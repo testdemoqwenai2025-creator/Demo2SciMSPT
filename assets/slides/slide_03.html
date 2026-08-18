@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Methodology & Sources</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+<link rel="stylesheet" href="global.css" />
+<style>
+  .method-row {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    margin-bottom: 16px;
+  }
+  .method-num {
+    flex-shrink: 0;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-num);
+    font-size: 13px;
+    font-weight: 600;
+    margin-top: 2px;
+  }
+  .method-body {
+    font-family: var(--font-body);
+    font-size: 14.5px;
+    color: var(--primary);
+    line-height: 1.55;
+  }
+  .method-body .em {
+    font-weight: 600;
+    color: var(--primary);
+  }
+  .method-body .accent {
+    color: var(--accent);
+    font-weight: 600;
+  }
+  .source-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-top: 3px solid var(--accent);
+    border-radius: 6px;
+    padding: 22px 22px 20px 22px;
+    box-shadow: 0 1px 2px rgba(20, 40, 64, 0.04);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  .source-card h3 {
+    font-family: var(--font-heading);
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 4px;
+    letter-spacing: -0.3px;
+  }
+  .source-card .sub {
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    font-weight: 500;
+  }
+  .source-list {
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+    flex-grow: 1;
+  }
+  .source-item {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    padding-bottom: 10px;
+    border-bottom: 1px dashed var(--border);
+  }
+  .source-item:last-child { border-bottom: none; padding-bottom: 0; }
+  .source-date {
+    flex-shrink: 0;
+    font-family: var(--font-num);
+    font-size: 11px;
+    color: var(--accent);
+    font-weight: 500;
+    background: rgba(45, 122, 179, 0.08);
+    padding: 3px 8px;
+    border-radius: 3px;
+    letter-spacing: 0.5px;
+    margin-top: 2px;
+    white-space: nowrap;
+  }
+  .source-text {
+    font-size: 13px;
+    color: var(--primary);
+    line-height: 1.4;
+  }
+  .header-rule {
+    width: 60px;
+    height: 3px;
+    background: var(--accent);
+    margin-top: 14px;
+    margin-bottom: 20px;
+  }
+  .stat-pills {
+    display: flex;
+    gap: 18px;
+    margin-top: 14px;
+  }
+  .stat-pill {
+    flex: 1;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 10px 14px;
+  }
+  .stat-pill .num {
+    font-family: var(--font-num);
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--accent);
+    line-height: 1;
+  }
+  .stat-pill .lbl {
+    font-size: 10.5px;
+    color: var(--muted);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-top: 5px;
+    font-weight: 500;
+  }
+</style>
+</head>
+<body>
+<div class="slide">
+
+  <!-- Header -->
+  <div>
+    <div class="kicker">Methodology</div>
+    <h1>Research Grounded in Peer-Reviewed Breakthroughs</h1>
+    <div class="header-rule" data-decor aria-hidden="true"></div>
+  </div>
+
+  <!-- 60/40 split -->
+  <div class="flex" style="gap: 36px; flex-grow: 1;">
+
+    <!-- Left 60% -->
+    <div style="flex: 0 0 60%;">
+      <div class="method-row">
+        <div class="method-num">1</div>
+        <div class="method-body">
+          <span class="em">Source corpus:</span> ScienceDaily Computers &amp; Math news feed, May–August 2026 <span class="accent">(~50 breakthroughs)</span>. Each project profiled is anchored to specific dated ScienceDaily reports.
+        </div>
+      </div>
+
+      <div class="method-row">
+        <div class="method-num">2</div>
+        <div class="method-body">
+          <span class="em">Extrapolation method:</span> For each breakthrough, we trace forward to a credible commercial project with <span class="accent">10–20 year horizon</span>. Phases: <span class="em">Lab → Pilot → Scale → Mature</span>.
+        </div>
+      </div>
+
+      <div class="method-row">
+        <div class="method-num">3</div>
+        <div class="method-body">
+          <span class="em">Platform mapping:</span> Each project is mapped to specific SciMSPT microservices for actionable platform positioning, not abstract prediction.
+        </div>
+      </div>
+
+      <!-- Stat pills row -->
+      <div class="stat-pills">
+        <div class="stat-pill">
+          <div class="num">~50</div>
+          <div class="lbl">Breakthroughs Tracked</div>
+        </div>
+        <div class="stat-pill">
+          <div class="num">12</div>
+          <div class="lbl">Projects Profiled</div>
+        </div>
+        <div class="stat-pill">
+          <div class="num">4</div>
+          <div class="lbl">Maturity Phases</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right 40% — source citation card -->
+    <div style="flex: 0 0 calc(40% - 36px);">
+      <div class="source-card">
+        <div class="flex items-center justify-between">
+          <div>
+            <h3>Source Highlights</h3>
+            <div class="sub">ScienceDaily · May–Aug 2026</div>
+          </div>
+          <i class="material-icons" style="color: var(--accent); font-size: 22px;">article</i>
+        </div>
+
+        <div class="source-list">
+          <div class="source-item">
+            <div class="source-date">Aug 14 2026</div>
+            <div class="source-text">Superconducting quantum heat engine</div>
+          </div>
+          <div class="source-item">
+            <div class="source-date">Aug 09 2026</div>
+            <div class="source-text">0.42-nm atomically thin semiconductors</div>
+          </div>
+          <div class="source-item">
+            <div class="source-date">Aug 05 2026</div>
+            <div class="source-text">Claude Fable 5 topples 87-yr conjecture</div>
+          </div>
+          <div class="source-item">
+            <div class="source-date">Jul 08 2026</div>
+            <div class="source-text">Harvard silicon-chip DNA writer</div>
+          </div>
+          <div class="source-item">
+            <div class="source-date">Jun 12 2026</div>
+            <div class="source-text">HKU brain-inspired chip near absolute zero</div>
+          </div>
+          <div class="source-item">
+            <div class="source-date">May 24 2026</div>
+            <div class="source-text">Light-matter particles power AI</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Page meta -->
+  <div class="page-meta">
+    <span>SciMSPT Research · Aug 2026</span>
+    <span>03 / 15</span>
+  </div>
+
+</div>
+
+<aside data-notes class="hidden">
+  <ul>
+    <li>Stress rigor: every claim is anchored to a dated ScienceDaily citation.</li>
+    <li>Extrapolation discipline: 10–20 year horizon, four-phase Lab → Pilot → Scale → Mature.</li>
+    <li>Traceability matters — investors can audit each project back to peer-reviewed source.</li>
+    <li>Platform mapping is actionable, not theoretical — each project ties to SciMSPT microservices.</li>
+    <li>Audience takeaway: methodology is the moat; reproducibility differentiates this from speculative whitepapers.</li>
+  </ul>
+</aside>
+
+</body>
+</html>

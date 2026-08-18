@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Domain 6 — AI-Driven Discovery</title>
+  <link rel="stylesheet" href="global.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .domain-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 22px 26px;
+      box-shadow: 0 1px 2px rgba(20, 40, 64, 0.04);
+      display: flex;
+      flex-direction: column;
+    }
+    .card-head {
+      font-family: var(--font-heading);
+      font-size: 20px;
+      font-weight: 700;
+      line-height: 1.25;
+      letter-spacing: -0.3px;
+      color: var(--primary);
+      flex: 1;
+    }
+    .stat-label-mini {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+    .stat-val {
+      font-family: var(--font-num);
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--accent);
+      line-height: 1;
+      letter-spacing: -0.5px;
+    }
+    .ghost-num {
+      position: absolute;
+      top: 24px;
+      right: 60px;
+      font-family: var(--font-heading);
+      font-size: 200px;
+      font-weight: 900;
+      color: rgba(45, 122, 179, 0.06);
+      line-height: 0.85;
+      pointer-events: none;
+      user-select: none;
+      letter-spacing: -8px;
+    }
+    .src-strip {
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 0.4px;
+    }
+  </style>
+</head>
+<body>
+  <div class="slide">
+    <!-- Decorative ghost numeral -->
+    <div class="ghost-num" data-decor aria-hidden="true">06</div>
+
+    <!-- Header -->
+    <div>
+      <div class="kicker">DOMAIN 6 OF 6</div>
+      <h1 style="font-size: 40px;">AI-Driven Discovery &amp; Autonomous Materials Science</h1>
+      <p class="lead" style="margin-top: 10px; max-width: 980px;">The bottleneck is shifting from execution to ideation. Platforms building autonomous discovery pipelines will compound advantages.</p>
+    </div>
+
+    <!-- Two-card row -->
+    <div class="row" style="margin-top: 24px; gap: 28px; flex: 1; align-items: stretch;">
+      <!-- Card 1: P11 -->
+      <div class="domain-card flex-1" style="border-top: 4px solid var(--tier1);">
+        <div class="flex items-start gap-3" style="margin-bottom: 12px;">
+          <i class="material-icons" style="color: var(--tier1); font-size: 28px; line-height: 1;">science</i>
+          <h3 class="card-head">P11: AI-Discovered Materials Pipeline</h3>
+        </div>
+        <span class="tag tier1" style="align-self: flex-start; margin-bottom: 14px;">TIER 1 — HIGH CONFIDENCE</span>
+        <p style="font-size: 14.5px; line-height: 1.6; color: var(--primary);">Closed-loop pipeline combining ML property prediction, automated quantum simulation, robotic synthesis, high-throughput characterization. Discovers and validates new superconductors, catalysts, quantum materials at 100x traditional pace.</p>
+
+        <!-- Stat row -->
+        <div class="flex" style="margin-top: auto; padding-top: 16px; border-top: 1px solid var(--border); gap: 14px;">
+          <div class="flex-1">
+            <div class="stat-label-mini">TAM</div>
+            <div class="stat-val">$48B</div>
+          </div>
+          <div class="flex-1">
+            <div class="stat-label-mini">IRR</div>
+            <div class="stat-val">34%</div>
+          </div>
+          <div class="flex-1">
+            <div class="stat-label-mini">Payback</div>
+            <div class="stat-val">4.8yr</div>
+          </div>
+        </div>
+
+        <!-- SciMSPT mapping -->
+        <div class="flex items-center gap-2" style="margin-top: 12px; padding-top: 12px; border-top: 1px dashed var(--border);">
+          <i class="material-icons" style="color: var(--accent); font-size: 18px;">hub</i>
+          <span class="stat-label-mini" style="margin: 0;">SciMSPT</span>
+          <span style="font-size: 13px; color: var(--primary); font-weight: 600;">ML + Data + Compute Services</span>
+        </div>
+      </div>
+
+      <!-- Card 2: P12 -->
+      <div class="domain-card flex-1" style="border-top: 4px solid var(--tier2);">
+        <div class="flex items-start gap-3" style="margin-bottom: 12px;">
+          <i class="material-icons" style="color: var(--tier2); font-size: 28px; line-height: 1;">verified</i>
+          <h3 class="card-head">P12: AI-Verified Reasoning Engines</h3>
+        </div>
+        <span class="tag tier2" style="align-self: flex-start; margin-bottom: 14px;">TIER 2 — MEDIUM RISK</span>
+        <p style="font-size: 14.5px; line-height: 1.6; color: var(--primary);">AI reasoning systems producing formally verifiable proofs rather than plausible arguments. Combines LLM intuition with proof assistants (Lean, Coq) for machine-checkable correctness.</p>
+
+        <!-- Stat row -->
+        <div class="flex" style="margin-top: auto; padding-top: 16px; border-top: 1px solid var(--border); gap: 14px;">
+          <div class="flex-1">
+            <div class="stat-label-mini">TAM</div>
+            <div class="stat-val">$22B</div>
+          </div>
+          <div class="flex-1">
+            <div class="stat-label-mini">IRR</div>
+            <div class="stat-val">33%</div>
+          </div>
+          <div class="flex-1">
+            <div class="stat-label-mini">Payback</div>
+            <div class="stat-val">5.1yr</div>
+          </div>
+        </div>
+
+        <!-- SciMSPT mapping -->
+        <div class="flex items-center gap-2" style="margin-top: 12px; padding-top: 12px; border-top: 1px dashed var(--border);">
+          <i class="material-icons" style="color: var(--accent); font-size: 18px;">hub</i>
+          <span class="stat-label-mini" style="margin: 0;">SciMSPT</span>
+          <span style="font-size: 13px; color: var(--primary); font-weight: 600;">ML + Auth Services</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Source citation strip -->
+    <div class="divider"></div>
+    <div class="flex items-center gap-2 src-strip">
+      <i class="material-icons" style="color: var(--muted); font-size: 14px;">menu_book</i>
+      <span style="text-transform: uppercase; letter-spacing: 1.5px; font-weight: 600;">Sources</span>
+      <span style="color: var(--border);">·</span>
+      <span class="num" style="letter-spacing: 0.4px;">ScienceDaily Jul 7 2026, Jul 8 2026, Aug 5 2026</span>
+    </div>
+
+    <!-- Page meta footer -->
+    <div class="page-meta">
+      <span>SciMSPT Research · Aug 2026</span>
+      <span class="num">10 / 15</span>
+    </div>
+  </div>
+
+  <aside data-notes class="hidden">
+    <ul>
+      <li>Bottleneck is shifting from execution to ideation — autonomous discovery pipelines compound advantages.</li>
+      <li>P11 (Tier 1) discovers superconductors, catalysts, quantum materials at 100x traditional pace.</li>
+      <li>P12 (Tier 2) addresses AGI safety pillar via machine-checkable proofs (Lean, Coq).</li>
+      <li>Both deliver option value: each new material or verified proof unlocks downstream projects.</li>
+      <li>Anchor citations: AI materials discovery (Jul 7, Jul 8 2026), Claude Fable 5 conjecture toppled (Aug 5 2026).</li>
+    </ul>
+  </aside>
+</body>
+</html>

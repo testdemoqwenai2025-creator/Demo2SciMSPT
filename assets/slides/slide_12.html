@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Slide 12 — SciMSPT Platform Integration Matrix</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  <link rel="stylesheet" href="global.css" />
+  <style>
+    .slide { padding: 48px 72px 64px; }
+    h1 { font-size: 32px; line-height: 1.15; }
+    .lead { font-size: 14.5px; max-width: 1100px; margin-top: 6px; }
+    .matrix-wrap {
+      flex: 1;
+      margin-top: 18px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: hidden;
+      background: white;
+    }
+    table.matrix {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12.5px;
+      table-layout: fixed;
+    }
+    table.matrix th {
+      background: var(--primary);
+      color: white;
+      padding: 9px 10px;
+      text-align: left;
+      font-weight: 600;
+      font-size: 11px;
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+      border-right: 1px solid #2a4060;
+    }
+    table.matrix th:last-child { border-right: none; }
+    table.matrix td {
+      padding: 8px 10px;
+      border-bottom: 1px solid var(--border);
+      border-right: 1px solid var(--border);
+      vertical-align: middle;
+      color: var(--primary);
+      line-height: 1.4;
+    }
+    table.matrix td:last-child { border-right: none; }
+    table.matrix tr:last-child td { border-bottom: none; }
+    table.matrix tr:nth-child(even) td { background: #f8fafc; }
+    .p-cell {
+      font-family: var(--font-num);
+      font-weight: 600;
+      color: var(--accent);
+      text-align: center;
+      letter-spacing: 0.5px;
+    }
+    .proj-cell { font-weight: 600; color: var(--primary); }
+    .svc-pill {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 10px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+      background: rgba(45, 122, 179, 0.12);
+      color: var(--accent);
+      margin-right: 4px;
+    }
+    .svc-pill.alt { background: rgba(90, 122, 150, 0.12); color: var(--primary-soft); }
+    .svc-pill.none { background: transparent; color: var(--muted); }
+    .infra-tag {
+      font-size: 11px;
+      color: var(--muted);
+      font-weight: 500;
+    }
+    .auth-cell { font-size: 11.5px; color: var(--primary); }
+  </style>
+</head>
+<body>
+  <div class="slide">
+    <!-- Header -->
+    <div>
+      <div class="kicker">Platform Positioning</div>
+      <h1>SciMSPT Platform Integration Matrix</h1>
+      <p class="lead">Modular microservice architecture uniquely suited to absorb heterogeneous compute paradigms without rip-and-replace disruption.</p>
+    </div>
+
+    <!-- Matrix Table -->
+    <div class="matrix-wrap">
+      <table class="matrix">
+        <colgroup>
+          <col style="width: 5%;" />
+          <col style="width: 19%;" />
+          <col style="width: 12%;" />
+          <col style="width: 16%;" />
+          <col style="width: 28%;" />
+          <col style="width: 20%;" />
+        </colgroup>
+        <thead>
+          <tr>
+            <th class="center">P#</th>
+            <th>Project</th>
+            <th>Primary Service</th>
+            <th>Secondary Services</th>
+            <th>Auth / Safety Implications</th>
+            <th>Infra Dependency</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="p-cell">P1</td>
+            <td class="proj-cell">Photonic-Quantum</td>
+            <td><span class="svc-pill">Compute</span></td>
+            <td><span class="svc-pill alt">ML</span></td>
+            <td class="auth-cell">Quantum resource isolation</td>
+            <td class="infra-tag">Photonic fab</td>
+          </tr>
+          <tr>
+            <td class="p-cell">P2</td>
+            <td class="proj-cell">Quantum Heat Engine</td>
+            <td><span class="svc-pill">Compute</span></td>
+            <td><span class="svc-pill alt">Notification</span></td>
+            <td class="auth-cell">Thermal metadata integrity</td>
+            <td class="infra-tag">Cryo plant</td>
+          </tr>
+          <tr>
+            <td class="p-cell">P3</td>
+            <td class="proj-cell">Cryo Neuromorphic</td>
+            <td><span class="svc-pill">Compute</span></td>
+            <td><span class="svc-pill alt">Storage</span></td>
+            <td class="auth-cell">Cryo-zone access control</td>
+            <td class="infra-tag">Cryo + quantum fab</td>
+          </tr>
+          <tr>
+            <td class="p-cell">P4</td>
+            <td class="proj-cell">Post-Turing</td>
+            <td><span class="svc-pill">ML</span></td>
+            <td><span class="svc-pill alt">User</span></td>
+            <td class="auth-cell">Verifiable behavior proofs</td>
+            <td class="infra-tag">Standard cloud</td>
+          </tr>
+          <tr>
+            <td class="p-cell">P5</td>
+            <td class="proj-cell">Sub-nm 2D Foundries</td>
+            <td><span class="svc-pill">Compute</span></td>
+            <td><span class="svc-pill alt">Infrastructure</span></td>
+            <td class="auth-cell">Chip provenance signing</td>
+            <td class="infra-tag">Specialty fab</td>
+          </tr>
+          <tr>
+            <td class="p-cell">P6</td>
+            <td class="proj-cell">Twistronics</td>
+            <td><span class="svc-pill">Compute</span></td>
+            <td><span class="svc-pill alt">Auth</span></td>
+            <td class="auth-cell">Hardware config signing</td>
+            <td class="infra-tag">Specialty fab</td>
+          </tr>
+          <tr>
+            <td class="p-cell">P7</td>
+            <td class="proj-cell">Polariton AI</td>
+            <td><span class="svc-pill">Compute</span></td>
+            <td><span class="svc-pill alt">ML</span></td>
+            <td class="auth-cell">Polariton IP protection</td>
+            <td class="infra-tag">Photonic fab</td>
+          </tr>
+          <tr>
+            <td class="p-cell">P8</td>
+            <td class="proj-cell">Electron-Lighthouse</td>
+            <td><span class="svc-pill">Compute</span></td>
+            <td><span class="svc-pill none">&mdash;</span></td>
+            <td class="auth-cell">Edge device attestation</td>
+            <td class="infra-tag">Standard fab</td>
+          </tr>
+          <tr>
+            <td class="p-cell">P9</td>
+            <td class="proj-cell">DNA-Storage</td>
+            <td><span class="svc-pill">Storage</span></td>
+            <td><span class="svc-pill alt">Data, ML</span></td>
+            <td class="auth-cell">Genomic data privacy</td>
+            <td class="infra-tag">Bio lab</td>
+          </tr>
+          <tr>
+            <td class="p-cell">P10</td>
+            <td class="proj-cell">Orbital DC</td>
+            <td><span class="svc-pill">Compute</span></td>
+            <td><span class="svc-pill alt">Notification, Gateway</span></td>
+            <td class="auth-cell">Air-gap key management</td>
+            <td class="infra-tag">Launch + ground stn</td>
+          </tr>
+          <tr>
+            <td class="p-cell">P11</td>
+            <td class="proj-cell">AI Materials</td>
+            <td><span class="svc-pill">ML</span></td>
+            <td><span class="svc-pill alt">Data, Compute</span></td>
+            <td class="auth-cell">IP / patent tracking</td>
+            <td class="infra-tag">Automated wet lab</td>
+          </tr>
+          <tr>
+            <td class="p-cell">P12</td>
+            <td class="proj-cell">AI Reasoning</td>
+            <td><span class="svc-pill">ML</span></td>
+            <td><span class="svc-pill alt">Auth</span></td>
+            <td class="auth-cell">Proof signature chain</td>
+            <td class="infra-tag">Standard cloud</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Page meta -->
+    <div class="page-meta">
+      <span>SciMSPT Research &middot; Aug 2026</span>
+      <span>12 / 15</span>
+    </div>
+  </div>
+
+  <aside data-notes class="hidden">
+    <ul>
+      <li>Compute Service is the central abstraction — 9 of 12 projects route through it.</li>
+      <li>Auth Service becomes a strategic moat as hardware-level signing expands (P5, P6, P12).</li>
+      <li>Storage Service absorbs non-classical media: DNA (P9), cryogenic (P3), orbital (P10).</li>
+      <li>Specialty fabs are the binding infra constraint — invest early to avoid supply chokepoints.</li>
+      <li>Each project maps cleanly to 2-3 microservices; no rip-and-replace required for onboarding.</li>
+    </ul>
+  </aside>
+</body>
+</html>

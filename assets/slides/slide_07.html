@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Domain 3 — Beyond-CMOS & 2D Materials</title>
+  <link rel="stylesheet" href="global.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .domain-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 22px 26px;
+      box-shadow: 0 1px 2px rgba(20, 40, 64, 0.04);
+      display: flex;
+      flex-direction: column;
+    }
+    .card-head {
+      font-family: var(--font-heading);
+      font-size: 20px;
+      font-weight: 700;
+      line-height: 1.25;
+      letter-spacing: -0.3px;
+      color: var(--primary);
+      flex: 1;
+    }
+    .stat-label-mini {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+    .stat-val {
+      font-family: var(--font-num);
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--accent);
+      line-height: 1;
+      letter-spacing: -0.5px;
+    }
+    .ghost-num {
+      position: absolute;
+      top: 24px;
+      right: 60px;
+      font-family: var(--font-heading);
+      font-size: 200px;
+      font-weight: 900;
+      color: rgba(45, 122, 179, 0.06);
+      line-height: 0.85;
+      pointer-events: none;
+      user-select: none;
+      letter-spacing: -8px;
+    }
+    .src-strip {
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 0.4px;
+    }
+  </style>
+</head>
+<body>
+  <div class="slide">
+    <!-- Decorative ghost numeral -->
+    <div class="ghost-num" data-decor aria-hidden="true">03</div>
+
+    <!-- Header -->
+    <div>
+      <div class="kicker">DOMAIN 3 OF 6</div>
+      <h1>Beyond-CMOS Devices &amp; 2D Materials</h1>
+      <p class="lead" style="margin-top: 10px; max-width: 920px;">Post-silicon devices engineered at the atomic interface, not merely patterned at smaller scales.</p>
+    </div>
+
+    <!-- Two-card row -->
+    <div class="row" style="margin-top: 24px; gap: 28px; flex: 1; align-items: stretch;">
+      <!-- Card 1: P5 -->
+      <div class="domain-card flex-1" style="border-top: 4px solid var(--tier1);">
+        <div class="flex items-start gap-3" style="margin-bottom: 12px;">
+          <i class="material-icons" style="color: var(--tier1); font-size: 28px; line-height: 1;">layers</i>
+          <h3 class="card-head">P5: Sub-nanometer 2D-Semiconductor Foundries</h3>
+        </div>
+        <span class="tag tier1" style="align-self: flex-start; margin-bottom: 14px;">TIER 1 — HIGH CONFIDENCE</span>
+        <p style="font-size: 14.5px; line-height: 1.6; color: var(--primary);">Atomically thin transition metal dichalcogenide semiconductors with controlled atomic interfaces, manufactured using plasma-treated molybdenum disulfide. Transistor gates below the silicon scaling limit.</p>
+
+        <!-- Stat row -->
+        <div class="flex" style="margin-top: auto; padding-top: 16px; border-top: 1px solid var(--border); gap: 14px;">
+          <div class="flex-1">
+            <div class="stat-label-mini">TAM</div>
+            <div class="stat-val">$68B</div>
+          </div>
+          <div class="flex-1">
+            <div class="stat-label-mini">IRR</div>
+            <div class="stat-val">24%</div>
+          </div>
+          <div class="flex-1">
+            <div class="stat-label-mini">Payback</div>
+            <div class="stat-val">7.1yr</div>
+          </div>
+        </div>
+
+        <!-- SciMSPT mapping -->
+        <div class="flex items-center gap-2" style="margin-top: 12px; padding-top: 12px; border-top: 1px dashed var(--border);">
+          <i class="material-icons" style="color: var(--accent); font-size: 18px;">hub</i>
+          <span class="stat-label-mini" style="margin: 0;">SciMSPT</span>
+          <span style="font-size: 13px; color: var(--primary); font-weight: 600;">Compute + Infrastructure</span>
+        </div>
+      </div>
+
+      <!-- Card 2: P6 -->
+      <div class="domain-card flex-1" style="border-top: 4px solid var(--tier3);">
+        <div class="flex items-start gap-3" style="margin-bottom: 12px;">
+          <i class="material-icons" style="color: var(--tier3); font-size: 28px; line-height: 1;">360</i>
+          <h3 class="card-head">P6: Twistronics Programmable Matter</h3>
+        </div>
+        <span class="tag tier3" style="align-self: flex-start; margin-bottom: 14px;">TIER 3 — SPECULATIVE</span>
+        <p style="font-size: 14.5px; line-height: 1.6; color: var(--primary);">Layered 2D materials twisted at controlled angles exhibit programmable electronic and optical properties. Actuating twist angles in real time enables post-fabrication circuit reconfiguration.</p>
+
+        <!-- Stat row -->
+        <div class="flex" style="margin-top: auto; padding-top: 16px; border-top: 1px solid var(--border); gap: 14px;">
+          <div class="flex-1">
+            <div class="stat-label-mini">TAM</div>
+            <div class="stat-val">$8B</div>
+          </div>
+          <div class="flex-1">
+            <div class="stat-label-mini">IRR</div>
+            <div class="stat-val">17%</div>
+          </div>
+          <div class="flex-1">
+            <div class="stat-label-mini">Payback</div>
+            <div class="stat-val">9.2yr</div>
+          </div>
+        </div>
+
+        <!-- SciMSPT mapping -->
+        <div class="flex items-center gap-2" style="margin-top: 12px; padding-top: 12px; border-top: 1px dashed var(--border);">
+          <i class="material-icons" style="color: var(--accent); font-size: 18px;">hub</i>
+          <span class="stat-label-mini" style="margin: 0;">SciMSPT</span>
+          <span style="font-size: 13px; color: var(--primary); font-weight: 600;">Compute + Auth Services</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Source citation strip -->
+    <div class="divider"></div>
+    <div class="flex items-center gap-2 src-strip">
+      <i class="material-icons" style="color: var(--muted); font-size: 14px;">menu_book</i>
+      <span style="text-transform: uppercase; letter-spacing: 1.5px; font-weight: 600;">Sources</span>
+      <span style="color: var(--border);">·</span>
+      <span class="num" style="letter-spacing: 0.4px;">ScienceDaily Aug 9 2026, Aug 3 2026, Jun 17 2026, Jun 20 2026</span>
+    </div>
+
+    <!-- Page meta footer -->
+    <div class="page-meta">
+      <span>SciMSPT Research · Aug 2026</span>
+      <span class="num">07 / 15</span>
+    </div>
+  </div>
+
+  <aside data-notes class="hidden">
+    <ul>
+      <li>P5 (Tier 1) is the highest-confidence semiconductor sovereignty play — direct foundry capex.</li>
+      <li>P6 (Tier 3) more speculative — real-time twist actuation still lab-scale, post-fab reconfiguration a moonshot.</li>
+      <li>Sub-nm 2D pushes transistor gates below the silicon scaling limit; enables post-Moore compute roadmap.</li>
+      <li>Twistronics creates hardware that can be reconfigured post-deployment — Auth Service implication for hardware config signing.</li>
+      <li>Four ScienceDaily anchors covering 2D material synthesis breakthroughs from Jun-Aug 2026.</li>
+    </ul>
+  </aside>
+</body>
+</html>

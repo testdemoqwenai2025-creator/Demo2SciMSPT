@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Domain 1 — Quantum Computing</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+<link rel="stylesheet" href="global.css" />
+<style>
+  .domain-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-top: 3px solid var(--accent);
+    border-radius: 6px;
+    padding: 22px 24px 20px 24px;
+    box-shadow: 0 1px 2px rgba(20, 40, 64, 0.04);
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .card-head-row {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 14px;
+  }
+  .card-id {
+    font-family: var(--font-num);
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 2px;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .card-title {
+    font-family: var(--font-heading);
+    font-size: 21px;
+    font-weight: 700;
+    color: var(--primary);
+    line-height: 1.18;
+    letter-spacing: -0.3px;
+  }
+  .tier-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 11px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .tier-tag.tier1 { background: rgba(45, 122, 179, 0.15); color: var(--tier1); }
+  .tier-tag.tier2 { background: rgba(122, 77, 168, 0.15); color: var(--tier2); }
+  .card-body {
+    font-family: var(--font-body);
+    font-size: 13.5px;
+    color: var(--primary);
+    line-height: 1.6;
+  }
+  .stat-row {
+    display: flex;
+    gap: 10px;
+    margin-top: 4px;
+  }
+  .stat-cell {
+    flex: 1;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 10px 12px;
+    text-align: left;
+  }
+  .stat-cell .lbl {
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    font-weight: 500;
+    margin-bottom: 4px;
+  }
+  .stat-cell .val {
+    font-family: var(--font-num);
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--accent);
+    line-height: 1;
+  }
+  .scimspt-line {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: auto;
+    padding-top: 12px;
+    border-top: 1px dashed var(--border);
+    font-size: 12px;
+  }
+  .scimspt-line .label {
+    color: var(--muted);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-weight: 500;
+    font-size: 10.5px;
+  }
+  .scimspt-line .value {
+    color: var(--primary);
+    font-weight: 600;
+  }
+  .scimspt-line .material-icons {
+    color: var(--accent);
+    font-size: 16px;
+  }
+  .source-strip {
+    margin-top: 16px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: 4px;
+    padding: 11px 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+  }
+  .source-strip .label {
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .source-strip .label .material-icons {
+    color: var(--accent);
+    font-size: 14px;
+  }
+  .source-strip .cites {
+    font-family: var(--font-num);
+    font-size: 12px;
+    color: var(--primary);
+    font-weight: 500;
+  }
+  .header-rule {
+    width: 60px;
+    height: 3px;
+    background: var(--accent);
+    margin-top: 12px;
+    margin-bottom: 14px;
+  }
+</style>
+</head>
+<body>
+<div class="slide">
+
+  <!-- Header -->
+  <div>
+    <div class="kicker">Domain 1 of 6</div>
+    <h1>Quantum Computing &amp; Quantum-AI Convergence</h1>
+    <div class="header-rule" data-decor aria-hidden="true"></div>
+    <p class="lead" style="max-width: 980px;">
+      Mid-2026 breakthroughs suggest quantum is crossing from scientific curiosity to engineering substrate.
+    </p>
+  </div>
+
+  <!-- Two-card comparison -->
+  <div class="flex" style="gap: 22px; margin-top: 18px; flex-grow: 1;">
+
+    <!-- Card 1 -->
+    <div class="domain-card">
+      <div class="card-head-row">
+        <div>
+          <div class="card-id">PROJECT P1</div>
+          <div class="card-title">Photonic-Quantum AI Accelerators</div>
+        </div>
+        <span class="tier-tag tier1"><i class="material-icons" style="font-size:12px;">verified</i> Tier 1</span>
+      </div>
+
+      <p class="card-body">
+        Direct generation of entangled photon pairs from ambient sunlight, coupled with programmable optical delay lines on silicon photonic chip. Room-temperature quantum inference for sampling, optimization, kernel methods.
+      </p>
+
+      <div class="stat-row">
+        <div class="stat-cell">
+          <div class="lbl">TAM</div>
+          <div class="val">$42B</div>
+        </div>
+        <div class="stat-cell">
+          <div class="lbl">IRR</div>
+          <div class="val">28%</div>
+        </div>
+        <div class="stat-cell">
+          <div class="lbl">Payback</div>
+          <div class="val">6.2yr</div>
+        </div>
+      </div>
+
+      <div class="scimspt-line">
+        <i class="material-icons">hub</i>
+        <span class="label">SciMSPT:</span>
+        <span class="value">Compute + ML Services</span>
+      </div>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="domain-card">
+      <div class="card-head-row">
+        <div>
+          <div class="card-id">PROJECT P2</div>
+          <div class="card-title">Superconducting Quantum Heat Engine Networks</div>
+        </div>
+        <span class="tier-tag tier2"><i class="material-icons" style="font-size:12px;">science</i> Tier 2</span>
+      </div>
+
+      <p class="card-body">
+        Cyclic quantum heat engine near absolute zero converts waste heat into useful work. Scaled into arrays, forms thermal-recovery layer for quantum data centers.
+      </p>
+
+      <div class="stat-row">
+        <div class="stat-cell">
+          <div class="lbl">TAM</div>
+          <div class="val">$12B</div>
+        </div>
+        <div class="stat-cell">
+          <div class="lbl">IRR</div>
+          <div class="val">19%</div>
+        </div>
+        <div class="stat-cell">
+          <div class="lbl">Payback</div>
+          <div class="val">8.5yr</div>
+        </div>
+      </div>
+
+      <div class="scimspt-line">
+        <i class="material-icons">hub</i>
+        <span class="label">SciMSPT:</span>
+        <span class="value">Compute + Notification Services</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Source citation strip -->
+  <div class="source-strip">
+    <div class="label">
+      <i class="material-icons">link</i>
+      Source Citations
+    </div>
+    <div class="cites">ScienceDaily Aug 7 2026 · Aug 14 2026 · Jul 21 2026</div>
+  </div>
+
+  <!-- Page meta -->
+  <div class="page-meta">
+    <span>SciMSPT Research · Aug 2026</span>
+    <span>05 / 15</span>
+  </div>
+
+</div>
+
+<aside data-notes class="hidden">
+  <ul>
+    <li>Quantum is crossing from lab curiosity to engineering substrate — cryogenic barrier is the unlock.</li>
+    <li>P1 (Tier 1): room-temperature photonic inference, no cryogenics — nearest-term path.</li>
+    <li>P2 (Tier 2): converts waste heat into useful work — turns the cooling cost into an asset.</li>
+    <li>Pair P2 with P3 (cryo neuromorphic) to share the cryogenic envelope — compounding infra value.</li>
+    <li>Sources are all dated Aug–Jul 2026; rigor signal for investors.</li>
+  </ul>
+</aside>
+
+</body>
+</html>

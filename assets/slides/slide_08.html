@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Domain 4 — Photonic & Optical Computing</title>
+  <link rel="stylesheet" href="global.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .domain-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 22px 26px;
+      box-shadow: 0 1px 2px rgba(20, 40, 64, 0.04);
+      display: flex;
+      flex-direction: column;
+    }
+    .card-head {
+      font-family: var(--font-heading);
+      font-size: 20px;
+      font-weight: 700;
+      line-height: 1.25;
+      letter-spacing: -0.3px;
+      color: var(--primary);
+      flex: 1;
+    }
+    .stat-label-mini {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+    .stat-val {
+      font-family: var(--font-num);
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--accent);
+      line-height: 1;
+      letter-spacing: -0.5px;
+    }
+    .ghost-num {
+      position: absolute;
+      top: 24px;
+      right: 60px;
+      font-family: var(--font-heading);
+      font-size: 200px;
+      font-weight: 900;
+      color: rgba(45, 122, 179, 0.06);
+      line-height: 0.85;
+      pointer-events: none;
+      user-select: none;
+      letter-spacing: -8px;
+    }
+    .src-strip {
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 0.4px;
+    }
+  </style>
+</head>
+<body>
+  <div class="slide">
+    <!-- Decorative ghost numeral -->
+    <div class="ghost-num" data-decor aria-hidden="true">04</div>
+
+    <!-- Header -->
+    <div>
+      <div class="kicker">DOMAIN 4 OF 6</div>
+      <h1>Photonic &amp; Optical Computing</h1>
+      <p class="lead" style="margin-top: 10px; max-width: 920px;">Near-term highest-confidence path beyond the energy wall — no cryogenic infrastructure required.</p>
+    </div>
+
+    <!-- Two-card row -->
+    <div class="row" style="margin-top: 24px; gap: 28px; flex: 1; align-items: stretch;">
+      <!-- Card 1: P7 -->
+      <div class="domain-card flex-1" style="border-top: 4px solid var(--tier1);">
+        <div class="flex items-start gap-3" style="margin-bottom: 12px;">
+          <i class="material-icons" style="color: var(--tier1); font-size: 28px; line-height: 1;">blur_on</i>
+          <h3 class="card-head">P7: Light-Matter Polariton AI Fabrics</h3>
+        </div>
+        <span class="tag tier1" style="align-self: flex-start; margin-bottom: 14px;">TIER 1 — HIGH CONFIDENCE</span>
+        <p style="font-size: 14.5px; line-height: 1.6; color: var(--primary);">Exciton-polariton quasiparticles in semiconductor microcavities perform matrix multiplication natively through bosonic condensation dynamics. Room temperature, femtosecond switching.</p>
+
+        <!-- Stat row -->
+        <div class="flex" style="margin-top: auto; padding-top: 16px; border-top: 1px solid var(--border); gap: 14px;">
+          <div class="flex-1">
+            <div class="stat-label-mini">TAM</div>
+            <div class="stat-val">$55B</div>
+          </div>
+          <div class="flex-1">
+            <div class="stat-label-mini">IRR</div>
+            <div class="stat-val">29%</div>
+          </div>
+          <div class="flex-1">
+            <div class="stat-label-mini">Payback</div>
+            <div class="stat-val">5.9yr</div>
+          </div>
+        </div>
+
+        <!-- SciMSPT mapping -->
+        <div class="flex items-center gap-2" style="margin-top: 12px; padding-top: 12px; border-top: 1px dashed var(--border);">
+          <i class="material-icons" style="color: var(--accent); font-size: 18px;">hub</i>
+          <span class="stat-label-mini" style="margin: 0;">SciMSPT</span>
+          <span style="font-size: 13px; color: var(--primary); font-weight: 600;">Compute + ML Services</span>
+        </div>
+      </div>
+
+      <!-- Card 2: P8 -->
+      <div class="domain-card flex-1" style="border-top: 4px solid var(--tier2);">
+        <div class="flex items-start gap-3" style="margin-bottom: 12px;">
+          <i class="material-icons" style="color: var(--tier2); font-size: 28px; line-height: 1;">flare</i>
+          <h3 class="card-head">P8: Electron-Lighthouse Optical Processors</h3>
+        </div>
+        <span class="tag tier2" style="align-self: flex-start; margin-bottom: 14px;">TIER 2 — MEDIUM RISK</span>
+        <p style="font-size: 14.5px; line-height: 1.6; color: var(--primary);">Laser-driven electron steering without applied electrical field. Eliminates resistive losses dominating CMOS dynamic power. Microwatt edge AI operation.</p>
+
+        <!-- Stat row -->
+        <div class="flex" style="margin-top: auto; padding-top: 16px; border-top: 1px solid var(--border); gap: 14px;">
+          <div class="flex-1">
+            <div class="stat-label-mini">TAM</div>
+            <div class="stat-val">$14B</div>
+          </div>
+          <div class="flex-1">
+            <div class="stat-label-mini">IRR</div>
+            <div class="stat-val">24%</div>
+          </div>
+          <div class="flex-1">
+            <div class="stat-label-mini">Payback</div>
+            <div class="stat-val">6.5yr</div>
+          </div>
+        </div>
+
+        <!-- SciMSPT mapping -->
+        <div class="flex items-center gap-2" style="margin-top: 12px; padding-top: 12px; border-top: 1px dashed var(--border);">
+          <i class="material-icons" style="color: var(--accent); font-size: 18px;">hub</i>
+          <span class="stat-label-mini" style="margin: 0;">SciMSPT</span>
+          <span style="font-size: 13px; color: var(--primary); font-weight: 600;">Compute Service</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Source citation strip -->
+    <div class="divider"></div>
+    <div class="flex items-center gap-2 src-strip">
+      <i class="material-icons" style="color: var(--muted); font-size: 14px;">menu_book</i>
+      <span style="text-transform: uppercase; letter-spacing: 1.5px; font-weight: 600;">Sources</span>
+      <span style="color: var(--border);">·</span>
+      <span class="num" style="letter-spacing: 0.4px;">ScienceDaily May 24 2026, May 26 2026, Jul 28 2026</span>
+    </div>
+
+    <!-- Page meta footer -->
+    <div class="page-meta">
+      <span>SciMSPT Research · Aug 2026</span>
+      <span class="num">08 / 15</span>
+    </div>
+  </div>
+
+  <aside data-notes class="hidden">
+    <ul>
+      <li>Photonic domain is the highest-confidence near-term path beyond the energy wall.</li>
+      <li>P7 (Tier 1) operates at room temperature — no cryogenic infrastructure barrier.</li>
+      <li>P8 (Tier 2) eliminates resistive losses via laser-driven electron steering — strong edge AI story.</li>
+      <li>Polariton matrix multiplication natively via bosonic condensation — bypasses von Neumann bottleneck.</li>
+      <li>Anchor citations: light-matter particles power AI (May 24 2026), electron-lighthouse breakthrough (May 26 2026).</li>
+    </ul>
+  </aside>
+</body>
+</html>

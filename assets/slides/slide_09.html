@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Domain 5 — Data Infrastructure & Storage</title>
+  <link rel="stylesheet" href="global.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .domain-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 22px 26px;
+      box-shadow: 0 1px 2px rgba(20, 40, 64, 0.04);
+      display: flex;
+      flex-direction: column;
+    }
+    .card-head {
+      font-family: var(--font-heading);
+      font-size: 20px;
+      font-weight: 700;
+      line-height: 1.25;
+      letter-spacing: -0.3px;
+      color: var(--primary);
+      flex: 1;
+    }
+    .stat-label-mini {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+    .stat-val {
+      font-family: var(--font-num);
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--accent);
+      line-height: 1;
+      letter-spacing: -0.5px;
+    }
+    .ghost-num {
+      position: absolute;
+      top: 24px;
+      right: 60px;
+      font-family: var(--font-heading);
+      font-size: 200px;
+      font-weight: 900;
+      color: rgba(45, 122, 179, 0.06);
+      line-height: 0.85;
+      pointer-events: none;
+      user-select: none;
+      letter-spacing: -8px;
+    }
+    .src-strip {
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 0.4px;
+    }
+  </style>
+</head>
+<body>
+  <div class="slide">
+    <!-- Decorative ghost numeral -->
+    <div class="ghost-num" data-decor aria-hidden="true">05</div>
+
+    <!-- Header -->
+    <div>
+      <div class="kicker">DOMAIN 5 OF 6</div>
+      <h1>Data Infrastructure &amp; Storage Revolution</h1>
+      <p class="lead" style="margin-top: 10px; max-width: 920px;">The least visible but most consequential battlefield in AI scaling.</p>
+    </div>
+
+    <!-- Two-card row -->
+    <div class="row" style="margin-top: 24px; gap: 28px; flex: 1; align-items: stretch;">
+      <!-- Card 1: P9 -->
+      <div class="domain-card flex-1" style="border-top: 4px solid var(--tier1);">
+        <div class="flex items-start gap-3" style="margin-bottom: 12px;">
+          <i class="material-icons" style="color: var(--tier1); font-size: 28px; line-height: 1;">biotech</i>
+          <h3 class="card-head">P9: DNA-Storage Compute Continuum</h3>
+        </div>
+        <span class="tag tier1" style="align-self: flex-start; margin-bottom: 14px;">TIER 1 — HIGH CONFIDENCE</span>
+        <p style="font-size: 14.5px; line-height: 1.6; color: var(--primary);">Silicon-chip-based DNA synthesis using electricity and water-based enzymes. Parallel writing of dozens of DNA sequences. Storage at 10²¹ bits/gram density with millennial archival lifetime.</p>
+
+        <!-- Stat row -->
+        <div class="flex" style="margin-top: auto; padding-top: 16px; border-top: 1px solid var(--border); gap: 14px;">
+          <div class="flex-1">
+            <div class="stat-label-mini">TAM</div>
+            <div class="stat-val">$32B</div>
+          </div>
+          <div class="flex-1">
+            <div class="stat-label-mini">IRR</div>
+            <div class="stat-val">26%</div>
+          </div>
+          <div class="flex-1">
+            <div class="stat-label-mini">Payback</div>
+            <div class="stat-val">6.8yr</div>
+          </div>
+        </div>
+
+        <!-- SciMSPT mapping -->
+        <div class="flex items-center gap-2" style="margin-top: 12px; padding-top: 12px; border-top: 1px dashed var(--border);">
+          <i class="material-icons" style="color: var(--accent); font-size: 18px;">hub</i>
+          <span class="stat-label-mini" style="margin: 0;">SciMSPT</span>
+          <span style="font-size: 13px; color: var(--primary); font-weight: 600;">Storage + Data + ML Services</span>
+        </div>
+      </div>
+
+      <!-- Card 2: P10 -->
+      <div class="domain-card flex-1" style="border-top: 4px solid var(--tier3);">
+        <div class="flex items-start gap-3" style="margin-bottom: 12px;">
+          <i class="material-icons" style="color: var(--tier3); font-size: 28px; line-height: 1;">public</i>
+          <h3 class="card-head">P10: Orbital AI Data Centers</h3>
+        </div>
+        <span class="tag tier3" style="align-self: flex-start; margin-bottom: 14px;">TIER 3 — SPECULATIVE</span>
+        <p style="font-size: 14.5px; line-height: 1.6; color: var(--primary);">Orbital facilities tap continuous solar power, exploit space thermal sink, use multi-network satellite downlinks. Eliminates terrestrial grid and water constraints.</p>
+
+        <!-- Stat row -->
+        <div class="flex" style="margin-top: auto; padding-top: 16px; border-top: 1px solid var(--border); gap: 14px;">
+          <div class="flex-1">
+            <div class="stat-label-mini">TAM</div>
+            <div class="stat-val">$28B</div>
+          </div>
+          <div class="flex-1">
+            <div class="stat-label-mini">IRR</div>
+            <div class="stat-val">14%</div>
+          </div>
+          <div class="flex-1">
+            <div class="stat-label-mini">Payback</div>
+            <div class="stat-val">11.5yr</div>
+          </div>
+        </div>
+
+        <!-- SciMSPT mapping -->
+        <div class="flex items-center gap-2" style="margin-top: 12px; padding-top: 12px; border-top: 1px dashed var(--border);">
+          <i class="material-icons" style="color: var(--accent); font-size: 18px;">hub</i>
+          <span class="stat-label-mini" style="margin: 0;">SciMSPT</span>
+          <span style="font-size: 13px; color: var(--primary); font-weight: 600;">Compute + Notification + API Gateway</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Source citation strip -->
+    <div class="divider"></div>
+    <div class="flex items-center gap-2 src-strip">
+      <i class="material-icons" style="color: var(--muted); font-size: 14px;">menu_book</i>
+      <span style="text-transform: uppercase; letter-spacing: 1.5px; font-weight: 600;">Sources</span>
+      <span style="color: var(--border);">·</span>
+      <span class="num" style="letter-spacing: 0.4px;">ScienceDaily Jul 8 2026, Aug 8 2026, Jun 18 2026, Jun 6 2026</span>
+    </div>
+
+    <!-- Page meta footer -->
+    <div class="page-meta">
+      <span>SciMSPT Research · Aug 2026</span>
+      <span class="num">09 / 15</span>
+    </div>
+  </div>
+
+  <aside data-notes class="hidden">
+    <ul>
+      <li>Data infra is the least visible but most consequential battlefield in AI scaling.</li>
+      <li>P9 (Tier 1) DNA storage directly resolves the data scarcity pillar — 10²¹ bits/gram density.</li>
+      <li>P10 (Tier 3) orbital DCs eliminate terrestrial grid + water constraints — long horizon moonshot.</li>
+      <li>DNA storage archival lifetime is millennial; reshapes cold-storage economics and compliance regimes.</li>
+      <li>Anchor citations: Harvard silicon-chip DNA writer (Jul 8 2026), orbital power/thermal stories (Aug 8, Jun 18, Jun 6 2026).</li>
+    </ul>
+  </aside>
+</body>
+</html>

@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>The AI Scaling Wall — Four Pillars</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+<link rel="stylesheet" href="global.css" />
+<style>
+  .pillar-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-top: 3px solid var(--accent);
+    border-radius: 6px;
+    padding: 22px 20px 20px 20px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    box-shadow: 0 1px 2px rgba(20, 40, 64, 0.04);
+  }
+  .pillar-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 4px;
+    background: rgba(45, 122, 179, 0.10);
+    color: var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .pillar-icon .material-icons { font-size: 22px; }
+  .pillar-num {
+    font-family: var(--font-num);
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 2px;
+    font-weight: 500;
+  }
+  .pillar-title {
+    font-family: var(--font-heading);
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--primary);
+    line-height: 1.15;
+    letter-spacing: -0.3px;
+  }
+  .pillar-body {
+    font-family: var(--font-body);
+    font-size: 13.5px;
+    color: var(--primary);
+    line-height: 1.55;
+  }
+  .pillar-tag {
+    font-family: var(--font-body);
+    font-size: 10.5px;
+    color: var(--muted);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-top: auto;
+    padding-top: 12px;
+    border-top: 1px dashed var(--border);
+    font-weight: 500;
+  }
+  .pillar-tag .num {
+    color: var(--accent);
+    font-weight: 600;
+  }
+  .header-rule {
+    width: 60px;
+    height: 3px;
+    background: var(--accent);
+    margin-top: 14px;
+    margin-bottom: 22px;
+  }
+  .interlock-strip {
+    margin-top: 18px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 14px 22px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .interlock-strip .material-icons {
+    color: var(--accent);
+    font-size: 20px;
+  }
+  .interlock-strip p {
+    font-size: 13px;
+    color: var(--primary-soft);
+    line-height: 1.4;
+    font-weight: 500;
+  }
+  .interlock-strip p .em {
+    color: var(--primary);
+    font-weight: 600;
+  }
+</style>
+</head>
+<body>
+<div class="slide">
+
+  <!-- Header -->
+  <div>
+    <div class="kicker">The Scaling Wall · Four Pillars</div>
+    <h1>The AI Scaling Wall</h1>
+    <p class="lead" style="margin-top: 10px; max-width: 980px;">
+      Four interlocking constraints forcing the industry beyond transformer-on-GPU paradigms within the next decade.
+    </p>
+    <div class="header-rule" data-decor aria-hidden="true"></div>
+  </div>
+
+  <!-- 4-column stat/pillar cards -->
+  <div class="flex" style="gap: 22px;">
+
+    <div class="pillar-card">
+      <div class="flex items-center justify-between">
+        <div class="pillar-icon"><i class="material-icons">bolt</i></div>
+        <div class="pillar-num">PILLAR 01</div>
+      </div>
+      <div class="pillar-title">Energy Wall</div>
+      <div class="pillar-body">
+        GPT-class training now exceeds gigawatt-hours. Data center power demand projected to triple by 2030. Aug 2026 fuel cell breakthrough signals non-grid power search.
+      </div>
+      <div class="pillar-tag">Pressure index <span class="num">3.0×</span> by 2030</div>
+    </div>
+
+    <div class="pillar-card">
+      <div class="flex items-center justify-between">
+        <div class="pillar-icon"><i class="material-icons">data_usage</i></div>
+        <div class="pillar-num">PILLAR 02</div>
+      </div>
+      <div class="pillar-title">Data Scarcity</div>
+      <div class="pillar-body">
+        High-quality text corpus exhausted between 2026–2030. Synthetic data risks model collapse. June 2026 Harvard silicon-chip DNA writer points to exabyte cold storage.
+      </div>
+      <div class="pillar-tag">Corpus exhaustion <span class="num">2026–2030</span></div>
+    </div>
+
+    <div class="pillar-card">
+      <div class="flex items-center justify-between">
+        <div class="pillar-icon"><i class="material-icons">hub</i></div>
+        <div class="pillar-num">PILLAR 03</div>
+      </div>
+      <div class="pillar-title">Transformer Limits</div>
+      <div class="pillar-body">
+        Attention mechanism O(n²) scaling. July 2026 attention test exposes AI weakness. June 2026 critique of Turing assumption suggests paradigm is insufficient.
+      </div>
+      <div class="pillar-tag">Scaling order <span class="num">O(n²)</span></div>
+    </div>
+
+    <div class="pillar-card">
+      <div class="flex items-center justify-between">
+        <div class="pillar-icon"><i class="material-icons">shield</i></div>
+        <div class="pillar-num">PILLAR 04</div>
+      </div>
+      <div class="pillar-title">AGI Safety</div>
+      <div class="pillar-body">
+        Alignment problem grows with capabilities. Aug 2026 Claude Fable 5 topples 87-year conjecture — AI capabilities emerging where verification is hard.
+      </div>
+      <div class="pillar-tag">Conjecture toppled <span class="num">87 yrs</span></div>
+    </div>
+
+  </div>
+
+  <!-- Interlock strip -->
+  <div class="interlock-strip">
+    <i class="material-icons">link</i>
+    <p><span class="em">Interlocking, not independent.</span> Energy limits cap data scale; data scarcity forces architectural reform; transformer limits shift work to harder paradigms where safety verification must be re-grounded.</p>
+  </div>
+
+  <!-- Page meta -->
+  <div class="page-meta">
+    <span>SciMSPT Research · Aug 2026</span>
+    <span>02 / 15</span>
+  </div>
+
+</div>
+
+<aside data-notes class="hidden">
+  <ul>
+    <li>Frame these as four interlocking constraints, not four independent problems.</li>
+    <li>Energy caps scale → forces architectural change → raises verification burden.</li>
+    <li>All four pillars surfaced via dated ScienceDaily breakthroughs (May–Aug 2026).</li>
+    <li>Each pillar maps to multiple portfolio projects later in the deck.</li>
+    <li>Investor takeaway: the wall is real, dated, and approachable from multiple angles.</li>
+  </ul>
+</aside>
+
+</body>
+</html>

@@ -1,0 +1,250 @@
+/* ─────────────────────────────────────────────────────────────────────
+   Beyond the Scaling Wall — Investor Foresight Deck
+   Crystal Blue palette (matches PDF report cover/body)
+   ───────────────────────────────────────────────────────────────────── */
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+:root {
+  /* Crystal Blue palette — aligned with PDF cover */
+  --bg:           #f5f8fc;    /* page background — ultra-light blue-white */
+  --bg-dark:      #0a1628;    /* deep night-sky (for cover / closing) */
+  --bg-card:      #e4ecf5;    /* card surface */
+  --primary:      #142840;    /* deep blue-black — body text */
+  --primary-soft: #2d5f8a;    /* mid blue — subheads */
+  --accent:       #2d7ab3;    /* luminous blue — emphasis */
+  --accent-glow:  #4da8da;    /* brighter blue — stats, highlights */
+  --muted:        #5a7a96;    /* secondary text */
+  --border:       #c0d0e2;    /* hairlines, dividers */
+  --surface:      #edf2f9;    /* section backgrounds */
+
+  /* Semantic */
+  --tier1:  #2d7ab3;          /* high confidence */
+  --tier2:  #7a4da8;           /* medium risk */
+  --tier3:  #994942;           /* speculative */
+
+  /* Typography tokens */
+  --font-heading: 'Playfair Display', Georgia, serif;
+  --font-body:    'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-num:     'JetBrains Mono', 'Inter', monospace;
+
+  /* Type scale (px) */
+  --fs-display:  72px;
+  --fs-h1:       44px;
+  --fs-h2:       32px;
+  --fs-h3:       22px;
+  --fs-body:     16px;
+  --fs-small:    13px;
+  --fs-micro:    11px;
+}
+
+/* ── Reset & canvas ─────────────────────────────────────────────────── */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  background: #1a1a1a;
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+.slide {
+  width: 1280px;
+  min-height: 720px;
+  height: 720px;
+  background: var(--bg);
+  color: var(--primary);
+  overflow: hidden;
+  position: relative;
+  padding: 56px 72px;
+  display: flex;
+  flex-direction: column;
+}
+
+.slide.dark {
+  background: var(--bg-dark);
+  color: #e8f0f8;
+}
+
+/* ── Typography utilities ───────────────────────────────────────────── */
+.kicker {
+  font-family: var(--font-body);
+  font-size: var(--fs-small);
+  font-weight: 500;
+  color: var(--accent);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 18px;
+}
+
+.kicker::before {
+  content: "";
+  display: inline-block;
+  width: 28px;
+  height: 1px;
+  background: var(--accent);
+  vertical-align: middle;
+  margin-right: 14px;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-heading);
+  color: var(--primary);
+  line-height: 1.15;
+  letter-spacing: -0.5px;
+}
+
+.slide.dark h1, .slide.dark h2, .slide.dark h3 {
+  color: #e8f0f8;
+}
+
+h1 { font-size: var(--fs-h1); font-weight: 900; }
+h2 { font-size: var(--fs-h2); font-weight: 700; }
+h3 { font-size: var(--fs-h3); font-weight: 700; }
+
+p, li {
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: 1.55;
+  color: var(--primary);
+}
+
+.slide.dark p, .slide.dark li {
+  color: #c0d0e2;
+}
+
+.lead {
+  font-size: 18px;
+  line-height: 1.55;
+  color: var(--muted);
+}
+
+.num {
+  font-family: var(--font-num);
+  font-feature-settings: 'tnum' 1;
+}
+
+/* ── Layout primitives ──────────────────────────────────────────────── */
+.row { display: flex; gap: 32px; }
+.col { display: flex; flex-direction: column; gap: 16px; }
+.flex-1 { flex: 1; }
+.grow { flex-grow: 1; }
+
+.card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 20px 24px;
+  box-shadow: 0 1px 2px rgba(20, 40, 64, 0.04);
+}
+
+.card-accent {
+  border-top: 3px solid var(--accent);
+}
+
+.stat-block {
+  background: white;
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--accent);
+  padding: 24px 20px;
+  border-radius: 4px;
+  text-align: center;
+}
+
+.stat-num {
+  font-family: var(--font-heading);
+  font-size: 56px;
+  font-weight: 900;
+  color: var(--accent);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.stat-label {
+  font-size: var(--fs-small);
+  color: var(--muted);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+/* ── Table styling ──────────────────────────────────────────────────── */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--fs-small);
+  font-family: var(--font-body);
+}
+
+th {
+  background: var(--primary);
+  color: white;
+  padding: 10px 8px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+td {
+  padding: 9px 8px;
+  border-bottom: 1px solid var(--border);
+  color: var(--primary);
+  vertical-align: middle;
+}
+
+tr:nth-child(even) td { background: #f8fafc; }
+
+td.num, th.num { text-align: right; font-family: var(--font-num); }
+td.center, th.center { text-align: center; }
+
+/* ── Page chrome ────────────────────────────────────────────────────── */
+.page-meta {
+  position: absolute;
+  bottom: 24px;
+  left: 72px;
+  right: 72px;
+  display: flex;
+  justify-content: space-between;
+  font-size: var(--fs-micro);
+  color: var(--muted);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+.slide.dark .page-meta { color: #607080; }
+
+/* ── Decorative accents ─────────────────────────────────────────────── */
+.accent-line {
+  width: 60px;
+  height: 3px;
+  background: var(--accent);
+  margin-bottom: 18px;
+}
+
+.divider {
+  width: 100%;
+  height: 1px;
+  background: var(--border);
+  margin: 16px 0;
+}
+
+/* ── Tag pills ──────────────────────────────────────────────────────── */
+.tag {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  background: var(--bg-card);
+  color: var(--primary-soft);
+  margin-right: 6px;
+}
+
+.tag.tier1 { background: rgba(45, 122, 179, 0.15); color: var(--tier1); }
+.tag.tier2 { background: rgba(122, 77, 168, 0.15); color: var(--tier2); }
+.tag.tier3 { background: rgba(153, 73, 66, 0.15); color: var(--tier3); }
+
+/* ── Hidden speaker notes ──────────────────────────────────────────── */
+.hidden { display: none; }

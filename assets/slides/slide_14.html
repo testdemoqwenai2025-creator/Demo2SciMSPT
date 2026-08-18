@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Slide 14 — Per-Project Financial Summary</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  <link rel="stylesheet" href="global.css" />
+  <style>
+    .slide { padding: 44px 64px 60px; }
+    h1 { font-size: 30px; line-height: 1.15; }
+    .lead { font-size: 13.5px; max-width: 1080px; margin-top: 6px; line-height: 1.5; }
+
+    .table-wrap {
+      flex: 1;
+      margin-top: 14px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: hidden;
+      background: white;
+    }
+    table.fin {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+      table-layout: fixed;
+    }
+    table.fin th {
+      background: var(--primary);
+      color: white;
+      padding: 8px 6px;
+      text-align: left;
+      font-weight: 600;
+      font-size: 10.5px;
+      letter-spacing: 0.4px;
+      text-transform: uppercase;
+      border-right: 1px solid #2a4060;
+      line-height: 1.2;
+    }
+    table.fin th:last-child { border-right: none; }
+    table.fin th.num { text-align: right; }
+    table.fin th.center { text-align: center; }
+    table.fin td {
+      padding: 7px 8px;
+      border-bottom: 1px solid var(--border);
+      border-right: 1px solid var(--border);
+      vertical-align: middle;
+      color: var(--primary);
+      line-height: 1.3;
+    }
+    table.fin td:last-child { border-right: none; }
+    table.fin tr:last-child td { border-bottom: none; }
+    table.fin tr:nth-child(even) td { background: #f8fafc; }
+    table.fin td.num {
+      text-align: right;
+      font-family: var(--font-num);
+      font-feature-settings: 'tnum' 1;
+      font-weight: 500;
+    }
+    table.fin td.center {
+      text-align: center;
+      font-family: var(--font-num);
+      font-weight: 600;
+      color: var(--accent);
+      letter-spacing: 0.4px;
+    }
+    .proj-cell { font-weight: 600; color: var(--primary); }
+
+    .pos { color: var(--accent); }
+    .strong-pos { color: #1f5a82; font-weight: 700; }
+    .weak { color: var(--tier3); }
+
+    .footnote {
+      margin-top: 10px;
+      padding: 9px 14px;
+      background: var(--surface);
+      border-left: 3px solid var(--accent);
+      border-radius: 0 4px 4px 0;
+      font-size: 11.5px;
+      line-height: 1.45;
+      color: var(--primary-soft);
+    }
+    .footnote strong { color: var(--primary); font-weight: 700; }
+  </style>
+</head>
+<body>
+  <div class="slide">
+    <!-- Header -->
+    <div>
+      <div class="kicker">Financial Modeling</div>
+      <h1>Per-Project Financial Summary</h1>
+      <p class="lead">All figures 2026 USD, SciMSPT Research estimates. TAM/SAM at project maturity (2035&ndash;2045); Capex/Opex cumulative 5-year from commercial launch.</p>
+    </div>
+
+    <!-- Financial Table -->
+    <div class="table-wrap">
+      <table class="fin">
+        <colgroup>
+          <col style="width: 4.5%;" />
+          <col style="width: 22%;" />
+          <col style="width: 9%;" />
+          <col style="width: 9%;" />
+          <col style="width: 10.5%;" />
+          <col style="width: 10.5%;" />
+          <col style="width: 11%;" />
+          <col style="width: 8%;" />
+          <col style="width: 9.5%;" />
+        </colgroup>
+        <thead>
+          <tr>
+            <th class="center">P#</th>
+            <th>Project</th>
+            <th class="num">TAM ($B)</th>
+            <th class="num">SAM ($B)</th>
+            <th class="num">Capex ($M)</th>
+            <th class="num">Yr1 Rev ($M)</th>
+            <th class="num">Yr5 Rev ($M)</th>
+            <th class="num">IRR %</th>
+            <th class="num">Payback (yr)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="center">P1</td>
+            <td class="proj-cell">Photonic-Quantum</td>
+            <td class="num">42</td>
+            <td class="num">8.4</td>
+            <td class="num">480</td>
+            <td class="num">35</td>
+            <td class="num">580</td>
+            <td class="num pos">28%</td>
+            <td class="num">6.2</td>
+          </tr>
+          <tr>
+            <td class="center">P2</td>
+            <td class="proj-cell">Quantum Heat Engine</td>
+            <td class="num">12</td>
+            <td class="num">2.1</td>
+            <td class="num">310</td>
+            <td class="num">12</td>
+            <td class="num">180</td>
+            <td class="num weak">19%</td>
+            <td class="num">8.5</td>
+          </tr>
+          <tr>
+            <td class="center">P3</td>
+            <td class="proj-cell">Cryo Neuromorphic</td>
+            <td class="num">18</td>
+            <td class="num">3.6</td>
+            <td class="num">410</td>
+            <td class="num">18</td>
+            <td class="num">240</td>
+            <td class="num pos">22%</td>
+            <td class="num">7.8</td>
+          </tr>
+          <tr>
+            <td class="center">P4</td>
+            <td class="proj-cell">Post-Turing Cog.</td>
+            <td class="num">25</td>
+            <td class="num">4.5</td>
+            <td class="num">180</td>
+            <td class="num">22</td>
+            <td class="num">310</td>
+            <td class="num strong-pos">31%</td>
+            <td class="num">5.4</td>
+          </tr>
+          <tr>
+            <td class="center">P5</td>
+            <td class="proj-cell">Sub-nm 2D Foundries</td>
+            <td class="num strong-pos">68</td>
+            <td class="num strong-pos">13.6</td>
+            <td class="num">920</td>
+            <td class="num">85</td>
+            <td class="num strong-pos">1240</td>
+            <td class="num pos">24%</td>
+            <td class="num">7.1</td>
+          </tr>
+          <tr>
+            <td class="center">P6</td>
+            <td class="proj-cell">Twistronics</td>
+            <td class="num">8</td>
+            <td class="num">1.4</td>
+            <td class="num">220</td>
+            <td class="num">6</td>
+            <td class="num">95</td>
+            <td class="num weak">17%</td>
+            <td class="num">9.2</td>
+          </tr>
+          <tr>
+            <td class="center">P7</td>
+            <td class="proj-cell">Polariton AI</td>
+            <td class="num strong-pos">55</td>
+            <td class="num strong-pos">11.0</td>
+            <td class="num">540</td>
+            <td class="num">48</td>
+            <td class="num">720</td>
+            <td class="num pos">29%</td>
+            <td class="num">5.9</td>
+          </tr>
+          <tr>
+            <td class="center">P8</td>
+            <td class="proj-cell">Electron-Lighthouse</td>
+            <td class="num">14</td>
+            <td class="num">2.8</td>
+            <td class="num">165</td>
+            <td class="num">14</td>
+            <td class="num">165</td>
+            <td class="num pos">24%</td>
+            <td class="num">6.5</td>
+          </tr>
+          <tr>
+            <td class="center">P9</td>
+            <td class="proj-cell">DNA-Storage</td>
+            <td class="num">32</td>
+            <td class="num">6.4</td>
+            <td class="num">385</td>
+            <td class="num">22</td>
+            <td class="num">410</td>
+            <td class="num pos">26%</td>
+            <td class="num">6.8</td>
+          </tr>
+          <tr>
+            <td class="center">P10</td>
+            <td class="proj-cell">Orbital DC</td>
+            <td class="num">28</td>
+            <td class="num">4.2</td>
+            <td class="num">720</td>
+            <td class="num">8</td>
+            <td class="num">220</td>
+            <td class="num weak">14%</td>
+            <td class="num">11.5</td>
+          </tr>
+          <tr>
+            <td class="center">P11</td>
+            <td class="proj-cell">AI Materials</td>
+            <td class="num">48</td>
+            <td class="num">9.6</td>
+            <td class="num">240</td>
+            <td class="num">42</td>
+            <td class="num">540</td>
+            <td class="num strong-pos">34%</td>
+            <td class="num">4.8</td>
+          </tr>
+          <tr>
+            <td class="center">P12</td>
+            <td class="proj-cell">AI Reasoning</td>
+            <td class="num">22</td>
+            <td class="num">4.0</td>
+            <td class="num">140</td>
+            <td class="num">18</td>
+            <td class="num">280</td>
+            <td class="num strong-pos">33%</td>
+            <td class="num">5.1</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Footnote -->
+    <div class="footnote">
+      <strong>Aggregate portfolio IRR (50/30/20 weighted):</strong> 24&ndash;27%, vs 15&ndash;18% deep-tech venture hurdle.
+    </div>
+
+    <!-- Page meta -->
+    <div class="page-meta">
+      <span>SciMSPT Research &middot; Aug 2026</span>
+      <span>14 / 15</span>
+    </div>
+  </div>
+
+  <aside data-notes class="hidden">
+    <ul>
+      <li>Capital intensity splits: P5 ($920M) and P10 ($720M) are the heaviest fabs; P12 ($140M) is lightest.</li>
+      <li>Tier 1 (P1, P5, P7, P9, P11) delivers the bulk of aggregate IRR — 24-34% range.</li>
+      <li>P11 best risk-adjusted return: 34% IRR, 4.8-yr payback, moderate capex.</li>
+      <li>P10 (Orbital DC) weakest IRR (14%) but strategic moat — optionality justifies Tier 3 allocation.</li>
+      <li>Yr5 Rev trajectory matters more than Yr1 — guide investors to long-dated ramp, not quarter-on-quarter.</li>
+    </ul>
+  </aside>
+</body>
+</html>

@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Portfolio Overview — 12 Projects, 6 Domains</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+<link rel="stylesheet" href="global.css" />
+<style>
+  .bento-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 16px;
+    flex-grow: 1;
+  }
+  .bento-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--accent);
+    border-radius: 6px;
+    padding: 16px 18px 14px 18px;
+    box-shadow: 0 1px 2px rgba(20, 40, 64, 0.04);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .bento-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .bento-domain {
+    font-family: var(--font-heading);
+    font-size: 19px;
+    font-weight: 700;
+    color: var(--primary);
+    line-height: 1;
+    letter-spacing: -0.3px;
+  }
+  .bento-domain-icon {
+    width: 26px;
+    height: 26px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .bento-domain-icon .material-icons {
+    font-size: 16px;
+    color: white;
+  }
+  .bento-project {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 7px 0;
+    border-top: 1px dashed var(--border);
+  }
+  .bento-project:first-of-type {
+    border-top: none;
+    padding-top: 4px;
+  }
+  .bento-proj-id {
+    font-family: var(--font-num);
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--muted);
+    letter-spacing: 0.5px;
+    flex-shrink: 0;
+  }
+  .bento-proj-name {
+    font-family: var(--font-body);
+    font-size: 13.5px;
+    color: var(--primary);
+    line-height: 1.3;
+    flex-grow: 1;
+    margin-left: 8px;
+  }
+  .mini-tag {
+    font-family: var(--font-body);
+    font-size: 10px;
+    font-weight: 600;
+    padding: 2px 7px;
+    border-radius: 8px;
+    letter-spacing: 0.5px;
+    flex-shrink: 0;
+  }
+  .mini-tag.tier1 { background: rgba(45, 122, 179, 0.15); color: var(--tier1); }
+  .mini-tag.tier2 { background: rgba(122, 77, 168, 0.15); color: var(--tier2); }
+  .mini-tag.tier3 { background: rgba(153, 73, 66, 0.15); color: var(--tier3); }
+
+  .header-rule {
+    width: 60px;
+    height: 3px;
+    background: var(--accent);
+    margin-top: 12px;
+    margin-bottom: 14px;
+  }
+  .lead-row {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px;
+  }
+  .legend-strip {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    flex-shrink: 0;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    color: var(--muted);
+    font-weight: 500;
+    letter-spacing: 0.5px;
+  }
+  .legend-swatch {
+    width: 10px;
+    height: 10px;
+    border-radius: 2px;
+  }
+</style>
+</head>
+<body>
+<div class="slide">
+
+  <!-- Header -->
+  <div>
+    <div class="kicker">Portfolio Overview</div>
+    <h1>12 Projects Across 6 Technology Domains</h1>
+    <div class="header-rule" data-decor aria-hidden="true"></div>
+    <div class="lead-row">
+      <p class="lead" style="max-width: 760px;">
+        Each project addresses one or more of the four scaling-wall pillars. Several cross-cut multiple pillars simultaneously — these tend to offer the highest long-term strategic value.
+      </p>
+      <div class="legend-strip">
+        <div class="legend-item"><span class="legend-swatch" style="background: var(--tier1);"></span>Tier 1</div>
+        <div class="legend-item"><span class="legend-swatch" style="background: var(--tier2);"></span>Tier 2</div>
+        <div class="legend-item"><span class="legend-swatch" style="background: var(--tier3);"></span>Tier 3</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3x2 Bento grid -->
+  <div class="bento-grid" style="margin-top: 18px;">
+
+    <!-- 1. Quantum -->
+    <div class="bento-card" style="border-left-color: #2d7ab3;">
+      <div class="bento-head">
+        <div class="bento-domain">Quantum</div>
+        <div class="bento-domain-icon" style="background: #2d7ab3;"><i class="material-icons">blur_on</i></div>
+      </div>
+      <div>
+        <div class="bento-project">
+          <span class="bento-proj-id">P1</span>
+          <span class="bento-proj-name">Photonic-Quantum AI Accel.</span>
+          <span class="mini-tag tier1">Tier 1</span>
+        </div>
+        <div class="bento-project">
+          <span class="bento-proj-id">P2</span>
+          <span class="bento-proj-name">Quantum Heat Engine NW</span>
+          <span class="mini-tag tier2">Tier 2</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. Neuromorphic -->
+    <div class="bento-card" style="border-left-color: #7a4da8;">
+      <div class="bento-head">
+        <div class="bento-domain">Neuromorphic</div>
+        <div class="bento-domain-icon" style="background: #7a4da8;"><i class="material-icons">psychology</i></div>
+      </div>
+      <div>
+        <div class="bento-project">
+          <span class="bento-proj-id">P3</span>
+          <span class="bento-proj-name">Cryogenic Neuromorphic</span>
+          <span class="mini-tag tier2">Tier 2</span>
+        </div>
+        <div class="bento-project">
+          <span class="bento-proj-id">P4</span>
+          <span class="bento-proj-name">Post-Turing Cognition</span>
+          <span class="mini-tag tier2">Tier 2</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. Beyond-CMOS -->
+    <div class="bento-card" style="border-left-color: #4a8a7d;">
+      <div class="bento-head">
+        <div class="bento-domain">Beyond-CMOS</div>
+        <div class="bento-domain-icon" style="background: #4a8a7d;"><i class="material-icons">memory</i></div>
+      </div>
+      <div>
+        <div class="bento-project">
+          <span class="bento-proj-id">P5</span>
+          <span class="bento-proj-name">Sub-nm 2D Foundries</span>
+          <span class="mini-tag tier1">Tier 1</span>
+        </div>
+        <div class="bento-project">
+          <span class="bento-proj-id">P6</span>
+          <span class="bento-proj-name">Twistronics Matter</span>
+          <span class="mini-tag tier3">Tier 3</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. Photonic -->
+    <div class="bento-card" style="border-left-color: #cd7d3f;">
+      <div class="bento-head">
+        <div class="bento-domain">Photonic</div>
+        <div class="bento-domain-icon" style="background: #cd7d3f;"><i class="material-icons">flare</i></div>
+      </div>
+      <div>
+        <div class="bento-project">
+          <span class="bento-proj-id">P7</span>
+          <span class="bento-proj-name">Polariton AI Fabrics</span>
+          <span class="mini-tag tier1">Tier 1</span>
+        </div>
+        <div class="bento-project">
+          <span class="bento-proj-id">P8</span>
+          <span class="bento-proj-name">Electron-Lighthouse</span>
+          <span class="mini-tag tier2">Tier 2</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. Data Infra -->
+    <div class="bento-card" style="border-left-color: #3e5b69;">
+      <div class="bento-head">
+        <div class="bento-domain">Data Infra</div>
+        <div class="bento-domain-icon" style="background: #3e5b69;"><i class="material-icons">storage</i></div>
+      </div>
+      <div>
+        <div class="bento-project">
+          <span class="bento-proj-id">P9</span>
+          <span class="bento-proj-name">DNA-Storage Continuum</span>
+          <span class="mini-tag tier1">Tier 1</span>
+        </div>
+        <div class="bento-project">
+          <span class="bento-proj-id">P10</span>
+          <span class="bento-proj-name">Orbital AI Data Centers</span>
+          <span class="mini-tag tier3">Tier 3</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6. AI Discovery -->
+    <div class="bento-card" style="border-left-color: #994942;">
+      <div class="bento-head">
+        <div class="bento-domain">AI Discovery</div>
+        <div class="bento-domain-icon" style="background: #994942;"><i class="material-icons">science</i></div>
+      </div>
+      <div>
+        <div class="bento-project">
+          <span class="bento-proj-id">P11</span>
+          <span class="bento-proj-name">AI-Discovered Materials</span>
+          <span class="mini-tag tier1">Tier 1</span>
+        </div>
+        <div class="bento-project">
+          <span class="bento-proj-id">P12</span>
+          <span class="bento-proj-name">AI-Verified Reasoning</span>
+          <span class="mini-tag tier2">Tier 2</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Page meta -->
+  <div class="page-meta">
+    <span>SciMSPT Research · Aug 2026</span>
+    <span>04 / 15</span>
+  </div>
+
+</div>
+
+<aside data-notes class="hidden">
+  <ul>
+    <li>Highlight that several projects cross-cut multiple pillars — these are the high-leverage bets.</li>
+    <li>Tier 1 clusters in Quantum, Beyond-CMOS, Photonic, Data Infra, AI Discovery — broadest coverage of the wall.</li>
+    <li>Tier 3 (P6 Twistronics, P10 Orbital DC) are moonshots — asymmetric upside, fundamental breakthroughs required.</li>
+    <li>Domain colors used here are reused across the deck for visual consistency.</li>
+    <li>Subsequent slides drill into each domain pair (P1+P2, P3+P4, etc.).</li>
+  </ul>
+</aside>
+
+</body>
+</html>

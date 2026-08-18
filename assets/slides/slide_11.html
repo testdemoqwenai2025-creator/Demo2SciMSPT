@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Slide 11 — Technology Maturity Timeline 2025-2045</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  <link rel="stylesheet" href="global.css" />
+  <style>
+    .slide { padding: 48px 72px 64px; }
+    .chart-wrap {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin-top: 14px;
+    }
+    .chart-wrap img {
+      width: 100%;
+      max-height: 460px;
+      object-fit: contain;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      background: white;
+      padding: 8px;
+    }
+    .caption {
+      margin-top: 10px;
+      font-size: 11.5px;
+      line-height: 1.45;
+      color: var(--muted);
+      font-style: italic;
+      max-width: 1080px;
+      text-align: center;
+    }
+    .caption strong { color: var(--accent); font-style: normal; font-weight: 600; }
+    h1 { font-size: 34px; line-height: 1.15; }
+    .lead { font-size: 15px; max-width: 1080px; margin-top: 6px; }
+    .header-row { display: flex; align-items: flex-end; justify-content: space-between; }
+    .legend-strip {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+      font-size: 10.5px;
+      color: var(--muted);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+    .legend-strip .dot { display:inline-block; width:10px; height:10px; border-radius:2px; margin-right:6px; vertical-align:middle; }
+  </style>
+</head>
+<body>
+  <div class="slide">
+    <!-- Header -->
+    <div class="header-row">
+      <div>
+        <div class="kicker">Foresight Horizon</div>
+        <h1>Technology Maturity Timeline 2025&ndash;2045</h1>
+        <p class="lead">All 12 projects projected across four phases: <strong style="color:var(--primary);font-weight:600;">Lab &rarr; Pilot &rarr; Scale &rarr; Mature</strong>. Critical path dependencies marked with red arrows.</p>
+      </div>
+      <div class="legend-strip" data-decor>
+        <span><span class="dot" style="background:#cfe1f0;"></span>Lab</span>
+        <span><span class="dot" style="background:#7fb6db;"></span>Pilot</span>
+        <span><span class="dot" style="background:#2d7ab3;"></span>Scale</span>
+        <span><span class="dot" style="background:#142840;"></span>Mature</span>
+        <span><span class="dot" style="background:#c0392b;"></span>Critical Path</span>
+      </div>
+    </div>
+
+    <!-- Chart -->
+    <div class="chart-wrap">
+      <img src="timeline_chart.png" alt="Tech maturity timeline 2025-2045 — twelve projects across Lab, Pilot, Scale, Mature phases with red critical-path arrows" />
+      <p class="caption">
+        <strong>Figure:</strong> Phase boundaries reflect demonstrated lab results, projected commercial deployment, scaling inflection, and infrastructure maturity. Red arrows show critical-path dependencies (e.g. P11 &rarr; P5, P5 &rarr; P6, P9 &rarr; P10).
+      </p>
+    </div>
+
+    <!-- Page meta -->
+    <div class="page-meta">
+      <span>SciMSPT Research &middot; Aug 2026</span>
+      <span>11 / 15</span>
+    </div>
+  </div>
+
+  <aside data-notes class="hidden">
+    <ul>
+      <li>Walk audience through 2025-2045 horizon: most projects exit Lab phase by 2032.</li>
+      <li>Highlight 2038-2045 maturity clustering — Tier 1 moonshots converge in late period.</li>
+      <li>Emphasize red arrows: P11 enables P5 (materials feedstock), P5 enables P6 (twistronics substrate), P9 enables P10 (orbital archival).</li>
+      <li>Note Tier 3 (P6, P10) extends past 2040 — longest-horizon bets.</li>
+      <li>Frame: timeline is a planning artifact, not a forecast; revise each ScienceDaily cycle.</li>
+    </ul>
+  </aside>
+</body>
+</html>

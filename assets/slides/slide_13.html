@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Slide 13 — Investment Thesis & Three-Tier Allocation</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  <link rel="stylesheet" href="global.css" />
+  <style>
+    .slide { padding: 48px 72px 64px; }
+    h1 { font-size: 32px; line-height: 1.15; }
+    .lead { font-size: 15px; max-width: 1080px; margin-top: 6px; }
+
+    .tier-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 24px;
+      margin-top: 22px;
+      flex: 1;
+    }
+    .tier-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 22px 22px 18px;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 2px 6px rgba(20, 40, 64, 0.05);
+      position: relative;
+    }
+    .tier-card::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      border-radius: 6px 6px 0 0;
+    }
+    .tier-card.t1::before { background: var(--tier1); }
+    .tier-card.t2::before { background: var(--tier2); }
+    .tier-card.t3::before { background: var(--tier3); }
+
+    .tier-header {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      margin-bottom: 4px;
+    }
+    .tier-label {
+      font-family: var(--font-body);
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: 1.6px;
+      text-transform: uppercase;
+    }
+    .tier-card.t1 .tier-label { color: var(--tier1); }
+    .tier-card.t2 .tier-label { color: var(--tier2); }
+    .tier-card.t3 .tier-label { color: var(--tier3); }
+
+    .tier-pct {
+      font-family: var(--font-heading);
+      font-size: 36px;
+      font-weight: 900;
+      line-height: 1;
+      margin-left: auto;
+    }
+    .tier-card.t1 .tier-pct { color: var(--tier1); }
+    .tier-card.t2 .tier-pct { color: var(--tier2); }
+    .tier-card.t3 .tier-pct { color: var(--tier3); }
+
+    .tier-title {
+      font-family: var(--font-heading);
+      font-size: 19px;
+      font-weight: 700;
+      color: var(--primary);
+      line-height: 1.2;
+      margin-bottom: 6px;
+    }
+    .tier-sub {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.4;
+      margin-bottom: 14px;
+      min-height: 34px;
+    }
+
+    .proj-section-label {
+      font-size: 10px;
+      letter-spacing: 1.4px;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 600;
+      margin-bottom: 8px;
+      padding-bottom: 6px;
+      border-bottom: 1px dashed var(--border);
+    }
+    .proj-list { list-style: none; padding: 0; margin: 0 0 14px 0; }
+    .proj-list li {
+      font-size: 12.5px;
+      line-height: 1.45;
+      padding: 5px 0;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .proj-list li::before {
+      content: "";
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .tier-card.t1 .proj-list li::before { background: var(--tier1); }
+    .tier-card.t2 .proj-list li::before { background: var(--tier2); }
+    .tier-card.t3 .proj-list li::before { background: var(--tier3); }
+
+    .proj-list li .pid {
+      font-family: var(--font-num);
+      font-weight: 600;
+      color: var(--accent);
+      margin-right: 4px;
+      font-size: 12px;
+    }
+    .tier-card.t1 .proj-list li .pid { color: var(--tier1); }
+    .tier-card.t2 .proj-list li .pid { color: var(--tier2); }
+    .tier-card.t3 .proj-list li .pid { color: var(--tier3); }
+
+    .stats-footer {
+      margin-top: auto;
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .stat-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      font-size: 11.5px;
+    }
+    .stat-row .lbl {
+      color: var(--muted);
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+      font-weight: 500;
+      font-size: 10px;
+    }
+    .stat-row .val {
+      font-family: var(--font-num);
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    .allocation-bar {
+      margin-top: 14px;
+      display: flex;
+      height: 8px;
+      border-radius: 4px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .allocation-bar .seg {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 9px;
+      color: white;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+    .allocation-bar .s1 { background: var(--tier1); flex: 50; }
+    .allocation-bar .s2 { background: var(--tier2); flex: 30; }
+    .allocation-bar .s3 { background: var(--tier3); flex: 20; }
+  </style>
+</head>
+<body>
+  <div class="slide">
+    <!-- Header -->
+    <div>
+      <div class="kicker">Portfolio Construction</div>
+      <h1>Investment Thesis &amp; Three-Tier Allocation</h1>
+      <p class="lead">A 50/30/20 allocation across confidence tiers balances near-term returns with option value on moonshots.</p>
+    </div>
+
+    <!-- Tier Cards -->
+    <div class="tier-grid">
+      <!-- Tier 1 -->
+      <div class="tier-card t1">
+        <div class="tier-header">
+          <span class="tier-label">Tier 1 &mdash; High Confidence</span>
+          <span class="tier-pct">50<span style="font-size:18px;">%</span></span>
+        </div>
+        <div class="tier-title">Near-term commercial path</div>
+        <div class="tier-sub">Multiple independent lab demonstrations. Engineering risk contained; commercialization within 7&ndash;10 years.</div>
+
+        <div class="proj-section-label">Project Allocation</div>
+        <ul class="proj-list">
+          <li><span class="pid">P1</span>Photonic-Quantum AI Accel.</li>
+          <li><span class="pid">P5</span>Sub-nm 2D Foundries</li>
+          <li><span class="pid">P7</span>Polariton AI Fabrics</li>
+          <li><span class="pid">P9</span>DNA-Storage Continuum</li>
+          <li><span class="pid">P11</span>AI-Discovered Materials</li>
+        </ul>
+
+        <div class="stats-footer">
+          <div class="stat-row"><span class="lbl">Horizon</span><span class="val">2027 &ndash; 2035</span></div>
+          <div class="stat-row"><span class="lbl">IRR Range</span><span class="val">24 &ndash; 34%</span></div>
+        </div>
+      </div>
+
+      <!-- Tier 2 -->
+      <div class="tier-card t2">
+        <div class="tier-header">
+          <span class="tier-label">Tier 2 &mdash; Medium Risk</span>
+          <span class="tier-pct">30<span style="font-size:18px;">%</span></span>
+        </div>
+        <div class="tier-title">Strong scientific basis</div>
+        <div class="tier-sub">Significant engineering risk remains. Requires sustained pilot-scale investment to bridge Lab&rarr;Scale.</div>
+
+        <div class="proj-section-label">Project Allocation</div>
+        <ul class="proj-list">
+          <li><span class="pid">P2</span>Quantum Heat Engine</li>
+          <li><span class="pid">P3</span>Cryo Neuromorphic</li>
+          <li><span class="pid">P4</span>Post-Turing Cognition</li>
+          <li><span class="pid">P8</span>Electron-Lighthouse</li>
+          <li><span class="pid">P12</span>AI-Verified Reasoning</li>
+        </ul>
+
+        <div class="stats-footer">
+          <div class="stat-row"><span class="lbl">Horizon</span><span class="val">2030 &ndash; 2040</span></div>
+          <div class="stat-row"><span class="lbl">IRR Range</span><span class="val">19 &ndash; 33%</span></div>
+        </div>
+      </div>
+
+      <!-- Tier 3 -->
+      <div class="tier-card t3">
+        <div class="tier-header">
+          <span class="tier-label">Tier 3 &mdash; Speculative</span>
+          <span class="tier-pct">20<span style="font-size:18px;">%</span></span>
+        </div>
+        <div class="tier-title">Asymmetric upside moonshots</div>
+        <div class="tier-sub">Requires fundamental breakthroughs. Loss tolerance accepted for portfolio-level upside optionality.</div>
+
+        <div class="proj-section-label">Project Allocation</div>
+        <ul class="proj-list">
+          <li><span class="pid">P6</span>Twistronics Matter</li>
+          <li><span class="pid">P10</span>Orbital AI Data Centers</li>
+        </ul>
+
+        <div class="stats-footer">
+          <div class="stat-row"><span class="lbl">Horizon</span><span class="val">2035 &ndash; 2045</span></div>
+          <div class="stat-row"><span class="lbl">IRR Range</span><span class="val">14 &ndash; 17%</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Allocation bar -->
+    <div class="allocation-bar" data-decor>
+      <div class="seg s1">TIER 1 &middot; 50%</div>
+      <div class="seg s2">TIER 2 &middot; 30%</div>
+      <div class="seg s3">TIER 3 &middot; 20%</div>
+    </div>
+
+    <!-- Page meta -->
+    <div class="page-meta">
+      <span>SciMSPT Research &middot; Aug 2026</span>
+      <span>13 / 15</span>
+    </div>
+  </div>
+
+  <aside data-notes class="hidden">
+    <ul>
+      <li>50/30/20 mirrors deep-tech venture practice — anchor returns in Tier 1, optionality in Tier 3.</li>
+      <li>Cross-domain hedging: no two projects in the same tier share the same primary scaling wall.</li>
+      <li>Tier 2 carries widest IRR variance (19-33%) — bets that re-tier upward post-pilot.</li>
+      <li>Tier 3 moonshots represent structural bets on paradigm shift, not incremental returns.</li>
+      <li>Rebalance annually as ScienceDaily signals move projects between tiers.</li>
+    </ul>
+  </aside>
+</body>
+</html>
