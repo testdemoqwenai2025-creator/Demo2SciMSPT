@@ -1,0 +1,68 @@
+{
+  "schema_version": "1.0.0",
+  "generated_at": "2026-08-17T09:37:08Z",
+  "snapshot_date": "2026-08-17",
+  "source": "https://www.sciencedaily.com/rss/",
+  "axes": {
+    "S": {
+      "label": "Life & Health",
+      "feed_count": 3,
+      "article_count": 115,
+      "feeds": [
+        {
+          "name": "health_medicine",
+          "url": "https://www.sciencedaily.com/rss/health_medicine.xml"
+        },
+        {
+          "name": "mind_brain",
+          "url": "https://www.sciencedaily.com/rss/mind_brain.xml"
+        },
+        {
+          "name": "living_well",
+          "url": "https://www.sciencedaily.com/rss/living_well.xml"
+        }
+      ]
+    },
+    "M": {
+      "label": "Matter & Energy",
+      "feed_count": 1,
+      "article_count": 60,
+      "feeds": [
+        {
+          "name": "matter_energy",
+          "url": "https://www.sciencedaily.com/rss/matter_energy.xml"
+        }
+      ]
+    },
+    "P": {
+      "label": "Physics · Space & Time",
+      "feed_count": 1,
+      "article_count": 50,
+      "feeds": [
+        {
+          "name": "space_time",
+          "url": "https://www.sciencedaily.com/rss/space_time.xml"
+        }
+      ]
+    },
+    "T": {
+      "label": "Computers & Math (Time/Tech)",
+      "feed_count": 1,
+      "article_count": 39,
+      "feeds": [
+        {
+          "name": "computers_math",
+          "url": "https://www.sciencedaily.com/rss/computers_math.xml"
+        }
+      ]
+    }
+  },
+  "total_articles": 264,
+  "duplicates_removed": 96,
+  "files": {
+    "per_axis": "per_axis/<axis>.json",
+    "all_articles": "all_articles.json",
+    "digest_md": "DIGEST.md",
+    "rss_cache": "rss_cache/"
+  }
+}
