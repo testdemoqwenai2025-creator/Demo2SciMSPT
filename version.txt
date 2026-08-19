@@ -1,0 +1,34 @@
+SciMSPT Version Information
+===========================
+Version: 1.2.0
+Build Date: 2026-08-20
+Platform: GitHub Pages
+URL: https://testdemoqwenai2025-creator.github.io/SciMSPT/
+
+Version History:
+---------------
+v1.2.0 (2026-08-20) - Repository organization, Skills.md, worklog, roadmap
+v1.1.0 (2026-08-19) - OAuth, GDPR, navigation ribbon, UI consistency
+v1.0.0 (2026-08-18) - Initial release with core platform
+
+Technical Stack:
+--------------
+Frontend: HTML5, CSS3, Vanilla JavaScript
+Fonts: Playfair Display, Inter, JetBrains Mono
+Icons: Material Icons (Google)
+Hosting: GitHub Pages (static)
+
+Features in v1.2.0:
+-------------------
+- Pipeline section (Research → Analysis → Venture)
+- ScienceDaily RSS integration ready
+- bioRxiv/medRxiv API support
+- arXiv OAI-PMH sync capability
+- Paper search with filters
+- User bookmarks system
+- Comment system infrastructure
+- Dark mode improvements
+- Card layout centering fixes
+
+Status: Production Ready
+Maintainer: SciMSPT Development Team

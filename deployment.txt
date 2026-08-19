@@ -1,0 +1,282 @@
+SciMSPT Deployment Guide
+=======================
+
+QUICK DEPLOYMENT TO GITHUB PAGES
+--------------------------------
+
+Prerequisites:
+- GitHub account
+- Git installed locally
+- Repository: https://github.com/testdemoqwenai2025-creator/SciMSPT
+
+Steps:
+
+1. Clone the repository
+   git clone https://github.com/testdemoqwenai2025-creator/SciMSPT.git
+   cd SciMSPT
+
+2. Make your changes
+   # Edit files as needed
+   # All changes should be in main branch for Pages
+
+3. Commit and push
+   git add .
+   git commit -m "Your commit message"
+   git push origin main
+
+4. Automatic Deployment
+   - GitHub Pages is configured to deploy from main branch
+   - Site will be live within 1-2 minutes
+   - URL: https://testdemoqwenai2025-creator.github.io/SciMSPT/
+
+GITHUB PAGES CONFIGURATION
+--------------------------
+
+Settings to verify:
+1. Go to repository Settings > Pages
+2. Source: Deploy from a branch
+3. Branch: main / (root)
+4. Save settings
+
+Custom Domain (Optional):
+1. Add CNAME file to root with your domain
+2. Configure DNS A record: 185.199.108.153
+3. Enable HTTPS in Settings > Pages
+
+
+LOCAL DEVELOPMENT SETUP
+-----------------------
+
+Option 1: Direct File Opening
+- Simply open index.html in browser
+- Note: Some features may not work (fetch API, etc.)
+
+Option 2: Python HTTP Server
+cd /path/to/SciMSPT
+python3 -m http.server 8000
+# Open http://localhost:8000
+
+Option 3: Node.js Serve
+npx serve .
+# Open http://localhost:3000
+
+Option 4: VS Code Live Server
+1. Install "Live Server" extension
+2. Right-click index.html > "Open with Live Server"
+
+
+AUTOMATION WITH GITHUB ACTIONS
+------------------------------
+
+Weekly ScienceDaily Parsing (.github/workflows/weekly-digest.yml):
+
+name: Weekly ScienceDaily Digest
+on:
+  schedule:
+    - cron: '0 9 * * 1'  # Every Monday 9:00 UTC
+  workflow_dispatch:  # Manual trigger
+
+jobs:
+  parse-sciencedaily:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+      
+      - name: Install dependencies
+        run: npm install axios cheerio
+      
+      - name: Run ScienceDaily parser
+        run: node Scripts/parse-sciencedaily.js
+      
+      - name: Run arXiv sync
+        run: node Scripts/sync-arxiv.js
+      
+      - name: Generate startup data
+        run: node Scripts/generate-startups.js
+      
+      - name: Commit changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add data/
+          git commit -m "Auto-update: Weekly digest $(date +%Y-%m-%d)" || echo "No changes"
+          git push
+
+
+CLOUDFLARE WORKER BACKEND SETUP
+-------------------------------
+
+For comment system and advanced features:
+
+1. Create Worker at https://dash.cloudflare.com
+2. Use this basic structure:
+
+// worker/index.js
+export default {
+  async fetch(request, env) {
+    const url = new URL(request.url);
+    
+    // CORS headers
+    const corsHeaders = {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+      'Access-Control-Allow-Headers': 'Content-Type',
+    };
+    
+    // Handle preflight
+    if (request.method === 'OPTIONS') {
+      return new Response(null, { headers: corsHeaders });
+    }
+    
+    // Comments endpoint
+    if (url.pathname === '/api/comments' && request.method === 'POST') {
+      const data = await request.json();
+      // Save to KV storage
+      await env.COMMENTS.put(
+        `${data.paperId}:${Date.now()}`,
+        JSON.stringify(data)
+      );
+      return Response.json({ success: true }, { headers: corsHeaders });
+    }
+    
+    // Get comments
+    if (url.pathname === '/api/comments' && request.method === 'GET') {
+      const paperId = url.searchParams.get('paperId');
+      const list = await env.COMMENTS.list({ prefix: paperId });
+      return Response.json(list.keys, { headers: corsHeaders });
+    }
+    
+    return new Response('Not Found', { status: 404 });
+  }
+};
+
+3. Deploy with Wrangler CLI:
+   npm install -g wrangler
+   wrangler login
+   wrangler deploy
+
+
+ENVIRONMENT CONFIGURATION
+-------------------------
+
+Create .env file (DO NOT COMMIT):
+
+# OAuth Providers
+GITHUB_CLIENT_ID=your_github_client_id
+GITHUB_CLIENT_SECRET=your_github_secret
+GOOGLE_CLIENT_ID=your_google_client_id
+GOOGLE_CLIENT_SECRET=your_google_secret
+LINKEDIN_CLIENT_ID=your_linkedin_client_id
+LINKEDIN_CLIENT_SECRET=your_linkedin_secret
+TWITTER_CLIENT_ID=your_twitter_client_id
+TWITTER_CLIENT_SECRET=your_twitter_secret
+
+# Worker Backend
+WORKER_API_URL=https://scimspt-api.workers.dev
+WORKER_API_KEY=your_worker_api_key
+
+# Analytics (Optional)
+GOOGLE_ANALYTICS_ID=G-XXXXXXXXXX
+
+
+TROUBLESHOOTING
+---------------
+
+Issue: Changes not showing on GitHub Pages
+Solution:
+- Check if pushed to main branch
+- Verify Pages settings (Source: main branch)
+- Wait 1-2 minutes for deployment
+- Clear browser cache (Ctrl+Shift+R)
+
+Issue: 404 errors on subpages
+Solution:
+- Verify file paths are correct (case-sensitive)
+- Check .gitignore isn't excluding files
+- Ensure all HTML files are committed
+
+Issue: OAuth not working
+Solution:
+- Configure OAuth credentials in provider dashboard
+- Update redirect URI to match GitHub Pages URL
+- Check browser console for error messages
+
+Issue: Styles not loading correctly
+Solution:
+- Check CSS paths are relative
+- Verify assets folder is deployed
+- Inspect network tab for 404s on CSS files
+
+
+PERFORMANCE OPTIMIZATION
+------------------------
+
+Current Bundle Size: ~200KB (HTML + CSS + JS)
+
+Optimization Tips:
+1. Minify CSS and JavaScript
+2. Compress images (use WebP format)
+3. Enable gzip/brotli compression (automatic on GitHub Pages)
+4. Use lazy loading for images below fold
+5. Consider splitting CSS into critical + non-critical
+
+
+MONITORING & ANALYTICS
+----------------------
+
+Recommended Tools:
+1. Google Analytics (free tier available)
+2. Plausible Analytics (privacy-friendly alternative)
+3. Cloudflare Analytics (if using Workers)
+
+Key Metrics to Track:
+- Page load time
+- Bounce rate
+- User session duration
+- Feature usage (search, bookmarks, comments)
+
+
+BACKUP STRATEGY
+---------------
+
+GitHub serves as primary backup:
+- Full version history maintained
+- Can rollback to any commit
+- Fork repository for additional backup
+
+Local Backup:
+git clone --mirror https://github.com/testdemoqwenai2025-creator/SciMSPT.git backup/
+
+
+SECURITY CHECKLIST
+------------------
+
+- [ ] No API keys in code
+- [ ] Environment variables used for secrets
+- [ ] HTTPS enforced (automatic on GitHub Pages)
+- [ ] Content Security Policy headers considered
+- [ ] User input sanitized
+- [ ] Dependencies up to date
+- [ ] CORS properly configured
+- [ ] Rate limiting implemented
+
+
+SUPPORT & CONTACT
+-----------------
+
+For issues:
+- GitHub Issues: https://github.com/testdemoqwenai2025-creator/SciMSPT/issues
+- Documentation: See Skills.md, worklog.md, roadmap.md
+
+For security issues:
+- Email: security@scimspt.research (placeholder)
+- Do NOT open public issue for vulnerabilities
+
+---
+Deployment Guide Version: 1.0
+Last Updated: 2026-08-20

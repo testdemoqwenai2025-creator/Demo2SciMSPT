@@ -1,0 +1,199 @@
+SciMSPT API Configuration
+========================
+
+TIER 1: PRIMARY APIS (Free, Primary Sources)
+--------------------------------------------
+
+1. SCIENCE DAILY RSS FEEDS
+   - Endpoint: https://www.sciencedaily.com/rss/all.xml
+   - Format: XML/RSS
+   - Rate Limit: None (be polite, 1 req/min recommended)
+   - Update Frequency: Daily
+   - Categories: All science domains
+   - Usage: Primary news aggregation source
+   
+2. ARXIV API
+   - Query Endpoint: http://export.arxiv.org/api/query
+   - Parameters:
+     * search_query=cat:cs.AI (category search)
+     * start=0 (pagination offset)
+     * max_results=100 (items per page)
+     * sortBy=submittedDate (sorting)
+     * sortOrder=descending
+   - OAI-PMH Endpoint: http://export.arxiv.org/oai2
+   - Rate Limit: 1 request per 3 seconds (strict!)
+   - Important Categories:
+     * cs.AI - Artificial Intelligence
+     * cs.LG - Machine Learning
+     * cs.CL - Computation and Language
+     * stat.ML - Machine Learning (Statistics)
+     * q-bio.QM - Quantitative Methods
+     * q-bio.BM - Biomolecules
+     * physics.quant-ph - Quantum Physics
+   - Best Practice: Use OAI-PMH for daily delta syncs
+
+3. BIORXIV/MEDRXIV API
+   - Endpoint: https://api.biorxiv.org/details/{server}/{doi}/{interval}
+   - Server Values:
+     * biorxiv - Biology preprints
+     * medrxiv - Medical preprints
+   - DOI Format: Full DOI or partial
+   - Interval Examples:
+     * 2020-01-01/2020-12-31 (date range)
+     * 2020-01 (single month)
+     * 2020 (entire year)
+   - Rate Limit: No hard limit (be polite)
+   - Best For: Health/biology preprints
+   - Note: Many startups came from this world (Insitro, Recursion, etc.)
+
+4. CHEMRXIV API
+   - Endpoint: https://chemrxiv.figshare.com/v1/articles
+   - Platform: Figshare-based
+   - Rate Limit: Standard Figshare limits
+   - Best For: Chemistry preprints
+   - Use Cases: Materials science, catalysis research
+
+
+TIER 2: ACADEMIC DATABASES
+--------------------------
+
+5. PUBMED CENTRAL
+   - Endpoint: https://pubmed.ncbi.nlm.nih.gov/
+   - Type: Biomedical literature database
+   - Access: Free full-text archive
+   - Best For: Life sciences, medicine
+
+6. GOOGLE SCHOLAR
+   - Endpoint: https://scholar.google.com/
+   - Type: Search engine
+   - Access: Free
+   - Best For: Cross-disciplinary search
+   - Note: No official API; use academic tools
+
+7. SEMANTIC SCHOLAR
+   - Endpoint: https://api.semanticscholar.org/v1
+   - Type: AI-powered academic search
+   - Access: Free API available
+   - Features: Citation analysis, paper recommendations
+
+8. ZENODO
+   - Endpoint: https://zenodo.org/api
+   - Type: Research data repository
+   - Host: CERN
+   - Best For: Research artifacts, datasets
+
+
+TIER 3: PREMIUM SOURCES (Future Integration)
+---------------------------------------------
+
+9. NATURE PORTAL
+   - Type: Premium journals
+   - Access: Subscription required
+   - Value: High-impact publications
+
+10. IEEE XPLORE
+    - Type: Engineering database
+    - Access: Institutional subscription
+    - Value: Semiconductor, CS papers
+
+11. ACM DIGITAL LIBRARY
+    - Type: Computer science archive
+    - Access: Institutional subscription
+    - Value: CS theory, algorithms
+
+
+RATE LIMITING STRATEGY
+----------------------
+
+Recommended Implementation:
+
+1. Queue System
+   - Use async queue for API requests
+   - Implement exponential backoff on failures
+   - Respect all rate limits strictly
+
+2. Caching Strategy
+   - Cache responses for 1 hour (short-lived data)
+   - Cache metadata for 24 hours (stable data)
+   - Use ETags/Last-Modified headers
+
+3. Batch Processing
+   - Combine multiple queries when possible
+   - Use OAI-PMH for bulk operations
+   - Schedule non-urgent requests during off-hours
+
+
+ENVIRONMENT VARIABLES REQUIRED
+------------------------------
+
+# GitHub OAuth
+GITHUB_CLIENT_ID=your_client_id
+GITHUB_CLIENT_SECRET=your_secret
+
+# Google OAuth
+GOOGLE_CLIENT_ID=your_client_id
+GOOGLE_CLIENT_SECRET=your_secret
+
+# LinkedIn OAuth
+LINKEDIN_CLIENT_ID=your_client_id
+LINKEDIN_CLIENT_SECRET=your_secret
+
+# Twitter/X OAuth
+TWITTER_CLIENT_ID=your_client_id
+TWITTER_CLIENT_SECRET=your_secret
+
+# Worker Backend (Cloudflare)
+WORKER_API_URL=https://scimspt-api.workers.dev
+WORKER_API_KEY=your_api_key
+
+# Analytics (Optional)
+GOOGLE_ANALYTICS_ID=G-XXXXXXXXXX
+PLAUSIBLE_DOMAIN=scimspt.research
+
+
+ERROR HANDLING
+--------------
+
+Common HTTP Status Codes:
+- 200: Success
+- 301/302: Redirect (follow redirects)
+- 400: Bad Request (check parameters)
+- 403: Forbidden (check API key)
+- 429: Too Many Requests (implement backoff)
+- 500: Server Error (retry with exponential backoff)
+
+Retry Logic:
+- First retry: 1 second delay
+- Second retry: 5 second delay
+- Third retry: 30 second delay
+- After 3 failures: Log and skip
+
+
+SECURITY NOTES
+--------------
+
+1. Never commit API keys to repository
+2. Use environment variables for secrets
+3. Implement CORS properly
+4. Validate all user inputs
+5. Sanitize data before display
+6. Use HTTPS exclusively
+
+
+TESTING ENDPOINTS
+-----------------
+
+To test API connectivity:
+
+# arXiv test
+curl "http://export.arxiv.org/api/query?search_query=cat:cs.AI&max_results=5"
+
+# bioRxiv test
+curl "https://api.biorxiv.org/details/biorxiv/10.1101/2026.01.01.123456/2020-01-01"
+
+# Semantic Scholar test
+curl "https://api.semanticscholar.org/v1/paper/DOI:10.1038/nature12373"
+
+---
+Configuration Version: 1.0
+Last Updated: 2026-08-20
