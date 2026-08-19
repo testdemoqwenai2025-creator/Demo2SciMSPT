@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio Shorts — SciMSPT Research</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <style>
+    /* Copy same CSS variables and base styles from index.html */
+    :root {
+      --bg-dark: #0a1628; --bg-light: #f5f8fc;
+      --bg-card-dark: rgba(20, 40, 64, 0.7); --bg-card-light: rgba(255, 255, 255, 0.95);
+      --primary-dark: #e8f0f8; --primary-light: #142840;
+      --accent: #4da8da; --accent-glow: #2d7ab3;
+      --muted-dark: #7a9bb8; --muted-light: #5a7a96;
+      --border-dark: rgba(77, 168, 218, 0.25); --border-light: #c0d0e2;
+      --surface-dark: rgba(45, 122, 179, 0.08); --surface-light: #edf2f9;
+      --font-heading: 'Playfair Display', Georgia, serif;
+      --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-num: 'JetBrains Mono', 'Inter', monospace;
+      --nav-height: 72px;
+    }
+    [data-theme="dark"] { --bg: var(--bg-dark); --bg-card: var(--bg-card-dark); --primary: var(--primary-dark); --muted: var(--muted-dark); --border: var(--border-dark); --surface: var(--surface-dark); --shadow: 0 12px 48px rgba(0,0,0,0.4); --nav-bg: rgba(10,22,40,0.95); }
+    [data-theme="light"] { --bg: var(--bg-light); --bg-card: var(--bg-card-light); --primary: var(--primary-light); --muted: var(--muted-light); --border: var(--border-light); --surface: var(--surface-light); --shadow: 0 12px 48px rgba(20,40,64,0.1); --nav-bg: rgba(245,248,252,0.95); }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: var(--font-body); background: var(--bg); color: var(--primary); line-height: 1.65; min-height: 100vh; }
+    
+    /* Navigation */
+    .navbar { position: fixed; top: 0; left: 0; right: 0; height: var(--nav-height); z-index: 1000; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; background: var(--nav-bg); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); }
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--primary); }
+    .nav-logo img { width: 32px; height: 32px; filter: drop-shadow(0 0 6px var(--accent)); }
+    .nav-logo-text { font-family: var(--font-heading); font-size: 20px; font-weight: 700; }
+    .nav-logo-text span { color: var(--accent); }
+    .nav-links { display: flex; gap: 8px; }
+    .nav-link { font-size: 13px; font-weight: 500; color: var(--muted); text-decoration: none; padding: 8px 16px; border-radius: 20px; transition: all 0.25s ease; }
+    .nav-link:hover { color: var(--accent); background: var(--surface); }
+    
+    /* Content */
+    .container { max-width: 1200px; margin: calc(var(--nav-height) + 60px) auto 48px; padding: 0 48px; }
+    h1 { font-family: var(--font-heading); font-size: clamp(32px, 5vw, 48px); font-weight: 900; margin-bottom: 16px; letter-spacing: -1px; }
+    .lead { font-size: 18px; color: var(--muted); margin-bottom: 48px; line-height: 1.6; }
+    
+    /* Grid */
+    .shorts-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 24px; }
+    .short-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 28px; text-decoration: none; color: inherit; transition: all 0.3s ease; backdrop-filter: blur(10px); display: block; }
+    .short-card:hover { transform: translateY(-6px); border-color: var(--accent); box-shadow: var(--shadow); }
+    .card-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+    .card-id { font-family: var(--font-num); font-size: 12px; color: var(--accent); font-weight: 600; }
+    .card-domain { padding: 4px 12px; background: var(--surface); border-radius: 12px; font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
+    .card-title { font-family: var(--font-heading); font-size: 20px; font-weight: 700; margin-bottom: 10px; color: var(--primary); }
+    .card-desc { font-size: 14px; color: var(--muted); line-height: 1.6; margin-bottom: 16px; }
+    .card-meta { display: flex; align-items: center; gap: 12px; font-size: 12px; color: var(--muted); }
+    .card-meta i { font-size: 16px; color: var(--accent); }
+    
+    @media (max-width: 768px) { .navbar { padding: 0 20px; } .container { padding: 0 20px; } .shorts-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <a href="../index.html" class="nav-logo">
+      <img src="../assets/icons/icon-science.png" alt="SciMSPT">
+      <span class="nav-logo-text">Sci<span>MSPT</span></span>
+    </a>
+    <div class="nav-links">
+      <a href="../index.html" class="nav-link">Home</a>
+      <a href="../startups.html" class="nav-link">Startups</a>
+      <a href="../research.html" class="nav-link">Research</a>
+    </div>
+  </nav>
+
+  <div class="container">
+    <h1>Portfolio Shorts</h1>
+    <p class="lead">In-depth analysis of each startup opportunity from this week's portfolio.</p>
+    
+    <div class="shorts-grid">
+      <a href="P-ai-materials.html" class="short-card">
+        <div class="card-header">
+          <span class="card-id">P-AI-MATERIALS</span>
+          <span class="card-domain">Materials Science</span>
+        </div>
+        <div class="card-title">AI-Discovered Materials</div>
+        <div class="card-desc">Machine learning-driven discovery of novel perovskite materials for tandem solar cells.</div>
+        <div class="card-meta">
+          <i class="material-icons">description</i>
+          <span>AI · Materials · Photovoltaics</span>
+        </div>
+      </a>
+      
+      <a href="P-cmos-2nm.html" class="short-card">
+        <div class="card-header">
+          <span class="card-id">P-CMOS-2NM</span>
+          <span class="card-domain">Semiconductor</span>
+        </div>
+        <div class="card-title">Beyond Silicon CMOS</div>
+        <div class="card-desc">2nm node breakthrough enabling next-generation computing beyond traditional silicon limits.</div>
+        <div class="card-meta">
+          <i class="material-icons">memory</i>
+          <span>Semiconductor · Computing · Hardware</span>
+        </div>
+      </a>
+      
+      <a href="P3.html" class="short-card">
+        <div class="card-header">
+          <span class="card-id">P3</span>
+          <span class="card-domain">Energy</span>
+        </div>
+        <div class="card-title">Compact Stellarator</div>
+        <div class="card-desc">Fusion energy reactor achieving net energy gain with advanced magnetic confinement geometry.</div>
+        <div class="card-meta">
+          <i class="material-icons">bolt</i>
+          <span>Fusion Energy · Plasma Physics</span>
+        </div>
+      </a>
+      
+      <a href="P5.html" class="short-card">
+        <div class="card-header">
+          <span class="card-id">P5</span>
+          <span class="card-domain">Biotech</span>
+        </div>
+        <div class="card-title">Protein Engineering Platform</div>
+        <div class="card-desc">De novo protein structure prediction using deep learning approaches.</div>
+        <div class="card-meta">
+          <i class="material-icons">biotech</i>
+          <span>Biotechnology · Protein Design</span>
+        </div>
+      </a>
+      
+      <a href="P9.html" class="short-card">
+        <div class="card-header">
+          <span class="card-id">P9</span>
+          <span class="card-domain">Computing</span>
+        </div>
+        <div class="card-title">Neural Temporal Models</div>
+        <div class="card-desc">Advanced neural architectures for temporal dynamics modeling across scientific domains.</div>
+        <div class="card-meta">
+          <i class="material-icons">psychology</i>
+          <span>AI/ML · Neural Networks · Time Series</span>
+        </div>
+      </a>
+      
+      <a href="P11.html" class="short-card">
+        <div class="card-header">
+          <span class="card-id">P11</span>
+          <span class="card-domain">Quantum</span>
+        </div>
+        <div class="card-title">Hybrid Quantum Algorithms</div>
+        <div class="card-desc">Quantum-classical hybrid algorithms for optimization problems in scientific computing.</div>
+        <div class="card-meta">
+          <i class="material-icons">quantum</i>
+          <span>Quantum Computing · Optimization</span>
+        </div>
+      </a>
+      
+      <a href="P12.html" class="short-card">
+        <div class="card-header">
+          <span class="card-id">P12</span>
+          <span class="card-domain">Space Tech</span>
+        </div>
+        <div class="card-title">Advanced Propulsion Systems</div>
+        <div class="card-desc">Next-generation propulsion technologies for satellite and deep-space missions.</div>
+        <div class="card-meta">
+          <i class="material-icons">rocket_launch</i>
+          <span>Aerospace · Propulsion · Space</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</body>
+</html>
