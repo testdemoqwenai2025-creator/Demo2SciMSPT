@@ -3,1031 +3,1426 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>About — SciMSPT Research Platform</title>
-  <meta name="description" content="About SciMSPT — Methodology, research sources, Foresight Series reports, team information, and contact details.">
+  <title>About — SciMSPT Neural Research Intelligence</title>
+  <meta name="description" content="About SciMSPT: Our mission to transform scientific discovery into strategic opportunity through neural intelligence and molecular computing.">
   
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
   
   <style>
     :root {
-      --bg-dark: #0a1628; --bg-light: #f5f8fc;
-      --bg-card-dark: rgba(20, 40, 64, 0.7); --bg-card-light: rgba(255, 255, 255, 0.95);
-      --primary-dark: #e8f0f8; --primary-light: #142840;
-      --accent: #4da8da; --accent-glow: #2d7ab3;
-      --muted-dark: #7a9bb8; --muted-light: #5a7a96;
-      --border-dark: rgba(77, 168, 218, 0.25); --border-light: #c0d0e2;
-      --surface-dark: rgba(45, 122, 179, 0.08); --surface-light: #edf2f9;
+      --bg-deep: #030810;
+      --bg-primary: #0a1628;
+      --bg-secondary: #0d1f35;
+      --bg-tertiary: #122a45;
+      --bg-glass: rgba(10, 22, 40, 0.85);
+      --bg-glass-light: rgba(255, 255, 255, 0.03);
+      
+      --accent-primary: #00E5FF;
+      --accent-secondary: #4da8da;
+      --accent-tertiary: #a78bfa;
+      --accent-pink: #f472b6;
+      --accent-green: #10b981;
+      --accent-gold: #f59e0b;
+      
+      --text-primary: #e8f4fc;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+      
+      --border-subtle: rgba(0, 229, 255, 0.15);
+      
       --font-heading: 'Playfair Display', Georgia, serif;
-      --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      --font-num: 'JetBrains Mono', 'Inter', monospace;
-      --nav-height: 72px;
-    }
-    [data-theme="dark"] { --bg: var(--bg-dark); --bg-card: var(--bg-card-dark); --primary: var(--primary-dark); --muted: var(--muted-dark); --border: var(--border-dark); --surface: var(--surface-dark); --shadow: 0 12px 48px rgba(0,0,0,0.4); --nav-bg: rgba(10,22,40,0.95); --glow-color: rgba(77,168,218,0.15); }
-    [data-theme="light"] { --bg: var(--bg-light); --bg-card: var(--bg-card-light); --primary: var(--primary-light); --muted: var(--muted-light); --border: var(--border-light); --surface: var(--surface-light); --shadow: 0 12px 48px rgba(20,40,64,0.1); --nav-bg: rgba(245,248,252,0.95); --glow-color: rgba(45,122,179,0.08); }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; scroll-padding-top: var(--nav-height); }
-    body { font-family: var(--font-body); background: var(--bg); color: var(--primary); line-height: 1.65; transition: background 0.4s ease, color 0.4s ease; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
-
-    /* Navigation */
-    .navbar { position: fixed; top: 0; left: 0; right: 0; height: var(--nav-height); z-index: 1000; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; background: var(--nav-bg); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); transition: all 0.3s ease; }
-    .nav-left { display: flex; align-items: center; gap: 28px; }
-    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--primary); transition: opacity 0.3s ease; }
-    .nav-logo:hover { opacity: 0.85; }
-    .nav-logo img { width: 32px; height: 32px; filter: drop-shadow(0 0 6px var(--accent)); }
-    .nav-logo-text { font-family: var(--font-heading); font-size: 20px; font-weight: 700; letter-spacing: -0.5px; }
-    .nav-logo-text span { color: var(--accent); }
-    .nav-links { display: flex; align-items: center; gap: 8px; }
-    .nav-link { font-size: 13px; font-weight: 500; color: var(--muted); text-decoration: none; padding: 8px 16px; border-radius: 20px; transition: all 0.25s ease; letter-spacing: 0.3px; white-space: nowrap; }
-    .nav-link:hover { color: var(--accent); background: var(--surface); }
-    .nav-link.active { color: var(--accent); background: rgba(77,168,218,0.12); }
-    .nav-right { display: flex; align-items: center; gap: 16px; }
-    .theme-toggle { display: flex; align-items: center; gap: 6px; padding: 8px 16px; background: var(--surface); border: 1px solid var(--border); border-radius: 20px; cursor: pointer; font-family: var(--font-body); font-size: 11px; font-weight: 600; color: var(--muted); transition: all 0.3s ease; white-space: nowrap; }
-    .theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
-    .theme-toggle .material-icons { font-size: 16px; }
-    .mobile-menu-btn { display: none; width: 40px; height: 40px; border-radius: 50%; background: var(--surface); border: 1px solid var(--border); color: var(--muted); cursor: pointer; align-items: center; justify-content: center; }
-
-    /* Hero */
-    .page-hero { padding: calc(var(--nav-height) + 60px) 48px 60px; position: relative; overflow: hidden; }
-    .hero-bg { position: absolute; inset: 0; z-index: 0; }
-    .grid-pattern { position: absolute; inset: 0; background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px); background-size: 60px 60px; opacity: 0.15; }
-    .hero-glow { position: absolute; width: 600px; height: 600px; border-radius: 50%; filter: blur(120px); opacity: 0.3; }
-    .hero-glow.tl { top: -200px; left: -200px; background: radial-gradient(circle, var(--glow-color), transparent 70%); }
-    .hero-content { position: relative; z-index: 1; max-width: 800px; }
-    .kicker { font-size: 12px; font-weight: 600; color: var(--accent); letter-spacing: 3px; text-transform: uppercase; margin-bottom: 14px; display: flex; align-items: center; gap: 12px; }
-    .kicker::before { content: ''; width: 28px; height: 2px; background: var(--accent); display: inline-block; }
-    h1 { font-family: var(--font-heading); font-size: clamp(36px, 5vw, 56px); font-weight: 900; line-height: 1.1; letter-spacing: -1px; margin-bottom: 20px; }
-    .lead { font-size: 18px; color: var(--muted); max-width: 650px; line-height: 1.6; }
-
-    /* Section */
-    .section { padding: 80px 48px; max-width: 1100px; margin: 0 auto; }
-    .section-header { margin-bottom: 40px; }
-    h2 { font-family: var(--font-heading); font-size: clamp(24px, 3vw, 36px); font-weight: 700; margin-bottom: 12px; }
-    h3 { font-family: var(--font-heading); font-size: 22px; font-weight: 700; margin-bottom: 16px; color: var(--primary); }
-    p { font-size: 16px; color: var(--muted); line-height: 1.75; margin-bottom: 16px; }
-
-    /* Content Blocks */
-    .content-block { background: var(--bg-card); border: 1px solid var(--border); border-radius: 20px; padding: 40px; margin-bottom: 32px; backdrop-filter: blur(10px); }
-    
-    /* Methodology Steps */
-    .methodology-steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px; margin-top: 32px; }
-    .step { position: relative; padding-left: 56px; }
-    .step-num { position: absolute; left: 0; top: 0; width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, var(--accent-glow), var(--accent)); display: flex; align-items: center; justify-content: center; font-family: var(--font-num); font-size: 16px; font-weight: 700; color: white; }
-    .step-title { font-weight: 600; font-size: 16px; margin-bottom: 8px; color: var(--primary); }
-    .step-desc { font-size: 14px; color: var(--muted); line-height: 1.6; }
-
-    /* Reports Grid */
-    .reports-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; margin-top: 32px; }
-    .report-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 28px; transition: all 0.35s ease; backdrop-filter: blur(10px); text-decoration: none; color: inherit; display: block; position: relative; overflow: hidden; }
-    .report-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--accent-glow), var(--accent)); }
-    .report-card:hover { transform: translateY(-4px); border-color: var(--accent); box-shadow: var(--shadow); }
-    .report-icon { width: 52px; height: 52px; border-radius: 12px; background: var(--surface); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; margin-bottom: 20px; }
-    .report-icon .material-icons { font-size: 28px; color: var(--accent); }
-    .report-title { font-family: var(--font-heading); font-size: 18px; font-weight: 700; margin-bottom: 10px; color: var(--primary); }
-    .report-desc { font-size: 14px; color: var(--muted); line-height: 1.55; margin-bottom: 16px; }
-    .report-meta { display: flex; align-items: center; gap: 16px; font-size: 12px; color: var(--muted); }
-    .report-meta span { display: flex; align-items: center; gap: 6px; }
-    .report-meta .material-icons { font-size: 16px; }
-
-    /* Tech Stack */
-    .tech-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-top: 24px; }
-    .tech-item { background: var(--surface); border-radius: 12px; padding: 20px; text-align: center; }
-    .tech-name { font-weight: 600; font-size: 14px; margin-bottom: 4px; }
-    .tech-desc { font-size: 12px; color: var(--muted); }
-
-    /* Timeline */
-    .timeline { margin-top: 32px; position: relative; padding-left: 32px; }
-    .timeline::before { content: ''; position: absolute; left: 8px; top: 0; bottom: 0; width: 2px; background: var(--border); }
-    .timeline-item { position: relative; padding-bottom: 32px; }
-    .timeline-item::before { content: ''; position: absolute; left: -28px; top: 6px; width: 12px; height: 12px; border-radius: 50%; background: var(--accent); border: 2px solid var(--bg); }
-    .timeline-date { font-family: var(--font-num); font-size: 12px; color: var(--accent); margin-bottom: 6px; }
-    .timeline-title { font-weight: 600; font-size: 16px; margin-bottom: 6px; }
-    .timeline-desc { font-size: 14px; color: var(--muted); line-height: 1.6; }
-
-    /* Contact */
-    .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-top: 32px; }
-    .contact-item { background: var(--surface); border-radius: 12px; padding: 24px; display: flex; align-items: start; gap: 16px; }
-    .contact-icon { width: 44px; height: 44px; border-radius: 10px; background: linear-gradient(135deg, var(--accent-glow), var(--accent)); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-    .contact-icon .material-icons { font-size: 22px; color: white; }
-    .contact-label { font-size: 12px; color: var(--muted); margin-bottom: 4px; text-transform: uppercase; letter-spacing: 1px; }
-    .contact-value { font-weight: 600; font-size: 15px; }
-
-    footer { padding: 48px; border-top: 1px solid var(--border); background: var(--surface); }
-    .footer-content { max-width: 1280px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 24px; }
-    .footer-brand { display: flex; align-items: center; gap: 12px; }
-    .footer-brand img { width: 28px; height: 28px; filter: drop-shadow(0 0 4px var(--accent)); }
-    .footer-brand span { font-family: var(--font-heading); font-size: 17px; font-weight: 700; }
-    .footer-brand span em { color: var(--accent); font-style: normal; }
-    .footer-links { display: flex; gap: 24px; overflow-x: auto; padding-bottom: 8px; }
-    .footer-links::-webkit-scrollbar { height: 6px; }
-    .footer-links::-webkit-scrollbar-track { background: var(--surface); border-radius: 3px; }
-    .footer-links::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 3px; }
-    .footer-links a { font-size: 13px; color: var(--muted); text-decoration: none; transition: color 0.25s ease; white-space: nowrap; }
-    .footer-links a:hover { color: var(--accent); }
-    .footer-copy { font-size: 12px; color: var(--muted); width: 100%; text-align: center; margin-top: 24px; padding-top: 24px; border-top: 1px solid var(--border); }
-
-    @media (max-width: 768px) {
-      .navbar { padding: 0 20px; } .page-hero { padding: calc(var(--nav-height) + 32px) 20px 40px; }
-      .section { padding: 48px 20px; } .nav-links { display: none; } .mobile-menu-btn { display: flex; }
-      .methodology-steps { grid-template-columns: 1fr; } .reports-grid { grid-template-columns: 1fr; }
-      .footer-content { flex-direction: column; text-align: center; } .footer-links { flex-wrap: wrap; justify-content: center; }
+      --font-body: 'Inter', -apple-system, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+      --font-tech: 'Orbitron', sans-serif;
+      
+      --nav-height: 80px;
+      --sidebar-width: 100px;
     }
     
-    /* ═══════════════════════════════════════════════════════════════
-       PROFESSIONAL SCIENTIFIC SIDE PANELS
-       ═══════════════════════════════════════════════════════════════ */
-    .side-panel {
-      position: fixed; top: 0; bottom: 0; width: 180px; z-index: 2;
-      pointer-events: none; overflow: hidden;
-      display: flex; align-items: center; justify-content: center;
+    [data-theme="light"] {
+      --bg-deep: #f0f4f8;
+      --bg-primary: #ffffff;
+      --bg-secondary: #f8fafc;
+      --bg-tertiary: #e2e8f0;
+      --bg-glass: rgba(255, 255, 255, 0.92);
+      --bg-glass-light: rgba(0, 0, 0, 0.02);
+      --text-primary: #0f172a;
+      --text-secondary: #475569;
+      --text-muted: #94a3b8;
+      --border-subtle: rgba(77, 168, 218, 0.25);
     }
-    .side-panel-inner { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; }
-    .left-panel {
-      left: 0;
-      background: linear-gradient(180deg, rgba(6, 12, 24, 0.96) 0%, rgba(10, 20, 36, 0.94) 50%, rgba(6, 12, 24, 0.96) 100%);
-      border-right: 1px solid rgba(77, 168, 218, 0.4);
-      box-shadow: 4px 0 30px rgba(77, 168, 218, 0.2), inset -15px 0 40px rgba(77, 168, 218, 0.04);
+    
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    
+    body {
+      font-family: var(--font-body);
+      background: var(--bg-deep);
+      color: var(--text-primary);
+      line-height: 1.6;
+      overflow-x: hidden;
+      min-height: 100vh;
     }
-    .right-panel {
-      right: 0;
-      background: linear-gradient(180deg, rgba(6, 12, 24, 0.96) 0%, rgba(10, 20, 36, 0.94) 50%, rgba(6, 12, 24, 0.96) 100%);
-      border-left: 1px solid rgba(167, 139, 250, 0.4);
-      box-shadow: -4px 0 30px rgba(167, 139, 250, 0.2), inset 15px 0 40px rgba(167, 139, 250, 0.04);
-    }
-    .dna-svg, .protein-svg { width: 100%; height: 100%; max-height: 100vh; }
-    .side-panel::before {
-      content: ''; position: absolute; inset: 0;
-      background-image: linear-gradient(rgba(77, 168, 218, 0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(77, 168, 218, 0.06) 1px, transparent 1px);
-      background-size: 20px 20px; pointer-events: none;
-    }
-    .side-panel::after {
-      content: ''; position: absolute; inset: 0;
-      background: radial-gradient(circle at center, transparent 35%, rgba(6, 12, 24, 0.5) 100%);
+    
+    /* Molecular Sidebars */
+    .molecular-sidebar {
+      position: fixed;
+      top: 0;
+      width: var(--sidebar-width);
+      height: 100vh;
+      z-index: 5;
       pointer-events: none;
+      overflow: hidden;
     }
-    .dna-helix-group { animation: helixRotate 20s linear infinite; transform-origin: center center; }
-    @keyframes helixRotate { 0% { transform: rotateY(0deg); } 100% { transform: rotateY(360deg); } }
-    .base-node { animation: nodePulse 2s ease-in-out infinite; transform-origin: center; }
-    @keyframes nodePulse { 0%, 100% { transform: scale(1); opacity: 0.8; } 50% { transform: scale(1.25); opacity: 1; } }
-    .protein-structure-group { animation: proteinBreathe 6s ease-in-out infinite; transform-origin: center center; }
-    @keyframes proteinBreathe { 0%, 100% { transform: scale(1) translateY(0); } 33% { transform: scale(1.02) translateY(-3px); } 66% { transform: scale(0.98) translateY(2px); } }
-    .aa-sphere { animation: sphereFloat 4s ease-in-out infinite; transform-origin: center; }
-    @keyframes sphereFloat { 0%, 100% { transform: translateY(0) scale(1); } 50% { transform: translateY(-4px) scale(1.08); } }
-    @media (max-width: 1024px) { .side-panel { display: none; } }
     
-    /* Floating Navigation */
-    .floating-nav {
-      position: fixed; bottom: 30px; right: 30px; z-index: 999;
-      display: flex; flex-direction: column; gap: 12px;
-    }
-    .float-btn {
-      width: 50px; height: 50px; border-radius: 50%;
-      background: var(--bg-card); border: 1px solid var(--border);
-      color: var(--accent); display: flex; align-items: center; justify-content: center;
-      text-decoration: none; box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-      transition: all 0.3s ease; backdrop-filter: blur(10px);
-    }
-    .float-btn:hover { transform: translateY(-4px); border-color: var(--accent); box-shadow: 0 8px 30px rgba(77,168,218,0.4); }
-    .float-btn .material-icons { font-size: 24px; }
-    @media (max-width: 768px) {
-      .floating-nav { bottom: 20px; right: 20px; }
-      .float-btn { width: 44px; height: 44px; }
-      .float-btn .material-icons { font-size: 20px; }
-    }
-
-    /* ═══════════════════════════════════════════════════════════════
-       SCROLL ENHANCEMENTS - Progress Bar, Back-to-Top, Custom Scrollbar
-       ═══════════════════════════════════════════════════════════════ */
-    
-    /* Custom Scrollbar - Webkit Browsers */
-    ::-webkit-scrollbar { width: 10px; height: 10px; }
-    ::-webkit-scrollbar-track { 
-      background: var(--bg); 
-      border-radius: 10px;
-    }
-    ::-webkit-scrollbar-thumb { 
-      background: linear-gradient(180deg, var(--accent-glow), var(--accent));
-      border-radius: 10px;
-      border: 2px solid var(--bg);
-    }
-    ::-webkit-scrollbar-thumb:hover { 
-      background: linear-gradient(180deg, var(--accent), #a78bfa);
-    }
-    ::-webkit-scrollbar-corner { background: var(--bg); }
-    
-    /* Firefox Scrollbar */
-    * { scrollbar-width: thin; scrollbar-color: var(--accent) var(--bg); }
-
-    /* Scroll Progress Bar */
-    .scroll-progress {
-      position: fixed;
-      top: var(--nav-height);
+    .molecular-sidebar.left {
       left: 0;
-      width: 0%;
-      height: 3px;
-      background: linear-gradient(90deg, #4da8da, #a78bfa, #4da8da);
-      background-size: 200% 100%;
-      z-index: 9999;
-      transition: width 0.1s ease-out;
-      box-shadow: 0 0 10px rgba(77, 168, 218, 0.5);
-      animation: progressShimmer 3s linear infinite;
+      background: linear-gradient(90deg, rgba(0, 229, 255, 0.08) 0%, transparent 100%);
+      border-right: 1px solid var(--border-subtle);
     }
     
-    @keyframes progressShimmer {
-      0% { background-position: 200% 0; }
-      100% { background-position: -200% 0; }
+    .molecular-sidebar.right {
+      right: 0;
+      background: linear-gradient(-90deg, rgba(167, 139, 250, 0.08) 0%, transparent 100%);
+      border-left: 1px solid var(--border-subtle);
     }
-
-    /* Back to Top Button */
-    .back-to-top {
-      position: fixed;
-      bottom: 30px;
-      right: 30px;
-      width: 54px;
-      height: 54px;
+    
+    .dna-helix {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 60px;
+      height: 80vh;
+    }
+    
+    .nucleotide {
+      position: absolute;
+      width: 12px;
+      height: 12px;
       border-radius: 50%;
-      background: linear-gradient(135deg, #4da8da, #a78bfa);
-      color: white;
+      animation: nucleotidePulse 3s ease-in-out infinite;
+    }
+    
+    .nucleotide.adenine { background: var(--accent-primary); box-shadow: 0 0 10px var(--accent-primary); }
+    .nucleotide.thymine { background: var(--accent-pink); box-shadow: 0 0 10px var(--accent-pink); }
+    .nucleotide.guanine { background: var(--accent-tertiary); box-shadow: 0 0 10px var(--accent-tertiary); }
+    .nucleotide.cytosine { background: var(--accent-green); box-shadow: 0 0 10px var(--accent-green); }
+    
+    @keyframes nucleotidePulse {
+      0%, 100% { opacity: 0.6; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.2); }
+    }
+    
+    .backbone-line {
+      position: absolute;
+      width: 2px;
+      height: 100%;
+      left: 50%;
+      background: linear-gradient(to bottom, transparent, var(--accent-primary) 20%, var(--accent-tertiary) 50%, var(--accent-pink) 80%, transparent);
+      opacity: 0.3;
+    }
+    
+    .protein-chain { position: absolute; width: 40px; height: 200px; top: 20%; }
+    
+    .amino-acid {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      border-radius: 2px;
+      background: var(--accent-gold);
+      opacity: 0.7;
+      animation: aminoFloat 4s ease-in-out infinite;
+    }
+    
+    @keyframes aminoFloat {
+      0%, 100% { transform: translateX(0) rotate(0deg); }
+      50% { transform: translateX(10px) rotate(180deg); }
+    }
+    
+    .molecular-grid {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-image: 
+        radial-gradient(circle at 20% 30%, rgba(0, 229, 255, 0.05) 1px, transparent 1px),
+        radial-gradient(circle at 70% 60%, rgba(167, 139, 250, 0.05) 1px, transparent 1px);
+      background-size: 30px 30px, 50px 50px;
+      animation: gridShift 20s linear infinite;
+    }
+    
+    @keyframes gridShift {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(30px); }
+    }
+    
+    .floating-molecule {
+      position: absolute;
+      border: 1px solid var(--border-subtle);
+      border-radius: 50%;
+      animation: moleculeFloat 8s ease-in-out infinite;
+    }
+    
+    .floating-molecule::before {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 4px; height: 4px;
+      background: var(--accent-primary);
+      border-radius: 50%;
+    }
+    
+    @keyframes moleculeFloat {
+      0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.5; }
+      50% { transform: translateY(-30px) rotate(180deg); opacity: 0.8; }
+    }
+    
+    /* Neural Background */
+    .neural-bg {
+      position: fixed;
+      top: 0;
+      left: calc(var(--sidebar-width));
+      width: calc(100% - 2 * var(--sidebar-width));
+      height: 100%;
+      z-index: 0;
+      overflow: hidden;
+    }
+    
+    .neuron {
+      position: absolute;
+      width: 4px; height: 4px;
+      background: var(--accent-primary);
+      border-radius: 50%;
+      opacity: 0.4;
+      animation: neuronPulse 4s ease-in-out infinite;
+    }
+    
+    @keyframes neuronPulse {
+      0%, 100% { opacity: 0.2; transform: scale(1); }
+      50% { opacity: 0.6; transform: scale(1.5); }
+    }
+    
+    /* Navigation */
+    .nav-container {
+      position: fixed;
+      top: 0;
+      left: var(--sidebar-width);
+      right: var(--sidebar-width);
+      height: var(--nav-height);
+      z-index: 100;
+      background: var(--bg-glass);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 40px;
+    }
+    
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--text-primary);
+    }
+    
+    .nav-logo {
+      width: 42px; height: 42px;
+      background: linear-gradient(135deg, var(--accent-primary), var(--accent-tertiary));
+      border-radius: 12px;
       display: flex;
       align-items: center;
       justify-content: center;
-      text-decoration: none;
-      box-shadow: 
-        0 6px 25px rgba(77, 168, 218, 0.5),
-        0 0 40px rgba(167, 139, 250, 0.3);
-      opacity: 0;
-      visibility: hidden;
-      transform: translateY(20px) scale(0.8);
-      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-      z-index: 998;
-      border: 2px solid rgba(255, 255, 255, 0.2);
+      font-family: var(--font-tech);
+      font-weight: 900;
+      font-size: 16px;
+      color: var(--bg-deep);
+      position: relative;
+      overflow: hidden;
     }
     
-    .back-to-top.visible {
-      opacity: 1;
-      visibility: visible;
-      transform: translateY(0) scale(1);
+    .nav-logo::before {
+      content: '';
+      position: absolute;
+      top: -50%; left: -50%;
+      width: 200%; height: 200%;
+      background: conic-gradient(from 0deg, transparent, rgba(255,255,255,0.3), transparent);
+      animation: logoShine 4s linear infinite;
     }
     
-    .back-to-top:hover {
-      transform: translateY(-5px) scale(1.1);
-      box-shadow: 
-        0 12px 35px rgba(77, 168, 218, 0.7),
-        0 0 60px rgba(167, 139, 250, 0.4);
+    @keyframes logoShine {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
     }
     
-    .back-to-top:active {
-      transform: translateY(-2px) scale(0.95);
+    .nav-title {
+      font-family: var(--font-heading);
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
     }
     
-    .back-to-top .material-icons {
-      font-size: 26px;
-      animation: bounceArrow 2s ease-in-out infinite;
-    }
+    .nav-title span { color: var(--accent-primary); }
     
-    @keyframes bounceArrow {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-3px); }
-    }
-
-    /* Scroll Position Indicator */
-    .scroll-indicator {
-      position: fixed;
-      right: 20px;
-      top: 50%;
-      transform: translateY(-50%);
+    .nav-links {
       display: flex;
-      flex-direction: column;
+      align-items: center;
       gap: 8px;
-      z-index: 997;
+    }
+    
+    .nav-link {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 10px 18px;
+      text-decoration: none;
+      color: var(--text-secondary);
+      font-size: 14px;
+      font-weight: 500;
+      border-radius: 10px;
+      transition: all 0.3s ease;
+    }
+    
+    .nav-link:hover {
+      color: var(--text-primary);
+      background: var(--bg-glass-light);
+    }
+    
+    .nav-link.active {
+      color: var(--accent-primary);
+      background: rgba(0, 229, 255, 0.08);
+    }
+    
+    .nav-link .material-icons-round { font-size: 18px; }
+    
+    .workspace-btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 24px;
+      background: linear-gradient(135deg, var(--accent-primary), var(--accent-tertiary));
+      color: var(--bg-deep);
+      font-weight: 600;
+      font-size: 14px;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 30px rgba(0, 229, 255, 0.3);
+    }
+    
+    .workspace-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 40px rgba(0, 229, 255, 0.5);
+    }
+    
+    .user-profile {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 16px 8px 8px;
+      background: var(--bg-glass-light);
+      border: 1px solid var(--border-subtle);
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .user-profile:hover {
+      border-color: var(--accent-primary);
+      box-shadow: 0 0 20px rgba(0, 229, 255, 0.2);
+    }
+    
+    .user-avatar {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent-primary), var(--accent-pink));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 14px;
+      color: white;
+      position: relative;
+    }
+    
+    .user-avatar::after {
+      content: '';
+      position: absolute;
+      bottom: 0; right: 0;
+      width: 10px; height: 10px;
+      background: var(--accent-green);
+      border-radius: 50%;
+      border: 2px solid var(--bg-primary);
+    }
+    
+    .user-info { display: flex; flex-direction: column; gap: 2px; }
+    .user-name { font-size: 13px; font-weight: 600; color: var(--text-primary); }
+    .user-role { font-size: 11px; color: var(--accent-primary); font-family: var(--font-mono); }
+    
+    .theme-toggle {
+      width: 44px; height: 44px;
+      border-radius: 12px;
+      background: var(--bg-glass-light);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-secondary);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+    
+    .theme-toggle:hover {
+      color: var(--accent-primary);
+      border-color: var(--accent-primary);
+    }
+    
+    /* Page Navigation */
+    .page-nav-bar {
+      position: fixed;
+      top: calc(var(--nav-height) + 16px);
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 90;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 20px;
+      background: var(--bg-glass);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--border-subtle);
+      border-radius: 50px;
+    }
+    
+    .page-nav-btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      background: transparent;
+      border: 1px solid var(--border-subtle);
+      border-radius: 25px;
+      color: var(--text-secondary);
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+    }
+    
+    .page-nav-btn:hover {
+      background: var(--bg-glass-light);
+      border-color: var(--accent-primary);
+      color: var(--accent-primary);
+    }
+    
+    .page-indicator {
+      font-size: 12px;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+      padding: 0 8px;
+    }
+    
+    /* Main Content */
+    .main-content {
+      position: relative;
+      z-index: 10;
+      margin-left: var(--sidebar-width);
+      margin-right: var(--sidebar-width);
+      padding-top: calc(var(--nav-height) + 24px);
+      min-height: 100vh;
+    }
+    
+    /* About Hero */
+    .about-hero {
+      padding: 80px 60px;
+      text-align: center;
+    }
+    
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 20px;
+      background: rgba(0, 229, 255, 0.1);
+      border: 1px solid rgba(0, 229, 255, 0.3);
+      border-radius: 50px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--accent-primary);
+      margin-bottom: 32px;
+      font-family: var(--font-mono);
+    }
+    
+    .hero-badge .pulse-dot {
+      width: 8px; height: 8px;
+      background: var(--accent-primary);
+      border-radius: 50%;
+      animation: pulse 2s ease-in-out infinite;
+    }
+    
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(1.5); }
+    }
+    
+    .about-title {
+      font-family: var(--font-heading);
+      font-size: clamp(42px, 6vw, 72px);
+      font-weight: 900;
+      line-height: 1.05;
+      margin-bottom: 24px;
+      letter-spacing: -2px;
+    }
+    
+    .about-title .gradient-text {
+      background: linear-gradient(135deg, var(--accent-primary), var(--accent-tertiary), var(--accent-pink));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .about-subtitle {
+      font-size: clamp(17px, 2vw, 22px);
+      color: var(--text-secondary);
+      max-width: 700px;
+      margin: 0 auto 48px;
+      line-height: 1.6;
+    }
+    
+    /* Mission Section */
+    .mission-section {
+      padding: 80px 60px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .section-header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+    
+    .section-tag {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: var(--accent-primary);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 16px;
+    }
+    
+    .section-title {
+      font-family: var(--font-heading);
+      font-size: clamp(32px, 4vw, 48px);
+      font-weight: 800;
+      margin-bottom: 20px;
+      letter-spacing: -1px;
+    }
+    
+    .section-desc {
+      font-size: 18px;
+      color: var(--text-secondary);
+      max-width: 650px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+    
+    /* Values Grid */
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 28px;
+      margin-top: 48px;
+    }
+    
+    .value-card {
+      background: var(--bg-glass);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--border-subtle);
+      border-radius: 24px;
+      padding: 36px;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .value-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent-primary), var(--accent-tertiary));
       opacity: 0;
       transition: opacity 0.3s ease;
     }
     
-    .scroll-indicator.visible { opacity: 1; }
+    .value-card:hover {
+      transform: translateY(-8px);
+      border-color: var(--accent-primary);
+      box-shadow: 0 20px 60px rgba(0, 229, 255, 0.15);
+    }
     
-    .indicator-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: var(--border);
-      cursor: pointer;
+    .value-card:hover::before {
+      opacity: 1;
+    }
+    
+    .value-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, rgba(0, 229, 255, 0.15), rgba(167, 139, 250, 0.15));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 24px;
+    }
+    
+    .value-icon .material-icons-round {
+      font-size: 28px;
+      color: var(--accent-primary);
+    }
+    
+    .value-title {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+    
+    .value-desc {
+      font-size: 15px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+    
+    /* Team Section */
+    .team-section {
+      padding: 80px 60px;
+      background: var(--bg-glass-light);
+      border-top: 1px solid var(--border-subtle);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 28px;
+      max-width: 1200px;
+      margin: 64px auto 0;
+    }
+    
+    .team-member {
+      background: var(--bg-glass);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--border-subtle);
+      border-radius: 24px;
+      padding: 32px;
+      text-align: center;
       transition: all 0.3s ease;
+    }
+    
+    .team-member:hover {
+      border-color: var(--accent-primary);
+      transform: translateY(-4px);
+    }
+    
+    .member-avatar {
+      width: 96px;
+      height: 96px;
+      border-radius: 50%;
+      margin: 0 auto 20px;
+      background: linear-gradient(135deg, var(--accent-primary), var(--accent-tertiary));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 32px;
+      color: white;
       position: relative;
     }
     
-    .indicator-dot.active {
-      background: var(--accent);
-      transform: scale(1.4);
-      box-shadow: 0 0 8px var(--accent);
-    }
-    
-    .indicator-dot:hover {
-      background: var(--accent);
-      transform: scale(1.2);
-    }
-    
-    .indicator-dot::before {
-      content: attr(data-label);
+    .member-avatar::after {
+      content: '';
       position: absolute;
-      right: 16px;
-      top: 50%;
-      transform: translateY(-50%);
-      font-size: 11px;
-      font-family: var(--font-body);
-      color: var(--muted);
-      white-space: nowrap;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.2s ease;
-      padding: 4px 8px;
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 6px;
+      bottom: 4px;
+      right: 4px;
+      width: 16px;
+      height: 16px;
+      background: var(--accent-green);
+      border-radius: 50%;
+      border: 3px solid var(--bg-glass);
     }
     
-    .indicator-dot:hover::before { opacity: 1; }
-
-    /* Sticky Footer Bar */
-    .footer-scroll-bar {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: 48px;
-      background: var(--nav-bg);
-      backdrop-filter: blur(20px);
-      border-top: 1px solid var(--border);
+    .member-name {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+    
+    .member-role {
+      font-size: 14px;
+      color: var(--accent-primary);
+      font-family: var(--font-mono);
+      margin-bottom: 12px;
+    }
+    
+    .member-bio {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+    
+    /* Timeline Section */
+    .timeline-section {
+      padding: 80px 60px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    
+    .timeline-item {
       display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 24px;
-      z-index: 996;
-      transform: translateY(100%);
-      transition: transform 0.3s ease;
+      gap: 32px;
+      padding: 32px 0;
+      border-bottom: 1px solid var(--border-subtle);
     }
     
-    .footer-scroll-bar.visible {
-      transform: translateY(0);
+    .timeline-year {
+      font-family: var(--font-tech);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--accent-primary);
+      min-width: 80px;
     }
     
-    .footer-scroll-bar-left,
-    .footer-scroll-bar-right {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-    }
-    
-    .footer-scroll-text {
-      font-size: 12px;
-      color: var(--muted);
-      font-family: var(--font-num);
-    }
-    
-    .footer-scroll-link {
-      font-size: 13px;
-      color: var(--accent);
-      text-decoration: none;
+    .timeline-content h4 {
+      font-size: 18px;
       font-weight: 600;
+      margin-bottom: 8px;
+    }
+    
+    .timeline-content p {
+      font-size: 15px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+    
+    /* CTA Section */
+    .cta-section {
+      padding: 80px 60px;
+      text-align: center;
+    }
+    
+    .cta-box {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 64px;
+      background: linear-gradient(135deg, rgba(0, 229, 255, 0.08), rgba(167, 139, 250, 0.08));
+      border: 1px solid var(--border-subtle);
+      border-radius: 32px;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .cta-box::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: conic-gradient(from 0deg, transparent, rgba(0, 229, 255, 0.1), transparent, rgba(167, 139, 250, 0.1), transparent);
+      animation: ctaRotate 15s linear infinite;
+    }
+    
+    @keyframes ctaRotate {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    
+    .cta-content {
+      position: relative;
+      z-index: 1;
+    }
+    
+    .cta-title {
+      font-family: var(--font-heading);
+      font-size: 36px;
+      font-weight: 800;
+      margin-bottom: 16px;
+    }
+    
+    .cta-desc {
+      font-size: 17px;
+      color: var(--text-secondary);
+      margin-bottom: 32px;
+    }
+    
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 18px 36px;
+      background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+      color: var(--bg-deep);
+      font-size: 16px;
+      font-weight: 600;
+      border: none;
+      border-radius: 14px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+    }
+    
+    .btn-primary:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px rgba(0, 229, 255, 0.35);
+    }
+    
+    /* Footer */
+    .footer {
+      padding: 60px;
+      border-top: 1px solid var(--border-subtle);
+      background: var(--bg-glass);
+    }
+    
+    .footer-content {
+      display: grid;
+      grid-template-columns: 2fr repeat(3, 1fr);
+      gap: 48px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .footer-brand { display: flex; flex-direction: column; gap: 20px; }
+    
+    .footer-logo {
       display: flex;
       align-items: center;
-      gap: 6px;
-      padding: 8px 16px;
-      border-radius: 20px;
-      background: rgba(77, 168, 218, 0.1);
-      transition: all 0.3s ease;
+      gap: 12px;
     }
     
-    .footer-scroll-link:hover {
-      background: rgba(77, 168, 218, 0.2);
-      transform: translateY(-2px);
+    .footer-logo-icon {
+      width: 40px; height: 40px;
+      background: linear-gradient(135deg, var(--accent-primary), var(--accent-tertiary));
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-tech);
+      font-weight: 900;
+      font-size: 14px;
+      color: var(--bg-deep);
     }
     
+    .footer-logo-text {
+      font-family: var(--font-heading);
+      font-size: 20px;
+      font-weight: 700;
+    }
+    
+    .footer-desc {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+    
+    .footer-column h4 {
+      font-size: 14px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 20px;
+      color: var(--text-primary);
+    }
+    
+    .footer-links {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    
+    .footer-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 14px;
+      transition: color 0.2s ease;
+    }
+    
+    .footer-links a:hover { color: var(--accent-primary); }
+    
+    .footer-links::-webkit-scrollbar { height: 6px; }
+    .footer-links::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 3px; }
+    
+    .footer-bottom {
+      margin-top: 48px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border-subtle);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+    
+    .footer-social { display: flex; gap: 16px; }
+    .footer-social a { color: var(--text-muted); transition: color 0.2s ease; }
+    .footer-social a:hover { color: var(--accent-primary); }
+    
+    /* Responsive */
     @media (max-width: 1024px) {
-      .scroll-indicator { display: none; }
+      :root { --sidebar-width: 60px; }
+      .molecular-sidebar { width: 60px; }
+      .dna-helix { width: 40px; }
+      .nucleotide { width: 8px; height: 8px; }
+      .nav-container { padding: 0 20px; }
+      .nav-links { display: none; }
+      .main-content { padding-left: 20px; padding-right: 20px; }
+      .about-hero, .mission-section, .team-section, .timeline-section { padding-left: 30px; padding-right: 30px; }
+      .footer-content { grid-template-columns: 1fr 1fr; }
     }
     
     @media (max-width: 768px) {
-      .back-to-top { 
-        bottom: 70px; 
-        right: 20px; 
-        width: 48px; 
-        height: 48px; 
-      }
-      .back-to-top .material-icons { font-size: 22px; }
-      .footer-scroll-bar { height: 44px; padding: 0 16px; }
-      .footer-scroll-text { font-size: 10px; }
+      :root { --sidebar-width: 0px; --nav-height: 70px; }
+      .molecular-sidebar { display: none; }
+      .neural-bg { width: 100%; left: 0; }
+      .main-content { margin-left: 0; margin-right: 0; }
+      .nav-container { left: 0; right: 0; padding: 0 16px; }
+      .page-nav-bar { display: none; }
+      .about-title { font-size: 32px; }
+      .values-grid, .team-grid { grid-template-columns: 1fr; }
+      .timeline-item { flex-direction: column; gap: 12px; }
+      .footer-content { grid-template-columns: 1fr; gap: 32px; }
+      .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
     }
   </style>
 </head>
-
 <body>
+  <!-- Left Molecular Sidebar -->
+  <aside class="molecular-sidebar left">
+    <div class="molecular-grid"></div>
+    <div class="dna-helix">
+      <div class="backbone-line"></div>
+      <div class="dna-strand" id="leftDnaStrand"></div>
+    </div>
+    <div class="protein-chain" id="leftProteinChain"></div>
+    <div class="floating-molecule" style="width: 20px; height: 20px; top: 15%; left: 30%;"></div>
+    <div class="floating-molecule" style="width: 14px; height: 14px; top: 45%; left: 55%;"></div>
+    <div class="floating-molecule" style="width: 18px; height: 18px; top: 75%; left: 25%;"></div>
+  </aside>
 
-  <!-- Professional Scientific Side Panels -->
-  <!-- LEFT PANEL: DNA Double Helix -->
-  <div class="side-panel left-panel" id="leftPanel">
-    <div class="side-panel-inner">
-      <svg viewBox="0 0 180 600" class="dna-svg" preserveAspectRatio="xMidYMid meet">
-        <defs>
-          <linearGradient id="strandBlue" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" stop-color="#4da8da"/><stop offset="50%" stop-color="#2d7ab3"/><stop offset="100%" stop-color="#4da8da"/>
-          </linearGradient>
-          <linearGradient id="strandPurple" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" stop-color="#a78bfa"/><stop offset="50%" stop-color="#7c3aed"/><stop offset="100%" stop-color="#a78bfa"/>
-          </linearGradient>
-          <filter id="glowBlue" x="-50%" y="-50%" width="200%" height="200%">
-            <feGaussianBlur stdDeviation="3" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-          </filter>
-          <filter id="glowPurple" x="-50%" y="-50%" width="200%" height="200%">
-            <feGaussianBlur stdDeviation="3" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-          </filter>
-          <filter id="softGlow" x="-50%" y="-50%" width="200%" height="200%">
-            <feGaussianBlur stdDeviation="6" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-          </filter>
-          <linearGradient id="atPair" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stop-color="#4da8da"/><stop offset="100%" stop-color="#f472b6"/>
-          </linearGradient>
-          <linearGradient id="gcPair" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stop-color="#a78bfa"/><stop offset="100%" stop-color="#34d399"/>
-          </linearGradient>
-        </defs>
-        <pattern id="gridPattern" width="20" height="20" patternUnits="userSpaceOnUse">
-          <path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(77,168,218,0.08)" stroke-width="0.5"/>
-        </pattern>
-        <rect width="180" height="600" fill="url(#gridPattern)" opacity="0.5"/>
-        <g class="dna-helix-group">
-          <path d="M45,0 Q75,50 45,100 Q15,150 45,200 Q75,250 45,300 Q15,350 45,400 Q75,450 45,500 Q15,550 45,600" fill="none" stroke="url(#strandBlue)" stroke-width="5" stroke-linecap="round" filter="url(#glowBlue)"/>
-          <path d="M135,0 Q105,50 135,100 Q165,150 135,200 Q105,250 135,300 Q165,350 135,400 Q105,450 135,500 Q165,550 135,600" fill="none" stroke="url(#strandPurple)" stroke-width="5" stroke-linecap="round" filter="url(#glowPurple)"/>
-          <g class="base-pairs">
-            <line x1="48" y1="25" x2="132" y2="25" stroke="url(#atPair)" stroke-width="3" stroke-linecap="round"/>
-            <circle cx="48" cy="25" r="5" fill="#4da8da" filter="url(#softGlow)" class="base-node" style="animation-delay:0s"/><circle cx="132" cy="25" r="5" fill="#f472b6" filter="url(#softGlow)" class="base-node" style="animation-delay:0.05s"/>
-            <line x1="30" y1="75" x2="150" y2="75" stroke="url(#gcPair)" stroke-width="3" stroke-linecap="round"/>
-            <circle cx="30" cy="75" r="5" fill="#a78bfa" filter="url(#softGlow)" class="base-node" style="animation-delay:0.1s"/><circle cx="150" cy="75" r="5" fill="#34d399" filter="url(#softGlow)" class="base-node" style="animation-delay:0.15s"/>
-            <line x1="42" y1="125" x2="138" y2="125" stroke="url(#atPair)" stroke-width="3" stroke-linecap="round"/>
-            <circle cx="42" cy="125" r="5" fill="#4da8da" filter="url(#softGlow)" class="base-node" style="animation-delay:0.2s"/><circle cx="138" cy="125" r="5" fill="#f472b6" filter="url(#softGlow)" class="base-node" style="animation-delay:0.25s"/>
-            <line x1="25" y1="175" x2="155" y2="175" stroke="url(#gcPair)" stroke-width="3" stroke-linecap="round"/>
-            <circle cx="25" cy="175" r="5" fill="#a78bfa" filter="url(#softGlow)" class="base-node" style="animation-delay:0.3s"/><circle cx="155" cy="175" r="5" fill="#34d399" filter="url(#softGlow)" class="base-node" style="animation-delay:0.35s"/>
-            <line x1="40" y1="225" x2="140" y2="225" stroke="url(#atPair)" stroke-width="3" stroke-linecap="round"/>
-            <circle cx="40" cy="225" r="5" fill="#4da8da" filter="url(#softGlow)" class="base-node" style="animation-delay:0.4s"/><circle cx="140" cy="225" r="5" fill="#f472b6" filter="url(#softGlow)" class="base-node" style="animation-delay:0.45s"/>
-            <line x1="28" y1="275" x2="152" y2="275" stroke="url(#gcPair)" stroke-width="3" stroke-linecap="round"/>
-            <circle cx="28" cy="275" r="5" fill="#a78bfa" filter="url(#softGlow)" class="base-node" style="animation-delay:0.5s"/><circle cx="152" cy="275" r="5" fill="#34d399" filter="url(#softGlow)" class="base-node" style="animation-delay:0.55s"/>
-            <line x1="44" y1="325" x2="136" y2="325" stroke="url(#atPair)" stroke-width="3" stroke-linecap="round"/>
-            <circle cx="44" cy="325" r="5" fill="#4da8da" filter="url(#softGlow)" class="base-node" style="animation-delay:0.6s"/><circle cx="136" cy="325" r="5" fill="#f472b6" filter="url(#softGlow)" class="base-node" style="animation-delay:0.65s"/>
-            <line x1="22" y1="375" x2="158" y2="375" stroke="url(#gcPair)" stroke-width="3" stroke-linecap="round"/>
-            <circle cx="22" cy="375" r="5" fill="#a78bfa" filter="url(#softGlow)" class="base-node" style="animation-delay:0.7s"/><circle cx="158" cy="375" r="5" fill="#34d399" filter="url(#softGlow)" class="base-node" style="animation-delay:0.75s"/>
-            <line x1="38" y1="425" x2="142" y2="425" stroke="url(#atPair)" stroke-width="3" stroke-linecap="round"/>
-            <circle cx="38" cy="425" r="5" fill="#4da8da" filter="url(#softGlow)" class="base-node" style="animation-delay:0.8s"/><circle cx="142" cy="425" r="5" fill="#f472b6" filter="url(#softGlow)" class="base-node" style="animation-delay:0.85s"/>
-            <line x1="26" y1="475" x2="154" y2="475" stroke="url(#gcPair)" stroke-width="3" stroke-linecap="round"/>
-            <circle cx="26" cy="475" r="5" fill="#a78bfa" filter="url(#softGlow)" class="base-node" style="animation-delay:0.9s"/><circle cx="154" cy="475" r="5" fill="#34d399" filter="url(#softGlow)" class="base-node" style="animation-delay:0.95s"/>
-            <line x1="46" y1="525" x2="134" y2="525" stroke="url(#atPair)" stroke-width="3" stroke-linecap="round"/>
-            <circle cx="46" cy="525" r="5" fill="#4da8da" filter="url(#softGlow)" class="base-node" style="animation-delay:1s"/><circle cx="134" cy="525" r="5" fill="#f472b6" filter="url(#softGlow)" class="base-node" style="animation-delay:1.05s"/>
-            <line x1="32" y1="575" x2="148" y2="575" stroke="url(#gcPair)" stroke-width="3" stroke-linecap="round"/>
-            <circle cx="32" cy="575" r="5" fill="#a78bfa" filter="url(#softGlow)" class="base-node" style="animation-delay:1.1s"/><circle cx="148" cy="575" r="5" fill="#34d399" filter="url(#softGlow)" class="base-node" style="animation-delay:1.15s"/>
-          </g>
-        </g>
-        <text x="90" y="592" text-anchor="middle" fill="rgba(77,168,218,0.6)" font-family="var(--font-num)" font-size="9" letter-spacing="2">DNA HELIX</text>
-      </svg>
+  <!-- Right Molecular Sidebar -->
+  <aside class="molecular-sidebar right">
+    <div class="molecular-grid"></div>
+    <div class="dna-helix">
+      <div class="backbone-line"></div>
+      <div class="dna-strand" id="rightDnaStrand"></div>
     </div>
-  </div>
-  
-  <!-- RIGHT PANEL: Protein Structure -->
-  <div class="side-panel right-panel" id="rightPanel">
-    <div class="side-panel-inner">
-      <svg viewBox="0 0 180 600" class="protein-svg" preserveAspectRatio="xMidYMid meet">
-        <defs>
-          <linearGradient id="helixGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stop-color="#3b82f6"/><stop offset="50%" stop-color="#60a5fa"/><stop offset="100%" stop-color="#3b82f6"/>
-          </linearGradient>
-          <linearGradient id="sheetGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stop-color="#a78bfa"/><stop offset="50%" stop-color="#c084fc"/><stop offset="100%" stop-color="#a78bfa"/>
-          </linearGradient>
-          <linearGradient id="loopGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stop-color="#f472b6"/><stop offset="50%" stop-color="#fb7185"/><stop offset="100%" stop-color="#f472b6"/>
-          </linearGradient>
-          <linearGradient id="sphereGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#60a5fa"/><stop offset="100%" stop-color="#2563eb"/>
-          </linearGradient>
-          <linearGradient id="sphereGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#c084fc"/><stop offset="100%" stop-color="#7c3aed"/>
-          </linearGradient>
-          <radialGradient id="aaSphere" cx="30%" cy="30%" r="70%">
-            <stop offset="0%" stop-color="rgba(255,255,255,0.8)"/><stop offset="100%" stop-color="rgba(255,255,255,0)"/>
-          </radialGradient>
-          <filter id="proteinGlow" x="-50%" y="-50%" width="200%" height="200%">
-            <feGaussianBlur stdDeviation="4" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-          </filter>
-        </defs>
-        <pattern id="gridPatternRight" width="20" height="20" patternUnits="userSpaceOnUse">
-          <path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(167,139,250,0.08)" stroke-width="0.5"/>
-        </pattern>
-        <rect width="180" height="600" fill="url(#gridPatternRight)" opacity="0.5"/>
-        <g class="protein-structure-group">
-          <g class="alpha-helix">
-            <path d="M90,10 C120,25 140,45 130,70 C120,95 60,95 50,70 C40,45 60,25 90,10" fill="none" stroke="url(#helixGrad)" stroke-width="8" stroke-linecap="round" filter="url(#proteinGlow)" opacity="0.9"/>
-            <path d="M90,35 C115,48 132,64 124,84 C116,104 64,104 56,84 C48,64 65,48 90,35" fill="none" stroke="url(#helixGrad)" stroke-width="7" stroke-linecap="round" opacity="0.8"/>
-            <path d="M90,58 C110,69 124,82 118,98 C112,114 68,114 62,98 C56,82 70,69 90,58" fill="none" stroke="url(#helixGrad)" stroke-width="6" stroke-linecap="round" opacity="0.7"/>
-          </g>
-          <path class="loop-region" d="M70,110 Q30,140 50,180 Q70,220 90,200 Q110,180 130,190 Q150,200 140,170 Q130,140 110,120" fill="none" stroke="url(#loopGrad)" stroke-width="4" stroke-linecap="round" opacity="0.8"/>
-          <g class="beta-sheet">
-            <polygon points="45,230 95,215 95,235" fill="url(#sheetGrad)" opacity="0.85" filter="url(#proteinGlow)"/>
-            <polygon points="45,260 95,245 95,265" fill="url(#sheetGrad)" opacity="0.8"/>
-            <polygon points="45,290 95,275 95,295" fill="url(#sheetGrad)" opacity="0.75"/>
-          </g>
-          <path class="loop-region2" d="M95,310 Q140,340 120,380 Q100,420 70,400 Q40,380 55,350 Q70,320 95,310" fill="none" stroke="url(#loopGrad)" stroke-width="4" stroke-linecap="round" opacity="0.75"/>
-          <g class="alpha-helix2">
-            <path d="M75,420 C50,435 35,455 45,480 C55,505 115,505 125,480 C135,455 110,435 85,420" fill="none" stroke="url(#helixGrad)" stroke-width="7" stroke-linecap="round" filter="url(#proteinGlow)" opacity="0.85"/>
-            <path d="M80,445 C58,458 44,472 52,492 C60,512 110,512 118,492 C126,472 102,458 88,445" fill="none" stroke="url(#helixGrad)" stroke-width="6" stroke-linecap="round" opacity="0.75"/>
-          </g>
-          <g class="amino-acids">
-            <circle cx="130" cy="55" r="10" fill="url(#sphereGrad1)" class="aa-sphere" style="animation-delay:0s"/><circle cx="130" cy="55" r="10" fill="url(#aaSphere)" class="aa-highlight"/>
-            <circle cx="50" cy="85" r="8" fill="url(#sphereGrad1)" class="aa-sphere" style="animation-delay:0.2s"/><circle cx="50" cy="85" r="8" fill="url(#aaSphere)" class="aa-highlight"/>
-            <circle cx="45" cy="165" r="9" fill="url(#sphereGrad2)" class="aa-sphere" style="animation-delay:0.4s"/><circle cx="45" cy="165" r="9" fill="url(#aaSphere)" class="aa-highlight"/>
-            <circle cx="135" cy="195" r="7" fill="url(#sphereGrad2)" class="aa-sphere" style="animation-delay:0.5s"/><circle cx="135" cy="195" r="7" fill="url(#aaSphere)" class="aa-highlight"/>
-            <circle cx="125" cy="250" r="8" fill="#fb7185" class="aa-sphere" style="animation-delay:0.7s"/><circle cx="125" cy="250" r="8" fill="url(#aaSphere)" class="aa-highlight"/>
-            <circle cx="60" cy="370" r="9" fill="#fb7185" class="aa-sphere" style="animation-delay:0.9s"/><circle cx="60" cy="370" r="9" fill="url(#aaSphere)" class="aa-highlight"/>
-            <circle cx="40" cy="465" r="10" fill="url(#sphereGrad1)" class="aa-sphere" style="animation-delay:1.1s"/><circle cx="40" cy="465" r="10" fill="url(#aaSphere)" class="aa-highlight"/>
-            <circle cx="130" cy="495" r="8" fill="url(#sphereGrad1)" class="aa-sphere" style="animation-delay:1.3s"/><circle cx="130" cy="495" r="8" fill="url(#aaSphere)" class="aa-highlight"/>
-            <circle cx="90" cy="350" r="12" fill="#fbbf24" class="aa-sphere active-site" style="animation-delay:0.8s" filter="url(#proteinGlow)"/><circle cx="90" cy="350" r="12" fill="url(#aaSphere)" class="aa-highlight"/>
-          </g>
-          <g class="tertiary-bonds" opacity="0.3">
-            <line x1="130" y1="55" x2="135" y2="195" stroke="#a78bfa" stroke-width="1" stroke-dasharray="4,4"/>
-            <line x1="45" y1="165" x2="40" y2="465" stroke="#4da8da" stroke-width="1" stroke-dasharray="4,4"/>
-            <line x1="125" y1="250" x2="130" y2="495" stroke="#f472b6" stroke-width="1" stroke-dasharray="4,4"/>
-          </g>
-        </g>
-        <text x="90" y="592" text-anchor="middle" fill="rgba(167,139,250,0.6)" font-family="var(--font-num)" font-size="9" letter-spacing="2">PROTEIN</text>
-      </svg>
-    </div>
-  </div>
+    <div class="protein-chain" id="rightProteinChain"></div>
+    <div class="floating-molecule" style="width: 16px; height: 16px; top: 25%; left: 40%;"></div>
+    <div class="floating-molecule" style="width: 22px; height: 22px; top: 55%; left: 60%;"></div>
+    <div class="floating-molecule" style="width: 12px; height: 12px; top: 85%; left: 35%;"></div>
+  </aside>
+
+  <!-- Neural Background -->
+  <div class="neural-bg" id="neuralBg"></div>
 
   <!-- Navigation -->
-  <nav class="navbar">
-    <div class="nav-left">
-      <a href="index.html" class="nav-logo"><img src="assets/icons/icon-science.png" alt="SciMSPT"><span class="nav-logo-text">Sci<span>MSPT</span></span></a>
-      <div class="nav-links">
-        <a href="index.html" class="nav-link">Home</a>
-        <a href="dashboard.html" class="nav-link">Dashboard</a>
-        <a href="research.html" class="nav-link">Research Trends</a>
-        <a href="startups.html" class="nav-link">7 Startups</a>
-        <a href="documentation.html" class="nav-link">Documentation</a>
-        <a href="platform.html" class="nav-link">Platform</a>
-        <a href="studio.html" class="nav-link">Workspace</a>
-        <a href="about.html" class="nav-link active">About</a>
-      </div>
+  <nav class="nav-container">
+    <a href="index.html" class="nav-brand">
+      <div class="nav-logo">S</div>
+      <span class="nav-title">Sci<span>MSPT</span></span>
+    </a>
+    
+    <div class="nav-links">
+      <a href="index.html" class="nav-link"><span class="material-icons-round">home</span> Home</a>
+      <a href="research.html" class="nav-link"><span class="material-icons-round">biotech</span> Research</a>
+      <a href="startups.html" class="nav-link"><span class="material-icons-round">rocket_launch</span> Startups</a>
+      <a href="platform.html" class="nav-link"><span class="material-icons-round">dashboard</span> Platform</a>
+      <a href="documentation.html" class="nav-link"><span class="material-icons-round">code</span> API Docs</a>
+      <a href="about.html" class="nav-link active"><span class="material-icons-round">info</span> About</a>
     </div>
-    <div class="nav-right">
-      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme"><i class="material-icons" id="themeIcon">dark_mode</i><span id="themeText">Dark</span></button>
-      <button class="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="Menu"><i class="material-icons">menu</i></button>
+    
+    <div style="display: flex; align-items: center; gap: 16px;">
+      <button class="theme-toggle" onclick="toggleTheme()">
+        <span class="material-icons-round" id="themeIcon">dark_mode</span>
+      </button>
+      
+      <button class="workspace-btn" onclick="location.href='platform.html#collaboration'">
+        <span class="material-icons-round">workspaces</span>
+        Workspace
+      </button>
+      
+      <div class="user-profile">
+        <div class="user-avatar">EV</div>
+        <div class="user-info">
+          <span class="user-name">Dr. Elena Vasquez</span>
+          <span class="user-role">Neural Architect</span>
+        </div>
+      </div>
     </div>
   </nav>
 
-  <!-- Hero -->
-  <div class="page-hero" id="about">
-    <div class="hero-bg"><div class="grid-pattern"></div><div class="hero-glow tl"></div></div>
-    <div class="hero-content">
-      <div class="kicker">Platform Information</div>
-      <h1>About SciMSPT</h1>
-      <p class="lead">Science, Matter, Physics & Time — A research platform transforming peer-reviewed breakthroughs into investable frontier computing startups.</p>
-    </div>
+  <!-- Page Navigation Bar -->
+  <div class="page-nav-bar">
+    <a href="javascript:history.back()" class="page-nav-btn">
+      <span class="material-icons-round">arrow_back</span>
+      Back
+    </a>
+    <span class="page-indicator">|</span>
+    <a href="index.html" class="page-nav-btn">
+      <span class="material-icons-round">home</span>
+      Home
+    </a>
+    <span class="page-indicator">|</span>
+    <a href="#team" class="page-nav-btn">
+      <span class="material-icons-round">groups</span>
+      Team
+    </a>
   </div>
 
-  <!-- What is SciMSPT -->
-  <div class="section" id="what-is">
-    <div class="section-header">
-      <h2>What is SciMSPT?</h2>
-    </div>
-    <div class="content-block">
-      <p><strong>SciMSPT</strong> (Science, Matter, Physics & Time) is a research-to-investment platform that systematically extrapolates frontier computing opportunities from peer-reviewed scientific breakthroughs published in ScienceDaily across six domains:</p>
+  <!-- Main Content -->
+  <main class="main-content">
+    <!-- About Hero -->
+    <section class="about-hero">
+      <div class="hero-badge">
+        <span class="pulse-dot"></span>
+        Neural Intelligence Since 2023
+      </div>
       
-      <ul style="margin-left: 20px; margin-top: 16px; margin-bottom: 16px;">
-        <li style="margin-bottom: 8px;"><strong>Matter & Energy</strong> — Quantum materials, superconductors, energy storage, hydrogen systems</li>
-        <li style="margin-bottom: 8px;"><strong>Space & Time</strong> — Astrophysics, fusion energy, temporal mechanics, orbital infrastructure</li>
-        <li style="margin-bottom: 8px;"><strong>Computers & Math</strong> — AI/ML algorithms, quantum computing, photonic computing</li>
-        <li style="margin-bottom: 8px;"><strong>Health & Medicine</strong> — Biotech, genomics, DNA storage, neural interfaces</li>
-        <li style="margin-bottom: 8px;"><strong>Mind & Brain</strong> — Neuroscience, cognition, AGI safety, brain-computer interfaces</li>
-        <li style="margin-bottom: 8px;"><strong>Living Well</strong> — Sustainability, green energy, environmental technology</li>
-      </ul>
+      <h1 class="about-title">
+        About <span class="gradient-text">SciMSPT</span>
+      </h1>
       
-      <p>The platform produces weekly digests, research shorts, Monte Carlo-validated startup portfolios, and investor foresight reports — all grounded in real scientific publications.</p>
-    </div>
-  </div>
+      <p class="about-subtitle">
+        We're building the neural infrastructure that transforms how humanity 
+        discovers, analyzes, and acts upon scientific knowledge.
+      </p>
+    </section>
 
-  <!-- Methodology -->
-  <div class="section" id="methodology">
-    <div class="section-header">
-      <h2>Research Methodology</h2>
-      <p class="lead" style="max-width: 800px;">Our systematic approach transforms academic breakthroughs into investment-ready startup theses.</p>
-    </div>
-    
-    <div class="content-block">
-      <h3>The 5-Step Extrapolation Process</h3>
-      <div class="methodology-steps">
-        <div class="step">
-          <div class="step-num">1</div>
-          <div class="step-title">Breakthrough Identification</div>
-          <div class="step-desc">Monitor ScienceDaily RSS feeds across 6 domains for peer-reviewed breakthroughs with commercial potential signals.</div>
-        </div>
-        <div class="step">
-          <div class="step-num">2</div>
-          <div class="step-title">Signal Classification</div>
-          <div class="step-desc">Categorize each breakthrough by S/M/P/T axis coordinates, maturity level, and investment readiness indicators.</div>
-        </div>
-        <div class="step">
-          <div class="step-num">3</div>
-          <div class="step-title">Venture Extrapolation</div>
-          <div class="step-desc">Map scientific advances to fundable business models with TAM, TTM, and competitive moat analysis.</div>
-        </div>
-        <div class="step">
-          <div class="step-num">4</div>
-          <div class="step-title">Financial Modeling</div>
-          <div class="step-desc">Build NPV/IRR projections with Monte Carlo simulation (10,000 runs) for statistical validation.</div>
-        </div>
-        <div class="step">
-          <div class="step-num">5</div>
-          <div class="step-title">Portfolio Integration</div>
-          <div class="step-desc">Position startups within the SciMSPT microservices platform architecture for operational synergy.</div>
+    <!-- Mission Section -->
+    <section class="mission-section">
+      <div class="section-header">
+        <p class="section-tag">// Our Mission</p>
+        <h2 class="section-title">Bridging Science & Strategy</h2>
+        <p class="section-desc">
+          Our mission is to democratize access to frontier technology intelligence 
+          by leveraging advanced AI to extract actionable insights from global research.
+        </p>
+      </div>
+      
+      <div class="values-grid">
+        <article class="value-card">
+          <div class="value-icon">
+            <span class="material-icons-round">psychology</span>
+          </div>
+          <h3 class="value-title">Neural-First Approach</h3>
+          <p class="value-desc">
+            Every aspect of our platform is built on neural architectures that 
+            understand context, identify patterns, and generate insights beyond 
+            human capability alone.
+          </p>
+        </article>
+        
+        <article class="value-card">
+          <div class="value-icon">
+            <span class="material-icons-round">verified</span>
+          </div>
+          <h3 class="value-title">Scientific Rigor</h3>
+          <p class="value-desc">
+            We maintain the highest standards of academic integrity, ensuring 
+            every analysis is traceable, reproducible, and grounded in 
+            peer-reviewed research.
+          </p>
+        </article>
+        
+        <article class="value-card">
+          <div class="value-icon">
+            <span class="material-icons-round">diversity_3</span>
+          </div>
+          <h3 class="value-title">Open Collaboration</h3>
+          <p class="value-desc">
+            We believe in the power of collective intelligence. Our platform 
+            enables researchers, investors, and innovators to collaborate 
+            seamlessly across boundaries.
+          </p>
+        </article>
+        
+        <article class="value-card">
+          <div class="value-icon">
+            <span class="material-icons-round">rocket_launch</span>
+          </div>
+          <h3 class="value-title">Impact-Driven</h3>
+          <p class="value-desc">
+            Every feature we build is focused on accelerating the path from 
+            discovery to deployment, helping breakthrough technologies 
+            reach the world faster.
+          </p>
+        </article>
+        
+        <article class="value-card">
+          <div class="value-icon">
+            <span class="material-icons-round">shield</span>
+          </div>
+          <h3 class="value-title">Privacy Preserving</h3>
+          <p class="value-desc">
+            We employ cutting-edge cryptographic techniques to ensure your 
+            research interests and strategies remain confidential while 
+            benefiting from collective insights.
+          </p>
+        </article>
+        
+        <article class="value-card">
+          <div class="value-icon">
+            <span class="material-icons-round">auto_awesome</span>
+          </div>
+          <h3 class="value-title">Continuous Evolution</h3>
+          <p class="value-desc">
+            Our models learn and improve continuously, incorporating new 
+            research methodologies and expanding our understanding of 
+            the innovation landscape.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="team-section" id="team">
+      <div class="section-header">
+        <p class="section-tag">// The Team</p>
+        <h2 class="section-title">Meet Our Neural Architects</h2>
+        <p class="section-desc">
+          A multidisciplinary team of researchers, engineers, and visionaries 
+          united by a passion for advancing scientific discovery.
+        </p>
+      </div>
+      
+      <div class="team-grid">
+        <article class="team-member">
+          <div class="member-avatar">EV</div>
+          <h4 class="member-name">Dr. Elena Vasquez</h4>
+          <p class="member-role">Founder & CEO</p>
+          <p class="member-bio">
+            Former quantum computing researcher at MIT. PhD in Computational 
+            Biology with focus on neural network applications in drug discovery.
+          </p>
+        </article>
+        
+        <article class="team-member">
+          <div class="member-avatar" style="background: linear-gradient(135deg, #10b981, #059669);">MC</div>
+          <h4 class="member-name">Marcus Chen</h4>
+          <p class="member-role">CTO</p>
+          <p class="member-bio">
+            Ex-Google Brain engineer specializing in large language models 
+            and distributed systems. Led infrastructure for models serving 
+            billions of users.
+          </p>
+        </article>
+        
+        <article class="team-member">
+          <div class="member-avatar" style="background: linear-gradient(135deg, #f59e0b, #d97706);">AP</div>
+          <h4 class="member-name">Dr. Aisha Patel</h4>
+          <p class="member-role">Head of Research</p>
+          <p class="member-bio">
+            Published author in Nature and Science. Expertise in genomics, 
+            CRISPR technology, and computational biology with 15+ years 
+            of academic experience.
+          </p>
+        </article>
+        
+        <article class="team-member">
+          <div class="member-avatar" style="background: linear-gradient(135deg, #ef4444, #dc2626);">JK</div>
+          <h4 class="member-name">James Kim</h4>
+          <p class="member-role">VP of Engineering</p>
+          <p class="member-bio">
+            Full-stack architect with deep expertise in real-time systems 
+            and collaborative platforms. Previously led engineering at 
+            a YC-backed ML startup.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Timeline Section -->
+    <section class="timeline-section">
+      <div class="section-header">
+        <p class="section-tag">// Our Journey</p>
+        <h2 class="section-title">Key Milestones</h2>
+      </div>
+      
+      <div class="timeline-item">
+        <div class="timeline-year">2023</div>
+        <div class="timeline-content">
+          <h4>Founding & Vision</h4>
+          <p>SciMSPT was founded with the mission to bridge the gap between academic research and investment opportunities using AI.</p>
         </div>
       </div>
-    </div>
-  </div>
-
-  <!-- Foresight Series Reports -->
-  <div class="section" id="reports">
-    <div class="section-header">
-      <h2>Foresight Series Reports</h2>
-      <p class="lead">Comprehensive investor reports analyzing frontier computing opportunities with full documentation.</p>
-    </div>
-    
-    <div class="reports-grid">
-      <a href="assets/reports/Beyond_the_Scaling_Wall_2025-2045.pdf" target="_blank" class="report-card">
-        <div class="report-icon"><i class="material-icons">description</i></div>
-        <div class="report-title">Beyond the Scaling Wall</div>
-        <div class="report-desc">Vol. 01 — 12 Frontier Computing Projects That Will Reshape AI Infrastructure, 2025-2045</div>
-        <div class="report-meta">
-          <span><i class="material-icons">calendar_today</i> Aug 2026</span>
-          <span><i class="material-icons">picture_as_pdf</i> PDF Report</span>
-        </div>
-      </a>
       
-      <a href="assets/reports/Beyond_the_Energy_Trilemma_2025-2045.pdf" target="_blank" class="report-card">
-        <div class="report-icon"><i class="material-icons">electric_bolt</i></div>
-        <div class="report-title">Beyond the Energy Trilemma</div>
-        <div class="report-desc">Vol. 02 — Matter & Energy Projects Addressing the Global Energy Transition Challenge</div>
-        <div class="report-meta">
-          <span><i class="material-icons">calendar_today</i> Aug 2026</span>
-          <span><i class="material-icons">picture_as_pdf</i> PDF Report</span>
-        </div>
-      </a>
-      
-      <a href="assets/reports/Beyond_the_Cosmic_Frontier_2025-2045.pdf" target="_blank" class="report-card">
-        <div class="report-icon"><i class="material-icons">public</i></div>
-        <div class="report-title">Beyond the Cosmic Frontier</div>
-        <div class="report-desc">Space & Time domain analysis covering astrophysics, fusion, and lunar/Mars infrastructure</div>
-        <div class="report-meta">
-          <span><i class="material-icons">calendar_today</i> Aug 2026</span>
-          <span><i class="material-icons">picture_as_pdf</i> PDF Report</span>
-        </div>
-      </a>
-      
-      <a href="assets/reports/SciMSPT_Monte_Carlo_Sensitivity_Vol_02_6.pdf" target="_blank" class="report-card">
-        <div class="report-icon"><i class="material-icons">analytics</i></div>
-        <div class="report-title">Monte Carlo Sensitivity Analysis</div>
-        <div class="report-desc">Statistical validation of 7 core startups with NPV/IRR distributions and probability tables</div>
-        <div class="report-meta">
-          <span><i class="material-icons">calendar_today</i> Aug 2026</span>
-          <span><i class="material-icons">picture_as_pdf</i> PDF Analysis</span>
-        </div>
-      </a>
-      
-      <a href="assets/reports/P12_AI_Discovered_Tandem_PV_DeepDive.pdf" target="_blank" class="report-card">
-        <div class="report-icon"><i class="material-icons">insights</i></div>
-        <div class="report-title">P12 Deep Dive: AI-Discovered Tandem PV</div>
-        <div class="report-desc">Anchor tenant analysis for ML-driven materials discovery applied to next-gen solar cells</div>
-        <div class="report-meta">
-          <span><i class="material-icons">calendar_today</i> Aug 2026</span>
-          <span><i class="material-icons">picture_as_pdf</i> PDF Brief</span>
-        </div>
-      </a>
-      
-      <a href="assets/reports/SciMSPT_Foresight_Series_Bundle.pdf" target="_blank" class="report-card">
-        <div class="report-icon"><i class="material-icons">folder_special</i></div>
-        <div class="report-title">Foresight Series Bundle</div>
-        <div class="report-desc">Complete collection of all Vol. 00, 01, 02 reports with integration matrices and platform roadmap</div>
-        <div class="report-meta">
-          <span><i class="material-icons">calendar_today</i> Aug 2026</span>
-          <span><i class="material-icons">picture_as_pdf</i> PDF Bundle</span>
-        </div>
-      </a>
-    </div>
-  </div>
-
-  <!-- Tech Stack -->
-  <div class="section" id="tech">
-    <div class="section-header">
-      <h2>Platform Architecture</h2>
-      <p class="lead">SciMSPT is built on a microservices architecture designed for scalability and research reproducibility.</p>
-    </div>
-    
-    <div class="content-block">
-      <h3>Microservices Platform (10 Services)</h3>
-      <div class="tech-grid">
-        <div class="tech-item"><div class="tech-name">API Gateway</div><div class="tech-desc">Edge ingress, rate-limiting, tenant routing</div></div>
-        <div class="tech-item"><div class="tech-name">User Service</div><div class="tech-desc">Identity, RBAC, multi-tenant isolation</div></div>
-        <div class="tech-item"><div class="tech-name">Data Service</div><div class="tech-desc">Materials datasets, training corpora</div></div>
-        <div class="tech-item"><div class="tech-name">Compute Service</div><div class="tech-desc">GPU/CPU orchestration, HPC batch</div></div>
-        <div class="tech-item"><div class="tech-name">Storage Service</div><div class="tech-desc">Long-term archive, tamper-evident ledger</div></div>
-        <div class="tech-item"><div class="tech-name">Auth Service</div><div class="tech-desc">JWT issuance, Ed25519 signing</div></div>
-        <div class="tech-item"><div class="tech-name">ML Service</div><div class="tech-desc">Closed-loop discovery, active learning</div></div>
-        <div class="tech-item"><div class="tech-name">Materials Provenance</div><div class="tech-desc">AI-discovered materials IP signing</div></div>
-        <div class="tech-item"><div class="tech-name">Safety Signing</div><div class="tech-desc">Cryptographic attestation</div></div>
-        <div class="tech-item"><div class="tech-name">Notification</div><div class="tech-desc">Safety-critical alerting, SLA-bound</div></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Timeline -->
-  <div class="section" id="timeline">
-    <div class="section-header">
-      <h2>Project Timeline</h2>
-    </div>
-    
-    <div class="content-block">
-      <div class="timeline">
-        <div class="timeline-item">
-          <div class="timeline-date">2026-W27 → W34</div>
-          <div class="timeline-title">Weekly Digest Generation</div>
-          <div class="timeline-desc">Automated ScienceDaily RSS ingestion producing 264+ articles per week across 4 axes (S/M/P/T).</div>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-date">August 2026</div>
-          <div class="timeline-title">Foresight Series Publication</div>
-          <div class="timeline-desc">Release of Vol. 01 (Scaling Wall), Vol. 02 (Energy Trilemma), and Monte Carlo validation reports.</div>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-date">August 2026</div>
-          <div class="timeline-title">GitHub Pages Deployment</div>
-          <div class="timeline-desc">Public launch of research platform at testdemoqwenai2025-creator.github.io/SciMSPT/</div>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-date">Q4 2026</div>
-          <div class="timeline-title">Investor Deck Finalization</div>
-          <div class="timeline-desc">Complete 15-slide investor presentation with financial projections and market analysis.</div>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-date">Q1 2027</div>
-          <div class="timeline-title">Materials Provenance Service Launch</div>
-          <div class="timeline-desc">New microservice for AI-discovered materials IP signing using ST.26 XML standard.</div>
+      <div class="timeline-item">
+        <div class="timeline-year">Q1 2024</div>
+        <div class="timeline-content">
+          <h4>Neural Engine v1.0</h4>
+          <p>Launched our proprietary analysis engine capable of processing 10,000+ papers daily with 95% accuracy.</p>
         </div>
       </div>
-    </div>
-  </div>
-
-  <!-- Contact -->
-  <div class="section" id="contact">
-    <div class="section-header">
-      <h2>Contact & Resources</h2>
-    </div>
-    
-    <div class="content-block">
-      <h3>Repositories</h3>
-      <div class="contact-grid">
-        <div class="contact-item">
-          <div class="contact-icon"><i class="material-icons">code</i></div>
-          <div>
-            <div class="contact-label">Public Repository</div>
-            <div class="contact-value">github.com/testdemoqwenai2025-creator/SciMSPT</div>
-          </div>
-        </div>
-        <div class="contact-item">
-          <div class="contact-icon"><i class="material-icons">lock</i></div>
-          <div>
-            <div class="contact-label">Private Repository</div>
-            <div class="contact-value">github.com/testdemoqwenai2025-creator/SciMSPT-private</div>
-          </div>
-        </div>
-        <div class="contact-item">
-          <div class="contact-icon"><i class="material-icons">article</i></div>
-          <div>
-            <div class="contact-label">Data Source</div>
-            <div class="contact-value">sciencedaily.com (RSS feeds)</div>
-          </div>
-        </div>
-        <div class="contact-item">
-          <div class="contact-icon"><i class="material-icons">description</i></div>
-          <div>
-            <div class="contact-label">Documentation</div>
-            <div class="contact-value">Foresight Series PDFs in /download/</div>
-          </div>
+      
+      <div class="timeline-item">
+        <div class="timeline-year">Q2 2024</div>
+        <div class="timeline-content">
+          <h4>Platform Launch</h4>
+          <p>Released the full platform including collaborative workspaces, API access, and pipeline builder tools.</p>
         </div>
       </div>
-    </div>
-  </div>
+      
+      <div class="timeline-item">
+        <div class="timeline-year">Q3 2024</div>
+        <div class="timeline-content">
+          <h4>Enterprise Adoption</h4>
+          <p>Onboarded first enterprise clients including leading VCs and pharmaceutical companies.</p>
+        </div>
+      </div>
+      
+      <div class="timeline-item">
+        <div class="timeline-year">2025</div>
+        <div class="timeline-content">
+          <h4>Global Expansion</h4>
+          <p>Scaling to serve researchers and investors worldwide with enhanced multilingual support and regional partnerships.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+      <div class="cta-box">
+        <div class="cta-content">
+          <h2 class="cta-title">Join the Neural Revolution</h2>
+          <p class="cta-desc">
+            Be part of the community transforming how we discover and invest in 
+            frontier technology.
+          </p>
+          
+          <a href="#" class="btn-primary" onclick="showNotification('Welcome to SciMSPT!')">
+            <span class="material-icons-round">rocket_launch</span>
+            Get Started Free
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
 
   <!-- Footer -->
-  <footer>
+  <footer class="footer">
     <div class="footer-content">
-      <div class="footer-brand"><img src="assets/icons/icon-science.png" alt="SciMSPT"><span>Sci<em>MSPT</em> Research</span></div>
-      <div class="footer-links">
-        <a href="index.html">Home</a><a href="dashboard.html">Dashboard</a><a href="research.html">Research</a><a href="startups.html">Startups</a><a href="documentation.html">Documentation</a><a href="platform.html">Platform</a><a href="studio.html">Workspace</a><a href="about.html">About</a>
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <div class="footer-logo-icon">S</div>
+          <span class="footer-logo-text">SciMSPT</span>
+        </div>
+        <p class="footer-desc">
+          Transforming scientific discovery into strategic opportunity through 
+          neural intelligence and molecular computing.
+        </p>
       </div>
-      <div class="footer-copy">&copy; 2026 SciMSPT Research Platform. All rights reserved. Data sourced from ScienceDaily.</div>
+      
+      <div class="footer-column">
+        <h4>Company</h4>
+        <div class="footer-links">
+          <a href="#">About Us</a>
+          <a href="#">Careers</a>
+          <a href="#">Blog</a>
+          <a href="#">Press Kit</a>
+          <a href="#">Contact</a>
+        </div>
+      </div>
+      
+      <div class="footer-column">
+        <h4>Resources</h4>
+        <div class="footer-links">
+          <a href="documentation.html">API Documentation</a>
+          <a href="research.html">Research Papers</a>
+          <a href="startups.html">Startup Database</a>
+          <a href="platform.html">Platform Features</a>
+        </div>
+      </div>
+      
+      <div class="footer-column">
+        <h4>Legal</h4>
+        <div class="footer-links">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+          <a href="#">Cookie Policy</a>
+          <a href="#">GDPR Compliance</a>
+        </div>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <span>&copy; 2025 SciMSPT — Neural Research Intelligence. All rights reserved.</span>
+      <div class="footer-social">
+        <a href="#"><span class="material-icons-round">github</span></a>
+        <a href="#"><span class="material-icons-round">twitter</span></a>
+        <a href="#"><span class="material-icons-round">linkedin</span></a>
+        <a href="#"><span class="material-icons-round">discord</span></a>
+      </div>
     </div>
   </footer>
 
   <script>
-    function initTheme() {
-      const saved = localStorage.getItem('scimspt-theme');
-      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      setTheme(saved || (prefersDark ? 'dark' : 'light'));
-    }
-    function setTheme(theme) {
-      document.documentElement.setAttribute('data-theme', theme);
-      const icon = document.getElementById('themeIcon'), text = document.getElementById('themeText');
-      if (theme === 'dark') { icon.textContent = 'dark_mode'; text.textContent = 'Dark'; }
-      else { icon.textContent = 'light_mode'; text.textContent = 'Light'; }
-      localStorage.setItem('scimspt-theme', theme);
-    }
-    function toggleTheme() { setTheme(document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'); }
-    initTheme();
-    function toggleMobileMenu() { alert('Navigation:\n• Home\n• Dashboard\n• Research Trends\n• 7 Startups\n• About'); }
-  </script>
-  
-  <!-- Scroll Progress Bar -->
-  <div class="scroll-progress" id="scrollProgress"></div>
-  
-  <!-- Back to Top Button -->
-  <a href="#" class="back-to-top" id="backToTop" title="Back to Top">
-    <i class="material-icons">keyboard_arrow_up</i>
-  </a>
-  
-  <!-- Scroll Position Indicator -->
-  <div class="scroll-indicator" id="scrollIndicator">
-    <span class="indicator-dot active" data-label="About" data-section="about"></span>
-    <span class="indicator-dot" data-label="Methodology" data-section="methodology"></span>
-    <span class="indicator-dot" data-label="Reports" data-section="reports"></span>
-    <span class="indicator-dot" data-label="Contact" data-section="contact"></span>
-  </div>
-
-  <!-- Sticky Footer Bar (shows when scrolled) -->
-  <div class="footer-scroll-bar" id="footerScrollBar">
-    <div class="footer-scroll-bar-left">
-      <span class="footer-scroll-text" id="scrollPosition">0% • SciMSPT About</span>
-    </div>
-    <div class="footer-scroll-bar-right">
-      <a href="#about" class="footer-scroll-link" onclick="scrollToSection('about'); return false;">
-        <i class="material-icons" style="font-size: 16px;">north</i>
-        Top
-      </a>
-      <a href="#contact" class="footer-scroll-link" onclick="scrollToSection('contact'); return false;">
-        <i class="material-icons" style="font-size: 16px;">south</i>
-        Bottom
-      </a>
-    </div>
-  </div>
-
-  <!-- Floating Navigation Buttons -->
-  <div class="floating-nav">
-    <a href="index.html" class="float-btn home-btn" title="Home">
-      <i class="material-icons">home</i>
-    </a>
-    <a href="javascript:history.back()" class="float-btn back-btn" title="Go Back">
-      <i class="material-icons">arrow_back</i>
-    </a>
-  </div>
-
-  <script>
-    // ═══════════════════════════════════════════════════════════════
-    // SCROLL ENHANCEMENTS
-    // ═══════════════════════════════════════════════════════════════
-    
-    // Elements
-    const scrollProgress = document.getElementById('scrollProgress');
-    const backToTop = document.getElementById('backToTop');
-    const scrollIndicator = document.getElementById('scrollIndicator');
-    const footerScrollBar = document.getElementById('footerScrollBar');
-    const scrollPositionText = document.getElementById('scrollPosition');
-    const indicatorDots = document.querySelectorAll('.indicator-dot');
-    
-    // Sections for tracking (matching actual HTML IDs)
-    const sections = ['about', 'what-is', 'methodology', 'reports', 'tech', 'timeline', 'contact'];
-    
-    // Update scroll progress and show/hide elements
-    function updateScroll() {
-      const scrollTop = window.scrollY;
-      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-      const scrollPercent = (scrollTop / docHeight) * 100;
+    // Initialize DNA Helix
+    function initDnaHelix() {
+      const strands = [
+        { container: 'leftDnaStrand', offset: 0 },
+        { container: 'rightDnaStrand', offset: 50 }
+      ];
       
-      // Update progress bar width
-      if (scrollProgress) {
-        scrollProgress.style.width = `${Math.min(scrollPercent, 100)}%`;
-      }
+      const nucleotides = ['adenine', 'thymine', 'guanine', 'cytosine'];
       
-      // Update position text in footer bar
-      if (scrollPositionText) {
-        scrollPositionText.textContent = `${Math.round(scrollPercent)}% • SciMSPT About`;
-      }
-      
-      // Show/hide back to top button
-      if (backToTop) {
-        if (scrollTop > 400) {
-          backToTop.classList.add('visible');
-        } else {
-          backToTop.classList.remove('visible');
-        }
-      }
-      
-      // Show/hide scroll indicator
-      if (scrollIndicator) {
-        if (scrollTop > 600) {
-          scrollIndicator.classList.add('visible');
-        } else {
-          scrollIndicator.classList.remove('visible');
-        }
-      }
-      
-      // Show/hide footer scroll bar
-      if (footerScrollBar) {
-        if (scrollTop > 800) {
-          footerScrollBar.classList.add('visible');
-        } else {
-          footerScrollBar.classList.remove('visible');
-        }
-      }
-      
-      // Update active section indicator
-      updateActiveSection(scrollTop);
-    }
-    
-    // Update which section is currently active
-    function updateActiveSection(scrollY) {
-      let currentSection = 'about';
-      
-      for (const sectionId of sections) {
-        const section = document.getElementById(sectionId);
-        if (section) {
-          const rect = section.getBoundingClientRect();
-          if (rect.top <= window.innerHeight / 3) {
-            currentSection = sectionId;
-          }
-        }
-      }
-      
-      // Update dots
-      indicatorDots.forEach(dot => {
-        dot.classList.remove('active');
-        if (dot.dataset.section === currentSection) {
-          dot.classList.add('active');
+      strands.forEach(({ container, offset }) => {
+        const strand = document.getElementById(container);
+        if (!strand) return;
+        
+        for (let i = 0; i < 20; i++) {
+          const nucleotide = document.createElement('div');
+          nucleotide.className = `nucleotide ${nucleotides[i % 4]}`;
+          
+          const y = (i / 20) * 100;
+          const x = 50 + Math.sin((i + offset) * 0.5) * 35;
+          const delay = (i * 0.15) % 3;
+          
+          nucleotide.style.cssText = `
+            top: ${y}%;
+            left: ${x}%;
+            transform: translate(-50%, -50%);
+            animation-delay: ${delay}s;
+          `;
+          
+          strand.appendChild(nucleotide);
         }
       });
     }
     
-    // Smooth scroll to top
-    if (backToTop) {
-      backToTop.addEventListener('click', (e) => {
-        e.preventDefault();
-        window.scrollTo({
-          top: 0,
-          behavior: 'smooth'
-        });
+    // Initialize Protein Chains
+    function initProteinChains() {
+      const chains = ['leftProteinChain', 'rightProteinChain'];
+      
+      chains.forEach(chainId => {
+        const chain = document.getElementById(chainId);
+        if (!chain) return;
+        
+        for (let i = 0; i < 12; i++) {
+          const amino = document.createElement('div');
+          amino.className = 'amino-acid';
+          
+          const y = (i / 12) * 100;
+          const x = Math.sin(i * 0.8) * 15;
+          const delay = (i * 0.3) % 4;
+          const hue = (i * 30) % 360;
+          
+          amino.style.cssText = `
+            top: ${y}%;
+            left: calc(50% + ${x}px);
+            transform: translate(-50%, -50%);
+            animation-delay: ${delay}s;
+            background: hsl(${hue}, 70%, 60%);
+          `;
+          
+          chain.appendChild(amino);
+        }
       });
     }
     
-    // Click on indicator dots to scroll to section
-    indicatorDots.forEach(dot => {
-      dot.addEventListener('click', () => {
-        const sectionId = dot.dataset.section;
-        scrollToSection(sectionId);
-      });
+    // Initialize Neural Background
+    function initNeuralBackground() {
+      const bg = document.getElementById('neuralBg');
+      if (!bg) return;
+      
+      for (let i = 0; i < 50; i++) {
+        const neuron = document.createElement('div');
+        neuron.className = 'neuron';
+        neuron.style.cssText = `
+          left: ${Math.random() * 100}%;
+          top: ${Math.random() * 100}%;
+          animation-delay: ${Math.random() * 4}s;
+        `;
+        bg.appendChild(neuron);
+      }
+    }
+    
+    // Theme Toggle
+    function toggleTheme() {
+      const html = document.documentElement;
+      const icon = document.getElementById('themeIcon');
+      const isDark = html.getAttribute('data-theme') === 'dark';
+      
+      html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+      icon.textContent = isDark ? 'light_mode' : 'dark_mode';
+      localStorage.setItem('theme', isDark ? 'light' : 'dark');
+    }
+    
+    // Load saved theme
+    function loadTheme() {
+      const saved = localStorage.getItem('theme');
+      if (saved) {
+        document.documentElement.setAttribute('data-theme', saved);
+        document.getElementById('themeIcon').textContent = 
+          saved === 'dark' ? 'dark_mode' : 'light_mode';
+      }
+    }
+    
+    // Notification System
+    function showNotification(message) {
+      const notification = document.createElement('div');
+      notification.style.cssText = `
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        padding: 20px 28px;
+        background: linear-gradient(135deg, var(--accent-primary), var(--accent-tertiary));
+        color: var(--bg-deep);
+        border-radius: 14px;
+        font-weight: 600;
+        z-index: 9999;
+        animation: slideIn 0.4s ease;
+        box-shadow: 0 10px 40px rgba(0, 229, 255, 0.3);
+      `;
+      notification.textContent = message;
+      document.body.appendChild(notification);
+      
+      setTimeout(() => {
+        notification.style.animation = 'slideOut 0.3s ease forwards';
+        setTimeout(() => notification.remove(), 300);
+      }, 4000);
+    }
+    
+    // Add CSS animations
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes slideIn {
+        from { transform: translateX(100px); opacity: 0; }
+        to { transform: translateX(0); opacity: 1; }
+      }
+      @keyframes slideOut {
+        from { transform: translateX(0); opacity: 1; }
+        to { transform: translateX(100px); opacity: 0; }
+      }
+    `;
+    document.head.appendChild(style);
+    
+    // Initialize
+    document.addEventListener('DOMContentLoaded', () => {
+      loadTheme();
+      initDnaHelix();
+      initProteinChains();
+      initNeuralBackground();
     });
-    
-    // Scroll to specific section
-    function scrollToSection(sectionId) {
-      const section = document.getElementById(sectionId);
-      if (section) {
-        section.scrollIntoView({
-          behavior: 'smooth',
-          block: 'start'
-        });
-      }
-    }
-    
-    // Throttle scroll events for performance
-    let ticking = false;
-    window.addEventListener('scroll', () => {
-      if (!ticking) {
-        requestAnimationFrame(() => {
-          updateScroll();
-          ticking = false;
-        });
-        ticking = true;
-      }
-    });
-    
-    // Initial call
-    updateScroll();
-    
-    // Expose function globally
-    window.scrollToSection = scrollToSection;
   </script>
 </body>
 </html>
