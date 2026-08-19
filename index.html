@@ -222,6 +222,92 @@
     
     .hero-bg { position: absolute; inset: 0; z-index: 0; }
     
+    /* Scientific Side Images - Left & Right */
+    .side-image {
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      width: 180px;
+      z-index: 1;
+      opacity: 0.15;
+      pointer-events: none;
+      background-size: cover;
+      background-position: center;
+      filter: blur(0.5px) brightness(1.2);
+    }
+    
+    .side-image.left {
+      left: 0;
+      background: linear-gradient(180deg, 
+        rgba(77, 168, 218, 0.3) 0%, 
+        rgba(167, 139, 250, 0.2) 50%, 
+        rgba(77, 168, 218, 0.3) 100%
+      ),
+      repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 20px,
+        rgba(77, 168, 218, 0.1) 20px,
+        rgba(77, 168, 218, 0.1) 21px
+      ),
+      repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 20px,
+        rgba(167, 139, 250, 0.08) 20px,
+        rgba(167, 139, 250, 0.08) 21px
+      );
+      border-right: 1px solid var(--border);
+    }
+    
+    .side-image.right {
+      right: 0;
+      background: linear-gradient(180deg, 
+        rgba(167, 139, 250, 0.3) 0%, 
+        rgba(77, 168, 218, 0.2) 50%, 
+        rgba(167, 139, 250, 0.3) 100%
+      ),
+      repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 25px,
+        rgba(167, 139, 250, 0.1) 25px,
+        rgba(167, 139, 250, 0.1) 26px
+      ),
+      repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 25px,
+        rgba(77, 168, 218, 0.08) 25px,
+        rgba(77, 168, 218, 0.08) 26px
+      );
+      border-left: 1px solid var(--border);
+    }
+    
+    /* Scientific icons overlay on side images */
+    .side-image::before {
+      content: '';
+      position: absolute;
+      top: 10%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      border: 2px solid currentColor;
+      opacity: 0.4;
+    }
+    
+    .side-image::after {
+      content: '⚛';
+      position: absolute;
+      top: 30%;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 40px;
+      opacity: 0.5;
+    }
+    
     .grid-pattern {
       position: absolute;
       inset: 0;
@@ -400,43 +486,66 @@
     
     .hero-actions { 
       display: flex; 
-      gap: 16px; 
+      gap: 20px; 
       justify-content: center;
       flex-wrap: wrap; 
       margin-bottom: 56px; 
+      padding: 32px 0;
+      background: rgba(10, 22, 40, 0.6);
+      backdrop-filter: blur(12px);
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+      box-shadow: 0 8px 40px rgba(0, 0, 0, 0.3);
     }
     
     .btn {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      padding: 16px 32px;
-      border-radius: 32px;
+      gap: 10px;
+      padding: 18px 36px;
+      border-radius: 16px;
       font-family: var(--font-body);
-      font-size: 14px;
-      font-weight: 600;
+      font-size: 15px;
+      font-weight: 700;
       text-decoration: none;
-      transition: all 0.3s ease;
+      transition: all 0.35s ease;
       cursor: pointer;
-      border: none;
+      border: 2px solid transparent;
       white-space: nowrap;
+      letter-spacing: 0.5px;
+      text-transform: none;
+      min-width: 160px;
+      justify-content: center;
     }
     
     .btn-primary {
       background: linear-gradient(135deg, #4da8da 0%, #a78bfa 100%);
-      color: white;
+      color: #ffffff;
       box-shadow: 
-        0 4px 24px rgba(77, 168, 218, 0.35),
-        0 0 40px rgba(167, 139, 250, 0.2);
-      font-weight: 700;
-      letter-spacing: 0.5px;
+        0 6px 30px rgba(77, 168, 218, 0.45),
+        0 0 50px rgba(167, 139, 250, 0.25),
+        inset 0 2px 0 rgba(255, 255, 255, 0.2);
+      font-weight: 800;
+      font-size: 16px;
+      letter-spacing: 0.8px;
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      animation: btnPulse 3s ease-in-out infinite;
+    }
+    
+    @keyframes btnPulse {
+      0%, 100% { transform: scale(1); box-shadow: 0 6px 30px rgba(77, 168, 218, 0.45), 0 0 50px rgba(167, 139, 250, 0.25); }
+      50% { transform: scale(1.03); box-shadow: 0 8px 40px rgba(77, 168, 218, 0.6), 0 0 70px rgba(167, 139, 250, 0.35); }
     }
     
     .btn-primary:hover { 
-      transform: translateY(-3px); 
+      transform: translateY(-4px) scale(1.05); 
       box-shadow: 
-        0 8px 36px rgba(77, 168, 218, 0.5),
-        0 0 60px rgba(167, 139, 250, 0.3);
+        0 12px 45px rgba(77, 168, 218, 0.6),
+        0 0 80px rgba(167, 139, 250, 0.4);
+      animation: none;
     }
     
     .btn-secondary {
@@ -454,38 +563,44 @@
     
     /* Login Button - Ghost Style */
     .btn-login {
-      background: transparent;
-      color: var(--muted);
-      border: 1px solid transparent;
-      font-weight: 500;
-      padding: 16px 24px;
+      background: rgba(255, 255, 255, 0.05);
+      color: #e8f0f8;
+      border: 2px solid rgba(232, 240, 248, 0.3);
+      font-weight: 600;
+      padding: 18px 36px;
+      backdrop-filter: blur(8px);
     }
     
     .btn-login:hover { 
-      color: var(--accent); 
-      border-color: var(--border);
-      transform: none;
+      background: rgba(77, 168, 218, 0.15);
+      color: #4da8da; 
+      border-color: #4da8da;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 30px rgba(77, 168, 218, 0.3);
     }
     
     /* Studio IDE Button - Premium Dark */
     .btn-studio {
       background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
       color: #ffffff;
-      border: 1px solid rgba(77, 168, 218, 0.3);
+      border: 2px solid rgba(77, 168, 218, 0.5);
       box-shadow: 
-        0 4px 20px rgba(15, 23, 42, 0.5),
-        inset 0 1px 0 rgba(255, 255, 255, 0.1);
-      font-weight: 600;
-      letter-spacing: 0.3px;
+        0 6px 25px rgba(15, 23, 42, 0.7),
+        inset 0 2px 0 rgba(255, 255, 255, 0.15),
+        0 0 30px rgba(77, 168, 218, 0.2);
+      font-weight: 700;
+      font-size: 15px;
+      letter-spacing: 0.5px;
     }
     
     .btn-studio:hover { 
-      transform: translateY(-2px);
-      border-color: rgba(77, 168, 218, 0.6);
+      transform: translateY(-4px);
+      border-color: rgba(77, 168, 218, 0.9);
+      background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
       box-shadow: 
-        0 8px 30px rgba(15, 23, 42, 0.7),
-        inset 0 1px 0 rgba(255, 255, 255, 0.15),
-        0 0 40px rgba(77, 168, 218, 0.2);
+        0 10px 40px rgba(15, 23, 42, 0.9),
+        inset 0 2px 0 rgba(255, 255, 255, 0.2),
+        0 0 50px rgba(77, 168, 218, 0.35);
     }
     .btn .material-icons { font-size: 18px; }
     
@@ -607,6 +722,10 @@
 </head>
 
 <body>
+
+  <!-- Scientific Side Images (Fixed - Header to Footer) -->
+  <div class="side-image left"></div>
+  <div class="side-image right"></div>
 
   <!-- Navigation -->
   <nav class="navbar">
