@@ -1,0 +1,70 @@
+{
+  "generated_at": "2026-08-19 21:40:17",
+  "video_file": "SCIMSPT_PHASE2_SHOWCASE.mp4",
+  "total_scenes": 6,
+  "duration_seconds": 60,
+  "resolution": "1920x1080",
+  "file_size_mb": 2.03,
+  "next_phase_recommendations": [
+    {
+      "phase": "Phase 3A",
+      "name": "Interactive Features",
+      "priority": "HIGH",
+      "effort": "2-3 days",
+      "description": "Working search, filterable databases, user bookmarks with localStorage persistence"
+    },
+    {
+      "phase": "Phase 3B",
+      "name": "Backend Integration",
+      "priority": "MEDIUM",
+      "effort": "5-7 days",
+      "description": "Cloudflare Worker API, real OAuth authentication, automated RSS parsing"
+    },
+    {
+      "phase": "Phase 3C",
+      "name": "Advanced Visualizations",
+      "priority": "MEDIUM",
+      "effort": "7-10 days",
+      "description": "3D molecular models (Three.js), interactive knowledge graphs, real-time dashboards"
+    },
+    {
+      "phase": "Phase 3D",
+      "name": "Mobile & PWA",
+      "priority": "HIGH",
+      "effort": "3-5 days",
+      "description": "Touch navigation, Progressive Web App support, offline reading mode"
+    }
+  ],
+  "scenes": [
+    {
+      "id": "01_intro",
+      "title": "Platform Evolution",
+      "duration": 10
+    },
+    {
+      "id": "02_neural",
+      "title": "Neural Identity System",
+      "duration": 10
+    },
+    {
+      "id": "03_molecular",
+      "title": "Molecular Visualizations",
+      "duration": 10
+    },
+    {
+      "id": "04_design",
+      "title": "Futuristic Design",
+      "duration": 10
+    },
+    {
+      "id": "05_nav",
+      "title": "Enhanced Navigation",
+      "duration": 10
+    },
+    {
+      "id": "06_cta",
+      "title": "Begin Your Journey",
+      "duration": 10
+    }
+  ]
+}

@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SciMSPT Phase 2 Showcase</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #030810;
+      color: #e8f4fc;
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+    
+    /* Animated background */
+    .bg-grid {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-image: 
+        radial-gradient(circle at 20% 30%, rgba(0, 229, 255, 0.08) 1px, transparent 1px),
+        radial-gradient(circle at 70% 60%, rgba(167, 139, 250, 0.06) 1px, transparent 1px);
+      background-size: 40px 40px;
+      animation: gridMove 20s linear infinite;
+      z-index: 0;
+    }
+    
+    @keyframes gridMove {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(40px); }
+    }
+    
+    .container {
+      position: relative;
+      z-index: 10;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+    
+    /* Header */
+    .header {
+      text-align: center;
+      padding: 80px 20px 60px;
+      position: relative;
+    }
+    
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 20px;
+      background: rgba(0, 229, 255, 0.1);
+      border: 1px solid rgba(0, 229, 255, 0.3);
+      border-radius: 50px;
+      font-size: 13px;
+      color: #00E5FF;
+      margin-bottom: 24px;
+      font-family: monospace;
+      letter-spacing: 1px;
+    }
+    
+    .pulse-dot {
+      width: 8px; height: 8px;
+      background: #00E5FF;
+      border-radius: 50%;
+      animation: pulse 2s ease-in-out infinite;
+    }
+    
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(1.5); }
+    }
+    
+    h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: clamp(36px, 6vw, 64px);
+      font-weight: 900;
+      margin-bottom: 16px;
+      background: linear-gradient(135deg, #00E5FF, #a78bfa, #f472b6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: shimmer 3s ease-in-out infinite;
+    }
+    
+    @keyframes shimmer {
+      0%, 100% { filter: brightness(1); }
+      50% { filter: brightness(1.3); }
+    }
+    
+    .subtitle {
+      font-size: 18px;
+      color: #94a3b8;
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+    
+    /* Timeline */
+    .timeline {
+      position: relative;
+      padding: 40px 0;
+    }
+    
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 2px;
+      height: 100%;
+      background: linear-gradient(to bottom, transparent, #00E5FF, #a78bfa, transparent);
+    }
+    
+    .scene-card {
+      display: flex;
+      align-items: center;
+      margin-bottom: 60px;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeInUp 0.6s ease forwards;
+    }
+    
+    .scene-card:nth-child(odd) { flex-direction: row-reverse; }
+    .scene-card:nth-child(1) { animation-delay: 0.2s; }
+    .scene-card:nth-child(2) { animation-delay: 0.4s; }
+    .scene-card:nth-child(3) { animation-delay: 0.6s; }
+    .scene-card:nth-child(4) { animation-delay: 0.8s; }
+    .scene-card:nth-child(5) { animation-delay: 1s; }
+    
+    @keyframes fadeInUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .scene-number {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 700;
+      font-size: 24px;
+      flex-shrink: 0;
+      margin: 0 40px;
+      position: relative;
+      z-index: 10;
+    }
+    
+    .scene-content {
+      flex: 1;
+      max-width: 450px;
+      background: rgba(10, 22, 40, 0.85);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(0, 229, 255, 0.15);
+      border-radius: 20px;
+      padding: 32px;
+      transition: all 0.3s ease;
+    }
+    
+    .scene-content:hover {
+      transform: translateY(-5px);
+      border-color: rgba(0, 229, 255, 0.4);
+      box-shadow: 0 20px 60px rgba(0, 229, 255, 0.15);
+    }
+    
+    .scene-icon {
+      font-size: 32px;
+      margin-bottom: 12px;
+    }
+    
+    .scene-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: #e8f4fc;
+    }
+    
+    .scene-desc {
+      font-size: 14px;
+      color: #94a3b8;
+      line-height: 1.7;
+    }
+    
+    .scene-tags {
+      display: flex;
+      gap: 8px;
+      margin-top: 16px;
+      flex-wrap: wrap;
+    }
+    
+    .tag {
+      padding: 4px 12px;
+      background: rgba(0, 229, 255, 0.1);
+      border-radius: 20px;
+      font-size: 11px;
+      color: #00E5FF;
+      font-family: monospace;
+    }
+    
+    /* Stats bar */
+    .stats-bar {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 24px;
+      margin: 80px 0;
+      padding: 48px;
+      background: rgba(10, 22, 40, 0.85);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(0, 229, 255, 0.15);
+      border-radius: 24px;
+    }
+    
+    .stat-item {
+      text-align: center;
+    }
+    
+    .stat-value {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 42px;
+      font-weight: 900;
+      color: #00E5FF;
+      margin-bottom: 8px;
+    }
+    
+    .stat-label {
+      font-size: 13px;
+      color: #94a3b8;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    
+    /* Next phase section */
+    .next-phase {
+      background: linear-gradient(135deg, rgba(0, 229, 255, 0.05), rgba(167, 139, 250, 0.05));
+      border: 1px solid rgba(167, 139, 250, 0.2);
+      border-radius: 24px;
+      padding: 48px;
+      margin: 60px 0;
+    }
+    
+    .next-phase h2 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 28px;
+      margin-bottom: 24px;
+      text-align: center;
+      color: #a78bfa;
+    }
+    
+    .phase-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+    
+    .phase-card {
+      background: rgba(10, 22, 40, 0.8);
+      border: 1px solid rgba(167, 139, 250, 0.15);
+      border-radius: 16px;
+      padding: 24px;
+      transition: all 0.3s ease;
+    }
+    
+    .phase-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(167, 139, 250, 0.4);
+    }
+    
+    .phase-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+    
+    .phase-name {
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 700;
+      font-size: 14px;
+    }
+    
+    .priority {
+      padding: 4px 10px;
+      border-radius: 12px;
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+    
+    .priority.HIGH { background: rgba(239, 68, 68, 0.2); color: #f87171; }
+    .priority.MEDIUM { background: rgba(245, 158, 11, 0.2); color: #fbbf24; }
+    
+    .phase-title {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: #e8f4fc;
+    }
+    
+    .phase-desc {
+      font-size: 13px;
+      color: #94a3b8;
+      line-height: 1.6;
+      margin-bottom: 12px;
+    }
+    
+    .phase-effort {
+      font-size: 11px;
+      color: #64748b;
+      font-family: monospace;
+    }
+    
+    /* CTA */
+    .cta-section {
+      text-align: center;
+      padding: 80px 20px;
+    }
+    
+    .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 18px 40px;
+      background: linear-gradient(135deg, #00E5FF, #a78bfa);
+      color: #030810;
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 700;
+      font-size: 16px;
+      border: none;
+      border-radius: 14px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 40px rgba(0, 229, 255, 0.3);
+    }
+    
+    .cta-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 0 60px rgba(0, 229, 255, 0.5);
+    }
+    
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 40px;
+      border-top: 1px solid rgba(0, 229, 255, 0.1);
+      color: #64748b;
+      font-size: 13px;
+    }
+    
+    @media (max-width: 768px) {
+      .timeline::before { left: 20px; }
+      .scene-card { flex-direction: column !important; align-items: flex-start; padding-left: 60px; }
+      .scene-number { margin: 0; position: absolute; left: -10px; width: 50px; height: 50px; font-size: 18px; }
+      .scene-content { max-width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-grid"></div>
+  
+  <div class="container">
+    <!-- Header -->
+    <header class="header">
+      <div class="badge">
+        <span class="pulse-dot"></span>
+        PHASE 2 COMPLETE — LIVE NOW
+      </div>
+      <h1>Molecular Intelligence Overhaul</h1>
+      <p class="subtitle">
+        Comprehensive transformation of SciMSPT with futuristic design enhancements, 
+        creative neural identity system, and molecular visualizations across all 8 pages.
+      </p>
+    </header>
+
+    <!-- Timeline of Enhancements -->
+    <section class="timeline">
+      
+      <!-- Scene 1: Neural Identity -->
+      <div class="scene-card">
+        <div class="scene-number" style="background: linear-gradient(135deg, #00E5FF, #a78bfa);">
+          01
+        </div>
+        <div class="scene-content">
+          <div class="scene-icon">🧠</div>
+          <h3 class="scene-title">Neural Identity System</h3>
+          <p class="scene-desc">
+            Revolutionary synthetic login with algorithmic personas. Each user receives 
+            a unique neural identity featuring dynamic names like "Dr. Aeva Chen-Neural" 
+            or "Prof. Kai Synapse", ATGC-based session IDs, and holographic avatar cards 
+            with pulsing cognitive resonance indicators.
+          </p>
+          <div class="scene-tags">
+            <span class="tag">generateNeuralIdentity()</span>
+            <span class="tag">ATGC Session ID</span>
+            <span class="tag">Holographic Card</span>
+            <span class="tag">Neural Score</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Scene 2: Molecular Sidebars -->
+      <div class="scene-card">
+        <div class="scene-number" style="background: linear-gradient(135deg, #f472b6, #a78bfa);">
+          02
+        </div>
+        <div class="scene-content">
+          <div class="scene-icon">🧬</div>
+          <h3 class="scene-title">Molecular Visualizations</h3>
+          <p class="scene-desc">
+            Enhanced DNA/RNA/Protein decorations on every page. Left sidebar features 
+            animated double helix with connecting rungs between nucleotide pairs (A-T, G-C). 
+            Right sidebar displays protein folding spirals that respond to scroll position. 
+            Hover to reveal nucleotide labels and orbiting electrons.
+          </p>
+          <div class="scene-tags">
+            <span class="tag">DNA Helix</span>
+            <span class="tag">Protein Folding</span>
+            <span class="tag">Nucleotides</span>
+            <span class="tag">Scroll Trail</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Scene 3: Futuristic Design -->
+      <div class="scene-card">
+        <div class="scene-number" style="background: linear-gradient(135deg, #10b981, #00E5FF);">
+          03
+        </div>
+        <div class="scene-content">
+          <div class="scene-icon">✨</div>
+          <h3 class="scene-title">Futuristic Design Polish</h3>
+          <p class="scene-desc">
+            Every visual element elevated with cutting-edge effects. Holographic edge glow 
+            on cards using animated gradient borders. Text shadows radiating cyan light. 
+            Magnetic buttons that subtly pull toward cursor position. Custom scrollbars with 
+            luminous thumbs. Ambient particle fields floating across pages.
+          </p>
+          <div class="scene-tags">
+            <span class="tag">Holographic Glow</span>
+            <span class="tag">Magnetic Buttons</span>
+            <span class="tag">Particle Field</span>
+            <span class="tag">Ripple Effects</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Scene 4: Navigation -->
+      <div class="scene-card">
+        <div class="scene-number" style="background: linear-gradient(135deg, #f59e0b, #f472b6);">
+          04
+        </div>
+        <div class="scene-content">
+          <div class="scene-icon">🧭</div>
+          <h3 class="scene-title">Enhanced Navigation</h3>
+          <p class="scene-desc">
+            Sophisticated page navigation system with dynamic current-page detection. 
+            Breadcrumb trails showing location hierarchy (Home > Section > Page). 
+            Return and Home buttons on every page for seamless navigation. Smooth 
+            slide-in animations enhance the user experience on each transition.
+          </p>
+          <div class="scene-tags">
+            <span class="tag">Breadcrumbs</span>
+            <span class="tag">Back/Home Buttons</span>
+            <span class="tag">Dynamic Pages</span>
+            <span class="tag">Slide Animations</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Scene 5: Alignment Fix -->
+      <div class="scene-card">
+        <div class="scene-number" style="background: linear-gradient(135deg, #ef4444, #f59e0b);">
+          05
+        </div>
+        <div class="scene-content">
+          <div class="scene-icon">📐</div>
+          <h3 class="scene-title">Content Alignment</h3>
+          <p class="scene-desc">
+            Resolved left-alignment issues across all pages. Content now properly centered 
+            with max-width constraints accounting for molecular sidebars (100px each). 
+            Consistent padding ensures readability while maintaining the immersive 
+            full-width decorative elements.
+          </p>
+          <div class="scene-tags">
+            <span class="tag">Centered Layout</span>
+            <span class="tag">Max-Width 1400px</span>
+            <span class="tag">Sidebar Offset</span>
+            <span class="tag">Responsive Grid</span>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- Stats Bar -->
+    <div class="stats-bar">
+      <div class="stat-item">
+        <div class="stat-value">8</div>
+        <div class="stat-label">Pages Updated</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value">40+</div>
+        <div class="stat-label">Enhancements Applied</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value">35KB</div>
+        <div class="stat-label">Avg Size Increase</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value">v3.1</div>
+        <div class="stat-label">Design System Version</div>
+      </div>
+    </div>
+
+    <!-- Next Phase Recommendations -->
+    <section class="next-phase">
+      <h2>🔮 Recommended Next Phases</h2>
+      
+      <div class="phase-cards">
+        
+        <div class="phase-card">
+          <div class="phase-header">
+            <span class="phase-name">Phase 3A</span>
+            <span class="priority HIGH">HIGH</span>
+          </div>
+          <div class="phase-title">Interactive Features</div>
+          <p class="phase-desc">
+            Implement working search functionality, filterable paper/startup databases, 
+            user bookmarks with localStorage persistence, and real-time filtering.
+          </p>
+          <div class="phase-effort">⏱️ Estimated: 2-3 days</div>
+        </div>
+
+        <div class="phase-card">
+          <div class="phase-header">
+            <span class="phase-name">Phase 3B</span>
+            <span class="priority MEDIUM">MEDIUM</span>
+          </div>
+          <div class="phase-title">Backend Integration</div>
+          <p class="phase-desc">
+            Deploy Cloudflare Worker for comments API, implement real OAuth authentication 
+            (GitHub/Google), set up automated RSS feed parsing pipeline.
+          </p>
+          <div class="phase-effort">⏱️ Estimated: 5-7 days</div>
+        </div>
+
+        <div class="phase-card">
+          <div class="phase-header">
+            <span class="phase-name">Phase 3C</span>
+            <span class="priority MEDIUM">MEDIUM</span>
+          </div>
+          <div class="phase-title">Advanced Visualizations</div>
+          <p class="phase-desc">
+            Add 3D molecular models using Three.js, interactive knowledge graph 
+            visualization, real-time data dashboards with live updates.
+          </p>
+          <div class="phase-effort">⏱️ Estimated: 7-10 days</div>
+        </div>
+
+        <div class="phase-card">
+          <div class="phase-header">
+            <span class="phase-name">Phase 3D</span>
+            <span class="priority HIGH">HIGH</span>
+          </div>
+          <div class="phase-title">Mobile & PWA</div>
+          <p class="phase-desc">
+            Optimize touch-friendly navigation, implement Progressive Web App support 
+            for offline reading mode, add mobile-specific gestures and layouts.
+          </p>
+          <div class="phase-effort">⏱️ Estimated: 3-5 days</div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section">
+      <a href="https://testdemoqwenai2025-creator.github.io/SciMSPT/" target="_blank" class="cta-btn">
+        🚀 View Live Platform
+      </a>
+    </section>
+
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>SciMSPT — Neural Research Intelligence Platform | Phase 2 Complete | 2026</p>
+    <p style="margin-top: 8px;">Generated: August 20, 2026 | Commit: b168c4a</p>
+  </footer>
+
+</body>
+</html>

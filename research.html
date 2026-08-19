@@ -823,7 +823,778 @@
       .footer-content { grid-template-columns: 1fr; gap: 32px; }
       .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
     }
-  </style>
+  
+    /* ============================================
+       PHASE 2: MOLECULAR INTELLIGENCE OVERHAUL
+       Enhanced Neural Design System v4.0
+       ============================================ */
+    
+    /* --- 4.1 HOLOGRAPHIC EDGE GLOW ON CARDS --- */
+    .phase2-holographic {
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .phase2-holographic::before {
+      content: '';
+      position: absolute;
+      top: -2px;
+      left: -2px;
+      right: -2px;
+      bottom: -2px;
+      background: conic-gradient(
+        from var(--phase2-hue, 0deg),
+        transparent 0%,
+        rgba(0, 229, 255, 0.4) 10%,
+        rgba(167, 139, 250, 0.4) 20%,
+        transparent 30%,
+        transparent 70%,
+        rgba(244, 114, 182, 0.4) 80%,
+        rgba(0, 229, 255, 0.4) 90%,
+        transparent 100%
+      );
+      border-radius: inherit;
+      animation: phase2-holographicRotate 6s linear infinite;
+      z-index: -1;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+    
+    .phase2-holographic:hover::before {
+      opacity: 1;
+    }
+    
+    @keyframes phase2-holographicRotate {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    
+    /* Apply holographic effect to existing cards */
+    .feature-card.phase2-enhanced,
+    .stat-card.phase2-enhanced,
+    .pipeline-step.phase2-enhanced {
+      position: relative;
+    }
+    
+    .feature-card.phase2-enhanced::after,
+    .stat-card.phase2-enhanced::after,
+    .pipeline-step.phase2-enhanced::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      padding: 1px;
+      background: linear-gradient(
+        135deg,
+        rgba(0, 229, 255, 0.5),
+        transparent 40%,
+        transparent 60%,
+        rgba(167, 139, 250, 0.5)
+      );
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      pointer-events: none;
+    }
+    
+    .feature-card.phase2-enhanced:hover::after,
+    .stat-card.phase2-enhanced:hover::after,
+    .pipeline-step.phase2-enhanced:hover::after {
+      opacity: 1;
+    }
+    
+    /* --- 4.2 TEXT SHADOW GLOW ON HEADINGS --- */
+    .phase2-glow-text {
+      text-shadow: 
+        0 0 30px rgba(0, 229, 255, 0.3),
+        0 0 60px rgba(0, 229, 255, 0.15),
+        0 0 90px rgba(167, 139, 250, 0.1);
+    }
+    
+    .hero-title.phase2-enhanced,
+    .section-title.phase2-enhanced,
+    .cta-title.phase2-enhanced {
+      text-shadow: 
+        0 0 30px rgba(0, 229, 255, 0.25),
+        0 0 60px rgba(167, 139, 250, 0.15);
+    }
+    
+    /* --- 4.3 MAGNETIC BUTTON HOVER EFFECT --- */
+    .phase2-magnetic {
+      transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+    
+    .btn-primary.phase2-enhanced,
+    .btn-secondary.phase2-enhanced,
+    .workspace-btn.phase2-enhanced,
+    .page-nav-btn.phase2-enhanced {
+      position: relative;
+      overflow: visible;
+    }
+    
+    /* --- 4.4 CUSTOM SCROLLBAR WITH GLOW --- */
+    .phase2-custom-scrollbar::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    
+    .phase2-custom-scrollbar::-webkit-scrollbar-track {
+      background: var(--bg-secondary, #0d1f35);
+      border-radius: 4px;
+    }
+    
+    .phase2-custom-scrollbar::-webkit-scrollbar-thumb {
+      background: linear-gradient(
+        180deg,
+        var(--accent-primary, #00E5FF),
+        var(--accent-tertiary, #a78bfa)
+      );
+      border-radius: 4px;
+      box-shadow: 
+        0 0 10px rgba(0, 229, 255, 0.4),
+        inset 0 0 5px rgba(255, 255, 255, 0.2);
+    }
+    
+    .phase2-custom-scrollbar::-webkit-scrollbar-thumb:hover {
+      background: linear-gradient(
+        180deg,
+        var(--accent-tertiary, #a78bfa),
+        var(--accent-pink, #f472b6)
+      );
+      box-shadow: 
+        0 0 15px rgba(167, 139, 250, 0.5),
+        inset 0 0 5px rgba(255, 255, 255, 0.3);
+    }
+    
+    /* Apply custom scrollbar globally */
+    html.phase2-enhanced {
+      scrollbar-width: thin;
+      scrollbar-color: var(--accent-primary, #00E5FF) var(--bg-secondary, #0d1f35);
+    }
+    
+    html.phase2-enhanced * {
+      scrollbar-width: thin;
+      scrollbar-color: rgba(0, 229, 255, 0.3) transparent;
+    }
+    
+    /* --- 4.5 SKELETON LOADING ANIMATION --- */
+    .phase2-skeleton {
+      background: linear-gradient(
+        90deg,
+        var(--bg-tertiary, #122a45) 25%,
+        var(--bg-secondary, #0d1f35) 50%,
+        var(--bg-tertiary, #122a45) 75%
+      );
+      background-size: 200% 100%;
+      animation: phase2-skeletonShimmer 1.5s infinite;
+      border-radius: 8px;
+    }
+    
+    @keyframes phase2-skeletonShimmer {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+    
+    .phase2-skeleton-text {
+      height: 16px;
+      margin-bottom: 12px;
+    }
+    
+    .phase2-skeleton-text:last-child {
+      width: 70%;
+    }
+    
+    .phase2-skeleton-avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+    }
+    
+    .phase2-skeleton-card {
+      height: 200px;
+      border-radius: 16px;
+    }
+    
+    /* --- 4.6 MESH GRADIENT BACKGROUNDS FOR HERO --- */
+    .phase2-mesh-gradient {
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .phase2-mesh-gradient::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: 
+        radial-gradient(circle at 20% 30%, rgba(0, 229, 255, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(167, 139, 250, 0.06) 0%, transparent 50%),
+        radial-gradient(circle at 40% 80%, rgba(244, 114, 182, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 90% 70%, rgba(16, 185, 129, 0.04) 0%, transparent 50%);
+      animation: phase2-meshFloat 20s ease-in-out infinite;
+      pointer-events: none;
+    }
+    
+    @keyframes phase2-meshFloat {
+      0%, 100% { transform: translate(0, 0) rotate(0deg); }
+      25% { transform: translate(2%, 1%) rotate(1deg); }
+      50% { transform: translate(-1%, 2%) rotate(-1deg); }
+      75% { transform: translate(1%, -1%) rotate(0.5deg); }
+    }
+    
+    .hero-section.phase2-enhanced {
+      position: relative;
+    }
+    
+    .hero-section.phase2-enhanced::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: 
+        radial-gradient(ellipse at 30% 20%, rgba(0, 229, 255, 0.07) 0%, transparent 50%),
+        radial-gradient(ellipse at 70% 80%, rgba(167, 139, 250, 0.05) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: 0;
+    }
+    
+    /* --- 4.7 RIPPLE EFFECT ON BUTTON CLICK --- */
+    .phase2-ripple {
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .phase2-ripple-effect {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.35);
+      transform: scale(0);
+      animation: phase2-rippleAnim 0.6s linear;
+      pointer-events: none;
+    }
+    
+    @keyframes phase2-rippleAnim {
+      to {
+        transform: scale(4);
+        opacity: 0;
+      }
+    }
+    
+    /* --- 4.8 PARTICLE FIELD OVERLAY --- */
+    .phase2-particle-field {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+      overflow: hidden;
+    }
+    
+    .phase2-particle {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: var(--accent-primary, #00E5FF);
+      border-radius: 50%;
+      opacity: 0;
+      animation: phase2-particleFloat 8s infinite;
+    }
+    
+    @keyframes phase2-particleFloat {
+      0% {
+        opacity: 0;
+        transform: translateY(100vh) scale(0);
+      }
+      10% {
+        opacity: 0.6;
+      }
+      90% {
+        opacity: 0.6;
+      }
+      100% {
+        opacity: 0;
+        transform: translateY(-10vh) scale(1);
+      }
+    }
+    
+    /* --- 4.9 NEURAL IDENTITY CARD STYLES --- */
+    .phase2-neural-card {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 12px 20px;
+      background: var(--bg-glass, rgba(10, 22, 40, 0.85));
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--border-subtle, rgba(0, 229, 255, 0.15));
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+      position: relative;
+      overflow: visible;
+    }
+    
+    .phase2-neural-card::before {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      border-radius: 54px;
+      background: conic-gradient(
+        from var(--neural-hue, 0deg),
+        var(--accent-primary, #00E5FF),
+        var(--accent-tertiary, #a78bfa),
+        var(--accent-pink, #f472b6),
+        var(--accent-primary, #00E5FF)
+      );
+      z-index: -1;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      animation: phase2-neuralRingRotate 4s linear infinite paused;
+    }
+    
+    .phase2-neural-card:hover::before {
+      opacity: 1;
+      animation-play-state: running;
+    }
+    
+    @keyframes phase2-neuralRingRotate {
+      0% { --neural-hue: 0deg; }
+      100% { --neural-hue: 360deg; }
+    }
+    
+    .phase2-avatar-ring {
+      position: relative;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      padding: 2px;
+      background: linear-gradient(
+        135deg,
+        var(--avatar-color-1, #00E5FF),
+        var(--avatar-color-2, #f472b6)
+      );
+    }
+    
+    .phase2-avatar-ring::after {
+      content: '';
+      position: absolute;
+      inset: -3px;
+      border-radius: 50%;
+      border: 2px solid transparent;
+      border-top-color: var(--status-color, #10b981);
+      animation: phase2-avatarPulse 2s ease-in-out infinite;
+    }
+    
+    @keyframes phase2-avatarPulse {
+      0%, 100% { 
+        transform: rotate(0deg); 
+        opacity: 1;
+      }
+      50% { 
+        transform: rotate(180deg); 
+        opacity: 0.5;
+      }
+    }
+    
+    .phase2-neural-score {
+      font-family: var(--font-tech, 'Orbitron', monospace);
+      font-size: 11px;
+      color: var(--accent-green, #10b981);
+      background: rgba(16, 185, 129, 0.1);
+      padding: 2px 8px;
+      border-radius: 10px;
+      letter-spacing: 0.5px;
+    }
+    
+    .phase2-session-id {
+      font-family: var(--font-mono, 'JetBrains Mono', monospace);
+      font-size: 10px;
+      color: var(--text-muted, #64748b);
+      letter-spacing: 1px;
+      opacity: 0.7;
+    }
+    
+    /* --- 4.10 ENHANCED MOLECULAR SIDEBARS --- */
+    .phase2-dna-rung {
+      position: absolute;
+      height: 1px;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        var(--rung-color, rgba(0, 229, 255, 0.4)),
+        transparent
+      );
+      transform-origin: left center;
+      animation: phase2-rungPulse 3s ease-in-out infinite;
+    }
+    
+    @keyframes phase2-rungPulse {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 0.8; }
+    }
+    
+    .phase2-nucleotide-label {
+      position: absolute;
+      font-family: var(--font-mono, 'JetBrains Mono', monospace);
+      font-size: 9px;
+      font-weight: 600;
+      padding: 2px 6px;
+      border-radius: 4px;
+      opacity: 0;
+      transform: translateY(5px);
+      transition: all 0.3s ease;
+      pointer-events: none;
+      white-space: nowrap;
+      z-index: 10;
+    }
+    
+    .nucleotide:hover + .phase2-nucleotide-label,
+    .molecular-sidebar:hover .phase2-nucleotide-label.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    .phase2-protein-fold {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      animation: phase2-proteinFold 8s ease-in-out infinite;
+    }
+    
+    @keyframes phase2-proteinFold {
+      0%, 100% { 
+        transform: scaleY(1) rotate(0deg); 
+      }
+      25% { 
+        transform: scaleY(0.7) rotate(5deg); 
+      }
+      50% { 
+        transform: scaleY(1.2) rotate(-3deg); 
+      }
+      75% { 
+        transform: scaleY(0.85) rotate(2deg); 
+      }
+    }
+    
+    .phase2-orbiting-electron {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: var(--accent-primary, #00E5FF);
+      border-radius: 50%;
+      box-shadow: 0 0 8px var(--accent-primary, #00E5FF);
+      animation: phase2-orbitElectron 3s linear infinite;
+    }
+    
+    @keyframes phase2-orbitElectron {
+      0% { transform: rotate(0deg) translateX(12px) rotate(0deg); }
+      100% { transform: rotate(360deg) translateX(12px) rotate(-360deg); }
+    }
+    
+    .phase2-molecular-trail {
+      position: fixed;
+      width: 4px;
+      height: 4px;
+      background: var(--accent-primary, #00E5FF);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      box-shadow: 0 0 10px var(--accent-primary, #00E5FF);
+    }
+    
+    /* --- 4.11 ENHANCED PAGE NAV BAR --- */
+    .phase2-page-nav-bar {
+      position: fixed;
+      top: calc(var(--nav-height, 80px) + 16px);
+      left: 50%;
+      transform: translateX(-50%) translateY(-20px);
+      z-index: 90;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 24px;
+      background: var(--bg-glass, rgba(10, 22, 40, 0.92));
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--border-subtle, rgba(0, 229, 255, 0.15));
+      border-radius: 50px;
+      opacity: 0;
+      animation: phase2-navSlideIn 0.6s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+      animation-delay: 0.3s;
+    }
+    
+    @keyframes phase2-navSlideIn {
+      0% {
+        opacity: 0;
+        transform: translateX(-50%) translateY(-20px) scale(0.95);
+      }
+      100% {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0) scale(1);
+      }
+    }
+    
+    .phase2-breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      color: var(--text-muted, #64748b);
+      font-family: var(--font-mono, 'JetBrains Mono', monospace);
+    }
+    
+    .phase2-breadcrumb-sep {
+      color: var(--border-subtle, rgba(0, 229, 255, 0.3));
+    }
+    
+    .phase2-breadcrumb-current {
+      color: var(--accent-primary, #00E5FF);
+      font-weight: 600;
+    }
+    
+    .phase2-page-indicator {
+      font-size: 11px;
+      color: var(--text-muted, #64748b);
+      font-family: var(--font-mono, 'JetBrains Mono', monospace);
+      padding: 0 10px;
+      border-left: 1px solid var(--border-subtle, rgba(0, 229, 255, 0.15));
+    }
+    
+    /* --- 4.12 CONTENT WRAPPER ALIGNMENT --- */
+    .phase2-content-wrapper {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 40px;
+      position: relative;
+      z-index: 10;
+    }
+    
+    .main-content.phase2-aligned {
+      max-width: 1600px;
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: calc(var(--sidebar-width, 100px) + 40px);
+      padding-right: calc(var(--sidebar-width, 100px) + 40px);
+    }
+    
+    /* --- 4.13 RESPONSIVE ENHANCEMENTS FOR PHASE 2 --- */
+    @media (max-width: 1024px) {
+      .phase2-content-wrapper {
+        padding: 0 24px;
+      }
+      
+      .main-content.phase2-aligned {
+        padding-left: calc(var(--sidebar-width, 60px) + 24px);
+        padding-right: calc(var(--sidebar-width, 60px) + 24px);
+      }
+      
+      .phase2-page-nav-bar {
+        padding: 8px 16px;
+        gap: 6px;
+      }
+      
+      .phase2-breadcrumb {
+        font-size: 11px;
+      }
+      
+      .phase2-neural-score {
+        display: none;
+      }
+      
+      .phase2-session-id {
+        display: none;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .phase2-particle-field {
+        display: none;
+      }
+      
+      .phase2-holographic::before {
+        display: none;
+      }
+      
+      .phase2-neural-card::before {
+        display: none;
+      }
+      
+      .phase2-page-nav-bar {
+        display: none !important;
+      }
+    }
+
+    /* Phase 3 Video Integration Styles */
+    .startup-video-wrapper, .paper-video-section {
+      margin-top: 20px;
+      border-top: 1px solid var(--border-subtle);
+      padding-top: 16px;
+    }
+    
+    .startup-video-label, .paper-video-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+    
+    .startup-video-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      background: rgba(0, 229, 255, 0.08);
+      border: 1px solid rgba(0, 229, 255, 0.2);
+      border-radius: 20px;
+      font-size: 13px;
+      color: var(--accent-primary);
+      font-weight: 600;
+    }
+    
+    .paper-video-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--accent-primary);
+    }
+    
+    .paper-video-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 12px;
+      background: rgba(167, 139, 250, 0.15);
+      border: 1px solid rgba(167, 139, 250, 0.25);
+      border-radius: 16px;
+      font-size: 12px;
+      color: var(--accent-tertiary);
+      font-weight: 500;
+    }
+    
+    .video-container {
+      position: relative;
+      background: #000;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    }
+    
+    .video-container video {
+      width: 100%;
+      height: auto;
+      display: block;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+    }
+    
+    .video-info-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 14px;
+      background: var(--bg-secondary);
+      border-top: 1px solid var(--border-subtle);
+    }
+    
+    .video-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+    
+    .video-title .material-icons-round {
+      font-size: 18px;
+      color: var(--accent-primary);
+    }
+    
+    .video-meta {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    
+    .video-meta-item {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+    
+    .video-meta-item .material-icons-round {
+      font-size: 14px;
+    }
+
+    /* AI Review Embed Section */
+    .ai-review-embed {
+      margin-top: 60px;
+      background: var(--bg-glass);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--border-subtle);
+      border-radius: 24px;
+      overflow: hidden;
+    }
+    
+    .ai-review-embed-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 24px 28px;
+      background: linear-gradient(135deg, rgba(0, 229, 255, 0.08), rgba(167, 139, 250, 0.08));
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    
+    .ai-review-embed-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-family: var(--font-heading);
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--text-primary);
+    }
+    
+    .ai-review-embed-title .material-icons-round {
+      font-size: 28px;
+      color: var(--accent-primary);
+    }
+    
+    .ai-review-embed-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 16px;
+      background: linear-gradient(135deg, var(--accent-primary), var(--accent-tertiary));
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 700;
+      color: #030810;
+    }
+    
+    .ai-review-embed-body {
+      padding: 24px;
+    }
+    
+    .ai-review-embed iframe {
+      width: 100%;
+      min-height: 1200px;
+      border: none;
+      border-radius: 12px;
+    }
+
+</style>
 </head>
 <body>
   <!-- Left Molecular Sidebar -->
@@ -992,6 +1763,29 @@
           <a href="#" class="btn-sm primary">Analyze Paper</a>
           <a href="#" class="btn-sm">View PDF</a>
         </div>
+        <!-- Paper Explainer Video -->
+        <div class="paper-video-section">
+          <div class="paper-video-header">
+            <div class="paper-video-title">
+              <span class="material-icons-round">school</span>
+              Paper Explainer Video
+            </div>
+            <span class="paper-video-badge">
+              <span class="material-icons-round" style="font-size: 14px;">insights</span>
+              1-Minute Analysis
+            </span>
+          </div>
+          <div class="video-container" style="max-width: 100%;">
+            <video 
+              id="paper-video-vqe_drug_discovery"
+              preload="metadata"
+              controls
+              poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1280' height='720'%3E%3Crect fill='%230a1628' width='1280' height='720'/%3E%3Ctext x='50%25' y='50%25' fill='%2300E5FF' font-family='sans-serif' font-size='20' text-anchor='middle' dominant-baseline='middle'%3EVQE Drug Discovery%3C/text%3E%3C/svg%3E"
+            >
+              <source src="video-clips/phase3/research/vqe_drug_discovery_explainer.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
       </article>
 
       <!-- Paper Card 2 -->
@@ -1033,6 +1827,29 @@
         <div class="paper-actions">
           <a href="#" class="btn-sm primary">Analyze Paper</a>
           <a href="#" class="btn-sm">View PDF</a>
+        </div>
+        <!-- Paper Explainer Video -->
+        <div class="paper-video-section">
+          <div class="paper-video-header">
+            <div class="paper-video-title">
+              <span class="material-icons-round">school</span>
+              Paper Explainer Video
+            </div>
+            <span class="paper-video-badge">
+              <span class="material-icons-round" style="font-size: 14px;">insights</span>
+              1-Minute Analysis
+            </span>
+          </div>
+          <div class="video-container" style="max-width: 100%;">
+            <video 
+              id="paper-video-crispr_rna_design"
+              preload="metadata"
+              controls
+              poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1280' height='720'%3E%3Crect fill='%230a1628' width='1280' height='720'/%3E%3Ctext x='50%25' y='50%25' fill='%2300E5FF' font-family='sans-serif' font-size='20' text-anchor='middle' dominant-baseline='middle'%3ECRISPR RNA Design%3C/text%3E%3C/svg%3E"
+            >
+              <source src="video-clips/phase3/research/crispr_rna_design_explainer.mp4" type="video/mp4">
+            </video>
+          </div>
         </div>
       </article>
 
@@ -1076,6 +1893,29 @@
           <a href="#" class="btn-sm primary">Analyze Paper</a>
           <a href="#" class="btn-sm">View PDF</a>
         </div>
+        <!-- Paper Explainer Video -->
+        <div class="paper-video-section">
+          <div class="paper-video-header">
+            <div class="paper-video-title">
+              <span class="material-icons-round">school</span>
+              Paper Explainer Video
+            </div>
+            <span class="paper-video-badge">
+              <span class="material-icons-round" style="font-size: 14px;">insights</span>
+              1-Minute Analysis
+            </span>
+          </div>
+          <div class="video-container" style="max-width: 100%;">
+            <video 
+              id="paper-video-perovskite_solar"
+              preload="metadata"
+              controls
+              poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1280' height='720'%3E%3Crect fill='%230a1628' width='1280' height='720'/%3E%3Ctext x='50%25' y='50%25' fill='%2300E5FF' font-family='sans-serif' font-size='20' text-anchor='middle' dominant-baseline='middle'%3EPerovskite Solar%3C/text%3E%3C/svg%3E"
+            >
+              <source src="video-clips/phase3/research/perovskite_solar_explainer.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
       </article>
 
       <!-- Paper Card 4 -->
@@ -1118,7 +1958,51 @@
           <a href="#" class="btn-sm primary">Analyze Paper</a>
           <a href="#" class="btn-sm">View PDF</a>
         </div>
+        <!-- Paper Explainer Video -->
+        <div class="paper-video-section">
+          <div class="paper-video-header">
+            <div class="paper-video-title">
+              <span class="material-icons-round">school</span>
+              Paper Explainer Video
+            </div>
+            <span class="paper-video-badge">
+              <span class="material-icons-round" style="font-size: 14px;">insights</span>
+              1-Minute Analysis
+            </span>
+          </div>
+          <div class="video-container" style="max-width: 100%;">
+            <video 
+              id="paper-video-neuromorphic_computing"
+              preload="metadata"
+              controls
+              poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1280' height='720'%3E%3Crect fill='%230a1628' width='1280' height='720'/%3E%3Ctext x='50%25' y='50%25' fill='%2300E5FF' font-family='sans-serif' font-size='20' text-anchor='middle' dominant-baseline='middle'%3ENeuromorphic Computing%3C/text%3E%3C/svg%3E"
+            >
+              <source src="video-clips/phase3/research/neuromorphic_computing_explainer.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
       </article>
+    </section>
+
+    <!-- AI Peer Review Panel -->
+    <section class="ai-review-embed">
+      <div class="ai-review-embed-header">
+        <div class="ai-review-embed-title">
+          <span class="material-icons-round">psychology</span>
+          Tri-Perspective Neural Analysis
+        </div>
+        <span class="ai-review-embed-badge">
+          <span class="material-icons-round" style="font-size: 14px;">auto_awesome</span>
+          AI-Powered Peer Review
+        </span>
+      </div>
+      <div class="ai-review-embed-body">
+        <iframe 
+          src="video-clips/output/AI_PEER_REVIEW_PANEL_V2.html"
+          title="AI Peer Review Panel"
+          loading="lazy"
+        ></iframe>
+      </div>
     </section>
   </main>
 
@@ -1311,6 +2195,532 @@
       initProteinChains();
       initNeuralBackground();
     });
+  
+
+    // Initialize Phase 2 after DOM is ready
+    if (typeof initPhase2Enhancements === 'function') {
+      initPhase2Enhancements();
+    }
+</script>
+
+  <script>
+    
+    // ============================================
+    // PHASE 2: NEURAL IDENTITY SYSTEM
+    // Dynamic Persona Generation & Holographic UI
+    // ============================================
+    
+    // Neural Identity Data Store
+    const phase2NeuralIdentities = [
+      {
+        name: 'Dr. Aeva Chen-Neural',
+        initials: 'AC',
+        role: 'Computational Theorist',
+        specialization: 'Neural Networks & Quantum Computing',
+        neuralScore: 97.3,
+        archetype: 'theorist',
+        cognitiveResonance: 0.94,
+        avatarColors: ['#00E5FF', '#a78bfa'],
+        statusColor: '#10b981'
+      },
+      {
+        name: 'Prof. Kai Synapse',
+        initials: 'KS',
+        role: 'Quantum Architect',
+        specialization: 'Quantum Algorithms & Cryptography',
+        neuralScore: 95.8,
+        archetype: 'architect',
+        cognitiveResonance: 0.91,
+        avatarColors: ['#f472b6', '#00E5FF'],
+        statusColor: '#f59e0b'
+      },
+      {
+        name: 'Researcher Nova Vertex',
+        initials: 'NV',
+        role: 'Bioinformatics Lead',
+        specialization: 'Genomics & Protein Folding',
+        neuralScore: 94.2,
+        archetype: 'analyst',
+        cognitiveResonance: 0.89,
+        avatarColors: ['#10b981', '#00E5FF'],
+        statusColor: '#10b981'
+      },
+      {
+        name: 'Commander Zara Mesh-Network',
+        initials: 'ZM',
+        role: 'Systems Integrator',
+        specialization: 'Distributed Systems & AI Infrastructure',
+        neuralScore: 96.5,
+        archetype: 'integrator',
+        cognitiveResonance: 0.93,
+        avatarColors: ['#f59e0b', '#f472b6'],
+        statusColor: '#ef4444'
+      },
+      {
+        name: 'Dr. Elena Vasquez',
+        initials: 'EV',
+        role: 'Neural Architect',
+        specialization: 'Computational Biology & ML',
+        neuralScore: 94.7,
+        archetype: 'architect',
+        cognitiveResonance: 0.88,
+        avatarColors: ['#00E5FF', '#f472b6'],
+        statusColor: '#10b981'
+      }
+    ];
+    
+    // Research Archetypes with Color Mappings
+    const phase2ArchetypeColors = {
+      theorist: { primary: '#00E5FF', secondary: '#4da8da' },
+      architect: { primary: '#a78bfa', secondary: '#f472b6' },
+      analyst: { primary: '#10b981', secondary: '#34d399' },
+      integrator: { primary: '#f59e0b', secondary: '#fbbf24' },
+      explorer: { primary: '#ec4899', secondary: '#f472b6' }
+    };
+    
+    // Generate ATGC Nucleotide Session ID
+    function phase2GenerateSessionId(length = 12) {
+      const nucleotides = 'ATGC';
+      let sessionId = '';
+      for (let i = 0; i < length; i++) {
+        sessionId += nucleotides[Math.floor(Math.random() * 4)];
+        if ((i + 1) % 4 === 0 && i < length - 1) sessionId += '-';
+      }
+      return sessionId;
+    }
+    
+    // Generate Unique Neural Identity
+    function generateNeuralIdentity() {
+      const baseIdentity = phase2NeuralIdentities[Math.floor(Math.random() * phase2NeuralIdentities.length)];
+      const variation = Math.floor(Math.random() * 100);
+      
+      return {
+        ...baseIdentity,
+        neuralScore: Math.min(99.9, baseIdentity.neuralScore + (variation * 0.01)),
+        sessionId: phase2GenerateSessionId(),
+        connectionTimestamp: new Date().toISOString(),
+        nodeId: `NODE-${Math.random().toString(36).substr(2, 8).toUpperCase()}`
+      };
+    }
+    
+    // Initialize and Display Neural Identity
+    function phase2InitNeuralIdentity() {
+      const identity = generateNeuralIdentity();
+      
+      // Update user profile displays
+      document.querySelectorAll('.user-profile').forEach(profile => {
+        profile.classList.add('phase2-neural-card');
+        
+        // Add neural score if not present
+        if (!profile.querySelector('.phase2-neural-score')) {
+          const scoreEl = document.createElement('span');
+          scoreEl.className = 'phase2-neural-score';
+          scoreEl.textContent = `${identity.neuralScore.toFixed(1)}%`;
+          scoreEl.title = 'Neural Sync Score';
+          profile.appendChild(scoreEl);
+        }
+        
+        // Update session ID display
+        const userInfo = profile.querySelector('.user-info');
+        if (userInfo && !userInfo.querySelector('.phase2-session-id')) {
+          const sessionEl = document.createElement('div');
+          sessionEl.className = 'phase2-session-id';
+          sessionEl.textContent = identity.sessionId;
+          sessionEl.title = 'Session Identifier';
+          userInfo.appendChild(sessionEl);
+        }
+        
+        // Style avatar ring
+        const avatar = profile.querySelector('.user-avatar');
+        if (avatar) {
+          avatar.classList.add('phase2-avatar-ring');
+          avatar.style.setProperty('--avatar-color-1', identity.avatarColors[0]);
+          avatar.style.setProperty('--avatar-color-2', identity.avatarColors[1]);
+          avatar.style.setProperty('--status-color', identity.statusColor);
+        }
+      });
+      
+      // Apply archetype-based color theming
+      const colors = phase2ArchetypeColors[identity.archetype] || phase2ArchetypeColors.theorist;
+      document.documentElement.style.setProperty('--neural-accent', colors.primary);
+      document.documentElement.style.setProperty('--neural-accent-secondary', colors.secondary);
+      
+      // Store identity for other components
+      window.currentNeuralIdentity = identity;
+      
+      console.log('[Phase 2] Neural Identity Generated:', identity.name, '| Score:', identity.neuralScore + '%');
+      
+      return identity;
+    }
+    
+    // Animate Neural Score Counter
+    function phase2AnimateNeuralScore(targetScore, duration = 2000) {
+      const scoreElements = document.querySelectorAll('.phase2-neural-score');
+      
+      scoreElements.forEach(el => {
+        const startScore = 0;
+        const startTime = performance.now();
+        
+        function updateScore(currentTime) {
+          const elapsed = currentTime - startTime;
+          const progress = Math.min(elapsed / duration, 1);
+          
+          // Easing function
+          const eased = 1 - Math.pow(1 - progress, 3);
+          const currentScore = startScore + (targetScore - startScore) * eased;
+          
+          el.textContent = `${currentScore.toFixed(1)}%`;
+          
+          if (progress < 1) {
+            requestAnimationFrame(updateScore);
+          }
+        }
+        
+        requestAnimationFrame(updateScore);
+      });
+    }
+    
+    // ============================================
+    // PHASE 2: ENHANCED MOLECULAR SIDEBARS
+    // Double Helix Rungs, Protein Folding, Labels
+    // ============================================
+    
+    function phase2EnhanceMolecularSidebars() {
+      // Enhance DNA Helix with connecting rungs
+      document.querySelectorAll('.dna-helix').forEach(helix => {
+        const strand = helix.querySelector('.dna-strand');
+        if (!strand) return;
+        
+        const nucleotides = strand.querySelectorAll('.nucleotide');
+        const helixRect = helix.getBoundingClientRect();
+        
+        // Create connecting rungs between paired nucleotides
+        for (let i = 0; i < nucleotides.length - 1; i += 2) {
+          if (i + 1 < nucleotides.length) {
+            const n1 = nucleotides[i];
+            const n2 = nucleotides[i + 1];
+            
+            const rung = document.createElement('div');
+            rung.className = 'phase2-dna-rung';
+            
+            const rect1 = n1.getBoundingClientRect();
+            const rect2 = n2.getBoundingClientRect();
+            const helixTop = helix.getBoundingClientRect().top;
+            
+            const y1 = rect1.top - helixTop + rect1.height / 2;
+            const y2 = rect2.top - helixTop + rect2.height / 2;
+            const midY = (y1 + y2) / 2;
+            
+            rung.style.cssText = `
+              top: ${midY}px;
+              left: 10%;
+              width: 80%;
+              --rung-color: ${getComputedStyle(n1).backgroundColor};
+              animation-delay: ${(i * 0.1)}s;
+            `;
+            
+            helix.appendChild(rung);
+          }
+        }
+        
+        // Add nucleotide labels on hover
+        const nucleotideClasses = ['adenine', 'thymine', 'guanine', 'cytosine'];
+        const nucleotideLabels = ['A', 'T', 'G', 'C'];
+        
+        nucleotides.forEach((nuc, idx) => {
+          const label = document.createElement('span');
+          label.className = 'phase2-nucleotide-label';
+          label.textContent = nucleotideLabels[idx % 4];
+          
+          const classIdx = nucleotideClasses.findIndex(c => nuc.classList.contains(c));
+          if (classIdx >= 0) {
+            const colors = ['#00E5FF', '#f472b6', '#a78bfa', '#10b981'];
+            label.style.background = colors[classIdx];
+            label.style.color = '#030810';
+          }
+          
+          nuc.parentNode.insertBefore(label, nuc.nextSibling);
+        });
+      });
+      
+      // Enhance protein chains with folding animation
+      document.querySelectorAll('.protein-chain').forEach(chain => {
+        chain.classList.add('phase2-protein-fold');
+        
+        // Add orbiting electrons to floating molecules
+        const parentSidebar = chain.closest('.molecular-sidebar');
+        if (parentSidebar) {
+          parentSidebar.querySelectorAll('.floating-molecule').forEach(mol => {
+            for (let i = 0; i < 2; i++) {
+              const electron = document.createElement('div');
+              electron.className = 'phase2-orbiting-electron';
+              electron.style.cssText = `
+                top: 50%;
+                left: 50%;
+                animation-delay: ${i * 1.5}s;
+              `;
+              mol.appendChild(electron);
+              mol.style.position = 'relative';
+            }
+          });
+        }
+      });
+      
+      console.log('[Phase 2] Molecular Sidebars Enhanced');
+    }
+    
+    // ============================================
+    // PHASE 2: MOLECULAR SCROLL TRAIL
+    // ============================================
+    
+    function phase2InitMolecularTrail() {
+      let trailElements = [];
+      const maxTrailLength = 15;
+      
+      // Create trail elements
+      for (let i = 0; i < maxTrailLength; i++) {
+        const trail = document.createElement('div');
+        trail.className = 'phase2-molecular-trail';
+        trail.style.opacity = (1 - i / maxTrailLength) * 0.6;
+        trail.style.transform = `scale(${1 - i / maxTrailLength})`;
+        document.body.appendChild(trail);
+        trailElements.push(trail);
+      }
+      
+      let lastX = 0, lastY = 0;
+      let ticking = false;
+      
+      document.addEventListener('mousemove', (e) => {
+        lastX = e.clientX;
+        lastY = e.clientY;
+        
+        if (!ticking) {
+          requestAnimationFrame(() => {
+            trailElements.forEach((trail, idx) => {
+              const delay = idx * 20;
+              setTimeout(() => {
+                trail.style.left = `${lastX}px`;
+                trail.style.top = `${lastY}px`;
+                trail.style.opacity = (1 - idx / maxTrailLength) * 0.4;
+              }, delay);
+            });
+            ticking = false;
+          });
+          ticking = true;
+        }
+      });
+      
+      // Hide trail when mouse leaves window
+      document.addEventListener('mouseleave', () => {
+        trailElements.forEach(trail => trail.style.opacity = 0);
+      });
+      
+      console.log('[Phase 2] Molecular Trail Initialized');
+    }
+    
+    // ============================================
+    // PHASE 2: MAGNETIC BUTTON EFFECT
+    // ============================================
+    
+    function phase2InitMagneticButtons() {
+      document.querySelectorAll('.btn-primary, .btn-secondary, .workspace-btn, .page-nav-btn').forEach(btn => {
+        btn.classList.add('phase2-magnetic', 'phase2-ripple');
+        
+        btn.addEventListener('mousemove', (e) => {
+          const rect = btn.getBoundingClientRect();
+          const x = e.clientX - rect.left - rect.width / 2;
+          const y = e.clientY - rect.top - rect.height / 2;
+          
+          const pullStrength = 0.3;
+          btn.style.transform = `translate(${x * pullStrength}px, ${y * pullStrength}px)`;
+        });
+        
+        btn.addEventListener('mouseleave', () => {
+          btn.style.transform = '';
+        });
+        
+        // Ripple effect on click
+        btn.addEventListener('click', (e) => {
+          const ripple = document.createElement('span');
+          ripple.className = 'phase2-ripple-effect';
+          
+          const rect = btn.getBoundingClientRect();
+          const size = Math.max(rect.width, rect.height);
+          ripple.style.width = ripple.style.height = size + 'px';
+          ripple.style.left = e.clientX - rect.left - size / 2 + 'px';
+          ripple.style.top = e.clientY - rect.top - size / 2 + 'px';
+          
+          btn.appendChild(ripple);
+          setTimeout(() => ripple.remove(), 600);
+        });
+      });
+      
+      console.log('[Phase 2] Magnetic Buttons Initialized');
+    }
+    
+    // ============================================
+    // PHASE 2: PARTICLE FIELD OVERLAY
+    // ============================================
+    
+    function phase2InitParticleField() {
+      // Only create on larger screens
+      if (window.innerWidth < 1024) return;
+      
+      const field = document.createElement('div');
+      field.className = 'phase2-particle-field';
+      field.id = 'phase2ParticleField';
+      document.body.appendChild(field);
+      
+      // Create particles
+      const particleCount = 30;
+      for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'phase2-particle';
+        particle.style.cssText = `
+          left: ${Math.random() * 100}%;
+          animation-delay: ${Math.random() * 8}s;
+          animation-duration: ${6 + Math.random() * 4}s;
+        `;
+        field.appendChild(particle);
+      }
+      
+      console.log('[Phase 2] Particle Field Initialized');
+    }
+    
+    // ============================================
+    // PHASE 2: PAGE NAVIGATION ENHANCEMENT
+    // ============================================
+    
+    function phase2EnhancePageNav() {
+      const pageNavBars = document.querySelectorAll('.page-nav-bar');
+      
+      pageNavBars.forEach(navBar => {
+        navBar.classList.add('phase2-page-nav-bar');
+        
+        // Get current page info
+        const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+        const pageInfo = phase2GetPageInfo(currentPage);
+        
+        // Create breadcrumb
+        const breadcrumb = document.createElement('div');
+        breadcrumb.className = 'phase2-breadcrumb';
+        breadcrumb.innerHTML = `
+          <a href="index.html" style="color:inherit;text-decoration:none;">Home</a>
+          <span class="phase2-breadcrumb-sep">›</span>
+          ${pageInfo.section ? `<span>${pageInfo.section}</span><span class="phase2-breadcrumb-sep">›</span>` : ''}
+          <span class="phase2-breadcrumb-current">${pageInfo.title}</span>
+        `;
+        
+        // Insert breadcrumb at start of nav bar
+        navBar.insertBefore(breadcrumb, navBar.firstChild);
+        
+        // Add page indicator
+        const indicator = document.createElement('span');
+        indicator.className = 'phase2-page-indicator';
+        indicator.textContent = pageInfo.indicator || '';
+        navBar.appendChild(indicator);
+      });
+      
+      console.log('[Phase 2] Page Navigation Enhanced');
+    }
+    
+    function phase2GetPageInfo(filename) {
+      const pageMap = {
+        'index.html': { title: 'Home', section: '', indicator: '// Landing' },
+        'platform.html': { title: 'Platform', section: 'Features', indicator: '// Features' },
+        'documentation.html': { title: 'API Docs', section: 'Developer', indicator: '// API v3.0' },
+        'startups.html': { title: 'Startups', section: 'Intelligence', indicator: '// Ventures' },
+        'research.html': { title: 'Research', section: 'Analysis', indicator: '// Papers' },
+        'about.html': { title: 'About', section: 'Company', indicator: '// Info' },
+        'dashboard.html': { title: 'Dashboard', section: 'Workspace', indicator: '// Control' },
+        'studio.html': { title: 'Studio', section: 'Creative', indicator: '// Lab' }
+      };
+      
+      return pageMap[filename] || { title: 'Page', section: '', indicator: '' };
+    }
+    
+    // ============================================
+    // PHASE 2: CONTENT ALIGNMENT FIX
+    // ============================================
+    
+    function phase2FixContentAlignment() {
+      // Ensure main-content has proper wrapper
+      document.querySelectorAll('.main-content').forEach(content => {
+        content.classList.add('phase2-aligned');
+        
+        // Wrap existing children in content-wrapper if not present
+        if (!content.querySelector('.phase2-content-wrapper')) {
+          const wrapper = document.createElement('div');
+          wrapper.className = 'phase2-content-wrapper';
+          
+          // Move all children to wrapper
+          while (content.firstChild) {
+            wrapper.appendChild(content.firstChild);
+          }
+          
+          content.appendChild(wrapper);
+        }
+      });
+      
+      // Apply custom scrollbar to main content areas
+      document.documentElement.classList.add('phase2-enhanced');
+      
+      console.log('[Phase 2] Content Alignment Fixed');
+    }
+    
+    // ============================================
+    // PHASE 2: APPLY ENHANCEMENT CLASSES
+    // ============================================
+    
+    function phase2ApplyEnhancementClasses() {
+      // Add enhancement classes to key elements
+      const selectors = {
+        '.feature-card': 'phase2-enhanced',
+        '.hero-section': 'phase2-enhanced',
+        '.section-title': 'phase2-enhanced',
+        '.cta-title': 'phase2-enhanced',
+        '.pipeline-step': 'phase2-enhanced',
+        '.stat-card': 'phase2-enhanced'
+      };
+      
+      Object.entries(selectors).forEach(([selector, className]) => {
+        document.querySelectorAll(selector).forEach(el => {
+          el.classList.add(className);
+        });
+      });
+      
+      console.log('[Phase 2] Enhancement Classes Applied');
+    }
+    
+    // ============================================
+    // PHASE 2 INITIALIZATION
+    // ============================================
+    
+    function initPhase2Enhancements() {
+      console.log('%c[Phase 2] Initializing Molecular Intelligence Overhaul...', 
+        'color: #00E5FF; font-weight: bold; font-size: 14px;');
+      
+      // Run all initializations
+      phase2InitNeuralIdentity();
+      phase2AnimateNeuralScore(window.currentNeuralIdentity?.neuralScore || 94.7);
+      phase2EnhanceMolecularSidebars();
+      phase2InitMolecularTrail();
+      phase2InitMagneticButtons();
+      phase2InitParticleField();
+      phase2EnhancePageNav();
+      phase2FixContentAlignment();
+      phase2ApplyEnhancementClasses();
+      
+      console.log('%c[Phase 2] All Enhancements Loaded Successfully ✓', 
+        'color: #10b981; font-weight: bold;');
+    }
+
+    
+    // Initialize Phase 2 after DOM is ready
+    if (typeof initPhase2Enhancements === 'function') {
+      initPhase2Enhancements();
+    }
+
   </script>
 </body>
 </html>

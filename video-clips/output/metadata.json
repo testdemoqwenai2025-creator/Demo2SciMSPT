@@ -1,0 +1,51 @@
+{
+  "generated_at": "2026-08-19 20:27:47",
+  "total_time_seconds": 273.6,
+  "voice": "jam (British English Gentleman)",
+  "duration_target_seconds": 60,
+  "resolution": "1920x1080",
+  "startups_processed": [
+    {
+      "id": "P1",
+      "name": "Stellarator Fusion",
+      "success": true,
+      "video": "P1_Stellarator_Fusion.mp4"
+    },
+    {
+      "id": "P2",
+      "name": "SMR Fleet OS",
+      "success": true,
+      "video": "P2_SMR_Fleet_OS.mp4"
+    },
+    {
+      "id": "P3",
+      "name": "Solid-State Battery",
+      "success": true,
+      "video": "P3_Solid-State_Battery.mp4"
+    },
+    {
+      "id": "P4",
+      "name": "Iron-Air LDES",
+      "success": true,
+      "video": "P4_Iron-Air_LDES.mp4"
+    },
+    {
+      "id": "P5",
+      "name": "Super-Steel Electrolyzer",
+      "success": true,
+      "video": "P5_Super-Steel_Electrolyzer.mp4"
+    },
+    {
+      "id": "P6",
+      "name": "Detonation H2 Turbine",
+      "success": true,
+      "video": "P6_Detonation_H2_Turbine.mp4"
+    },
+    {
+      "id": "P7",
+      "name": "Room-Temp Quantum Materials",
+      "success": false,
+      "error": "Failed to generate any audio"
+    }
+  ]
+}

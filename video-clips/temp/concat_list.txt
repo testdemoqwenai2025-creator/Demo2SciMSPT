@@ -1,0 +1,6 @@
+file '/home/z/my-project/SciMSPT/video-clips/output/phase2_01_intro.mp4'
+file '/home/z/my-project/SciMSPT/video-clips/output/phase2_02_neural.mp4'
+file '/home/z/my-project/SciMSPT/video-clips/output/phase2_03_molecular.mp4'
+file '/home/z/my-project/SciMSPT/video-clips/output/phase2_04_design.mp4'
+file '/home/z/my-project/SciMSPT/video-clips/output/phase2_05_nav.mp4'
+file '/home/z/my-project/SciMSPT/video-clips/output/phase2_06_cta.mp4'

@@ -1,0 +1,45 @@
+{
+  "generated_at": "2026-08-19T22:20:09.929905",
+  "results": {
+    "startups": [
+      "quantum_therapeutics",
+      "neurosynth_labs",
+      "solaris_materials",
+      "genomeforge",
+      "fusion_dynamics",
+      "bionexus_ai"
+    ],
+    "papers": [
+      "vqe_drug_discovery",
+      "crispr_rna_design",
+      "perovskite_solar",
+      "neuromorphic_computing"
+    ],
+    "reviewers": [
+      "dr_synthia_turing",
+      "prof_helix_bio",
+      "architect_nova"
+    ]
+  },
+  "videos": {
+    "startups": [
+      "/home/z/my-project/SciMSPT/video-clips/phase3/startups/quantum_therapeutics_explainer.mp4",
+      "/home/z/my-project/SciMSPT/video-clips/phase3/startups/neurosynth_labs_explainer.mp4",
+      "/home/z/my-project/SciMSPT/video-clips/phase3/startups/solaris_materials_explainer.mp4",
+      "/home/z/my-project/SciMSPT/video-clips/phase3/startups/genomeforge_explainer.mp4",
+      "/home/z/my-project/SciMSPT/video-clips/phase3/startups/fusion_dynamics_explainer.mp4",
+      "/home/z/my-project/SciMSPT/video-clips/phase3/startups/bionexus_ai_explainer.mp4"
+    ],
+    "papers": [
+      "/home/z/my-project/SciMSPT/video-clips/phase3/research/vqe_drug_discovery_explainer.mp4",
+      "/home/z/my-project/SciMSPT/video-clips/phase3/research/crispr_rna_design_explainer.mp4",
+      "/home/z/my-project/SciMSPT/video-clips/phase3/research/perovskite_solar_explainer.mp4",
+      "/home/z/my-project/SciMSPT/video-clips/phase3/research/neuromorphic_computing_explainer.mp4"
+    ],
+    "reviewers": [
+      "/home/z/my-project/SciMSPT/video-clips/phase3/ai-review/dr_synthia_turing_intro.mp4",
+      "/home/z/my-project/SciMSPT/video-clips/phase3/ai-review/prof_helix_bio_intro.mp4",
+      "/home/z/my-project/SciMSPT/video-clips/phase3/ai-review/architect_nova_intro.mp4"
+    ]
+  }
+}

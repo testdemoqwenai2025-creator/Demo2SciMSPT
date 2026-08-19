@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SciMSPT Phase 3 Integration Guide — Video & AI Review</title>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+  <link href="styles/video-player.css" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-deep: #030810;
+      --bg-primary: #0a1628;
+      --bg-secondary: #0d1f35;
+      --accent-cyan: #00E5FF;
+      --accent-purple: #a78bfa;
+      --accent-pink: #f472b6;
+      --text-primary: #e8f4fc;
+      --text-secondary: #94a3b8;
+      --border-subtle: rgba(0, 229, 255, 0.15);
+      --font-heading: 'Playfair Display', serif;
+      --font-body: 'Inter', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+    
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body {
+      font-family: var(--font-body);
+      background: var(--bg-deep);
+      color: var(--text-primary);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+    
+    .container { max-width: 1200px; margin: 0 auto; padding: 40px 24px; }
+    
+    h1 {
+      font-family: var(--font-heading);
+      font-size: 42px;
+      font-weight: 900;
+      margin-bottom: 16px;
+      background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    h2 {
+      font-family: var(--font-heading);
+      font-size: 28px;
+      font-weight: 800;
+      margin: 48px 0 24px;
+      color: var(--accent-cyan);
+    }
+    
+    h3 {
+      font-size: 20px;
+      font-weight: 700;
+      margin: 24px 0 12px;
+    }
+    
+    p { color: var(--text-secondary); margin-bottom: 16px; line-height: 1.7; }
+    
+    code {
+      font-family: var(--font-mono);
+      background: rgba(0, 229, 255, 0.08);
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 14px;
+      color: var(--accent-cyan);
+    }
+    
+    pre {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 24px;
+      overflow-x: auto;
+      margin: 20px 0;
+    }
+    
+    pre code {
+      background: none;
+      padding: 0;
+      display: block;
+      line-height: 1.6;
+    }
+    
+    .integration-section {
+      background: var(--bg-primary);
+      border: 1px solid var(--border-subtle);
+      border-radius: 20px;
+      padding: 32px;
+      margin: 32px 0;
+    }
+    
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    
+    .section-header .material-icons-round {
+      font-size: 28px;
+      color: var(--accent-purple);
+    }
+    
+    .section-title {
+      font-family: var(--font-heading);
+      font-size: 22px;
+      font-weight: 800;
+    }
+    
+    /* Demo Video Player */
+    .demo-video-wrapper {
+      margin: 32px 0;
+    }
+    
+    /* Code Block with Copy Button */
+    .code-block {
+      position: relative;
+    }
+    
+    .copy-btn {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      padding: 8px 14px;
+      background: rgba(0, 229, 255, 0.15);
+      border: 1px solid rgba(0, 229, 255, 0.25);
+      border-radius: 8px;
+      color: var(--accent-cyan);
+      font-size: 13px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-family: var(--font-mono);
+    }
+    
+    .copy-btn:hover {
+      background: rgba(0, 229, 255, 0.25);
+    }
+    
+    /* Feature Grid */
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      margin: 24px 0;
+    }
+    
+    .feature-card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      padding: 24px;
+      transition: all 0.3s ease;
+    }
+    
+    .feature-card:hover {
+      border-color: var(--accent-cyan);
+      transform: translateY(-4px);
+    }
+    
+    .feature-icon {
+      width: 48px; height: 48px;
+      background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+    }
+    
+    .feature-icon .material-icons-round {
+      color: white;
+      font-size: 24px;
+    }
+    
+    .feature-card h4 {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    
+    .feature-card p {
+      font-size: 14px;
+      margin-bottom: 0;
+    }
+    
+    /* Status Badge */
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 600;
+      font-family: var(--font-mono);
+    }
+    
+    .status-badge.ready {
+      background: rgba(16, 185, 129, 0.15);
+      color: #10b981;
+      border: 1px solid rgba(16, 185, 129, 0.25);
+    }
+    
+    .status-badge.pending {
+      background: rgba(245, 158, 11, 0.15);
+      color: #f59e0b;
+      border: 1px solid rgba(245, 158, 11, 0.25);
+    }
+    
+    footer {
+      margin-top: 80px;
+      padding: 32px;
+      text-align: center;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border-subtle);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>SciMSPT Phase 3 Integration Guide</h1>
+      <p style="font-size: 18px;">Video Content & AI Peer Review System Implementation Documentation</p>
+      
+      <div style="margin-top: 24px; display: flex; gap: 12px; flex-wrap: wrap;">
+        <span class="status-badge ready">
+          <span class="material-icons-round" style="font-size: 14px;">check_circle</span>
+          AI Peer Review Panel
+        </span>
+        <span class="status-badge ready">
+          <span class="material-icons-round" style="font-size: 14px;">videocam</span>
+          Video Player Component
+        </span>
+        <span class="status-badge pending">
+          <span class="material-icons-round" style="font-size: 14px;">schedule</span>
+          Video Generation Pipeline
+        </span>
+      </div>
+    </header>
+    
+    <!-- Overview Section -->
+    <section class="integration-section">
+      <div class="section-header">
+        <span class="material-icons-round">dashboard</span>
+        <h2 class="section-title">Phase 3 Overview</h2>
+      </div>
+      
+      <p>
+        Phase 3 of SciMSPT introduces two major features that enhance the platform's scientific content capabilities:
+      </p>
+      
+      <div class="feature-grid">
+        <div class="feature-card">
+          <div class="feature-icon"><span class="material-icons-round">play_circle</span></div>
+          <h4>Startup Explainer Videos</h4>
+          <p>Professional 30-60 second video clips for each startup in the database, featuring TTS narration and scientific visualization.</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon"><span class="material-icons-round">school</span></div>
+          <h4>Research Paper Videos</h4>
+          <p>In-depth explainer videos for breakthrough research papers, matching quality standards of Nature Video and arXiv abstracts.</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon"><span class="material-icons-round">psychology</span></div>
+          <h4>AI Peer Review System</h4>
+          <p>Three distinct AI personas analyze papers from theoretical, biological, and engineering perspectives with interactive switching.</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon"><span class="material-icons-round">code</span></div>
+          <h4>Video Player Component</h4>
+          <p>Custom-styled video player with SciMSPT design system, keyboard shortcuts, and responsive controls.</p>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Video Player Integration -->
+    <section id="video-player-integration">
+      <h2><span class="material-icons-round" style="vertical-align: middle; margin-right: 8px;">videocam</span>Video Player Component</h2>
+      
+      <p>The custom video player provides a professional, branded experience for scientific video content.</p>
+      
+      <h3>Basic Usage</h3>
+      <div class="code-block">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>&lt;!-- Include CSS and JS --&gt;
+&lt;link href="phase3/styles/video-player.css" rel="stylesheet"&gt;
+&lt;script src="phase3/js/video-player.js"&gt;&lt;/script&gt;
+
+&lt;!-- Video Container --&gt;
+&lt;div class="video-container"&gt;
+  &lt;video 
+    poster="thumbnail.jpg"
+    preload="metadata"
+  &gt;
+    &lt;source src="startup-explainer.mp4" type="video/mp4"&gt;
+    Your browser does not support video.
+  &lt;/video&gt;
+&lt;/div&gt;</code></pre>
+      </div>
+      
+      <h3>Demo Player (Placeholder)</h3>
+      <div class="demo-video-wrapper">
+        <div class="video-container" style="max-width: 720px;">
+          <video poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1280' height='720'%3E%3Crect fill='%23030810' width='1280' height='720'/%3E%3Ctext x='50%25' y='50%25' fill='%2300E5FF' font-family='sans-serif' font-size='24' text-anchor='middle' dominant-baseline='middle'%3ESciMSPT Video Player Demo%3C/text%3E%3Ccircle cx='50%25' cy='45%25' r='40' fill='none' stroke='%2300E5FF' stroke-width='4'/%3E%3Cpolygon points='620,610 650,630 620,650 590,630' fill='%2300E5FF'/%3E%3C/svg%3E" preload="none">
+            <source src="#" type="video/mp4">
+          </video>
+          
+          <div class="video-info-bar">
+            <div class="video-title">
+              <span class="material-icons-round">play_circle</span>
+              Quantum Therapeutics — Company Overview
+            </div>
+            <div class="video-meta">
+              <span class="video-meta-item">
+                <span class="material-icons-round">schedule</span>
+                0:45
+              </span>
+              <span class="video-meta-item">
+                <span class="material-icons-round">4k</span>
+                HD
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <h3>Startup Card Integration</h3>
+      <div class="code-block">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>&lt;article class="startup-card"&gt;
+  ... existing card content ...
+  
+  &lt;!-- Add Video Section --&gt;
+  &lt;div class="startup-video-wrapper"&gt;
+    &lt;div class="startup-video-label"&gt;
+      &lt;span class="material-icons-round"&gt;videocam&lt;/span&gt;
+      Company Explainer
+    &lt;/div&gt;
+    
+    &lt;div class="video-container"&gt;
+      &lt;video 
+        id="video-{startup_id}"
+        poster="{thumbnail_path}"
+        preload="metadata"
+      &gt;
+        &lt;source src="video-clips/phase3/startups/{startup_id}_explainer.mp4" type="video/mp4"&gt;
+      &lt;/video&gt;
+      
+      &lt;div class="video-info-bar"&gt;
+        &lt;div class="video-title"&gt;
+          &lt;span class="material-icons-round"&gt;play_circle&lt;/span&gt;
+          {startup_name} — Innovation Deep Dive
+        &lt;/div&gt;
+        &lt;div class="video-meta"&gt;
+          &lt;span class="video-meta-item"&gt;
+            &lt;span class="material-icons-round"&gt;schedule&lt;/span&gt;
+            ~60 seconds
+          &lt;/span&gt;
+          &lt;span class="video-meta-item"&gt;
+            &lt;span class="material-icons-round"&gt;4k&lt;/span&gt;
+            TTS Narration
+          &lt;/span&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/article&gt;</code></pre>
+      </div>
+    </section>
+    
+    <!-- Research Paper Video Integration -->
+    <section id="research-video-integration">
+      <h2><span class="material-icons-round" style="vertical-align: middle; margin-right: 8px;">school</span>Research Paper Video Integration</h2>
+      
+      <p>Research paper cards include both explainer videos and optional AI Peer Review panels.</p>
+      
+      <h3>Paper Card with Video</h3>
+      <div class="code-block">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>&lt;article class="paper-card"&gt;
+  ... existing paper card content ...
+  
+  &lt;!-- Paper Video Section --&gt;
+  &lt;div class="paper-video-section"&gt;
+    &lt;div class="paper-video-header"&gt;
+      &lt;div class="paper-video-title"&gt;
+        &lt;span class="material-icons-round"&gt;play_circle_filled&lt;/span&gt;
+        Paper Explainer Video
+      &lt;/div&gt;
+      &lt;span class="paper-video-badge"&gt;
+        &lt;span class="material-icons-round" style="font-size: 14px;"&gt;insights&lt;/span&gt;
+        1-Minute Analysis
+      &lt;/span&gt;
+    &lt;/div&gt;
+    
+    &lt;div class="video-container"&gt;
+      &lt;video 
+        id="paper-video-{paper_id}"
+        poster="{paper_thumbnail}"
+        preload="metadata"
+      &gt;
+        &lt;source src="video-clips/phase3/research/{paper_id}_explainer.mp4" type="video/mp4"&gt;
+      &lt;/video&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/article&gt;</code></pre>
+      </div>
+    </section>
+    
+    <!-- AI Peer Review Integration -->
+    <section id="ai-review-integration">
+      <h2><span class="material-icons-round" style="vertical-align: middle; margin-right: 8px;">psychology</span>AI Peer Review Panel Integration</h2>
+      
+      <p>The AI Peer Review system can be embedded as a standalone panel or integrated into the research page flow.</p>
+      
+      <h3>Option 1: Embedded Panel (Recommended)</h3>
+      <div class="code-block">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>&lt;!-- After papers grid section --&gt;
+&lt;section class="ai-review-embed"&gt;
+  &lt;div class="ai-review-embed-header"&gt;
+    &lt;div class="ai-review-embed-title"&gt;
+      &lt;span class="material-icons-round"&gt;psychology&lt;/span&gt;
+      Tri-Perspective Neural Analysis
+    &lt;/div&gt;
+    &lt;span class="ai-review-embed-badge"&gt;
+      &lt;span class="material-icons-round" style="font-size: 14px;"&gt;auto_awesome&lt;/span&gt;
+      AI-Powered Review
+    &lt;/span&gt;
+  &lt;/div&gt;
+  
+  &lt;div class="ai-review-embed-body"&gt;
+    &lt;!-- Inline or iframe embed of AI_PEER_REVIEW_PANEL_V2.html --&gt;
+    &lt;iframe 
+      src="video-clips/output/AI_PEER_REVIEW_PANEL_V2.html"
+      width="100%" 
+      height="1200px"
+      frameborder="0"
+      style="border-radius: 16px;"
+    &gt;&lt;/iframe&gt;
+    
+    &lt;!-- OR: Direct implementation (see full HTML source) --&gt;
+  &lt;/div&gt;
+&lt;/section&gt;</code></pre>
+      </div>
+      
+      <h3>Option 2: Link to Standalone Page</h3>
+      <div class="code-block">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>&lt;a 
+  href="video-clips/output/AI_PEER_REVIEW_PANEL_V2.html"
+  target="_blank"
+  class="btn-sm primary"
+  style="
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 20px;
+    background: linear-gradient(135deg, #00E5FF, #a78bfa);
+    color: #030810;
+    font-weight: 600;
+    border-radius: 10px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  "
+&gt;
+  &lt;span class="material-icons-round"&gt;psychology&lt;/span&gt;
+  Launch Full AI Peer Review Panel
+&lt;/a&gt;</code></pre>
+      </div>
+      
+      <h3>AI Reviewer Personas Summary</h3>
+      <table style="width: 100%; border-collapse: collapse; margin: 24px 0; font-size: 14px;">
+        <thead>
+          <tr style="background: rgba(0, 229, 255, 0.08);">
+            <th style="padding: 12px; text-align: left; color: #00E5FF;">Persona</th>
+            <th style="padding: 12px; text-align: left; color: #00E5FF;">Specialty</th>
+            <th style="padding: 12px; text-align: left; color: #00E5FF;">Perspective</th>
+            <th style="padding: 12px; text-align: left; color: #00E5FF;">Voice</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom: 1px solid var(--border-subtle);">
+            <td style="padding: 12px;"><strong style="color: #00E5FF;">Dr. Synthia Turing</strong></td>
+            <td style="padding: 12px;">Theoretical CS & Quantum Algorithms</td>
+            <td style="padding: 12px;">Mathematical rigor, complexity analysis</td>
+            <td style="padding: 12px;"><code>en-US-AriaNeural</code></td>
+          </tr>
+          <tr style="border-bottom: 1px solid var(--border-subtle);">
+            <td style="padding: 12px;"><strong style="color: #10b981;">Prof. Helix Bio</strong></td>
+            <td style="padding: 12px;">Computational Biology & Translational Medicine</td>
+            <td style="padding: 12px;">Biological plausibility, clinical impact</td>
+            <td style="padding: 12px;"><code>en-US-JennyNeural</code></td>
+          </tr>
+          <tr>
+            <td style="padding: 12px;"><strong style="color: #f59e0b;">Architect Nova</strong></td>
+            <td style="padding: 12px;">Systems Engineering & ML Infrastructure</td>
+            <td style="padding: 12px;">Implementation feasibility, scalability</td>
+            <td style="padding: 12px;"><code>en-US-GuyNeural</code></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+    
+    <!-- Video Generation Pipeline -->
+    <section id="video-generation">
+      <h2><span class="material-icons-round" style="vertical-align: middle; margin-right: 8px;">movie_creation</span>Video Generation Pipeline</h2>
+      
+      <p>The video generation pipeline uses Python with PIL for frame generation, edge-tts for narration, and FFmpeg for assembly.</p>
+      
+      <h3>Quick Start</h3>
+      <div class="code-block">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code># Install dependencies
+pip install edge-tts pillow numpy
+
+# Run optimized generation (fast mode)
+cd SciMSPT/video-clips/phase3
+python scripts/generate_fast.py
+
+# Or run full generation (slower)
+python scripts/generate_phase3_content.py</code></pre>
+      </div>
+      
+      <h3>Generated Output Structure</h3>
+      <pre style="background: var(--bg-secondary); padding: 20px; border-radius: 12px; font-family: var(--font-mono); font-size: 13px; overflow-x: auto;"><code>video-clips/phase3/
+├── output/
+│   ├── phase3_fast_metadata.json     # Generation metadata
+│   └── phase3_metadata.json         # Full metadata
+├── startups/
+│   ├── quantum_therapeutics_explainer.mp4
+│   ├── neurosynth_labs_explainer.mp4
+│   └── ... (one per startup)
+├── research/
+│   ├── vqe_drug_discovery_explainer.mp4
+│   ├── crispr_rna_design_explainer.mp4
+│   └── ... (one per paper)
+├── ai-review/
+│   ├── dr_synthia_turing_intro.mp4
+│   ├── prof_helix_bio_intro.mp4
+│   └── architect_nova_intro.mp4
+└── audio/
+    ├── *_narration.wav             # TTS audio files
+    └── *_intro.wav                 # Reviewer intro audio</code></pre>
+      
+      <h3>TTS Voice Options</h3>
+      <div class="feature-grid" style="margin-top: 20px;">
+        <div class="feature-card" style="grid-column: span 1;">
+          <h4 style="color: #00E5FF;">Male Voices</h4>
+          <ul style="color: var(--text-secondary); font-size: 14px; list-style: none; padding-left: 0;">
+            <li><code>en-US-GuyNeural</code> — Professional, authoritative</li>
+            <li><code>en-US-EricNeural</code> — Friendly, conversational</li>
+            <li><code>en-US-JennyNeural</code> — Can also use for neutral tone</li>
+          </ul>
+        </div>
+        <div class="feature-card" style="grid-column: span 1;">
+          <h4 style="color: #a78bfa;">Female Voices</h4>
+          <ul style="color: var(--text-secondary); font-size: 14px; list-style: none; padding-left: 0;">
+            <li><code>en-US-AriaNeural</code> — Clear, articulate</li>
+            <li><code>en-US-JennyNeural</code> — Warm, engaging</li>
+            <li><code>en-US-AmberNeural</code> — Energetic, dynamic</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Keyboard Shortcuts -->
+    <section id="keyboard-shortcuts">
+      <h2><span class="material-icons-round" style="vertical-align: middle; margin-right: 8px;">keyboard</span>Keyboard Shortcuts</h2>
+      
+      <div class="feature-grid">
+        <div class="feature-card">
+          <div class="feature-icon" style="background: linear-gradient(135deg, #10b981, #06b6d4);">
+            <span class="material-icons-round">space_bar</span>
+          </div>
+          <h4>Space / K</h4>
+          <p>Play / Pause video</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon" style="background: linear-gradient(135deg, #f59e0b, #ef4444);">
+            <span class="material-icons-round">fullscreen</span>
+          </div>
+          <h4>F</h4>
+          <p>Toggle fullscreen mode</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon" style="background: linear-gradient(135deg, #a78bfa, #ec4899);">
+            <span class="material-icons-round">volume_up</span>
+          </div>
+          <h4>M</h4>
+          <p>Mute / Unmute audio</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon" style="background: linear-gradient(135deg, #00E5FF, #4da8da);">
+            <span class="material-icons-round">fast_forward</span>
+          </div>
+          <h4>← → Arrow Keys</h4>
+          <p>Seek ±5 seconds</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon" style="background: linear-gradient(135deg, #ec4899, #8b5cf6);">
+            <span class="material-icons-round">volume_up</span>
+          </div>
+          <h4>↑ ↓ Arrow Keys</h4>
+          <p>Volume up/down 10%</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon" style="background: linear-gradient(135deg, #06b6d4, #3b82f6);">
+            <span class="material-icons-round">looks_3</span>
+          </div>
+          <h4>1 / 2 / 3</h4>
+          <p>Switch AI reviewer perspective</p>
+        </div>
+      </div>
+    </section>
+    
+    <footer>
+      <p><strong>SciMSPT Phase 3</strong> — Video Content & AI Peer Review System</p>
+      <p style="margin-top: 8px; font-size: 13px;">Generated: 2026-08-20 | Version: 3.0.0</p>
+    </footer>
+  </div>
+  
+  <script src="js/video-player.js"></script>
+  <script>
+    function copyCode(btn) {
+      const codeBlock = btn.closest('.code-block');
+      const code = codeBlock.querySelector('code').textContent;
+      
+      navigator.clipboard.writeText(code).then(() => {
+        const originalText = btn.textContent;
+        btn.textContent = 'Copied!';
+        btn.style.background = 'rgba(16, 185, 129, 0.25)';
+        btn.style.borderColor = 'rgba(16, 185, 129, 0.5)';
+        btn.style.color = '#10b981';
+        
+        setTimeout(() => {
+          btn.textContent = originalText;
+          btn.style.background = '';
+          btn.style.borderColor = '';
+          btn.style.color = '';
+        }, 2000);
+      });
+    }
+  </script>
+</body>
+</html>

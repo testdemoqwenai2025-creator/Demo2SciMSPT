@@ -1,0 +1,33 @@
+{
+  "generated_at": "2026-08-19T21:46:57.822414",
+  "startup_clips": 6,
+  "research_clips": 5,
+  "total_clips": 11,
+  "clip_duration_seconds": 60,
+  "files": {
+    "ai_peer_review": "AI_PEER_REVIEW_PANEL.html",
+    "startup_clips": "STARTUP_VIDEO_CLIPS.html",
+    "research_clips": "RESEARCH_VIDEO_CLIPS.html"
+  },
+  "startups": [
+    "P1",
+    "P2",
+    "P3",
+    "P4",
+    "P5",
+    "P6"
+  ],
+  "research_papers": [
+    "R1",
+    "R2",
+    "R3",
+    "R4",
+    "R5"
+  ],
+  "next_steps": [
+    "Use generate_phase2_showcase_fast.py to render videos",
+    "Integrate clips into startups.html and research.html pages",
+    "Add TTS narration using edge-tts or similar",
+    "Create thumbnail images for each clip"
+  ]
+}

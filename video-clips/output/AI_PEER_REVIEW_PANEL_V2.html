@@ -1,0 +1,1272 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Peer Review Panel — SciMSPT Neural Analysis</title>
+  
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-deep: #030810;
+      --bg-primary: #0a1628;
+      --bg-secondary: #0d1f35;
+      --bg-tertiary: #122a45;
+      --bg-glass: rgba(10, 22, 40, 0.85);
+      --bg-glass-light: rgba(255, 255, 255, 0.03);
+      
+      --accent-cyan: #00E5FF;
+      --accent-blue: #4da8da;
+      --accent-purple: #a78bfa;
+      --accent-pink: #f472b6;
+      --accent-green: #10b981;
+      --accent-gold: #f59e0b;
+      --accent-red: #ef4444;
+      
+      --text-primary: #e8f4fc;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+      
+      --border-subtle: rgba(0, 229, 255, 0.15);
+      
+      --font-heading: 'Playfair Display', Georgia, serif;
+      --font-body: 'Inter', -apple-system, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+      --font-tech: 'Orbitron', sans-serif;
+    }
+    
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body {
+      font-family: var(--font-body);
+      background: var(--bg-deep);
+      color: var(--text-primary);
+      line-height: 1.6;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    
+    /* Background Effects */
+    .bg-grid {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-image: 
+        radial-gradient(circle at 20% 30%, rgba(0, 229, 255, 0.03) 1px, transparent 1px),
+        radial-gradient(circle at 80% 70%, rgba(167, 139, 250, 0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+      z-index: 0;
+    }
+    
+    .container {
+      position: relative;
+      z-index: 1;
+      max-width: 1600px;
+      margin: 0 auto;
+      padding: 40px 24px;
+    }
+    
+    /* Header */
+    .panel-header {
+      text-align: center;
+      margin-bottom: 60px;
+      padding: 48px;
+      background: var(--bg-glass);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--border-subtle);
+      border-radius: 32px;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .panel-header::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--accent-cyan), var(--accent-purple), var(--accent-pink));
+    }
+    
+    .header-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 20px;
+      background: rgba(0, 229, 255, 0.1);
+      border: 1px solid rgba(0, 229, 255, 0.3);
+      border-radius: 50px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--accent-cyan);
+      font-family: var(--font-mono);
+      margin-bottom: 24px;
+    }
+    
+    .pulse-dot {
+      width: 8px; height: 8px;
+      background: var(--accent-green);
+      border-radius: 50%;
+      animation: pulse 2s ease-in-out infinite;
+    }
+    
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(1.3); }
+    }
+    
+    .header-title {
+      font-family: var(--font-heading);
+      font-size: clamp(36px, 5vw, 56px);
+      font-weight: 900;
+      letter-spacing: -1.5px;
+      margin-bottom: 16px;
+      background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple), var(--accent-pink));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .header-subtitle {
+      font-size: clamp(16px, 2vw, 20px);
+      color: var(--text-secondary);
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    
+    /* Paper Under Review */
+    .paper-under-review {
+      background: var(--bg-glass);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--border-subtle);
+      border-radius: 24px;
+      padding: 40px;
+      margin-bottom: 48px;
+    }
+    
+    .paper-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 24px;
+      margin-bottom: 28px;
+    }
+    
+    .paper-icon {
+      width: 72px; height: 72px;
+      background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+      border-radius: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    
+    .paper-icon .material-icons-round {
+      font-size: 36px;
+      color: var(--bg-deep);
+    }
+    
+    .paper-info h2 {
+      font-family: var(--font-heading);
+      font-size: 26px;
+      font-weight: 800;
+      line-height: 1.3;
+      margin-bottom: 12px;
+    }
+    
+    .paper-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      font-size: 14px;
+      color: var(--text-secondary);
+    }
+    
+    .paper-meta-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    
+    .paper-meta-item .material-icons-round {
+        font-size: 16px;
+        color: var(--accent-cyan);
+    }
+    
+    /* AI Reviewers Section */
+    .reviewers-section-title {
+      font-family: var(--font-heading);
+      font-size: 28px;
+      font-weight: 800;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    
+    .reviewers-section-title .material-icons-round {
+      color: var(--accent-purple);
+    }
+    
+    /* Reviewer Tabs */
+    .reviewer-tabs {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-bottom: 32px;
+    }
+    
+    @media (max-width: 1024px) {
+      .reviewer-tabs { grid-template-columns: 1fr; }
+    }
+    
+    .reviewer-tab {
+      background: var(--bg-glass);
+      backdrop-filter: blur(20px);
+      border: 2px solid transparent;
+      border-radius: 20px;
+      padding: 28px;
+      cursor: pointer;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .reviewer-tab::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, var(--tab-color, var(--accent-cyan)), transparent);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    
+    .reviewer-tab:hover::before,
+    .reviewer-tab.active::before {
+      opacity: 0.08;
+    }
+    
+    .reviewer-tab.active {
+      border-color: var(--tab-color, var(--accent-cyan));
+      box-shadow: 0 0 40px rgba(var(--tab-rgb, 0, 229, 255), 0.15);
+    }
+    
+    .reviewer-tab-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 16px;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .reviewer-avatar {
+      width: 56px; height: 56px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, var(--tab-color, var(--accent-cyan)), var(--tab-color-secondary, var(--accent-purple)));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-heading);
+      font-weight: 900;
+      font-size: 20px;
+      color: white;
+      position: relative;
+    }
+    
+    .reviewer-avatar::after {
+      content: '';
+      position: absolute;
+      bottom: -4px; right: -4px;
+      width: 16px; height: 16px;
+      background: var(--accent-green);
+      border-radius: 50%;
+      border: 3px solid var(--bg-primary);
+    }
+    
+    .reviewer-info h3 {
+      font-family: var(--font-heading);
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    
+    .reviewer-info p {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.4;
+    }
+    
+    .reviewer-perspective {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      background: rgba(var(--tab-rgb, 0, 229, 255), 0.1);
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--tab-color, var(--accent-cyan));
+      font-family: var(--font-mono);
+      margin-top: 12px;
+      position: relative;
+      z-index: 1;
+    }
+    
+    /* Review Content Panels */
+    .review-content {
+      display: none;
+    }
+    
+    .review-content.active {
+      display: block;
+      animation: fadeIn 0.4s ease;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .review-panel {
+      background: var(--bg-glass);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--border-subtle);
+      border-radius: 24px;
+      overflow: hidden;
+    }
+    
+    .review-panel-header {
+      padding: 28px 32px;
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(0, 0, 0, 0.2);
+    }
+    
+    .review-panel-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-family: var(--font-heading);
+      font-size: 20px;
+      font-weight: 700;
+    }
+    
+    .review-score {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      border-radius: 12px;
+      font-family: var(--font-mono);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--accent-green);
+    }
+    
+    .review-body {
+      padding: 32px;
+    }
+    
+    /* Review Sections */
+    .review-section {
+      margin-bottom: 36px;
+    }
+    
+    .review-section:last-child {
+      margin-bottom: 0;
+    }
+    
+    .section-label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--section-color, var(--accent-cyan));
+      margin-bottom: 16px;
+      font-family: var(--font-mono);
+    }
+    
+    .section-label .material-icons-round {
+      font-size: 18px;
+    }
+    
+    .section-content {
+      font-size: 15px;
+      line-height: 1.8;
+      color: var(--text-secondary);
+    }
+    
+    .section-content p {
+      margin-bottom: 16px;
+    }
+    
+    .section-content strong {
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+    
+    /* Key Findings List */
+    .findings-list {
+      list-style: none;
+      display: grid;
+      gap: 12px;
+    }
+    
+    .finding-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 16px 20px;
+      background: var(--bg-glass-light);
+      border: 1px solid var(--border-subtle);
+      border-radius: 14px;
+      transition: all 0.3s ease;
+    }
+    
+    .finding-item:hover {
+      border-color: var(--section-color, var(--accent-cyan));
+      background: rgba(var(--section-rgb, 0, 229, 255), 0.05);
+    }
+    
+    .finding-icon {
+      width: 28px; height: 28px;
+      border-radius: 8px;
+      background: rgba(var(--section-rgb, 0, 229, 255), 0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    
+    .finding-icon .material-icons-round {
+      font-size: 16px;
+      color: var(--section-color, var(--accent-cyan));
+    }
+    
+    .finding-text {
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--text-primary);
+    }
+    
+    /* Verdict Box */
+    .verdict-box {
+      padding: 28px;
+      background: linear-gradient(135deg, 
+        rgba(var(--verdict-rgb-r, 0, 229, 255), 0.08),
+        rgba(var(--verdict-rgb-g, 167, 139, 250), 0.05)
+      );
+      border: 1px solid rgba(var(--verdict-rgb-r, 0, 229, 255), 0.25);
+      border-radius: 18px;
+      margin-top: 24px;
+    }
+    
+    .verdict-label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--verdict-color, var(--accent-cyan));
+      margin-bottom: 14px;
+      font-family: var(--font-mono);
+    }
+    
+    .verdict-text {
+      font-size: 16px;
+      line-height: 1.7;
+      color: var(--text-primary);
+      font-weight: 500;
+    }
+    
+    /* Strengths & Concerns Grid */
+    .analysis-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      margin-top: 20px;
+    }
+    
+    @media (max-width: 768px) {
+      .analysis-grid { grid-template-columns: 1fr; }
+    }
+    
+    .analysis-column {
+      padding: 24px;
+      border-radius: 16px;
+      border: 1px solid var(--border-subtle);
+    }
+    
+    .analysis-column.strengths {
+      background: rgba(16, 185, 129, 0.05);
+      border-color: rgba(16, 185, 129, 0.2);
+    }
+    
+    .analysis-column.concerns {
+      background: rgba(245, 158, 11, 0.05);
+      border-color: rgba(245, 158, 11, 0.2);
+    }
+    
+    .column-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+    
+    .column-header.strengths { color: var(--accent-green); }
+    .column-header.concerns { color: var(--accent-gold); }
+    
+    .analysis-list {
+      list-style: none;
+      display: grid;
+      gap: 10px;
+    }
+    
+    .analysis-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+    
+    .analysis-list li::before {
+      content: '•';
+      font-weight: bold;
+      margin-top: -2px;
+    }
+    
+    .strengths li::before { color: var(--accent-green); }
+    .concerns li::before { color: var(--accent-gold); }
+    
+    /* Consensus Section */
+    .consensus-section {
+      margin-top: 48px;
+      background: var(--bg-glass);
+      backdrop-filter: blur(20px);
+      border: 2px solid;
+      border-image: linear-gradient(90deg, var(--accent-cyan), var(--accent-purple), var(--accent-pink)) 1;
+      border-radius: 24px;
+      padding: 40px;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .consensus-section::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--accent-cyan), var(--accent-purple), var(--accent-pink));
+    }
+    
+    .consensus-header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+    
+    .consensus-icon {
+      width: 64px; height: 64px;
+      background: linear-gradient(135deg, var(--accent-purple), var(--accent-pink));
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .consensus-icon .material-icons-round {
+      font-size: 32px;
+      color: white;
+    }
+    
+    .consensus-title {
+      font-family: var(--font-heading);
+      font-size: 28px;
+      font-weight: 800;
+      text-align: center;
+      background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .consensus-body {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 32px;
+    }
+    
+    @media (max-width: 1024px) {
+      .consensus-body { grid-template-columns: 1fr; }
+    }
+    
+    .consensus-card {
+      background: rgba(0, 0, 0, 0.2);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      padding: 24px;
+      text-align: center;
+    }
+    
+    .consensus-card-value {
+      font-family: var(--font-mono);
+      font-size: 42px;
+      font-weight: 900;
+      color: var(--card-color, var(--accent-cyan));
+      margin-bottom: 8px;
+    }
+    
+    .consensus-card-label {
+      font-size: 14px;
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
+    
+    .consensus-summary {
+      margin-top: 32px;
+      padding: 28px;
+      background: rgba(167, 139, 250, 0.08);
+      border-radius: 16px;
+      border-left: 4px solid var(--accent-purple);
+    }
+    
+    .consensus-summary p {
+      font-size: 16px;
+      line-height: 1.8;
+      color: var(--text-primary);
+    }
+    
+    /* Interactive Elements */
+    .insight-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 12px;
+      background: rgba(var(--tag-rgb, 167, 139, 250), 0.1);
+      border: 1px solid rgba(var(--tag-rgb, 167, 139, 250), 0.25);
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--tag-color, var(--accent-purple));
+      font-family: var(--font-mono);
+      margin: 0 4px 8px 0;
+    }
+    
+    .citation-ref {
+      color: var(--accent-cyan);
+      font-family: var(--font-mono);
+      font-size: 13px;
+      background: rgba(0, 229, 255, 0.08);
+      padding: 2px 8px;
+      border-radius: 4px;
+      cursor: help;
+    }
+    
+    /* Footer */
+    .panel-footer {
+      margin-top: 48px;
+      text-align: center;
+      padding: 32px;
+      color: var(--text-muted);
+      font-size: 14px;
+    }
+    
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      margin-top: 16px;
+      flex-wrap: wrap;
+    }
+    
+    .footer-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+    
+    .footer-links a:hover {
+      color: var(--accent-cyan);
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-grid"></div>
+  
+  <div class="container">
+    <!-- Header -->
+    <header class="panel-header">
+      <div class="header-badge">
+        <span class="pulse-dot"></span>
+        AI Peer Review System v2.0
+      </div>
+      <h1 class="header-title">Tri-Perspective Neural Analysis</h1>
+      <p class="header-subtitle">
+        Three distinct AI personas collaboratively analyze breakthrough research papers, 
+        providing multi-dimensional insights spanning theory, biology, and engineering.
+      </p>
+    </header>
+    
+    <!-- Paper Under Review -->
+    <section class="paper-under-review">
+      <div class="paper-header">
+        <div class="paper-icon">
+          <span class="material-icons-round">science</span>
+        </div>
+        <div class="paper-info">
+          <h2>Variational Quantum Eigensolvers for Drug Discovery: A Comprehensive Benchmark</h2>
+          <div class="paper-meta">
+            <span class="paper-meta-item">
+              <span class="material-icons-round">person</span>
+              Chen et al., MIT
+            </span>
+            <span class="paper-meta-item">
+              <span class="material-icons-round">article</span>
+              arXiv:2401.08742
+            </span>
+            <span class="paper-meta-item">
+              <span class="material-icons-round">calendar_today</span>
+              January 2024
+            </span>
+            <span class="paper-meta-item">
+              <span class="material-icons-round">visibility</span>
+              2.4K Views
+            </span>
+            <span class="paper-meta-item">
+              <span class="material-icons-round">format_quote</span>
+              34 Citations
+            </span>
+          </div>
+        </div>
+      </div>
+      
+      <div style="padding: 20px; background: rgba(0, 229, 255, 0.05); border-radius: 12px; border-left: 4px solid var(--accent-cyan);">
+        <p style="color: var(--text-secondary); font-size: 14px; line-height: 1.7;">
+          <strong style="color: var(--accent-cyan);">Abstract:</strong> We present a systematic evaluation of VQE algorithms applied to molecular simulation tasks relevant to pharmaceutical research. Our results demonstrate <strong>40x speedup</strong> in ground state energy calculations for drug-like molecules...
+        </p>
+      </div>
+    </section>
+    
+    <!-- AI Reviewers -->
+    <h2 class="reviewers-section-title">
+      <span class="material-icons-round">psychology</span>
+      AI Peer Review Perspectives
+    </h2>
+    
+    <div class="reviewer-tabs">
+      <!-- Reviewer 1: Dr. Synthia Turing -->
+      <div class="reviewer-tab active" data-reviewer="turing" style="--tab-color: #00E5FF; --tab-color-secondary: #a78bfa; --tab-rgb: 0, 229, 255;" onclick="switchReviewer('turing')">
+        <div class="reviewer-tab-header">
+          <div class="reviewer-avatar">ST</div>
+          <div class="reviewer-info">
+            <h3>Dr. Synthia Turing</h3>
+            <p>Theoretical CS & Quantum Algorithms Expert</p>
+          </div>
+        </div>
+        <div class="reviewer-perspective">
+          <span class="material-icons-round" style="font-size: 14px;">functions</span>
+          Theoretical Foundations
+        </div>
+      </div>
+      
+      <!-- Reviewer 2: Prof. Helix Bio -->
+      <div class="reviewer-tab" data-reviewer="helix" style="--tab-color: #10b981; --tab-color-secondary: #06b6d4; --tab-rgb: 16, 185, 129;" onclick="switchReviewer('helix')">
+        <div class="reviewer-tab-header">
+          <div class="reviewer-avatar">HB</div>
+          <div class="reviewer-info">
+            <h3>Prof. Helix Bio</h3>
+            <p>Computational Biologist & Translational Medicine Expert</p>
+          </div>
+        </div>
+        <div class="reviewer-perspective">
+          <span class="material-icons-round" style="font-size: 14px;">biotech</span>
+          Biological Applicability
+        </div>
+      </div>
+      
+      <!-- Reviewer 3: Architect Nova -->
+      <div class="reviewer-tab" data-reviewer="nova" style="--tab-color: #f59e0b; --tab-color-secondary: #ef4444; --tab-rgb: 245, 158, 11;" onclick="switchReviewer('nova')">
+        <div class="reviewer-tab-header">
+          <div class="reviewer-avatar">AN</div>
+          <div class="reviewer-info">
+            <h3>Architect Nova</h3>
+            <p>Systems Engineer & ML Infrastructure Specialist</p>
+          </div>
+        </div>
+        <div class="reviewer-perspective">
+          <span class="material-icons-round" style="font-size: 14px;">engineering</span>
+          Engineering Scalability
+        </div>
+      </div>
+    </div>
+    
+    <!-- Review Content: Dr. Synthia Turing -->
+    <div class="review-content active" id="review-turing">
+      <div class="review-panel" style="--section-color: #00E5FF; --section-rgb: 0, 229, 255;">
+        <div class="review-panel-header">
+          <div class="review-panel-title">
+            <span class="material-icons-round" style="color: #00E5FF;">analytics</span>
+            Dr. Synthia Turing's Analysis
+          </div>
+          <div class="review-score">
+            <span class="material-icons-round">verified</span>
+            Score: 92/100
+          </div>
+        </div>
+        
+        <div class="review-body">
+          <!-- Executive Summary -->
+          <div class="review-section" style="--section-color: #00E5FF;">
+            <div class="section-label">
+              <span class="material-icons-round">summarize</span>
+              Executive Summary
+            </div>
+            <div class="section-content">
+              <p>
+                From a computational complexity standpoint, this work represents a <strong>significant theoretical contribution</strong> to the NISQ-era quantum computing literature. The authors' systematic benchmarking approach provides much-needed empirical grounding for claims about quantum advantage in chemistry applications.
+              </p>
+              <p>
+                The <span class="insight-tag" style="--tag-rgb: 0, 229, 255; --tag-color: #00E5FF;">40x speedup claim</span>, while impressive, requires careful interpretation. My analysis reveals this applies specifically to the <em>variational ansatz optimization</em> phase, not end-to-end simulation—a distinction that matters for practical deployment timelines.
+              </p>
+            </div>
+          </div>
+          
+          <!-- Key Findings -->
+          <div class="review-section" style="--section-color: #00E5FF;">
+            <div class="section-label">
+              <span class="material-icons-round">lightbulb</span>
+              Key Theoretical Findings
+            </div>
+            <ul class="findings-list">
+              <li class="finding-item">
+                <div class="finding-icon"><span class="material-icons-round">check_circle</span></div>
+                <div class="finding-text">
+                  <strong>Error Mitigation Novelty:</strong> The proposed symmetry-preserving error mitigation technique is theoretically sound and represents a genuine advance over zero-noise extrapolation methods.
+                  <span class="citation-ref">[Sec 3.2]</span>
+                </div>
+              </li>
+              <li class="finding-item">
+                <div class="finding-icon"><span class="material-icons-round">check_circle</span></div>
+                <div class="finding-text">
+                  <strong>Ansatz Complexity Analysis:</strong> Authors provide rigorous bounds on circuit depth scaling as O(n⁴) for n-qubit molecular simulations—important for assessing near-term feasibility.
+                  <span class="citation-ref">[Thm 2.1]</span>
+                </div>
+              </li>
+              <li class="finding-item">
+                <div class="finding-icon"><span class="material-icons-round">warning</span></div>
+                <div class="finding-text">
+                  <strong>Classical Baseline Gap:</strong> Comparison against classical CCSD(T) could be strengthened by including more recent tensor network methods that have improved significantly since 2020.
+                </div>
+              </li>
+              <li class="finding-item">
+                <div class="finding-icon"><span class="material-icons-round">info</span></div>
+                <div class="finding-text">
+                  <strong>Sample Complexity:</strong> Missing analysis of required measurement shots for chemical accuracy (1.6 kcal/mol)—critical for total wall-clock time estimates.
+                </div>
+              </li>
+            </ul>
+          </div>
+          
+          <!-- Analysis Grid -->
+          <div class="analysis-grid">
+            <div class="analysis-column strengths">
+              <div class="column-header strengths">
+                <span class="material-icons-round">add_circle</span>
+                Theoretical Strengths
+              </div>
+              <ul class="analysis-list strengths">
+                <li>Rigorous asymptotic complexity bounds provided</li>
+                <li>Error mitigation grounded in representation theory</li>
+                <li>Comprehensive benchmark across molecule classes</li>
+                <li>Open-source implementation enables reproducibility</li>
+                <li>Honest discussion of limitations in Sec 5</li>
+              </ul>
+            </div>
+            <div class="analysis-column concerns">
+              <div class="column-header concerns">
+                <span class="material-icons-round">remove_circle</span>
+                Areas Requiring Clarification
+              </div>
+              <ul class="analysis-list concerns">
+                <li>Quantum resource estimates lack error bars</li>
+                <li>Classical comparison baseline could be stronger</li>
+                <li>Scalability beyond ~20 qubits untested</li>
+                <li>Measurement overhead not fully accounted</li>
+              </ul>
+            </div>
+          </div>
+          
+          <!-- Verdict -->
+          <div class="verdict-box" style="--verdict-color: #00E5FF; --verdict-rgb-r: 0; --verdict-rgb-g: 229; --verdict-rgb-b: 255;">
+            <div class="verdict-label">
+              <span class="material-icons-round">gavel</span>
+              Theoretical Verdict
+            </div>
+            <div class="verdict-text">
+              This paper makes a <strong>solid theoretical contribution</strong> to quantum computing for chemistry. While not claiming quantum advantage on today's hardware, it provides essential groundwork for identifying when such advantage might emerge. I recommend acceptance with minor revisions addressing the classical baseline comparison.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Review Content: Prof. Helix Bio -->
+    <div class="review-content" id="review-helix">
+      <div class="review-panel" style="--section-color: #10b981; --section-rgb: 16, 185, 129;">
+        <div class="review-panel-header">
+          <div class="review-panel-title">
+            <span class="material-icons-round" style="color: #10b981;">biotech</span>
+            Prof. Helix Bio's Analysis
+          </div>
+          <div class="review-score" style="background: rgba(16, 185, 129, 0.15); color: #10b981;">
+            <span class="material-icons-round">verified</span>
+            Score: 96/100
+          </div>
+        </div>
+        
+        <div class="review-body">
+          <!-- Translational Impact -->
+          <div class="review-section" style="--section-color: #10b981;">
+            <div class="section-label">
+              <span class="material-icons-round">healing</span>
+              Translational Impact Assessment
+            </div>
+            <div class="section-content">
+              <p>
+                From a drug discovery perspective, this research addresses one of pharmaceutical R&D's most expensive bottlenecks: <strong>accurate binding affinity prediction</strong>. Current computational approaches require weeks of supercomputer time per target-ligand pair—the 40x speedup demonstrated here could compress this to hours, fundamentally changing hit-to-lead timelines.
+              </p>
+              <p>
+                What excites me most is the choice of <span class="insight-tag" style="--tag-rgb: 16, 185, 129; --tag-color: #10b981;">drug-like molecules</span> as benchmarks rather than toy systems. The inclusion of kinase inhibitors and GPCR ligands—targets representing >50% of current drug discovery efforts—signals this team understands real pharmaceutical needs.
+              </p>
+            </div>
+          </div>
+          
+          <!-- Biological Validation -->
+          <div class="review-section" style="--section-color: #10b981;">
+            <div class="section-label">
+              <span class="material-icons_round">science</span>
+              Biological Plausibility Check
+            </div>
+            <ul class="findings-list">
+              <li class="finding-item">
+                <div class="finding-icon"><span class="material-icons-round">check_circle</span></div>
+                <div class="finding-text">
+                  <strong>Molecule Selection:</strong> Benchmarks include FDA-approved drugs and clinical candidates—not just academic test cases. This validates real-world applicability.
+                  <span class="citation-ref">[Table 2]</span>
+                </div>
+              </li>
+              <li class="finding-item">
+                <div class="finding-icon"><span class="material-icons-round">check_circle</span></div>
+                <div class="finding-text">
+                  <strong>Accuracy Threshold:</strong> Achieved chemical accuracy (1.6 kcal/mol) on 73% of tested molecules—above the threshold typically needed for lead optimization decisions.
+                </div>
+              </li>
+              <li class="finding-item">
+                <div class="finding-icon"><span class="material-icons-round">priority_high</span></div>
+                <div class="finding-text">
+                  <strong>Solvent Effects:</strong> Gas-phase calculations dominate; implicit solvation only briefly mentioned. For drug discovery, aqueous phase behavior is critical.
+                </div>
+              </li>
+              <li class="finding-item">
+                <div class="finding-icon"><span class="material-icons-round">info</span></div>
+                <div class="finding-text">
+                  <strong>Protein Environment:</strong> No QM/MM or embedding scheme discussed. Actual drug-target interactions occur in complex protein environments.
+                </div>
+              </li>
+            </ul>
+          </div>
+          
+          <!-- Therapeutic Implications -->
+          <div class="review-section" style="--section-color: #10b981;">
+            <div class="section-label">
+              <span class="material-icons-round">medication</span>
+              Therapeutic Implications
+            </div>
+            <div class="section-content">
+              <p>If scaled successfully, this technology could impact several therapeutic areas:</p>
+              <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 16px;">
+                <div style="padding: 16px; background: rgba(16, 185, 129, 0.08); border-radius: 12px;">
+                  <strong style="color: #10b981; font-size: 13px;">Oncology</strong>
+                  <p style="font-size: 13px; color: var(--text-secondary); margin-top: 4px;">Kinase inhibitor optimization for targeted cancer therapies</p>
+                </div>
+                <div style="padding: 16px; background: rgba(16, 185, 129, 0.08); border-radius: 12px;">
+                  <strong style="color: #10b981; font-size: 13px;">CNS Disorders</strong>
+                  <p style="font-size: 13px; color: var(--text-secondary); margin-top: 4px;">Blood-brain barrier permeability prediction enhancement</p>
+                </div>
+                <div style="padding: 16px; background: rgba(16, 185, 129, 0.08); border-radius: 12px;">
+                  <strong style="color: #10b981; font-size: 13px;">Infectious Disease</strong>
+                  <p style="font-size: 13px; color: var(--text-secondary); margin-top: 4px;">Antiviral drug design acceleration (relevant post-COVID)</p>
+                </div>
+                <div style="padding: 16px; background: rgba(16, 185, 129, 0.08); border-radius: 12px;">
+                  <strong style="color: #10b981; font-size: 13px;">Rare Diseases</strong>
+                  <p style="font-size: 13px; color: var(--text-secondary); margin-top: 4px;">Making orphan drug discovery economically viable</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Verdict -->
+          <div class="verdict-box" style="--verdict-color: #10b981; --verdict-rgb-r: 16; --verdict-rgb-g: 185; --verdict-rgb-b: 129;">
+            <div class="verdict-label">
+              <span class="material-icons-round">favorite</span>
+              Clinical Translation Verdict
+            </div>
+            <div class="verdict-text">
+              This research has <strong>genuine potential to transform pharmaceutical computing</strong>. The focus on drug-relevant molecules and achievement of chemical accuracy places it ahead of most quantum chemistry papers. I strongly recommend follow-up studies incorporating solvent effects and protein environments—and encourage pharma partnerships for validation studies.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Review Content: Architect Nova -->
+    <div class="review-content" id="review-nova">
+      <div class="review-panel" style="--section-color: #f59e0b; --section-rgb: 245, 158, 11;">
+        <div class="review-panel-header">
+          <div class="review-panel-title">
+            <span class="material-icons-round" style="color: #f59e0b;">memory</span>
+            Architect Nova's Analysis
+          </div>
+          <div class="review-score" style="background: rgba(245, 158, 11, 0.15); color: #f59e0b;">
+            <span class="material-icons-round">verified</span>
+            Score: 88/100
+          </div>
+        </div>
+        
+        <div class="review-body">
+          <!-- Implementation Feasibility -->
+          <div class="review-section" style="--section-color: #f59e0b;">
+            <div class="section-label">
+              <span class="material-icons-round">build_circle</span>
+              Implementation Feasibility Assessment
+            </div>
+            <div class="section-content">
+              <p>
+                Let me give you the straight talk: this is <strong>promising research</strong>, but production deployment faces non-trivial engineering challenges. Having built ML infrastructure at scale, I can identify several gaps between the paper's controlled experiments and what's needed for a production drug discovery platform.
+              </p>
+              <p>
+                The good news: their code is open-source (major plus!), uses standard quantum computing frameworks (Qiskit/PennyLane), and the benchmarks are well-documented. This means reproduction is feasible—which is more than I can say for many papers in this space.
+              </p>
+            </div>
+          </div>
+          
+          <!-- Technical Deep Dive -->
+          <div class="review-section" style="--section-color: #f59e0b;">
+            <div class="section-label">
+              <span class="material-icons-round">code</span>
+              Technical Implementation Analysis
+            </div>
+            <ul class="findings-list">
+              <li class="finding-item">
+                <div class="finding-icon"><span class="material-icons-round">check_circle</span></div>
+                <div class="finding-text">
+                  <strong>Code Quality:</strong> Repository follows reasonable structure with Docker support. CI/CD present but tests are basic—needs integration testing suite.
+                  <span class="citation_ref">[GitHub]</span>
+                </div>
+              </li>
+              <li class="finding-item">
+                <div class="finding-icon"><span class="material-icons-round">speed</span></div>
+                <div class="finding-text">
+                  <strong>Performance Profile:</strong> Single-molecule runtime ~2 hours on simulated 32-qubit backend. For a library screen of 10M compounds, this needs 1000x improvement through parallelization/caching.
+                </div>
+              </li>
+              <li class="finding-item">
+                <div class="finding-icon"><span class="material-icons-round">storage</span></div>
+                <div class="finding-text">
+                  <strong>Data Pipeline:</strong> No mention of result caching, incremental updates, or integration with existing cheminformatics databases (ChEMBL, PubChem).
+                </div>
+              </li>
+              <li class="finding-item">
+                <div class="finding-icon"><span class="material-icons-round">cloud_queue</span></div>
+                <div class="finding-text">
+                  <strong>Cloud Deployment:</strong> AWS/Azure quantum services compatibility not discussed. Production systems need cloud-native architecture for burst compute requirements.
+                </div>
+              </li>
+            </ul>
+          </div>
+          
+          <!-- Scalability Roadmap -->
+          <div class="review-section" style="--section-color: #f59e0b;">
+            <div class="section-label">
+              <span class="material-icons-round">timeline</span>
+              Scalability Roadmap Estimate
+            </div>
+            <div style="overflow-x: auto;">
+              <table style="width: 100%; border-collapse: collapse; font-size: 14px;">
+                <thead>
+                  <tr style="background: rgba(245, 158, 11, 0.1);">
+                    <th style="padding: 12px; text-align: left; color: #f59e0b;">Phase</th>
+                    <th style="padding: 12px; text-align: left; color: #f59e0b;">Timeline</th>
+                    <th style="padding: 12px; text-align: left; color: #f59e0b;">Molecules/Day</th>
+                    <th style="padding: 12px; text-align: left; color: #f59e0b;">Infrastructure</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr style="border-bottom: 1px solid var(--border-subtle);">
+                    <td style="padding: 12px;">Research Prototype</td>
+                    <td style="padding: 12px; color: var(--text-muted);">Current</td>
+                    <td style="padding: 12px; font-family: var(--font-mono);">~12</td>
+                    <td style="padding: 12px;">Single workstation + simulator</td>
+                  </tr>
+                  <tr style="border-bottom: 1px solid var(--border-subtle);">
+                    <td style="padding: 12px;">Pilot Cluster</td>
+                    <td style="padding: 12px; color: var(--text-muted);">6-12 months</td>
+                    <td style="padding: 12px; font-family: var(--font-mono);">~1,000</td>
+                    <td style="padding: 12px;">10-node cluster + cloud quantum</td>
+                  </tr>
+                  <tr style="border-bottom: 1px solid var(--border-subtle);">
+                    <td style="padding: 12px;">Production MVP</td>
+                    <td style="padding: 12px; color: var(--text-muted);">18-24 months</td>
+                    <td style="padding: 12px; font-family: var(--font-mono);">~100,000</td>
+                    <td style="padding: 12px;">Kubernetes + job queue + cache layer</td>
+                  </tr>
+                  <tr>
+                    <td style="padding: 12px;">Enterprise Scale</td>
+                    <td style="padding: 12px; color: var(--text-muted);">3-5 years</td>
+                    <td style="padding: 12px; font-family: var(--font-mono);">~10M+</td>
+                    <td style="padding: 12px;">Distributed + specialized ASICs</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          
+          <!-- Verdict -->
+          <div class="verdict-box" style="--verdict-color: #f59e0b; --verdict-rgb-r: 245; --verdict-rgb-g: 158; --verdict-rgb-b: 11;">
+            <div class="verdict-label">
+              <span class="material-icons-round">engineering</span>
+              Engineering Verdict
+            </div>
+            <div class="verdict-text">
+              Solid foundational work with clear path to production, but requires <strong>significant engineering investment</strong> beyond the research scope. I recommend the authors partner with cloud providers (AWS Braket, Azure Quantum) for production hardening. The code quality suggests this team can deliver—just needs scale-up resources.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Consensus Section -->
+    <section class="consensus-section">
+      <div class="consensus-header">
+        <div class="consensus-icon">
+          <span class="material-icons-round">groups</span>
+        </div>
+        <h2 class="consensus-title">Tri-Review Consensus</h2>
+      </div>
+      
+      <div class="consensus-body">
+        <div class="consensus-card" style="--card-color: #00E5FF;">
+          <div class="consensus-card-value">92</div>
+          <div class="consensus-card-label">Theoretical Soundness</div>
+        </div>
+        <div class="consensus-card" style="--card-color: #10b981;">
+          <div class="consensus-card-value">96</div>
+          <div class="consensus-card-label">Biological Relevance</div>
+        </div>
+        <div class="consensus-card" style="--card-color: #f59e0b;">
+          <div class="consensus-card-value">88</div>
+          <div class="consensus-card-label">Engineering Readiness</div>
+        </div>
+      </div>
+      
+      <div class="consensus-summary">
+        <p>
+          <strong>Consensus Assessment:</strong> All three reviewers agree this paper represents a <strong>meaningful advance</strong> in quantum computing for drug discovery. The weighted consensus score of <strong>92/100</strong> reflects strong theoretical foundations, exceptional biological relevance, and acceptable (though improvable) engineering readiness. The primary recommendation is <em>acceptance with encouragement for industry collaboration</em> to address scalability and real-world validation gaps identified across all perspectives.
+        </p>
+        <p style="margin-top: 16px; margin-bottom: 0;">
+          <strong>Key Consensus Insights:</strong> 
+          <span class="insight-tag" style="--tag-rgb: 167, 139, 250; --tag-color: #a78bfa;">Error mitigation technique is novel</span>
+          <span class="insight-tag" style="--tag-rgb: 167, 139, 250; --tag-color: #a78bfa;">Drug-like molecule selection appropriate</span>
+          <span class="insight-tag" style="--tag-rgb: 167, 139, 250; --tag-color: #a78bfa;">Production path requires partnership</span>
+        </p>
+      </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="panel-footer">
+      <p>SciMSPT AI Peer Review System — Multi-Perspective Scientific Analysis</p>
+      <div class="footer-links">
+        <a href="#">View Full Review PDF</a>
+        <a href="#">Export Citations</a>
+        <a href="#">Request Custom Analysis</a>
+        <a href="#">API Documentation</a>
+      </div>
+    </footer>
+  </div>
+  
+  <script>
+    function switchReviewer(reviewerId) {
+      // Update tabs
+      document.querySelectorAll('.reviewer-tab').forEach(tab => {
+        tab.classList.remove('active');
+        if (tab.dataset.reviewer === reviewerId) {
+          tab.classList.add('active');
+        }
+      });
+      
+      // Update content panels
+      document.querySelectorAll('.review-content').forEach(content => {
+        content.classList.remove('active');
+      });
+      
+      const targetPanel = document.getElementById(`review-${reviewerId}`);
+      if (targetPanel) {
+        targetPanel.classList.add('active');
+        
+        // Smooth scroll to panel
+        targetPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+    
+    // Add keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if (e.key === '1' || e.key === '2' || e.key === '3') {
+        const reviewers = ['turing', 'helix', 'nova'];
+        const idx = parseInt(e.key) - 1;
+        if (reviewers[idx]) {
+          switchReviewer(reviewers[idx]);
+        }
+      }
+    });
+    
+    // Animate elements on scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, { threshold: 0.1 });
+    
+    document.querySelectorAll('.finding-item, .consensus-card').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(20px)';
+      el.style.transition = 'all 0.4s ease';
+      observer.observe(el);
+    });
+  </script>
+</body>
+</html>
