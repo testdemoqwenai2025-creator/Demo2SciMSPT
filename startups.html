@@ -1604,6 +1604,320 @@
       border-radius: 12px;
     }
 
+    /* ============================================
+       DYNAMIC FOOTER ANIMATIONS - Phase 3 Enhanced
+       ============================================ */
+    
+    /* Footer Base Enhancements */
+    .footer {
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(180deg, var(--bg-glass) 0%, rgba(3, 8, 16, 0.95) 100%);
+    }
+    
+    /* Animated Background Particles */
+    .footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: 
+        radial-gradient(circle at 10% 20%, rgba(0, 229, 255, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 90% 80%, rgba(167, 139, 250, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 50% 50%, rgba(244, 114, 182, 0.05) 0%, transparent 70%);
+      animation: footerBgPulse 15s ease-in-out infinite alternate;
+      pointer-events: none;
+      z-index: 0;
+    }
+    
+    @keyframes footerBgPulse {
+      0% { opacity: 0.5; transform: scale(1); }
+      100% { opacity: 1; transform: scale(1.1); }
+    }
+    
+    /* Floating Particles Container */
+    .footer-particles {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 0;
+    }
+    
+    .footer-particle {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: var(--accent-primary);
+      border-radius: 50%;
+      opacity: 0;
+      animation: particleFloat 12s ease-in-out infinite;
+    }
+    
+    .footer-particle:nth-child(1) { left: 10%; animation-delay: 0s; animation-duration: 12s; }
+    .footer-particle:nth-child(2) { left: 20%; animation-delay: 2s; animation-duration: 14s; background: var(--accent-tertiary); }
+    .footer-particle:nth-child(3) { left: 30%; animation-delay: 4s; animation-duration: 10s; }
+    .footer-particle:nth-child(4) { left: 40%; animation-delay: 1s; animation-duration: 16s; background: var(--accent-pink); }
+    .footer-particle:nth-child(5) { left: 50%; animation-delay: 3s; animation-duration: 11s; }
+    .footer-particle:nth-child(6) { left: 60%; animation-delay: 5s; animation-duration: 13s; background: var(--accent-green); }
+    .footer-particle:nth-child(7) { left: 70%; animation-delay: 2.5s; animation-duration: 15s; }
+    .footer-particle:nth-child(8) { left: 80%; animation-delay: 4.5s; animation-duration: 9s; background: var(--accent-gold); }
+    .footer-particle:nth-child(9) { left: 90%; animation-delay: 1.5s; animation-duration: 12s; }
+    .footer-particle:nth-child(10) { left: 15%; animation-delay: 6s; animation-duration: 14s; background: var(--accent-tertiary); }
+    
+    @keyframes particleFloat {
+      0% {
+        transform: translateY(100px) translateX(0) scale(0);
+        opacity: 0;
+      }
+      10% {
+        opacity: 0.8;
+        transform: translateY(80px) translateX(10px) scale(1);
+      }
+      90% {
+        opacity: 0.3;
+        transform: translateY(-20px) translateX(-10px) scale(0.8);
+      }
+      100% {
+        transform: translateY(-40px) translateX(0) scale(0);
+        opacity: 0;
+      }
+    }
+    
+    /* Footer Content Positioning */
+    .footer > * {
+      position: relative;
+      z-index: 1;
+    }
+    
+    .footer-content {
+      position: relative;
+      z-index: 1;
+    }
+    
+    /* Logo Animation */
+    .footer-logo-icon {
+      animation: logoGlow 3s ease-in-out infinite alternate;
+      transition: all 0.3s ease;
+    }
+    
+    @keyframes logoGlow {
+      0% {
+        box-shadow: 0 0 10px rgba(0, 229, 255, 0.3);
+        transform: rotate(0deg) scale(1);
+      }
+      100% {
+        box-shadow: 0 0 25px rgba(0, 229, 255, 0.6), 0 0 50px rgba(167, 139, 250, 0.3);
+        transform: rotate(360deg) scale(1.05);
+      }
+    }
+    
+    .footer-logo:hover .footer-logo-icon {
+      transform: rotate(720deg) scale(1.15);
+      box-shadow: 0 0 30px rgba(0, 229, 255, 0.8), 0 0 60px rgba(167, 139, 250, 0.4);
+    }
+    
+    /* Column Headers Animation */
+    .footer-column h4 {
+      position: relative;
+      display: inline-block;
+    }
+    
+    .footer-column h4::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent-primary), var(--accent-tertiary));
+      transition: width 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    
+    .footer-column:hover h4::after {
+      width: 100%;
+    }
+    
+    /* Link Hover Effects - Animated Underline */
+    .footer-links a {
+      position: relative;
+      display: inline-block;
+      padding: 4px 0;
+      transition: all 0.3s ease;
+    }
+    
+    .footer-links a::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: linear-gradient(90deg, var(--accent-primary), var(--accent-tertiary));
+      transition: width 0.3s ease;
+    }
+    
+    .footer-links a:hover::before {
+      width: 100%;
+    }
+    
+    .footer-links a:hover {
+      color: var(--accent-primary);
+      transform: translateX(8px);
+      text-shadow: 0 0 20px rgba(0, 229, 255, 0.5);
+    }
+    
+    /* Social Icons Enhancement */
+    .footer-social a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border-subtle);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .footer-social a::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      background: radial-gradient(circle, var(--accent-primary) 0%, transparent 70%);
+      transform: translate(-50%, -50%);
+      transition: all 0.5s ease;
+      border-radius: 50%;
+      opacity: 0;
+    }
+    
+    .footer-social a:hover::before {
+      width: 150%;
+      height: 150%;
+      opacity: 0.2;
+    }
+    
+    .footer-social a:hover {
+      color: var(--accent-primary);
+      transform: translateY(-5px) scale(1.1);
+      border-color: var(--accent-primary);
+      box-shadow: 0 10px 30px rgba(0, 229, 255, 0.3);
+    }
+    
+    .footer-social a:hover .material-icons-round {
+      animation: socialIconBounce 0.6s ease;
+    }
+    
+    @keyframes socialIconBounce {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.3); }
+    }
+    
+    /* Footer Bottom Enhancement */
+    .footer-bottom {
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .footer-bottom::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--accent-primary), var(--accent-tertiary), transparent);
+      animation: shimmerLine 4s ease-in-out infinite;
+    }
+    
+    @keyframes shimmerLine {
+      0% { left: -100%; }
+      100% { left: 100%; }
+    }
+    
+    /* Copyright Text Pulse */
+    .footer-bottom span {
+      animation: textPulse 4s ease-in-out infinite;
+    }
+    
+    @keyframes textPulse {
+      0%, 100% { opacity: 0.7; }
+      50% { opacity: 1; }
+    }
+    
+    /* Neural Network Lines (decorative) */
+    .footer-neural-line {
+      position: absolute;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border-subtle), transparent);
+      animation: neuralPulse 8s ease-in-out infinite;
+      pointer-events: none;
+    }
+    
+    .footer-neural-line.line-1 {
+      top: 20%;
+      left: 0;
+      width: 30%;
+      animation-delay: 0s;
+    }
+    
+    .footer-neural-line.line-2 {
+      top: 60%;
+      right: 0;
+      width: 25%;
+      animation-delay: 3s;
+    }
+    
+    .footer-neural-line.line-3 {
+      top: 80%;
+      left: 10%;
+      width: 20%;
+      animation-delay: 5s;
+    }
+    
+    @keyframes neuralPulse {
+      0%, 100% { opacity: 0; transform: scaleX(0.5); }
+      50% { opacity: 0.6; transform: scaleX(1); }
+    }
+    
+    /* Interactive Glow on Footer Hover */
+    .footer:hover .footer-logo-icon {
+      animation-play-state: paused;
+      box-shadow: 0 0 40px rgba(0, 229, 255, 0.7), 0 0 80px rgba(167, 139, 250, 0.4);
+    }
+    
+    /* Staggered Entrance Animation */
+    .footer-brand, .footer-column, .footer-bottom {
+      animation: footerSlideIn 0.8s ease-out both;
+    }
+    
+    .footer-brand { animation-delay: 0.1s; }
+    .footer-column:nth-of-type(2) { animation-delay: 0.2s; }
+    .footer-column:nth-of-type(3) { animation-delay: 0.3s; }
+    .footer-column:nth-of-type(4) { animation-delay: 0.4s; }
+    .footer-bottom { animation-delay: 0.5s; }
+    
+    @keyframes footerSlideIn {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
 </style>
 </head>
 <body>
@@ -2223,6 +2537,24 @@
 
   <!-- Footer -->
   <footer class="footer">
+    <!-- Dynamic Footer Effects -->
+    <div class="footer-particles">
+      <div class="footer-particle"></div>
+      <div class="footer-particle"></div>
+      <div class="footer-particle"></div>
+      <div class="footer-particle"></div>
+      <div class="footer-particle"></div>
+      <div class="footer-particle"></div>
+      <div class="footer-particle"></div>
+      <div class="footer-particle"></div>
+      <div class="footer-particle"></div>
+      <div class="footer-particle"></div>
+    </div>
+    
+    <div class="footer-neural-line line-1"></div>
+    <div class="footer-neural-line line-2"></div>
+    <div class="footer-neural-line line-3"></div>
+    
     <div class="footer-content">
       <div class="footer-brand">
         <div class="footer-logo">
