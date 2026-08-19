@@ -1081,7 +1081,7 @@
         </a>
         <a href="#subscribe" class="cta-btn secondary">
           <span class="material-icons">notifications_active</span>
-          Subscribe to Updates
+          Get Updates
         </a>
       </div>
       <div class="stats-row">
@@ -1804,21 +1804,41 @@ digest = parser.<span class="token-function">parse_latest</span>()
         </div>
       </section>
 
-      <!-- Subscribe CTA -->
+      <!-- Subscribe CTA (Automated - Boolean Only) -->
       <section id="subscribe" class="subscribe-section">
         <div class="subscribe-content">
-          <h2 class="subscribe-title">Stay Ahead of Discovery</h2>
+          <h2 class="subscribe-title">Get Developer Access</h2>
           <p class="subscribe-desc">
-            Subscribe to our developer newsletter for API updates, new endpoint releases, 
-            case studies, and early access to beta features shaping the future of scientific computing.
+            Select your preferences to receive API updates, new endpoint releases, 
+            case studies, and early access to beta features. No email required — fully automated.
           </p>
-          <form class="subscribe-form" onsubmit="handleSubscribe(event)">
-            <input type="email" class="subscribe-input" placeholder="Enter your email address" required>
-            <button type="submit" class="cta-btn primary">
-              <span class="material-icons">send</span>
-              Subscribe Now
-            </button>
-          </form>
+          
+          <div class="subscribe-options" style="display: flex; flex-direction: column; gap: 10px; max-width: 480px; margin: 0 auto;">
+            <label style="display: flex; align-items: center; gap: 12px; padding: 14px 18px; background: var(--surface); border: 2px solid var(--border); border-radius: 12px; cursor: pointer; transition: all 0.25s ease;" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='var(--border)'">
+              <input type="checkbox" checked style="width: 20px; height: 20px; accent-color: var(--accent); cursor: pointer;">
+              <span style="display: flex; flex-direction: column;"><strong style="font-size: 14px;">API Updates</strong><small style="font-size: 12px; color: var(--muted);">New endpoints & features</small></span>
+            </label>
+            
+            <label style="display: flex; align-items: center; gap: 12px; padding: 14px 18px; background: var(--surface); border: 2px solid var(--border); border-radius: 12px; cursor: pointer; transition: all 0.25s ease;" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='var(--border)'">
+              <input type="checkbox" checked style="width: 20px; height: 20px; accent-color: var(--accent); cursor: pointer;">
+              <span style="display: flex; flex-direction: column;"><strong style="font-size: 14px;">Case Studies</strong><small style="font-size: 12px; color: var(--muted);">Real-world integrations</small></span>
+            </label>
+            
+            <label style="display: flex; align-items: center; gap: 12px; padding: 14px 18px; background: var(--surface); border: 2px solid var(--border); border-radius: 12px; cursor: pointer; transition: all 0.25s ease;" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='var(--border)'">
+              <input type="checkbox" style="width: 20px; height: 20px; accent-color: var(--accent); cursor: pointer;">
+              <span style="display: flex; flex-direction: column;"><strong style="font-size: 14px;">Beta Features</strong><small style="font-size: 12px; color: var(--muted);">Early access program</small></span>
+            </label>
+            
+            <label style="display: flex; align-items: center; gap: 12px; padding: 14px 18px; background: var(--surface); border: 2px solid var(--border); border-radius: 12px; cursor: pointer; transition: all 0.25s ease;" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='var(--border)'">
+              <input type="checkbox" checked style="width: 20px; height: 20px; accent-color: var(--accent); cursor: pointer;">
+              <span style="display: flex; flex-direction: column;"><strong style="font-size: 14px;">Weekly Digest</strong><small style="font-size: 12px; color: var(--muted);">Research roundup emails</small></span>
+            </label>
+          </div>
+          
+          <button onclick="handleSubscribe()" class="cta-btn primary" style="margin-top: 24px;">
+            <span class="material-icons">check_circle</span>
+            Get Instant Access
+          </button>
           <p style="font-size: 12px; color: var(--muted); margin-top: 16px;">
             Join 2,400+ developers building the future of scientific research infrastructure.
           </p>
@@ -1840,7 +1860,10 @@ digest = parser.<span class="token-function">parse_latest</span>()
         <span>Sci<em>MSPT</em></span>
       </div>
       <div class="footer-links">
+        <a href="index.html">Home</a>
         <a href="documentation.html">Docs</a>
+        <a href="platform.html">Platform</a>
+        <a href="studio.html">Studio</a>
         <a href="about.html">About</a>
         <a href="#">Status</a>
         <a href="#">GitHub</a>
@@ -1918,25 +1941,33 @@ digest = parser.<span class="token-function">parse_latest</span>()
       document.getElementById('sdk-' + sdkId).style.display = 'block';
     }
 
-    // Subscribe Handler
-    function handleSubscribe(e) {
-      e.preventDefault();
-      const input = e.target.querySelector('input');
-      const email = input.value;
+    // Subscribe Handler (Boolean-based - No Email Required)
+    function handleSubscribe() {
+      const checkboxes = document.querySelectorAll('.subscribe-options input[type="checkbox"]');
+      const selected = Array.from(checkboxes).filter(cb => cb.checked).length;
       
-      // Simulate subscription success
-      const btn = e.target.querySelector('button');
+      // Simulate automated subscription
+      const btn = event.target.closest('button');
       const originalHTML = btn.innerHTML;
-      btn.innerHTML = '<span class="material-icons">check_circle</span> Subscribed!';
+      btn.innerHTML = '<span class="material-icons">autorenew</span> Configuring...';
       btn.disabled = true;
-      input.value = '';
-      input.placeholder = 'Thank you for subscribing!';
       
       setTimeout(() => {
-        btn.innerHTML = originalHTML;
-        btn.disabled = false;
-        input.placeholder = 'Enter your email address';
-      }, 3000);
+        btn.innerHTML = '<span class="material-icons">check_circle</span> Access Enabled!';
+        
+        // Store preferences
+        const prefs = {};
+        checkboxes.forEach((cb, i) => {
+          prefs[`option_${i}`] = cb.checked;
+        });
+        localStorage.setItem('scimspt-dev-prefs', JSON.stringify(prefs));
+        
+        setTimeout(() => {
+          alert(`✅ Developer Access Configured!\n\nSelected (${selected} options):\n${Array.from(checkboxes).filter(cb => cb.checked).map(cb => cb.parentElement.querySelector('strong').textContent).join('\n')}\n\nAll features activated — no email required!`);
+          btn.innerHTML = originalHTML;
+          btn.disabled = false;
+        }, 500);
+      }, 1000);
     }
 
     // Smooth scroll for sidebar links

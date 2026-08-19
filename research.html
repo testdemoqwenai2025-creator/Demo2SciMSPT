@@ -115,8 +115,11 @@
     .footer-brand img { width: 28px; height: 28px; filter: drop-shadow(0 0 4px var(--accent)); }
     .footer-brand span { font-family: var(--font-heading); font-size: 17px; font-weight: 700; }
     .footer-brand span em { color: var(--accent); font-style: normal; }
-    .footer-links { display: flex; gap: 24px; }
-    .footer-links a { font-size: 13px; color: var(--muted); text-decoration: none; transition: color 0.25s ease; }
+    .footer-links { display: flex; gap: 24px; overflow-x: auto; padding-bottom: 8px; }
+    .footer-links::-webkit-scrollbar { height: 6px; }
+    .footer-links::-webkit-scrollbar-track { background: var(--surface); border-radius: 3px; }
+    .footer-links::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 3px; }
+    .footer-links a { font-size: 13px; color: var(--muted); text-decoration: none; transition: color 0.25s ease; white-space: nowrap; }
     .footer-links a:hover { color: var(--accent); }
     .footer-copy { font-size: 12px; color: var(--muted); width: 100%; text-align: center; margin-top: 24px; padding-top: 24px; border-top: 1px solid var(--border); }
 
@@ -876,7 +879,7 @@
     <div class="footer-content">
       <div class="footer-brand"><img src="assets/icons/icon-science.png" alt="SciMSPT"><span>Sci<em>MSPT</em> Research</span></div>
       <div class="footer-links">
-        <a href="index.html">Home</a><a href="dashboard.html">Dashboard</a><a href="research.html">Research</a><a href="startups.html">Startups</a><a href="about.html">About</a>
+        <a href="index.html">Home</a><a href="dashboard.html">Dashboard</a><a href="research.html">Research</a><a href="startups.html">Startups</a><a href="documentation.html">Documentation</a><a href="platform.html">Platform</a><a href="studio.html">Studio</a><a href="about.html">About</a>
       </div>
       <div class="footer-copy">&copy; 2026 SciMSPT Research Platform. Data sourced from ScienceDaily.</div>
     </div>
