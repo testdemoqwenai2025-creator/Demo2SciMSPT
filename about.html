@@ -191,6 +191,230 @@
       .float-btn { width: 44px; height: 44px; }
       .float-btn .material-icons { font-size: 20px; }
     }
+
+    /* ═══════════════════════════════════════════════════════════════
+       SCROLL ENHANCEMENTS - Progress Bar, Back-to-Top, Custom Scrollbar
+       ═══════════════════════════════════════════════════════════════ */
+    
+    /* Custom Scrollbar - Webkit Browsers */
+    ::-webkit-scrollbar { width: 10px; height: 10px; }
+    ::-webkit-scrollbar-track { 
+      background: var(--bg); 
+      border-radius: 10px;
+    }
+    ::-webkit-scrollbar-thumb { 
+      background: linear-gradient(180deg, var(--accent-glow), var(--accent));
+      border-radius: 10px;
+      border: 2px solid var(--bg);
+    }
+    ::-webkit-scrollbar-thumb:hover { 
+      background: linear-gradient(180deg, var(--accent), #a78bfa);
+    }
+    ::-webkit-scrollbar-corner { background: var(--bg); }
+    
+    /* Firefox Scrollbar */
+    * { scrollbar-width: thin; scrollbar-color: var(--accent) var(--bg); }
+
+    /* Scroll Progress Bar */
+    .scroll-progress {
+      position: fixed;
+      top: var(--nav-height);
+      left: 0;
+      width: 0%;
+      height: 3px;
+      background: linear-gradient(90deg, #4da8da, #a78bfa, #4da8da);
+      background-size: 200% 100%;
+      z-index: 9999;
+      transition: width 0.1s ease-out;
+      box-shadow: 0 0 10px rgba(77, 168, 218, 0.5);
+      animation: progressShimmer 3s linear infinite;
+    }
+    
+    @keyframes progressShimmer {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+
+    /* Back to Top Button */
+    .back-to-top {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #4da8da, #a78bfa);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      box-shadow: 
+        0 6px 25px rgba(77, 168, 218, 0.5),
+        0 0 40px rgba(167, 139, 250, 0.3);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(20px) scale(0.8);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 998;
+      border: 2px solid rgba(255, 255, 255, 0.2);
+    }
+    
+    .back-to-top.visible {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0) scale(1);
+    }
+    
+    .back-to-top:hover {
+      transform: translateY(-5px) scale(1.1);
+      box-shadow: 
+        0 12px 35px rgba(77, 168, 218, 0.7),
+        0 0 60px rgba(167, 139, 250, 0.4);
+    }
+    
+    .back-to-top:active {
+      transform: translateY(-2px) scale(0.95);
+    }
+    
+    .back-to-top .material-icons {
+      font-size: 26px;
+      animation: bounceArrow 2s ease-in-out infinite;
+    }
+    
+    @keyframes bounceArrow {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-3px); }
+    }
+
+    /* Scroll Position Indicator */
+    .scroll-indicator {
+      position: fixed;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      z-index: 997;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    
+    .scroll-indicator.visible { opacity: 1; }
+    
+    .indicator-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--border);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+    
+    .indicator-dot.active {
+      background: var(--accent);
+      transform: scale(1.4);
+      box-shadow: 0 0 8px var(--accent);
+    }
+    
+    .indicator-dot:hover {
+      background: var(--accent);
+      transform: scale(1.2);
+    }
+    
+    .indicator-dot::before {
+      content: attr(data-label);
+      position: absolute;
+      right: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 11px;
+      font-family: var(--font-body);
+      color: var(--muted);
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease;
+      padding: 4px 8px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+    }
+    
+    .indicator-dot:hover::before { opacity: 1; }
+
+    /* Sticky Footer Bar */
+    .footer-scroll-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 48px;
+      background: var(--nav-bg);
+      backdrop-filter: blur(20px);
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+      z-index: 996;
+      transform: translateY(100%);
+      transition: transform 0.3s ease;
+    }
+    
+    .footer-scroll-bar.visible {
+      transform: translateY(0);
+    }
+    
+    .footer-scroll-bar-left,
+    .footer-scroll-bar-right {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    
+    .footer-scroll-text {
+      font-size: 12px;
+      color: var(--muted);
+      font-family: var(--font-num);
+    }
+    
+    .footer-scroll-link {
+      font-size: 13px;
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 16px;
+      border-radius: 20px;
+      background: rgba(77, 168, 218, 0.1);
+      transition: all 0.3s ease;
+    }
+    
+    .footer-scroll-link:hover {
+      background: rgba(77, 168, 218, 0.2);
+      transform: translateY(-2px);
+    }
+    
+    @media (max-width: 1024px) {
+      .scroll-indicator { display: none; }
+    }
+    
+    @media (max-width: 768px) {
+      .back-to-top { 
+        bottom: 70px; 
+        right: 20px; 
+        width: 48px; 
+        height: 48px; 
+      }
+      .back-to-top .material-icons { font-size: 22px; }
+      .footer-scroll-bar { height: 44px; padding: 0 16px; }
+      .footer-scroll-text { font-size: 10px; }
+    }
   </style>
 </head>
 
@@ -622,6 +846,39 @@
     function toggleMobileMenu() { alert('Navigation:\n• Home\n• Dashboard\n• Research Trends\n• 7 Startups\n• About'); }
   </script>
   
+  <!-- Scroll Progress Bar -->
+  <div class="scroll-progress" id="scrollProgress"></div>
+  
+  <!-- Back to Top Button -->
+  <a href="#" class="back-to-top" id="backToTop" title="Back to Top">
+    <i class="material-icons">keyboard_arrow_up</i>
+  </a>
+  
+  <!-- Scroll Position Indicator -->
+  <div class="scroll-indicator" id="scrollIndicator">
+    <span class="indicator-dot active" data-label="About" data-section="about"></span>
+    <span class="indicator-dot" data-label="Methodology" data-section="methodology"></span>
+    <span class="indicator-dot" data-label="Reports" data-section="reports"></span>
+    <span class="indicator-dot" data-label="Contact" data-section="contact"></span>
+  </div>
+
+  <!-- Sticky Footer Bar (shows when scrolled) -->
+  <div class="footer-scroll-bar" id="footerScrollBar">
+    <div class="footer-scroll-bar-left">
+      <span class="footer-scroll-text" id="scrollPosition">0% • SciMSPT About</span>
+    </div>
+    <div class="footer-scroll-bar-right">
+      <a href="#about" class="footer-scroll-link" onclick="scrollToSection('about'); return false;">
+        <i class="material-icons" style="font-size: 16px;">north</i>
+        Top
+      </a>
+      <a href="#contact" class="footer-scroll-link" onclick="scrollToSection('contact'); return false;">
+        <i class="material-icons" style="font-size: 16px;">south</i>
+        Bottom
+      </a>
+    </div>
+  </div>
+
   <!-- Floating Navigation Buttons -->
   <div class="floating-nav">
     <a href="index.html" class="float-btn home-btn" title="Home">
@@ -631,5 +888,140 @@
       <i class="material-icons">arrow_back</i>
     </a>
   </div>
+
+  <script>
+    // ═══════════════════════════════════════════════════════════════
+    // SCROLL ENHANCEMENTS
+    // ═══════════════════════════════════════════════════════════════
+    
+    // Elements
+    const scrollProgress = document.getElementById('scrollProgress');
+    const backToTop = document.getElementById('backToTop');
+    const scrollIndicator = document.getElementById('scrollIndicator');
+    const footerScrollBar = document.getElementById('footerScrollBar');
+    const scrollPositionText = document.getElementById('scrollPosition');
+    const indicatorDots = document.querySelectorAll('.indicator-dot');
+    
+    // Sections for tracking (matching actual HTML IDs)
+    const sections = ['about', 'what-is', 'methodology', 'reports', 'tech', 'timeline', 'contact'];
+    
+    // Update scroll progress and show/hide elements
+    function updateScroll() {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrollPercent = (scrollTop / docHeight) * 100;
+      
+      // Update progress bar width
+      if (scrollProgress) {
+        scrollProgress.style.width = `${Math.min(scrollPercent, 100)}%`;
+      }
+      
+      // Update position text in footer bar
+      if (scrollPositionText) {
+        scrollPositionText.textContent = `${Math.round(scrollPercent)}% • SciMSPT About`;
+      }
+      
+      // Show/hide back to top button
+      if (backToTop) {
+        if (scrollTop > 400) {
+          backToTop.classList.add('visible');
+        } else {
+          backToTop.classList.remove('visible');
+        }
+      }
+      
+      // Show/hide scroll indicator
+      if (scrollIndicator) {
+        if (scrollTop > 600) {
+          scrollIndicator.classList.add('visible');
+        } else {
+          scrollIndicator.classList.remove('visible');
+        }
+      }
+      
+      // Show/hide footer scroll bar
+      if (footerScrollBar) {
+        if (scrollTop > 800) {
+          footerScrollBar.classList.add('visible');
+        } else {
+          footerScrollBar.classList.remove('visible');
+        }
+      }
+      
+      // Update active section indicator
+      updateActiveSection(scrollTop);
+    }
+    
+    // Update which section is currently active
+    function updateActiveSection(scrollY) {
+      let currentSection = 'about';
+      
+      for (const sectionId of sections) {
+        const section = document.getElementById(sectionId);
+        if (section) {
+          const rect = section.getBoundingClientRect();
+          if (rect.top <= window.innerHeight / 3) {
+            currentSection = sectionId;
+          }
+        }
+      }
+      
+      // Update dots
+      indicatorDots.forEach(dot => {
+        dot.classList.remove('active');
+        if (dot.dataset.section === currentSection) {
+          dot.classList.add('active');
+        }
+      });
+    }
+    
+    // Smooth scroll to top
+    if (backToTop) {
+      backToTop.addEventListener('click', (e) => {
+        e.preventDefault();
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+      });
+    }
+    
+    // Click on indicator dots to scroll to section
+    indicatorDots.forEach(dot => {
+      dot.addEventListener('click', () => {
+        const sectionId = dot.dataset.section;
+        scrollToSection(sectionId);
+      });
+    });
+    
+    // Scroll to specific section
+    function scrollToSection(sectionId) {
+      const section = document.getElementById(sectionId);
+      if (section) {
+        section.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }
+    }
+    
+    // Throttle scroll events for performance
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          updateScroll();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    });
+    
+    // Initial call
+    updateScroll();
+    
+    // Expose function globally
+    window.scrollToSection = scrollToSection;
+  </script>
 </body>
 </html>
