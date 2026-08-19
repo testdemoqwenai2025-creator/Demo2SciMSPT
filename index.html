@@ -308,13 +308,13 @@
     }
     
     .highlight-text span.research {
-      color: #1e3a8a;
-      -webkit-text-fill-color: #1e3a8a;
+      color: #0f172a;
+      -webkit-text-fill-color: #0f172a;
       font-weight: 950;
       text-shadow: 
-        0 0 40px rgba(30, 58, 138, 0.5),
-        0 4px 12px rgba(30, 58, 138, 0.3),
-        0 0 80px rgba(30, 58, 138, 0.2);
+        0 0 40px rgba(15, 23, 42, 0.8),
+        0 4px 12px rgba(15, 23, 42, 0.5),
+        0 0 80px rgba(30, 64, 175, 0.3);
       position: relative;
       display: inline-block;
       animation: researchPulse 3s ease-in-out infinite;
@@ -423,20 +423,70 @@
     }
     
     .btn-primary {
-      background: var(--accent);
+      background: linear-gradient(135deg, #4da8da 0%, #a78bfa 100%);
       color: white;
-      box-shadow: 0 4px 24px rgba(77, 168, 218, 0.35);
+      box-shadow: 
+        0 4px 24px rgba(77, 168, 218, 0.35),
+        0 0 40px rgba(167, 139, 250, 0.2);
+      font-weight: 700;
+      letter-spacing: 0.5px;
     }
     
-    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 36px rgba(77, 168, 218, 0.45); }
+    .btn-primary:hover { 
+      transform: translateY(-3px); 
+      box-shadow: 
+        0 8px 36px rgba(77, 168, 218, 0.5),
+        0 0 60px rgba(167, 139, 250, 0.3);
+    }
     
     .btn-secondary {
       background: var(--surface);
       color: var(--primary);
       border: 1px solid var(--border);
+      font-weight: 600;
     }
     
-    .btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+    .btn-secondary:hover { 
+      border-color: var(--accent); 
+      color: var(--accent); 
+      transform: translateY(-2px);
+    }
+    
+    /* Login Button - Ghost Style */
+    .btn-login {
+      background: transparent;
+      color: var(--muted);
+      border: 1px solid transparent;
+      font-weight: 500;
+      padding: 16px 24px;
+    }
+    
+    .btn-login:hover { 
+      color: var(--accent); 
+      border-color: var(--border);
+      transform: none;
+    }
+    
+    /* Studio IDE Button - Premium Dark */
+    .btn-studio {
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      color: #ffffff;
+      border: 1px solid rgba(77, 168, 218, 0.3);
+      box-shadow: 
+        0 4px 20px rgba(15, 23, 42, 0.5),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      font-weight: 600;
+      letter-spacing: 0.3px;
+    }
+    
+    .btn-studio:hover { 
+      transform: translateY(-2px);
+      border-color: rgba(77, 168, 218, 0.6);
+      box-shadow: 
+        0 8px 30px rgba(15, 23, 42, 0.7),
+        inset 0 1px 0 rgba(255, 255, 255, 0.15),
+        0 0 40px rgba(77, 168, 218, 0.2);
+    }
     .btn .material-icons { font-size: 18px; }
     
     /* Stats row */
@@ -614,9 +664,13 @@
           <i class="material-icons">arrow_forward</i>
           View This Week's Startups
         </a>
-        <a href="#pages" class="btn btn-secondary">
-          <i class="material-icons">auto_awesome</i>
-          How It Works
+        <a href="#pages" class="btn btn-studio">
+          <i class="material-icons">code</i>
+          Studio IDE
+        </a>
+        <a href="#" class="btn btn-login" onclick="alert('Login coming soon!'); return false;">
+          <i class="material-icons">login</i>
+          Login
         </a>
       </div>
       
