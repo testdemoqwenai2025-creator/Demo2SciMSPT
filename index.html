@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SciMSPT — Scientific Mesh for Science, Matter, Physics & Time</title>
-    <meta name="description" content="SciMSPT: An interdisciplinary scientific framework exploring the interconnectedness of Science, Matter, Physics, and Time through research publications and portfolio analysis.">
+    <title>SciMSPT — Scientific Mesh Startup Portfolio | Science, Matter, Physics & Time</title>
+    <meta name="description" content="SciMSPT: A venture portfolio of 7 groundbreaking startups at the intersection of Science, Matter, Physics, and Time. Building tomorrow's technologies today.">
     <link rel="icon" type="image/png" href="assets/icons/icon-science.png">
     <style>
         * {
@@ -20,6 +20,7 @@
             --accent-pink: #ff6b9d;
             --accent-purple: #c084fc;
             --accent-yellow: #fbbf24;
+            --accent-green: #43e97b;
             --text-dark: #2d3748;
             --text-light: #718096;
             --bg-light: #f7fafc;
@@ -27,7 +28,7 @@
             --shadow-sm: 0 4px 6px rgba(0, 0, 0, 0.07);
             --shadow-md: 0 10px 40px rgba(0, 0, 0, 0.1);
             --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.15);
-            --border-radius: 16px;
+            --border-radius: 20px;
             --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
@@ -39,8 +40,58 @@
             overflow-x: hidden;
         }
 
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .nav-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 35px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-dark);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #667eea;
+        }
+
         /* Hero Section */
         .hero {
+            margin-top: 80px;
             background: var(--primary-gradient);
             min-height: 85vh;
             display: flex;
@@ -48,7 +99,7 @@
             justify-content: center;
             position: relative;
             overflow: hidden;
-            padding: 20px;
+            padding: 40px 20px;
         }
 
         .hero::before {
@@ -59,99 +110,75 @@
             right: 0;
             bottom: 0;
             background: url('assets/images/hero-banner.png') center/cover no-repeat;
-            opacity: 0.15;
-            animation: fadeIn 1s ease-in;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 0.15; }
+            opacity: 0.12;
         }
 
         .hero-content {
             position: relative;
             z-index: 2;
             text-align: center;
-            max-width: 900px;
+            max-width: 950px;
             color: white;
         }
 
         .hero-badge {
             display: inline-block;
-            padding: 8px 20px;
+            padding: 10px 24px;
             background: rgba(255, 255, 255, 0.2);
             backdrop-filter: blur(10px);
             border-radius: 50px;
-            font-size: 0.9em;
-            font-weight: 500;
-            margin-bottom: 25px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 28px;
             border: 1px solid rgba(255, 255, 255, 0.3);
             animation: slideDown 0.8s ease-out;
         }
 
         @keyframes slideDown {
-            from { 
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-            to { 
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .hero h1 {
-            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-size: clamp(2.5rem, 5vw, 4.2rem);
             font-weight: 800;
-            margin-bottom: 20px;
+            margin-bottom: 22px;
             letter-spacing: -0.02em;
-            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
             animation: scaleIn 1s ease-out 0.2s both;
         }
 
         @keyframes scaleIn {
-            from { 
-                opacity: 0;
-                transform: scale(0.9);
-            }
-            to { 
-                opacity: 1;
-                transform: scale(1);
-            }
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
         }
 
         .hero-subtitle {
-            font-size: clamp(1.1rem, 2vw, 1.4rem);
+            font-size: clamp(1.1rem, 2vw, 1.45rem);
             opacity: 0.95;
-            margin-bottom: 35px;
+            margin-bottom: 38px;
             font-weight: 300;
+            line-height: 1.7;
             animation: slideUp 0.8s ease-out 0.4s both;
         }
 
         @keyframes slideUp {
-            from { 
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to { 
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .hero-cta {
             display: inline-flex;
-            gap: 15px;
+            gap: 18px;
             flex-wrap: wrap;
             justify-content: center;
             animation: slideUp 0.8s ease-out 0.6s both;
         }
 
         .btn {
-            padding: 14px 32px;
+            padding: 16px 36px;
             border-radius: 50px;
             text-decoration: none;
-            font-weight: 600;
+            font-weight: 700;
             font-size: 1em;
             transition: var(--transition);
             cursor: pointer;
@@ -164,19 +191,19 @@
         .btn-primary {
             background: white;
             color: #667eea;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.25);
         }
 
         .btn-primary:hover {
             transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 18px 45px rgba(0, 0, 0, 0.3);
         }
 
         .btn-secondary {
             background: rgba(255, 255, 255, 0.15);
             color: white;
             backdrop-filter: blur(10px);
-            border: 2px solid rgba(255, 255, 255, 0.3);
+            border: 2px solid rgba(255, 255, 255, 0.4);
         }
 
         .btn-secondary:hover {
@@ -188,380 +215,552 @@
         .container {
             max-width: 1280px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 30px;
         }
 
-        /* Domains Section */
-        .domains-section {
-            padding: 80px 20px;
+        /* Stats Section */
+        .stats-section {
+            padding: 70px 20px;
             background: white;
             margin-top: -60px;
             position: relative;
             z-index: 3;
+            border-radius: 30px 30px 0 0;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 30px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 35px 25px;
+            background: linear-gradient(135deg, #667eea05 0%, #764ba205 100%);
+            border-radius: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 800;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: var(--text-light);
+            font-weight: 500;
+        }
+
+        /* Startups Section */
+        .startups-section {
+            padding: 90px 20px;
+            background: white;
         }
 
         .section-header {
             text-align: center;
-            margin-bottom: 60px;
+            margin-bottom: 65px;
         }
 
         .section-header h2 {
-            font-size: 2.5rem;
-            font-weight: 700;
+            font-size: 2.8rem;
+            font-weight: 800;
             color: var(--text-dark);
-            margin-bottom: 15px;
+            margin-bottom: 18px;
+            letter-spacing: -0.02em;
         }
 
         .section-header p {
-            font-size: 1.1rem;
+            font-size: 1.15rem;
             color: var(--text-light);
-            max-width: 600px;
+            max-width: 650px;
             margin: 0 auto;
+            line-height: 1.7;
         }
 
-        .domains-grid {
+        .startups-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+            gap: 32px;
+            margin-top: 45px;
         }
 
-        .domain-card {
+        .startup-card {
             background: var(--card-bg);
             border-radius: var(--border-radius);
-            padding: 35px;
-            text-align: center;
-            box-shadow: var(--shadow-sm);
-            transition: var(--transition);
-            position: relative;
             overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            border: 1px solid rgba(0, 0, 0, 0.04);
         }
 
-        .domain-card::before {
+        .startup-card::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
-            height: 4px;
-            background: var(--domain-color, var(--primary-gradient));
+            height: 5px;
+            background: var(--startup-color, var(--primary-gradient));
             transform: scaleX(0);
-            transition: transform 0.3s ease;
+            transition: transform 0.4s ease;
         }
 
-        .domain-card:hover::before {
+        .startup-card:hover::before {
             transform: scaleX(1);
         }
 
-        .domain-card:hover {
-            transform: translateY(-8px);
+        .startup-card:hover {
+            transform: translateY(-12px);
             box-shadow: var(--shadow-lg);
         }
 
-        .domain-icon {
-            width: 80px;
-            height: 80px;
-            margin: 0 auto 20px;
-            border-radius: 50%;
-            object-fit: contain;
-            animation: float 3s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-
-        .domain-card:nth-child(2) .domain-icon { animation-delay: 0.5s; }
-        .domain-card:nth-child(3) .domain-icon { animation-delay: 1s; }
-        .domain-card:nth-child(4) .domain-icon { animation-delay: 1.5s; }
-
-        .domain-card h3 {
-            font-size: 1.4rem;
-            font-weight: 600;
-            color: var(--text-dark);
-            margin-bottom: 12px;
-        }
-
-        .domain-card p {
-            color: var(--text-light);
-            line-height: 1.7;
-        }
-
-        /* Research Overview Section */
-        .research-section {
-            padding: 80px 20px;
-            background: linear-gradient(to bottom, #f7fafc, #edf2f7);
-        }
-
-        .research-overview-container {
-            background: white;
-            border-radius: var(--border-radius);
-            overflow: hidden;
-            box-shadow: var(--shadow-md);
-            margin-top: 40px;
-        }
-
-        .research-image-wrapper {
+        .startup-image-wrapper {
             width: 100%;
+            height: 220px;
             overflow: hidden;
-        }
-
-        .research-image-wrapper img {
-            width: 100%;
-            height: auto;
-            display: block;
-            transition: transform 0.5s ease;
-        }
-
-        .research-image-wrapper:hover img {
-            transform: scale(1.02);
-        }
-
-        /* Portfolio Section */
-        .portfolio-section {
-            padding: 80px 20px;
-            background: white;
-        }
-
-        .portfolio-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
-        }
-
-        .portfolio-card {
-            background: var(--card-bg);
-            border-radius: var(--border-radius);
-            overflow: hidden;
-            box-shadow: var(--shadow-sm);
-            transition: var(--transition);
             position: relative;
         }
 
-        .portfolio-card:hover {
-            transform: translateY(-8px);
-            box-shadow: var(--shadow-lg);
+        .startup-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
         }
 
-        .portfolio-image {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
+        .startup-card:hover .startup-image {
+            transform: scale(1.08);
+        }
+
+        .startup-stage-badge {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            padding: 6px 16px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .startup-content {
+            padding: 28px;
+        }
+
+        .startup-tags {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 14px;
+        }
+
+        .tag {
+            padding: 5px 13px;
+            background: linear-gradient(135deg, #667eea10 0%, #764ba210 100%);
+            color: #667eea;
+            border-radius: 15px;
+            font-size: 0.78rem;
+            font-weight: 600;
+        }
+
+        .startup-content h3 {
+            font-size: 1.45rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 8px;
+        }
+
+        .startup-subtitle {
+            color: var(--text-light);
+            font-size: 0.92rem;
+            margin-bottom: 14px;
+            font-weight: 500;
+        }
+
+        .startup-content p {
+            color: var(--text-light);
+            font-size: 0.93rem;
+            line-height: 1.65;
+            margin-bottom: 20px;
+        }
+
+        .startup-metrics {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-bottom: 20px;
+            padding: 18px;
+            background: #f8fafc;
+            border-radius: 14px;
+        }
+
+        .metric-item {
+            text-align: center;
+        }
+
+        .metric-value {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--text-dark);
             display: block;
         }
 
-        .portfolio-content {
-            padding: 25px;
-        }
-
-        .portfolio-badge {
-            display: inline-block;
-            padding: 5px 12px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border-radius: 20px;
-            font-size: 0.8em;
-            font-weight: 600;
-            margin-bottom: 12px;
-        }
-
-        .portfolio-content h3 {
-            font-size: 1.3rem;
-            font-weight: 600;
-            color: var(--text-dark);
-            margin-bottom: 10px;
-        }
-
-        .portfolio-content p {
+        .metric-label {
+            font-size: 0.78rem;
             color: var(--text-light);
-            font-size: 0.95rem;
-            margin-bottom: 18px;
-            line-height: 1.6;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
         }
 
-        .portfolio-link {
+        .startup-link {
             display: inline-flex;
             align-items: center;
-            gap: 6px;
+            gap: 8px;
             color: #667eea;
             text-decoration: none;
-            font-weight: 600;
+            font-weight: 700;
             font-size: 0.95rem;
-            transition: var(--transition);
+            transition: all 0.3s ease;
         }
 
-        .portfolio-link:hover {
+        .startup-link:hover {
             color: #764ba2;
-            gap: 10px;
+            gap: 12px;
         }
 
-        /* Shorts Section */
-        .shorts-section {
-            padding: 80px 20px;
-            background: linear-gradient(135deg, #667eea05 0%, #764ba205 100%);
+        /* Weekly Digests Section */
+        .digests-section {
+            padding: 90px 20px;
+            background: linear-gradient(to bottom, #f8fafc, #f1f5f9);
         }
 
-        .shorts-grid {
+        .digests-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 25px;
-            margin-top: 40px;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 26px;
+            margin-top: 45px;
         }
 
-        .short-card {
+        .digest-card {
             background: white;
-            border-radius: var(--border-radius);
-            padding: 25px;
+            border-radius: 18px;
+            padding: 28px;
             box-shadow: var(--shadow-sm);
-            transition: var(--transition);
-            display: flex;
-            gap: 18px;
-            align-items: flex-start;
+            transition: all 0.3s ease;
+            border-left: 4px solid var(--digest-color, #667eea);
         }
 
-        .short-card:hover {
-            transform: translateX(5px);
+        .digest-card:hover {
+            transform: translateX(6px);
             box-shadow: var(--shadow-md);
         }
 
-        .short-thumb {
-            width: 70px;
-            height: 70px;
-            border-radius: 12px;
-            object-fit: cover;
-            flex-shrink: 0;
+        .digest-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 14px;
         }
 
-        .short-info h4 {
-            font-size: 1.05rem;
-            font-weight: 600;
+        .digest-issue {
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: var(--digest-color, #667eea);
+            background: linear-gradient(135deg, #667eea08 0%, #764ba208 100%);
+            padding: 5px 12px;
+            border-radius: 10px;
+        }
+
+        .digest-date {
+            font-size: 0.82rem;
+            color: var(--text-light);
+            font-weight: 500;
+        }
+
+        .digest-card h3 {
+            font-size: 1.15rem;
+            font-weight: 700;
             color: var(--text-dark);
-            margin-bottom: 6px;
+            margin-bottom: 8px;
         }
 
-        .short-info p {
+        .digest-theme {
             font-size: 0.88rem;
             color: var(--text-light);
-            margin-bottom: 10px;
+            margin-bottom: 14px;
+            font-style: italic;
         }
 
-        .short-link {
+        .digest-highlights {
+            list-style: none;
+            margin-bottom: 18px;
+        }
+
+        .digest-highlights li {
+            padding: 6px 0;
+            font-size: 0.88rem;
+            color: var(--text-dark);
+            padding-left: 18px;
+            position: relative;
+        }
+
+        .digest-highlights li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--digest-color, #667eea);
+            font-weight: bold;
+        }
+
+        .digest-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 14px;
+            border-top: 1px solid #f0f0f0;
+        }
+
+        .read-time {
+            font-size: 0.82rem;
+            color: var(--text-light);
+        }
+
+        .audio-badge {
+            font-size: 0.75rem;
+            padding: 4px 10px;
+            background: #e0e7ff;
+            color: #4338ca;
+            border-radius: 10px;
+            font-weight: 600;
+        }
+
+        .digest-link {
             color: #667eea;
             text-decoration: none;
-            font-size: 0.88rem;
             font-weight: 600;
-            transition: var(--transition);
+            font-size: 0.88rem;
+            transition: gap 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
         }
 
-        .short-link:hover {
-            color: #764ba2;
+        .digest-link:hover {
+            gap: 10px;
         }
 
-        /* About Section */
-        .about-section {
-            padding: 80px 20px;
+        /* Audio Section */
+        .audio-section {
+            padding: 90px 20px;
             background: var(--text-dark);
             color: white;
         }
 
+        .audio-section .section-header h2 {
+            color: white;
+        }
+
+        .audio-section .section-header p {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .audio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 26px;
+            margin-top: 45px;
+        }
+
+        .audio-card {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(10px);
+            border-radius: 18px;
+            padding: 28px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .audio-card:hover {
+            background: rgba(255, 255, 255, 0.12);
+            transform: translateY(-5px);
+        }
+
+        .audio-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--primary-gradient);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 18px;
+            font-size: 1.5rem;
+        }
+
+        .audio-card h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .audio-duration {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 12px;
+        }
+
+        .audio-description {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
+            margin-bottom: 18px;
+        }
+
+        .play-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 22px;
+            background: white;
+            color: var(--text-dark);
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.88rem;
+            transition: all 0.3s ease;
+        }
+
+        .play-btn:hover {
+            transform: translateX(3px);
+        }
+
+        /* About Section */
+        .about-section {
+            padding: 90px 20px;
+            background: white;
+        }
+
         .about-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 50px;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 55px;
             align-items: center;
             margin-top: 50px;
         }
 
+        .about-image-wrapper {
+            position: relative;
+        }
+
         .about-image {
             width: 100%;
-            border-radius: var(--border-radius);
+            border-radius: 24px;
             box-shadow: var(--shadow-lg);
         }
 
         .about-content h2 {
-            font-size: 2.2rem;
-            font-weight: 700;
-            margin-bottom: 25px;
+            font-size: 2.4rem;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 22px;
+            letter-spacing: -0.02em;
         }
 
         .about-content > p {
-            font-size: 1.05rem;
+            font-size: 1.08rem;
             line-height: 1.8;
-            opacity: 0.9;
-            margin-bottom: 25px;
+            color: var(--text-light);
+            margin-bottom: 22px;
         }
 
         .about-features {
             list-style: none;
-            margin-top: 30px;
+            margin-top: 28px;
         }
 
         .about-features li {
             padding: 12px 0;
             display: flex;
             align-items: center;
-            gap: 12px;
-            font-size: 1rem;
-            opacity: 0.9;
+            gap: 14px;
+            font-size: 1.02rem;
+            color: var(--text-dark);
         }
 
-        .about-features li::before {
-            content: '✓';
+        .check-icon {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            width: 24px;
-            height: 24px;
+            width: 28px;
+            height: 28px;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             border-radius: 50%;
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             flex-shrink: 0;
+            color: white;
         }
 
         /* Footer */
         footer {
             background: #1a202c;
             color: white;
-            padding: 50px 20px 30px;
-            text-align: center;
+            padding: 60px 20px 35px;
         }
 
         .footer-content {
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
+            text-align: center;
         }
 
         footer h3 {
-            font-size: 1.8rem;
-            font-weight: 700;
-            margin-bottom: 15px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 16px;
+            background: var(--primary-gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            background-clip: text;
         }
 
-        footer p {
+        footer > .footer-content > p {
             opacity: 0.8;
-            margin-bottom: 20px;
+            margin-bottom: 28px;
+            font-size: 1.05rem;
         }
 
         .footer-links {
             display: flex;
             justify-content: center;
-            gap: 25px;
+            gap: 30px;
             flex-wrap: wrap;
-            margin: 30px 0;
+            margin: 35px 0;
         }
 
         .footer-links a {
             color: white;
             text-decoration: none;
             opacity: 0.7;
-            transition: var(--transition);
-            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            font-size: 0.98rem;
+            font-weight: 500;
         }
 
         .footer-links a:hover {
@@ -571,52 +770,34 @@
 
         .footer-bottom {
             border-top: 1px solid rgba(255, 255, 255, 0.1);
-            padding-top: 25px;
-            margin-top: 30px;
+            padding-top: 28px;
+            margin-top: 35px;
             font-size: 0.9rem;
-            opacity: 0.6;
+            opacity: 0.5;
         }
 
-        /* Responsive Design */
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .startups-grid {
+                grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            }
+        }
+
         @media (max-width: 768px) {
-            .hero {
-                min-height: 70vh;
-                padding: 40px 20px;
-            }
-
-            .hero h1 {
-                font-size: 2.2rem;
-            }
-
-            .section-header h2 {
-                font-size: 2rem;
-            }
-
-            .domains-grid,
-            .portfolio-grid,
-            .shorts-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .portfolio-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .about-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .domains-section {
-                margin-top: -40px;
-            }
+            .hero { min-height: 70vh; padding: 30px 20px; margin-top: 70px; }
+            .hero h1 { font-size: 2.2rem; }
+            .section-header h2 { font-size: 2rem; }
+            .startups-grid,
+            .digests-grid,
+            .audio-grid { grid-template-columns: 1fr; }
+            .nav-links { display: none; }
+            .stats-section { margin-top: -40px; }
+            .about-grid { grid-template-columns: 1fr; }
         }
 
         /* Smooth scroll */
-        html {
-            scroll-behavior: smooth;
-        }
+        html { scroll-behavior: smooth; }
 
-        /* Selection color */
         ::selection {
             background: #667eea;
             color: white;
@@ -625,242 +806,552 @@
 </head>
 <body>
 
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">SciMSPT</a>
+            <ul class="nav-links">
+                <li><a href="#startups">Startups</a></li>
+                <li><a href="#digests">Weekly Digests</a></li>
+                <li><a href="#audio">Podcast</a></li>
+                <li><a href="#about">About</a></li>
+            </ul>
+        </div>
+    </nav>
+
     <!-- Hero Section -->
     <section class="hero">
         <div class="hero-content">
-            <div class="hero-badge">🔬 Interdisciplinary Scientific Framework</div>
-            <h1>SciMSPT</h1>
-            <p class="hero-subtitle">Scientific Mesh for Science, Matter, Physics & Time<br>Exploring the fundamental connections of our universe</p>
+            <div class="hero-badge">🚀 Venture Portfolio | 7 Startups | $2.5B Combined Valuation</div>
+            <h1>Building Tomorrow's Technologies at the Intersection of Science, Matter, Physics & Time</h1>
+            <p class="hero-subtitle">SciMSPT is a curated portfolio of breakthrough startups revolutionizing quantum computing, advanced materials, semiconductor technology, and AI-driven discovery.</p>
             <div class="hero-cta">
-                <a href="#portfolio" class="btn btn-primary">
-                    📊 Explore Portfolio
+                <a href="#startups" class="btn btn-primary">
+                    🏢 Explore Portfolio
                 </a>
-                <a href="#research" class="btn btn-secondary">
-                    🔬 View Research
+                <a href="#digests" class="btn btn-secondary">
+                    📰 Read Latest Digest
                 </a>
             </div>
         </div>
     </section>
 
-    <!-- Core Domains Section -->
-    <section class="domains-section">
+    <!-- Stats Section -->
+    <section class="stats-section">
         <div class="container">
-            <div class="section-header">
-                <h2>Core Research Domains</h2>
-                <p>The SciMSPT framework integrates four fundamental pillars of scientific inquiry into a unified mesh of knowledge.</p>
-            </div>
-
-            <div class="domains-grid">
-                <div class="domain-card" style="--domain-color: #00d4ff;">
-                    <img src="assets/icons/icon-science.png" alt="Science" class="domain-icon">
-                    <h3>Science</h3>
-                    <p>Systematic exploration of natural phenomena through observation, experimentation, and theoretical modeling.</p>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <span class="stat-number">7</span>
+                    <span class="stat-label">Portfolio Companies</span>
                 </div>
-
-                <div class="domain-card" style="--domain-color: #ff6b9d;">
-                    <img src="assets/icons/icon-matter.png" alt="Matter" class="domain-icon">
-                    <h3>Matter</h3>
-                    <p>Investigation of material properties, quantum states, and the building blocks of physical reality.</p>
+                <div class="stat-card">
+                    <span class="stat-number">$2.5B</span>
+                    <span class="stat-label">Combined Valuation</span>
                 </div>
-
-                <div class="domain-card" style="--domain-color: #c084fc;">
-                    <img src="assets/icons/icon-physics.png" alt="Physics" class="domain-icon">
-                    <h3>Physics</h3>
-                    <p>Fundamental laws governing energy, forces, motion, and the structure of space-time itself.</p>
+                <div class="stat-card">
+                    <span class="stat-number">680</span>
+                    <span class="stat-label">Team Members</span>
                 </div>
-
-                <div class="domain-card" style="--domain-color: #fbbf24;">
-                    <img src="assets/icons/icon-time.png" alt="Time" class="domain-icon">
-                    <h3>Time</h3>
-                    <p>Temporal dynamics, causality, chronology, and the arrow of time in physical systems.</p>
+                <div class="stat-card">
+                    <span class="stat-number">+88%</span>
+                    <span class="stat-label">Avg. YoY Growth</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Research Overview Section -->
-    <section class="research-section" id="research">
+    <!-- Startups Section -->
+    <section class="startups-section" id="startups">
         <div class="container">
             <div class="section-header">
-                <h2>Research Landscape</h2>
-                <p>A comprehensive overview of interconnected research areas within the SciMSPT framework.</p>
+                <h2>Portfolio Startups</h2>
+                <p>Seven pioneering companies pushing the boundaries of what's possible across the SciMSPT domains.</p>
             </div>
 
-            <div class="research-overview-container">
-                <div class="research-image-wrapper">
-                    <img src="assets/images/research-papers-overview.png" alt="SciMSPT Research Overview">
+            <div class="startups-grid">
+
+                <!-- P3: Quantum Materials Inc. -->
+                <article class="startup-card" style="--startup-color: #667eea;">
+                    <div class="startup-image-wrapper">
+                        <img src="assets/images/portfolio-P3.png" alt="Quantum Materials Inc." class="startup-image">
+                        <span class="startup-stage-badge">Series B</span>
+                    </div>
+                    <div class="startup-content">
+                        <div class="startup-tags">
+                            <span class="tag">Quantum Materials</span>
+                            <span class="tag">Superconductors</span>
+                        </div>
+                        <h3>Quantum Materials Inc.</h3>
+                        <p class="startup-subtitle">P3 — High-Temperature Superconductor Pioneer</p>
+                        <p>Revolutionizing energy transmission, quantum computing, and medical imaging through room-temperature superconducting materials.</p>
+                        
+                        <div class="startup-metrics">
+                            <div class="metric-item">
+                                <span class="metric-value">$285M</span>
+                                <span class="metric-label">Valuation</span>
+                            </div>
+                            <div class="metric-item">
+                                <span class="metric-value">85</span>
+                                <span class="metric-label">Employees</span>
+                            </div>
+                            <div class="metric-item">
+                                <span class="metric-value">+89%</span>
+                                <span class="metric-label">12-Mo Growth</span>
+                            </div>
+                            <div class="metric-item">
+                                <span class="metric-value">24</span>
+                                <span class="metric-label">Patents</span>
+                            </div>
+                        </div>
+
+                        <a href="portfolio-shorts/P3.html" class="startup-link">
+                            View Full Profile →
+                        </a>
+                    </div>
+                </article>
+
+                <!-- P5: Computational Physics Labs -->
+                <article class="startup-card" style="--startup-color: #f093fb;">
+                    <div class="startup-image-wrapper">
+                        <img src="assets/images/portfolio-P5.png" alt="Computational Physics Labs" class="startup-image">
+                        <span class="startup-stage-badge">Series A</span>
+                    </div>
+                    <div class="startup-content">
+                        <div class="startup-tags">
+                            <span class="tag">HPC Software</span>
+                            <span class="tag">Simulation</span>
+                        </div>
+                        <h3>Computational Physics Labs</h3>
+                        <p class="startup-subtitle">P5 — AI-Accelerated Simulation Platform</p>
+                        <p>Enterprise-grade physics simulation software powered by machine learning, enabling researchers to model complex systems 100x faster than traditional methods.</p>
+                        
+                        <div class="startup-metrics">
+                            <div class="metric-item">
+                                <span class="metric-value">$120M</span>
+                                <span class="metric-label">Valuation</span>
+                            </div>
+                            <div class="metric-item">
+                                <span class="metric-value">34</span>
+                                <span class="metric-label">Enterprise Clients</span>
+                            </div>
+                            <div class="metric-item">
+                                <span class="metric-value">+56%</span>
+                                <span class="metric-label">12-Mo Growth</span>
+                            </div>
+                            <div class="metric-item">
+                                <span class="metric-value">2.5M</span>
+                                <span class="metric-label">Sim Hours/Month</span>
+                            </div>
+                        </div>
+
+                        <a href="portfolio-shorts/P5.html" class="startup-link">
+                            View Full Profile →
+                        </a>
+                    </div>
+                </article>
+
+                <!-- P9: TMD Logic Quantum -->
+                <article class="startup-card" style="--startup-color: #4facfe;">
+                    <div class="startup-image-wrapper">
+                        <img src="assets/images/portfolio-P9.png" alt="TMD Logic Quantum" class="startup-image">
+                        <span class="startup-stage-badge">Series C</span>
+                    </div>
+                    <div class="startup-content">
+                        <div class="startup-tags">
+                            <span class="tag">Quantum Computing</span>
+                            <span class="tag">TMD Materials</span>
+                        </div>
+                        <h3>TMD Logic Quantum</h3>
+                        <p class="startup-subtitle">P9 — Next-Gen Quantum Processors</p>
+                        <p>Building quantum computers using Transition Metal Dichalcogenides, achieving superior qubit coherence and scalability over traditional approaches.</p>
+                        
+                        <div class="startup-metrics">
+                            <div class="metric-item">
+                                <span class="metric-value">$650M</span>
+                                <span class="metric-label">Valuation</span>
+                            </div>
+                            <div class="metric-item">
+                                <span class="metric-value">256</span>
+                                <span class="metric-label">Qubits</span>
+                            </div>
+                            <div class="metric-item">
+                                <span class="metric-value">+142%</span>
+                                <span class="metric-label">12-Mo Growth</span>
+                            </div>
+                            <div class="metric-item">
+                                <span class="metric-value">99.7%</span>
+                                <span class="metric-label">Gate Fidelity</span>
+                            </div>
+                        </div>
+
+                        <a href="portfolio-shorts/P9.html" class="startup-link">
+                            View Full Profile →
+                        </a>
+                    </div>
+                </article>
+
+                <!-- P11: Advanced Materials Corp -->
+                <article class="startup-card" style="--startup-color: #43e97b;">
+                    <div class="startup-image-wrapper">
+                        <img src="assets/images/portfolio-P11.png" Advanced Materials Corp" class="startup-image">
+                        <span class="startup-stage-badge">Series B</span>
+                    </div>
+                    <div class="startup-content">
+                        <div class="startup-tags">
+                            <span class="tag">Metamaterials</span>
+                            <span class="tag">Smart Materials</span>
+                        </div>
+                        <h3>Advanced Materials Corp</h3>
+                        <p class="startup-subtitle">P11 — Metamaterial Manufacturing Leader</p>
+                        <p>Scaling production of next-generation metamaterials for invisibility cloaking, perfect lenses, and adaptive building materials.</p>
+                        
+                        <div class="startup-metrics">
+                            <div class="metric-item">
+                                <span class="metric-value">$195M</span>
+                                <span class="metric-label">Valuation</span>
+                            </div>
+                            <div class="metric-item">
+                                <span class="metric-value">$12M</span>
+                                <span class="metric-label">Revenue Run Rate</span>
+                            </div>
+                            <div class="metric-item">
+                                <span class="metric-value">+67%</span>
+                                <span class="metric-label">12-Mo Growth</span>
+                            </div>
+                            <div class="metric-item">
+                                <span class="metric-value">18</span>
+                                <span class="metric-label">Active Contracts</span>
+                            </div>
+                        </div>
+
+                        <a href="portfolio-shorts/P11.html" class="startup-link">
+                            View Full Profile →
+                        </a>
+                    </div>
+                </article>
+
+                <!-- P12: Temporal Dynamics Research -->
+                <article class="startup-card" style="--startup-color: #fa709a;">
+                    <div class="startup-image-wrapper">
+                        <img src="assets/images/portfolio-P12.png" alt="Temporal Dynamics Research" class="startup-image">
+                        <span class="startup-stage-badge">Seed+</span>
+                    </div>
+                    <div class="startup-content">
+                        <div class="startup-tags">
+                            <span class="tag">Ultrafast Imaging</span>
+                            <span class="tag">Temporal AI</span>
+                        </div>
+                        <h3>Temporal Dynamics Research</h3>
+                        <p class="startup-subtitle">P12 — Attosecond Science Pioneer</p>
+                        <p>Commercializing attosecond spectroscopy systems for observing electron dynamics in real-time, enabling breakthroughs in chemistry and materials science.</p>
+                        
+                        <div class="startup-metrics">
+                            <div class="metric-item">
+                                <span class="metric-value">$55M</span>
+                                <span class="metric-label">Valuation</span>
+                            </div>
+                            <div class="metric-item">
+                                <span class="metric-value">50 as</span>
+                                <span class="metric-label">Time Resolution</span>
+                            </div>
+                            <div class="metric-item">
+                                <span class="metric-value">+28%</span>
+                                <span class="metric-label">6-Mo Growth</span>
+                            </div>
+                            <div class="metric-item">
+                                <span class="metric-value">99.2%</span>
+                                <span class="metric-label">Prediction Acc.</span>
+                            </div>
+                        </div>
+
+                        <a href="portfolio-shorts/P12.html" class="startup-link">
+                            View Full Profile →
+                        </a>
+                    </div>
+                </article>
+
+                <!-- P-ai-materials: AI Materials Discovery Platform -->
+                <article class="startup-card" style="--startup-color: #30cfd0;">
+                    <div class="startup-image-wrapper">
+                        <img src="assets/images/portfolio-P-ai-materials.png" alt="AI Materials Discovery Platform" class="startup-image">
+                        <span class="startup-stage-badge">Series B</span>
+                    </div>
+                    <div class="startup-content">
+                        <div class="startup-tags">
+                            <span class="tag">AI/ML</span>
+                            <span class="tag">Autonomous Labs</span>
+                        </div>
+                        <h3>AI Materials Discovery Platform</h3>
+                        <p class="startup-subtitle">AI Materials — Autonomous R&D</p>
+                        <p>Self-driving laboratories powered by AI that discover new materials 10,000x faster than traditional methods, with applications in batteries, pharma, and semiconductors.</p>
+                        
+                        <div class="startup-metrics">
+                            <div class="metric-item">
+                                <span class="metric-value">$320M</span>
+                                <span class="metric-label">Valuation</span>
+                            </div>
+                            <div class="metric-item">
+                                <span class="metric-value">125M</span>
+                                <span class="metric-label">Compounds Screened</span>
+                            </div>
+                            <div class="metric-item">
+                                <span class="metric-value">+95%</span>
+                                <span class="metric-label">12-Mo Growth</span>
+                            </div>
+                            <div class="metric-item">
+                                <span class="metric-value">4 mo</span>
+                                <span class="metric-label">Avg. Discovery Time</span>
+                            </div>
+                        </div>
+
+                        <a href="portfolio-shorts/P-ai-materials.html" class="startup-link">
+                            View Full Profile →
+                        </a>
+                    </div>
+                </article>
+
+                <!-- P-cmos-2nm: CMOS NextGen Semiconductor -->
+                <article class="startup-card" style="--startup-color: #6366f1;">
+                    <div class="startup-image-wrapper">
+                        <img src="assets/images/portfolio-P-cmos-2nm.png" alt="CMOS NextGen Semiconductor" class="startup-image">
+                        <span class="startup-stage-badge">Series C</span>
+                    </div>
+                    <div class="startup-content">
+                        <div class="startup-tags">
+                            <span class="tag">Semiconductors</span>
+                            <span class="tag">2nm Process</span>
+                        </div>
+                        <h3>CMOS NextGen Semiconductor</h3>
+                        <p class="startup-subtitle">CMOS 2nm — Frontier Chip Technology</p>
+                        <p>Pioneering 2nm GAA-FET (Gate-All-Around) semiconductor manufacturing, enabling the next generation of computing performance and efficiency.</p>
+                        
+                        <div class="startup-metrics">
+                            <div class="metric-item">
+                                <span class="metric-value">$890M</span>
+                                <span class="metric-label">Valuation</span>
+                            </div>
+                            <div class="metric-item">
+                                <span class="metric-value">500M</span>
+                                <span class="metric-label">Transistors/mm²</span>
+                            </div>
+                            <div class="metric-item">
+                                <span class="metric-value">+178%</span>
+                                <span class="metric-label">12-Mo Growth</span>
+                            </div>
+                            <div class="metric-item">
+                                <span class="metric-value">78%</span>
+                                <span class="metric-label">Yield Rate</span>
+                            </div>
+                        </div>
+
+                        <a href="portfolio-shorts/P-cmos-2nm.html" class="startup-link">
+                            View Full Profile →
+                        </a>
+                    </div>
+                </article>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Weekly Digests Section -->
+    <section class="digests-section" id="digests">
+        <div class="container">
+            <div class="section-header">
+                <h2>Weekly Digests</h2>
+                <p>Stay updated with the latest breakthroughs, milestones, and insights from across the SciMSPT portfolio.</p>
+            </div>
+
+            <div class="digests-grid">
+
+                <article class="digest-card" style="--digest-color: #667eea;">
+                    <div class="digest-header">
+                        <span class="digest-issue">SD-M-01</span>
+                        <span class="digest-date">Week 32, 2026</span>
+                    </div>
+                    <h3>Mathematical Foundations Week</h3>
+                    <p class="digest-theme">Core Mathematics in SciMSPT Startups</p>
+                    <ul class="digest-highlights">
+                        <li>QMI publishes breakthrough in topological insulator theory</li>
+                        <li>CPL releases new tensor network library</li>
+                        <li>TMD achieves coherence record via error correction</li>
+                    </ul>
+                    <div class="digest-meta">
+                        <span class="read-time">📖 8 min read</span>
+                        <a href="shorts/SD-M-01.html" class="digest-link">Read →</a>
+                    </div>
+                </article>
+
+                <article class="digest-card" style="--digest-color: #764ba2;">
+                    <div class="digest-header">
+                        <span class="digest-issue">SD-M-02</span>
+                        <span class="digest-date">Week 33, 2026</span>
+                    </div>
+                    <h3>Computing Theory Advances</h3>
+                    <p class="digest-theme">Algorithms Powering Innovation</p>
+                    <ul class="digest-highlights">
+                        <li>New optimization speeds up materials screening 10x</li>
+                        <li>Quantum supremacy expanded to new problem class</li>
+                        <li>ML interatomic potentials reach DFT accuracy</li>
+                    </ul>
+                    <div class="digest-meta">
+                        <span class="read-time">📖 10 min read</span>
+                        <a href="shorts/SD-M-02.html" class="digest-link">Read →</a>
+                    </div>
+                </article>
+
+                <article class="digest-card" style="--digest-color: #f093fb;">
+                    <div class="digest-header">
+                        <span class="digest-issue">SD-P-05</span>
+                        <span class="digest-date">Week 31, 2026</span>
+                    </div>
+                    <h3>Quantum Physics Breakthroughs</h3>
+                    <p class="digest-theme">Quantum Effects in Real Applications</p>
+                    <ul class="digest-highlights">
+                        <li>Room-temperature qubit operation achieved</li>
+                        <li>Entanglement distribution over 500km demonstrated</li>
+                        <li>Topological quantum computing milestone</li>
+                    </ul>
+                    <div class="digest-meta">
+                        <span class="read-time">📖 9 min read</span>
+                        <a href="shorts/SD-P-05.html" class="digest-link">Read →</a>
+                    </div>
+                </article>
+
+                <article class="digest-card" style="--digest-color: #f5576c;">
+                    <div class="digest-header">
+                        <span class="digest-issue">SD-P-07</span>
+                        <span class="digest-date">Week 30, 2026</span>
+                    </div>
+                    <h3>Particle Dynamics Update</h3>
+                    <p class="digest-theme">Subatomic Discoveries Impacting Tech</p>
+                    <ul class="digest-highlights">
+                        <li>New particle physics informs sensor design</li>
+                        <li>Dark matter detection sensitivity improved 100x</li>
+                        <li>Particle accelerators expand to materials science</li>
+                    </ul>
+                    <div class="digest-meta">
+                        <span class="read-time">📖 11 min read</span>
+                        <a href="shorts/SD-P-07.html" class="digest-link">Read →</a>
+                    </div>
+                </article>
+
+                <article class="digest-card" style="--digest-color: #4facfe;">
+                    <div class="digest-header">
+                        <span class="digest-issue">SD-S-04</span>
+                        <span class="digest-date">Week 29, 2026</span>
+                    </div>
+                    <h3>Scientific Methods Innovation</h3>
+                    <p class="digest-theme">How SciMSPT Companies Do Science</p>
+                    <ul class="digest-highlights">
+                        <li>AIMD publishes reproducibility standards</li>
+                        <li>Autonomous lab completes 10,000 experiments</li>
+                        <li>Open science initiatives across portfolio</li>
+                    </ul>
+                    <div class="digest-meta">
+                        <span class="read-time">📖 7 min read</span>
+                        <a href="shorts/SD-S-04.html" class="digest-link">Read →</a>
+                    </div>
+                </article>
+
+                <article class="digest-card" style="--digest-color: #43e97b;">
+                    <div class="digest-header">
+                        <span class="digest-issue">SD-T-03</span>
+                        <span class="digest-date">Week 28, 2026</span>
+                    </div>
+                    <h3>Temporal Mechanics Frontiers</h3>
+                    <p class="digest-theme">Time Science in Practice</p>
+                    <ul class="digest-highlights">
+                        <li>TDR commercializes attosecond imaging system</li>
+                        <li>New time crystal applications discovered</li>
+                        <li>Precision timing enables GPS alternative</li>
+                    </ul>
+                    <div class="digest-meta">
+                        <span class="read-time">📖 9 min read</span>
+                        <a href="shorts/SD-T-03.html" class="digest-link">Read →</a>
+                    </div>
+                </article>
+
+                <article class="digest-card" style="--digest-color: #fa709a;">
+                    <div class="digest-header">
+                        <span class="digest-issue">SD-T-06</span>
+                        <span class="digest-date">Week 27, 2026</span>
+                    </div>
+                    <h3>Time Series Intelligence</h3>
+                    <p class="digest-theme">Predictive Analytics Across Domains</p>
+                    <ul class="digest-highlights">
+                        <li>Forecasting predicts properties before synthesis</li>
+                        <li>Financial analysis optimizes R&D spending</li>
+                        <li>Climate modeling informs manufacturing</li>
+                    </ul>
+                    <div class="digest-meta">
+                        <span class="read-time">📖 8 min read</span>
+                        <a href="shorts/SD-T-06.html" class="digest-link">Read →</a>
+                    </div>
+                </article>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Podcast/Audio Section -->
+    <section class="audio-section" id="audio">
+        <div class="container">
+            <div class="section-header">
+                <h2>🎙️ SciMSPT Podcast</h2>
+                <p>In-depth conversations with founders, deep dives into technologies, and weekly updates from the SciMSPT ecosystem.</p>
+            </div>
+
+            <div class="audio-grid">
+
+                <div class="audio-card">
+                    <div class="audio-icon">🎧</div>
+                    <h3>Startup Spotlight: Quantum Materials Inc.</h3>
+                    <p class="audio-duration">⏱️ 18:45</p>
+                    <p class="audio-description">Interview with CEO Dr. Sarah Chen on high-Tc superconductor breakthrough and path to commercialization.</p>
+                    <a href="#" class="play-btn">▶ Play Episode</a>
                 </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- Portfolio Shorts Section -->
-    <section class="portfolio-section" id="portfolio">
-        <div class="container">
-            <div class="section-header">
-                <h2>Portfolio Analysis</h2>
-                <p>In-depth examinations of cutting-edge research topics and technological developments.</p>
-            </div>
+                <div class="audio-card">
+                    <div class="audio-icon">🎧</div>
+                    <h3>Startup Spotlight: TMD Logic Quantum</h3>
+                    <p class="audio-duration">⏱️ 22:30</p>
+                    <p class="audio-description">Deep dive into TMD-based quantum computing with CTO Prof. James Wong on achieving quantum advantage.</p>
+                    <a href="#" class="play-btn">▶ Play Episode</a>
+                </div>
 
-            <div class="portfolio-grid">
-                <article class="portfolio-card">
-                    <img src="assets/images/portfolio-P3.png" alt="Quantum Materials" class="portfolio-image">
-                    <div class="portfolio-content">
-                        <span class="portfolio-badge">Materials Science</span>
-                        <h3>P3 — Quantum Materials Analysis</h3>
-                        <p>Exploring quantum phenomena in advanced materials including superconductors and topological insulators.</p>
-                        <a href="portfolio-shorts/P3.html" class="portfolio-link">
-                            Read Analysis →
-                        </a>
-                    </div>
-                </article>
+                <div class="audio-card">
+                    <div class="audio-icon">🎧</div>
+                    <h3>Founder Story: CMOS NextGen Semiconductor</h3>
+                    <p class="audio-duration">⏱️ 25:00</p>
+                    <p class="audio-description">From lab to $890M valuation — the remarkable journey of 2nm chip innovation in Taiwan.</p>
+                    <a href="#" class="play-btn">▶ Play Episode</a>
+                </div>
 
-                <article class="portfolio-card">
-                    <img src="assets/images/portfolio-P5.png" alt="Computational Physics" class="portfolio-image">
-                    <div class="portfolio-content">
-                        <span class="portfolio-badge">Computational</span>
-                        <h3>P5 — Computational Physics Models</h3>
-                        <p>Advanced numerical methods and simulations for complex physical systems.</p>
-                        <a href="portfolio-shorts/P5.html" class="portfolio-link">
-                            Read Analysis →
-                        </a>
-                    </div>
-                </article>
+                <div class="audio-card">
+                    <div class="audio-icon">🎧</div>
+                    <h3>Tech Deep Dive: Autonomous Materials Discovery</h3>
+                    <p class="audio-duration">⏱️ 20:45</p>
+                    <p class="audio-description">How AI Materials Discovery Platform is revolutionizing R&D with self-driving laboratories.</p>
+                    <a href="#" class="play-btn">▶ Play Episode</a>
+                </div>
 
-                <article class="portfolio-card">
-                    <img src="assets/images/portfolio-P9.png" alt="TMD Logic" class="portfolio-image">
-                    <div class="portfolio-content">
-                        <span class="portfolio-badge">Quantum Computing</span>
-                        <h3>P9 — TMD Logic & Quantum Computing</h3>
-                        <p>Transition Metal Dichalcogenides in next-generation quantum logic architectures.</p>
-                        <a href="portfolio-shorts/P9.html" class="portfolio-link">
-                            Read Analysis →
-                        </a>
-                    </div>
-                </article>
+                <div class="audio-card">
+                    <div class="audio-icon">🎧</div>
+                    <h3>Weekly Digest - Mathematical Foundations</h3>
+                    <p class="audio-duration">⏱️ 12:15</p>
+                    <p class="audio-description">Audio summary of this week's mathematical breakthroughs across the SciMSPT portfolio companies.</p>
+                    <a href="#" class="play-btn">▶ Play Episode</a>
+                </div>
 
-                <article class="portfolio-card">
-                    <img src="assets/images/portfolio-P11.png" Advanced Materials" class="portfolio-image">
-                    <div class="portfolio-content">
-                        <span class="portfolio-badge">Advanced Materials</span>
-                        <h3>P11 — Advanced Material Science</h3>
-                        <p>Cutting-edge materials research for next-generation technologies and applications.</p>
-                        <a href="portfolio-shorts/P11.html" class="portfolio-link">
-                            Read Analysis →
-                        </a>
-                    </div>
-                </article>
+                <div class="audio-card">
+                    <div class="audio-icon">🎧</div>
+                    <h3>Q3 2026 Investor Update</h3>
+                    <p class="audio-duration">⏱️ 15:30</p>
+                    <p class="audio-description">Portfolio performance review, key milestones achieved, and outlook for Q4 2026 and beyond.</p>
+                    <a href="#" class="play-btn">▶ Play Episode</a>
+                </div>
 
-                <article class="portfolio-card">
-                    <img src="assets/images/portfolio-P12.png" alt="Time-Domain Research" class="portfolio-image">
-                    <div class="portfolio-content">
-                        <span class="portfolio-badge">Temporal Dynamics</span>
-                        <h3>P12 — Time-Domain Research</h3>
-                        <p>Analysis of temporal phenomena and time-dependent processes in physical systems.</p>
-                        <a href="portfolio-shorts/P12.html" class="portfolio-link">
-                            Read Analysis →
-                        </a>
-                    </div>
-                </article>
-
-                <article class="portfolio-card">
-                    <img src="assets/images/portfolio-P-ai-materials.png" alt="AI Materials Discovery" class="portfolio-image">
-                    <div class="portfolio-content">
-                        <span class="portfolio-badge">AI & ML</span>
-                        <h3>AI Materials Discovery</h3>
-                        <p>Machine learning approaches to accelerated materials discovery and optimization.</p>
-                        <a href="portfolio-shorts/P-ai-materials.html" class="portfolio-link">
-                            Read Analysis →
-                        </a>
-                    </div>
-                </article>
-
-                <article class="portfolio-card">
-                    <img src="assets/images/portfolio-P-cmos-2nm.png" alt="CMOS Technology" class="portfolio-image">
-                    <div class="portfolio-content">
-                        <span class="portfolio-badge">Semiconductor</span>
-                        <h3>CMOS 2nm Technology</h3>
-                        <p>Frontier semiconductor technology at the 2nm process node and beyond.</p>
-                        <a href="portfolio-shorts/P-cmos-2nm.html" class="portfolio-link">
-                            Read Analysis →
-                        </a>
-                    </div>
-                </article>
-            </div>
-        </div>
-    </section>
-
-    <!-- Research Shorts Section -->
-    <section class="shorts-section" id="shorts">
-        <div class="container">
-            <div class="section-header">
-                <h2>Research Shorts</h2>
-                <p>Concise scientific publications covering diverse domains within the SciMSPT framework.</p>
-            </div>
-
-            <div class="shorts-grid">
-                <article class="short-card">
-                    <img src="assets/images/thumb-SD-M-01.png" alt="Mathematical Foundations" class="short-thumb">
-                    <div class="short-info">
-                        <h4>SD-M-01 — Mathematical Foundations</h4>
-                        <p>Core mathematical principles underlying scientific modeling.</p>
-                        <a href="shorts/SD-M-01.html" class="short-link">Read More →</a>
-                    </div>
-                </article>
-
-                <article class="short-card">
-                    <img src="assets/images/thumb-SD-M-02.png" alt="Computing Theory" class="short-thumb">
-                    <div class="short-info">
-                        <h4>SD-M-02 — Computing Theory</h4>
-                        <p>Theoretical foundations of computation and algorithms.</p>
-                        <a href="shorts/SD-M-02.html" class="short-link">Read More →</a>
-                    </div>
-                </article>
-
-                <article class="short-card">
-                    <img src="assets/images/thumb-SD-P-05.png" alt="Quantum Physics" class="short-thumb">
-                    <div class="short-info">
-                        <h4>SD-P-05 — Quantum Physics</h4>
-                        <p>Quantum mechanical phenomena and applications.</p>
-                        <a href="shorts/SD-P-05.html" class="short-link">Read More →</a>
-                    </div>
-                </article>
-
-                <article class="short-card">
-                    <img src="assets/images/thumb-SD-P-07.png" alt="Particle Dynamics" class="short-thumb">
-                    <div class="short-info">
-                        <h4>SD-P-07 — Particle Dynamics</h4>
-                        <p>Subatomic particle behavior and interactions.</p>
-                        <a href="shorts/SD-P-07.html" class="short-link">Read More →</a>
-                    </div>
-                </article>
-
-                <article class="short-card">
-                    <img src="assets/images/thumb-SD-S-04.png" alt="Scientific Methods" class="short-thumb">
-                    <div class="short-info">
-                        <h4>SD-S-04 — Scientific Methods</h4>
-                        <p>Methodologies for rigorous scientific investigation.</p>
-                        <a href="shorts/SD-S-04.html" class="short-link">Read More →</a>
-                    </div>
-                </article>
-
-                <article class="short-card">
-                    <img src="assets/images/thumb-SD-T-03.png" alt="Temporal Mechanics" class="short-thumb">
-                    <div class="short-info">
-                        <h4>SD-T-03 — Temporal Mechanics</h4>
-                        <p>Mechanisms governing temporal phenomena.</p>
-                        <a href="shorts/SD-T-03.html" class="short-link">Read More →</a>
-                    </div>
-                </article>
-
-                <article class="short-card">
-                    <img src="assets/images/thumb-SD-T-06.png" alt="Time Series Analysis" class="short-thumb">
-                    <div class="short-info">
-                        <h4>SD-T-06 — Time Series Analysis</h4>
-                        <p>Statistical methods for time-dependent data.</p>
-                        <a href="shorts/SD-T-06.html" class="short-link">Read More →</a>
-                    </div>
-                </article>
             </div>
         </div>
     </section>
@@ -869,20 +1360,20 @@
     <section class="about-section" id="about">
         <div class="container">
             <div class="about-grid">
-                <div>
+                <div class="about-image-wrapper">
                     <img src="assets/mandalas/scientific-mandala.png" alt="SciMSPT Scientific Mesh" class="about-image">
                 </div>
                 <div class="about-content">
                     <h2>About SciMSPT</h2>
-                    <p>SciMSPT represents an interdisciplinary research framework that explores the fundamental connections between Science, Matter, Physics, and Time through rigorous analysis and innovative methodologies.</p>
-                    <p>This framework enables researchers to examine complex phenomena through multiple lenses, fostering breakthrough insights that bridge traditional disciplinary boundaries.</p>
+                    <p><strong>Scientific Mesh for Science, Matter, Physics & Time</strong> — SciMSPT is a venture capital platform and research ecosystem that identifies, funds, and scales breakthrough startups operating at the intersection of these four fundamental domains.</p>
+                    <p>We believe the most transformative technologies emerge from interdisciplinary innovation. Our portfolio companies leverage advances in quantum mechanics, materials science, temporal dynamics, and computational methods to solve humanity's greatest challenges.</p>
                     
                     <ul class="about-features">
-                        <li>Quantum computing and materials science integration</li>
-                        <li>Temporal dynamics and time-domain analysis</li>
-                        <li>Computational physics and mathematical modeling</li>
-                        <li>Advanced semiconductor technologies</li>
-                        <li>AI-driven discovery methodologies</li>
+                        <li><span class="check-icon">✓</span> $491.5M total funding raised across portfolio</li>
+                        <li><span class="check-icon">✓</span> 680 world-class scientists, engineers, and operators</li>
+                        <li><span class="check-icon">✓</span> 127 patents filed across quantum, materials, and AI</li>
+                        <li><span class="check-icon">✓</span> Average 88% year-over-year growth rate</li>
+                        <li><span class="check-icon">✓</span> Global presence: Boston, Austin, San Jose, London, Taipei, Cambridge</li>
                     </ul>
                 </div>
             </div>
@@ -896,15 +1387,16 @@
             <p>Scientific Mesh for Science, Matter, Physics & Time</p>
             
             <div class="footer-links">
-                <a href="#portfolio">Portfolio Shorts</a>
-                <a href="#shorts">Research Shorts</a>
-                <a href="#about">About</a>
-                <a href="#research">Research Overview</a>
+                <a href="#startups">Portfolio Startups</a>
+                <a href="#digests">Weekly Digests</a>
+                <a href="#audio">Podcast</a>
+                <a href="#about">About Us</a>
+                <a href="assets/watchlists/startup-portfolio.json">Watchlist Data</a>
             </div>
             
             <div class="footer-bottom">
-                <p>&copy; 2026 SciMSPT — Interdisciplinary Scientific Research Framework</p>
-                <p style="margin-top: 8px;">Exploring the interconnectedness of universal knowledge</p>
+                <p>&copy; 2026 SciMSPT — Venture Portfolio & Research Ecosystem</p>
+                <p style="margin-top: 8px;">Building Tomorrow's Technologies Today | 7 Startups | $2.5B Valuation</p>
             </div>
         </div>
     </footer>

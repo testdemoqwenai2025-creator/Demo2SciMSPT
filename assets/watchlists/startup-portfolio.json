@@ -1,0 +1,188 @@
+{
+  "name": "SciMSPT Startup Portfolio",
+  "last_updated": "2026-08-19",
+  "currency": "USD",
+  "startups": [
+    {
+      "id": "P3",
+      "name": "Quantum Materials Inc.",
+      "ticker": "QMI",
+      "sector": "Quantum Computing / Materials",
+      "stage": "Series B",
+      "valuation": 285000000,
+      "funding_raised": 45000000,
+      "employees": 85,
+      "founded": 2022,
+      "hq": "Boston, MA",
+      "focus": "High-temperature superconductors & topological materials",
+      "metrics": {
+        "revenue_run_rate": 8200000,
+        "patents": 24,
+        "research_papers": 47,
+        "partnerships": 12
+      },
+      "performance": {
+        "6m_change": "+34%",
+        "12m_change": "+89%",
+        "milestone": "Achieved room-temperature superconductor prototype"
+      }
+    },
+    {
+      "id": "P5",
+      "name": "Computational Physics Labs",
+      "ticker": "CPL",
+      "sector": "HPC / Simulation Software",
+      "stage": "Series A",
+      "valuation": 120000000,
+      "funding_raised": 28000000,
+      "employees": 45,
+      "founded": 2023,
+      "hq": "Austin, TX",
+      "focus": "AI-accelerated physics simulation platforms",
+      "metrics": {
+        "revenue_run_rate": 3400000,
+        "patents": 8,
+        "enterprise_customers": 34,
+        "simulation_hours_monthly": 2500000
+      },
+      "performance": {
+        "6m_change": "+22%",
+        "12m_change": "+56%",
+        "milestone": "Launched quantum chemistry module"
+      }
+    },
+    {
+      "id": "P9",
+      "name": "TMD Logic Quantum",
+      "ticker": "TMDL",
+      "sector": "Quantum Hardware / Semiconductors",
+      "stage": "Series C",
+      "valuation": 650000000,
+      "funding_raised": 125000000,
+      "employees": 145,
+      "founded": 2021,
+      "hq": "San Jose, CA",
+      "focus": "Transition Metal Dichalcogenide quantum processors",
+      "metrics": {
+        "qubit_count": 256,
+        "coherence_time_us": 450,
+        "gate_fidelity": 99.7,
+        "quantum_volume": 4096
+      },
+      "performance": {
+        "6m_change": "+45%",
+        "12m_change": "+142%",
+        "milestone": "Demonstrated quantum advantage in materials simulation"
+      }
+    },
+    {
+      "id": "P11",
+      "name": "Advanced Materials Corp",
+      "ticker": "AMC",
+      "sector": "Materials Science / Manufacturing",
+      "stage": "Series B",
+      "valuation": 195000000,
+      "funding_raised": 38000000,
+      "employees": 72,
+      "founded": 2022,
+      "hq": "Pittsburgh, PA",
+      "focus": "Metamaterials & smart material manufacturing",
+      "metrics": {
+        "revenue_run_rate": 12100000,
+        "patents": 31,
+        "manufacturing_capacity_tons": 5000,
+        "active_contracts": 18
+      },
+      "performance": {
+        "6m_change": "+18%",
+        "12m_change": "+67%",
+        "milestone": "Scaled production of invisibility cloak material"
+      }
+    },
+    {
+      "id": "P12",
+      "name": "Temporal Dynamics Research",
+      "ticker": "TDR",
+      "sector": "Time-Series Analytics / AI",
+      "stage": "Seed+",
+      "valuation": 55000000,
+      "funding_raised": 8500000,
+      "employees": 28,
+      "founded": 2024,
+      "hq": "Cambridge, UK",
+      "focus": "Ultrafast spectroscopy & temporal AI systems",
+      "metrics": {
+        "time_resolution_as": 50,
+        "prediction_accuracy": 99.2,
+        "api_calls_daily": 1500000,
+        "enterprise_clients": 8
+      },
+      "performance": {
+        "6m_change": "+28%",
+        "12m_change": "N/A (New)",
+        "milestone": "Commercialized attosecond imaging system"
+      }
+    },
+    {
+      "id": "P-ai-materials",
+      "name": "AI Materials Discovery Platform",
+      "ticker": "AIMD",
+      "sector": "AI / Drug Discovery / Materials",
+      "stage": "Series B",
+      "valuation": 320000000,
+      "funding_raised": 62000000,
+      "employees": 95,
+      "founded": 2021,
+      "hq": "London, UK",
+      "focus": "Autonomous AI-driven materials discovery labs",
+      "metrics": {
+        "compounds_screened": 125000000,
+        "discovery_time_months": 4,
+        "active_projects": 23,
+        "pharma_partnerships": 8
+      },
+      "performance": {
+        "6m_change": "+38%",
+        "12m_change": "+95%",
+        "milestone": "Discovered solid-state electrolyte for EV batteries"
+      }
+    },
+    {
+      "id": "P-cmos-2nm",
+      "name": "CMOS NextGen Semiconductor",
+      "ticker": "CMOS",
+      "sector": "Semiconductors / Hardware",
+      "stage": "Series C",
+      "valuation": 890000000,
+      "funding_raised": 185000000,
+      "employees": 210,
+      "founded": 2020,
+      "hq": "Taipei, Taiwan",
+      "focus": "2nm and beyond CMOS process technology",
+      "metrics": {
+        "process_node_nm": 2,
+        "transistor_density_per_mm2": 500000000,
+        "yield_rate_percent": 78,
+        "chips_shipped_millions": 15
+      },
+      "performance": {
+        "6m_change": "+52%",
+        "12m_change": "+178%",
+        "milestone": "Begun volume production of 2nm GAA-FET chips"
+      }
+    }
+  ],
+  "portfolio_summary": {
+    "total_valuation": 2515000000,
+    "total_funding": 491500000,
+    "total_employees": 680,
+    "average_growth_12m": "+88%",
+    "sectors": [
+      "Quantum Computing",
+      "Semiconductors",
+      "AI/ML",
+      "Materials Science",
+      "Software"
+    ]
+  }
+}

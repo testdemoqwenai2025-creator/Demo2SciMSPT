@@ -1,0 +1,93 @@
+[
+  {
+    "issue": "SD-M-01",
+    "title": "Mathematical Foundations Week",
+    "date": "2026-W32",
+    "theme": "Core Mathematics in SciMSPT Startups",
+    "highlights": [
+      "Quantum Materials Inc. publishes breakthrough in topological insulator theory",
+      "Computational Physics Labs releases new tensor network library",
+      "TMD Logic achieves new coherence time record through error correction"
+    ],
+    "read_time": "8 min",
+    "audio_available": true
+  },
+  {
+    "issue": "SD-M-02",
+    "title": "Computing Theory Advances",
+    "date": "2026-W33",
+    "theme": "Algorithms Powering Innovation",
+    "highlights": [
+      "New optimization algorithm speeds up materials screening 10x",
+      "Quantum supremacy demonstration expanded to new problem class",
+      "Machine learning interatomic potentials reach DFT accuracy"
+    ],
+    "read_time": "10 min",
+    "audio_available": true
+  },
+  {
+    "issue": "SD-P-05",
+    "title": "Quantum Physics Breakthroughs",
+    "date": "2026-W31",
+    "theme": "Quantum Effects in Real Applications",
+    "highlights": [
+      "Room-temperature qubit operation achieved by TMD Logic",
+      "Entanglement distribution over 500km demonstrated",
+      "Topological quantum computing milestone reached"
+    ],
+    "read_time": "9 min",
+    "audio_available": true
+  },
+  {
+    "issue": "SD-P-07",
+    "title": "Particle Dynamics Update",
+    "date": "2026-W30",
+    "theme": "Subatomic Discoveries Impacting Tech",
+    "highlights": [
+      "New particle physics results inform next-gen sensor design",
+      "Dark matter detection sensitivity improved 100x",
+      "Particle accelerator applications expand to materials science"
+    ],
+    "read_time": "11 min",
+    "audio_available": false
+  },
+  {
+    "issue": "SD-S-04",
+    "title": "Scientific Methods Innovation",
+    "date": "2026-W29",
+    "theme": "How SciMSPT Companies Do Science",
+    "highlights": [
+      "AI Materials Discovery platform publishes reproducibility standards",
+      "Autonomous lab completes 10,000 experiments without human intervention",
+      "Open science initiatives across portfolio companies"
+    ],
+    "read_time": "7 min",
+    "audio_available": true
+  },
+  {
+    "issue": "SD-T-03",
+    "title": "Temporal Mechanics Frontiers",
+    "date": "2026-W28",
+    "theme": "Time Science in Practice",
+    "highlights": [
+      "Temporal Dynamics commercializes attosecond imaging",
+      "New time crystal applications discovered",
+      "Precision timing enables next-gen GPS alternative"
+    ],
+    "read_time": "9 min",
+    "audio_available": true
+  },
+  {
+    "issue": "SD-T-06",
+    "title": "Time Series Intelligence",
+    "date": "2026-W27",
+    "theme": "Predictive Analytics Across Domains",
+    "highlights": [
+      "Forecasting models predict materials properties before synthesis",
+      "Financial time series analysis optimizes R&D spending",
+      "Climate modeling informs sustainable manufacturing"
+    ],
+    "read_time": "8 min",
+    "audio_available": false
+  }
+]

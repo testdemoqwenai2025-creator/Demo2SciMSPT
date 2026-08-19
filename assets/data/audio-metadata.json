@@ -1,0 +1,51 @@
+[
+  {
+    "file": "podcast-intro.mp3",
+    "title": "SciMSPT Podcast Introduction",
+    "duration": "2:30",
+    "description": "Welcome to SciMSPT \u2014 where Science, Matter, Physics, and Time converge to build tomorrow's technologies.",
+    "category": "podcast"
+  },
+  {
+    "file": "startup-spotlight-p3.mp3",
+    "title": "Startup Spotlight: Quantum Materials Inc.",
+    "duration": "18:45",
+    "description": "Interview with CEO Dr. Sarah Chen on high-Tc superconductor breakthrough.",
+    "category": "interview"
+  },
+  {
+    "file": "startup-spotlight-p9.mp3",
+    "title": "Startup Spotlight: TMD Logic Quantum",
+    "duration": "22:30",
+    "description": "Deep dive into TMD-based quantum computing with CTO Prof. James Wong.",
+    "category": "interview"
+  },
+  {
+    "file": "weekly-digest-w32.mp3",
+    "title": "Weekly Digest - Mathematical Foundations",
+    "duration": "12:15",
+    "description": "Audio summary of this week's mathematical breakthroughs across the portfolio.",
+    "category": "digest"
+  },
+  {
+    "file": "founder-story-cmos.mp3",
+    "title": "Founder Story: CMOS NextGen Semiconductor",
+    "duration": "25:00",
+    "description": "From lab to $890M valuation \u2014 the journey of 2nm chip innovation.",
+    "category": "story"
+  },
+  {
+    "file": "tech-deep-dive-ai-materials.mp3",
+    "title": "Tech Deep Dive: Autonomous Materials Discovery",
+    "duration": "20:45",
+    "description": "How AI is revolutionizing materials discovery at AI Materials Discovery Platform.",
+    "category": "technical"
+  },
+  {
+    "file": "investor-update-q3.mp3",
+    "title": "Q3 2026 Investor Update",
+    "duration": "15:30",
+    "description": "Portfolio performance, milestones, and outlook for Q4 2026.",
+    "category": "business"
+  }
+]
