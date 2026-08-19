@@ -589,44 +589,422 @@
     
     .hero-subtitle strong { color: var(--primary); font-weight: 600; }
     
-    .hero-actions { 
-      display: flex !important; 
-      gap: 24px; 
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap; 
-      margin: 48px auto;
-      padding: 32px 40px;
-      background: linear-gradient(135deg, rgba(10, 22, 40, 0.98) 0%, rgba(20, 40, 64, 0.95) 100%);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
+    /* ═══════════════════════════════════════════════════════════════
+       PIPELINE VISUALIZATION - RESEARCH → ANALYSIS → VENTURE
+       ═══════════════════════════════════════════════════════════════ */
+    .pipeline-container {
+      margin: 56px auto 48px;
+      padding: 44px 40px;
+      background: linear-gradient(135deg, rgba(10, 22, 40, 0.97) 0%, rgba(20, 40, 64, 0.94) 100%);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
       border-radius: 28px;
-      border: 3px solid rgba(77, 168, 218, 0.6);
-      max-width: 960px;
+      border: 2px solid rgba(77, 168, 218, 0.4);
+      max-width: 1100px;
       box-shadow: 
-        0 16px 70px rgba(0, 0, 0, 0.6),
-        0 0 100px rgba(77, 168, 218, 0.25),
-        inset 0 2px 0 rgba(255, 255, 255, 0.1),
-        0 0 0 1px rgba(255, 255, 255, 0.05);
+        0 20px 80px rgba(0, 0, 0, 0.5),
+        0 0 120px rgba(77, 168, 218, 0.15),
+        inset 0 2px 0 rgba(255, 255, 255, 0.08),
+        0 0 0 1px rgba(255, 255, 255, 0.04);
       position: relative;
       z-index: 100;
-      visibility: visible !important;
-      opacity: 1 !important;
+      overflow: hidden;
     }
     
-    .hero-actions-left {
-      display: flex;
-      align-items: center;
+    .pipeline-container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, 
+        #00E5FF 0%, 
+        #4da8da 33%, 
+        #a78bfa 66%, 
+        #f472b6 100%
+      );
     }
     
-    .hero-actions-right {
-      display: flex;
+    .pipeline-header {
+      text-align: center;
+      margin-bottom: 44px;
+    }
+    
+    .pipeline-kicker {
+      display: inline-flex;
       align-items: center;
-      gap: 12px;
-      padding: 8px 16px;
-      background: rgba(77, 168, 218, 0.08);
-      border-radius: 16px;
+      gap: 8px;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+      padding: 8px 18px;
+      background: rgba(77, 168, 218, 0.12);
+      border-radius: 20px;
       border: 1px solid rgba(77, 168, 218, 0.25);
+    }
+    
+    .pipeline-title {
+      font-family: var(--font-heading);
+      font-size: clamp(26px, 4vw, 38px);
+      font-weight: 900;
+      color: #ffffff;
+      letter-spacing: -0.5px;
+      margin-bottom: 14px;
+      background: linear-gradient(135deg, #00E5FF 0%, #4da8da 50%, #a78bfa 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .pipeline-subtitle {
+      font-size: 16px;
+      color: var(--muted);
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+    
+    .pipeline-flow {
+      display: flex;
+      align-items: stretch;
+      justify-content: center;
+      gap: 0;
+      margin-bottom: 36px;
+    }
+    
+    .pipeline-stage {
+      flex: 1;
+      max-width: 260px;
+      padding: 32px 24px;
+      background: rgba(77, 168, 218, 0.06);
+      border: 1px solid rgba(77, 168, 218, 0.2);
+      border-radius: 20px;
+      text-align: center;
+      position: relative;
+      transition: all 0.4s ease;
+    }
+    
+    .pipeline-stage:hover {
+      transform: translateY(-6px);
+      border-color: var(--accent);
+      box-shadow: 0 12px 40px rgba(77, 168, 218, 0.2);
+      background: rgba(77, 168, 218, 0.1);
+    }
+    
+    .stage-research:hover { border-color: #00E5FF; box-shadow: 0 12px 40px rgba(0, 229, 255, 0.25); }
+    .stage-analysis:hover { border-color: #a78bfa; box-shadow: 0 12px 40px rgba(167, 139, 250, 0.25); }
+    .stage-venture:hover { border-color: #f472b6; box-shadow: 0 12px 40px rgba(244, 114, 182, 0.25); }
+    
+    .stage-icon-wrapper {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+    
+    .stage-icon {
+      width: 72px;
+      height: 72px;
+      border-radius: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 34px;
+      position: relative;
+      z-index: 2;
+      transition: all 0.35s ease;
+    }
+    
+    .stage-research .stage-icon {
+      background: linear-gradient(135deg, rgba(0, 229, 255, 0.2), rgba(0, 229, 255, 0.05));
+      color: #00E5FF;
+      border: 2px solid rgba(0, 229, 255, 0.4);
+      box-shadow: 0 0 30px rgba(0, 229, 255, 0.3);
+    }
+    
+    .stage-analysis .stage-icon {
+      background: linear-gradient(135deg, rgba(167, 139, 250, 0.2), rgba(167, 139, 250, 0.05));
+      color: #a78bfa;
+      border: 2px solid rgba(167, 139, 250, 0.4);
+      box-shadow: 0 0 30px rgba(167, 139, 250, 0.3);
+    }
+    
+    .stage-venture .stage-icon {
+      background: linear-gradient(135deg, rgba(244, 114, 182, 0.2), rgba(244, 114, 182, 0.05));
+      color: #f472b6;
+      border: 2px solid rgba(244, 114, 182, 0.4);
+      box-shadow: 0 0 30px rgba(244, 114, 182, 0.3);
+    }
+    
+    .pipeline-stage:hover .stage-icon {
+      transform: scale(1.1) rotate(-5deg);
+    }
+    
+    .stage-glow {
+      position: absolute;
+      inset: -10px;
+      border-radius: 22px;
+      filter: blur(15px);
+      opacity: 0.4;
+      z-index: 1;
+      transition: opacity 0.35s ease;
+    }
+    
+    .stage-research .stage-glow { background: radial-gradient(circle, rgba(0, 229, 255, 0.4), transparent 70%); }
+    .stage-analysis .stage-glow { background: radial-gradient(circle, rgba(167, 139, 250, 0.4), transparent 70%); }
+    .stage-venture .stage-glow { background: radial-gradient(circle, rgba(244, 114, 182, 0.4), transparent 70%); }
+    
+    .pipeline-stage:hover .stage-glow { opacity: 0.7; }
+    
+    .stage-title {
+      font-family: var(--font-heading);
+      font-size: 22px;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 8px;
+    }
+    
+    .stage-subtitle {
+      font-size: 14px;
+      color: var(--accent);
+      line-height: 1.5;
+      margin-bottom: 16px;
+      font-weight: 500;
+    }
+    
+    .stage-research .stage-subtitle { color: #00E5FF; }
+    .stage-analysis .stage-subtitle { color: #a78bfa; }
+    .stage-venture .stage-subtitle { color: #f472b6; }
+    
+    .stage-details {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 20px;
+      padding: 14px;
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 12px;
+    }
+    
+    .detail-item {
+      font-size: 12px;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+    
+    .detail-item strong {
+      color: var(--primary);
+      font-family: var(--font-num);
+      font-weight: 600;
+    }
+    
+    .stage-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 20px;
+      background: rgba(77, 168, 218, 0.1);
+      border: 1px solid rgba(77, 168, 218, 0.3);
+      border-radius: 12px;
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+    
+    .stage-link:hover {
+      background: var(--accent);
+      color: #0a1628;
+      transform: translateX(4px);
+    }
+    
+    .stage-link .material-icons {
+      font-size: 16px;
+      transition: transform 0.3s ease;
+    }
+    
+    .stage-link:hover .material-icons {
+      transform: translateX(4px);
+    }
+    
+    /* Arrow Connectors */
+    .pipeline-arrow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 70px;
+      flex-shrink: 0;
+      position: relative;
+    }
+    
+    .arrow-line {
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent), rgba(167, 139, 250, 0.6));
+      border-radius: 2px;
+      position: relative;
+    }
+    
+    .arrow-line::after {
+      content: '';
+      position: absolute;
+      inset: -4px 0;
+      background: inherit;
+      filter: blur(8px);
+      opacity: 0.5;
+    }
+    
+    .arrow-head {
+      position: absolute;
+      right: -8px;
+      width: 28px;
+      height: 28px;
+      background: linear-gradient(135deg, var(--accent), rgba(167, 139, 250, 0.8));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff;
+      font-size: 16px;
+      box-shadow: 0 0 20px rgba(77, 168, 218, 0.4);
+      animation: arrowPulse 2s ease-in-out infinite;
+      z-index: 2;
+    }
+    
+    @keyframes arrowPulse {
+      0%, 100% { transform: scale(1); box-shadow: 0 0 15px rgba(77, 168, 218, 0.4); }
+      50% { transform: scale(1.15); box-shadow: 0 0 25px rgba(77, 168, 218, 0.6); }
+    }
+    
+    .arrow-particles {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+    
+    .particle {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: var(--accent);
+      border-radius: 50%;
+      animation: particleFlow 2s ease-in-out infinite;
+    }
+    
+    .particle:nth-child(1) { top: 20%; animation-delay: 0s; }
+    .particle:nth-child(2) { top: 50%; animation-delay: 0.4s; }
+    .particle:nth-child(3) { top: 80%; animation-delay: 0.8s; }
+    
+    @keyframes particleFlow {
+      0% { left: 0; opacity: 0; transform: scale(0); }
+      30% { opacity: 1; transform: scale(1); }
+      70% { opacity: 1; transform: scale(1); }
+      100% { left: calc(100% - 4px); opacity: 0; transform: scale(0.5); }
+    }
+    
+    /* Pipeline CTA Row */
+    .pipeline-cta-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      padding-top: 32px;
+      border-top: 1px solid rgba(77, 168, 218, 0.2);
+      flex-wrap: wrap;
+    }
+    
+    .pipeline-main-cta {
+      background: linear-gradient(135deg, #00E5FF 0%, #4da8da 50%, #a78bfa 100%) !important;
+      border: 2px solid rgba(255, 255, 255, 0.3) !important;
+      animation: ctaGlow 3s ease-in-out infinite !important;
+    }
+    
+    @keyframes ctaGlow {
+      0%, 100% { box-shadow: 0 8px 40px rgba(0, 229, 255, 0.5), 0 0 60px rgba(167, 139, 250, 0.3); }
+      50% { box-shadow: 0 12px 50px rgba(0, 229, 255, 0.7), 0 0 80px rgba(167, 139, 250, 0.45); }
+    }
+    
+    .pipeline-main-cta:hover {
+      transform: translateY(-4px) scale(1.03) !important;
+      box-shadow: 0 16px 60px rgba(0, 229, 255, 0.7), 0 0 100px rgba(167, 139, 250, 0.5) !important;
+      animation: none !important;
+    }
+    
+    /* Responsive Pipeline */
+    @media (max-width: 1024px) {
+      .pipeline-flow {
+        flex-direction: column;
+        gap: 24px;
+      }
+      
+      .pipeline-arrow {
+        width: 100%;
+        height: 60px;
+        flex-direction: column;
+      }
+      
+      .arrow-line {
+        width: 3px;
+        height: 100%;
+        background: linear-gradient(180deg, var(--accent), rgba(167, 139, 250, 0.6));
+      }
+      
+      .arrow-head {
+        bottom: -8px;
+        right: auto;
+        top: auto;
+      }
+      
+      .particle {
+        animation: particleFlowVertical 2s ease-in-out infinite;
+      }
+      
+      @keyframes particleFlowVertical {
+        0% { top: 0; opacity: 0; transform: scale(0); }
+        30% { opacity: 1; transform: scale(1); }
+        70% { opacity: 1; transform: scale(1); }
+        100% { top: calc(100% - 4px); opacity: 0; transform: scale(0.5); }
+      }
+      
+      .pipeline-stage {
+        max-width: 100%;
+      }
+      
+      .pipeline-cta-row {
+        flex-direction: column;
+      }
+      
+      .pipeline-cta-row .btn {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .pipeline-container {
+        padding: 28px 20px;
+        margin: 32px auto;
+      }
+      
+      .pipeline-header {
+        margin-bottom: 32px;
+      }
+      
+      .stage-details {
+        flex-direction: row;
+        justify-content: center;
+        gap: 16px;
+      }
     }
     
     .btn {
@@ -1690,17 +2068,109 @@
         <strong>7 high-potential opportunities</strong>.
       </p>
       
-      <div class="hero-actions">
-        <div class="hero-actions-left">
-          <a href="startups.html" class="btn btn-primary">
-            <i class="material-icons">arrow_forward</i>
-            View This Week's Startups
-          </a>
+      <!-- ═══════════════════════════════════════════════════════════════
+           PIPELINE VISUALIZATION - Research → Analysis → Venture
+           ═══════════════════════════════════════════════════════════════ -->
+      <div class="pipeline-container">
+        <div class="pipeline-header">
+          <span class="pipeline-kicker">The Pipeline</span>
+          <h2 class="pipeline-title">Research → Analysis → Venture</h2>
+          <p class="pipeline-subtitle">Our proprietary pipeline transforms raw scientific publications into investment-ready startup theses.</p>
         </div>
-        <div class="hero-actions-right">
-          <a href="#studio" class="btn btn-studio" onclick="showStudioInfo(); return false;">
+        
+        <div class="pipeline-flow">
+          <!-- Stage 1: Research / ScienceDaily -->
+          <div class="pipeline-stage stage-research">
+            <div class="stage-icon-wrapper">
+              <div class="stage-icon">
+                <i class="material-icons">article</i>
+              </div>
+              <div class="stage-glow"></div>
+            </div>
+            <h3 class="stage-title">Research</h3>
+            <p class="stage-subtitle">ScienceDaily<br/>RSS Feeds</p>
+            <div class="stage-details">
+              <span class="detail-item"><strong>264+</strong> articles/week</span>
+              <span class="detail-item"><strong>6</strong> domains</span>
+            </div>
+            <a href="research.html" class="stage-link">
+              Explore Research
+              <i class="material-icons">arrow_forward</i>
+            </a>
+          </div>
+
+          <!-- Arrow Connector 1 -->
+          <div class="pipeline-arrow">
+            <div class="arrow-line"></div>
+            <div class="arrow-head"><i class="material-icons">arrow_forward</i></div>
+            <div class="arrow-particles">
+              <span class="particle"></span>
+              <span class="particle"></span>
+              <span class="particle"></span>
+            </div>
+          </div>
+
+          <!-- Stage 2: Analysis / AI-Powered -->
+          <div class="pipeline-stage stage-analysis">
+            <div class="stage-icon-wrapper">
+              <div class="stage-icon">
+                <i class="material-icons">psychology</i>
+              </div>
+              <div class="stage-glow"></div>
+            </div>
+            <h3 class="stage-title">Analysis</h3>
+            <p class="stage-subtitle">AI-Powered<br/>Analysis</p>
+            <div class="stage-details">
+              <span class="detail-item"><strong>NLP</strong> extraction</span>
+              <span class="detail-item"><strong>ML</strong> scoring</span>
+            </div>
+            <a href="documentation.html" class="stage-link">
+                View Documentation
+                <i class="material-icons">arrow_forward</i>
+            </a>
+          </div>
+
+          <!-- Arrow Connector 2 -->
+          <div class="pipeline-arrow">
+            <div class="arrow-line"></div>
+            <div class="arrow-head"><i class="material-icons">arrow_forward</i></div>
+            <div class="arrow-particles">
+              <span class="particle"></span>
+              <span class="particle"></span>
+              <span class="particle"></span>
+            </div>
+          </div>
+
+          <!-- Stage 3: Venture / 7 Fundable Startups -->
+          <div class="pipeline-stage stage-venture">
+            <div class="stage-icon-wrapper">
+              <div class="stage-icon">
+                <i class="material-icons">rocket_launch</i>
+              </div>
+              <div class="stage-glow"></div>
+            </div>
+            <h3 class="stage-title">Venture</h3>
+            <p class="stage-subtitle"><strong>7</strong> Fundable<br/>Startups</p>
+            <div class="stage-details">
+              <span class="detail-item"><strong>$18B+</strong> avg TAM</span>
+              <span class="detail-item"><strong>49</strong> papers/startup</span>
+            </div>
+            <a href="startups.html" class="stage-link">
+              View Startups
+              <i class="material-icons">arrow_forward</i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Pipeline CTA Row -->
+        <div class="pipeline-cta-row">
+          <a href="startups.html" class="btn btn-primary pipeline-main-cta">
+            <i class="material-icons">rocket_launch</i>
+            Explore This Week's 7 Startups
+          </a>
+          <a href="documentation.html" class="btn btn-secondary">
             <i class="material-icons">code</i>
-            Studio IDE
+            Developer Portal
           </a>
           <a href="#" class="btn btn-login" onclick="openLoginModal(); return false;">
             <i class="material-icons">login</i>
