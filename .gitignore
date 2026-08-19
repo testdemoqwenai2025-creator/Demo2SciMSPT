@@ -1,0 +1,35 @@
+# Dependencies
+node_modules/
+
+# Build outputs
+dist/
+build/
+out/
+.next/
+.cache/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# NEXUS CONTAMINATION BLOCK - CRITICAL
+# Block any ecosystem intelligence or nexus content
+*nexus*
+*NEXUS*
+*ecosystem-intelligence*
+*Ecosystem Intelligence*
+
+# Test files
+__tests__/
+*.test.js
+*.spec.js
+
+# Environment
+.env
+.env.local

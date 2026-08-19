@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SciMSPT — Scientific Mesh for Science, Matter, Physics & Time</title>
+    <meta name="description" content="SciMSPT: An interdisciplinary scientific framework exploring the interconnectedness of Science, Matter, Physics, and Time through research publications and portfolio analysis.">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-size: 2.5em;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 1.2em;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        nav {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        nav a {
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        nav a:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card h2 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+
+        .card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .card li {
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .card li:last-child {
+            border-bottom: none;
+        }
+
+        .card a {
+            color: #764ba2;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .card a:hover {
+            color: #667eea;
+        }
+
+        footer {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            color: #666;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            background: #e8f4f8;
+            color: #2980b9;
+            border-radius: 20px;
+            font-size: 0.85em;
+            margin-left: 8px;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8em;
+            }
+            
+            nav {
+                flex-direction: column;
+            }
+            
+            nav a {
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>SciMSPT</h1>
+            <p class="subtitle">Scientific Mesh for Science, Matter, Physics & Time</p>
+            <nav>
+                <a href="#portfolio-shorts">Portfolio Shorts</a>
+                <a href="#shorts">Research Shorts</a>
+                <a href="#about">About</a>
+            </nav>
+        </header>
+
+        <div class="main-content">
+            <section id="portfolio-shorts" class="card">
+                <h2>Portfolio Shorts <span class="badge">Analysis</span></h2>
+                <ul>
+                    <li><a href="portfolio-shorts/P3.html">P3 — Quantum Materials Analysis</a></li>
+                    <li><a href="portfolio-shorts/P5.html">P5 — Computational Physics Models</a></li>
+                    <li><a href="portfolio-shorts/P9.html">P9 — TMD Logic & Quantum Computing</a></li>
+                    <li><a href="portfolio-shorts/P11.html">P11 — Advanced Material Science</a></li>
+                    <li><a href="portfolio-shorts/P12.html">P12 — Time-Domain Research</a></li>
+                    <li><a href="portfolio-shorts/P-ai-materials.html">AI Materials Discovery</a></li>
+                    <li><a href="portfolio-shorts/P-cmos-2nm.html">CMOS 2nm Technology</a></li>
+                </ul>
+            </section>
+
+            <section id="shorts" class="card">
+                <h2>Research Shorts <span class="badge">Publications</span></h2>
+                <ul>
+                    <li><a href="shorts/SD-M-01.html">SD-M-01 — Mathematical Foundations</a></li>
+                    <li><a href="shorts/SD-M-02.html">SD-M-02 — Computing Theory</a></li>
+                    <li><a href="shorts/SD-P-05.html">SD-P-05 — Quantum Physics</a></li>
+                    <li><a href="shorts/SD-P-07.html">SD-P-07 — Particle Dynamics</a></li>
+                    <li><a href="shorts/SD-S-04.html">SD-S-04 — Scientific Methods</a></li>
+                    <li><a href="shorts/SD-T-03.html">SD-T-03 — Temporal Mechanics</a></li>
+                    <li><a href="shorts/SD-T-06.html">SD-T-06 — Time Series Analysis</a></li>
+                </ul>
+            </section>
+
+            <section id="about" class="card">
+                <h2>About SciMSPT</h2>
+                <p>SciMSPT represents an interdisciplinary research framework that explores the fundamental connections between Science, Matter, Physics, and Time.</p>
+                <br>
+                <p><strong>Core Research Areas:</strong></p>
+                <ul style="margin-top: 10px; padding-left: 20px;">
+                    <li>Quantum computing and materials science</li>
+                    <li>Temporal dynamics and time-domain analysis</li>
+                    <li>Computational physics and mathematical modeling</li>
+                    <li>Advanced semiconductor technologies</li>
+                </ul>
+            </section>
+        </div>
+
+        <footer>
+            <p>&copy; 2026 SciMSPT — Scientific Mesh for Science, Matter, Physics & Time</p>
+            <p style="margin-top: 10px; font-size: 0.9em;">Interdisciplinary Research Framework</p>
+        </footer>
+    </div>
+</body>
+</html>
+<!-- Cache bust: 1787144599 -->
