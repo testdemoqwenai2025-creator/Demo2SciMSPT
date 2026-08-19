@@ -287,14 +287,104 @@
       color: #ffffff;
     }
     
+    .highlight-text {
+      display: inline-flex;
+      align-items: center;
+      position: relative;
+      padding: 4px 0;
+    }
+    
+    .highlight-text::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: -20px;
+      right: -20px;
+      height: 12px;
+      background: linear-gradient(90deg, transparent, rgba(30, 64, 175, 0.3), rgba(167, 139, 250, 0.3), transparent);
+      border-radius: 6px;
+      filter: blur(8px);
+      z-index: -1;
+    }
+    
     .highlight-text span.research {
-      color: #1e40af;
-      -webkit-text-fill-color: #1e40af;
+      color: #1e3a8a;
+      -webkit-text-fill-color: #1e3a8a;
+      font-weight: 950;
+      text-shadow: 
+        0 0 40px rgba(30, 58, 138, 0.5),
+        0 4px 12px rgba(30, 58, 138, 0.3),
+        0 0 80px rgba(30, 58, 138, 0.2);
+      position: relative;
+      display: inline-block;
+      animation: researchPulse 3s ease-in-out infinite;
     }
     
     .highlight-text span.papers {
-      color: #a78bfa;
-      -webkit-text-fill-color: #a78bfa;
+      color: #c084fc;
+      -webkit-text-fill-color: #c084fc;
+      font-weight: 950;
+      text-shadow: 
+        0 0 40px rgba(192, 132, 252, 0.5),
+        0 4px 12px rgba(192, 132, 252, 0.3),
+        0 0 80px rgba(192, 132, 252, 0.2);
+      position: relative;
+      display: inline-block;
+      animation: papersShimmer 4s ease-in-out infinite;
+      margin-left: 2px;
+    }
+    
+    /* Decorative sparkle after "Papers" */
+    .highlight-text span.papers::after {
+      content: '✦';
+      position: absolute;
+      right: -28px;
+      top: -8px;
+      font-size: 20px;
+      color: #c084fc;
+      opacity: 0.6;
+      animation: sparkleRotate 6s linear infinite;
+      filter: drop-shadow(0 0 8px rgba(192, 132, 252, 0.8));
+    }
+    
+    @keyframes researchPulse {
+      0%, 100% { 
+        transform: translateY(0); 
+        text-shadow: 
+          0 0 40px rgba(30, 58, 138, 0.5),
+          0 4px 12px rgba(30, 58, 138, 0.3);
+      }
+      50% { 
+        transform: translateY(-2px); 
+        text-shadow: 
+          0 0 60px rgba(30, 58, 138, 0.7),
+          0 6px 20px rgba(30, 58, 138, 0.4),
+          0 0 100px rgba(30, 58, 138, 0.3);
+      }
+    }
+    
+    @keyframes papersShimmer {
+      0%, 100% { 
+        transform: translateY(0); 
+        filter: brightness(1);
+        text-shadow: 
+          0 0 40px rgba(192, 132, 252, 0.5),
+          0 4px 12px rgba(192, 132, 252, 0.3);
+      }
+      50% { 
+        transform: translateY(-2px); 
+        filter: brightness(1.15);
+        text-shadow: 
+          0 0 60px rgba(192, 132, 252, 0.7),
+          0 6px 20px rgba(192, 132, 252, 0.4),
+          0 0 100px rgba(192, 132, 252, 0.3);
+      }
+    }
+    
+    @keyframes sparkleRotate {
+      0% { transform: rotate(0deg) scale(1); opacity: 0.6; }
+      50% { transform: rotate(180deg) scale(1.2); opacity: 1; }
+      100% { transform: rotate(360deg) scale(1); opacity: 0.6; }
     }
     
     .hero-subtitle {
