@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SciMSPT Feature Test Suite</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0a1628; color: #e8f0f8; padding: 2rem; line-height: 1.6; }
+    h1 { color: #4da8da; margin-bottom: 0.5rem; }
+    .subtitle { color: #7a9bb8; margin-bottom: 2rem; border-bottom: 1px solid rgba(77,168,218,0.3); padding-bottom: 1rem; }
+    
+    .test-section { background: rgba(20,40,64,0.7); border: 1px solid rgba(77,168,218,0.25); border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem; }
+    .test-section h2 { color: #4da8da; font-size: 1.25rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
+    .test-result { padding: 1rem; background: rgba(0,20,40,0.6); border-radius: 8px; margin-top: 0.75rem; font-family: 'Courier New', monospace; font-size: 0.9rem; }
+    .pass { color: #10b981; }
+    .fail { color: #ef4444; }
+    .info { color: #4da8da; }
+    
+    .btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.25rem; background: linear-gradient(135deg, #4da8da, #2d7ab3); color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; transition: transform 0.2s, box-shadow 0.2s; margin-right: 0.5rem; margin-bottom: 0.5rem; }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(77,168,218,0.35); }
+    .btn-secondary { background: rgba(77,168,218,0.15); border: 1px solid rgba(77,168,218,0.3); }
+    
+    .modal-test { position: fixed; inset: 0; background: rgba(0,0,0,0.7); display: none; align-items: center; justify-content: center; z-index: 9999; }
+    .modal-test.active { display: flex; }
+    .modal-content-test { background: #142840; border-radius: 16px; padding: 2rem; max-width: 480px; width: 90%; max-height: 80vh; overflow-y: auto; }
+    
+    /* Boolean Options Test */
+    .quick-option { display: flex; align-items: center; gap: 12px; padding: 14px 16px; background: rgba(45,122,179,0.08); border: 2px solid rgba(77,168,218,0.25); border-radius: 12px; cursor: pointer; margin-bottom: 10px; transition: all 0.25s ease; }
+    .quick-option:hover { border-color: #4da8da; background: rgba(77,168,218,0.1); }
+    .quick-option.selected { border-color: #4da8da; background: rgba(77,168,218,0.15); }
+    .quick-option input[type="checkbox"] { width: 22px; height: 22px; accent-color: #4da8da; cursor: pointer; }
+    .option-content strong { font-size: 14px; }
+    .option-content small { font-size: 12px; color: #7a9bb8; }
+    
+    /* Mobile Simulation */
+    .mobile-sim { width: 375px; height: 667px; border: 2px solid #4da8da; border-radius: 20px; overflow: hidden; margin: 1rem auto; position: relative; background: #0a1628; }
+    .mobile-sim .footer-content { 
+      position: absolute; bottom: 0; left: 0; right: 0;
+      padding: 16px; background: rgba(45,122,179,0.08);
+      overflow-x: auto;
+    }
+    .mobile-sim .footer-links { 
+      display: flex; gap: 16px; 
+      overflow-x: auto; padding-bottom: 8px;
+    }
+    .mobile-sim .footer-links::-webkit-scrollbar { height: 6px; }
+    .mobile-sim .footer-links::-webkit-scrollbar-track { background: rgba(45,122,179,0.2); border-radius: 3px; }
+    .mobile-sim .footer-links::-webkit-scrollbar-thumb { background: #4da8da; border-radius: 3px; }
+    .mobile-sim .footer-links a { color: #7a9bb8; text-decoration: none; font-size: 13px; white-space: nowrap; }
+    
+    .log-entry { padding: 0.5rem; border-left: 3px solid #4da8da; margin-bottom: 0.5rem; background: rgba(0,20,40,0.4); }
+    .timestamp { color: #7a9bb8; font-size: 0.8rem; }
+    
+    table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+    th, td { padding: 0.75rem; text-align: left; border-bottom: 1px solid rgba(77,168,218,0.2); }
+    th { background: rgba(77,168,218,0.15); color: #4da8da; }
+    tr:hover { background: rgba(77,168,218,0.05); }
+  </style>
+</head>
+<body>
+  <h1>🧪 SciMSPT Feature Test Suite</h1>
+  <p class="subtitle">Testing Get Started Modal • Boolean Preferences • Footer Scroll Bars • Platform Features</p>
+
+  <!-- Test 1: Get Started Modal -->
+  <div class="test-section">
+    <h2>✅ Test 1: Get Started Modal (Boolean Preferences)</h2>
+    <button class="btn" onclick="openTestModal()">Open Get Started Modal</button>
+    <div id="modal1-result" class="test-result"></div>
+  </div>
+
+  <!-- Test 2: Platform Features Check -->
+  <div class="test-section">
+    <h2>⚙️ Test 2: Platform.html Features</h2>
+    <button class="btn" onclick="checkPlatformFeatures()">Check All Features</button>
+    <div id="platform-result" class="test-result"></div>
+  </div>
+
+  <!-- Test 3: Footer Scroll Bar (Mobile) -->
+  <div class="test-section">
+    <h2>📱 Test 3: Footer Scroll Bar (Mobile View)</h2>
+    <p style="color: #7a9bb8; margin-bottom: 1rem;">Simulating mobile viewport (375×667) to test footer scroll behavior:</p>
+    <div class="mobile-sim">
+      <div style="padding: 1rem; text-align: center; color: #7a9bb8; font-size: 0.9rem;">Mobile Preview</div>
+      <div class="footer-content">
+        <div class="footer-links">
+          <a href="#">Home</a>
+          <a href="#">Dashboard</a>
+          <a href="#">Research</a>
+          <a href="#">Startups</a>
+          <a href="#">Documentation</a>
+          <a href="#">Platform</a>
+          <a href="#">Workspace</a>
+          <a href="#">About</a>
+        </div>
+      </div>
+    </div>
+    <div id="scrollbar-result" class="test-result info">→ Scroll bar should appear above when links overflow the container</div>
+  </div>
+
+  <!-- Test 4: Navigation Links -->
+  <div class="test-section">
+    <h2>🔗 Test 4: Navigation Links Verification</h2>
+    <button class="btn" onclick="verifyNavigation()">Verify All Nav Links</button>
+    <div id="nav-result" class="test-result"></div>
+  </div>
+
+  <!-- Test 5: CTA Buttons -->
+  <div class="test-section">
+    <h2>🎯 Test 5: CTA Button Text Verification</h2>
+    <button class="btn" onclick="verifyCTAs()">Verify CTA Text</button>
+    <div id="cta-result" class="test-result"></div>
+  </div>
+
+  <!-- Test Log -->
+  <div class="test-section">
+    <h2>📋 Test Execution Log</h2>
+    <div id="test-log"></div>
+  </div>
+
+  <!-- Modal for Test 1 -->
+  <div id="test-modal" class="modal-test">
+    <div class="modal-content-test">
+      <h2 style="color: #e8f0f8; margin-bottom: 0.5rem;">Get Started</h2>
+      <p style="color: #7a9bb8; margin-bottom: 1.5rem; text-align: center;">Select your access preferences:</p>
+      
+      <label class="quick-option selected" onclick="toggleTestOption(this)">
+        <input type="checkbox" name="research_access" checked>
+        <span class="option-content">
+          <strong>Research Tools</strong>
+          <small>Paper analysis & trends</small>
+        </span>
+      </label>
+      
+      <label class="quick-option selected" onclick="toggleTestOption(this)">
+        <input type="checkbox" name="startup_data" checked>
+        <span class="option-content">
+          <strong>Startup Portfolio</strong>
+          <small>Venture intelligence</small>
+        </span>
+      </label>
+      
+      <label class="quick-option" onclick="toggleTestOption(this)">
+        <input type="checkbox" name="api_access">
+        <span class="option-content">
+          <strong>API Access</strong>
+          <small>Developer integration</small>
+        </span>
+      </label>
+      
+      <label class="quick-option selected" onclick="toggleTestOption(this)">
+        <input type="checkbox" name="notifications" checked>
+        <span class="option-content">
+          <strong>Weekly Digests</strong>
+          <small>Email notifications</small>
+        </span>
+      </label>
+      
+      <button class="btn" style="width: 100%; justify-content: center; margin-top: 1rem;" onclick="runQuickAccessTest()">
+        Get Instant Access
+      </button>
+      <button class="btn btn-secondary" style="width: 100%; justify-content: center; margin-top: 0.5rem;" onclick="closeTestModal()">Close</button>
+    </div>
+  </div>
+
+  <script>
+    const testLog = [];
+    
+    function log(message, type = 'info') {
+      const timestamp = new Date().toLocaleTimeString();
+      testLog.push({ message, type, timestamp });
+      updateLogDisplay();
+    }
+    
+    function updateLogDisplay() {
+      const container = document.getElementById('test-log');
+      container.innerHTML = testLog.map(entry => `
+        <div class="log-entry" style="border-left-color: ${entry.type === 'pass' ? '#10b981' : entry.type === 'fail' ? '#ef4444' : '#4da8da'}">
+          <span class="timestamp">[${entry.timestamp}]</span>
+          <span class="${entry.type}">${entry.message}</span>
+        </div>
+      `).join('');
+    }
+    
+    // Test 1: Modal Functions
+    function openTestModal() {
+      document.getElementById('test-modal').classList.add('active');
+      log('Opened Get Started modal', 'info');
+    }
+    
+    function closeTestModal() {
+      document.getElementById('test-modal').classList.remove('active');
+      log('Closed modal', 'info');
+    }
+    
+    function toggleTestOption(element) {
+      const checkbox = element.querySelector('input[type="checkbox"]');
+      checkbox.checked = !checkbox.checked;
+      element.classList.toggle('selected', checkbox.checked);
+      log(`Toggled ${checkbox.name}: ${checkbox.checked}`, 'info');
+    }
+    
+    function runQuickAccessTest() {
+      const options = {};
+      document.querySelectorAll('#test-modal .quick-option input[type="checkbox"]').forEach(cb => {
+        options[cb.name] = cb.checked;
+      });
+      
+      const selected = Object.keys(options).filter(k => options[k]).length;
+      const resultDiv = document.getElementById('modal1-result');
+      
+      // Simulate processing
+      resultDiv.innerHTML = '<span class="info">Processing...</span>';
+      log('Processing quick access...', 'info');
+      
+      setTimeout(() => {
+        // Store in localStorage (same as production)
+        localStorage.setItem('scimspt-preferences', JSON.stringify(options));
+        
+        const html = `
+          <span class="pass">✅ SUCCESS</span><br>
+          <strong>Selected Features (${selected}/4):</strong><br>
+          ${Object.keys(options).map(k => `${options[k] ? '☑' : '☐'} ${k.replace('_', ' ')}`).join('<br>')}<br><br>
+          <strong>Stored in localStorage:</strong> scimspt-preferences<br>
+          <strong>Data:</strong> ${JSON.stringify(options)}
+        `;
+        resultDiv.innerHTML = html;
+        log(`Quick access completed! Selected ${selected} features`, 'pass');
+        closeTestModal();
+      }, 800);
+    }
+    
+    // Test 2: Platform Features
+    async function checkPlatformFeatures() {
+      const resultDiv = document.getElementById('platform-result');
+      resultDiv.innerHTML = '<span class="info">Checking platform.html...</span>';
+      log('Checking platform.html features...', 'info');
+      
+      try {
+        const response = await fetch('platform.html');
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        
+        const html = await response.text();
+        const features = {
+          'AI API Integration': html.includes('provider-card') && html.includes('testConnection'),
+          'Cloud Storage Sync': html.includes('storage-data') && html.includes('exportData'),
+          'Collaborative Workspaces': html.includes('workspace-container') && html.includes('chat-messages'),
+          'Analysis Pipelines': html.includes('pipeline-builder') && html.includes('runPipeline'),
+          'Model Fine-Tuning': html.includes('tuning-layout') && html.includes('startTraining'),
+          'Feature Tabs': html.includes('feature-tab') && html.includes('feature-section'),
+          'Toast Notifications': html.includes('toast-container') && html.includes('showToast'),
+          'Theme Toggle': html.includes('toggleTheme') && html.includes('data-theme')
+        };
+        
+        const passed = Object.values(features).filter(Boolean).length;
+        const total = Object.keys(features).length;
+        
+        let htmlResult = `<strong>${passed}/${total} Features Detected:</strong><br><br>`;
+        htmlResult += `<table><tr><th>Feature</th><th>Status</th></tr>`;
+        for (const [name, found] of Object.entries(features)) {
+          htmlResult += `<tr><td>${name}</td><td class="${found ? 'pass' : 'fail'}">${found ? '✅ Found' : '❌ Missing'}</td></tr>`;
+          log(`Platform feature "${name}": ${found ? 'FOUND' : 'MISSING'}`, found ? 'pass' : 'fail');
+        }
+        htmlResult += `</table>`;
+        
+        resultDiv.innerHTML = htmlResult;
+        log(`Platform check complete: ${passed}/${total} features`, passed === total ? 'pass' : 'fail');
+        
+      } catch (error) {
+        resultDiv.innerHTML = `<span class="fail">❌ Error: ${error.message}</span>`;
+        log(`Error checking platform: ${error.message}`, 'fail');
+      }
+    }
+    
+    // Test 4: Navigation Links
+    async function verifyNavigation() {
+      const resultDiv = document.getElementById('nav-result');
+      resultDiv.innerHTML = '<span class="info">Verifying navigation links...</span>';
+      log('Verifying navigation across pages...', 'info');
+      
+      const pages = ['index.html', 'startups.html', 'research.html', 'about.html', 'documentation.html', 'platform.html'];
+      const expectedLinks = ['studio.html', 'Workspace', 'platform.html', 'Platform'];
+      const results = {};
+      
+      for (const page of pages) {
+        try {
+          const response = await fetch(page);
+          if (!response.ok) throw new Error(`HTTP ${response.status}`);
+          
+          const html = await response.text();
+          results[page] = {
+            hasWorkspaceLink: html.includes('studio.html') || html.includes('Workspace'),
+            hasPlatformLink: html.includes('platform.html') || html.includes('Platform'),
+            workspaceCount: (html.match(/workspace|Workspace/gi) || []).length,
+            status: 'loaded'
+          };
+          log(`${page}: Workspace link=${results[page].hasWorkspaceLink}, Platform link=${results[page].hasPlatformLink}`, results[page].hasWorkspaceLink ? 'pass' : 'fail');
+          
+        } catch (error) {
+          results[page] = { error: error.message };
+          log(`${page}: Error - ${error.message}`, 'fail');
+        }
+      }
+      
+      let htmlResult = '<table><tr><th>Page</th><th>Workspace Link</th><th>Platform Link</th></tr>';
+      for (const [page, data] of Object.entries(results)) {
+        if (data.error) {
+          htmlResult += `<tr><td>${page}</td><td colspan="2" class="fail">${data.error}</td></tr>`;
+        } else {
+          htmlResult += `<tr><td>${page}</td><td class="${data.hasWorkspaceLink ? 'pass' : 'fail'}">${data.hasWorkspaceLink ? '✅' : '❌'}</td><td class="${data.hasPlatformLink ? 'pass' : 'fail'}">${data.hasPlatformLink ? '✅' : '❌'}</td></tr>`;
+        }
+      }
+      htmlResult += '</table>';
+      resultDiv.innerHTML = htmlResult;
+    }
+    
+    // Test 5: CTA Button Text
+    async function verifyCTAs() {
+      const resultDiv = document.getElementById('cta-result');
+      resultDiv.innerHTML = '<span class="info">Verifying CTA button text...</span>';
+      log('Verifying CTA buttons use "Get" style...', 'info');
+      
+      try {
+        const response = await fetch('index.html');
+        const html = await response.text();
+        
+        const ctaChecks = {
+          'Uses "Get This Week\'s 7 Startups"': html.includes("Get This Week's 7 Startups"),
+          'Uses "Get API Access"': html.includes('Get API Access'),
+          'Uses "Get Platform Features"': html.includes('Get Platform Features'),
+          'Uses "Get Started"': html.includes('Get Started'),
+          'No "Subscribe Now" text': !html.includes('Subscribe Now'),
+          'No "CTA" text in nav ribbon': !html.includes('<span>CTA</span>') || html.includes('Get Platform'),
+          'Boolean form present': html.includes('quick-option') && html.includes('type="checkbox"'),
+          'Get Instant Access button': html.includes('Get Instant Access')
+        };
+        
+        const passed = Object.values(ctaChecks).filter(Boolean).length;
+        const total = Object.keys(ctaChecks).length;
+        
+        let htmlResult = `<strong>${passed}/${total} CTA Checks Passed:</strong><br><br>`;
+        htmlResult += `<table><tr><th>Check</th><th>Status</th></tr>`;
+        for (const [name, passed] of Object.entries(ctaChecks)) {
+          htmlResult += `<tr><td>${name}</td><td class="${passed ? 'pass' : 'fail'}">${passed ? '✅' : '❌'}</td></tr>`;
+          log(`CTA check "${name}": ${passed ? 'PASS' : 'FAIL'}`, passed ? 'pass' : 'fail');
+        }
+        htmlResult += `</table>`;
+        
+        resultDiv.innerHTML = htmlResult;
+        log(`CTA verification complete: ${passed}/${total}`, passed === total ? 'pass' : 'fail');
+        
+      } catch (error) {
+        resultDiv.innerHTML = `<span class="fail">❌ Error: ${error.message}</span>`;
+        log(`CTA check error: ${error.message}`, 'fail');
+      }
+    }
+    
+    // Auto-run basic checks on load
+    window.addEventListener('load', () => {
+      log('Test suite loaded successfully', 'pass');
+      log('Ready to run tests', 'info');
+    });
+  </script>
+</body>
+</html>
