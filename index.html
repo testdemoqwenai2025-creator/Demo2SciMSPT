@@ -222,59 +222,72 @@
     
     .hero-bg { position: absolute; inset: 0; z-index: 0; }
     
-    /* Scientific Side Images - Left & Right */
+    /* Scientific Side Images - Left & Right - HIGHLY VISIBLE */
     .side-image {
       position: fixed;
       top: 0;
       bottom: 0;
-      width: 200px;
-      z-index: 1;
-      opacity: 0.6;
+      width: 180px;
+      z-index: 2;
+      opacity: 1;
       pointer-events: none;
-      background-size: cover;
-      background-position: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-evenly;
+      padding: 40px 20px;
+      box-sizing: border-box;
     }
     
     .side-image.left {
       left: 0;
-      background: 
-        linear-gradient(180deg, rgba(77, 168, 218, 0.4) 0%, rgba(167, 139, 250, 0.3) 50%, rgba(77, 168, 218, 0.4) 100%),
-        repeating-linear-gradient(0deg, transparent 0px, transparent 28px, rgba(77, 168, 218, 0.3) 28px, rgba(77, 168, 218, 0.3) 29px),
-        repeating-linear-gradient(90deg, transparent 0px, transparent 28px, rgba(167, 139, 250, 0.2) 28px, rgba(167, 139, 250, 0.2) 29px);
-      border-right: 2px solid rgba(77, 168, 218, 0.5);
+      background: linear-gradient(180deg, 
+        rgba(10, 22, 40, 0.95) 0%, 
+        rgba(15, 35, 60, 0.9) 50%, 
+        rgba(10, 22, 40, 0.95) 100%);
+      border-right: 3px solid rgba(77, 168, 218, 0.6);
+      box-shadow: 4px 0 30px rgba(77, 168, 218, 0.2);
     }
     
     .side-image.right {
       right: 0;
-      background: 
-        linear-gradient(180deg, rgba(167, 139, 250, 0.4) 0%, rgba(77, 168, 218, 0.3) 50%, rgba(167, 139, 250, 0.4) 100%),
-        repeating-linear-gradient(0deg, transparent 0px, transparent 32px, rgba(167, 139, 250, 0.3) 32px, rgba(167, 139, 250, 0.3) 33px),
-        repeating-linear-gradient(90deg, transparent 0px, transparent 32px, rgba(77, 168, 218, 0.2) 32px, rgba(77, 168, 218, 0.2) 33px);
-      border-left: 2px solid rgba(167, 139, 250, 0.5);
+      background: linear-gradient(180deg, 
+        rgba(10, 22, 40, 0.95) 0%, 
+        rgba(15, 35, 60, 0.9) 50%, 
+        rgba(10, 22, 40, 0.95) 100%);
+      border-left: 3px solid rgba(167, 139, 250, 0.6);
+      box-shadow: -4px 0 30px rgba(167, 139, 250, 0.2);
     }
     
-    /* Scientific icons overlay on side images */
+    /* Scientific symbols for side panels */
+ .sci-symbol {
+      font-size: 48px;
+      opacity: 0.7;
+      animation: floatSymbol 4s ease-in-out infinite;
+      text-align: center;
+      line-height: 1;
+    }
+    
+    .side-image.left .sci-symbol:nth-child(odd) { color: #4da8da; animation-delay: 0s; }
+    .side-image.left .sci-symbol:nth-child(even) { color: #a78bfa; animation-delay: 2s; }
+    .side-image.right .sci-symbol:nth-child(odd) { color: #a78bfa; animation-delay: 1s; }
+    .side-image.right .sci-symbol:nth-child(even) { color: #4da8da; animation-delay: 3s; }
+    
+    @keyframes floatSymbol {
+      0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.7; }
+      50% { transform: translateY(-10px) rotate(5deg); opacity: 1; }
+    }
+    
+    /* Grid pattern overlay on side images */
     .side-image::before {
       content: '';
       position: absolute;
-      top: 10%;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 80px;
-      height: 80px;
-      border-radius: 50%;
-      border: 2px solid currentColor;
-      opacity: 0.4;
-    }
-    
-    .side-image::after {
-      content: '⚛';
-      position: absolute;
-      top: 30%;
-      left: 50%;
-      transform: translateX(-50%);
-      font-size: 40px;
-      opacity: 0.5;
+      inset: 0;
+      background-image: 
+        linear-gradient(rgba(77, 168, 218, 0.15) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(77, 168, 218, 0.15) 1px, transparent 1px);
+      background-size: 30px 30px;
+      opacity: 1;
     }
     
     .grid-pattern {
@@ -454,56 +467,67 @@
     .hero-subtitle strong { color: var(--primary); font-weight: 600; }
     
     .hero-actions { 
-      display: flex; 
+      display: flex !important; 
       gap: 24px; 
       justify-content: center;
       flex-wrap: wrap; 
       margin: 48px auto;
-      padding: 36px 40px;
-      background: linear-gradient(135deg, rgba(10, 22, 40, 0.95) 0%, rgba(20, 40, 64, 0.9) 100%);
-      backdrop-filter: blur(16px);
-      border-radius: 24px;
-      border: 2px solid rgba(77, 168, 218, 0.4);
-      max-width: 900px;
+      padding: 44px 48px;
+      background: linear-gradient(135deg, rgba(10, 22, 40, 0.98) 0%, rgba(20, 40, 64, 0.95) 100%);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-radius: 28px;
+      border: 3px solid rgba(77, 168, 218, 0.6);
+      max-width: 920px;
       box-shadow: 
-        0 12px 60px rgba(0, 0, 0, 0.5),
-        0 0 80px rgba(77, 168, 218, 0.15),
-        inset 0 2px 0 rgba(255, 255, 255, 0.05);
+        0 16px 70px rgba(0, 0, 0, 0.6),
+        0 0 100px rgba(77, 168, 218, 0.25),
+        inset 0 2px 0 rgba(255, 255, 255, 0.1),
+        0 0 0 1px rgba(255, 255, 255, 0.05);
+      position: relative;
+      z-index: 100;
+      visibility: visible !important;
+      opacity: 1 !important;
     }
     
     .btn {
-      display: inline-flex;
+      display: inline-flex !important;
       align-items: center;
       gap: 12px;
-      padding: 20px 40px;
-      border-radius: 18px;
+      padding: 22px 44px;
+      border-radius: 20px;
       font-family: var(--font-body);
-      font-size: 16px;
+      font-size: 17px;
       font-weight: 800;
       text-decoration: none;
       transition: all 0.35s ease;
       cursor: pointer;
-      border: 2px solid transparent;
+      border: 3px solid transparent;
       white-space: nowrap;
-      letter-spacing: 0.8px;
-      min-width: 180px;
+      letter-spacing: 1px;
+      min-width: 200px;
       justify-content: center;
       position: relative;
       overflow: hidden;
+      visibility: visible !important;
+      opacity: 1 !important;
+      transform: none !important;
     }
     
     .btn-primary {
-      background: linear-gradient(135deg, #4da8da 0%, #a78bfa 100%);
-      color: #ffffff;
+      background: linear-gradient(135deg, #4da8da 0%, #a78bfa 100%) !important;
+      color: #ffffff !important;
       box-shadow: 
-        0 6px 30px rgba(77, 168, 218, 0.45),
-        0 0 50px rgba(167, 139, 250, 0.25),
-        inset 0 2px 0 rgba(255, 255, 255, 0.2);
-      font-weight: 800;
-      font-size: 16px;
-      letter-spacing: 0.8px;
-      border: 2px solid rgba(255, 255, 255, 0.2);
-      animation: btnPulse 3s ease-in-out infinite;
+        0 8px 40px rgba(77, 168, 218, 0.6),
+        0 0 60px rgba(167, 139, 250, 0.35),
+        inset 0 2px 0 rgba(255, 255, 255, 0.25) !important;
+      font-weight: 900 !important;
+      font-size: 17px !important;
+      letter-spacing: 1px !important;
+      border: 3px solid rgba(255, 255, 255, 0.4) !important;
+      animation: btnPulse 3s ease-in-out infinite !important;
+      visibility: visible !important;
+      opacity: 1 !important;
     }
     
     @keyframes btnPulse {
@@ -532,14 +556,20 @@
       transform: translateY(-2px);
     }
     
-    /* Login Button - Ghost Style */
+    /* Login Button - Ghost Style - HIGHLY VISIBLE */
     .btn-login {
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
-      color: #ffffff;
-      border: 2px solid rgba(232, 240, 248, 0.6);
-      font-weight: 700;
-      padding: 20px 40px;
-      backdrop-filter: blur(10px);
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.08) 100%) !important;
+      color: #ffffff !important;
+      border: 3px solid rgba(232, 240, 248, 0.8) !important;
+      font-weight: 800 !important;
+      padding: 22px 44px !important;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: 
+        0 6px 30px rgba(0, 0, 0, 0.3),
+        inset 0 2px 0 rgba(255, 255, 255, 0.15) !important;
+      visibility: visible !important;
+      opacity: 1 !important;
     }
     
     .btn-login:hover { 
@@ -550,18 +580,21 @@
       box-shadow: 0 12px 40px rgba(77, 168, 218, 0.4);
     }
     
-    /* Studio IDE Button - Premium Dark */
+    /* Studio IDE Button - Premium Dark - HIGHLY VISIBLE */
     .btn-studio {
-      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-      color: #ffffff;
-      border: 2px solid rgba(77, 168, 218, 0.5);
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%) !important;
+      color: #ffffff !important;
+      border: 3px solid rgba(77, 168, 218, 0.7) !important;
       box-shadow: 
-        0 6px 25px rgba(15, 23, 42, 0.7),
-        inset 0 2px 0 rgba(255, 255, 255, 0.15),
-        0 0 30px rgba(77, 168, 218, 0.2);
-      font-weight: 700;
-      font-size: 15px;
-      letter-spacing: 0.5px;
+        0 8px 35px rgba(15, 23, 42, 0.8),
+        inset 0 2px 0 rgba(255, 255, 255, 0.2) !important,
+        0 0 40px rgba(77, 168, 218, 0.3) !important;
+      font-weight: 800 !important;
+      font-size: 17px !important;
+      letter-spacing: 1px !important;
+      padding: 22px 44px !important;
+      visibility: visible !important;
+      opacity: 1 !important;
     }
     
     .btn-studio:hover { 
@@ -695,8 +728,26 @@
 <body>
 
   <!-- Scientific Side Images (Fixed - Header to Footer) -->
-  <div class="side-image left"></div>
-  <div class="side-image right"></div>
+  <div class="side-image left">
+    <div class="sci-symbol">⚛️</div>
+    <div class="sci-symbol">🔬</div>
+    <div class="sci-symbol">🧬</div>
+    <div class="sci-symbol">🧮</div>
+    <div class="sci-symbol">🔭</div>
+    <div class="sci-symbol">💡</div>
+    <div class="sci-symbol">📊</div>
+    <div class="sci-symbol">🎯</div>
+  </div>
+  <div class="side-image right">
+    <div class="sci-symbol">🚀</div>
+    <div class="sci-symbol">💎</div>
+    <div class="sci-symbol">🌐</div>
+    <div class="sci-symbol">⚡</div>
+    <div class="sci-symbol">🔮</div>
+    <div class="sci-symbol">📡</div>
+    <div class="sci-symbol">🎨</div>
+    <div class="sci-symbol">⭐</div>
+  </div>
 
   <!-- Navigation -->
   <nav class="navbar">
