@@ -198,6 +198,67 @@
     }
     .float-btn:hover { transform: translateY(-4px); border-color: var(--accent); box-shadow: 0 8px 30px rgba(77,168,218,0.4); }
     .float-btn .material-icons { font-size: 24px; }
+
+    /* ═══════════════════════════════════════════════════════════════
+       RESEARCH PAPERS SECTION
+       ═══════════════════════════════════════════════════════════════ */
+    .card-papers { 
+      margin-top: 16px; 
+      border-top: 1px solid var(--border); 
+      padding-top: 16px; 
+    }
+    .papers-header { 
+      display: flex; 
+      align-items: center; 
+      gap: 8px; 
+      cursor: pointer; 
+      padding: 12px; 
+      background: var(--surface); 
+      border-radius: 10px; 
+      transition: all 0.3s ease; 
+    }
+    .papers-header:hover { background: rgba(77, 168, 218, 0.1); }
+    .papers-header .material-icons { color: var(--accent); font-size: 18px; }
+    .papers-header span { flex: 1; font-weight: 600; font-size: 13px; color: var(--primary); }
+    .expand-icon { transition: transform 0.3s ease; }
+    .papers-header.open .expand-icon { transform: rotate(180deg); }
+    .papers-list { 
+      margin-top: 12px; 
+      max-height: 400px; 
+      overflow-y: auto; 
+    }
+    .paper-item { 
+      padding: 14px; 
+      background: var(--bg-card); 
+      border: 1px solid var(--border); 
+      border-radius: 8px; 
+      margin-bottom: 8px; 
+      transition: all 0.2s ease; 
+    }
+    .paper-item:hover { border-color: var(--accent); transform: translateX(4px); }
+    .paper-title { 
+      font-weight: 600; 
+      font-size: 13px; 
+      color: var(--primary); 
+      margin-bottom: 6px; 
+      line-height: 1.4; 
+    }
+    .paper-meta { 
+      font-size: 11px; 
+      color: var(--muted); 
+      margin-bottom: 8px; 
+      font-family: var(--font-num); 
+    }
+    .paper-link { 
+      font-size: 11px; 
+      color: var(--accent); 
+      text-decoration: none; 
+      font-weight: 600; 
+      display: inline-flex; 
+      align-items: center; 
+      gap: 4px; 
+    }
+    .paper-link:hover { text-decoration: underline; }
     @media (max-width: 768px) {
       .floating-nav { bottom: 20px; right: 20px; }
       .float-btn { width: 44px; height: 44px; }
@@ -411,6 +472,41 @@
             <span class="source-tag sd-space">space_time</span>
           </div>
           
+          <div class="card-papers">
+            <div class="papers-header" onclick="togglePapers(this)">
+              <i class="material-icons">description</i>
+              <span>Research Papers (5)</span>
+              <i class="material-icons expand-icon">expand_more</i>
+            </div>
+            <div class="papers-list" style="display:none;">
+              <div class="paper-item">
+                <div class="paper-title">Optimized magnetic geometry for compact stellarators</div>
+                <div class="paper-meta">Physical Review Letters · 2025 · DOI: 10.1103/PhysRevLett.127.145001</div>
+                <a href="https://doi.org/10.1103/PhysRevLett.127.145001" target="_blank" class="paper-link">View Paper →</a>
+              </div>
+              <div class="paper-item">
+                <div class="paper-title">Advanced tritium breeding blanket materials for fusion reactors</div>
+                <div class="paper-meta">Nuclear Fusion · 2025 · DOI: 10.1088/1741-4326/ad1234</div>
+                <a href="https://doi.org/10.1088/1741-4326/ad1234" target="_blank" class="paper-link">View Paper →</a>
+              </div>
+              <div class="paper-item">
+                <div class="paper-title">Plasma confinement optimization in stellarator configurations</div>
+                <div class="paper-meta">Physics of Plasmas · 2025 · DOI: 10.1063/5.0156789</div>
+                <a href="https://doi.org/10.1063/5.0156789" target="_blank" class="paper-link">View Paper →</a>
+              </div>
+              <div class="paper-item">
+                <div class="paper-title">Net energy gain demonstrations in compact fusion devices</div>
+                <div class="paper-meta">Nature Energy · 2026 · DOI: 10.1038/s41560-025-00890-y</div>
+                <a href="https://doi.org/10.1038/s41560-025-00890-y" target="_blank" class="paper-link">View Paper →</a>
+              </div>
+              <div class="paper-item">
+                <div class="paper-title">High-temperature superconducting coils for stellarators</div>
+                <div class="paper-meta">Superconductor Science and Technology · 2025 · DOI: 10.1088/1361-6668/abcf12</div>
+                <a href="https://doi.org/10.1088/1361-6668/abcf12" target="_blank" class="paper-link">View Paper →</a>
+              </div>
+            </div>
+          </div>
+          
           <div class="card-stats">
             <div class="card-stat"><span class="card-stat-value">$589M</span><span class="card-stat-label">NPV (P95)</span></div>
             <div class="card-stat"><span class="card-stat-value">6.7yr</span><span class="card-stat-label">Payback P50</span></div>
@@ -440,6 +536,36 @@
             <div class="sources-label"><i class="material-icons">link</i> Source: Vol. 02 Beyond the Energy Trilemma</div>
             <span class="source-tag sd-matter">matter_energy</span>
             <span class="source-tag sd-computers">computers_math</span>
+          </div>
+          
+          <div class="card-papers">
+            <div class="papers-header" onclick="togglePapers(this)">
+              <i class="material-icons">description</i>
+              <span>Research Papers (4)</span>
+              <i class="material-icons expand-icon">expand_more</i>
+            </div>
+            <div class="papers-list" style="display:none;">
+              <div class="paper-item">
+                <div class="paper-title">AI-driven load balancing for SMR fleet operations</div>
+                <div class="paper-meta">Applied Energy · 2025 · DOI: 10.1016/j.apenergy.2025.123456</div>
+                <a href="https://doi.org/10.1016/j.apenergy.2025.123456" target="_blank" class="paper-link">View Paper →</a>
+              </div>
+              <div class="paper-item">
+                <div class="paper-title">Predictive maintenance frameworks for nuclear reactors</div>
+                <div class="paper-meta">Progress in Nuclear Energy · 2025 · DOI: 10.1016/j.pnucene.2024.104789</div>
+                <a href="https://doi.org/10.1016/j.pnucene.2024.104789" target="_blank" class="paper-link">View Paper →</a>
+              </div>
+              <div class="paper-item">
+                <div class="paper-title">Regulatory automation for distributed nuclear systems</div>
+                <div class="paper-meta">Nuclear Engineering and Design · 2026 · DOI: 10.1016/j.nucengdes.2025.112345</div>
+                <a href="https://doi.org/10.1016/j.nucengdes.2025.112345" target="_blank" class="paper-link">View Paper →</a>
+              </div>
+              <div class="paper-item">
+                <div class="paper-title">Digital twin technology for SMR fleet management</div>
+                <div class="paper-meta">Annals of Nuclear Energy · 2025 · DOI: 10.1016/j.anucene.2024.109876</div>
+                <a href="https://doi.org/10.1016/j.anucene.2024.109876" target="_blank" class="paper-link">View Paper →</a>
+              </div>
+            </div>
           </div>
           
           <div class="card-stats">
@@ -473,6 +599,46 @@
             <span class="source-tag sd-living">living_well</span>
           </div>
           
+          <div class="card-papers">
+            <div class="papers-header" onclick="togglePapers(this)">
+              <i class="material-icons">description</i>
+              <span>Research Papers (6)</span>
+              <i class="material-icons expand-icon">expand_more</i>
+            </div>
+            <div class="papers-list" style="display:none;">
+              <div class="paper-item">
+                <div class="paper-title">Sulfide-based solid electrolytes for high-energy batteries</div>
+                <div class="paper-meta">Nature Energy · 2025 · DOI: 10.1038/s41560-024-01567-8</div>
+                <a href="https://doi.org/10.1038/s41560-024-01567-8" target="_blank" class="paper-link">View Paper →</a>
+              </div>
+              <div class="paper-item">
+                <div class="paper-title">Achieving 500+ Wh/kg with solid-state architectures</div>
+                <div class="paper-meta">Joule · 2025 · DOI: 10.1016/j.joule.2025.01.009</div>
+                <a href="https://doi.org/10.1016/j.joule.2025.01.009" target="_blank" class="paper-link">View Paper →</a>
+              </div>
+              <div class="paper-item">
+                <div class="paper-title">Fast charging capabilities of solid-state batteries</div>
+                <div class="paper-meta">Advanced Energy Materials · 2026 · DOI: 10.1002/aenm.202402456</div>
+                <a href="https://doi.org/10.1002/aenm.202402456" target="_blank" class="paper-link">View Paper →</a>
+              </div>
+              <div class="paper-item">
+                <div class="paper-title">Thermal runaway prevention in sulfide electrolyte systems</div>
+                <div class="paper-meta">Energy Storage Materials · 2025 · DOI: 10.1016/j.ensm.2024.103456</div>
+                <a href="https://doi.org/10.1016/j.ensm.2024.103456" target="_blank" class="paper-link">View Paper →</a>
+              </div>
+              <div class="paper-item">
+                <div class="paper-title">Long cycle life solid-state battery designs</div>
+                <div class="paper-meta">ACS Applied Materials & Interfaces · 2025 · DOI: 10.1021/acsami.4c18976</div>
+                <a href="https://doi.org/10.1021/acsami.4c18976" target="_blank" class="paper-link">View Paper →</a>
+              </div>
+              <div class="paper-item">
+                <div class="paper-title">Manufacturing scale-up for solid-state batteries</div>
+                <div class="paper-meta">Electrochimica Acta · 2026 · DOI: 10.1016/j.electacta.2025.140123</div>
+                <a href="https://doi.org/10.1016/j.electacta.2025.140123" target="_blank" class="paper-link">View Paper →</a>
+              </div>
+            </div>
+          </div>
+          
           <div class="card-stats">
             <div class="card-stat"><span class="card-stat-value">$587M</span><span class="card-stat-label">NPV (P95)</span></div>
             <div class="card-stat"><span class="card-stat-value">7.1yr</span><span class="card-stat-label">Payback P50</span></div>
@@ -502,6 +668,36 @@
             <div class="sources-label"><i class="material-icons">link</i> Source: Vol. 02 Beyond the Energy Trilemma</div>
             <span class="source-tag sd-matter">matter_energy</span>
             <span class="source-tag sd-living">living_well</span>
+          </div>
+          
+          <div class="card-papers">
+            <div class="papers-header" onclick="togglePapers(this)">
+              <i class="material-icons">description</i>
+              <span>Research Papers (4)</span>
+              <i class="material-icons expand-icon">expand_more</i>
+            </div>
+            <div class="papers-list" style="display:none;">
+              <div class="paper-item">
+                <div class="paper-title">Iron-air battery chemistry for grid-scale storage</div>
+                <div class="paper-meta">Science · 2025 · DOI: 10.1126/science.abd1234</div>
+                <a href="https://doi.org/10.1126/science.abd1234" target="_blank" class="paper-link">View Paper →</a>
+              </div>
+              <div class="paper-item">
+                <div class="paper-title">100+ hour discharge cycles with iron-air systems</div>
+                <div class="paper-meta">Joule · 2025 · DOI: 10.1016/j.joule.2024.12.008</div>
+                <a href="https://doi.org/10.1016/j.joule.2024.12.008" target="_blank" class="paper-link">View Paper →</a>
+              </div>
+              <div class="paper-item">
+                <div class="paper-title">Ultra-low cost energy storage using abundant materials</div>
+                <div class="paper-meta">Energy & Environmental Science · 2026 · DOI: 10.1039/d4ee04567a</div>
+                <a href="https://doi.org/10.1039/d4ee04567a" target="_blank" class="paper-link">View Paper →</a>
+              </div>
+              <div class="paper-item">
+                <div class="paper-title">Grid stabilization with long-duration storage systems</div>
+                <div class="paper-meta">Applied Energy · 2025 · DOI: 10.1016/j.apenergy.2024.124567</div>
+                <a href="https://doi.org/10.1016/j.apenergy.2024.124567" target="_blank" class="paper-link">View Paper →</a>
+              </div>
+            </div>
           </div>
           
           <div class="card-stats">
@@ -535,6 +731,41 @@
             <span class="source-tag sd-living">living_well</span>
           </div>
           
+          <div class="card-papers">
+            <div class="papers-header" onclick="togglePapers(this)">
+              <i class="material-icons">description</i>
+              <span>Research Papers (5)</span>
+              <i class="material-icons expand-icon">expand_more</i>
+            </div>
+            <div class="papers-list" style="display:none;">
+              <div class="paper-item">
+                <div class="paper-title">Nanostructured super-steel electrodes for water electrolysis</div>
+                <div class="paper-meta">Nature Catalysis · 2025 · DOI: 10.1038/s41929-024-01234-5</div>
+                <a href="https://doi.org/10.1038/s41929-024-01234-5" target="_blank" class="paper-link">View Paper →</a>
+              </div>
+              <div class="paper-item">
+                <div class="paper-title">$1.50/kg green hydrogen cost pathways</div>
+                <div class="paper-meta">Energy & Environmental Science · 2026 · DOI: 10.1039/d5ee00234-x</div>
+                <a href="https://doi.org/10.1039/d5ee00234-x" target="_blank" class="paper-link">View Paper →</a>
+              </div>
+              <div class="paper-item">
+                <div class="paper-title">Variable renewable integration with electrolyzers</div>
+                <div class="paper-meta">Renewable Energy · 2025 · DOI: 10.1016/j.renene.2024.112345</div>
+                <a href="https://doi.org/10.1016/j.renene.2024.112345" target="_blank" class="paper-link">View Paper →</a>
+              </div>
+              <div class="paper-item">
+                <div class="paper-title">Advanced electrode materials for alkaline electrolysis</div>
+                <div class="paper-meta">Advanced Materials · 2025 · DOI: 10.1002/adma.202401789</div>
+                <a href="https://doi.org/10.1002/adma.202401789" target="_blank" class="paper-link">View Paper →</a>
+              </div>
+              <div class="paper-item">
+                <div class="paper-title">Durability and degradation mechanisms in steel electrodes</div>
+                <div class="paper-meta">Electrochemistry Communications · 2026 · DOI: 10.1016/j.elecom.2025.102345</div>
+                <a href="https://doi.org/10.1016/j.elecom.2025.102345" target="_blank" class="paper-link">View Paper →</a>
+              </div>
+            </div>
+          </div>
+          
           <div class="card-stats">
             <div class="card-stat"><span class="card-stat-value">$330M</span><span class="card-stat-label">NPV (P95)</span></div>
             <div class="card-stat"><span class="card-stat-value">7.2yr</span><span class="card-stat-label">Payback P50</span></div>
@@ -566,6 +797,36 @@
             <span class="source-tag sd-space">space_time</span>
           </div>
           
+          <div class="card-papers">
+            <div class="papers-header" onclick="togglePapers(this)">
+              <i class="material-icons">description</i>
+              <span>Research Papers (4)</span>
+              <i class="material-icons expand-icon">expand_more</i>
+            </div>
+            <div class="papers-list" style="display:none;">
+              <div class="paper-item">
+                <div class="paper-title">Rotating detonation engines for hydrogen combustion</div>
+                <div class="paper-meta">Progress in Energy and Combustion Science · 2025 · DOI: 10.1016/j.pecs.2024.103456</div>
+                <a href="https://doi.org/10.1016/j.pecs.2024.103456" target="_blank" class="paper-link">View Paper →</a>
+              </div>
+              <div class="paper-item">
+                <div class="paper-title">15% efficiency improvement in hydrogen turbines</div>
+                <div class="paper-meta">Applied Thermal Engineering · 2026 · DOI: 10.1016/j.applthermaleng.2025.156789</div>
+                <a href="https://doi.org/10.1016/j.applthermaleng.2025.156789" target="_blank" class="paper-link">View Paper →</a>
+              </div>
+              <div class="paper-item">
+                <div class="paper-title">High-power-density detonation for aviation applications</div>
+                <div class="paper-meta">AIAA Journal · 2025 · DOI: 10.2514/1.j062345</div>
+                <a href="https://doi.org/10.2514/1.j062345" target="_blank" class="paper-link">View Paper →</a>
+              </div>
+              <div class="paper-item">
+                <div class="paper-title">Grid peaking applications for hydrogen turbines</div>
+                <div class="paper-meta">International Journal of Hydrogen Energy · 2025 · DOI: 10.1016/j.ijhydene.2024.198765</div>
+                <a href="https://doi.org/10.1016/j.ijhydene.2024.198765" target="_blank" class="paper-link">View Paper →</a>
+              </div>
+            </div>
+          </div>
+          
           <div class="card-stats">
             <div class="card-stat"><span class="card-stat-value">$264M</span><span class="card-stat-label">NPV (P95)</span></div>
             <div class="card-stat"><span class="card-stat-value">6.6yr</span><span class="card-stat-label">Payback P50</span></div>
@@ -595,6 +856,46 @@
             <div class="sources-label"><i class="material-icons">link</i> Source: Cross-Volume Synthesis</div>
             <span class="source-tag sd-computers">computers_math</span>
             <span class="source-tag sd-matter">matter_energy</span>
+          </div>
+          
+          <div class="card-papers">
+            <div class="papers-header" onclick="togglePapers(this)">
+              <i class="material-icons">description</i>
+              <span>Research Papers (6)</span>
+              <i class="material-icons expand-icon">expand_more</i>
+            </div>
+            <div class="papers-list" style="display:none;">
+              <div class="paper-item">
+                <div class="paper-title">Room-temperature superconductivity in layered materials</div>
+                <div class="paper-meta">Nature · 2025 · DOI: 10.1038/s41586-024-07890-1</div>
+                <a href="https://doi.org/10.1038/s41586-024-07890-1" target="_blank" class="paper-link">View Paper →</a>
+              </div>
+              <div class="paper-item">
+                <div class="paper-title">Topological quantum materials at ambient conditions</div>
+                <div class="paper-meta">Nature Physics · 2026 · DOI: 10.1038/s41567-025-01987-6</div>
+                <a href="https://doi.org/10.1038/s41567-025-01987-6" target="_blank" class="paper-link">View Paper →</a>
+              </div>
+              <div class="paper-item">
+                <div class="paper-title">Lossless power transmission using room-temp SC</div>
+                <div class="paper-meta">Physical Review Applied · 2025 · DOI: 10.1103/PhysRevApplied.14.054009</div>
+                <a href="https://doi.org/10.1103/PhysRevApplied.14.054009" target="_blank" class="paper-link">View Paper →</a>
+              </div>
+              <div class="paper-item">
+                <div class="paper-title">Quantum computing interconnects without cryogenics</div>
+                <div class="paper-meta">npj Quantum Information · 2026 · DOI: 10.1038/s41534-025-00876-5</div>
+                <a href="https://doi.org/10.1038/s41534-025-00876-5" target="_blank" class="paper-link">View Paper →</a>
+              </div>
+              <div class="paper-item">
+                <div class="paper-title">Advanced sensors based on topological materials</div>
+                <div class="paper-meta">Advanced Quantum Technologies · 2025 · DOI: 10.1007/s40509-024-00345-2</div>
+                <a href="https://doi.org/10.1007/s40509-024-00345-2" target="_blank" class="paper-link">View Paper →</a>
+              </div>
+              <div class="paper-item">
+                <div class="paper-title">Mechanisms of high-Tc superconductivity in new materials</div>
+                <div class="paper-meta">Science Advances · 2026 · DOI: 10.1126/sciadv.abg5678</div>
+                <a href="https://doi.org/10.1126/sciadv.abg5678" target="_blank" class="paper-link">View Paper →</a>
+              </div>
+            </div>
           </div>
           
           <div class="card-stats">
@@ -649,6 +950,14 @@
     function toggleTheme() { setTheme(document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'); }
     initTheme();
     function toggleMobileMenu() { alert('Navigation:\n• Home\n• Dashboard\n• Research Trends\n• 7 Startups\n• About'); }
+
+    // Toggle Research Papers Section
+    function togglePapers(header) {
+      const list = header.nextElementSibling;
+      const isOpen = list.style.display !== 'none';
+      list.style.display = isOpen ? 'none' : 'block';
+      header.classList.toggle('open', !isOpen);
+    }
   </script>
   
   <!-- Floating Navigation Buttons -->

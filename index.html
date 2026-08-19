@@ -589,16 +589,17 @@
     .hero-actions { 
       display: flex !important; 
       gap: 24px; 
-      justify-content: center;
+      justify-content: space-between;
+      align-items: center;
       flex-wrap: wrap; 
       margin: 48px auto;
-      padding: 44px 48px;
+      padding: 32px 40px;
       background: linear-gradient(135deg, rgba(10, 22, 40, 0.98) 0%, rgba(20, 40, 64, 0.95) 100%);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
       border-radius: 28px;
       border: 3px solid rgba(77, 168, 218, 0.6);
-      max-width: 920px;
+      max-width: 960px;
       box-shadow: 
         0 16px 70px rgba(0, 0, 0, 0.6),
         0 0 100px rgba(77, 168, 218, 0.25),
@@ -608,6 +609,21 @@
       z-index: 100;
       visibility: visible !important;
       opacity: 1 !important;
+    }
+    
+    .hero-actions-left {
+      display: flex;
+      align-items: center;
+    }
+    
+    .hero-actions-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 8px 16px;
+      background: rgba(77, 168, 218, 0.08);
+      border-radius: 16px;
+      border: 1px solid rgba(77, 168, 218, 0.25);
     }
     
     .btn {
@@ -805,6 +821,227 @@
     /* Footer */
     footer { padding: 48px; border-top: 1px solid var(--border); background: var(--surface); }
     
+    /* ═══════════════════════════════════════════════════════════════
+       BREAKTHROUGHS SECTION STYLES
+       ═══════════════════════════════════════════════════════════════ */
+    .breakthroughs-section {
+      background: linear-gradient(180deg, var(--bg) 0%, rgba(77, 168, 218, 0.03) 50%, var(--bg) 100%);
+    }
+    
+    .breakthroughs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 28px;
+      margin-top: 48px;
+    }
+    
+    .breakthrough-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 32px;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      backdrop-filter: blur(12px);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    
+    .breakthrough-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--accent), #a78bfa);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    
+    .breakthrough-card:hover {
+      transform: translateY(-8px);
+      border-color: var(--accent);
+      box-shadow: 
+        0 20px 60px rgba(0, 0, 0, 0.3),
+        0 0 40px rgba(77, 168, 218, 0.15);
+    }
+    
+    .breakthrough-card:hover::before { opacity: 1; }
+    
+    .breakthrough-icon {
+      width: 64px;
+      height: 64px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      background: linear-gradient(135deg, rgba(77, 168, 218, 0.15), rgba(167, 139, 250, 0.15));
+      border: 1px solid rgba(77, 168, 218, 0.25);
+    }
+    
+    .breakthrough-icon.quantum { background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(139, 92, 246, 0.2)); border-color: rgba(139, 92, 246, 0.3); }
+    .breakthrough-icon.materials { background: linear-gradient(135deg, rgba(34, 197, 94, 0.2), rgba(16, 185, 129, 0.2)); border-color: rgba(34, 197, 94, 0.3); }
+    .breakthrough-icon.physics { background: linear-gradient(135deg, rgba(249, 115, 22, 0.2), rgba(234, 88, 12, 0.2)); border-color: rgba(249, 115, 22, 0.3); }
+    .breakthrough-icon.biology { background: linear-gradient(135deg, rgba(236, 72, 153, 0.2), rgba(219, 39, 119, 0.2)); border-color: rgba(236, 72, 153, 0.3); }
+    .breakthrough-icon.time { background: linear-gradient(135deg, rgba(14, 165, 233, 0.2), rgba(6, 182, 212, 0.2)); border-color: rgba(14, 165, 233, 0.3); }
+    .breakthrough-icon.science { background: linear-gradient(135deg, rgba(77, 168, 218, 0.2), rgba(45, 122, 179, 0.2)); border-color: rgba(77, 168, 218, 0.3); }
+    
+    .breakthrough-domain {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      font-family: var(--font-num);
+    }
+    
+    .breakthrough-title {
+      font-family: var(--font-heading);
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--primary);
+      line-height: 1.3;
+    }
+    
+    .breakthrough-desc {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.65;
+      flex-grow: 1;
+    }
+    
+    .breakthrough-meta {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      font-size: 12px;
+      color: var(--muted);
+      font-family: var(--font-num);
+    }
+    
+    .breakthrough-meta span {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    
+    .breakthrough-meta .material-icons { font-size: 14px; color: var(--accent); }
+    
+    .breakthrough-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--accent);
+      text-decoration: none;
+      padding: 12px 20px;
+      background: rgba(77, 168, 218, 0.08);
+      border-radius: 10px;
+      border: 1px solid transparent;
+      transition: all 0.3s ease;
+      margin-top: auto;
+    }
+    
+    .breakthrough-link:hover {
+      background: rgba(77, 168, 218, 0.15);
+      border-color: var(--accent);
+      transform: translateX(4px);
+    }
+
+    /* ═══════════════════════════════════════════════════════════════
+       RESOURCES SECTION STYLES
+       ═══════════════════════════════════════════════════════════════ */
+    .resources-section {
+      background: linear-gradient(180deg, var(--bg) 0%, var(--surface) 50%, var(--bg) 100%);
+    }
+    
+    .resources-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+      margin-top: 48px;
+    }
+    
+    .resource-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 28px;
+      text-decoration: none;
+      color: inherit;
+      transition: all 0.35s ease;
+      backdrop-filter: blur(10px);
+      display: block;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .resource-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent), #a78bfa);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.35s ease;
+    }
+    
+    .resource-card:hover {
+      transform: translateY(-6px);
+      border-color: var(--accent);
+      box-shadow: var(--shadow);
+    }
+    
+    .resource-card:hover::after { transform: scaleX(1); }
+    
+    .resource-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, rgba(77, 168, 218, 0.12), rgba(167, 139, 250, 0.12));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      margin-bottom: 18px;
+      border: 1px solid rgba(77, 168, 218, 0.2);
+    }
+    
+    .resource-card h3 {
+      font-family: var(--font-heading);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 10px;
+    }
+    
+    .resource-card p {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+    
+    .resource-type {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--accent);
+      background: rgba(77, 168, 218, 0.1);
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-family: var(--font-num);
+      letter-spacing: 0.5px;
+    }
+    
     .footer-content { max-width: 1280px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 24px; }
     
     .footer-brand { display: flex; align-items: center; gap: 12px; }
@@ -838,9 +1075,22 @@
       .footer-links { flex-wrap: wrap; justify-content: center; }
     }
     
-    @media (max-width: 480px) {
-      .hero-actions { flex-direction: column; }
-      .btn { width: 100%; justify-content: center; }
+    @media (max-width: 768px) {
+      .hero-actions { 
+        flex-direction: column; 
+        gap: 16px;
+        padding: 24px;
+      }
+      .hero-actions-left, .hero-actions-right { 
+        width: 100%; 
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+      .hero-actions-right {
+        width: auto;
+        padding: 12px;
+      }
+      .btn { width: 100%; justify-content: center; min-width: unset; }
     }
     
     /* Hide side panels on mobile */
@@ -1259,18 +1509,22 @@
       </p>
       
       <div class="hero-actions">
-        <a href="startups.html" class="btn btn-primary">
-          <i class="material-icons">arrow_forward</i>
-          View This Week's Startups
-        </a>
-        <a href="#studio" class="btn btn-studio" onclick="showStudioInfo(); return false;">
-          <i class="material-icons">code</i>
-          Studio IDE
-        </a>
-        <a href="#" class="btn btn-login" onclick="openLoginModal(); return false;">
-          <i class="material-icons">login</i>
-          Login
-        </a>
+        <div class="hero-actions-left">
+          <a href="startups.html" class="btn btn-primary">
+            <i class="material-icons">arrow_forward</i>
+            View This Week's Startups
+          </a>
+        </div>
+        <div class="hero-actions-right">
+          <a href="#studio" class="btn btn-studio" onclick="showStudioInfo(); return false;">
+            <i class="material-icons">code</i>
+            Studio IDE
+          </a>
+          <a href="#" class="btn btn-login" onclick="openLoginModal(); return false;">
+            <i class="material-icons">login</i>
+            Login
+          </a>
+        </div>
       </div>
       
       <div class="hero-stats">
@@ -1338,6 +1592,178 @@
           <div class="quick-link-title">About SciMSPT</div>
           <div class="quick-link-desc">Methodology, team, research sources, Foresight Series reports, and contact information.</div>
           <div class="quick-link-arrow">Learn More <i class="material-icons" style="font-size: 16px;">arrow_forward</i></div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Recent Breakthroughs Section -->
+  <section class="section breakthroughs-section" id="breakthroughs">
+    <div class="container">
+      <div class="section-header">
+        <div class="kicker">This Week's Breakthroughs</div>
+        <h2>Recent Scientific Discoveries</h2>
+        <p class="lead">The latest peer-reviewed breakthroughs driving this week's startup opportunities.</p>
+      </div>
+      
+      <div class="breakthroughs-grid">
+        <!-- Breakthrough Card 1: Quantum Magnons -->
+        <article class="breakthrough-card">
+          <div class="breakthrough-icon quantum">⚛️</div>
+          <div class="breakthrough-content">
+            <div class="breakthrough-domain">Physics · Quantum Computing</div>
+            <h3 class="breakthrough-title">Ultralong-Living Magnons in Quantum Limit</h3>
+            <p class="breakthrough-desc">Researchers extended magnon lifetime by nearly 100×, reaching 18 microseconds—overturning established limits for quantum information carriers.</p>
+            <div class="breakthrough-meta">
+              <span><i class="material-icons">science</i> Science Advances</span>
+              <span><i class="material-icons">calendar_today</i> Week 34, 2026</span>
+            </div>
+            <a href="shorts/SD-M-01.html" class="breakthrough-link">Read Research Short →</a>
+          </div>
+        </article>
+
+        <!-- Breakthrough Card 2: Materials Science -->
+        <article class="breakthrough-card">
+          <div class="breakthrough-icon materials">🔬</div>
+          <div class="breakthrough-content">
+            <div class="breakthrough-domain">Materials Science · Photovoltaics</div>
+            <h3 class="breakthrough-title">AI-Discovered Tandem Solar Cell Materials</h3>
+            <p class="breakthrough-desc">Machine learning identified novel perovskite-silicon tandem configurations achieving >35% theoretical efficiency with enhanced stability.</p>
+            <div class="breakthrough-meta">
+              <span><i class="material-icons">science</i> Nature Energy</span>
+              <span><i class="material-icons">calendar_today</i> Week 34, 2026</span>
+            </div>
+            <a href="shorts/SD-P-05.html" class="breakthrough-link">Read Research Short →</a>
+          </div>
+        </article>
+
+        <!-- Breakthrough Card 3: Protein Engineering -->
+        <article class="breakthrough-card">
+          <div class="breakthrough-icon biology">🧬</div>
+          <div class="breakthrough-content">
+            <div class="breakthrough-domain">Biotechnology · Protein Design</div>
+            <h3 class="breakthrough-title">De Novo Protein Structure Prediction</h3>
+            <p class="breakthrough-desc">New deep learning approaches achieve near-experimental accuracy in predicting protein folding from sequence alone.</p>
+            <div class="breakthrough-meta">
+              <span><i class="material-icons">science</i> Nature Biotechnology</span>
+              <span><i class="material-icons">calendar_today</i> Week 34, 2026</span>
+            </div>
+            <a href="shorts/SD-P-07.html" class="breakthrough-link">Read Research Short →</a>
+          </div>
+        </article>
+
+        <!-- Breakthrough Card 4: Semiconductor Physics -->
+        <article class="breakthrough-card">
+          <div class="breakthrough-icon physics">💾</div>
+          <div class="breakthrough-content">
+            <div class="breakthrough-domain">Semiconductors · CMOS Technology</div>
+            <h3 class="breakthrough-title">2nm CMOS Process Breakthrough</h3>
+            <p class="breakthrough-desc">Novel gate-all-around transistor architecture enables continued Moore's Law scaling beyond perceived physical limits.</p>
+            <div class="breakthrough-meta">
+              <span><i class="material-icons">science</i> IEEE EDL</span>
+              <span><i class="material-icons">calendar_today</i> Week 34, 2026</span>
+            </div>
+            <a href="shorts/SD-S-04.html" class="breakthrough-link">Read Research Short →</a>
+          </div>
+        </article>
+
+        <!-- Breakthrough Card 5: Temporal Dynamics -->
+        <article class="breakthrough-card">
+          <div class="breakthrough-icon time">⏱️</div>
+          <div class="breakthrough-content">
+            <div class="breakthrough-domain">Time Series · Forecasting</div>
+            <h3 class="breakthrough-title">Neural Temporal Foundation Models</h3>
+            <p class="breakthrough-desc">Transformer architectures adapted for multivariate time series achieve state-of-the-art forecasting across domains.</p>
+            <div class="breakthrough-meta">
+              <span><i class="material-icons">science</i> ICML 2026</span>
+              <span><i class="material-icons">calendar_today</i> Week 34, 2026</span>
+            </div>
+            <a href="shorts/SD-T-03.html" class="breakthrough-link">Read Research Short →</a>
+          </div>
+        </article>
+
+        <!-- Breakthrough Card 6: Mathematical Methods -->
+        <article class="breakthrough-card">
+          <div class="breakthrough-icon science">📐</div>
+          <div class="breakthrough-content">
+            <div class="breakthrough-domain">Mathematics · Optimization</div>
+            <h3 class="breakthrough-title">Quantum-Classical Hybrid Algorithms</h3>
+            <p class="breakthrough-desc">Variational methods bridging quantum and classical computing show promise for NP-hard optimization problems.</p>
+            <div class="breakthrough-meta">
+              <span><i class="material-icons">science</i> PRL</span>
+              <span><i class="material-icons">calendar_today</i> Week 34, 2026</span>
+            </div>
+            <a href="shorts/SD-M-02.html" class="breakthrough-link">Read Research Short →</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Free Scientific Resources Section -->
+  <section class="section resources-section" id="resources">
+    <div class="container">
+      <div class="section-header">
+        <div class="kicker">Open Access</div>
+        <h2>Free Scientific Portals & Resources</h2>
+        <p class="lead">Curated free-tier scientific databases and tools for researchers.</p>
+      </div>
+      
+      <div class="resources-grid">
+        <a href="https://www.sciencedaily.com/" target="_blank" rel="noopener" class="resource-card">
+          <div class="resource-icon">📰</div>
+          <h3>ScienceDaily</h3>
+          <p>Daily science news, research summaries across all domains.</p>
+          <span class="resource-type">News Aggregator · Free</span>
+        </a>
+        
+        <a href="https://arxiv.org/" target="_blank" rel="noopener" class="resource-card">
+          <div class="resource-icon">📄</div>
+          <h3>arXiv.org</h3>
+          <p>Open-access preprint server for physics, math, CS, biology.</p>
+          <span class="resource-type">Preprints · Free</span>
+        </a>
+        
+        <a href="https://pubmed.ncbi.nlm.nih.gov/" target="_blank" rel="noopener" class="resource-card">
+          <div class="resource-icon">🧬</div>
+          <h3>PubMed Central</h3>
+          <p>Free full-text archive of biomedical/life sciences literature.</p>
+          <span class="resource-type">Database · Free</span>
+        </a>
+        
+        <a href="https://scholar.google.com/" target="_blank" rel="noopener" class="resource-card">
+          <div class="resource-icon">🎓</div>
+          <h3>Google Scholar</h3>
+          <p>Comprehensive scholarly literature search across disciplines.</p>
+          <span class="resource-type">Search Engine · Free</span>
+        </a>
+        
+        <a href="https://www.semanticscholar.org/" target="_blank" rel="noopener" class="resource-card">
+          <div class="resource-icon">🔍</div>
+          <h3>Semantic Scholar</h3>
+          <p>AI-powered academic paper search with citation analysis.</p>
+          <span class="resource-type">Research Tool · Free</span>
+        </a>
+        
+        <a href="https://www.researchgate.net/" target="_blank" rel="noopener" class="resource-card">
+          <div class="resource-icon">🌐</div>
+          <h3>ResearchGate</h3>
+          <p>Scientific network for researchers to share and collaborate.</p>
+          <span class="resource-type">Network · Free Tier</span>
+        </a>
+        
+        <a href="https://zenodo.org/" target="_blank" rel="noopener" class="resource-card">
+          <div class="resource-icon">📊</div>
+          <h3>Zenodo</h3>
+          <p>CERN open-data repository for research artifacts and datasets.</p>
+          <span class="resource-type">Repository · Free</span>
+        </a>
+        
+        <a href="https://www.nature.com/" target="_blank" rel="noopener" class="resource-card">
+          <div class="resource-icon">🌿</div>
+          <h3>Nature Portfolio</h3>
+          <p>Premier scientific journals covering all areas of research.</p>
+          <span class="resource-type">Journals · Subscription</span>
         </a>
       </div>
     </div>

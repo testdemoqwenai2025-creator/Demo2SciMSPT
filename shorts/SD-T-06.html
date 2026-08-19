@@ -1,54 +1,150 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SD-T-06 — Time Series Analysis | SciMSPT Research</title>
     <meta name="description" content="SD-T-06: Statistical methods for time-dependent data analysis within the SciMSPT Time domain.">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        :root {
-            --primary: #fa709a; --secondary: #fee140;
-            --text-dark: #2d3748; --text-light: #718096;
-        }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            line-height: 1.7; color: var(--text-dark);
-            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
-            min-height: 100vh; padding: 20px;
-        }
-        .container { max-width: 850px; margin: 0 auto; background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1); }
-        .hero-section { background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%); padding: 50px; text-align: center; color: white; }
-        .hero-icon { width: 80px; height: 80px; margin-bottom: 20px; filter: brightness(10); }
-        .hero-section h1 { font-size: 2rem; font-weight: 700; margin-bottom: 10px; }
-        .hero-section p { opacity: 0.9; font-size: 1.05rem; }
-        .content { padding: 45px; }
-        .back-link { display: inline-flex; align-items: center; gap: 6px; margin-bottom: 25px; color: #e53e6d; text-decoration: none; font-weight: 600; font-size: 0.95rem; transition: all 0.3s ease; }
-        .back-link:hover { gap: 10px; color: var(--secondary); }
-        .meta-tags { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 30px; }
-        .tag { padding: 6px 14px; background: #fff1f2; color: #be123c; border-radius: 20px; font-size: 0.85em; font-weight: 600; }
-        h2 { color: #e53e6d; margin-top: 35px; margin-bottom: 16px; font-size: 1.55rem; font-weight: 700; position: relative; padding-left: 16px; }
-        h2::before { content: ''; position: absolute; left: 0; top: 6px; bottom: 6px; width: 4px; background: linear-gradient(180deg, var(--primary), var(--secondary)); border-radius: 2px; }
-        p { margin-bottom: 16px; color: var(--text-dark); font-size: 1.02rem; line-height: 1.75; }
-        ul, ol { margin-left: 22px; margin-bottom: 18px; }
-        li { margin-bottom: 9px; color: var(--text-dark); font-size: 1rem; line-height: 1.65; }
-        strong { color: var(--text-dark); font-weight: 600; }
-        .key-insight { background: linear-gradient(135deg, #fa709a08 0%, #fee14008 100%); padding: 25px; border-radius: 12px; margin: 28px 0; border: 1px solid #e2e8f0; }
-        footer { margin-top: 45px; padding-top: 25px; border-top: 2px solid #f0f0f0; color: var(--text-light); font-size: 0.9rem; text-align: center; }
-        @media (max-width: 768px) { .content { padding: 30px 24px; } .hero-section { padding: 35px 25px; } h1 { font-size: 1.65rem; } }
+        :root { --bg-dark: #0a1628; --bg-light: #f5f8fc; --bg-card-dark: rgba(20, 40, 64, 0.7); --bg-card-light: rgba(255, 255, 255, 0.95); --primary-dark: #e8f0f8; --primary-light: #142840; --accent: #4da8da; --accent-glow: #2d7ab3; --muted-dark: #7a9bb8; --muted-light: #5a7a96; --border-dark: rgba(77, 168, 218, 0.25); --border-light: #c0d0e2; --surface-dark: rgba(45, 122, 179, 0.08); --surface-light: #edf2f9; --font-heading: 'Playfair Display', Georgia, serif; --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; --font-num: 'JetBrains Mono', 'Inter', monospace; --nav-height: 72px; }
+        [data-theme="dark"] { --bg: var(--bg-dark); --bg-card: var(--bg-card-dark); --primary: var(--primary-dark); --muted: var(--muted-dark); --border: var(--border-dark); --surface: var(--surface-dark); --shadow: 0 12px 48px rgba(0,0,0,0.4); --nav-bg: rgba(10,22,40,0.95); --glow-color: rgba(77,168,218,0.15); }
+        [data-theme="light"] { --bg: var(--bg-light); --bg-card: var(--bg-card-light); --primary: var(--primary-light); --muted: var(--muted-light); --border: var(--border-light); --surface: var(--surface-light); --shadow: 0 12px 48px rgba(20,40,64,0.1); --nav-bg: rgba(245,248,252,0.95); --glow-color: rgba(45,122,179,0.08); }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; scroll-padding-top: var(--nav-height); }
+        body { font-family: var(--font-body); background: var(--bg); color: var(--primary); line-height: 1.65; transition: background 0.4s ease, color 0.4s ease; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+
+        .navbar { position: fixed; top: 0; left: 0; right: 0; height: var(--nav-height); z-index: 1000; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; background: var(--nav-bg); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); transition: all 0.3s ease; }
+        .nav-left { display: flex; align-items: center; gap: 28px; }
+        .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--primary); transition: opacity 0.3s ease; }
+        .nav-logo:hover { opacity: 0.85; }
+        .nav-logo img { width: 32px; height: 32px; filter: drop-shadow(0 0 6px var(--accent)); }
+        .nav-logo-text { font-family: var(--font-heading); font-size: 20px; font-weight: 700; letter-spacing: -0.5px; }
+        .nav-logo-text span { color: var(--accent); }
+        .nav-links { display: flex; align-items: center; gap: 8px; }
+        .nav-link { font-size: 13px; font-weight: 500; color: var(--muted); text-decoration: none; padding: 8px 16px; border-radius: 20px; transition: all 0.25s ease; letter-spacing: 0.3px; white-space: nowrap; }
+        .nav-link:hover { color: var(--accent); background: var(--surface); }
+        .nav-link.active { color: var(--accent); background: rgba(77,168,218,0.12); }
+        .nav-right { display: flex; align-items: center; gap: 16px; }
+        .theme-toggle { display: flex; align-items: center; gap: 6px; padding: 8px 16px; background: var(--surface); border: 1px solid var(--border); border-radius: 20px; cursor: pointer; font-family: var(--font-body); font-size: 11px; font-weight: 600; color: var(--muted); transition: all 0.3s ease; white-space: nowrap; }
+        .theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
+        .theme-toggle .material-icons { font-size: 16px; }
+        .mobile-menu-btn { display: none; width: 40px; height: 40px; border-radius: 50%; background: var(--surface); border: 1px solid var(--border); color: var(--muted); cursor: pointer; align-items: center; justify-content: center; }
+
+        .side-panel { position: fixed; top: 0; bottom: 0; width: 180px; z-index: 2; pointer-events: none; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+        .side-panel-inner { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; }
+        .left-panel { left: 0; background: linear-gradient(180deg, rgba(6, 12, 24, 0.96) 0%, rgba(10, 20, 36, 0.94) 50%, rgba(6, 12, 24, 0.96) 100%); border-right: 1px solid rgba(77, 168, 218, 0.4); box-shadow: 4px 0 30px rgba(77, 168, 218, 0.2), inset -15px 0 40px rgba(77, 168, 218, 0.04); }
+        .right-panel { right: 0; background: linear-gradient(180deg, rgba(6, 12, 24, 0.96) 0%, rgba(10, 20, 36, 0.94) 50%, rgba(6, 12, 24, 0.96) 100%); border-left: 1px solid rgba(167, 139, 250, 0.4); box-shadow: -4px 0 30px rgba(167, 139, 250, 0.2), inset 15px 0 40px rgba(167, 139, 250, 0.04); }
+        .dna-svg, .protein-svg { width: 100%; height: 100%; max-height: 100vh; }
+        .side-panel::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(77, 168, 218, 0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(77, 168, 218, 0.06) 1px, transparent 1px); background-size: 20px 20px; pointer-events: none; }
+        .side-panel::after { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at center, transparent 35%, rgba(6, 12, 24, 0.5) 100%); pointer-events: none; }
+
+        .main-content { margin-left: 180px; margin-right: 180px; min-height: 100vh; padding-top: calc(var(--nav-height) + 48px); padding-bottom: 80px; position: relative; z-index: 10; }
+        .content-wrapper { max-width: 900px; margin: 0 auto; padding: 0 48px; }
+
+        .short-hero { text-align: center; padding: 48px 0; position: relative; }
+        .short-badge { display: inline-flex; align-items: center; gap: 8px; padding: 8px 18px; background: var(--surface); border: 1px solid var(--border); border-radius: 24px; font-size: 12px; font-weight: 600; color: var(--accent); letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 24px; }
+        .short-title { font-family: var(--font-heading); font-size: clamp(32px, 5vw, 52px); font-weight: 900; line-height: 1.1; letter-spacing: -1.5px; margin-bottom: 16px; background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .short-subtitle { font-size: 18px; color: var(--muted); max-width: 600px; margin: 0 auto; line-height: 1.6; }
+
+        .back-nav { display: inline-flex; align-items: center; gap: 8px; margin-bottom: 28px; padding: 10px 20px; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; color: var(--muted); text-decoration: none; font-size: 14px; font-weight: 500; transition: all 0.3s ease; }
+        .back-nav:hover { color: var(--accent); border-color: var(--accent); transform: translateX(-4px); }
+        .back-nav .material-icons { font-size: 18px; }
+
+        .meta-tags { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 40px; }
+        .tag { padding: 8px 16px; background: rgba(77, 168, 218, 0.1); color: var(--accent); border-radius: 20px; font-size: 12px; font-weight: 600; letter-spacing: 0.5px; border: 1px solid rgba(77, 168, 218, 0.2); }
+
+        .article-content { background: var(--bg-card); border: 1px solid var(--border); border-radius: 20px; padding: 48px; backdrop-filter: blur(12px); box-shadow: var(--shadow); }
+        h2 { font-family: var(--font-heading); font-size: 26px; font-weight: 700; color: var(--primary); margin-top: 40px; margin-bottom: 20px; padding-left: 20px; position: relative; line-height: 1.25; }
+        h2::before { content: ''; position: absolute; left: 0; top: 4px; bottom: 4px; width: 4px; background: linear-gradient(180deg, var(--accent), #a78bfa); border-radius: 2px; }
+        h2:first-child { margin-top: 0; }
+        p { margin-bottom: 18px; color: var(--muted); font-size: 15px; line-height: 1.75; }
+        ul, ol { margin-left: 24px; margin-bottom: 20px; }
+        li { margin-bottom: 10px; color: var(--muted); font-size: 15px; line-height: 1.65; }
+        strong { color: var(--primary); font-weight: 600; }
+
+        .key-insight { background: linear-gradient(135deg, rgba(77, 168, 218, 0.08) 0%, rgba(167, 139, 250, 0.08) 100%); padding: 28px; border-radius: 16px; margin: 32px 0; border: 1px solid rgba(77, 168, 218, 0.2); position: relative; overflow: hidden; }
+        .key-insight::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--accent), #a78bfa); }
+        .key-insight p { margin-bottom: 0; color: var(--primary); }
+
+        .article-footer { margin-top: 48px; padding-top: 28px; border-top: 1px solid var(--border); text-align: center; color: var(--muted); font-size: 13px; }
+        .article-footer p { margin-bottom: 8px; }
+
+        .floating-nav { position: fixed; bottom: 30px; right: 30px; z-index: 999; display: flex; flex-direction: column; gap: 12px; }
+        .float-btn { width: 50px; height: 50px; border-radius: 50%; background: var(--bg-card); border: 1px solid var(--border); color: var(--accent); display: flex; align-items: center; justify-content: center; text-decoration: none; box-shadow: 0 4px 20px rgba(0,0,0,0.3); transition: all 0.3s ease; backdrop-filter: blur(10px); }
+        .float-btn:hover { transform: translateY(-4px); border-color: var(--accent); box-shadow: 0 8px 30px rgba(77,168,218,0.4); }
+        .float-btn .material-icons { font-size: 24px; }
+
+        @media (max-width: 1024px) { .side-panel { display: none; } .main-content { margin-left: 0; margin-right: 0; } }
+        @media (max-width: 768px) { .navbar { padding: 0 20px; } .nav-links { display: none; } .mobile-menu-btn { display: flex; } .content-wrapper { padding: 0 24px; } .article-content { padding: 28px; } .short-title { font-size: 32px; } h2 { font-size: 22px; } .floating-nav { bottom: 20px; right: 20px; } .float-btn { width: 44px; height: 44px; } .float-btn .material-icons { font-size: 20px; } }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="hero-section">
-            <img src="../assets/images/thumb-SD-T-06.png" alt="Time Series Analysis" class="hero-icon">
-            <h1>SD-T-06 — Time Series Analysis</h1>
-            <p>Statistical methods for time-dependent data analysis</p>
-        </div>
 
-        <div class="content">
-            <a href="../index.html" class="back-link">← Back to SciMSPT</a>
-            
+    <!-- Side Panels -->
+    <div class="side-panel left-panel"><div class="side-panel-inner">
+        <svg viewBox="0 0 180 600" class="dna-svg" preserveAspectRatio="xMidYMid meet">
+            <defs><linearGradient id="strandBlue" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#4da8da"/><stop offset="50%" stop-color="#2d7ab3"/><stop offset="100%" stop-color="#4da8da"/></linearGradient><linearGradient id="strandPurple" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#a78bfa"/><stop offset="50%" stop-color="#7c3aed"/><stop offset="100%" stop-color="#a78bfa"/></linearGradient><filter id="glowBlue" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="3" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter><filter id="glowPurple" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="3" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+            <pattern id="gridPattern" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(77,168,218,0.08)" stroke-width="0.5"/></pattern>
+            <rect width="180" height="600" fill="url(#gridPattern)" opacity="0.5"/>
+            <g style="animation: helixRotate 20s linear infinite; transform-origin: center center;">
+                <path d="M45,0 Q75,50 45,100 Q15,150 45,200 Q75,250 45,300 Q15,350 45,400 Q75,450 45,500 Q15,550 45,600" fill="none" stroke="url(#strandBlue)" stroke-width="5" stroke-linecap="round" filter="url(#glowBlue)"/>
+                <path d="M135,0 Q105,50 135,100 Q165,150 135,200 Q105,250 135,300 Q165,350 135,400 Q105,450 135,500 Q165,550 135,600" fill="none" stroke="url(#strandPurple)" stroke-width="5" stroke-linecap="round" filter="url(#glowPurple)"/>
+            </g>
+            <text x="90" y="592" text-anchor="middle" fill="rgba(77,168,218,0.6)" font-family="monospace" font-size="9" letter-spacing="2">DNA HELIX</text>
+        </svg>
+    </div></div>
+
+    <div class="side-panel right-panel"><div class="side-panel-inner">
+        <svg viewBox="0 0 180 600" class="protein-svg" preserveAspectRatio="xMidYMid meet">
+            <defs><linearGradient id="helixGrad" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#3b82f6"/><stop offset="50%" stop-color="#60a5fa"/><stop offset="100%" stop-color="#3b82f6"/></linearGradient><radialGradient id="aaSphere" cx="30%" cy="30%" r="70%"><stop offset="0%" stop-color="rgba(255,255,255,0.8)"/><stop offset="100%" stop-color="rgba(255,255,255,0)"/></radialGradient><filter id="proteinGlow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="4" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+            <pattern id="gridPatternRight" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(167,139,250,0.08)" stroke-width="0.5"/></pattern>
+            <rect width="180" height="600" fill="url(#gridPatternRight)" opacity="0.5"/>
+            <g style="animation: proteinBreathe 6s ease-in-out infinite; transform-origin: center center;">
+                <path d="M90,10 C120,25 140,45 130,70 C120,95 60,95 50,70 C40,45 60,25 90,10" fill="none" stroke="url(#helixGrad)" stroke-width="8" stroke-linecap="round" filter="url(#proteinGlow)" opacity="0.9"/>
+                <circle cx="130" cy="55" r="10" fill="#60a5fa" style="animation: sphereFloat 4s ease-in-out infinite; transform-origin: center;"/>
+                <circle cx="50" cy="85" r="8" fill="#c084fc" style="animation: sphereFloat 4s ease-in-out infinite; animation-delay: 0.5s; transform-origin: center;"/>
+                <circle cx="45" cy="165" r="9" fill="#c084fc" style="animation: sphereFloat 4s ease-in-out infinite; animation-delay: 1s; transform-origin: center;"/>
+                <circle cx="135" cy="195" r="7" fill="#c084fc" style="animation: sphereFloat 4s ease-in-out infinite; animation-delay: 1.5s; transform-origin: center;"/>
+                <circle cx="125" cy="250" r="8" fill="#fb7185" style="animation: sphereFloat 4s ease-in-out infinite; animation-delay: 2s; transform-origin: center;"/>
+                <circle cx="60" cy="370" r="9" fill="#fb7185" style="animation: sphereFloat 4s ease-in-out infinite; animation-delay: 2.5s; transform-origin: center;"/>
+                <circle cx="40" cy="465" r="10" fill="#60a5fa" style="animation: sphereFloat 4s ease-in-out infinite; animation-delay: 3s; transform-origin: center;"/>
+                <circle cx="130" cy="495" r="8" fill="#60a5fa" style="animation: sphereFloat 4s ease-in-out infinite; animation-delay: 3.5s; transform-origin: center;"/>
+            </g>
+            <text x="90" y="592" text-anchor="middle" fill="rgba(167,139,250,0.6)" font-family="monospace" font-size="9" letter-spacing="2">PROTEIN</text>
+        </svg>
+    </div></div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-left">
+            <a href="../index.html" class="nav-logo"><img src="../assets/icons/icon-science.png" alt="SciMSPT"><span class="nav-logo-text">Sci<span>MSPT</span></span></a>
+            <div class="nav-links">
+                <a href="../index.html" class="nav-link">Home</a>
+                <a href="../dashboard.html" class="nav-link">Dashboard</a>
+                <a href="../research.html" class="nav-link active">Research Trends</a>
+                <a href="../startups.html" class="nav-link">Startups</a>
+                <a href="../about.html" class="nav-link">About</a>
+            </div>
+        </div>
+        <div class="nav-right">
+            <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme"><i class="material-icons" id="themeIcon">dark_mode</i><span id="themeText">Dark</span></button>
+            <button class="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="Menu"><i class="material-icons">menu</i></button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="content-wrapper">
+            <header class="short-hero">
+                <div class="short-badge"><i class="material-icons" style="font-size: 16px;">analytics</i> Research Short · Domain T</div>
+                <h1 class="short-title">SD-T-06 — Time Series Analysis</h1>
+                <p class="short-subtitle">Statistical methods for time-dependent data analysis within the SciMSPT framework.</p>
+            </header>
+
+            <a href="../research.html" class="back-nav"><i class="material-icons">arrow_back</i> Back to Research</a>
+
             <div class="meta-tags">
                 <span class="tag">Time Series</span>
                 <span class="tag">Statistics</span>
@@ -56,67 +152,82 @@
                 <span class="tag">Domain: Time (T)</span>
             </div>
 
-            <h2>Abstract</h2>
-            <p>This research short presents statistical and computational methodologies for analyzing sequentially ordered observations—time series data. Time series analysis techniques enable extraction of patterns, trends, and predictive insights from temporal data across scientific domains ranging from climate science to financial markets.</p>
+            <article class="article-content">
+                <h2>Abstract</h2>
+                <p>This research short presents statistical and computational methodologies for analyzing sequentially ordered observations—time series data. Time series analysis techniques enable extraction of patterns, trends, and predictive insights from temporal data across scientific domains ranging from climate science to financial markets.</p>
 
-            <h2>Fundamental Time Series Concepts</h2>
+                <h2>Fundamental Time Series Concepts</h2>
 
-            <p><strong>Stationarity & Non-stationarity:</strong></p>
-            <ul>
-                <li>Strict stationarity: Joint probability distribution invariant under time shifts</li>
-                <li>Weak stationarity: Constant mean, variance, and autocovariance depending only on lag</li>
-                <li>Trend-stationary vs. difference-stationary processes requiring different modeling approaches</li>
-                <li>Unit root tests (ADF, KPSS) distinguishing stochastic from deterministic trends</li>
-            </ul>
+                <p><strong>Stationarity & Non-stationarity:</strong></p>
+                <ul>
+                    <li>Strict stationarity: Joint probability distribution invariant under time shifts</li>
+                    <li>Weak stationarity: Constant mean, variance, and autocovariance depending only on lag</li>
+                    <li>Trend-stationary vs. difference-stationary processes requiring different modeling approaches</li>
+                    <li>Unit root tests (ADF, KPSS) distinguishing stochastic from deterministic trends</li>
+                </ul>
 
-            <p><strong>Decomposition Methods:</strong></p>
-            <ul>
-                <li>Additive decomposition: Yₜ = Tₜ + Sₜ + Rₜ separating trend, seasonal, and residual components</li>
-                <li>Multiplicative decomposition: Yₜ = Tₜ × Sₜ × Rₜ for seasonality proportional to level</li>
-                <li>STL (Seasonal-Trend decomposition using Loess) robust to outliers and missing values</li>
-                <li>Wavelet decomposition providing time-frequency localization for non-stationary signals</li>
-            </ul>
+                <p><strong>Decomposition Methods:</strong></p>
+                <ul>
+                    <li>Additive decomposition: Yₜ = Tₜ + Sₜ + Rₜ separating trend, seasonal, and residual components</li>
+                    <li>Multiplicative decomposition: Yₜ = Tₜ × Sₜ × Rₜ for seasonality proportional to level</li>
+                    <li>STL (Seasonal-Trend decomposition using Loess) robust to outliers and missing values</li>
+                    <li>Wavelet decomposition providing time-frequency localization for non-stationary signals</li>
+                </ul>
 
-            <div class="key-insight">
-                <p><strong>Prediction vs. Understanding:</strong> While machine learning approaches often prioritize prediction accuracy, classical time series methods emphasize interpretable parameters revealing underlying data-generating mechanisms—both perspectives are valuable within the SciMSPT framework depending on research objectives.</p>
-            </div>
+                <div class="key-insight">
+                    <p><strong>Prediction vs. Understanding:</strong> While machine learning approaches often prioritize prediction accuracy, classical time series methods emphasize interpretable parameters revealing underlying data-generating mechanisms—both perspectives are valuable within the SciMSPT framework depending on research objectives.</p>
+                </div>
 
-            <h2>Modeling Approaches</h2>
+                <h2>Modeling Approaches</h2>
 
-            <ol>
-                <li><strong>ARIMA Models:</strong> Autoregressive Integrated Moving Average models capturing autocorrelation structure through lagged values (AR), differencing for stationarity (I), and error smoothing (MA).</li>
+                <ol>
+                    <li><strong>ARIMA Models:</strong> Autoregressive Integrated Moving Average models capturing autocorrelation structure through lagged values (AR), differencing for stationarity (I), and error smoothing (MA).</li>
+                    
+                    <li><strong>State Space Models:</strong> Unobserved components framework enabling flexible specification of trend, seasonal, and cyclical dynamics with Kalman filtering for optimal state estimation.</li>
+                    
+                    <li><strong>Machine Learning Methods:</strong> Recurrent neural networks (LSTM, GRU) learning complex temporal dependencies, transformer architectures with attention mechanisms capturing long-range correlations, and gradient boosting for feature-based forecasting.</li>
+                    
+                    <li><strong>Bayesian Structural Time Series:</strong> Probabilistic frameworks quantifying uncertainty in forecasts, incorporating prior knowledge, and performing causal inference through intervention analysis.</li>
+                </ol>
+
+                <h2>Spectral & Frequency Domain Analysis</h2>
                 
-                <li><strong>State Space Models:</strong> Unobserved components framework enabling flexible specification of trend, seasonal, and cyclical dynamics with Kalman filtering for optimal state estimation.</li>
+                <ul>
+                    <li><strong>Fourier transform:</strong> Decomposing signals into sinusoidal frequency components identifying periodicities</li>
+                    <li><strong>Power spectral density:</strong> Distribution of signal power across frequencies distinguishing noise from structured variation</li>
+                    <li><strong>Coherence analysis:</strong> Frequency-domain correlation between two time series revealing common driving factors</li>
+                    <li><strong>Wavelet analysis:</strong> Multi-resolution representation adapting window length to local frequency content</li>
+                </ul>
+
+                <h2>Applications Across SciMSPT Domains</h2>
                 
-                <li><strong>Machine Learning Methods:</strong> Recurrent neural networks (LSTM, GRU) learning complex temporal dependencies, transformer architectures with attention mechanisms capturing long-range correlations, and gradient boosting for feature-based forecasting.</li>
-                
-                <li><strong>Bayesian Structural Time Series:</strong> Probabilistic frameworks quantifying uncertainty in forecasts, incorporating prior knowledge, and performing causal inference through intervention analysis.</li>
-            </ol>
+                <ul>
+                    <li><strong>Climate science:</strong> Temperature trend detection, El Niño prediction, extreme event frequency analysis</li>
+                    <li><strong>Materials science:</strong> Degradation modeling, process control time series, sensor data monitoring</li>
+                    <li><strong>Finance:</strong> Volatility forecasting, risk modeling, algorithmic trading strategy development</li>
+                    <li><strong>Biology:</strong> Gene expression dynamics, circadian rhythm analysis, population ecology modeling</li>
+                </ul>
 
-            <h2>Spectral & Frequency Domain Analysis</h2>
-            
-            <ul>
-                <li><strong>Fourier transform:</strong> Decomposing signals into sinusoidal frequency components identifying periodicities</li>
-                <li><strong>Power spectral density:</strong> Distribution of signal power across frequencies distinguishing noise from structured variation</li>
-                <li><strong>Coherence analysis:</strong> Frequency-domain correlation between two time series revealing common driving factors</li>
-                <li><strong>Wavelet analysis:</strong> Multi-resolution representation adapting window length to local frequency content</li>
-            </ul>
-
-            <h2>Applications Across SciMSPT Domains</h2>
-            
-            <ul>
-                <li><strong>Climate science:</strong> Temperature trend detection, El Niño prediction, extreme event frequency analysis</li>
-                <li><strong>Materials science:</strong> Degradation modeling, process control time series, sensor data monitoring</li>
-                <li><strong>Finance:</strong> Volatility forecasting, risk modeling, algorithmic trading strategy development</li>
-                <li><strong>Biology:</strong> Gene expression dynamics, circadian rhythm analysis, population ecology modeling</li>
-            </ul>
-
-            <footer>
-                <p><strong>SD-T-06 — Time Series Analysis</strong></p>
-                <p style="margin-top: 8px;">© 2026 SciMSPT — Scientific Mesh for Science, Matter, Physics & Time</p>
-                <p style="margin-top: 12px; font-size: 0.82em; opacity: 0.7;">Research Short | Domain: Time (T)</p>
-            </footer>
+                <footer class="article-footer">
+                    <p><strong>SD-T-06 — Time Series Analysis</strong></p>
+                    <p>&copy; 2026 SciMSPT — Scientific Mesh for Science, Matter, Physics & Time</p>
+                    <p style="margin-top: 12px; opacity: 0.7;">Research Short | Domain: Time (T)</p>
+                </footer>
+            </article>
         </div>
+    </main>
+
+    <div class="floating-nav">
+        <a href="../index.html" class="float-btn home-btn" title="Home"><i class="material-icons">home</i></a>
+        <a href="javascript:history.back()" class="float-btn back-btn" title="Go Back"><i class="material-icons">arrow_back</i></a>
     </div>
+
+    <script>
+        function initTheme() { const saved = localStorage.getItem('scimspt-theme'); const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches; setTheme(saved || (prefersDark ? 'dark' : 'light')); }
+        function setTheme(theme) { document.documentElement.setAttribute('data-theme', theme); const icon = document.getElementById('themeIcon'), text = document.getElementById('themeText'); if (theme === 'dark') { icon.textContent = 'dark_mode'; text.textContent = 'Dark'; } else { icon.textContent = 'light_mode'; text.textContent = 'Light'; } localStorage.setItem('scimspt-theme', theme); }
+        function toggleTheme() { setTheme(document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'); }
+        initTheme();
+        function toggleMobileMenu() { alert('Navigation:\n• Home\n• Dashboard\n• Research Trends\n• 7 Startups\n• About'); }
+    </script>
 </body>
 </html>
