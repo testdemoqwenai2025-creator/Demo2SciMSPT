@@ -3,15 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SciMSPT — Science, Matter, Physics & Time | Frontier Computing Research Platform</title>
-  <meta name="description" content="SciMSPT Research Platform — where frontier science meets investment foresight. Audio podcasts, startup portfolio, research shorts, and investor deck presentations.">
+  <title>SciMSPT — Science, Matter, Physics & Time | 7 Frontier Computing Startups</title>
+  <meta name="description" content="SciMSPT Research Platform — 7 frontier computing startups extrapolated from ScienceDaily breakthroughs in matter_energy, space_time, computers_math, health_medicine, mind_brain, and living_well.">
   
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   
   <style>
-    /* ── CSS Variables & Theme System ─────────────────────────────── */
     :root {
       --bg-dark: #0a1628;
       --bg-light: #f5f8fc;
@@ -59,13 +58,9 @@
       --glow-color: rgba(45, 122, 179, 0.08);
     }
     
-    /* ── Reset & Base ────────────────────────────────────────────── */
     * { box-sizing: border-box; margin: 0; padding: 0; }
     
-    html {
-      scroll-behavior: smooth;
-      scroll-padding-top: var(--nav-height);
-    }
+    html { scroll-behavior: smooth; scroll-padding-top: var(--nav-height); }
     
     body {
       font-family: var(--font-body);
@@ -76,8 +71,8 @@
       -webkit-font-smoothing: antialiased;
       overflow-x: hidden;
     }
-    
-    /* ── Navigation Bar ──────────────────────────────────────────── */
+
+    /* Navigation */
     .navbar {
       position: fixed;
       top: 0;
@@ -95,11 +90,7 @@
       transition: all 0.3s ease;
     }
     
-    .nav-left {
-      display: flex;
-      align-items: center;
-      gap: 28px;
-    }
+    .nav-left { display: flex; align-items: center; gap: 28px; }
     
     .nav-logo {
       display: flex;
@@ -127,11 +118,7 @@
     
     .nav-logo-text span { color: var(--accent); }
     
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
+    .nav-links { display: flex; align-items: center; gap: 8px; }
     
     .nav-link {
       font-size: 13px;
@@ -145,21 +132,10 @@
       white-space: nowrap;
     }
     
-    .nav-link:hover {
-      color: var(--accent);
-      background: var(--surface);
-    }
+    .nav-link:hover { color: var(--accent); background: var(--surface); }
+    .nav-link.active { color: var(--accent); background: rgba(77, 168, 218, 0.12); }
     
-    .nav-link.active {
-      color: var(--accent);
-      background: rgba(77, 168, 218, 0.12);
-    }
-    
-    .nav-right {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-    }
+    .nav-right { display: flex; align-items: center; gap: 16px; }
     
     .theme-toggle {
       display: flex;
@@ -178,14 +154,9 @@
       white-space: nowrap;
     }
     
-    .theme-toggle:hover {
-      border-color: var(--accent);
-      color: var(--accent);
-    }
-    
+    .theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
     .theme-toggle .material-icons { font-size: 16px; }
     
-    /* Mobile menu */
     .mobile-menu-btn {
       display: none;
       width: 40px;
@@ -199,18 +170,10 @@
       justify-content: center;
     }
     
-    .mobile-menu-btn .material-icons { font-size: 22px; }
+    /* Section Base */
+    .section { padding: 100px 48px; position: relative; overflow: hidden; }
     
-    /* ── Section Base ────────────────────────────────────────────── */
-    .section {
-      padding: 100px 48px;
-      position: relative;
-      overflow: hidden;
-    }
-    
-    .section-header {
-      margin-bottom: 56px;
-    }
+    .section-header { margin-bottom: 56px; }
     
     .kicker {
       font-family: var(--font-body);
@@ -244,20 +207,10 @@
     h2 { font-size: clamp(28px, 3.5vw, 42px); font-weight: 700; }
     h3 { font-size: 22px; font-weight: 700; }
     
-    .lead {
-      font-size: 18px;
-      color: var(--muted);
-      max-width: 700px;
-      margin-top: 16px;
-      line-height: 1.6;
-    }
-    
-    .container {
-      max-width: 1280px;
-      margin: 0 auto;
-    }
-    
-    /* ── Hero Section ────────────────────────────────────────────── */
+    .lead { font-size: 18px; color: var(--muted); max-width: 700px; margin-top: 16px; line-height: 1.6; }
+    .container { max-width: 1280px; margin: 0 auto; }
+
+    /* Hero Section */
     .hero {
       min-height: 100vh;
       display: flex;
@@ -267,11 +220,7 @@
       overflow: hidden;
     }
     
-    .hero-bg {
-      position: absolute;
-      inset: 0;
-      z-index: 0;
-    }
+    .hero-bg { position: absolute; inset: 0; z-index: 0; }
     
     .grid-pattern {
       position: absolute;
@@ -292,23 +241,10 @@
       opacity: 0.4;
     }
     
-    .hero-glow.tl {
-      top: -300px;
-      left: -200px;
-      background: radial-gradient(circle, var(--glow-color) 0%, transparent 70%);
-    }
+    .hero-glow.tl { top: -300px; left: -200px; background: radial-gradient(circle, var(--glow-color) 0%, transparent 70%); }
+    .hero-glow.br { bottom: -300px; right: -200px; background: radial-gradient(circle, rgba(77, 168, 218, 0.1) 0%, transparent 70%); }
     
-    .hero-glow.br {
-      bottom: -300px;
-      right: -200px;
-      background: radial-gradient(circle, rgba(77, 168, 218, 0.1) 0%, transparent 70%);
-    }
-    
-    .hero-content {
-      position: relative;
-      z-index: 1;
-      max-width: 900px;
-    }
+    .hero-content { position: relative; z-index: 1; max-width: 900px; }
     
     .hero-badge {
       display: inline-flex;
@@ -332,10 +268,7 @@
       animation: pulse 2s infinite;
     }
     
-    @keyframes pulse {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.5; transform: scale(1.2); }
-    }
+    @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(1.2); } }
     
     .hero-title {
       font-size: clamp(44px, 7vw, 80px);
@@ -358,11 +291,7 @@
       font-weight: 300;
     }
     
-    .hero-actions {
-      display: flex;
-      gap: 16px;
-      flex-wrap: wrap;
-    }
+    .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
     
     .btn {
       display: inline-flex;
@@ -386,10 +315,7 @@
       box-shadow: 0 4px 20px rgba(77, 168, 218, 0.35);
     }
     
-    .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 30px rgba(77, 168, 218, 0.45);
-    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(77, 168, 218, 0.45); }
     
     .btn-secondary {
       background: var(--surface);
@@ -397,56 +323,64 @@
       border: 1px solid var(--border);
     }
     
-    .btn-secondary:hover {
-      border-color: var(--accent);
-      color: var(--accent);
-    }
-    
+    .btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
     .btn .material-icons { font-size: 18px; }
     
     /* Stats row */
-    .hero-stats {
-      display: flex;
-      gap: 48px;
-      margin-top: 64px;
-      padding-top: 32px;
-      border-top: 1px solid var(--border);
-    }
+    .hero-stats { display: flex; gap: 48px; margin-top: 64px; padding-top: 32px; border-top: 1px solid var(--border); }
     
-    .stat-item {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
+    .stat-item { display: flex; flex-direction: column; gap: 6px; }
+    .stat-num { font-family: var(--font-heading); font-size: 42px; font-weight: 900; color: var(--accent); line-height: 1; letter-spacing: -1.5px; }
+    .stat-label { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 1.5px; font-weight: 500; }
+
+    /* ScienceDaily Sources Section */
+    .sources-section { background: linear-gradient(180deg, var(--bg) 0%, var(--surface) 50%, var(--bg) 100%); }
     
-    .stat-num {
-      font-family: var(--font-heading);
-      font-size: 42px;
-      font-weight: 900;
-      color: var(--accent);
-      line-height: 1;
-      letter-spacing: -1.5px;
-    }
-    
-    .stat-label {
-      font-size: 12px;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
-      font-weight: 500;
-    }
-    
-    /* ── Audio Section (#audio) ──────────────────────────────────── */
-    .audio-section {
-      background: linear-gradient(180deg, var(--bg) 0%, var(--surface) 50%, var(--bg) 100%);
-    }
-    
-    .audio-grid {
+    .source-categories {
       display: grid;
-      grid-template-columns: 400px 1fr;
-      gap: 48px;
-      align-items: start;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 16px;
+      margin-top: 40px;
     }
+    
+    .source-category {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      color: inherit;
+      backdrop-filter: blur(10px);
+    }
+    
+    .source-category:hover {
+      border-color: var(--accent);
+      transform: translateY(-4px);
+      box-shadow: var(--shadow);
+    }
+    
+    .source-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--accent-glow), var(--accent));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 12px;
+    }
+    
+    .source-icon .material-icons { font-size: 26px; color: white; }
+    
+    .source-name { font-weight: 600; font-size: 13px; margin-bottom: 4px; }
+    .source-count { font-size: 11px; color: var(--muted); font-family: var(--font-num); }
+
+    /* Audio Section (#audio) */
+    .audio-section { background: linear-gradient(180deg, var(--bg) 0%, var(--surface) 50%, var(--bg) 100%); }
+    
+    .audio-grid { display: grid; grid-template-columns: 400px 1fr; gap: 48px; align-items: start; }
     
     .audio-player-card {
       background: var(--bg-card);
@@ -459,11 +393,7 @@
       top: calc(var(--nav-height) + 24px);
     }
     
-    .now-playing {
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-    }
+    .now-playing { display: flex; flex-direction: column; gap: 20px; }
     
     .player-artwork {
       width: 100%;
@@ -477,43 +407,13 @@
       overflow: hidden;
     }
     
-    .player-artwork .material-icons {
-      font-size: 72px;
-      color: white;
-      opacity: 0.9;
-    }
+    .player-artwork .material-icons { font-size: 72px; color: white; opacity: 0.9; }
     
-    .player-artwork::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.08'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-    }
+    .track-info { text-align: center; }
+    .track-title { font-family: var(--font-heading); font-size: 18px; font-weight: 700; margin-bottom: 6px; color: var(--primary); }
+    .track-meta { font-size: 13px; color: var(--muted); }
     
-    .track-info {
-      text-align: center;
-    }
-    
-    .track-title {
-      font-family: var(--font-heading);
-      font-size: 18px;
-      font-weight: 700;
-      margin-bottom: 6px;
-      color: var(--primary);
-    }
-    
-    .track-meta {
-      font-size: 13px;
-      color: var(--muted);
-    }
-    
-    .player-controls {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 16px;
-      margin: 20px 0;
-    }
+    .player-controls { display: flex; align-items: center; justify-content: center; gap: 16px; margin: 20px 0; }
     
     .control-btn {
       width: 44px;
@@ -529,26 +429,9 @@
       transition: all 0.25s ease;
     }
     
-    .control-btn:hover {
-      background: var(--accent);
-      border-color: var(--accent);
-      color: white;
-      transform: scale(1.05);
-    }
-    
-    .control-btn.play-btn {
-      width: 56px;
-      height: 56px;
-      background: var(--accent);
-      border-color: var(--accent);
-      color: white;
-    }
-    
-    .control-btn.play-btn:hover {
-      transform: scale(1.1);
-      box-shadow: 0 4px 20px rgba(77, 168, 218, 0.4);
-    }
-    
+    .control-btn:hover { background: var(--accent); border-color: var(--accent); color: white; transform: scale(1.05); }
+    .control-btn.play-btn { width: 56px; height: 56px; background: var(--accent); border-color: var(--accent); color: white; }
+    .control-btn.play-btn:hover { transform: scale(1.1); box-shadow: 0 4px 20px rgba(77, 168, 218, 0.4); }
     .control-btn .material-icons { font-size: 24px; }
     .control-btn.play-btn .material-icons { font-size: 30px; }
     
@@ -562,29 +445,10 @@
       overflow: hidden;
     }
     
-    .progress-fill {
-      height: 100%;
-      background: var(--accent);
-      border-radius: 3px;
-      width: 0%;
-      transition: width 0.1s linear;
-    }
+    .progress-fill { height: 100%; background: var(--accent); border-radius: 3px; width: 0%; transition: width 0.1s linear; }
+    .time-display { display: flex; justify-content: space-between; font-family: var(--font-num); font-size: 11px; color: var(--muted); margin-top: 8px; }
     
-    .time-display {
-      display: flex;
-      justify-content: space-between;
-      font-family: var(--font-num);
-      font-size: 11px;
-      color: var(--muted);
-      margin-top: 8px;
-    }
-    
-    /* Episode list */
-    .episode-list {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
+    .episode-list { display: flex; flex-direction: column; gap: 12px; }
     
     .episode-item {
       display: flex;
@@ -599,77 +463,22 @@
       backdrop-filter: blur(10px);
     }
     
-    .episode-item:hover {
-      border-color: var(--accent);
-      transform: translateX(8px);
-      box-shadow: var(--shadow);
-    }
+    .episode-item:hover { border-color: var(--accent); transform: translateX(8px); box-shadow: var(--shadow); }
+    .episode-item.active { border-color: var(--accent); background: rgba(77, 168, 218, 0.08); }
     
-    .episode-item.active {
-      border-color: var(--accent);
-      background: rgba(77, 168, 218, 0.08);
-    }
+    .episode-num { font-family: var(--font-num); font-size: 13px; font-weight: 600; color: var(--accent); min-width: 28px; }
+    .episode-info { flex: 1; min-width: 0; }
+    .episode-title { font-weight: 600; font-size: 15px; margin-bottom: 4px; color: var(--primary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .episode-desc { font-size: 13px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .episode-duration { font-family: var(--font-num); font-size: 12px; color: var(--muted); background: var(--surface); padding: 4px 10px; border-radius: 12px; white-space: nowrap; }
+    .episode-category { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; padding: 4px 10px; border-radius: 12px; background: rgba(77, 168, 218, 0.12); color: var(--accent); }
+
+    /* Portfolio Section - 7 Startups */
+    .portfolio-section { }
     
-    .episode-num {
-      font-family: var(--font-num);
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--accent);
-      min-width: 28px;
-    }
+    .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); gap: 28px; }
     
-    .episode-info {
-      flex: 1;
-      min-width: 0;
-    }
-    
-    .episode-title {
-      font-weight: 600;
-      font-size: 15px;
-      margin-bottom: 4px;
-      color: var(--primary);
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-    
-    .episode-desc {
-      font-size: 13px;
-      color: var(--muted);
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-    
-    .episode-duration {
-      font-family: var(--font-num);
-      font-size: 12px;
-      color: var(--muted);
-      background: var(--surface);
-      padding: 4px 10px;
-      border-radius: 12px;
-      white-space: nowrap;
-    }
-    
-    .episode-category {
-      font-size: 10px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      padding: 4px 10px;
-      border-radius: 12px;
-      background: rgba(77, 168, 218, 0.12);
-      color: var(--accent);
-    }
-    
-    /* ── Portfolio Grid Section ──────────────────────────────────── */
-    .portfolio-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-      gap: 28px;
-    }
-    
-    .portfolio-card {
+    .startup-card {
       background: var(--bg-card);
       border: 1px solid var(--border);
       border-radius: 16px;
@@ -681,55 +490,13 @@
       display: block;
     }
     
-    .portfolio-card:hover {
-      transform: translateY(-6px);
-      border-color: var(--accent);
-      box-shadow: var(--shadow);
-    }
+    .startup-card:hover { transform: translateY(-6px); border-color: var(--accent); box-shadow: var(--shadow); }
     
-    .card-image {
-      width: 100%;
-      height: 200px;
-      object-fit: cover;
-      background: linear-gradient(135deg, var(--surface), var(--border));
+    .card-header {
+      padding: 28px 28px 0;
       display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      overflow: hidden;
-    }
-    
-    .card-image img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-    
-    .card-image .material-icons {
-      font-size: 64px;
-      color: var(--accent);
-      opacity: 0.3;
-    }
-    
-    .tier-badge {
-      position: absolute;
-      top: 16px;
-      right: 16px;
-      padding: 6px 14px;
-      border-radius: 16px;
-      font-size: 11px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      backdrop-filter: blur(10px);
-    }
-    
-    .tier-badge.tier1 { background: rgba(45, 122, 179, 0.9); color: white; }
-    .tier-badge.tier2 { background: rgba(122, 77, 168, 0.9); color: white; }
-    .tier-badge.tier3 { background: rgba(153, 73, 66, 0.9); color: white; }
-    
-    .card-body {
-      padding: 24px;
+      align-items: start;
+      justify-content: space-between;
     }
     
     .card-id {
@@ -738,58 +505,91 @@
       font-weight: 600;
       color: var(--accent);
       letter-spacing: 1.5px;
-      margin-bottom: 8px;
     }
     
-    .card-title {
-      font-family: var(--font-heading);
-      font-size: 22px;
-      font-weight: 700;
-      margin-bottom: 10px;
-      color: var(--primary);
-      line-height: 1.25;
-    }
-    
-    .card-desc {
-      font-size: 14px;
-      color: var(--muted);
-      line-height: 1.55;
-      margin-bottom: 16px;
-    }
-    
-    .card-stats {
-      display: flex;
-      gap: 20px;
-      padding-top: 16px;
-      border-top: 1px solid var(--border);
-    }
-    
-    .card-stat {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-    
-    .card-stat-value {
-      font-family: var(--font-num);
-      font-size: 18px;
-      font-weight: 700;
-      color: var(--accent);
-    }
-    
-    .card-stat-label {
+    .tier-badge {
+      padding: 6px 14px;
+      border-radius: 16px;
       font-size: 10px;
-      color: var(--muted);
+      font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 1px;
     }
     
-    /* ── Research Shorts Section ─────────────────────────────────── */
-    .shorts-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 24px;
+    .tier-badge.tier1 { background: rgba(45, 122, 179, 0.9); color: white; }
+    .tier-badge.tier2 { background: rgba(122, 77, 168, 0.9); color: white; }
+    
+    .card-body { padding: 24px 28px 28px; }
+    
+    .card-title {
+      font-family: var(--font-heading);
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: var(--primary);
+      line-height: 1.25;
     }
+    
+    .card-domain {
+      font-size: 12px;
+      color: var(--accent);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 16px;
+    }
+    
+    .card-desc { font-size: 14px; color: var(--muted); line-height: 1.6; margin-bottom: 20px; }
+    
+    /* Source attribution */
+    .card-sources {
+      background: var(--surface);
+      border-radius: 10px;
+      padding: 14px 16px;
+      margin-bottom: 20px;
+    }
+    
+    .sources-label {
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--muted);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    
+    .sources-label .material-icons { font-size: 14px; }
+    
+    .source-tag {
+      display: inline-block;
+      font-size: 10px;
+      padding: 3px 8px;
+      border-radius: 8px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      margin: 2px 4px 2px 0;
+      font-family: var(--font-num);
+    }
+    
+    .source-tag.sd-computers { border-color: #4da8da; color: #4da8da; }
+    .source-tag.sd-matter { border-color: #7cb342; color: #7cb342; }
+    .source-tag.sd-space { border-color: #ff7043; color: #ff7043; }
+    .source-tag.sd-health { border-color: #ab47bc; color: #ab47bc; }
+    .source-tag.sd-mind { border-color: #26c6da; color: #26c6da; }
+    .source-tag.sd-living { border-color: #ffa726; color: #ffa726; }
+    
+    .card-stats { display: flex; gap: 20px; padding-top: 20px; border-top: 1px solid var(--border); }
+    
+    .card-stat { display: flex; flex-direction: column; gap: 4px; }
+    .card-stat-value { font-family: var(--font-num); font-size: 18px; font-weight: 700; color: var(--accent); }
+    .card-stat-label { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
+
+    /* Research Shorts */
+    .shorts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
     
     .short-card {
       background: var(--bg-card);
@@ -803,10 +603,7 @@
       display: block;
     }
     
-    .short-card:hover {
-      border-color: var(--accent);
-      transform: translateY(-4px);
-    }
+    .short-card:hover { border-color: var(--accent); transform: translateY(-4px); }
     
     .short-icon {
       width: 48px;
@@ -819,40 +616,13 @@
       margin-bottom: 16px;
     }
     
-    .short-icon .material-icons {
-      font-size: 26px;
-      color: white;
-    }
-    
-    .short-code {
-      font-family: var(--font-num);
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--accent);
-      letter-spacing: 1px;
-      margin-bottom: 8px;
-    }
-    
-    .short-title {
-      font-family: var(--font-heading);
-      font-size: 18px;
-      font-weight: 700;
-      margin-bottom: 8px;
-      color: var(--primary);
-    }
-    
-    .short-excerpt {
-      font-size: 13px;
-      color: var(--muted);
-      line-height: 1.55;
-    }
-    
-    /* ── Reports Section ────────────────────────────────────────── */
-    .reports-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 24px;
-    }
+    .short-icon .material-icons { font-size: 26px; color: white; }
+    .short-code { font-family: var(--font-num); font-size: 12px; font-weight: 600; color: var(--accent); letter-spacing: 1px; margin-bottom: 8px; }
+    .short-title { font-family: var(--font-heading); font-size: 18px; font-weight: 700; margin-bottom: 8px; color: var(--primary); }
+    .short-excerpt { font-size: 13px; color: var(--muted); line-height: 1.55; }
+
+    /* Reports */
+    .reports-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; }
     
     .report-card {
       background: var(--bg-card);
@@ -878,11 +648,7 @@
       background: linear-gradient(90deg, var(--accent-glow), var(--accent));
     }
     
-    .report-card:hover {
-      border-color: var(--accent);
-      transform: translateY(-4px);
-      box-shadow: var(--shadow);
-    }
+    .report-card:hover { border-color: var(--accent); transform: translateY(-4px); box-shadow: var(--shadow); }
     
     .report-icon {
       width: 52px;
@@ -896,44 +662,14 @@
       margin-bottom: 20px;
     }
     
-    .report-icon .material-icons {
-      font-size: 28px;
-      color: var(--accent);
-    }
-    
-    .report-title {
-      font-family: var(--font-heading);
-      font-size: 19px;
-      font-weight: 700;
-      margin-bottom: 10px;
-      color: var(--primary);
-      line-height: 1.3;
-    }
-    
-    .report-desc {
-      font-size: 14px;
-      color: var(--muted);
-      line-height: 1.55;
-      margin-bottom: 16px;
-    }
-    
-    .report-meta {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      font-size: 12px;
-      color: var(--muted);
-    }
-    
-    .report-meta span {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-    
+    .report-icon .material-icons { font-size: 28px; color: var(--accent); }
+    .report-title { font-family: var(--font-heading); font-size: 19px; font-weight: 700; margin-bottom: 10px; color: var(--primary); line-height: 1.3; }
+    .report-desc { font-size: 14px; color: var(--muted); line-height: 1.55; margin-bottom: 16px; }
+    .report-meta { display: flex; align-items: center; gap: 16px; font-size: 12px; color: var(--muted); }
+    .report-meta span { display: flex; align-items: center; gap: 6px; }
     .report-meta .material-icons { font-size: 16px; }
-    
-    /* ── Investor Deck CTA Section ───────────────────────────────── */
+
+    /* Investor Deck CTA */
     .deck-cta {
       background: linear-gradient(135deg, var(--bg-dark) 0%, rgba(45, 122, 179, 0.15) 100%);
       text-align: center;
@@ -941,46 +677,14 @@
       overflow: hidden;
     }
     
-    .deck-cta .grid-pattern {
-      opacity: 0.12;
-    }
+    .deck-cta .grid-pattern { opacity: 0.12; }
     
-    .cta-content {
-      position: relative;
-      z-index: 1;
-      max-width: 800px;
-      margin: 0 auto;
-    }
+    .cta-content { position: relative; z-index: 1; max-width: 800px; margin: 0 auto; }
+    .cta-content h2 { font-size: clamp(32px, 5vw, 52px); margin-bottom: 20px; }
+    .cta-content p { font-size: 18px; color: var(--muted); margin-bottom: 40px; max-width: 650px; margin-left: auto; margin-right: auto; }
+    .cta-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
     
-    .cta-content h2 {
-      font-size: clamp(32px, 5vw, 52px);
-      margin-bottom: 20px;
-    }
-    
-    .cta-content p {
-      font-size: 18px;
-      color: var(--muted);
-      margin-bottom: 40px;
-      max-width: 650px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    
-    .cta-buttons {
-      display: flex;
-      gap: 16px;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-    
-    /* Deck preview */
-    .deck-preview {
-      margin-top: 64px;
-      display: flex;
-      gap: 16px;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
+    .deck-preview { margin-top: 64px; display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
     
     .slide-thumb {
       width: 140px;
@@ -999,110 +703,40 @@
       transition: all 0.25s ease;
     }
     
-    .slide-thumb:hover {
-      border-color: var(--accent);
-      color: var(--accent);
-      transform: translateY(-4px);
-    }
+    .slide-thumb:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-4px); }
+
+    /* Footer */
+    footer { padding: 48px; border-top: 1px solid var(--border); background: var(--surface); }
     
-    /* ── Footer ─────────────────────────────────────────────────── */
-    footer {
-      padding: 48px;
-      border-top: 1px solid var(--border);
-      background: var(--surface);
-    }
+    .footer-content { max-width: 1280px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 24px; }
     
-    .footer-content {
-      max-width: 1280px;
-      margin: 0 auto;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 24px;
-    }
-    
-    .footer-brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-    
-    .footer-brand img {
-      width: 28px;
-      height: 28px;
-      filter: drop-shadow(0 0 4px var(--accent));
-    }
-    
-    .footer-brand span {
-      font-family: var(--font-heading);
-      font-size: 17px;
-      font-weight: 700;
-    }
-    
+    .footer-brand { display: flex; align-items: center; gap: 12px; }
+    .footer-brand img { width: 28px; height: 28px; filter: drop-shadow(0 0 4px var(--accent)); }
+    .footer-brand span { font-family: var(--font-heading); font-size: 17px; font-weight: 700; }
     .footer-brand span em { color: var(--accent); font-style: normal; }
     
-    .footer-links {
-      display: flex;
-      gap: 24px;
-    }
-    
-    .footer-links a {
-      font-size: 13px;
-      color: var(--muted);
-      text-decoration: none;
-      transition: color 0.25s ease;
-    }
-    
+    .footer-links { display: flex; gap: 24px; }
+    .footer-links a { font-size: 13px; color: var(--muted); text-decoration: none; transition: color 0.25s ease; }
     .footer-links a:hover { color: var(--accent); }
     
-    .footer-copy {
-      font-size: 12px;
-      color: var(--muted);
-      width: 100%;
-      text-align: center;
-      margin-top: 24px;
-      padding-top: 24px;
-      border-top: 1px solid var(--border);
-    }
-    
-    /* ── Responsive Design ───────────────────────────────────────── */
-    @media (max-width: 1024px) {
-      .audio-grid {
-        grid-template-columns: 1fr;
-      }
-      
-      .audio-player-card {
-        position: static;
-        order: -1;
-      }
-      
-      .hero-stats { gap: 32px; }
-    }
+    .footer-copy { font-size: 12px; color: var(--muted); width: 100%; text-align: center; margin-top: 24px; padding-top: 24px; border-top: 1px solid var(--border); }
+
+    /* Responsive */
+    @media (max-width: 1024px) { .audio-grid { grid-template-columns: 1fr; } .audio-player-card { position: static; order: -1; } .hero-stats { gap: 32px; } }
     
     @media (max-width: 768px) {
       .navbar { padding: 0 20px; }
       .section { padding: 64px 20px; }
-      
       .nav-links { display: none; }
       .mobile-menu-btn { display: flex; }
-      
       .hero { min-height: auto; padding-top: calc(var(--nav-height) + 40px); padding-bottom: 60px; }
-      
-      .hero-stats {
-        flex-wrap: wrap;
-        gap: 24px;
-      }
-      
+      .hero-stats { flex-wrap: wrap; gap: 24px; }
       .stat-num { font-size: 32px; }
-      
       .portfolio-grid { grid-template-columns: 1fr; }
       .shorts-grid { grid-template-columns: 1fr; }
       .reports-grid { grid-template-columns: 1fr; }
-      
       .footer-content { flex-direction: column; text-align: center; }
       .footer-links { flex-wrap: wrap; justify-content: center; }
-      
       .deck-preview { gap: 10px; }
       .slide-thumb { width: 100px; font-size: 18px; }
     }
@@ -1110,7 +744,6 @@
     @media (max-width: 480px) {
       .hero-actions { flex-direction: column; }
       .btn { width: 100%; justify-content: center; }
-      
       .episode-item { flex-wrap: wrap; }
       .episode-category { order: 3; width: 100%; margin-top: 8px; }
     }
@@ -1126,8 +759,9 @@
         <span class="nav-logo-text">Sci<span>MSPT</span></span>
       </a>
       <div class="nav-links">
+        <a href="#sources" class="nav-link">Sources</a>
         <a href="#audio" class="nav-link">Audio</a>
-        <a href="#portfolio" class="nav-link">Portfolio</a>
+        <a href="#startups" class="nav-link">7 Startups</a>
         <a href="#research" class="nav-link">Research</a>
         <a href="#reports" class="nav-link">Reports</a>
         <a href="#investor-deck" class="nav-link">Investor Deck</a>
@@ -1160,46 +794,96 @@
           <span>Research Active · August 2026</span>
         </div>
         
-        <h1 class="hero-title">Beyond the<br/>Scaling Wall</h1>
+        <h1 class="hero-title">7 Startups from<br/>ScienceDaily Research</h1>
         
         <p class="hero-subtitle">
-          Where frontier science meets investment foresight. 12 computing projects across 6 technology domains 
-          reshaping AI infrastructure from 2025–2045.
+          Frontier computing startups extrapolated from peer-reviewed breakthroughs across 
+          <strong>6 ScienceDaily categories</strong>: matter_energy, space_time, computers_math, 
+          health_medicine, mind_brain, and living_well.
         </p>
         
         <div class="hero-actions">
-          <a href="#audio" class="btn btn-primary">
+          <a href="#startups" class="btn btn-primary">
+            <i class="material-icons">rocket_launch</i>
+            View 7 Startups
+          </a>
+          <a href="#audio" class="btn btn-secondary">
             <i class="material-icons">headphones</i>
             Listen to Podcast
           </a>
           <a href="#investor-deck" class="btn btn-secondary">
             <i class="material-icons">slideshow</i>
-            View Investor Deck
-          </a>
-          <a href="assets/reports/SciMSPT_Foresight_Series_Bundle.pdf" target="_blank" class="btn btn-secondary">
-            <i class="material-icons">picture_as_pdf</i>
-            Download Reports
+            Investor Deck
           </a>
         </div>
         
         <div class="hero-stats">
           <div class="stat-item">
-            <div class="stat-num">12</div>
-            <div class="stat-label">Flagship Projects</div>
+            <div class="stat-num">7</div>
+            <div class="stat-label">Core Startups</div>
           </div>
           <div class="stat-item">
             <div class="stat-num">6</div>
-            <div class="stat-label">Tech Domains</div>
+            <div class="stat-label">ScienceDaily Categories</div>
           </div>
           <div class="stat-item">
-            <div class="stat-num">$2.4B</div>
-            <div class="stat-label">Combined TAM</div>
+            <div class="stat-num">50+</div>
+            <div class="stat-label">Breakthroughs Analyzed</div>
           </div>
           <div class="stat-item">
-            <div class="stat-num">20+</div>
-            <div class="stat-label">Year Horizon</div>
+            <div class="stat-num">2025-45</div>
+            <div class="stat-label">Investment Horizon</div>
           </div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ScienceDaily Sources Section (#sources) -->
+  <section class="section sources-section" id="sources">
+    <div class="container">
+      <div class="section-header">
+        <div class="kicker">Research Methodology</div>
+        <h2>Sources: 6 ScienceDaily Categories</h2>
+        <p class="lead">Each startup is grounded in specific breakthroughs from these ScienceDaily news feeds. We trace from published research to commercial potential with 10-20 year horizons.</p>
+      </div>
+      
+      <div class="source-categories">
+        <a href="https://www.sciencedaily.com/news/matter_energy/" target="_blank" class="source-category">
+          <div class="source-icon"><i class="material-icons">science</i></div>
+          <div class="source-name">Matter & Energy</div>
+          <div class="source-count">Quantum · Materials · Physics</div>
+        </a>
+        
+        <a href="https://www.sciencedaily.com/news/space_time/" target="_blank" class="source-category">
+          <div class="source-icon"><i class="material-icons">public</i></div>
+          <div class="source-name">Space & Time</div>
+          <div class="source-count">Cosmic · Orbital · Astrophysics</div>
+        </a>
+        
+        <a href="https://www.sciencedaily.com/news/computers_math/" target="_blank" class="source-category">
+          <div class="source-icon"><i class="material-icons">computer</i></div>
+          <div class="source-name">Computers & Math</div>
+          <div class="source-count">AI · Quantum Computing · Algorithms</div>
+        </a>
+        
+        <a href="https://www.sciencedaily.com/news/health_medicine/" target="_blank" class="source-category">
+          <div class="source-icon"><i class="material-icons">biotech</i></div>
+          <div class="source-name">Health & Medicine</div>
+          <div class="source-count">Biotech · Genomics · DNA Storage</div>
+        </a>
+        
+        <a href="https://www.sciencedaily.com/news/mind_brain/" target="_blank" class="source-category">
+          <div class="source-icon"><i class="material-icons">psychology</i></div>
+          <div class="source-name">Mind & Brain</div>
+          <div class="source-count">Neuroscience · Cognition · AGI Safety</div>
+        </a>
+        
+        <a href="https://www.sciencedaily.com/news/living_well/" target="_blank" class="source-category">
+          <div class="source-icon"><i class="material-icons">eco</i></div>
+          <div class="source-name">Living Well</div>
+          <div class="source-count">Sustainability · Energy · Environment</div>
+        </a>
       </div>
     </div>
   </section>
@@ -1214,7 +898,6 @@
       </div>
       
       <div class="audio-grid">
-        <!-- Player Card -->
         <div class="audio-player-card">
           <div class="now-playing">
             <div class="player-artwork">
@@ -1248,92 +931,52 @@
           </div>
         </div>
         
-        <!-- Episode List -->
-        <div class="episode-list" id="episodeList">
-          <!-- Episodes populated by JS -->
-        </div>
+        <div class="episode-list" id="episodeList"></div>
       </div>
     </div>
   </section>
 
-  <!-- Portfolio Section (#portfolio) -->
-  <section class="section" id="portfolio">
+  <!-- 7 Startups Portfolio Section (#startups) -->
+  <section class="section portfolio-section" id="startups">
     <div class="container">
       <div class="section-header">
-        <div class="kicker">Startup Portfolio</div>
-        <h2>12 Frontier Computing Projects</h2>
-        <p class="lead">High-conviction investments across quantum systems, neuromorphic computing, photonic integration, and beyond-CMOS architectures.</p>
+        <div class="kicker">The 7 Startups</div>
+        <h2>Frontier Computing Portfolio</h2>
+        <p class="lead">Seven high-conviction startups addressing the AI scaling wall through quantum systems, neuromorphic computing, photonic integration, beyond-CMOS architectures, data infrastructure, and AI-driven discovery.</p>
       </div>
       
       <div class="portfolio-grid">
-        <a href="portfolio-shorts/P3.html" class="portfolio-card">
-          <div class="card-image">
-            <img src="assets/images/portfolio-P3.png" alt="Quantum Materials Inc." onerror="this.style.display='none';this.parentElement.innerHTML='<i class=material-icons>science</i>';">
-            <span class="tier-badge tier1">Tier 1</span>
-          </div>
-          <div class="card-body">
-            <div class="card-id">P03</div>
-            <h3 class="card-title">Quantum Materials Inc.</h3>
-            <p class="card-desc">High-Tc superconductor synthesis for lossless power transmission and quantum coherence substrates.</p>
-            <div class="card-stats">
-              <div class="card-stat">
-                <span class="card-stat-value">$380M</span>
-                <span class="card-stat-label">TAM</span>
-              </div>
-              <div class="card-stat">
-                <span class="card-stat-value">38%</span>
-                <span class="card-stat-label">IRR</span>
-              </div>
-              <div class="card-stat">
-                <span class="card-stat-value">2028</span>
-                <span class="card-stat-label">Target</span>
-              </div>
-            </div>
-          </div>
-        </a>
         
-        <a href="portfolio-shorts/P5.html" class="portfolio-card">
-          <div class="card-image">
-            <img src="assets/images/portfolio-P5.png" alt="Twistronics Foundry" onerror="this.style.display='none';this.parentElement.innerHTML='<i class=material-icons>grid_on</i>';">
-            <span class="tier-badge tier1">Tier 1</span>
+        <!-- Startup 1: Photonic-Quantum AI Accelerators -->
+        <a href="portfolio-shorts/P-cmos-2nm.html" class="startup-card">
+          <div class="card-header">
+            <span class="card-id">STARTUP 01</span>
+            <span class="tier-badge tier1">TIER 1</span>
           </div>
           <div class="card-body">
-            <div class="card-id">P05</div>
-            <h3 class="card-title">Twistronics Foundry</h3>
-            <p class="card-desc">Moiré materials engineering for designer electronic properties at the atomic scale.</p>
-            <div class="card-stats">
-              <div class="card-stat">
-                <span class="card-stat-value">$290M</span>
-                <span class="card-stat-label">TAM</span>
+            <h3 class="card-title">Photonic-Quantum AI Accelerators</h3>
+            <div class="card-domain">Quantum Computing Domain</div>
+            <p class="card-desc">
+              Direct generation of entangled photon pairs from ambient sunlight, coupled with programmable optical delay lines on silicon photonic chip. Room-temperature quantum inference for sampling, optimization, and kernel methods.
+            </p>
+            
+            <div class="card-sources">
+              <div class="sources-label">
+                <i class="material-icons">link</i>
+                Extrapolated from ScienceDaily:
               </div>
-              <div class="card-stat">
-                <span class="card-stat-value">41%</span>
-                <span class="card-stat-label">IRR</span>
-              </div>
-              <div class="card-stat">
-                <span class="card-stat-value">2030</span>
-                <span class="card-stat-label">Target</span>
-              </div>
+              <span class="source-tag sd-computers">computers_math</span>
+              <span class="source-tag sd-matter">matter_energy</span>
+              <span style="font-size: 10px; color: var(--muted); margin-left: 8px;">May 24, Jul 21, Aug 14 2026</span>
             </div>
-          </div>
-        </a>
-        
-        <a href="portfolio-shorts/P9.html" class="portfolio-card">
-          <div class="card-image">
-            <img src="assets/images/portfolio-P9.png" alt="DNA-Storage Continuum" onerror="this.style.display='none';this.parentElement.innerHTML='<i class=material-icons>storage</i>';">
-            <span class="tier-badge tier1">Tier 1</span>
-          </div>
-          <div class="card-body">
-            <div class="card-id">P09</div>
-            <h3 class="card-title">DNA-Storage Continuum</h3>
-            <p class="card-desc">Enzymatic DNA synthesis for cold archival storage at exabyte-per-gram density.</p>
+            
             <div class="card-stats">
               <div class="card-stat">
-                <span class="card-stat-value">$420M</span>
+                <span class="card-stat-value">$42B</span>
                 <span class="card-stat-label">TAM</span>
               </div>
               <div class="card-stat">
-                <span class="card-stat-value">35%</span>
+                <span class="card-stat-value">28%</span>
                 <span class="card-stat-label">IRR</span>
               </div>
               <div class="card-stat">
@@ -1344,18 +987,152 @@
           </div>
         </a>
         
-        <a href="portfolio-shorts/P11.html" class="portfolio-card">
-          <div class="card-image">
-            <img src="assets/images/portfolio-P11.png" alt="AI Materials Discovery" onerror="this.style.display='none';this.parentElement.innerHTML='<i class=material-icons>psychology</i>';">
-            <span class="tier-badge tier1">Tier 1</span>
+        <!-- Startup 2: CMOS NextGen / Sub-nm 2D Foundries -->
+        <a href="portfolio-shorts/P-cmos-2nm.html" class="startup-card">
+          <div class="card-header">
+            <span class="card-id">STARTUP 02</span>
+            <span class="tier-badge tier1">TIER 1</span>
           </div>
           <div class="card-body">
-            <div class="card-id">P11</div>
-            <h3 class="card-title">AI Materials Discovery</h3>
-            <p class="card-desc">Closed-loop pipeline combining ML prediction, quantum simulation, robotic synthesis.</p>
+            <h3 class="card-title">Sub-nm 2D Semiconductor Foundries</h3>
+            <div class="card-domain">Beyond-CMOS Domain</div>
+            <p class="card-desc">
+              Atomically thin transition metal dichalcogenide semiconductors with controlled atomic interfaces. Transistor gates below the silicon scaling limit using plasma-treated molybdenum disulfide.
+            </p>
+            
+            <div class="card-sources">
+              <div class="sources-label">
+                <i class="material-icons">link</i>
+                Extrapolated from ScienceDaily:
+              </div>
+              <span class="source-tag sd-matter">matter_energy</span>
+              <span class="source-tag sd-computers">computers_math</span>
+              <span style="font-size: 10px; color: var(--muted); margin-left: 8px;">Aug 9, Jun 17, Jun 20 2026</span>
+            </div>
+            
             <div class="card-stats">
               <div class="card-stat">
-                <span class="card-stat-value">$480M</span>
+                <span class="card-stat-value">$68B</span>
+                <span class="card-stat-label">TAM</span>
+              </div>
+              <div class="card-stat">
+                <span class="card-stat-value">24%</span>
+                <span class="card-stat-label">IRR</span>
+              </div>
+              <div class="card-stat">
+                <span class="card-stat-value">2028</span>
+                <span class="card-stat-label">Target</span>
+              </div>
+            </div>
+          </div>
+        </a>
+        
+        <!-- Startup 3: Polariton AI Fabrics -->
+        <a href="portfolio-shorts/P-ai-materials.html" class="startup-card">
+          <div class="card-header">
+            <span class="card-id">STARTUP 03</span>
+            <span class="tier-badge tier1">TIER 1</span>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">Light-Matter Polariton AI Fabrics</h3>
+            <div class="card-domain">Photonic Computing Domain</div>
+            <p class="card-desc">
+              Exciton-polariton quasiparticles in semiconductor microcavities perform matrix multiplication natively through bosonic condensation dynamics. Room temperature operation with femtosecond switching speeds.
+            </p>
+            
+            <div class="card-sources">
+              <div class="sources-label">
+                <i class="material-icons">link</i>
+                Extrapolated from ScienceDaily:
+              </div>
+              <span class="source-tag sd-computers">computers_math</span>
+              <span class="source-tag sd-matter">matter_energy</span>
+              <span style="font-size: 10px; color: var(--muted); margin-left: 8px;">May 24, May 26, Jul 28 2026</span>
+            </div>
+            
+            <div class="card-stats">
+              <div class="card-stat">
+                <span class="card-stat-value">$55B</span>
+                <span class="card-stat-label">TAM</span>
+              </div>
+              <div class="card-stat">
+                <span class="card-stat-value">29%</span>
+                <span class="card-stat-label">IRR</span>
+              </div>
+              <div class="card-stat">
+                <span class="card-stat-value">2030</span>
+                <span class="card-stat-label">Target</span>
+              </div>
+            </div>
+          </div>
+        </a>
+        
+        <!-- Startup 4: DNA-Storage Continuum -->
+        <a href="portfolio-shorts/P9.html" class="startup-card">
+          <div class="card-header">
+            <span class="card-id">STARTUP 04</span>
+            <span class="tier-badge tier1">TIER 1</span>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">DNA-Storage Continuum</h3>
+            <div class="card-domain">Data Infrastructure Domain</div>
+            <p class="card-desc">
+              Silicon-chip-based DNA synthesis using electricity and water-based enzymes. Parallel writing of dozens of DNA sequences at 10²¹ bits/gram density with millennial archival lifetime for cold storage.
+            </p>
+            
+            <div class="card-sources">
+              <div class="sources-label">
+                <i class="material-icons">link</i>
+                Extrapolated from ScienceDaily:
+              </div>
+              <span class="source-tag sd-health">health_medicine</span>
+              <span class="source-tag sd-matter">matter_energy</span>
+              <span style="font-size: 10px; color: var(--muted); margin-left: 8px;">Jul 8, Aug 8, Jun 18 2026</span>
+            </div>
+            
+            <div class="card-stats">
+              <div class="card-stat">
+                <span class="card-stat-value">$32B</span>
+                <span class="card-stat-label">TAM</span>
+              </div>
+              <div class="card-stat">
+                <span class="card-stat-value">26%</span>
+                <span class="card-stat-label">IRR</span>
+              </div>
+              <div class="card-stat">
+                <span class="card-stat-value">2029</span>
+                <span class="card-stat-label">Target</span>
+              </div>
+            </div>
+          </div>
+        </a>
+        
+        <!-- Startup 5: AI-Discovered Materials Pipeline -->
+        <a href="portfolio-shorts/P11.html" class="startup-card">
+          <div class="card-header">
+            <span class="card-id">STARTUP 05</span>
+            <span class="tier-badge tier1">TIER 1</span>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">AI-Discovered Materials Pipeline</h3>
+            <div class="card-domain">AI-Driven Discovery Domain</div>
+            <p class="card-desc">
+              Closed-loop pipeline combining ML property prediction, automated quantum simulation, robotic synthesis, and high-throughput characterization. Discovers new superconductors, catalysts, quantum materials at 100x traditional pace.
+            </p>
+            
+            <div class="card-sources">
+              <div class="sources-label">
+                <i class="material-icons">link</i>
+                Extrapolated from ScienceDaily:
+              </div>
+              <span class="source-tag sd-computers">computers_math</span>
+              <span class="source-tag sd-matter">matter_energy</span>
+              <span style="font-size: 10px; color: var(--muted); margin-left: 8px;">Jul 7, Jul 8, Aug 5 2026</span>
+            </div>
+            
+            <div class="card-stats">
+              <div class="card-stat">
+                <span class="card-stat-value">$48B</span>
                 <span class="card-stat-label">TAM</span>
               </div>
               <div class="card-stat">
@@ -1370,18 +1147,72 @@
           </div>
         </a>
         
-        <a href="portfolio-shorts/P12.html" class="portfolio-card">
-          <div class="card-image">
-            <img src="assets/images/portfolio-P12.png" alt="Verified Reasoning Engines" onerror="this.style.display='none';this.parentElement.innerHTML='<i class=material-icons>verified</i>';">
-            <span class="tier-badge tier2">Tier 2</span>
+        <!-- Startup 6: Post-Turing Cognition Architectures -->
+        <a href="portfolio-shorts/P5.html" class="startup-card">
+          <div class="card-header">
+            <span class="card-id">STARTUP 06</span>
+            <span class="tier-badge tier2">TIER 2</span>
           </div>
           <div class="card-body">
-            <div class="card-id">P12</div>
-            <h3 class="card-title">Verified Reasoning Engines</h3>
-            <p class="card-desc">AI reasoning systems producing formally verifiable proofs via Lean/Coq integration.</p>
+            <h3 class="card-title">Post-Turing Cognition Architectures</h3>
+            <div class="card-domain">Neuromorphic Computing Domain</div>
+            <p class="card-desc">
+              Architectural framework for AI systems that does not assume intelligence equals symbol manipulation. Builds on embodied, enactive, predictive processing theories for verifiable behavior guarantees and AGI safety.
+            </p>
+            
+            <div class="card-sources">
+              <div class="sources-label">
+                <i class="material-icons">link</i>
+                Extrapolated from ScienceDaily:
+              </div>
+              <span class="source-tag sd-mind">mind_brain</span>
+              <span class="source-tag sd-computers">computers_math</span>
+              <span style="font-size: 10px; color: var(--muted); margin-left: 8px;">Aug 5, Jul 13, Jun 12 2026</span>
+            </div>
+            
             <div class="card-stats">
               <div class="card-stat">
-                <span class="card-stat-value">$220M</span>
+                <span class="card-stat-value">$25B</span>
+                <span class="card-stat-label">TAM</span>
+              </div>
+              <div class="card-stat">
+                <span class="card-stat-value">31%</span>
+                <span class="card-stat-label">IRR</span>
+              </div>
+              <div class="card-stat">
+                <span class="card-stat-value">2032</span>
+                <span class="card-stat-label">Target</span>
+              </div>
+            </div>
+          </div>
+        </a>
+        
+        <!-- Startup 7: AI-Verified Reasoning Engines -->
+        <a href="portfolio-shorts/P12.html" class="startup-card">
+          <div class="card-header">
+            <span class="card-id">STARTUP 07</span>
+            <span class="tier-badge tier2">TIER 2</span>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">AI-Verified Reasoning Engines</h3>
+            <div class="card-domain">AI-Driven Discovery Domain</div>
+            <p class="card-desc">
+              AI reasoning systems producing formally verifiable proofs rather than plausible arguments. Combines LLM intuition with proof assistants (Lean, Coq) for machine-checkable correctness and hardware-level safety.
+            </p>
+            
+            <div class="card-sources">
+              <div class="sources-label">
+                <i class="material-icons">link</i>
+                Extrapolated from ScienceDaily:
+              </div>
+              <span class="source-tag sd-mind">mind_brain</span>
+              <span class="source-tag sd-computers">computers_math</span>
+              <span style="font-size: 10px; color: var(--muted); margin-left: 8px;">Aug 5, Jul 7, Jul 8 2026</span>
+            </div>
+            
+            <div class="card-stats">
+              <div class="card-stat">
+                <span class="card-stat-value">$22B</span>
                 <span class="card-stat-label">TAM</span>
               </div>
               <div class="card-stat">
@@ -1396,57 +1227,6 @@
           </div>
         </a>
         
-        <a href="portfolio-shorts/P-cmos-2nm.html" class="portfolio-card">
-          <div class="card-image">
-            <img src="assets/images/portfolio-P_cmos_2nm.png" alt="CMOS NextGen Semiconductor" onerror="this.style.display='none';this.parentElement.innerHTML='<i class=material-icons>memory</i>';">
-            <span class="tier-badge tier1">Tier 1</span>
-          </div>
-          <div class="card-body">
-            <div class="card-id">P01</div>
-            <h3 class="card-title">CMOS NextGen Semiconductor</h3>
-            <p class="card-desc">2nm process node innovation extending Moore's Law through novel lithography techniques.</p>
-            <div class="card-stats">
-              <div class="card-stat">
-                <span class="card-stat-value">$890M</span>
-                <span class="card-stat-label">TAM</span>
-              </div>
-              <div class="card-stat">
-                <span class="card-stat-value">29%</span>
-                <span class="card-stat-label">IRR</span>
-              </div>
-              <div class="card-stat">
-                <span class="card-stat-value">2027</span>
-                <span class="card-stat-label">Target</span>
-              </div>
-            </div>
-          </div>
-        </a>
-        
-        <a href="portfolio-shorts/P-ai-materials.html" class="portfolio-card">
-          <div class="card-image">
-            <img src="assets/images/portfolio-P_ai_materials.png" alt="AI Materials Platform" onerror="this.style.display='none';this.parentElement.innerHTML='<i class=material-icons>auto_awesome</i>';">
-            <span class="tier-badge tier2">Tier 2</span>
-          </div>
-          <div class="card-body">
-            <div class="card-id">P07</div>
-            <h3 class="card-title">AI Materials Platform</h3>
-            <p class="card-desc">Autonomous discovery of novel materials using generative models and automated labs.</p>
-            <div class="card-stats">
-              <div class="card-stat">
-                <span class="card-stat-value">$350M</span>
-                <span class="card-stat-label">TAM</span>
-              </div>
-              <div class="card-stat">
-                <span class="card-stat-value">37%</span>
-                <span class="card-stat-label">IRR</span>
-              </div>
-              <div class="card-stat">
-                <span class="card-stat-value">2030</span>
-                <span class="card-stat-label">Target</span>
-              </div>
-            </div>
-          </div>
-        </a>
       </div>
     </div>
   </section>
@@ -1456,69 +1236,55 @@
     <div class="container">
       <div class="section-header">
         <div class="kicker">ScienceDaily Shorts</div>
-        <h2>Research Breakthroughs</h2>
-        <p class="lead">Curated analysis of frontier research from ScienceDaily — mapped to portfolio opportunities and scaling wall pillars.</p>
+        <h2>Research Breakthrough Analysis</h2>
+        <p class="lead">Curated analysis of key breakthroughs mapped to portfolio opportunities and scaling wall pillars.</p>
       </div>
       
       <div class="shorts-grid">
         <a href="shorts/SD-M-01.html" class="short-card">
-          <div class="short-icon">
-            <i class="material-icons">science</i>
-          </div>
+          <div class="short-icon"><i class="material-icons">functions</i></div>
           <div class="short-code">SD-M-01</div>
           <h3 class="short-title">Mathematical Foundations</h3>
           <p class="short-excerpt">87-year conjecture toppled by AI reasoning — implications for formal verification in AGI safety.</p>
         </a>
         
         <a href="shorts/SD-M-02.html" class="short-card">
-          <div class="short-icon">
-            <i class="material-icons">functions</i>
-          </div>
+          <div class="short-icon"><i class="material-icons">science</i></div>
           <div class="short-code">SD-M-02</div>
           <h3 class="short-title">Quantum Algorithm Breakthrough</h3>
           <p class="short-excerpt">New polynomial-time algorithm for quantum system simulation accelerates materials discovery.</p>
         </a>
         
         <a href="shorts/SD-T-03.html" class="short-card">
-          <div class="short-icon">
-            <i class="material-icons">schedule</i>
-          </div>
+          <div class="short-icon"><i class="material-icons">schedule</i></div>
           <div class="short-code">SD-T-03</div>
           <h3 class="short-title">Temporal Computing Paradigm</h3>
           <p class="short-excerpt">Time-crystal logic gates demonstrate reversible computing at room temperature.</p>
         </a>
         
         <a href="shorts/SD-S-04.html" class="short-card">
-          <div class="short-icon">
-            <i class="material-icons">shield</i>
-          </div>
+          <div class="short-icon"><i class="material-icons">shield</i></div>
           <div class="short-code">SD-S-04</div>
           <h3 class="short-title">Safety Verification Framework</h3>
           <p class="short-excerpt">Hardware-level AI alignment through signed circuits and provable constraints.</p>
         </a>
         
         <a href="shorts/SD-P-05.html" class="short-card">
-          <div class="short-icon">
-            <i class="material-icons">grid_view</i>
-          </div>
+          <div class="short-icon"><i class="material-icons">grid_view</i></div>
           <div class="short-code">SD-P-05</div>
           <h3 class="short-title">Photonic Interconnect Scaling</h3>
           <p class="short-excerpt">Silicon photonic bandwidth exceeds 10 Tb/s per channel — enabling optical neural networks.</p>
         </a>
         
         <a href="shorts/SD-T-06.html" class="short-card">
-          <div class="short-icon">
-            <i class="material-icons">hub</i>
-          </div>
+          <div class="short-icon"><i class="material-icons">hub</i></div>
           <div class="short-code">SD-T-06</div>
           <h3 class="short-title">Neuromorphic Architecture</h3>
           <p class="short-excerpt">Spiking neural network chip achieves 100x efficiency gain on edge inference workloads.</p>
         </a>
         
         <a href="shorts/SD-P-07.html" class="short-card">
-          <div class="short-icon">
-            <i class="material-icons">wb_sunny</i>
-          </div>
+          <div class="short-icon"><i class="material-icons">wb_sunny</i></div>
           <div class="short-code">SD-P-07</div>
           <h3 class="short-title">Tandem PV Efficiency Record</h3>
           <p class="short-excerpt">AI-discovered perovskite tandem cell reaches 34.2% efficiency — commercial viability threshold.</p>
@@ -1538,9 +1304,7 @@
       
       <div class="reports-grid">
         <a href="assets/reports/Beyond_the_Scaling_Wall_2025-2045.pdf" target="_blank" class="report-card">
-          <div class="report-icon">
-            <i class="material-icons">trending_up</i>
-          </div>
+          <div class="report-icon"><i class="material-icons">trending_up</i></div>
           <h3 class="report-title">Beyond the Scaling Wall 2025–2045</h3>
           <p class="report-desc">Core thesis document outlining four interlocking constraints forcing paradigm shift in AI infrastructure.</p>
           <div class="report-meta">
@@ -1550,9 +1314,7 @@
         </a>
         
         <a href="assets/reports/Beyond_the_Cosmic_Frontier_2025-2045.pdf" target="_blank" class="report-card">
-          <div class="report-icon">
-            <i class="material-icons">public</i>
-          </div>
+          <div class="report-icon"><i class="material-icons">public</i></div>
           <h3 class="report-title">Beyond the Cosmic Frontier 2025–2045</h3>
           <p class="report-desc">Space-based computing infrastructure and orbital data centers for the exascale era.</p>
           <div class="report-meta">
@@ -1562,9 +1324,7 @@
         </a>
         
         <a href="assets/reports/Beyond_the_Energy_Trilemma_2025-2045.pdf" target="_blank" class="report-card">
-          <div class="report-icon">
-            <i class="material-icons">bolt</i>
-          </div>
+          <div class="report-icon"><i class="material-icons">bolt</i></div>
           <h3 class="report-title">Beyond the Energy Trilemma 2025–2045</h3>
           <p class="report-desc">Energy solutions for gigawatt-scale AI training: nuclear, fusion, and off-grid alternatives.</p>
           <div class="report-meta">
@@ -1574,9 +1334,7 @@
         </a>
         
         <a href="assets/reports/SciMSPT_Foresight_Series_Bundle.pdf" target="_blank" class="report-card">
-          <div class="report-icon">
-            <i class="material-icons">folder_zip</i>
-          </div>
+          <div class="report-icon"><i class="material-icons">folder_zip</i></div>
           <h3 class="report-title">Foresight Series Bundle</h3>
           <p class="report-desc">Complete collection of all SciMSPT research reports in one comprehensive archive.</p>
           <div class="report-meta">
@@ -1586,9 +1344,7 @@
         </a>
         
         <a href="assets/reports/P12_AI_Discovered_Tandem_PV_DeepDive.pdf" target="_blank" class="report-card">
-          <div class="report-icon">
-            <i class="material-icons">wb_sunny</i>
-          </div>
+          <div class="report-icon"><i class="material-icons">wb_sunny</i></div>
           <h3 class="report-title">AI-Discovered Tandem PV Deep Dive</h3>
           <p class="report-desc">Technical deep-dive into P12's autonomous materials discovery pipeline for solar cells.</p>
           <div class="report-meta">
@@ -1598,9 +1354,7 @@
         </a>
         
         <a href="assets/reports/SciMSPT_Monte_Carlo_Sensitivity_Vol_02_6.pdf" target="_blank" class="report-card">
-          <div class="report-icon">
-            <i class="material-icons">analytics</i>
-          </div>
+          <div class="report-icon"><i class="material-icons">analytics</i></div>
           <h3 class="report-title">Monte Carlo Sensitivity Analysis Vol. 02</h3>
           <p class="report-desc">Statistical modeling of portfolio risk scenarios under varying market conditions.</p>
           <div class="report-meta">
@@ -1636,13 +1390,13 @@
           <div class="slide-thumb" onclick="window.open('assets/slides/slide_01.html', '_blank')" title="Cover">01</div>
           <div class="slide-thumb" onclick="window.open('assets/slides/slide_02.html', '_blank')" title="Scaling Wall">02</div>
           <div class="slide-thumb" onclick="window.open('assets/slides/slide_03.html', '_blank')" title="Domains">03</div>
-          <div class="slide-thumb" onclick="window.open('assets/slides/slide_04.html', '_blank')" title="Quantum">04</div>
-          <div class="slide-thumb" onclick="window.open('assets/slides/slide_05.html', '_blank')" title="Neuromorphic">05</div>
-          <div class="slide-thumb" onclick="window.open('assets/slides/slide_06.html', '_blank')" title="Beyond-CMOS">06</div>
-          <div class="slide-thumb" onclick="window.open('assets/slides/slide_07.html', '_blank')" title="Photonic">07</div>
-          <div class="slide-thumb" onclick="window.open('assets/slides/slide_08.html', '_blank')" title="Data Infra">08</div>
-          <div class="slide-thumb" onclick="window.open('assets/slides/slide_09.html', '_blank')" title="AI Discovery">09</div>
-          <div class="slide-thumb" onclick="window.open('assets/slides/slide_10.html', '_blank')" title="Portfolio">10</div>
+          <div class="slide-thumb" onclick="window.open('assets/slides/slide_04.html', '_blank')" title="Portfolio">04</div>
+          <div class="slide-thumb" onclick="window.open('assets/slides/slide_05.html', '_blank')" title="Quantum">05</div>
+          <div class="slide-thumb" onclick="window.open('assets/slides/slide_06.html', '_blank')" title="Neuromorphic">06</div>
+          <div class="slide-thumb" onclick="window.open('assets/slides/slide_07.html', '_blank')" title="Beyond-CMOS">07</div>
+          <div class="slide-thumb" onclick="window.open('assets/slides/slide_08.html', '_blank')" title="Photonic">08</div>
+          <div class="slide-thumb" onclick="window.open('assets/slides/slide_09.html', '_blank')" title="Data Infra">09</div>
+          <div class="slide-thumb" onclick="window.open('assets/slides/slide_10.html', '_blank')" title="AI Discovery">10</div>
           <div class="slide-thumb" onclick="window.open('assets/slides/slide_11.html', '_blank')" title="Metrics">11</div>
           <div class="slide-thumb" onclick="window.open('assets/slides/slide_12.html', '_blank')" title="Financials">12</div>
           <div class="slide-thumb" onclick="window.open('assets/slides/slide_13.html', '_blank')" title="Risk Matrix">13</div>
@@ -1662,20 +1416,22 @@
       </div>
       <div class="footer-links">
         <a href="#home">Home</a>
+        <a href="#sources">Sources</a>
         <a href="#audio">Audio</a>
-        <a href="#portfolio">Portfolio</a>
+        <a href="#startups">7 Startups</a>
         <a href="#research">Research</a>
         <a href="#reports">Reports</a>
         <a href="#investor-deck">Investor Deck</a>
       </div>
       <div class="footer-copy">
-        SciMSPT Research · Beyond the Scaling Wall · August 2026 · Science, Matter, Physics & Time
+        SciMSPT Research · Beyond the Scaling Wall · August 2026 · Science, Matter, Physics & Time<br>
+        Data sourced from ScienceDaily: matter_energy · space_time · computers_math · health_medicine · mind_brain · living_well
       </div>
     </div>
   </footer>
 
   <script>
-    // ── Audio Data ────────────────────────────────────────────────
+    // Audio Data
     const EPISODES = [
       { file: "podcast-intro.mp3", title: "SciMSPT Podcast Introduction", duration: "2:30", description: "Welcome to SciMSPT — where Science, Matter, Physics, and Time converge.", category: "podcast" },
       { file: "startup-spotlight-p3.mp3", title: "Startup Spotlight: Quantum Materials Inc.", duration: "18:45", description: "Interview with CEO Dr. Sarah Chen on high-Tc breakthrough.", category: "interview" },
@@ -1691,10 +1447,8 @@
     let progressInterval = null;
     let currentProgress = 0;
     
-    // ── Initialize Audio Section ──────────────────────────────────
     function initAudio() {
       const listEl = document.getElementById('episodeList');
-      
       EPISODES.forEach((ep, idx) => {
         const item = document.createElement('div');
         item.className = `episode-item${idx === 0 ? ' active' : ''}`;
@@ -1715,34 +1469,20 @@
     function selectTrack(idx) {
       currentTrack = idx;
       currentProgress = 0;
-      
       const ep = EPISODES[idx];
       document.getElementById('currentTrackTitle').textContent = ep.title;
       document.getElementById('currentTrackMeta').textContent = `${ep.duration} · ${ep.category.charAt(0).toUpperCase() + ep.category.slice(1)}`;
       document.getElementById('totalTime').textContent = ep.duration;
       document.getElementById('progressFill').style.width = '0%';
       document.getElementById('currentTime').textContent = '0:00';
-      
-      // Update active state
-      document.querySelectorAll('.episode-item').forEach((el, i) => {
-        el.classList.toggle('active', i === idx);
-      });
-      
-      if (isPlaying) {
-        startProgress();
-      }
+      document.querySelectorAll('.episode-item').forEach((el, i) => el.classList.toggle('active', i === idx));
+      if (isPlaying) startProgress();
     }
     
     function togglePlay() {
       isPlaying = !isPlaying;
-      const icon = document.getElementById('playIcon');
-      icon.textContent = isPlaying ? 'pause' : 'play_arrow';
-      
-      if (isPlaying) {
-        startProgress();
-      } else {
-        stopProgress();
-      }
+      document.getElementById('playIcon').textContent = isPlaying ? 'pause' : 'play_arrow';
+      isPlaying ? startProgress() : stopProgress();
     }
     
     function startProgress() {
@@ -1750,118 +1490,57 @@
       const totalSeconds = parseDuration(EPISODES[currentTrack].duration);
       progressInterval = setInterval(() => {
         currentProgress += 0.1;
-        if (currentProgress >= totalSeconds) {
-          nextTrack();
-          return;
-        }
-        const pct = (currentProgress / totalSeconds) * 100;
-        document.getElementById('progressFill').style.width = `${pct}%`;
+        if (currentProgress >= totalSeconds) { nextTrack(); return; }
+        document.getElementById('progressFill').style.width = `${(currentProgress / totalSeconds) * 100}%`;
         document.getElementById('currentTime').textContent = formatTime(currentProgress);
       }, 100);
     }
     
-    function stopProgress() {
-      if (progressInterval) {
-        clearInterval(progressInterval);
-        progressInterval = null;
-      }
-    }
-    
-    function prevTrack() {
-      selectTrack(currentTrack > 0 ? currentTrack - 1 : EPISODES.length - 1);
-    }
-    
-    function nextTrack() {
-      selectTrack(currentTrack < EPISODES.length - 1 ? currentTrack + 1 : 0);
-    }
-    
+    function stopProgress() { if (progressInterval) { clearInterval(progressInterval); progressInterval = null; } }
+    function prevTrack() { selectTrack(currentTrack > 0 ? currentTrack - 1 : EPISODES.length - 1); }
+    function nextTrack() { selectTrack(currentTrack < EPISODES.length - 1 ? currentTrack + 1 : 0); }
     function seekTrack(e) {
-      const bar = e.currentTarget;
-      const rect = bar.getBoundingClientRect();
-      const pct = (e.clientX - rect.left) / rect.width;
+      const bar = e.currentTarget, rect = bar.getBoundingClientRect();
       const totalSeconds = parseDuration(EPISODES[currentTrack].duration);
-      currentProgress = pct * totalSeconds;
-      document.getElementById('progressFill').style.width = `${pct * 100}%`;
+      currentProgress = ((e.clientX - rect.left) / rect.width) * totalSeconds;
+      document.getElementById('progressFill').style.width = `${(currentProgress / totalSeconds) * 100}%`;
       document.getElementById('currentTime').textContent = formatTime(currentProgress);
     }
+    function parseDuration(str) { const parts = str.split(':').map(Number); return parts[0] * 60 + parts[1]; }
+    function formatTime(seconds) { const m = Math.floor(seconds / 60), s = Math.floor(seconds % 60); return `${m}:${String(s).padStart(2, '0')}`; }
     
-    function parseDuration(str) {
-      const parts = str.split(':').map(Number);
-      return parts[0] * 60 + parts[1];
-    }
-    
-    function formatTime(seconds) {
-      const m = Math.floor(seconds / 60);
-      const s = Math.floor(seconds % 60);
-      return `${m}:${String(s).padStart(2, '0')}`;
-    }
-    
-    // ── Theme Toggle ──────────────────────────────────────────────
+    // Theme Toggle
     function toggleTheme() {
-      const html = document.documentElement;
-      const newTheme = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      const html = document.documentElement, newTheme = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
       html.setAttribute('data-theme', newTheme);
       localStorage.setItem('scimspt-theme', newTheme);
-      
-      const icon = document.getElementById('themeIcon');
-      const text = document.getElementById('themeText');
-      icon.textContent = newTheme === 'light' ? 'light_mode' : 'dark_mode';
-      text.textContent = newTheme === 'light' ? 'Light' : 'Dark';
+      document.getElementById('themeIcon').textContent = newTheme === 'light' ? 'light_mode' : 'dark_mode';
+      document.getElementById('themeText').textContent = newTheme === 'light' ? 'Light' : 'Dark';
     }
     
     function restoreTheme() {
       const saved = localStorage.getItem('scimspt-theme') || 'dark';
       document.documentElement.setAttribute('data-theme', saved);
-      if (saved === 'light') {
-        document.getElementById('themeIcon').textContent = 'light_mode';
-        document.getElementById('themeText').textContent = 'Light';
-      }
+      if (saved === 'light') { document.getElementById('themeIcon').textContent = 'light_mode'; document.getElementById('themeText').textContent = 'Light'; }
     }
     
-    // ── Mobile Menu ───────────────────────────────────────────────
-    function toggleMobileMenu() {
-      const links = document.querySelector('.nav-links');
-      links.style.display = links.style.display === 'flex' ? 'none' : 'flex';
-    }
+    function toggleMobileMenu() { const links = document.querySelector('.nav-links'); links.style.display = links.style.display === 'flex' ? 'none' : 'flex'; }
     
-    // ── Smooth Scroll for Nav Links ───────────────────────────────
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', function(e) {
         const href = this.getAttribute('href');
-        if (href !== '#') {
-          e.preventDefault();
-          const target = document.querySelector(href);
-          if (target) {
-            target.scrollIntoView({ behavior: 'smooth' });
-          }
-        }
+        if (href !== '#') { e.preventDefault(); const target = document.querySelector(href); if (target) target.scrollIntoView({ behavior: 'smooth' }); }
       });
     });
     
-    // ── Update Active Nav on Scroll ───────────────────────────────
     const sections = document.querySelectorAll('section[id]');
     window.addEventListener('scroll', () => {
       let current = '';
-      sections.forEach(section => {
-        const sectionTop = section.offsetTop - 100;
-        if (scrollY >= sectionTop) {
-          current = section.getAttribute('id');
-        }
-      });
-      
-      document.querySelectorAll('.nav-link').forEach(link => {
-        link.classList.remove('active');
-        if (link.getAttribute('href') === `#${current}`) {
-          link.classList.add('active');
-        }
-      });
+      sections.forEach(section => { if (section.offsetTop - 100 <= scrollY) current = section.getAttribute('id'); });
+      document.querySelectorAll('.nav-link').forEach(link => link.classList.toggle('active', link.getAttribute('href') === `#${current}`));
     });
     
-    // ── Initialize ────────────────────────────────────────────────
-    document.addEventListener('DOMContentLoaded', () => {
-      restoreTheme();
-      initAudio();
-    });
+    document.addEventListener('DOMContentLoaded', () => { restoreTheme(); initAudio(); });
   </script>
 </body>
 </html>
