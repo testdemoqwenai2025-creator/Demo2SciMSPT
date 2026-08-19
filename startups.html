@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>7 Startups — SciMSPT Research Platform</title>
+  <meta name="description" content="SciMSPT 7 Startups — Monte Carlo validated frontier computing portfolio with NPV/IRR analysis and investment theses.">
+  
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-dark: #0a1628; --bg-light: #f5f8fc;
+      --bg-card-dark: rgba(20, 40, 64, 0.7); --bg-card-light: rgba(255, 255, 255, 0.95);
+      --primary-dark: #e8f0f8; --primary-light: #142840;
+      --accent: #4da8da; --accent-glow: #2d7ab3;
+      --muted-dark: #7a9bb8; --muted-light: #5a7a96;
+      --border-dark: rgba(77, 168, 218, 0.25); --border-light: #c0d0e2;
+      --surface-dark: rgba(45, 122, 179, 0.08); --surface-light: #edf2f9;
+      --font-heading: 'Playfair Display', Georgia, serif;
+      --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-num: 'JetBrains Mono', 'Inter', monospace;
+      --nav-height: 72px;
+    }
+    [data-theme="dark"] { --bg: var(--bg-dark); --bg-card: var(--bg-card-dark); --primary: var(--primary-dark); --muted: var(--muted-dark); --border: var(--border-dark); --surface: var(--surface-dark); --shadow: 0 12px 48px rgba(0,0,0,0.4); --nav-bg: rgba(10,22,40,0.95); --glow-color: rgba(77,168,218,0.15); }
+    [data-theme="light"] { --bg: var(--bg-light); --bg-card: var(--bg-card-light); --primary: var(--primary-light); --muted: var(--muted-light); --border: var(--border-light); --surface: var(--surface-light); --shadow: 0 12px 48px rgba(20,40,64,0.1); --nav-bg: rgba(245,248,252,0.95); --glow-color: rgba(45,122,179,0.08); }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; scroll-padding-top: var(--nav-height); }
+    body { font-family: var(--font-body); background: var(--bg); color: var(--primary); line-height: 1.65; transition: background 0.4s ease, color 0.4s ease; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+
+    /* Navigation */
+    .navbar { position: fixed; top: 0; left: 0; right: 0; height: var(--nav-height); z-index: 1000; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; background: var(--nav-bg); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); transition: all 0.3s ease; }
+    .nav-left { display: flex; align-items: center; gap: 28px; }
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--primary); transition: opacity 0.3s ease; }
+    .nav-logo:hover { opacity: 0.85; }
+    .nav-logo img { width: 32px; height: 32px; filter: drop-shadow(0 0 6px var(--accent)); }
+    .nav-logo-text { font-family: var(--font-heading); font-size: 20px; font-weight: 700; letter-spacing: -0.5px; }
+    .nav-logo-text span { color: var(--accent); }
+    .nav-links { display: flex; align-items: center; gap: 8px; }
+    .nav-link { font-size: 13px; font-weight: 500; color: var(--muted); text-decoration: none; padding: 8px 16px; border-radius: 20px; transition: all 0.25s ease; letter-spacing: 0.3px; white-space: nowrap; }
+    .nav-link:hover { color: var(--accent); background: var(--surface); }
+    .nav-link.active { color: var(--accent); background: rgba(77,168,218,0.12); }
+    .nav-right { display: flex; align-items: center; gap: 16px; }
+    .theme-toggle { display: flex; align-items: center; gap: 6px; padding: 8px 16px; background: var(--surface); border: 1px solid var(--border); border-radius: 20px; cursor: pointer; font-family: var(--font-body); font-size: 11px; font-weight: 600; color: var(--muted); transition: all 0.3s ease; white-space: nowrap; }
+    .theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
+    .theme-toggle .material-icons { font-size: 16px; }
+    .mobile-menu-btn { display: none; width: 40px; height: 40px; border-radius: 50%; background: var(--surface); border: 1px solid var(--border); color: var(--muted); cursor: pointer; align-items: center; justify-content: center; }
+
+    /* Hero */
+    .page-hero { padding: calc(var(--nav-height) + 60px) 48px 60px; position: relative; overflow: hidden; }
+    .hero-bg { position: absolute; inset: 0; z-index: 0; }
+    .grid-pattern { position: absolute; inset: 0; background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px); background-size: 60px 60px; opacity: 0.15; }
+    .hero-glow { position: absolute; width: 600px; height: 600px; border-radius: 50%; filter: blur(120px); opacity: 0.3; }
+    .hero-glow.tl { top: -200px; left: -200px; background: radial-gradient(circle, var(--glow-color), transparent 70%); }
+    .hero-glow.br { bottom: -200px; right: -200px; background: radial-gradient(circle, rgba(77,168,218,0.1), transparent 70%); }
+    .hero-content { position: relative; z-index: 1; max-width: 900px; }
+    .kicker { font-size: 12px; font-weight: 600; color: var(--accent); letter-spacing: 3px; text-transform: uppercase; margin-bottom: 14px; display: flex; align-items: center; gap: 12px; }
+    .kicker::before { content: ''; width: 28px; height: 2px; background: var(--accent); display: inline-block; }
+    h1 { font-family: var(--font-heading); font-size: clamp(36px, 5vw, 56px); font-weight: 900; line-height: 1.1; letter-spacing: -1px; margin-bottom: 20px; }
+    .lead { font-size: 18px; color: var(--muted); max-width: 700px; line-height: 1.6; margin-bottom: 28px; }
+    .hero-stats { display: flex; gap: 40px; flex-wrap: wrap; }
+    .stat-item { display: flex; flex-direction: column; gap: 6px; }
+    .stat-num { font-family: var(--font-heading); font-size: 42px; font-weight: 900; color: var(--accent); line-height: 1; letter-spacing: -1.5px; }
+    .stat-label { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 1.5px; font-weight: 500; }
+
+    /* Section */
+    .section { padding: 80px 48px; max-width: 1400px; margin: 0 auto; }
+    .section-header { margin-bottom: 48px; }
+    h2 { font-family: var(--font-heading); font-size: clamp(24px, 3vw, 36px); font-weight: 700; margin-bottom: 12px; }
+    .section-desc { font-size: 16px; color: var(--muted); max-width: 750px; line-height: 1.6; }
+
+    /* Portfolio Grid */
+    .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(420px, 1fr)); gap: 28px; }
+    
+    .startup-card {
+      background: var(--bg-card); border: 1px solid var(--border); border-radius: 20px;
+      overflow: hidden; transition: all 0.35s ease; backdrop-filter: blur(10px);
+      text-decoration: none; color: inherit; display: block;
+    }
+    .startup-card:hover { transform: translateY(-8px); border-color: var(--accent); box-shadow: var(--shadow); }
+    
+    .card-header { padding: 28px 28px 0; display: flex; align-items: start; justify-content: space-between; }
+    .card-id { font-family: var(--font-num); font-size: 12px; font-weight: 600; color: var(--accent); letter-spacing: 1.5px; }
+    .tier-badge { padding: 6px 14px; border-radius: 16px; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
+    .tier-1 { background: rgba(45, 122, 179, 0.9); color: white; }
+    .tier-2 { background: rgba(122, 77, 168, 0.9); color: white; }
+    .tier-3 { background: rgba(77, 168, 218, 0.9); color: white; }
+    
+    .card-body { padding: 24px 28px 28px; }
+    .card-title { font-family: var(--font-heading); font-size: 24px; font-weight: 700; margin-bottom: 8px; color: var(--primary); line-height: 1.25; }
+    .card-domain { font-size: 12px; color: var(--accent); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 16px; }
+    .card-desc { font-size: 14px; color: var(--muted); line-height: 1.65; margin-bottom: 20px; }
+
+    /* MC Stats */
+    .mc-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 20px; }
+    .mc-stat { background: var(--surface); border-radius: 10px; padding: 14px; text-align: center; }
+    .mc-stat-value { font-family: var(--font-num); font-size: 18px; font-weight: 700; color: var(--accent); }
+    .mc-stat-label { font-size: 9px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 4px; }
+
+    /* Sources */
+    .card-sources { background: var(--surface); border-radius: 10px; padding: 14px 16px; margin-bottom: 20px; }
+    .sources-label { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; color: var(--muted); margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
+    .sources-label .material-icons { font-size: 14px; }
+    .source-tag { display: inline-block; font-size: 10px; padding: 3px 8px; border-radius: 8px; background: var(--bg-card); border: 1px solid var(--border); color: var(--muted); margin: 2px 4px 2px 0; font-family: var(--font-num); }
+    .source-tag.sd-computers { border-color: #4da8da; color: #4da8da; }
+    .source-tag.sd-matter { border-color: #7cb342; color: #7cb342; }
+    .source-tag.sd-space { border-color: #ff7043; color: #ff7043; }
+    .source-tag.sd-health { border-color: #ab47bc; color: #ab47bc; }
+    .source-tag.sd-mind { border-color: #26c6da; color: #26c6da; }
+    .source-tag.sd-living { border-color: #ffa726; color: #ffa726; }
+
+    .card-stats { display: flex; gap: 20px; padding-top: 20px; border-top: 1px solid var(--border); }
+    .card-stat { display: flex; flex-direction: column; gap: 4px; }
+    .card-stat-value { font-family: var(--font-num); font-size: 18px; font-weight: 700; color: var(--accent); }
+    .card-stat-label { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
+
+    /* Methodology Note */
+    .methodology-note { background: linear-gradient(135deg, var(--bg) 0%, var(--surface) 50%, var(--bg) 100%); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 60px 48px; margin-top: 60px; }
+    .methodology-content { max-width: 900px; margin: 0 auto; text-align: center; }
+    .methodology-icon { font-size: 48px; color: var(--accent); margin-bottom: 20px; }
+    .methodology-title { font-family: var(--font-heading); font-size: 24px; font-weight: 700; margin-bottom: 16px; }
+    .methodology-text { font-size: 15px; color: var(--muted); line-height: 1.7; max-width: 700px; margin: 0 auto; }
+
+    footer { padding: 48px; border-top: 1px solid var(--border); background: var(--surface); }
+    .footer-content { max-width: 1280px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 24px; }
+    .footer-brand { display: flex; align-items: center; gap: 12px; }
+    .footer-brand img { width: 28px; height: 28px; filter: drop-shadow(0 0 4px var(--accent)); }
+    .footer-brand span { font-family: var(--font-heading); font-size: 17px; font-weight: 700; }
+    .footer-brand span em { color: var(--accent); font-style: normal; }
+    .footer-links { display: flex; gap: 24px; }
+    .footer-links a { font-size: 13px; color: var(--muted); text-decoration: none; transition: color 0.25s ease; }
+    .footer-links a:hover { color: var(--accent); }
+    .footer-copy { font-size: 12px; color: var(--muted); width: 100%; text-align: center; margin-top: 24px; padding-top: 24px; border-top: 1px solid var(--border); }
+
+    @media (max-width: 1024px) { .portfolio-grid { grid-template-columns: 1fr; } }
+    @media (max-width: 768px) {
+      .navbar { padding: 0 20px; } .page-hero { padding: calc(var(--nav-height) + 32px) 20px 40px; }
+      .section { padding: 48px 20px; } .nav-links { display: none; } .mobile-menu-btn { display: flex; }
+      .hero-stats { gap: 24px; } .stat-num { font-size: 32px; }
+      .mc-stats { grid-template-columns: repeat(2, 1fr); }
+      .footer-content { flex-direction: column; text-align: center; } .footer-links { flex-wrap: wrap; justify-content: center; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="nav-left">
+      <a href="index.html" class="nav-logo"><img src="assets/icons/icon-science.png" alt="SciMSPT"><span class="nav-logo-text">Sci<span>MSPT</span></span></a>
+      <div class="nav-links">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="dashboard.html" class="nav-link">Dashboard</a>
+        <a href="research.html" class="nav-link">Research Trends</a>
+        <a href="startups.html" class="nav-link active">7 Startups</a>
+        <a href="about.html" class="nav-link">About</a>
+      </div>
+    </div>
+    <div class="nav-right">
+      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme"><i class="material-icons" id="themeIcon">dark_mode</i><span id="themeText">Dark</span></button>
+      <button class="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="Menu"><i class="material-icons">menu</i></button>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <div class="page-hero" id="startups">
+    <div class="hero-bg"><div class="grid-pattern"></div><div class="hero-glow tl"></div><div class="hero-glow br"></div></div>
+    <div class="hero-content">
+      <div class="kicker">Investment Portfolio</div>
+      <h1>7 Frontier Computing Startups</h1>
+      <p class="lead">High-conviction startups addressing the AI scaling wall through quantum systems, advanced materials, photonic integration, energy storage, and hydrogen infrastructure — validated by Monte Carlo simulation (10,000 runs).</p>
+      <div class="hero-stats">
+        <div class="stat-item"><div class="stat-num">$938M</div><div class="stat-label">Mean NPV (P50)</div></div>
+        <div class="stat-item"><div class="stat-num">25.3%</div><div class="stat-label">Mean IRR (P50)</div></div>
+        <div class="stat-item"><div class="stat-num">69.1%</div><div class="stat-label">Avg P(NPV>0)</div></div>
+        <div class="stat-item"><div class="stat-num">10K</div><div class="stat-label">Monte Carlo Runs</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Portfolio -->
+  <div class="section" id="portfolio">
+    <div class="section-header">
+      <h2>Portfolio Overview</h2>
+      <p class="section-desc">Each startup is extrapolated from peer-reviewed breakthroughs in ScienceDaily, with financial projections validated through statistical simulation.</p>
+    </div>
+
+    <div class="portfolio-grid">
+
+      <!-- P1: Compact Stellarator -->
+      <a href="portfolio-shorts/P1.html" class="startup-card">
+        <div class="card-header">
+          <span class="card-id">P1 · STARTUP 01</span>
+          <span class="tier-badge tier-2">TIER 2</span>
+        </div>
+        <div class="card-body">
+          <h3 class="card-title">Compact Stellarator</h3>
+          <div class="card-domain">Fusion Energy · Plasma Confinement</div>
+          <p class="card-desc">Compact stellarator fusion reactor achieving net energy gain with optimized magnetic confinement geometry. Addresses tritium breeding through advanced blanket materials. Target: 100MW demonstration plant by 2035.</p>
+          
+          <div class="mc-stats">
+            <div class="mc-stat"><div class="mc-stat-value">$77M</div><div class="mc-stat-label">NPV (P50)</div></div>
+            <div class="mc-stat"><div class="mc-stat-value">23.2%</div><div class="mc-stat-label">IRR (P50)</div></div>
+            <div class="mc-stat"><div class="mc-stat-value">68.8%</div><div class="mc-stat-label">P(NPV&gt;0)</div></div>
+          </div>
+          
+          <div class="card-sources">
+            <div class="sources-label"><i class="material-icons">link</i> Source: Vol. 02 Beyond the Energy Trilemma</div>
+            <span class="source-tag sd-matter">matter_energy</span>
+            <span class="source-tag sd-space">space_time</span>
+          </div>
+          
+          <div class="card-stats">
+            <div class="card-stat"><span class="card-stat-value">$589M</span><span class="card-stat-label">NPV (P95)</span></div>
+            <div class="card-stat"><span class="card-stat-value">6.7yr</span><span class="card-stat-label">Payback P50</span></div>
+            <div class="card-stat"><span class="card-stat-value">65.7%</span><span class="card-stat-label">P(IRR&gt;15%)</span></div>
+          </div>
+        </div>
+      </a>
+
+      <!-- P2: SMR Fleet OS -->
+      <a href="portfolio-shorts/P2.html" class="startup-card">
+        <div class="card-header">
+          <span class="card-id">P2 · STARTUP 02</span>
+          <span class="tier-badge tier-2">TIER 2</span>
+        </div>
+        <div class="card-body">
+          <h3 class="card-title">SMR Fleet OS</h3>
+          <div class="card-domain">Nuclear · Small Modular Reactors</div>
+          <p class="card-desc">Operating system for fleets of Small Modular Reactors (SMRs). AI-driven load balancing, predictive maintenance, and regulatory compliance automation for distributed nuclear power generation.</p>
+          
+          <div class="mc-stats">
+            <div class="mc-stat"><div class="mc-stat-value">$50M</div><div class="mc-stat-label">NPV (P50)</div></div>
+            <div class="mc-stat"><div class="mc-stat-value">23.0%</div><div class="mc-stat-label">IRR (P50)</div></div>
+            <div class="mc-stat"><div class="mc-stat-value">68.8%</div><div class="mc-stat-label">P(NPV&gt;0)</div></div>
+          </div>
+          
+          <div class="card-sources">
+            <div class="sources-label"><i class="material-icons">link</i> Source: Vol. 02 Beyond the Energy Trilemma</div>
+            <span class="source-tag sd-matter">matter_energy</span>
+            <span class="source-tag sd-computers">computers_math</span>
+          </div>
+          
+          <div class="card-stats">
+            <div class="card-stat"><span class="card-stat-value">$400M</span><span class="card-stat-label">NPV (P95)</span></div>
+            <div class="card-stat"><span class="card-stat-value">6.7yr</span><span class="card-stat-label">Payback P50</span></div>
+            <div class="card-stat"><span class="card-stat-value">66.1%</span><span class="card-stat-label">P(IRR&gt;15%)</span></div>
+          </div>
+        </div>
+      </a>
+
+      <!-- P3: Solid-State Battery -->
+      <a href="portfolio-shorts/P3.html" class="startup-card">
+        <div class="card-header">
+          <span class="card-id">P3 · STARTUP 03</span>
+          <span class="tier-badge tier-1">TIER 1</span>
+        </div>
+        <div class="card-body">
+          <h3 class="card-title">Solid-State Battery</h3>
+          <div class="card-domain">Energy Storage · Next-Gen Batteries</div>
+          <p class="card-desc">Solid-state battery technology using sulfide-based electrolytes achieving 500+ Wh/kg energy density. Eliminates thermal runaway risk, enables fast charging (&lt;15 min), extends cycle life to 2000+ cycles.</p>
+          
+          <div class="mc-stats">
+            <div class="mc-stat"><div class="mc-stat-value">$80M</div><div class="mc-stat-label">NPV (P50)</div></div>
+            <div class="mc-stat"><div class="mc-stat-value">17.9%</div><div class="mc-stat-label">IRR (P50)</div></div>
+            <div class="mc-stat"><div class="mc-stat-value">65.8%</div><div class="mc-stat-label">P(NPV&gt;0)</div></div>
+          </div>
+          
+          <div class="card-sources">
+            <div class="sources-label"><i class="material-icons">link</i> Source: Vol. 02 Beyond the Energy Trilemma</div>
+            <span class="source-tag sd-matter">matter_energy</span>
+            <span class="source-tag sd-living">living_well</span>
+          </div>
+          
+          <div class="card-stats">
+            <div class="card-stat"><span class="card-stat-value">$587M</span><span class="card-stat-label">NPV (P95)</span></div>
+            <div class="card-stat"><span class="card-stat-value">7.1yr</span><span class="card-stat-label">Payback P50</span></div>
+            <div class="card-stat"><span class="card-stat-value">57.6%</span><span class="card-stat-label">P(IRR&gt;15%)</span></div>
+          </div>
+        </div>
+      </a>
+
+      <!-- P4: Iron-Air LDES -->
+      <a href="portfolio-shorts/P4.html" class="startup-card">
+        <div class="card-header">
+          <span class="card-id">P4 · STARTUP 04</span>
+          <span class="tier-badge tier-2">TIER 2</span>
+        </div>
+        <div class="card-body">
+          <h3 class="card-title">Iron-Air LDES</h3>
+          <div class="card-domain">Grid Storage · Long-Duration</div>
+          <p class="card-desc">Long-Duration Energy Storage (LDES) using iron-air chemistry for 100+ hour discharge. Ultra-low cost ($20/kWh) using earth-abundant materials for renewable grid stabilization.</p>
+          
+          <div class="mc-stats">
+            <div class="mc-stat"><div class="mc-stat-value">$44M</div><div class="mc-stat-label">NPV (P50)</div></div>
+            <div class="mc-stat"><div class="mc-stat-value">23.4%</div><div class="mc-stat-label">IRR (P50)</div></div>
+            <div class="mc-stat"><div class="mc-stat-value">68.2%</div><div class="mc-stat-label">P(NPV&gt;0)</div></div>
+          </div>
+          
+          <div class="card-sources">
+            <div class="sources-label"><i class="material-icons">link</i> Source: Vol. 02 Beyond the Energy Trilemma</div>
+            <span class="source-tag sd-matter">matter_energy</span>
+            <span class="source-tag sd-living">living_well</span>
+          </div>
+          
+          <div class="card-stats">
+            <div class="card-stat"><span class="card-stat-value">$336M</span><span class="card-stat-label">NPV (P95)</span></div>
+            <div class="card-stat"><span class="card-stat-value">6.6yr</span><span class="card-stat-label">Payback P50</span></div>
+            <div class="card-stat"><span class="card-stat-value">65.7%</span><span class="card-stat-label">P(IRR&gt;15%)</span></div>
+          </div>
+        </div>
+      </a>
+
+      <!-- P5: Super-Steel Electrolyzer -->
+      <a href="portfolio-shorts/P5.html" class="startup-card">
+        <div class="card-header">
+          <span class="card-id">P5 · STARTUP 05</span>
+          <span class="tier-badge tier-1">TIER 1</span>
+        </div>
+        <div class="card-body">
+          <h3 class="card-title">Super-Steel Electrolyzer</h3>
+          <div class="card-domain">Hydrogen · Green H2 Production</div>
+          <p class="card-desc">Advanced electrolyzer using nanostructured super-steel electrodes for efficient green hydrogen production. Achieves $1.50/kg H2 cost target compatible with variable renewable input.</p>
+          
+          <div class="mc-stats">
+            <div class="mc-stat"><div class="mc-stat-value">$43M</div><div class="mc-stat-label">NPV (P50)</div></div>
+            <div class="mc-stat"><div class="mc-stat-value">17.7%</div><div class="mc-stat-label">IRR (P50)</div></div>
+            <div class="mc-stat"><div class="mc-stat-value">65.3%</div><div class="mc-stat-label">P(NPV&gt;0)</div></div>
+          </div>
+          
+          <div class="card-sources">
+            <div class="sources-label"><i class="material-icons">link</i> Source: Vol. 02 Beyond the Energy Trilemma</div>
+            <span class="source-tag sd-matter">matter_energy</span>
+            <span class="source-tag sd-living">living_well</span>
+          </div>
+          
+          <div class="card-stats">
+            <div class="card-stat"><span class="card-stat-value">$330M</span><span class="card-stat-label">NPV (P95)</span></div>
+            <div class="card-stat"><span class="card-stat-value">7.2yr</span><span class="card-stat-label">Payback P50</span></div>
+            <div class="card-stat"><span class="card-stat-value">57.3%</span><span class="card-stat-label">P(IRR&gt;15%)</span></div>
+          </div>
+        </div>
+      </a>
+
+      <!-- P6: Detonation H2 Turbine -->
+      <a href="portfolio-shorts/P6.html" class="startup-card">
+        <div class="card-header">
+          <span class="card-id">P6 · STARTUP 06</span>
+          <span class="tier-badge tier-2">TIER 2</span>
+        </div>
+        <div class="card-body">
+          <h3 class="card-title">Detonation H2 Turbine</h3>
+          <div class="card-domain">Hydrogen · Rotating Detonation</div>
+          <p class="card-desc">Rotating detonation engine running on pure hydrogen with 15% efficiency improvement over conventional turbines. High-power-density for aviation, marine, and grid peaking applications.</p>
+          
+          <div class="mc-stats">
+            <div class="mc-stat"><div class="mc-stat-value">$34M</div><div class="mc-stat-label">NPV (P50)</div></div>
+            <div class="mc-stat"><div class="mc-stat-value">23.3%</div><div class="mc-stat-label">IRR (P50)</div></div>
+            <div class="mc-stat"><div class="mc-stat-value">69.0%</div><div class="mc-stat-label">P(NPV&gt;0)</div></div>
+          </div>
+          
+          <div class="card-sources">
+            <div class="sources-label"><i class="material-icons">link</i> Source: Vol. 02 Beyond the Energy Trilemma</div>
+            <span class="source-tag sd-matter">matter_energy</span>
+            <span class="source-tag sd-space">space_time</span>
+          </div>
+          
+          <div class="card-stats">
+            <div class="card-stat"><span class="card-stat-value">$264M</span><span class="card-stat-label">NPV (P95)</span></div>
+            <div class="card-stat"><span class="card-stat-value">6.6yr</span><span class="card-stat-label">Payback P50</span></div>
+            <div class="card-stat"><span class="card-stat-value">66.3%</span><span class="card-stat-label">P(IRR&gt;15%)</span></div>
+          </div>
+        </div>
+      </a>
+
+      <!-- P7: Room-Temp Quantum Materials -->
+      <a href="portfolio-shorts/P7.html" class="startup-card">
+        <div class="card-header">
+          <span class="card-id">P7 · STARTUP 07</span>
+          <span class="tier-badge tier-3">TIER 3</span>
+        </div>
+        <div class="card-body">
+          <h3 class="card-title">Room-Temp Quantum Materials</h3>
+          <div class="card-domain">Quantum · Superconductors</div>
+          <p class="card-desc">Room-temperature quantum materials exhibiting superconducting or topological properties without cryogenic cooling. Applications in lossless power transmission, quantum computing interconnects, and advanced sensors.</p>
+          
+          <div class="mc-stats">
+            <div class="mc-stat"><div class="mc-stat-value">$107M</div><div class="mc-stat-label">NPV (P50)</div></div>
+            <div class="mc-stat"><div class="mc-stat-value">34.3%</div><div class="mc-stat-label">IRR (P50)</div></div>
+            <div class="mc-stat"><div class="mc-stat-value">77.1%</div><div class="mc-stat-label">P(NPV&gt;0)</div></div>
+          </div>
+          
+          <div class="card-sources">
+            <div class="sources-label"><i class="material-icons">link</i> Source: Cross-Volume Synthesis</div>
+            <span class="source-tag sd-computers">computers_math</span>
+            <span class="source-tag sd-matter">matter_energy</span>
+          </div>
+          
+          <div class="card-stats">
+            <div class="card-stat"><span class="card-stat-value">$840M</span><span class="card-stat-label">NPV (P95)</span></div>
+            <div class="card-stat"><span class="card-stat-value">5.9yr</span><span class="card-stat-label">Payback P50</span></div>
+            <div class="card-stat"><span class="card-stat-value">77.8%</span><span class="card-stat-label">P(IRR&gt;15%)</span></div>
+          </div>
+        </div>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- Methodology Note -->
+  <div class="methodology-note">
+    <div class="methodology-content">
+      <i class="material-icons methodology-icon">analytics</i>
+      <h3 class="methodology-title">Monte Carlo Validation Methodology</h3>
+      <p class="methodology-text">
+        All financial projections are validated through 10,000-run Monte Carlo simulations using triangular distributions 
+        on 7 input variables per project. Key assumptions include: 10-year investment horizon, 10% base discount rate, 
+        15% hurdle rate. Probability metrics indicate statistical confidence in positive outcomes.
+        Full methodology documented in <strong>SciMSPT Monte Carlo Sensitivity Analysis (Vol. 02.6)</strong>.
+      </p>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      <div class="footer-brand"><img src="assets/icons/icon-science.png" alt="SciMSPT"><span>Sci<em>MSPT</em> Research</span></div>
+      <div class="footer-links">
+        <a href="index.html">Home</a><a href="dashboard.html">Dashboard</a><a href="research.html">Research</a><a href="startups.html">Startups</a><a href="about.html">About</a>
+      </div>
+      <div class="footer-copy">&copy; 2026 SciMSPT Research Platform. Data sourced from ScienceDaily.</div>
+    </div>
+  </footer>
+
+  <script>
+    function initTheme() {
+      const saved = localStorage.getItem('scimspt-theme');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      setTheme(saved || (prefersDark ? 'dark' : 'light'));
+    }
+    function setTheme(theme) {
+      document.documentElement.setAttribute('data-theme', theme);
+      const icon = document.getElementById('themeIcon'), text = document.getElementById('themeText');
+      if (theme === 'dark') { icon.textContent = 'dark_mode'; text.textContent = 'Dark'; }
+      else { icon.textContent = 'light_mode'; text.textContent = 'Light'; }
+      localStorage.setItem('scimspt-theme', theme);
+    }
+    function toggleTheme() { setTheme(document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'); }
+    initTheme();
+    function toggleMobileMenu() { alert('Navigation:\n• Home\n• Dashboard\n• Research Trends\n• 7 Startups\n• About'); }
+  </script>
+</body>
+</html>

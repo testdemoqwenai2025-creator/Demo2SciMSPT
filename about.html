@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About — SciMSPT Research Platform</title>
+  <meta name="description" content="About SciMSPT — Methodology, research sources, Foresight Series reports, team information, and contact details.">
+  
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-dark: #0a1628; --bg-light: #f5f8fc;
+      --bg-card-dark: rgba(20, 40, 64, 0.7); --bg-card-light: rgba(255, 255, 255, 0.95);
+      --primary-dark: #e8f0f8; --primary-light: #142840;
+      --accent: #4da8da; --accent-glow: #2d7ab3;
+      --muted-dark: #7a9bb8; --muted-light: #5a7a96;
+      --border-dark: rgba(77, 168, 218, 0.25); --border-light: #c0d0e2;
+      --surface-dark: rgba(45, 122, 179, 0.08); --surface-light: #edf2f9;
+      --font-heading: 'Playfair Display', Georgia, serif;
+      --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-num: 'JetBrains Mono', 'Inter', monospace;
+      --nav-height: 72px;
+    }
+    [data-theme="dark"] { --bg: var(--bg-dark); --bg-card: var(--bg-card-dark); --primary: var(--primary-dark); --muted: var(--muted-dark); --border: var(--border-dark); --surface: var(--surface-dark); --shadow: 0 12px 48px rgba(0,0,0,0.4); --nav-bg: rgba(10,22,40,0.95); --glow-color: rgba(77,168,218,0.15); }
+    [data-theme="light"] { --bg: var(--bg-light); --bg-card: var(--bg-card-light); --primary: var(--primary-light); --muted: var(--muted-light); --border: var(--border-light); --surface: var(--surface-light); --shadow: 0 12px 48px rgba(20,40,64,0.1); --nav-bg: rgba(245,248,252,0.95); --glow-color: rgba(45,122,179,0.08); }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; scroll-padding-top: var(--nav-height); }
+    body { font-family: var(--font-body); background: var(--bg); color: var(--primary); line-height: 1.65; transition: background 0.4s ease, color 0.4s ease; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+
+    /* Navigation */
+    .navbar { position: fixed; top: 0; left: 0; right: 0; height: var(--nav-height); z-index: 1000; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; background: var(--nav-bg); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); transition: all 0.3s ease; }
+    .nav-left { display: flex; align-items: center; gap: 28px; }
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--primary); transition: opacity 0.3s ease; }
+    .nav-logo:hover { opacity: 0.85; }
+    .nav-logo img { width: 32px; height: 32px; filter: drop-shadow(0 0 6px var(--accent)); }
+    .nav-logo-text { font-family: var(--font-heading); font-size: 20px; font-weight: 700; letter-spacing: -0.5px; }
+    .nav-logo-text span { color: var(--accent); }
+    .nav-links { display: flex; align-items: center; gap: 8px; }
+    .nav-link { font-size: 13px; font-weight: 500; color: var(--muted); text-decoration: none; padding: 8px 16px; border-radius: 20px; transition: all 0.25s ease; letter-spacing: 0.3px; white-space: nowrap; }
+    .nav-link:hover { color: var(--accent); background: var(--surface); }
+    .nav-link.active { color: var(--accent); background: rgba(77,168,218,0.12); }
+    .nav-right { display: flex; align-items: center; gap: 16px; }
+    .theme-toggle { display: flex; align-items: center; gap: 6px; padding: 8px 16px; background: var(--surface); border: 1px solid var(--border); border-radius: 20px; cursor: pointer; font-family: var(--font-body); font-size: 11px; font-weight: 600; color: var(--muted); transition: all 0.3s ease; white-space: nowrap; }
+    .theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
+    .theme-toggle .material-icons { font-size: 16px; }
+    .mobile-menu-btn { display: none; width: 40px; height: 40px; border-radius: 50%; background: var(--surface); border: 1px solid var(--border); color: var(--muted); cursor: pointer; align-items: center; justify-content: center; }
+
+    /* Hero */
+    .page-hero { padding: calc(var(--nav-height) + 60px) 48px 60px; position: relative; overflow: hidden; }
+    .hero-bg { position: absolute; inset: 0; z-index: 0; }
+    .grid-pattern { position: absolute; inset: 0; background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px); background-size: 60px 60px; opacity: 0.15; }
+    .hero-glow { position: absolute; width: 600px; height: 600px; border-radius: 50%; filter: blur(120px); opacity: 0.3; }
+    .hero-glow.tl { top: -200px; left: -200px; background: radial-gradient(circle, var(--glow-color), transparent 70%); }
+    .hero-content { position: relative; z-index: 1; max-width: 800px; }
+    .kicker { font-size: 12px; font-weight: 600; color: var(--accent); letter-spacing: 3px; text-transform: uppercase; margin-bottom: 14px; display: flex; align-items: center; gap: 12px; }
+    .kicker::before { content: ''; width: 28px; height: 2px; background: var(--accent); display: inline-block; }
+    h1 { font-family: var(--font-heading); font-size: clamp(36px, 5vw, 56px); font-weight: 900; line-height: 1.1; letter-spacing: -1px; margin-bottom: 20px; }
+    .lead { font-size: 18px; color: var(--muted); max-width: 650px; line-height: 1.6; }
+
+    /* Section */
+    .section { padding: 80px 48px; max-width: 1100px; margin: 0 auto; }
+    .section-header { margin-bottom: 40px; }
+    h2 { font-family: var(--font-heading); font-size: clamp(24px, 3vw, 36px); font-weight: 700; margin-bottom: 12px; }
+    h3 { font-family: var(--font-heading); font-size: 22px; font-weight: 700; margin-bottom: 16px; color: var(--primary); }
+    p { font-size: 16px; color: var(--muted); line-height: 1.75; margin-bottom: 16px; }
+
+    /* Content Blocks */
+    .content-block { background: var(--bg-card); border: 1px solid var(--border); border-radius: 20px; padding: 40px; margin-bottom: 32px; backdrop-filter: blur(10px); }
+    
+    /* Methodology Steps */
+    .methodology-steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px; margin-top: 32px; }
+    .step { position: relative; padding-left: 56px; }
+    .step-num { position: absolute; left: 0; top: 0; width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, var(--accent-glow), var(--accent)); display: flex; align-items: center; justify-content: center; font-family: var(--font-num); font-size: 16px; font-weight: 700; color: white; }
+    .step-title { font-weight: 600; font-size: 16px; margin-bottom: 8px; color: var(--primary); }
+    .step-desc { font-size: 14px; color: var(--muted); line-height: 1.6; }
+
+    /* Reports Grid */
+    .reports-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; margin-top: 32px; }
+    .report-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 28px; transition: all 0.35s ease; backdrop-filter: blur(10px); text-decoration: none; color: inherit; display: block; position: relative; overflow: hidden; }
+    .report-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--accent-glow), var(--accent)); }
+    .report-card:hover { transform: translateY(-4px); border-color: var(--accent); box-shadow: var(--shadow); }
+    .report-icon { width: 52px; height: 52px; border-radius: 12px; background: var(--surface); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; margin-bottom: 20px; }
+    .report-icon .material-icons { font-size: 28px; color: var(--accent); }
+    .report-title { font-family: var(--font-heading); font-size: 18px; font-weight: 700; margin-bottom: 10px; color: var(--primary); }
+    .report-desc { font-size: 14px; color: var(--muted); line-height: 1.55; margin-bottom: 16px; }
+    .report-meta { display: flex; align-items: center; gap: 16px; font-size: 12px; color: var(--muted); }
+    .report-meta span { display: flex; align-items: center; gap: 6px; }
+    .report-meta .material-icons { font-size: 16px; }
+
+    /* Tech Stack */
+    .tech-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-top: 24px; }
+    .tech-item { background: var(--surface); border-radius: 12px; padding: 20px; text-align: center; }
+    .tech-name { font-weight: 600; font-size: 14px; margin-bottom: 4px; }
+    .tech-desc { font-size: 12px; color: var(--muted); }
+
+    /* Timeline */
+    .timeline { margin-top: 32px; position: relative; padding-left: 32px; }
+    .timeline::before { content: ''; position: absolute; left: 8px; top: 0; bottom: 0; width: 2px; background: var(--border); }
+    .timeline-item { position: relative; padding-bottom: 32px; }
+    .timeline-item::before { content: ''; position: absolute; left: -28px; top: 6px; width: 12px; height: 12px; border-radius: 50%; background: var(--accent); border: 2px solid var(--bg); }
+    .timeline-date { font-family: var(--font-num); font-size: 12px; color: var(--accent); margin-bottom: 6px; }
+    .timeline-title { font-weight: 600; font-size: 16px; margin-bottom: 6px; }
+    .timeline-desc { font-size: 14px; color: var(--muted); line-height: 1.6; }
+
+    /* Contact */
+    .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-top: 32px; }
+    .contact-item { background: var(--surface); border-radius: 12px; padding: 24px; display: flex; align-items: start; gap: 16px; }
+    .contact-icon { width: 44px; height: 44px; border-radius: 10px; background: linear-gradient(135deg, var(--accent-glow), var(--accent)); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .contact-icon .material-icons { font-size: 22px; color: white; }
+    .contact-label { font-size: 12px; color: var(--muted); margin-bottom: 4px; text-transform: uppercase; letter-spacing: 1px; }
+    .contact-value { font-weight: 600; font-size: 15px; }
+
+    footer { padding: 48px; border-top: 1px solid var(--border); background: var(--surface); }
+    .footer-content { max-width: 1280px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 24px; }
+    .footer-brand { display: flex; align-items: center; gap: 12px; }
+    .footer-brand img { width: 28px; height: 28px; filter: drop-shadow(0 0 4px var(--accent)); }
+    .footer-brand span { font-family: var(--font-heading); font-size: 17px; font-weight: 700; }
+    .footer-brand span em { color: var(--accent); font-style: normal; }
+    .footer-links { display: flex; gap: 24px; }
+    .footer-links a { font-size: 13px; color: var(--muted); text-decoration: none; transition: color 0.25s ease; }
+    .footer-links a:hover { color: var(--accent); }
+    .footer-copy { font-size: 12px; color: var(--muted); width: 100%; text-align: center; margin-top: 24px; padding-top: 24px; border-top: 1px solid var(--border); }
+
+    @media (max-width: 768px) {
+      .navbar { padding: 0 20px; } .page-hero { padding: calc(var(--nav-height) + 32px) 20px 40px; }
+      .section { padding: 48px 20px; } .nav-links { display: none; } .mobile-menu-btn { display: flex; }
+      .methodology-steps { grid-template-columns: 1fr; } .reports-grid { grid-template-columns: 1fr; }
+      .footer-content { flex-direction: column; text-align: center; } .footer-links { flex-wrap: wrap; justify-content: center; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="nav-left">
+      <a href="index.html" class="nav-logo"><img src="assets/icons/icon-science.png" alt="SciMSPT"><span class="nav-logo-text">Sci<span>MSPT</span></span></a>
+      <div class="nav-links">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="dashboard.html" class="nav-link">Dashboard</a>
+        <a href="research.html" class="nav-link">Research Trends</a>
+        <a href="startups.html" class="nav-link">7 Startups</a>
+        <a href="about.html" class="nav-link active">About</a>
+      </div>
+    </div>
+    <div class="nav-right">
+      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme"><i class="material-icons" id="themeIcon">dark_mode</i><span id="themeText">Dark</span></button>
+      <button class="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="Menu"><i class="material-icons">menu</i></button>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <div class="page-hero" id="about">
+    <div class="hero-bg"><div class="grid-pattern"></div><div class="hero-glow tl"></div></div>
+    <div class="hero-content">
+      <div class="kicker">Platform Information</div>
+      <h1>About SciMSPT</h1>
+      <p class="lead">Science, Matter, Physics & Time — A research platform transforming peer-reviewed breakthroughs into investable frontier computing startups.</p>
+    </div>
+  </div>
+
+  <!-- What is SciMSPT -->
+  <div class="section" id="what-is">
+    <div class="section-header">
+      <h2>What is SciMSPT?</h2>
+    </div>
+    <div class="content-block">
+      <p><strong>SciMSPT</strong> (Science, Matter, Physics & Time) is a research-to-investment platform that systematically extrapolates frontier computing opportunities from peer-reviewed scientific breakthroughs published in ScienceDaily across six domains:</p>
+      
+      <ul style="margin-left: 20px; margin-top: 16px; margin-bottom: 16px;">
+        <li style="margin-bottom: 8px;"><strong>Matter & Energy</strong> — Quantum materials, superconductors, energy storage, hydrogen systems</li>
+        <li style="margin-bottom: 8px;"><strong>Space & Time</strong> — Astrophysics, fusion energy, temporal mechanics, orbital infrastructure</li>
+        <li style="margin-bottom: 8px;"><strong>Computers & Math</strong> — AI/ML algorithms, quantum computing, photonic computing</li>
+        <li style="margin-bottom: 8px;"><strong>Health & Medicine</strong> — Biotech, genomics, DNA storage, neural interfaces</li>
+        <li style="margin-bottom: 8px;"><strong>Mind & Brain</strong> — Neuroscience, cognition, AGI safety, brain-computer interfaces</li>
+        <li style="margin-bottom: 8px;"><strong>Living Well</strong> — Sustainability, green energy, environmental technology</li>
+      </ul>
+      
+      <p>The platform produces weekly digests, research shorts, Monte Carlo-validated startup portfolios, and investor foresight reports — all grounded in real scientific publications.</p>
+    </div>
+  </div>
+
+  <!-- Methodology -->
+  <div class="section" id="methodology">
+    <div class="section-header">
+      <h2>Research Methodology</h2>
+      <p class="lead" style="max-width: 800px;">Our systematic approach transforms academic breakthroughs into investment-ready startup theses.</p>
+    </div>
+    
+    <div class="content-block">
+      <h3>The 5-Step Extrapolation Process</h3>
+      <div class="methodology-steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-title">Breakthrough Identification</div>
+          <div class="step-desc">Monitor ScienceDaily RSS feeds across 6 domains for peer-reviewed breakthroughs with commercial potential signals.</div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-title">Signal Classification</div>
+          <div class="step-desc">Categorize each breakthrough by S/M/P/T axis coordinates, maturity level, and investment readiness indicators.</div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-title">Venture Extrapolation</div>
+          <div class="step-desc">Map scientific advances to fundable business models with TAM, TTM, and competitive moat analysis.</div>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <div class="step-title">Financial Modeling</div>
+          <div class="step-desc">Build NPV/IRR projections with Monte Carlo simulation (10,000 runs) for statistical validation.</div>
+        </div>
+        <div class="step">
+          <div class="step-num">5</div>
+          <div class="step-title">Portfolio Integration</div>
+          <div class="step-desc">Position startups within the SciMSPT microservices platform architecture for operational synergy.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Foresight Series Reports -->
+  <div class="section" id="reports">
+    <div class="section-header">
+      <h2>Foresight Series Reports</h2>
+      <p class="lead">Comprehensive investor reports analyzing frontier computing opportunities with full documentation.</p>
+    </div>
+    
+    <div class="reports-grid">
+      <a href="assets/reports/Beyond_the_Scaling_Wall_2025-2045.pdf" target="_blank" class="report-card">
+        <div class="report-icon"><i class="material-icons">description</i></div>
+        <div class="report-title">Beyond the Scaling Wall</div>
+        <div class="report-desc">Vol. 01 — 12 Frontier Computing Projects That Will Reshape AI Infrastructure, 2025-2045</div>
+        <div class="report-meta">
+          <span><i class="material-icons">calendar_today</i> Aug 2026</span>
+          <span><i class="material-icons">picture_as_pdf</i> PDF Report</span>
+        </div>
+      </a>
+      
+      <a href="assets/reports/Beyond_the_Energy_Trilemma_2025-2045.pdf" target="_blank" class="report-card">
+        <div class="report-icon"><i class="material-icons">electric_bolt</i></div>
+        <div class="report-title">Beyond the Energy Trilemma</div>
+        <div class="report-desc">Vol. 02 — Matter & Energy Projects Addressing the Global Energy Transition Challenge</div>
+        <div class="report-meta">
+          <span><i class="material-icons">calendar_today</i> Aug 2026</span>
+          <span><i class="material-icons">picture_as_pdf</i> PDF Report</span>
+        </div>
+      </a>
+      
+      <a href="assets/reports/Beyond_the_Cosmic_Frontier_2025-2045.pdf" target="_blank" class="report-card">
+        <div class="report-icon"><i class="material-icons">public</i></div>
+        <div class="report-title">Beyond the Cosmic Frontier</div>
+        <div class="report-desc">Space & Time domain analysis covering astrophysics, fusion, and lunar/Mars infrastructure</div>
+        <div class="report-meta">
+          <span><i class="material-icons">calendar_today</i> Aug 2026</span>
+          <span><i class="material-icons">picture_as_pdf</i> PDF Report</span>
+        </div>
+      </a>
+      
+      <a href="assets/reports/SciMSPT_Monte_Carlo_Sensitivity_Vol_02_6.pdf" target="_blank" class="report-card">
+        <div class="report-icon"><i class="material-icons">analytics</i></div>
+        <div class="report-title">Monte Carlo Sensitivity Analysis</div>
+        <div class="report-desc">Statistical validation of 7 core startups with NPV/IRR distributions and probability tables</div>
+        <div class="report-meta">
+          <span><i class="material-icons">calendar_today</i> Aug 2026</span>
+          <span><i class="material-icons">picture_as_pdf</i> PDF Analysis</span>
+        </div>
+      </a>
+      
+      <a href="assets/reports/P12_AI_Discovered_Tandem_PV_DeepDive.pdf" target="_blank" class="report-card">
+        <div class="report-icon"><i class="material-icons">insights</i></div>
+        <div class="report-title">P12 Deep Dive: AI-Discovered Tandem PV</div>
+        <div class="report-desc">Anchor tenant analysis for ML-driven materials discovery applied to next-gen solar cells</div>
+        <div class="report-meta">
+          <span><i class="material-icons">calendar_today</i> Aug 2026</span>
+          <span><i class="material-icons">picture_as_pdf</i> PDF Brief</span>
+        </div>
+      </a>
+      
+      <a href="assets/reports/SciMSPT_Foresight_Series_Bundle.pdf" target="_blank" class="report-card">
+        <div class="report-icon"><i class="material-icons">folder_special</i></div>
+        <div class="report-title">Foresight Series Bundle</div>
+        <div class="report-desc">Complete collection of all Vol. 00, 01, 02 reports with integration matrices and platform roadmap</div>
+        <div class="report-meta">
+          <span><i class="material-icons">calendar_today</i> Aug 2026</span>
+          <span><i class="material-icons">picture_as_pdf</i> PDF Bundle</span>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <!-- Tech Stack -->
+  <div class="section" id="tech">
+    <div class="section-header">
+      <h2>Platform Architecture</h2>
+      <p class="lead">SciMSPT is built on a microservices architecture designed for scalability and research reproducibility.</p>
+    </div>
+    
+    <div class="content-block">
+      <h3>Microservices Platform (10 Services)</h3>
+      <div class="tech-grid">
+        <div class="tech-item"><div class="tech-name">API Gateway</div><div class="tech-desc">Edge ingress, rate-limiting, tenant routing</div></div>
+        <div class="tech-item"><div class="tech-name">User Service</div><div class="tech-desc">Identity, RBAC, multi-tenant isolation</div></div>
+        <div class="tech-item"><div class="tech-name">Data Service</div><div class="tech-desc">Materials datasets, training corpora</div></div>
+        <div class="tech-item"><div class="tech-name">Compute Service</div><div class="tech-desc">GPU/CPU orchestration, HPC batch</div></div>
+        <div class="tech-item"><div class="tech-name">Storage Service</div><div class="tech-desc">Long-term archive, tamper-evident ledger</div></div>
+        <div class="tech-item"><div class="tech-name">Auth Service</div><div class="tech-desc">JWT issuance, Ed25519 signing</div></div>
+        <div class="tech-item"><div class="tech-name">ML Service</div><div class="tech-desc">Closed-loop discovery, active learning</div></div>
+        <div class="tech-item"><div class="tech-name">Materials Provenance</div><div class="tech-desc">AI-discovered materials IP signing</div></div>
+        <div class="tech-item"><div class="tech-name">Safety Signing</div><div class="tech-desc">Cryptographic attestation</div></div>
+        <div class="tech-item"><div class="tech-name">Notification</div><div class="tech-desc">Safety-critical alerting, SLA-bound</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Timeline -->
+  <div class="section" id="timeline">
+    <div class="section-header">
+      <h2>Project Timeline</h2>
+    </div>
+    
+    <div class="content-block">
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-date">2026-W27 → W34</div>
+          <div class="timeline-title">Weekly Digest Generation</div>
+          <div class="timeline-desc">Automated ScienceDaily RSS ingestion producing 264+ articles per week across 4 axes (S/M/P/T).</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-date">August 2026</div>
+          <div class="timeline-title">Foresight Series Publication</div>
+          <div class="timeline-desc">Release of Vol. 01 (Scaling Wall), Vol. 02 (Energy Trilemma), and Monte Carlo validation reports.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-date">August 2026</div>
+          <div class="timeline-title">GitHub Pages Deployment</div>
+          <div class="timeline-desc">Public launch of research platform at testdemoqwenai2025-creator.github.io/SciMSPT/</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-date">Q4 2026</div>
+          <div class="timeline-title">Investor Deck Finalization</div>
+          <div class="timeline-desc">Complete 15-slide investor presentation with financial projections and market analysis.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-date">Q1 2027</div>
+          <div class="timeline-title">Materials Provenance Service Launch</div>
+          <div class="timeline-desc">New microservice for AI-discovered materials IP signing using ST.26 XML standard.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Contact -->
+  <div class="section" id="contact">
+    <div class="section-header">
+      <h2>Contact & Resources</h2>
+    </div>
+    
+    <div class="content-block">
+      <h3>Repositories</h3>
+      <div class="contact-grid">
+        <div class="contact-item">
+          <div class="contact-icon"><i class="material-icons">code</i></div>
+          <div>
+            <div class="contact-label">Public Repository</div>
+            <div class="contact-value">github.com/testdemoqwenai2025-creator/SciMSPT</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon"><i class="material-icons">lock</i></div>
+          <div>
+            <div class="contact-label">Private Repository</div>
+            <div class="contact-value">github.com/testdemoqwenai2025-creator/SciMSPT-private</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon"><i class="material-icons">article</i></div>
+          <div>
+            <div class="contact-label">Data Source</div>
+            <div class="contact-value">sciencedaily.com (RSS feeds)</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon"><i class="material-icons">description</i></div>
+          <div>
+            <div class="contact-label">Documentation</div>
+            <div class="contact-value">Foresight Series PDFs in /download/</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      <div class="footer-brand"><img src="assets/icons/icon-science.png" alt="SciMSPT"><span>Sci<em>MSPT</em> Research</span></div>
+      <div class="footer-links">
+        <a href="index.html">Home</a><a href="dashboard.html">Dashboard</a><a href="research.html">Research</a><a href="startups.html">Startups</a><a href="about.html">About</a>
+      </div>
+      <div class="footer-copy">&copy; 2026 SciMSPT Research Platform. All rights reserved. Data sourced from ScienceDaily.</div>
+    </div>
+  </footer>
+
+  <script>
+    function initTheme() {
+      const saved = localStorage.getItem('scimspt-theme');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      setTheme(saved || (prefersDark ? 'dark' : 'light'));
+    }
+    function setTheme(theme) {
+      document.documentElement.setAttribute('data-theme', theme);
+      const icon = document.getElementById('themeIcon'), text = document.getElementById('themeText');
+      if (theme === 'dark') { icon.textContent = 'dark_mode'; text.textContent = 'Dark'; }
+      else { icon.textContent = 'light_mode'; text.textContent = 'Light'; }
+      localStorage.setItem('scimspt-theme', theme);
+    }
+    function toggleTheme() { setTheme(document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'); }
+    initTheme();
+    function toggleMobileMenu() { alert('Navigation:\n• Home\n• Dashboard\n• Research Trends\n• 7 Startups\n• About'); }
+  </script>
+</body>
+</html>

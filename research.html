@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Research Trends — SciMSPT Research Platform</title>
+  <meta name="description" content="SciMSPT Research Trends — Weekly ScienceDaily digests, research shorts, and breakthrough analysis across 6 domains.">
+  
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-dark: #0a1628; --bg-light: #f5f8fc;
+      --bg-card-dark: rgba(20, 40, 64, 0.7); --bg-card-light: rgba(255, 255, 255, 0.95);
+      --primary-dark: #e8f0f8; --primary-light: #142840;
+      --accent: #4da8da; --accent-glow: #2d7ab3;
+      --muted-dark: #7a9bb8; --muted-light: #5a7a96;
+      --border-dark: rgba(77, 168, 218, 0.25); --border-light: #c0d0e2;
+      --surface-dark: rgba(45, 122, 179, 0.08); --surface-light: #edf2f9;
+      --font-heading: 'Playfair Display', Georgia, serif;
+      --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-num: 'JetBrains Mono', 'Inter', monospace;
+      --nav-height: 72px;
+    }
+    [data-theme="dark"] { --bg: var(--bg-dark); --bg-card: var(--bg-card-dark); --primary: var(--primary-dark); --muted: var(--muted-dark); --border: var(--border-dark); --surface: var(--surface-dark); --shadow: 0 12px 48px rgba(0,0,0,0.4); --nav-bg: rgba(10,22,40,0.95); --glow-color: rgba(77,168,218,0.15); }
+    [data-theme="light"] { --bg: var(--bg-light); --bg-card: var(--bg-card-light); --primary: var(--primary-light); --muted: var(--muted-light); --border: var(--border-light); --surface: var(--surface-light); --shadow: 0 12px 48px rgba(20,40,64,0.1); --nav-bg: rgba(245,248,252,0.95); --glow-color: rgba(45,122,179,0.08); }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; scroll-padding-top: var(--nav-height); }
+    body { font-family: var(--font-body); background: var(--bg); color: var(--primary); line-height: 1.65; transition: background 0.4s ease, color 0.4s ease; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+
+    /* Navigation */
+    .navbar { position: fixed; top: 0; left: 0; right: 0; height: var(--nav-height); z-index: 1000; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; background: var(--nav-bg); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); transition: all 0.3s ease; }
+    .nav-left { display: flex; align-items: center; gap: 28px; }
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--primary); transition: opacity 0.3s ease; }
+    .nav-logo:hover { opacity: 0.85; }
+    .nav-logo img { width: 32px; height: 32px; filter: drop-shadow(0 0 6px var(--accent)); }
+    .nav-logo-text { font-family: var(--font-heading); font-size: 20px; font-weight: 700; letter-spacing: -0.5px; }
+    .nav-logo-text span { color: var(--accent); }
+    .nav-links { display: flex; align-items: center; gap: 8px; }
+    .nav-link { font-size: 13px; font-weight: 500; color: var(--muted); text-decoration: none; padding: 8px 16px; border-radius: 20px; transition: all 0.25s ease; letter-spacing: 0.3px; white-space: nowrap; }
+    .nav-link:hover { color: var(--accent); background: var(--surface); }
+    .nav-link.active { color: var(--accent); background: rgba(77,168,218,0.12); }
+    .nav-right { display: flex; align-items: center; gap: 16px; }
+    .theme-toggle { display: flex; align-items: center; gap: 6px; padding: 8px 16px; background: var(--surface); border: 1px solid var(--border); border-radius: 20px; cursor: pointer; font-family: var(--font-body); font-size: 11px; font-weight: 600; color: var(--muted); transition: all 0.3s ease; white-space: nowrap; }
+    .theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
+    .theme-toggle .material-icons { font-size: 16px; }
+    .mobile-menu-btn { display: none; width: 40px; height: 40px; border-radius: 50%; background: var(--surface); border: 1px solid var(--border); color: var(--muted); cursor: pointer; align-items: center; justify-content: center; }
+
+    /* Page Layout */
+    .page-hero { padding: calc(var(--nav-height) + 60px) 48px 48px; position: relative; overflow: hidden; }
+    .hero-bg { position: absolute; inset: 0; z-index: 0; }
+    .grid-pattern { position: absolute; inset: 0; background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px); background-size: 60px 60px; opacity: 0.15; }
+    .hero-glow { position: absolute; width: 600px; height: 600px; border-radius: 50%; filter: blur(120px); opacity: 0.3; }
+    .hero-glow.tl { top: -200px; left: -200px; background: radial-gradient(circle, var(--glow-color), transparent 70%); }
+    .hero-content { position: relative; z-index: 1; max-width: 800px; }
+    .kicker { font-size: 12px; font-weight: 600; color: var(--accent); letter-spacing: 3px; text-transform: uppercase; margin-bottom: 14px; display: flex; align-items: center; gap: 12px; }
+    .kicker::before { content: ''; width: 28px; height: 2px; background: var(--accent); display: inline-block; }
+    h1 { font-family: var(--font-heading); font-size: clamp(36px, 5vw, 56px); font-weight: 900; line-height: 1.1; letter-spacing: -1px; margin-bottom: 20px; }
+    .lead { font-size: 18px; color: var(--muted); max-width: 650px; line-height: 1.6; }
+
+    .section { padding: 80px 48px; max-width: 1400px; margin: 0 auto; }
+    .section-header { margin-bottom: 40px; }
+    h2 { font-family: var(--font-heading); font-size: clamp(24px, 3vw, 36px); font-weight: 700; margin-bottom: 12px; }
+    .section-desc { font-size: 16px; color: var(--muted); max-width: 700px; }
+
+    /* Domain Tabs */
+    .domain-tabs { display: flex; gap: 8px; margin-bottom: 32px; flex-wrap: wrap; }
+    .domain-tab { padding: 10px 20px; border-radius: 24px; font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.25s ease; border: 1px solid var(--border); background: var(--bg-card); color: var(--muted); }
+    .domain-tab:hover { border-color: var(--accent); color: var(--accent); }
+    .domain-tab.active { background: var(--accent); border-color: var(--accent); color: white; }
+
+    /* Digest Grid */
+    .digest-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); gap: 24px; }
+    .digest-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; transition: all 0.35s ease; backdrop-filter: blur(10px); text-decoration: none; color: inherit; display: block; }
+    .digest-card:hover { transform: translateY(-4px); border-color: var(--accent); box-shadow: var(--shadow); }
+    .digest-header { padding: 24px 24px 0; display: flex; align-items: start; justify-content: space-between; }
+    .digest-id { font-family: var(--font-num); font-size: 12px; font-weight: 600; color: var(--accent); letter-spacing: 1px; }
+    .digest-week { font-size: 11px; color: var(--muted); background: var(--surface); padding: 4px 10px; border-radius: 12px; }
+    .digest-body { padding: 20px 24px 24px; }
+    .digest-title { font-family: var(--font-heading); font-size: 20px; font-weight: 700; margin-bottom: 8px; }
+    .digest-theme { font-size: 14px; color: var(--accent); margin-bottom: 16px; font-weight: 500; }
+    .digest-highlights { list-style: none; margin-bottom: 16px; }
+    .digest-highlights li { font-size: 14px; color: var(--muted); padding: 6px 0; padding-left: 20px; position: relative; line-height: 1.5; }
+    .digest-highlights li::before { content: '→'; position: absolute; left: 0; color: var(--accent); }
+    .digest-meta { display: flex; gap: 16px; font-size: 12px; color: var(--muted); padding-top: 16px; border-top: 1px solid var(--border); }
+    .digest-meta span { display: flex; align-items: center; gap: 4px; }
+    .audio-badge { color: #4ade80; font-weight: 600; }
+
+    /* Shorts Section */
+    .shorts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
+    .short-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 28px; transition: all 0.35s ease; backdrop-filter: blur(10px); text-decoration: none; color: inherit; display: block; }
+    .short-card:hover { transform: translateY(-4px); border-color: var(--accent); box-shadow: var(--shadow); }
+    .short-icon { width: 52px; height: 52px; border-radius: 14px; background: linear-gradient(135deg, var(--accent-glow), var(--accent)); display: flex; align-items: center; justify-content: center; margin-bottom: 20px; }
+    .short-icon .material-icons { font-size: 28px; color: white; }
+    .short-code { font-family: var(--font-num); font-size: 12px; font-weight: 600; color: var(--accent); letter-spacing: 1px; margin-bottom: 8px; }
+    .short-title { font-family: var(--font-heading); font-size: 18px; font-weight: 700; margin-bottom: 10px; }
+    .short-excerpt { font-size: 14px; color: var(--muted); line-height: 1.6; margin-bottom: 16px; }
+    .short-tags { display: flex; gap: 8px; flex-wrap: wrap; }
+    .short-tag { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; padding: 4px 10px; border-radius: 10px; background: var(--surface); color: var(--muted); }
+
+    /* Sources Footer */
+    .sources-section { background: linear-gradient(180deg, var(--bg) 0%, var(--surface) 50%, var(--bg) 100%); }
+    .source-categories { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin-top: 32px; }
+    .source-category { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 20px; text-align: center; transition: all 0.3s ease; text-decoration: none; color: inherit; }
+    .source-category:hover { border-color: var(--accent); transform: translateY(-4px); }
+    .source-icon { width: 44px; height: 44px; border-radius: 12px; background: linear-gradient(135deg, var(--accent-glow), var(--accent)); display: flex; align-items: center; justify-content: center; margin: 0 auto 12px; }
+    .source-icon .material-icons { font-size: 24px; color: white; }
+    .source-name { font-weight: 600; font-size: 13px; margin-bottom: 4px; }
+    .source-count { font-size: 11px; color: var(--muted); font-family: var(--font-num); }
+
+    footer { padding: 48px; border-top: 1px solid var(--border); background: var(--surface); }
+    .footer-content { max-width: 1280px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 24px; }
+    .footer-brand { display: flex; align-items: center; gap: 12px; }
+    .footer-brand img { width: 28px; height: 28px; filter: drop-shadow(0 0 4px var(--accent)); }
+    .footer-brand span { font-family: var(--font-heading); font-size: 17px; font-weight: 700; }
+    .footer-brand span em { color: var(--accent); font-style: normal; }
+    .footer-links { display: flex; gap: 24px; }
+    .footer-links a { font-size: 13px; color: var(--muted); text-decoration: none; transition: color 0.25s ease; }
+    .footer-links a:hover { color: var(--accent); }
+    .footer-copy { font-size: 12px; color: var(--muted); width: 100%; text-align: center; margin-top: 24px; padding-top: 24px; border-top: 1px solid var(--border); }
+
+    @media (max-width: 768px) {
+      .navbar { padding: 0 20px; } .page-hero { padding: calc(var(--nav-height) + 32px) 20px 32px; }
+      .section { padding: 48px 20px; } .nav-links { display: none; } .mobile-menu-btn { display: flex; }
+      .digest-grid, .shorts-grid { grid-template-columns: 1fr; }
+      .footer-content { flex-direction: column; text-align: center; } .footer-links { flex-wrap: wrap; justify-content: center; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="nav-left">
+      <a href="index.html" class="nav-logo"><img src="assets/icons/icon-science.png" alt="SciMSPT"><span class="nav-logo-text">Sci<span>MSPT</span></span></a>
+      <div class="nav-links">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="dashboard.html" class="nav-link">Dashboard</a>
+        <a href="research.html" class="nav-link active">Research Trends</a>
+        <a href="startups.html" class="nav-link">7 Startups</a>
+        <a href="about.html" class="nav-link">About</a>
+      </div>
+    </div>
+    <div class="nav-right">
+      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme"><i class="material-icons" id="themeIcon">dark_mode</i><span id="themeText">Dark</span></button>
+      <button class="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="Menu"><i class="material-icons">menu</i></button>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <div class="page-hero" id="research">
+    <div class="hero-bg"><div class="grid-pattern"></div><div class="hero-glow tl"></div></div>
+    <div class="hero-content">
+      <div class="kicker">Research Intelligence</div>
+      <h1>Research Trends</h1>
+      <p class="lead">Weekly digests from ScienceDaily across 6 domains, research shorts analyzing breakthrough implications, and trend analysis for frontier computing investments.</p>
+    </div>
+  </div>
+
+  <!-- Weekly Digests -->
+  <div class="section" id="weekly-digests">
+    <div class="section-header">
+      <h2>Weekly Digests</h2>
+      <p class="section-desc">Curated weekly summaries from ScienceDaily RSS feeds, organized by research domain axis (S/M/P/T).</p>
+    </div>
+
+    <div class="domain-tabs">
+      <button class="domain-tab active" onclick="filterDigest('all')">All Domains</button>
+      <button class="domain-tab" onclick="filterDigest('M')">M — Matter & Energy</button>
+      <button class="domain-tab" onclick="filterDigest('P')">P — Physics · Space & Time</button>
+      <button class="domain-tab" onclick="filterDigest('T')">T — Computers & Math</button>
+      <button class="domain-tab" onclick="filterDigest('S')">S — Life & Health</button>
+    </div>
+
+    <div class="digest-grid">
+      <!-- SD-M-01 -->
+      <a href="shorts/SD-M-01.html" class="digest-card" data-domain="M">
+        <div class="digest-header">
+          <span class="digest-id">SD-M-01</span>
+          <span class="digest-week">W32</span>
+        </div>
+        <div class="digest-body">
+          <h3 class="digest-title">Mathematical Foundations Week</h3>
+          <div class="digest-theme">Core Mathematics in SciMSPT Startups</div>
+          <ul class="digest-highlights">
+            <li>Quantum Materials Inc. publishes breakthrough in topological insulator theory</li>
+            <li>Computational Physics Labs releases new tensor network library</li>
+            <li>TMD Logic achieves new coherence time record through error correction</li>
+          </ul>
+          <div class="digest-meta">
+            <span><i class="material-icons" style="font-size:14px;">schedule</i> 8 min read</span>
+            <span class="audio-badge"><i class="material-icons" style="font-size:14px;">headphones</i> Audio Available</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- SD-M-02 -->
+      <a href="shorts/SD-M-02.html" class="digest-card" data-domain="M">
+        <div class="digest-header">
+          <span class="digest-id">SD-M-02</span>
+          <span class="digest-week">W33</span>
+        </div>
+        <div class="digest-body">
+          <h3 class="digest-title">Computing Theory Advances</h3>
+          <div class="digest-theme">Algorithms Powering Innovation</div>
+          <ul class="digest-highlights">
+            <li>New optimization algorithm speeds up materials screening 10x</li>
+            <li>Quantum supremacy demonstration expanded to new problem class</li>
+            <li>Machine learning interatomic potentials reach DFT accuracy</li>
+          </ul>
+          <div class="digest-meta">
+            <span><i class="material-icons" style="font-size:14px;">schedule</i> 10 min read</span>
+            <span class="audio-badge"><i class="material-icons" style="font-size:14px;">headphones</i> Audio Available</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- SD-P-05 -->
+      <a href="shorts/SD-P-05.html" class="digest-card" data-domain="P">
+        <div class="digest-header">
+          <span class="digest-id">SD-P-05</span>
+          <span class="digest-week">W31</span>
+        </div>
+        <div class="digest-body">
+          <h3 class="digest-title">Quantum Physics Breakthroughs</h3>
+          <div class="digest-theme">Quantum Effects in Real Applications</div>
+          <ul class="digest-highlights">
+            <li>Room-temperature qubit operation achieved by TMD Logic</li>
+            <li>Entanglement distribution over 500km demonstrated</li>
+            <li>Topological quantum computing milestone reached</li>
+          </ul>
+          <div class="digest-meta">
+            <span><i class="material-icons" style="font-size:14px;">schedule</i> 9 min read</span>
+            <span class="audio-badge"><i class="material-icons" style="font-size:14px;">headphones</i> Audio Available</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- SD-P-07 -->
+      <a href="shorts/SD-P-07.html" class="digest-card" data-domain="P">
+        <div class="digest-header">
+          <span class="digest-id">SD-P-07</span>
+          <span class="digest-week">W30</span>
+        </div>
+        <div class="digest-body">
+          <h3 class="digest-title">Particle Dynamics Update</h3>
+          <div class="digest-theme">Subatomic Discoveries Impacting Tech</div>
+          <ul class="digest-highlights">
+            <li>New particle physics results inform next-gen sensor design</li>
+            <li>Dark matter detection sensitivity improved 100x</li>
+            <li>Particle accelerator applications expand to materials science</li>
+          </ul>
+          <div class="digest-meta">
+            <span><i class="material-icons" style="font-size:14px;">schedule</i> 11 min read</span>
+            <span><i class="material-icons" style="font-size:14px;">headphones_off</i> Text Only</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- SD-S-04 -->
+      <a href="shorts/SD-S-04.html" class="digest-card" data-domain="S">
+        <div class="digest-header">
+          <span class="digest-id">SD-S-04</span>
+          <span class="digest-week">W29</span>
+        </div>
+        <div class="digest-body">
+          <h3 class="digest-title">Scientific Methods Innovation</h3>
+          <div class="digest-theme">How SciMSPT Companies Do Science</div>
+          <ul class="digest-highlights">
+            <li>AI Materials Discovery platform publishes reproducibility standards</li>
+            <li>Autonomous lab completes 10,000 experiments without human intervention</li>
+            <li>Open science initiatives across portfolio companies</li>
+          </ul>
+          <div class="digest-meta">
+            <span><i class="material-icons" style="font-size:14px;">schedule</i> 7 min read</span>
+            <span class="audio-badge"><i class="material-icons" style="font-size:14px;">headphones</i> Audio Available</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- SD-T-03 -->
+      <a href="shorts/SD-T-03.html" class="digest-card" data-domain="T">
+        <div class="digest-header">
+          <span class="digest-id">SD-T-03</span>
+          <span class="digest-week">W28</span>
+        </div>
+        <div class="digest-body">
+          <h3 class="digest-title">Temporal Mechanics Frontiers</h3>
+          <div class="digest-theme">Time Science in Practice</div>
+          <ul class="digest-highlights">
+            <li>Temporal Dynamics commercializes attosecond imaging</li>
+            <li>New time crystal applications discovered</li>
+            <li>Precision timing enables next-gen GPS alternative</li>
+          </ul>
+          <div class="digest-meta">
+            <span><i class="material-icons" style="font-size:14px;">schedule</i> 9 min read</span>
+            <span class="audio-badge"><i class="material-icons" style="font-size:14px;">headphones</i> Audio Available</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- SD-T-06 -->
+      <a href="shorts/SD-T-06.html" class="digest-card" data-domain="T">
+        <div class="digest-header">
+          <span class="digest-id">SD-T-06</span>
+          <span class="digest-week">W27</span>
+        </div>
+        <div class="digest-body">
+          <h3 class="digest-title">Time Series Intelligence</h3>
+          <div class="digest-theme">Predictive Analytics Across Domains</div>
+          <ul class="digest-highlights">
+            <li>Forecasting models predict materials properties before synthesis</li>
+            <li>Financial time series analysis optimizes R&D spending</li>
+            <li>Climate modeling informs sustainable manufacturing</li>
+          </ul>
+          <div class="digest-meta">
+            <span><i class="material-icons" style="font-size:14px;">schedule</i> 8 min read</span>
+            <span><i class="material-icons" style="font-size:14px;">headphones_off</i> Text Only</span>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <!-- Research Shorts -->
+  <div class="section" id="shorts">
+    <div class="section-header">
+      <h2>Research Shorts</h2>
+      <p class="section-desc">Deep-dive analyses of specific breakthroughs and their commercial implications for the startup portfolio.</p>
+    </div>
+
+    <div class="shorts-grid">
+      <a href="portfolio-shorts/P9.html" class="short-card">
+        <div class="short-icon"><i class="material-icons">memory</i></div>
+        <div class="short-code">SD-C-01</div>
+        <div class="short-title">DNA-Storage Continuum</div>
+        <div class="short-excerpt">Molecular-scale data storage using synthetic DNA sequences. 215PB/gram density with 1000-year archival stability.</div>
+        <div class="short-tags">
+          <span class="short-tag">Biotech</span>
+          <span class="short-tag">Storage</span>
+          <span class="short-tag">Computers</span>
+        </div>
+      </a>
+
+      <a href="#" class="short-card">
+        <div class="short-icon"><i class="material-icons">auto_awesome</i></div>
+        <div class="short-code">SD-M-01</div>
+        <div class="short-title">Photonic Time Crystals</div>
+        <div class="short-excerpt">World-first photonic time crystal enabling coherent light control at femtosecond timescales for optical computing.</div>
+        <div class="short-tags">
+          <span class="short-tag">Photonics</span>
+          <span class="short-tag">Physics</span>
+          <span class="short-tag">Computing</span>
+        </div>
+      </a>
+
+      <a href="#" class="short-card">
+        <div class="short-icon"><i class="material-icons">bolt</i></div>
+        <div class="short-code">SD-E-01</div>
+        <div class="short-title">Room-Temp Superconductors</div>
+        <div class="short-excerpt">Breakthrough materials achieving superconductivity above 0°C without extreme pressure, enabling practical applications.</div>
+        <div class="short-tags">
+          <span class="short-tag">Materials</span>
+          <span class="short-tag">Energy</span>
+          <span class="short-tag">Physics</span>
+        </div>
+      </a>
+
+      <a href="#" class="short-card">
+        <div class="short-icon"><i class="material-icons">psychology_alt</i></div>
+        <div class="short-code">SD-P-07</div>
+        <div class="short-title">Quantum Brain Interfaces</div>
+        <div class="short-excerpt">Non-invasive neural interfaces using quantum sensors for high-bandwidth brain-computer communication.</div>
+        <div class="short-tags">
+          <span class="short-tag">Neuroscience</span>
+          <span class="short-tag">Quantum</span>
+          <span class="short-tag">Health</span>
+        </div>
+      </a>
+
+      <a href="#" class="short-card">
+        <div class="short-icon"><i class="material-icons">water_drop</i></div>
+        <div class="short-code">SD-H-03</div>
+        <div class="short-title">Green Hydrogen Economics</div>
+        <div class="short-excerpt">Economic modeling of green hydrogen production pathways achieving cost parity with fossil fuels by 2030.</div>
+        <div class="short-tags">
+          <span class="short-tag">Energy</span>
+          <span class="short-tag">Economics</span>
+          <span class="short-tag">H2</span>
+        </div>
+      </a>
+
+      <a href="#" class="short-card">
+        <div class="short-icon"><i class="material-icons">public</i></div>
+        <div class="short-code">SD-ST-04</div>
+        <div class="short-title">Lunar Infrastructure</div>
+        <div class="short-excerpt">Moon base logistics, resource utilization (ISRU), and orbital manufacturing supply chains for Mars missions.</div>
+        <div class="short-tags">
+          <span class="short-tag">Space</span>
+          <span class="short-tag">Infrastructure</span>
+          <span class="short-tag">NASA</span>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <!-- Sources -->
+  <div class="section sources-section" id="sources">
+    <div class="section-header">
+      <h2>Data Sources</h2>
+      <p class="section-desc">All research is sourced from peer-reviewed publications via ScienceDaily news feeds.</p>
+    </div>
+    <div class="source-categories">
+      <a href="https://www.sciencedaily.com/news/matter_energy/" target="_blank" class="source-category">
+        <div class="source-icon"><i class="material-icons">science</i></div>
+        <div class="source-name">Matter & Energy</div>
+        <div class="source-count">60 articles/week</div>
+      </a>
+      <a href="https://www.sciencedaily.com/news/space_time/" target="_blank" class="source-category">
+        <div class="source-icon"><i class="material-icons">public</i></div>
+        <div class="source-name">Space & Time</div>
+        <div class="source-count">50 articles/week</div>
+      </a>
+      <a href="https://www.sciencedaily.com/news/computers_math/" target="_blank" class="source-category">
+        <div class="source-icon"><i class="material-icons">computer</i></div>
+        <div class="source-name">Computers & Math</div>
+        <div class="source-count">39 articles/week</div>
+      </a>
+      <a href="https://www.sciencedaily.com/news/health_medicine/" target="_blank" class="source-category">
+        <div class="source-icon"><i class="material-icons">biotech</i></div>
+        <div class="source-name">Health & Medicine</div>
+        <div class="source-count">Part of S-axis</div>
+      </a>
+      <a href="https://www.sciencedaily.com/news/mind_brain/" target="_blank" class="source-category">
+        <div class="source-icon"><i class="material-icons">psychology</i></div>
+        <div class="source-name">Mind & Brain</div>
+        <div class="source-count">Part of S-axis</div>
+      </a>
+      <a href="https://www.sciencedaily.com/news/living_well/" target="_blank" class="source-category">
+        <div class="source-icon"><i class="material-icons">eco</i></div>
+        <div class="source-name">Living Well</div>
+        <div class="source-count">Part of S-axis</div>
+      </a>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      <div class="footer-brand"><img src="assets/icons/icon-science.png" alt="SciMSPT"><span>Sci<em>MSPT</em> Research</span></div>
+      <div class="footer-links">
+        <a href="index.html">Home</a><a href="dashboard.html">Dashboard</a><a href="research.html">Research</a><a href="startups.html">Startups</a><a href="about.html">About</a>
+      </div>
+      <div class="footer-copy">&copy; 2026 SciMSPT Research Platform. Data sourced from ScienceDaily.</div>
+    </div>
+  </footer>
+
+  <script>
+    function initTheme() {
+      const saved = localStorage.getItem('scimspt-theme');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      setTheme(saved || (prefersDark ? 'dark' : 'light'));
+    }
+    function setTheme(theme) {
+      document.documentElement.setAttribute('data-theme', theme);
+      const icon = document.getElementById('themeIcon'), text = document.getElementById('themeText');
+      if (theme === 'dark') { icon.textContent = 'dark_mode'; text.textContent = 'Dark'; }
+      else { icon.textContent = 'light_mode'; text.textContent = 'Light'; }
+      localStorage.setItem('scimspt-theme', theme);
+    }
+    function toggleTheme() { setTheme(document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'); }
+    initTheme();
+    
+    function filterDigest(domain) {
+      document.querySelectorAll('.domain-tab').forEach(tab => tab.classList.remove('active'));
+      event.target.classList.add('active');
+      
+      document.querySelectorAll('.digest-card').forEach(card => {
+        if (domain === 'all' || card.dataset.domain === domain) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+    
+    function toggleMobileMenu() { alert('Navigation:\n• Home\n• Dashboard\n• Research Trends\n• 7 Startups\n• About'); }
+  </script>
+</body>
+</html>
