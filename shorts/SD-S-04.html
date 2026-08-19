@@ -4,36 +4,108 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SD-S-04 — Scientific Methods | SciMSPT Research</title>
-    <meta name="description" content="SD-S-04: Scientific Methods - Methodological approaches to scientific inquiry and research.">
+    <meta name="description" content="SD-S-04: Methodologies for rigorous scientific investigation within the SciMSPT Science domain.">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #333; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; padding: 20px; }
-        .container { max-width: 900px; margin: 0 auto; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border-radius: 15px; padding: 40px; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1); }
-        h1 { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 10px; }
-        .meta { color: #666; margin-bottom: 30px; padding-bottom: 20px; border-bottom: 2px solid #eee; }
-        .back-link { display: inline-block; margin-bottom: 20px; color: #667eea; text-decoration: none; font-weight: 500; }
-        h2 { color: #667eea; margin-top: 30px; margin-bottom: 15px; }
-        p { margin-bottom: 15px; }
-        .tag { display: inline-block; padding: 4px 12px; background: #e8f4f8; color: #2980b9; border-radius: 20px; font-size: 0.85em; margin-right: 8px; }
+        :root {
+            --primary: #4facfe; --secondary: #00f2fe;
+            --text-dark: #2d3748; --text-light: #718096;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.7; color: var(--text-dark);
+            background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%);
+            min-height: 100vh; padding: 20px;
+        }
+        .container { max-width: 850px; margin: 0 auto; background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1); }
+        .hero-section { background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%); padding: 50px; text-align: center; color: white; }
+        .hero-icon { width: 80px; height: 80px; margin-bottom: 20px; filter: brightness(10); }
+        .hero-section h1 { font-size: 2rem; font-weight: 700; margin-bottom: 10px; }
+        .hero-section p { opacity: 0.9; font-size: 1.05rem; }
+        .content { padding: 45px; }
+        .back-link { display: inline-flex; align-items: center; gap: 6px; margin-bottom: 25px; color: #0284c7; text-decoration: none; font-weight: 600; font-size: 0.95rem; transition: all 0.3s ease; }
+        .back-link:hover { gap: 10px; color: var(--secondary); }
+        .meta-tags { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 30px; }
+        .tag { padding: 6px 14px; background: #e0f2fe; color: #0369a1; border-radius: 20px; font-size: 0.85em; font-weight: 600; }
+        h2 { color: #0284c7; margin-top: 35px; margin-bottom: 16px; font-size: 1.55rem; font-weight: 700; position: relative; padding-left: 16px; }
+        h2::before { content: ''; position: absolute; left: 0; top: 6px; bottom: 6px; width: 4px; background: linear-gradient(180deg, var(--primary), var(--secondary)); border-radius: 2px; }
+        p { margin-bottom: 16px; color: var(--text-dark); font-size: 1.02rem; line-height: 1.75; }
+        ul, ol { margin-left: 22px; margin-bottom: 18px; }
+        li { margin-bottom: 9px; color: var(--text-dark); font-size: 1rem; line-height: 1.65; }
+        strong { color: var(--text-dark); font-weight: 600; }
+        .key-insight { background: linear-gradient(135deg, #4facfe08 0%, #00f2fe08 100%); padding: 25px; border-radius: 12px; margin: 28px 0; border: 1px solid #e2e8f0; }
+        footer { margin-top: 45px; padding-top: 25px; border-top: 2px solid #f0f0f0; color: var(--text-light); font-size: 0.9rem; text-align: center; }
+        @media (max-width: 768px) { .content { padding: 30px 24px; } .hero-section { padding: 35px 25px; } h1 { font-size: 1.65rem; } }
     </style>
 </head>
 <body>
     <div class="container">
-        <a href="../index.html" class="back-link">← Back to SciMSPT</a>
-        <h1>SD-S-04 — Scientific Methods</h1>
-        <div class="meta">
-            <span class="tag">Methodology</span>
-            <span class="tag">Research</span>
-            <p><strong>Domain:</strong> Science</p>
+        <div class="hero-section">
+            <img src="../assets/images/thumb-SD-S-04.png" alt="Scientific Methods" class="hero-icon">
+            <h1>SD-S-04 — Scientific Methods</h1>
+            <p>Methodologies for rigorous scientific investigation</p>
         </div>
-        <h2>Overview</h2>
-        <p>This research short examines scientific methodologies and approaches to rigorous inquiry within the SciMSPT framework.</p>
-        <h2>Methodological Frameworks</h2>
-        <p><strong>Experimental Design:</strong> Principles of controlled experimentation and statistical analysis.</p>
-        <p><strong>Theoretical Validation:</strong> Criteria for evaluating scientific theories and models.</p>
-        <footer style="margin-top: 40px; padding-top: 20px; border-top: 2px solid #eee; color: #666; font-size: 0.9em;">
-            <p>© 2026 SciMSPT — Scientific Mesh for Science, Matter, Physics & Time</p>
-        </footer>
+
+        <div class="content">
+            <a href="../index.html" class="back-link">← Back to SciMSPT</a>
+            
+            <div class="meta-tags">
+                <span class="tag">Methodology</span>
+                <span class="tag">Experimental Design</span>
+                <span class="tag">Reproducibility</span>
+                <span class="tag">Domain: Science (S)</span>
+            </div>
+
+            <h2>Abstract</h2>
+            <p>This research short outlines the systematic approaches and methodological frameworks that underpin rigorous scientific inquiry across all domains of the SciMSPT platform. Sound scientific methodology ensures reproducibility, minimizes bias, and enables reliable knowledge accumulation through empirical observation and logical reasoning.</p>
+
+            <h2>The Scientific Method Framework</h2>
+
+            <p><strong>Observation & Question Formulation:</strong></p>
+            <ul>
+                <li>Systematic observation of natural phenomena identifying patterns requiring explanation</li>
+                <li>Precise formulation of research questions that are answerable through empirical investigation</li>
+                <li>Literature review establishing current knowledge state and identifying gaps</li>
+                <li>Hypothesis generation proposing testable explanations for observed phenomena</li>
+            </ul>
+
+            <p><strong>Experimental Design Principles:</strong></p>
+            <ul>
+                <li>Controlled experiments isolating effects of independent variables on dependent outcomes</li>
+                <li>Randomization eliminating confounding factors and selection biases in subject assignment</li>
+                <li>Blinding procedures preventing experimenter expectations from influencing results or analysis</li>
+                <li>Replication ensuring findings are robust across different samples, settings, and investigators</li>
+            </ul>
+
+            <div class="key-insight">
+                <p><strong>Falsifiability Criterion:</strong> A core principle distinguishing scientific hypotheses from non-scientific claims is falsifiability—scientific theories must make predictions that could potentially be proven wrong by empirical evidence. This criterion, articulated by Karl Popper, ensures scientific knowledge remains provisional and open to revision.</p>
+            </div>
+
+            <h2>Data Collection & Analysis</h2>
+
+            <ol>
+                <li><strong>Measurement & Instrumentation:</strong> Calibration protocols establishing traceability to standards, quantification of measurement uncertainty, and selection of instruments appropriate for required precision and accuracy.</li>
+                
+                <li><strong>Statistical Inference:</strong> Hypothesis testing quantifying evidence against null models, confidence intervals estimating parameter ranges consistent with data, and Bayesian methods updating prior beliefs with new observations.</li>
+                
+                <li><strong>Error Analysis:</strong> Propagation of uncertainties through calculations, identification of systematic vs. random errors, and robust statistical methods resistant to outliers and violations of assumptions.</li>
+            </ol>
+
+            <h2>Reproducibility & Open Science</h2>
+            
+            <ul>
+                <li><strong>Data sharing:</strong> Deposition of raw data in public repositories enabling reanalysis by independent researchers</li>
+                <li><strong>Code availability:</strong> Publication of analysis scripts and computational notebooks ensuring computational reproducibility</li>
+                <li><strong>Pre-registration:</strong> Specifying hypotheses and analysis plans before data collection preventing p-hacking and publication bias</li>
+                <li><strong>Replication studies:</strong> Systematic reproduction of published findings assessing generalizability and identifying potential errors</li>
+            </ul>
+
+            <footer>
+                <p><strong>SD-S-04 — Scientific Methods</strong></p>
+                <p style="margin-top: 8px;">© 2026 SciMSPT — Scientific Mesh for Science, Matter, Physics & Time</p>
+                <p style="margin-top: 12px; font-size: 0.82em; opacity: 0.7;">Research Short | Domain: Science (S)</p>
+            </footer>
+        </div>
     </div>
 </body>
 </html>

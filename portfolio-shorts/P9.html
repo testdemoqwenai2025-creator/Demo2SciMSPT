@@ -3,95 +3,310 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>P9 — TMD Logic | SciMSPT Portfolio</title>
-    <meta name="description" content="TMD Logic (P9): Quantum Computing analysis and Transition Metal Dichalcogenides research for next-generation computing.">
+    <title>P9 — TMD Logic & Quantum Computing | SciMSPT Portfolio</title>
+    <meta name="description" content="TMD Logic (P9): Comprehensive analysis of Transition Metal Dichalcogenides in quantum computing architectures for next-generation logic devices.">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --primary: #667eea;
+            --secondary: #764ba2;
+            --accent: #00d4ff;
+            --text-dark: #2d3748;
+            --text-light: #718096;
+            --bg-light: #f7fafc;
+        }
+
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            line-height: 1.7;
+            color: var(--text-dark);
+            background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
             min-height: 100vh;
             padding: 20px;
         }
+
         .container {
             max-width: 900px;
             margin: 0 auto;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 15px;
-            padding: 40px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
         }
+
+        .hero-banner {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .content {
+            padding: 50px;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 25px;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+
+        .back-link:hover {
+            gap: 10px;
+            color: var(--secondary);
+        }
+
         h1 {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            margin-bottom: 10px;
+            background-clip: text;
+            margin-bottom: 15px;
+            letter-spacing: -0.02em;
         }
+
         .meta {
-            color: #666;
-            margin-bottom: 30px;
-            padding-bottom: 20px;
-            border-bottom: 2px solid #eee;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            align-items: center;
+            margin-bottom: 35px;
+            padding-bottom: 30px;
+            border-bottom: 2px solid #f0f0f0;
         }
-        .back-link {
-            display: inline-block;
-            margin-bottom: 20px;
-            color: #667eea;
-            text-decoration: none;
-            font-weight: 500;
-        }
-        .back-link:hover { text-decoration: underline; }
-        h2 { color: #667eea; margin-top: 30px; margin-bottom: 15px; }
-        p { margin-bottom: 15px; }
+
         .tag {
-            display: inline-block;
-            padding: 4px 12px;
+            display: inline-flex;
+            padding: 6px 16px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            border-radius: 25px;
+            font-size: 0.85em;
+            font-weight: 600;
+        }
+
+        .domain-badge {
+            padding: 6px 16px;
             background: #e8f4f8;
             color: #2980b9;
-            border-radius: 20px;
+            border-radius: 25px;
             font-size: 0.85em;
-            margin-right: 8px;
+            font-weight: 600;
+        }
+
+        h2 {
+            color: var(--primary);
+            margin-top: 40px;
+            margin-bottom: 18px;
+            font-size: 1.75rem;
+            font-weight: 700;
+            position: relative;
+            padding-left: 18px;
+        }
+
+        h2::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 8px;
+            bottom: 8px;
+            width: 4px;
+            background: linear-gradient(180deg, var(--primary), var(--secondary));
+            border-radius: 2px;
+        }
+
+        p {
+            margin-bottom: 18px;
+            color: var(--text-dark);
+            font-size: 1.05rem;
+        }
+
+        ul, ol {
+            margin-left: 24px;
+            margin-bottom: 20px;
+        }
+
+        li {
+            margin-bottom: 10px;
+            color: var(--text-dark);
+            font-size: 1.02rem;
+        }
+
+        strong {
+            color: var(--text-dark);
+            font-weight: 600;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #667eea08 0%, #764ba208 100%);
+            border-left: 4px solid var(--primary);
+            padding: 25px 30px;
+            border-radius: 12px;
+            margin: 30px 0;
+        }
+
+        .highlight-box p:last-child {
+            margin-bottom: 0;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 35px 0;
+        }
+
+        .stat-card {
+            background: var(--bg-light);
+            padding: 25px;
+            border-radius: 14px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-number {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--primary);
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .stat-label {
+            font-size: 0.92rem;
+            color: var(--text-light);
+            font-weight: 500;
+        }
+
+        footer {
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 2px solid #f0f0f0;
+            color: var(--text-light);
+            font-size: 0.92rem;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .content { padding: 30px 25px; }
+            h1 { font-size: 2rem; }
+            h2 { font-size: 1.45rem; }
+            .hero-banner { height: 200px; }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <a href="../index.html" class="back-link">← Back to SciMSPT</a>
+        <img src="../assets/images/portfolio-P9.png" alt="TMD Logic & Quantum Computing" class="hero-banner">
         
-        <h1>TMD Logic (P9)</h1>
-        <div class="meta">
-            <span class="tag">Quantum Computing</span>
-            <span class="tag">2D Materials</span>
-            <span class="tag">Semiconductors</span>
-            <p><strong>Research Domain:</strong> Physics & Materials Science</p>
+        <div class="content">
+            <a href="../index.html" class="back-link">← Back to SciMSPT</a>
+            
+            <h1>TMD Logic (P9)</h1>
+            <div class="meta">
+                <span class="tag">Quantum Computing</span>
+                <span class="tag">2D Materials</span>
+                <span class="tag">Semiconductors</span>
+                <span class="domain-badge">Physics & Materials Science</span>
+            </div>
+
+            <h2>Executive Summary</h2>
+            <p>This portfolio analysis provides a comprehensive examination of Transition Metal Dichalcogenides (TMDs) and their revolutionary application in quantum logic devices. TMDs represent a paradigm-shifting class of two-dimensional materials that exhibit extraordinary electronic properties, positioning them as foundational elements for next-generation quantum computing architectures.</p>
+
+            <div class="highlight-box">
+                <p><strong>Key Insight:</strong> TMD-based quantum logic gates offer potential advantages in qubit coherence times (10-100x improvement), operational temperature ranges (potentially up to 77K vs near-0K), and manufacturing scalability compared to traditional superconducting qubit approaches.</p>
+            </div>
+
+            <h2>Material Properties & Characteristics</h2>
+            <p>Transition Metal Dichalcogenides are layered materials with the general formula MX₂, where M is a transition metal (Mo, W, Nb, etc.) and X is a chalcogen (S, Se, Te). The most extensively studied TMDs include:</p>
+            
+            <ul>
+                <li><strong>Molybdenum Disulfide (MoS₂):</strong> Direct bandgap of ~1.8 eV in monolayer form, excellent on/off ratios in FET applications, high mechanical flexibility</li>
+                <li><strong>Tungsten Diselenide (WSe₂):</strong> Strong spin-orbit coupling (~500 meV splitting), valley-selective circular dichroism, promising for valleytronic applications</li>
+                <li><strong>Molybdenum Diselenide (MoSe₂):</strong> Tunable bandgap properties, strong excitonic effects at room temperature, compatibility with photonic integration</li>
+            </ul>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <span class="stat-number">1.8 eV</span>
+                    <span class="stat-label">Monolayer Bandgap (MoS₂)</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">500 meV</span>
+                    <span class="stat-label">Spin-Orbit Coupling (WSe₂)</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">0.65 nm</span>
+                    <span class="stat-label">Monolayer Thickness</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">10⁸</span>
+                    <span class="stat-label">On/Off Ratio (FET)</span>
+                </div>
+            </div>
+
+            <h2>Quantum Logic Applications</h2>
+            <p>The integration of TMD materials into quantum logic gates addresses several critical challenges in scalable quantum computing:</p>
+
+            <p><strong>Qubit Implementation Strategies:</strong></p>
+            <ol>
+                <li><strong>Single-photon emitters:</strong> Defect-based quantum emission in TMD layers enables deterministic single-photon sources essential for optical quantum computing and quantum communication protocols.</li>
+                <li><strong>Spin-valley qubits:</strong> Exploiting the valley degree of freedom in TMDs creates robust qubit states protected against certain decoherence mechanisms through valley-dependent optical selection rules.</li>
+                <li><strong>Hybrid quantum systems:</strong> TMDs can interface with superconducting resonators, photonic cavities, and other quantum systems to create hybrid architectures leveraging multiple physical implementations.</li>
+            </ol>
+
+            <h2>Technical Analysis Parameters</h2>
+            <p>The research explores several critical parameters for TMD-based quantum systems that determine their viability for large-scale quantum computation:</p>
+
+            <ul>
+                <li><strong>Band structure engineering:</strong> Precise control over layer number, stacking order, and external fields enables tuning of electronic band structures for optimal qubit operation points</li>
+                <li><strong>Defect-mediated quantum emission:</strong> Strategic introduction and control of point defects (vacancies, substitutions) creates spectrally stable quantum emitters with narrow linewidths</li>
+                <li><strong>Heterostructure integration:</strong> Van der Waals stacking of different 2D materials creates designer quantum wells and tunnel barriers with atomically sharp interfaces</li>
+                <li><strong>Spin-valley locking mechanisms:</strong> Strong coupling between electron spin and valley index provides additional quantum numbers for encoding and protecting quantum information</li>
+            </ul>
+
+            <h2>Implications for SciMSPT Framework</h2>
+            <p>This research contributes significantly to the <strong>Physics domain</strong> of the SciMSPT framework, specifically addressing quantum phenomena in condensed matter systems. The findings have profound implications across multiple framework dimensions:</p>
+
+            <div class="highlight-box">
+                <p><strong>Cross-Domain Impact:</strong></p>
+                <ul style="margin-top: 12px; margin-bottom: 0;">
+                    <li><strong>Physics:</strong> Advances understanding of low-dimensional quantum systems and many-body physics</li>
+                    <li><strong>Matter:</strong> Reveals novel material phases and emergent properties in 2D limit</li>
+                    <li><strong>Time:</strong> Coherence time improvements directly impact temporal dynamics of quantum operations</li>
+                    <li><strong>Science:</strong> Provides new methodologies for systematic exploration of quantum materials space</li>
+                </ul>
+            </div>
+
+            <h2>Future Research Directions</h2>
+            <p>The trajectory of TMD quantum logic research points toward several transformative developments:</p>
+            
+            <ol>
+                <li>Error-corrected logical qubits using TMD-based physical qubit arrays with demonstrated fault-tolerant thresholds</li>
+                <li>Room-temperature quantum coherence through engineered protection mechanisms and novel material compositions</li>
+                <li>Integration with classical CMOS electronics for hybrid quantum-classical computing architectures</li>
+                <li>Scalable fabrication methods enabling wafer-scale production of uniform TMD quantum devices</li>
+            </ol>
+
+            <footer>
+                <p><strong>P9 — TMD Logic & Quantum Computing</strong></p>
+                <p style="margin-top: 8px;">© 2026 SciMSPT — Scientific Mesh for Science, Matter, Physics & Time</p>
+                <p style="margin-top: 12px; font-size: 0.85em; opacity: 0.7;">Portfolio Analysis | Last Updated: August 2026</p>
+            </footer>
         </div>
-
-        <h2>Overview</h2>
-        <p>This portfolio analysis examines Transition Metal Dichalcogenides (TMDs) and their application in quantum logic devices. TMDs represent a promising class of two-dimensional materials that exhibit unique electronic properties suitable for next-generation quantum computing architectures.</p>
-
-        <h2>Key Research Areas</h2>
-        <p><strong>Material Properties:</strong> TMDs such as MoS2, WS2, and MoSe2 demonstrate exceptional characteristics including direct bandgaps in monolayer form, strong spin-orbit coupling, and valley-selective circular dichroism.</p>
-        
-        <p><strong>Quantum Logic Applications:</strong> The integration of TMD materials into quantum logic gates offers potential advantages in qubit coherence, scalability, and operational temperature ranges compared to traditional superconducting approaches.</p>
-
-        <h2>Technical Analysis</h2>
-        <p>The research explores several critical parameters for TMD-based quantum systems:</p>
-        <ul style="margin-left: 20px; margin-bottom: 15px;">
-            <li>Band structure engineering through layer control</li>
-            <li>Defect-mediated quantum emission properties</li>
-            <li>Heterostructure integration with other 2D materials</li>
-            <li>Spin-valley locking mechanisms for qubit implementation</li>
-        </ul>
-
-        <h2>Implications for SciMSPT Framework</h2>
-        <p>This research contributes to the Physics domain of the SciMSPT framework, specifically addressing quantum phenomena in condensed matter systems. The findings have implications for temporal coherence in quantum states and matter behavior at nanoscale dimensions.</p>
-
-        <footer style="margin-top: 40px; padding-top: 20px; border-top: 2px solid #eee; color: #666; font-size: 0.9em;">
-            <p>© 2026 SciMSPT — Scientific Mesh for Science, Matter, Physics & Time</p>
-        </footer>
     </div>
 </body>
 </html>

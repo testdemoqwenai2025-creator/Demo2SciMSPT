@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SciMSPT — Scientific Mesh for Science, Matter, Physics & Time</title>
     <meta name="description" content="SciMSPT: An interdisciplinary scientific framework exploring the interconnectedness of Science, Matter, Physics, and Time through research publications and portfolio analysis.">
+    <link rel="icon" type="image/png" href="assets/icons/icon-science.png">
     <style>
         * {
             margin: 0;
@@ -12,211 +13,902 @@
             box-sizing: border-box;
         }
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --accent-blue: #00d4ff;
+            --accent-pink: #ff6b9d;
+            --accent-purple: #c084fc;
+            --accent-yellow: #fbbf24;
+            --text-dark: #2d3748;
+            --text-light: #718096;
+            --bg-light: #f7fafc;
+            --card-bg: rgba(255, 255, 255, 0.95);
+            --shadow-sm: 0 4px 6px rgba(0, 0, 0, 0.07);
+            --shadow-md: 0 10px 40px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.15);
+            --border-radius: 16px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: var(--bg-light);
+            overflow-x: hidden;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: var(--primary-gradient);
+            min-height: 85vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
             padding: 20px;
         }
 
-        header {
-            background: rgba(255, 255, 255, 0.95);
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('assets/images/hero-banner.png') center/cover no-repeat;
+            opacity: 0.15;
+            animation: fadeIn 1s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 0.15; }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 900px;
+            color: white;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            padding: 8px 20px;
+            background: rgba(255, 255, 255, 0.2);
             backdrop-filter: blur(10px);
-            border-radius: 15px;
-            padding: 30px;
-            margin-bottom: 30px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            border-radius: 50px;
+            font-size: 0.9em;
+            font-weight: 500;
+            margin-bottom: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            animation: slideDown 0.8s ease-out;
         }
 
-        h1 {
-            font-size: 2.5em;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 10px;
+        @keyframes slideDown {
+            from { 
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
-        .subtitle {
-            font-size: 1.2em;
-            color: #666;
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 800;
             margin-bottom: 20px;
+            letter-spacing: -0.02em;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            animation: scaleIn 1s ease-out 0.2s both;
         }
 
-        nav {
-            display: flex;
+        @keyframes scaleIn {
+            from { 
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to { 
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.1rem, 2vw, 1.4rem);
+            opacity: 0.95;
+            margin-bottom: 35px;
+            font-weight: 300;
+            animation: slideUp 0.8s ease-out 0.4s both;
+        }
+
+        @keyframes slideUp {
+            from { 
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-cta {
+            display: inline-flex;
             gap: 15px;
             flex-wrap: wrap;
-            margin-top: 20px;
+            justify-content: center;
+            animation: slideUp 0.8s ease-out 0.6s both;
         }
 
-        nav a {
-            padding: 12px 24px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
+        .btn {
+            padding: 14px 32px;
+            border-radius: 50px;
             text-decoration: none;
-            border-radius: 8px;
-            font-weight: 500;
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-
-        nav a:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
-        }
-
-        .main-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-            margin-bottom: 30px;
-        }
-
-        .card {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 15px;
-            padding: 25px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-        }
-
-        .card h2 {
-            color: #667eea;
-            margin-bottom: 15px;
-            font-size: 1.5em;
-        }
-
-        .card ul {
-            list-style: none;
-            padding-left: 0;
-        }
-
-        .card li {
-            padding: 8px 0;
-            border-bottom: 1px solid #eee;
-        }
-
-        .card li:last-child {
-            border-bottom: none;
-        }
-
-        .card a {
-            color: #764ba2;
-            text-decoration: none;
-            display: flex;
+            font-weight: 600;
+            font-size: 1em;
+            transition: var(--transition);
+            cursor: pointer;
+            border: none;
+            display: inline-flex;
             align-items: center;
             gap: 8px;
         }
 
-        .card a:hover {
+        .btn-primary {
+            background: white;
+            color: #667eea;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-3px);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Domains Section */
+        .domains-section {
+            padding: 80px 20px;
+            background: white;
+            margin-top: -60px;
+            position: relative;
+            z-index: 3;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 15px;
+        }
+
+        .section-header p {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .domains-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .domain-card {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 35px;
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .domain-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--domain-color, var(--primary-gradient));
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .domain-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .domain-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .domain-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            object-fit: contain;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .domain-card:nth-child(2) .domain-icon { animation-delay: 0.5s; }
+        .domain-card:nth-child(3) .domain-icon { animation-delay: 1s; }
+        .domain-card:nth-child(4) .domain-icon { animation-delay: 1.5s; }
+
+        .domain-card h3 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 12px;
+        }
+
+        .domain-card p {
+            color: var(--text-light);
+            line-height: 1.7;
+        }
+
+        /* Research Overview Section */
+        .research-section {
+            padding: 80px 20px;
+            background: linear-gradient(to bottom, #f7fafc, #edf2f7);
+        }
+
+        .research-overview-container {
+            background: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            margin-top: 40px;
+        }
+
+        .research-image-wrapper {
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .research-image-wrapper img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+
+        .research-image-wrapper:hover img {
+            transform: scale(1.02);
+        }
+
+        /* Portfolio Section */
+        .portfolio-section {
+            padding: 80px 20px;
+            background: white;
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .portfolio-card {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .portfolio-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .portfolio-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .portfolio-content {
+            padding: 25px;
+        }
+
+        .portfolio-badge {
+            display: inline-block;
+            padding: 5px 12px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .portfolio-content h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 10px;
+        }
+
+        .portfolio-content p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            margin-bottom: 18px;
+            line-height: 1.6;
+        }
+
+        .portfolio-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: var(--transition);
+        }
+
+        .portfolio-link:hover {
+            color: #764ba2;
+            gap: 10px;
+        }
+
+        /* Shorts Section */
+        .shorts-section {
+            padding: 80px 20px;
+            background: linear-gradient(135deg, #667eea05 0%, #764ba205 100%);
+        }
+
+        .shorts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .short-card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 25px;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            display: flex;
+            gap: 18px;
+            align-items: flex-start;
+        }
+
+        .short-card:hover {
+            transform: translateX(5px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .short-thumb {
+            width: 70px;
+            height: 70px;
+            border-radius: 12px;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+
+        .short-info h4 {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 6px;
+        }
+
+        .short-info p {
+            font-size: 0.88rem;
+            color: var(--text-light);
+            margin-bottom: 10px;
+        }
+
+        .short-link {
+            color: #667eea;
+            text-decoration: none;
+            font-size: 0.88rem;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .short-link:hover {
+            color: #764ba2;
+        }
+
+        /* About Section */
+        .about-section {
+            padding: 80px 20px;
+            background: var(--text-dark);
+            color: white;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 50px;
+            align-items: center;
+            margin-top: 50px;
+        }
+
+        .about-image {
+            width: 100%;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .about-content h2 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 25px;
+        }
+
+        .about-content > p {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            opacity: 0.9;
+            margin-bottom: 25px;
+        }
+
+        .about-features {
+            list-style: none;
+            margin-top: 30px;
+        }
+
+        .about-features li {
+            padding: 12px 0;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        .about-features li::before {
+            content: '✓';
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            font-size: 0.8rem;
+            flex-shrink: 0;
+        }
+
+        /* Footer */
+        footer {
+            background: #1a202c;
+            color: white;
+            padding: 50px 20px 30px;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        footer h3 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        footer p {
+            opacity: 0.8;
+            margin-bottom: 20px;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            flex-wrap: wrap;
+            margin: 30px 0;
+        }
+
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            opacity: 0.7;
+            transition: var(--transition);
+            font-size: 0.95rem;
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
             color: #667eea;
         }
 
-        footer {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 15px;
-            padding: 25px;
-            text-align: center;
-            color: #666;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 25px;
+            margin-top: 30px;
+            font-size: 0.9rem;
+            opacity: 0.6;
         }
 
-        .badge {
-            display: inline-block;
-            padding: 4px 12px;
-            background: #e8f4f8;
-            color: #2980b9;
-            border-radius: 20px;
-            font-size: 0.85em;
-            margin-left: 8px;
-        }
-
+        /* Responsive Design */
         @media (max-width: 768px) {
-            h1 {
-                font-size: 1.8em;
+            .hero {
+                min-height: 70vh;
+                padding: 40px 20px;
             }
-            
-            nav {
-                flex-direction: column;
+
+            .hero h1 {
+                font-size: 2.2rem;
             }
-            
-            nav a {
-                text-align: center;
+
+            .section-header h2 {
+                font-size: 2rem;
             }
+
+            .domains-grid,
+            .portfolio-grid,
+            .shorts-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .domains-section {
+                margin-top: -40px;
+            }
+        }
+
+        /* Smooth scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Selection color */
+        ::selection {
+            background: #667eea;
+            color: white;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-badge">🔬 Interdisciplinary Scientific Framework</div>
             <h1>SciMSPT</h1>
-            <p class="subtitle">Scientific Mesh for Science, Matter, Physics & Time</p>
-            <nav>
-                <a href="#portfolio-shorts">Portfolio Shorts</a>
+            <p class="hero-subtitle">Scientific Mesh for Science, Matter, Physics & Time<br>Exploring the fundamental connections of our universe</p>
+            <div class="hero-cta">
+                <a href="#portfolio" class="btn btn-primary">
+                    📊 Explore Portfolio
+                </a>
+                <a href="#research" class="btn btn-secondary">
+                    🔬 View Research
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Core Domains Section -->
+    <section class="domains-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Core Research Domains</h2>
+                <p>The SciMSPT framework integrates four fundamental pillars of scientific inquiry into a unified mesh of knowledge.</p>
+            </div>
+
+            <div class="domains-grid">
+                <div class="domain-card" style="--domain-color: #00d4ff;">
+                    <img src="assets/icons/icon-science.png" alt="Science" class="domain-icon">
+                    <h3>Science</h3>
+                    <p>Systematic exploration of natural phenomena through observation, experimentation, and theoretical modeling.</p>
+                </div>
+
+                <div class="domain-card" style="--domain-color: #ff6b9d;">
+                    <img src="assets/icons/icon-matter.png" alt="Matter" class="domain-icon">
+                    <h3>Matter</h3>
+                    <p>Investigation of material properties, quantum states, and the building blocks of physical reality.</p>
+                </div>
+
+                <div class="domain-card" style="--domain-color: #c084fc;">
+                    <img src="assets/icons/icon-physics.png" alt="Physics" class="domain-icon">
+                    <h3>Physics</h3>
+                    <p>Fundamental laws governing energy, forces, motion, and the structure of space-time itself.</p>
+                </div>
+
+                <div class="domain-card" style="--domain-color: #fbbf24;">
+                    <img src="assets/icons/icon-time.png" alt="Time" class="domain-icon">
+                    <h3>Time</h3>
+                    <p>Temporal dynamics, causality, chronology, and the arrow of time in physical systems.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Research Overview Section -->
+    <section class="research-section" id="research">
+        <div class="container">
+            <div class="section-header">
+                <h2>Research Landscape</h2>
+                <p>A comprehensive overview of interconnected research areas within the SciMSPT framework.</p>
+            </div>
+
+            <div class="research-overview-container">
+                <div class="research-image-wrapper">
+                    <img src="assets/images/research-papers-overview.png" alt="SciMSPT Research Overview">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Shorts Section -->
+    <section class="portfolio-section" id="portfolio">
+        <div class="container">
+            <div class="section-header">
+                <h2>Portfolio Analysis</h2>
+                <p>In-depth examinations of cutting-edge research topics and technological developments.</p>
+            </div>
+
+            <div class="portfolio-grid">
+                <article class="portfolio-card">
+                    <img src="assets/images/portfolio-P3.png" alt="Quantum Materials" class="portfolio-image">
+                    <div class="portfolio-content">
+                        <span class="portfolio-badge">Materials Science</span>
+                        <h3>P3 — Quantum Materials Analysis</h3>
+                        <p>Exploring quantum phenomena in advanced materials including superconductors and topological insulators.</p>
+                        <a href="portfolio-shorts/P3.html" class="portfolio-link">
+                            Read Analysis →
+                        </a>
+                    </div>
+                </article>
+
+                <article class="portfolio-card">
+                    <img src="assets/images/portfolio-P5.png" alt="Computational Physics" class="portfolio-image">
+                    <div class="portfolio-content">
+                        <span class="portfolio-badge">Computational</span>
+                        <h3>P5 — Computational Physics Models</h3>
+                        <p>Advanced numerical methods and simulations for complex physical systems.</p>
+                        <a href="portfolio-shorts/P5.html" class="portfolio-link">
+                            Read Analysis →
+                        </a>
+                    </div>
+                </article>
+
+                <article class="portfolio-card">
+                    <img src="assets/images/portfolio-P9.png" alt="TMD Logic" class="portfolio-image">
+                    <div class="portfolio-content">
+                        <span class="portfolio-badge">Quantum Computing</span>
+                        <h3>P9 — TMD Logic & Quantum Computing</h3>
+                        <p>Transition Metal Dichalcogenides in next-generation quantum logic architectures.</p>
+                        <a href="portfolio-shorts/P9.html" class="portfolio-link">
+                            Read Analysis →
+                        </a>
+                    </div>
+                </article>
+
+                <article class="portfolio-card">
+                    <img src="assets/images/portfolio-P11.png" Advanced Materials" class="portfolio-image">
+                    <div class="portfolio-content">
+                        <span class="portfolio-badge">Advanced Materials</span>
+                        <h3>P11 — Advanced Material Science</h3>
+                        <p>Cutting-edge materials research for next-generation technologies and applications.</p>
+                        <a href="portfolio-shorts/P11.html" class="portfolio-link">
+                            Read Analysis →
+                        </a>
+                    </div>
+                </article>
+
+                <article class="portfolio-card">
+                    <img src="assets/images/portfolio-P12.png" alt="Time-Domain Research" class="portfolio-image">
+                    <div class="portfolio-content">
+                        <span class="portfolio-badge">Temporal Dynamics</span>
+                        <h3>P12 — Time-Domain Research</h3>
+                        <p>Analysis of temporal phenomena and time-dependent processes in physical systems.</p>
+                        <a href="portfolio-shorts/P12.html" class="portfolio-link">
+                            Read Analysis →
+                        </a>
+                    </div>
+                </article>
+
+                <article class="portfolio-card">
+                    <img src="assets/images/portfolio-P-ai-materials.png" alt="AI Materials Discovery" class="portfolio-image">
+                    <div class="portfolio-content">
+                        <span class="portfolio-badge">AI & ML</span>
+                        <h3>AI Materials Discovery</h3>
+                        <p>Machine learning approaches to accelerated materials discovery and optimization.</p>
+                        <a href="portfolio-shorts/P-ai-materials.html" class="portfolio-link">
+                            Read Analysis →
+                        </a>
+                    </div>
+                </article>
+
+                <article class="portfolio-card">
+                    <img src="assets/images/portfolio-P-cmos-2nm.png" alt="CMOS Technology" class="portfolio-image">
+                    <div class="portfolio-content">
+                        <span class="portfolio-badge">Semiconductor</span>
+                        <h3>CMOS 2nm Technology</h3>
+                        <p>Frontier semiconductor technology at the 2nm process node and beyond.</p>
+                        <a href="portfolio-shorts/P-cmos-2nm.html" class="portfolio-link">
+                            Read Analysis →
+                        </a>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Research Shorts Section -->
+    <section class="shorts-section" id="shorts">
+        <div class="container">
+            <div class="section-header">
+                <h2>Research Shorts</h2>
+                <p>Concise scientific publications covering diverse domains within the SciMSPT framework.</p>
+            </div>
+
+            <div class="shorts-grid">
+                <article class="short-card">
+                    <img src="assets/images/thumb-SD-M-01.png" alt="Mathematical Foundations" class="short-thumb">
+                    <div class="short-info">
+                        <h4>SD-M-01 — Mathematical Foundations</h4>
+                        <p>Core mathematical principles underlying scientific modeling.</p>
+                        <a href="shorts/SD-M-01.html" class="short-link">Read More →</a>
+                    </div>
+                </article>
+
+                <article class="short-card">
+                    <img src="assets/images/thumb-SD-M-02.png" alt="Computing Theory" class="short-thumb">
+                    <div class="short-info">
+                        <h4>SD-M-02 — Computing Theory</h4>
+                        <p>Theoretical foundations of computation and algorithms.</p>
+                        <a href="shorts/SD-M-02.html" class="short-link">Read More →</a>
+                    </div>
+                </article>
+
+                <article class="short-card">
+                    <img src="assets/images/thumb-SD-P-05.png" alt="Quantum Physics" class="short-thumb">
+                    <div class="short-info">
+                        <h4>SD-P-05 — Quantum Physics</h4>
+                        <p>Quantum mechanical phenomena and applications.</p>
+                        <a href="shorts/SD-P-05.html" class="short-link">Read More →</a>
+                    </div>
+                </article>
+
+                <article class="short-card">
+                    <img src="assets/images/thumb-SD-P-07.png" alt="Particle Dynamics" class="short-thumb">
+                    <div class="short-info">
+                        <h4>SD-P-07 — Particle Dynamics</h4>
+                        <p>Subatomic particle behavior and interactions.</p>
+                        <a href="shorts/SD-P-07.html" class="short-link">Read More →</a>
+                    </div>
+                </article>
+
+                <article class="short-card">
+                    <img src="assets/images/thumb-SD-S-04.png" alt="Scientific Methods" class="short-thumb">
+                    <div class="short-info">
+                        <h4>SD-S-04 — Scientific Methods</h4>
+                        <p>Methodologies for rigorous scientific investigation.</p>
+                        <a href="shorts/SD-S-04.html" class="short-link">Read More →</a>
+                    </div>
+                </article>
+
+                <article class="short-card">
+                    <img src="assets/images/thumb-SD-T-03.png" alt="Temporal Mechanics" class="short-thumb">
+                    <div class="short-info">
+                        <h4>SD-T-03 — Temporal Mechanics</h4>
+                        <p>Mechanisms governing temporal phenomena.</p>
+                        <a href="shorts/SD-T-03.html" class="short-link">Read More →</a>
+                    </div>
+                </article>
+
+                <article class="short-card">
+                    <img src="assets/images/thumb-SD-T-06.png" alt="Time Series Analysis" class="short-thumb">
+                    <div class="short-info">
+                        <h4>SD-T-06 — Time Series Analysis</h4>
+                        <p>Statistical methods for time-dependent data.</p>
+                        <a href="shorts/SD-T-06.html" class="short-link">Read More →</a>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section" id="about">
+        <div class="container">
+            <div class="about-grid">
+                <div>
+                    <img src="assets/mandalas/scientific-mandala.png" alt="SciMSPT Scientific Mesh" class="about-image">
+                </div>
+                <div class="about-content">
+                    <h2>About SciMSPT</h2>
+                    <p>SciMSPT represents an interdisciplinary research framework that explores the fundamental connections between Science, Matter, Physics, and Time through rigorous analysis and innovative methodologies.</p>
+                    <p>This framework enables researchers to examine complex phenomena through multiple lenses, fostering breakthrough insights that bridge traditional disciplinary boundaries.</p>
+                    
+                    <ul class="about-features">
+                        <li>Quantum computing and materials science integration</li>
+                        <li>Temporal dynamics and time-domain analysis</li>
+                        <li>Computational physics and mathematical modeling</li>
+                        <li>Advanced semiconductor technologies</li>
+                        <li>AI-driven discovery methodologies</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <h3>SciMSPT</h3>
+            <p>Scientific Mesh for Science, Matter, Physics & Time</p>
+            
+            <div class="footer-links">
+                <a href="#portfolio">Portfolio Shorts</a>
                 <a href="#shorts">Research Shorts</a>
                 <a href="#about">About</a>
-            </nav>
-        </header>
-
-        <div class="main-content">
-            <section id="portfolio-shorts" class="card">
-                <h2>Portfolio Shorts <span class="badge">Analysis</span></h2>
-                <ul>
-                    <li><a href="portfolio-shorts/P3.html">P3 — Quantum Materials Analysis</a></li>
-                    <li><a href="portfolio-shorts/P5.html">P5 — Computational Physics Models</a></li>
-                    <li><a href="portfolio-shorts/P9.html">P9 — TMD Logic & Quantum Computing</a></li>
-                    <li><a href="portfolio-shorts/P11.html">P11 — Advanced Material Science</a></li>
-                    <li><a href="portfolio-shorts/P12.html">P12 — Time-Domain Research</a></li>
-                    <li><a href="portfolio-shorts/P-ai-materials.html">AI Materials Discovery</a></li>
-                    <li><a href="portfolio-shorts/P-cmos-2nm.html">CMOS 2nm Technology</a></li>
-                </ul>
-            </section>
-
-            <section id="shorts" class="card">
-                <h2>Research Shorts <span class="badge">Publications</span></h2>
-                <ul>
-                    <li><a href="shorts/SD-M-01.html">SD-M-01 — Mathematical Foundations</a></li>
-                    <li><a href="shorts/SD-M-02.html">SD-M-02 — Computing Theory</a></li>
-                    <li><a href="shorts/SD-P-05.html">SD-P-05 — Quantum Physics</a></li>
-                    <li><a href="shorts/SD-P-07.html">SD-P-07 — Particle Dynamics</a></li>
-                    <li><a href="shorts/SD-S-04.html">SD-S-04 — Scientific Methods</a></li>
-                    <li><a href="shorts/SD-T-03.html">SD-T-03 — Temporal Mechanics</a></li>
-                    <li><a href="shorts/SD-T-06.html">SD-T-06 — Time Series Analysis</a></li>
-                </ul>
-            </section>
-
-            <section id="about" class="card">
-                <h2>About SciMSPT</h2>
-                <p>SciMSPT represents an interdisciplinary research framework that explores the fundamental connections between Science, Matter, Physics, and Time.</p>
-                <br>
-                <p><strong>Core Research Areas:</strong></p>
-                <ul style="margin-top: 10px; padding-left: 20px;">
-                    <li>Quantum computing and materials science</li>
-                    <li>Temporal dynamics and time-domain analysis</li>
-                    <li>Computational physics and mathematical modeling</li>
-                    <li>Advanced semiconductor technologies</li>
-                </ul>
-            </section>
+                <a href="#research">Research Overview</a>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2026 SciMSPT — Interdisciplinary Scientific Research Framework</p>
+                <p style="margin-top: 8px;">Exploring the interconnectedness of universal knowledge</p>
+            </div>
         </div>
+    </footer>
 
-        <footer>
-            <p>&copy; 2026 SciMSPT — Scientific Mesh for Science, Matter, Physics & Time</p>
-            <p style="margin-top: 10px; font-size: 0.9em;">Interdisciplinary Research Framework</p>
-        </footer>
-    </div>
 </body>
 </html>
 <!-- Cache bust: 1787144599 -->

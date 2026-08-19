@@ -3,37 +3,132 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>P11 — Advanced Materials | SciMSPT Portfolio</title>
-    <meta name="description" content="P11: Advanced Material Science - Next-generation materials research for technological applications.">
+    <title>P11 — Advanced Material Science | SciMSPT Portfolio</title>
+    <meta name="description" content="P11: Comprehensive analysis of advanced materials research including metamaterials, smart materials, and nanomaterials for next-generation applications.">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #333; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; padding: 20px; }
-        .container { max-width: 900px; margin: 0 auto; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border-radius: 15px; padding: 40px; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1); }
-        h1 { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 10px; }
-        .meta { color: #666; margin-bottom: 30px; padding-bottom: 20px; border-bottom: 2px solid #eee; }
-        .back-link { display: inline-block; margin-bottom: 20px; color: #667eea; text-decoration: none; font-weight: 500; }
-        h2 { color: #667eea; margin-top: 30px; margin-bottom: 15px; }
-        p { margin-bottom: 15px; }
-        .tag { display: inline-block; padding: 4px 12px; background: #e8f4f8; color: #2980b9; border-radius: 20px; font-size: 0.85em; margin-right: 8px; }
+        :root {
+            --primary: #43e97b; --secondary: #38f9d7;
+            --text-dark: #2d3748; --text-light: #718096;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.7; color: var(--text-dark);
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh; padding: 20px;
+        }
+        .container { max-width: 900px; margin: 0 auto; background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1); }
+        .hero-banner { width: 100%; height: 280px; object-fit: cover; display: block; }
+        .content { padding: 50px; }
+        .back-link { display: inline-flex; align-items: center; gap: 6px; margin-bottom: 25px; color: #2d8a56; text-decoration: none; font-weight: 600; font-size: 0.95rem; transition: all 0.3s ease; }
+        .back-link:hover { gap: 10px; color: var(--secondary); }
+        h1 { font-size: 2.5rem; font-weight: 800; background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 15px; letter-spacing: -0.02em; }
+        .meta { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-bottom: 35px; padding-bottom: 30px; border-bottom: 2px solid #f0f0f0; }
+        .tag { display: inline-flex; padding: 6px 16px; background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%); color: white; border-radius: 25px; font-size: 0.85em; font-weight: 600; }
+        .domain-badge { padding: 6px 16px; background: #e8f5e9; color: #2e7d32; border-radius: 25px; font-size: 0.85em; font-weight: 600; }
+        h2 { color: #2d8a56; margin-top: 40px; margin-bottom: 18px; font-size: 1.75rem; font-weight: 700; position: relative; padding-left: 18px; }
+        h2::before { content: ''; position: absolute; left: 0; top: 8px; bottom: 8px; width: 4px; background: linear-gradient(180deg, var(--primary), var(--secondary)); border-radius: 2px; }
+        p { margin-bottom: 18px; color: var(--text-dark); font-size: 1.05rem; }
+        ul, ol { margin-left: 24px; margin-bottom: 20px; }
+        li { margin-bottom: 10px; color: var(--text-dark); font-size: 1.02rem; }
+        strong { color: var(--text-dark); font-weight: 600; }
+        .highlight-box { background: linear-gradient(135deg, #43e97b08 0%, #38f9d708 100%); border-left: 4px solid var(--primary); padding: 25px 30px; border-radius: 12px; margin: 30px 0; }
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin: 35px 0; }
+        .stat-card { background: #f1f8f4; padding: 25px; border-radius: 14px; text-align: center; transition: transform 0.3s ease; }
+        .stat-card:hover { transform: translateY(-5px); }
+        .stat-number { font-size: 2.2rem; font-weight: 800; color: #2d8a56; display: block; margin-bottom: 8px; }
+        .stat-label { font-size: 0.92rem; color: var(--text-light); font-weight: 500; }
+        footer { margin-top: 50px; padding-top: 30px; border-top: 2px solid #f0f0f0; color: var(--text-light); font-size: 0.92rem; text-align: center; }
+        @media (max-width: 768px) { .content { padding: 30px 25px; } h1 { font-size: 2rem; } h2 { font-size: 1.45rem; } .hero-banner { height: 200px; } }
     </style>
 </head>
 <body>
     <div class="container">
-        <a href="../index.html" class="back-link">← Back to SciMSPT</a>
-        <h1>P11 — Advanced Materials</h1>
-        <div class="meta">
-            <span class="tag">Materials Science</span>
-            <span class="tag">Nanotechnology</span>
-            <p><strong>Research Domain:</strong> Matter & Engineering</p>
+        <img src="../assets/images/portfolio-P11.png" alt="Advanced Material Science" class="hero-banner">
+        
+        <div class="content">
+            <a href="../index.html" class="back-link">← Back to SciMSPT</a>
+            
+            <h1>P11 — Advanced Material Science</h1>
+            <div class="meta">
+                <span class="tag">Nanomaterials</span>
+                <span class="tag">Metamaterials</span>
+                <span class="tag">Smart Materials</span>
+                <span class="domain-badge">Materials Engineering</span>
+            </div>
+
+            <h2>Executive Summary</h2>
+            <p>This portfolio analysis examines cutting-edge advances in material science that are enabling revolutionary capabilities across electronics, energy, medicine, and manufacturing. The convergence of nanoscale engineering, computational design, and novel synthesis techniques is creating materials with properties unprecedented in nature.</p>
+
+            <div class="highlight-box">
+                <p><strong>Innovation Acceleration:</strong> The average time from laboratory discovery to commercial application has decreased from 20 years (1990s) to under 5 years for advanced materials, driven by AI-assisted discovery and high-throughput characterization.</p>
+            </div>
+
+            <h2>Material Categories Under Development</h2>
+
+            <p><strong>Metamaterials & Photonic Crystals:</strong></p>
+            <ul>
+                <li>Negative-index materials enabling superlenses breaking the diffraction limit</li>
+                <li>Invisibility cloaks through engineered electromagnetic response</li>
+                <li>Thermal metamaterials for heat flux manipulation and thermoelectric enhancement</li>
+                <li>Acoustic metamaterials for sound isolation and vibration control</li>
+            </ul>
+
+            <p><strong>Smart & Responsive Materials:</strong></p>
+            <ul>
+                <li>Shape-memory alloys and polymers with programmable actuation cycles</li>
+                <li>Self-healing polymers autonomously repairing mechanical damage</li>
+                <li>Electrochromic and thermochromic materials for adaptive optics and building facades</li>
+                <li>Piezoelectric energy harvesters converting mechanical vibrations to electricity</li>
+            </ul>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <span class="stat-number">1 nm</span>
+                    <span class="stat-label">Atomic Precision Fabrication</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">10⁶ cycles</span>
+                    <span class="stat-label">Shape Memory Fatigue Life</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">99%</span>
+                    <span class="stat-label">Self-Healing Efficiency</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">-40</span>
+                    <span class="stat-label">Refractive Index Achieved</span>
+                </div>
+            </div>
+
+            <h2>Breakthrough Applications</h2>
+
+            <ol>
+                <li><strong>Biomedical implants:</strong> Biocompatible smart materials that adapt to physiological conditions, release drugs on demand, and integrate with neural tissue for brain-machine interfaces.</li>
+                
+                <li><strong>Sustainable infrastructure:</strong> Self-sensing concrete structures monitoring their own integrity, carbon-negative construction materials, and adaptive building envelopes reducing energy consumption by 60%+.</li>
+                
+                <li><strong>Space technologies:</strong> Ultra-lightweight structural materials, radiation-shielding composites, and self-deploying systems for satellite and habitat applications.</li>
+            </ol>
+
+            <h2>Manufacturing & Scalability</h2>
+            <p>The transition from laboratory curiosities to industrial-scale production requires addressing key challenges:</p>
+
+            <div class="highlight-box">
+                <ul style="margin-top: 12px; margin-bottom: 0;">
+                    <li><strong>Additive manufacturing:</strong> 3D printing of functional materials with spatially varying composition and microstructure</li>
+                    <li><strong>Roll-to-roll processing:</strong> Continuous fabrication of 2D materials and thin films at kilometer scales</li>
+                    <li><strong>Quality control:</strong> In-line machine learning characterization ensuring batch-to-batch consistency</li>
+                    <li><strong>Circular economy:</strong> Design for disassembly and material recovery enabling sustainable lifecycles</li>
+                </ul>
+            </div>
+
+            <footer>
+                <p><strong>P11 — Advanced Material Science</strong></p>
+                <p style="margin-top: 8px;">© 2026 SciMSPT — Scientific Mesh for Science, Matter, Physics & Time</p>
+                <p style="margin-top: 12px; font-size: 0.85em; opacity: 0.7;">Portfolio Analysis | Last Updated: August 2026</p>
+            </footer>
         </div>
-        <h2>Overview</h2>
-        <p>This portfolio segment examines advanced materials with exceptional properties for next-generation technological applications.</p>
-        <h2>Research Focus</h2>
-        <p><strong>Graphene & 2D Materials:</strong> Exploring the electronic and mechanical properties of atomically thin materials.</p>
-        <p><strong>Metamaterials:</strong> Engineered materials with properties not found in nature, including negative refractive index.</p>
-        <footer style="margin-top: 40px; padding-top: 20px; border-top: 2px solid #eee; color: #666; font-size: 0.9em;">
-            <p>© 2026 SciMSPT — Scientific Mesh for Science, Matter, Physics & Time</p>
-        </footer>
     </div>
 </body>
 </html>

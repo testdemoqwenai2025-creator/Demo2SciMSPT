@@ -4,36 +4,119 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SD-T-06 — Time Series Analysis | SciMSPT Research</title>
-    <meta name="description" content="SD-T-06: Time Series Analysis - Statistical methods for analyzing temporal data sequences.">
+    <meta name="description" content="SD-T-06: Statistical methods for time-dependent data analysis within the SciMSPT Time domain.">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #333; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; padding: 20px; }
-        .container { max-width: 900px; margin: 0 auto; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border-radius: 15px; padding: 40px; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1); }
-        h1 { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 10px; }
-        .meta { color: #666; margin-bottom: 30px; padding-bottom: 20px; border-bottom: 2px solid #eee; }
-        .back-link { display: inline-block; margin-bottom: 20px; color: #667eea; text-decoration: none; font-weight: 500; }
-        h2 { color: #667eea; margin-top: 30px; margin-bottom: 15px; }
-        p { margin-bottom: 15px; }
-        .tag { display: inline-block; padding: 4px 12px; background: #e8f4f8; color: #2980b9; border-radius: 20px; font-size: 0.85em; margin-right: 8px; }
+        :root {
+            --primary: #fa709a; --secondary: #fee140;
+            --text-dark: #2d3748; --text-light: #718096;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.7; color: var(--text-dark);
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            min-height: 100vh; padding: 20px;
+        }
+        .container { max-width: 850px; margin: 0 auto; background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1); }
+        .hero-section { background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%); padding: 50px; text-align: center; color: white; }
+        .hero-icon { width: 80px; height: 80px; margin-bottom: 20px; filter: brightness(10); }
+        .hero-section h1 { font-size: 2rem; font-weight: 700; margin-bottom: 10px; }
+        .hero-section p { opacity: 0.9; font-size: 1.05rem; }
+        .content { padding: 45px; }
+        .back-link { display: inline-flex; align-items: center; gap: 6px; margin-bottom: 25px; color: #e53e6d; text-decoration: none; font-weight: 600; font-size: 0.95rem; transition: all 0.3s ease; }
+        .back-link:hover { gap: 10px; color: var(--secondary); }
+        .meta-tags { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 30px; }
+        .tag { padding: 6px 14px; background: #fff1f2; color: #be123c; border-radius: 20px; font-size: 0.85em; font-weight: 600; }
+        h2 { color: #e53e6d; margin-top: 35px; margin-bottom: 16px; font-size: 1.55rem; font-weight: 700; position: relative; padding-left: 16px; }
+        h2::before { content: ''; position: absolute; left: 0; top: 6px; bottom: 6px; width: 4px; background: linear-gradient(180deg, var(--primary), var(--secondary)); border-radius: 2px; }
+        p { margin-bottom: 16px; color: var(--text-dark); font-size: 1.02rem; line-height: 1.75; }
+        ul, ol { margin-left: 22px; margin-bottom: 18px; }
+        li { margin-bottom: 9px; color: var(--text-dark); font-size: 1rem; line-height: 1.65; }
+        strong { color: var(--text-dark); font-weight: 600; }
+        .key-insight { background: linear-gradient(135deg, #fa709a08 0%, #fee14008 100%); padding: 25px; border-radius: 12px; margin: 28px 0; border: 1px solid #e2e8f0; }
+        footer { margin-top: 45px; padding-top: 25px; border-top: 2px solid #f0f0f0; color: var(--text-light); font-size: 0.9rem; text-align: center; }
+        @media (max-width: 768px) { .content { padding: 30px 24px; } .hero-section { padding: 35px 25px; } h1 { font-size: 1.65rem; } }
     </style>
 </head>
 <body>
     <div class="container">
-        <a href="../index.html" class="back-link">← Back to SciMSPT</a>
-        <h1>SD-T-06 — Time Series Analysis</h1>
-        <div class="meta">
-            <span class="tag">Statistics</span>
-            <span class="tag">Data Analysis</span>
-            <p><strong>Domain:</strong> Time & Computing</p>
+        <div class="hero-section">
+            <img src="../assets/images/thumb-SD-T-06.png" alt="Time Series Analysis" class="hero-icon">
+            <h1>SD-T-06 — Time Series Analysis</h1>
+            <p>Statistical methods for time-dependent data analysis</p>
         </div>
-        <h2>Overview</h2>
-        <p>This research short covers statistical and computational methods for analyzing time-dependent data within scientific contexts.</p>
-        <h2>Analytical Methods</h2>
-        <p><strong>Spectral Analysis:</strong> Fourier transforms and frequency domain decomposition of temporal signals.</p>
-        <p><strong>Prediction Models:</strong> ARIMA, neural networks, and other forecasting techniques for time series.</p>
-        <footer style="margin-top: 40px; padding-top: 20px; border-top: 2px solid #eee; color: #666; font-size: 0.9em;">
-            <p>© 2026 SciMSPT — Scientific Mesh for Science, Matter, Physics & Time</p>
-        </footer>
+
+        <div class="content">
+            <a href="../index.html" class="back-link">← Back to SciMSPT</a>
+            
+            <div class="meta-tags">
+                <span class="tag">Time Series</span>
+                <span class="tag">Statistics</span>
+                <span class="tag">Forecasting</span>
+                <span class="tag">Domain: Time (T)</span>
+            </div>
+
+            <h2>Abstract</h2>
+            <p>This research short presents statistical and computational methodologies for analyzing sequentially ordered observations—time series data. Time series analysis techniques enable extraction of patterns, trends, and predictive insights from temporal data across scientific domains ranging from climate science to financial markets.</p>
+
+            <h2>Fundamental Time Series Concepts</h2>
+
+            <p><strong>Stationarity & Non-stationarity:</strong></p>
+            <ul>
+                <li>Strict stationarity: Joint probability distribution invariant under time shifts</li>
+                <li>Weak stationarity: Constant mean, variance, and autocovariance depending only on lag</li>
+                <li>Trend-stationary vs. difference-stationary processes requiring different modeling approaches</li>
+                <li>Unit root tests (ADF, KPSS) distinguishing stochastic from deterministic trends</li>
+            </ul>
+
+            <p><strong>Decomposition Methods:</strong></p>
+            <ul>
+                <li>Additive decomposition: Yₜ = Tₜ + Sₜ + Rₜ separating trend, seasonal, and residual components</li>
+                <li>Multiplicative decomposition: Yₜ = Tₜ × Sₜ × Rₜ for seasonality proportional to level</li>
+                <li>STL (Seasonal-Trend decomposition using Loess) robust to outliers and missing values</li>
+                <li>Wavelet decomposition providing time-frequency localization for non-stationary signals</li>
+            </ul>
+
+            <div class="key-insight">
+                <p><strong>Prediction vs. Understanding:</strong> While machine learning approaches often prioritize prediction accuracy, classical time series methods emphasize interpretable parameters revealing underlying data-generating mechanisms—both perspectives are valuable within the SciMSPT framework depending on research objectives.</p>
+            </div>
+
+            <h2>Modeling Approaches</h2>
+
+            <ol>
+                <li><strong>ARIMA Models:</strong> Autoregressive Integrated Moving Average models capturing autocorrelation structure through lagged values (AR), differencing for stationarity (I), and error smoothing (MA).</li>
+                
+                <li><strong>State Space Models:</strong> Unobserved components framework enabling flexible specification of trend, seasonal, and cyclical dynamics with Kalman filtering for optimal state estimation.</li>
+                
+                <li><strong>Machine Learning Methods:</strong> Recurrent neural networks (LSTM, GRU) learning complex temporal dependencies, transformer architectures with attention mechanisms capturing long-range correlations, and gradient boosting for feature-based forecasting.</li>
+                
+                <li><strong>Bayesian Structural Time Series:</strong> Probabilistic frameworks quantifying uncertainty in forecasts, incorporating prior knowledge, and performing causal inference through intervention analysis.</li>
+            </ol>
+
+            <h2>Spectral & Frequency Domain Analysis</h2>
+            
+            <ul>
+                <li><strong>Fourier transform:</strong> Decomposing signals into sinusoidal frequency components identifying periodicities</li>
+                <li><strong>Power spectral density:</strong> Distribution of signal power across frequencies distinguishing noise from structured variation</li>
+                <li><strong>Coherence analysis:</strong> Frequency-domain correlation between two time series revealing common driving factors</li>
+                <li><strong>Wavelet analysis:</strong> Multi-resolution representation adapting window length to local frequency content</li>
+            </ul>
+
+            <h2>Applications Across SciMSPT Domains</h2>
+            
+            <ul>
+                <li><strong>Climate science:</strong> Temperature trend detection, El Niño prediction, extreme event frequency analysis</li>
+                <li><strong>Materials science:</strong> Degradation modeling, process control time series, sensor data monitoring</li>
+                <li><strong>Finance:</strong> Volatility forecasting, risk modeling, algorithmic trading strategy development</li>
+                <li><strong>Biology:</strong> Gene expression dynamics, circadian rhythm analysis, population ecology modeling</li>
+            </ul>
+
+            <footer>
+                <p><strong>SD-T-06 — Time Series Analysis</strong></p>
+                <p style="margin-top: 8px;">© 2026 SciMSPT — Scientific Mesh for Science, Matter, Physics & Time</p>
+                <p style="margin-top: 12px; font-size: 0.82em; opacity: 0.7;">Research Short | Domain: Time (T)</p>
+            </footer>
+        </div>
     </div>
 </body>
 </html>

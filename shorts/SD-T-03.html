@@ -4,36 +4,108 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SD-T-03 — Temporal Mechanics | SciMSPT Research</title>
-    <meta name="description" content="SD-T-03: Temporal Mechanics - Study of time as a physical dimension and its properties.">
+    <meta name="description" content="SD-T-03: Mechanisms governing temporal phenomena within the SciMSPT Time domain.">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #333; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; padding: 20px; }
-        .container { max-width: 900px; margin: 0 auto; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border-radius: 15px; padding: 40px; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1); }
-        h1 { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 10px; }
-        .meta { color: #666; margin-bottom: 30px; padding-bottom: 20px; border-bottom: 2px solid #eee; }
-        .back-link { display: inline-block; margin-bottom: 20px; color: #667eea; text-decoration: none; font-weight: 500; }
-        h2 { color: #667eea; margin-top: 30px; margin-bottom: 15px; }
-        p { margin-bottom: 15px; }
-        .tag { display: inline-block; padding: 4px 12px; background: #e8f4f8; color: #2980b9; border-radius: 20px; font-size: 0.85em; margin-right: 8px; }
+        :root {
+            --primary: #43e97b; --secondary: #38f9d7;
+            --text-dark: #2d3748; --text-light: #718096;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.7; color: var(--text-dark);
+            background: linear-gradient(135deg, #d4fc79 0%, #96e6a1 100%);
+            min-height: 100vh; padding: 20px;
+        }
+        .container { max-width: 850px; margin: 0 auto; background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1); }
+        .hero-section { background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%); padding: 50px; text-align: center; color: white; }
+        .hero-icon { width: 80px; height: 80px; margin-bottom: 20px; filter: brightness(10); }
+        .hero-section h1 { font-size: 2rem; font-weight: 700; margin-bottom: 10px; }
+        .hero-section p { opacity: 0.9; font-size: 1.05rem; }
+        .content { padding: 45px; }
+        .back-link { display: inline-flex; align-items: center; gap: 6px; margin-bottom: 25px; color: #059669; text-decoration: none; font-weight: 600; font-size: 0.95rem; transition: all 0.3s ease; }
+        .back-link:hover { gap: 10px; color: var(--secondary); }
+        .meta-tags { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 30px; }
+        .tag { padding: 6px 14px; background: #d1fae5; color: #047857; border-radius: 20px; font-size: 0.85em; font-weight: 600; }
+        h2 { color: #059669; margin-top: 35px; margin-bottom: 16px; font-size: 1.55rem; font-weight: 700; position: relative; padding-left: 16px; }
+        h2::before { content: ''; position: absolute; left: 0; top: 6px; bottom: 6px; width: 4px; background: linear-gradient(180deg, var(--primary), var(--secondary)); border-radius: 2px; }
+        p { margin-bottom: 16px; color: var(--text-dark); font-size: 1.02rem; line-height: 1.75; }
+        ul, ol { margin-left: 22px; margin-bottom: 18px; }
+        li { margin-bottom: 9px; color: var(--text-dark); font-size: 1rem; line-height: 1.65; }
+        strong { color: var(--text-dark); font-weight: 600; }
+        .key-insight { background: linear-gradient(135deg, #43e97b08 0%, #38f9d708 100%); padding: 25px; border-radius: 12px; margin: 28px 0; border: 1px solid #e2e8f0; }
+        footer { margin-top: 45px; padding-top: 25px; border-top: 2px solid #f0f0f0; color: var(--text-light); font-size: 0.9rem; text-align: center; }
+        @media (max-width: 768px) { .content { padding: 30px 24px; } .hero-section { padding: 35px 25px; } h1 { font-size: 1.65rem; } }
     </style>
 </head>
 <body>
     <div class="container">
-        <a href="../index.html" class="back-link">← Back to SciMSPT</a>
-        <h1>SD-T-03 — Temporal Mechanics</h1>
-        <div class="meta">
-            <span class="tag">Time</span>
-            <span class="tag">Relativity</span>
-            <p><strong>Domain:</strong> Time & Physics</p>
+        <div class="hero-section">
+            <img src="../assets/images/thumb-SD-T-03.png" alt="Temporal Mechanics" class="hero-icon">
+            <h1>SD-T-03 — Temporal Mechanics</h1>
+            <p>Mechanisms governing temporal phenomena</p>
         </div>
-        <h2>Overview</h2>
-        <p>This research short explores the nature of time as a fundamental dimension in physical theories.</p>
-        <h2>Core Concepts</h2>
-        <p><strong>Spacetime Structure:</strong> Minkowski spacetime and the geometry of special relativity.</p>
-        <p><strong>Time Dilation:</strong> Relativistic effects on time measurement in different reference frames.</p>
-        <footer style="margin-top: 40px; padding-top: 20px; border-top: 2px solid #eee; color: #666; font-size: 0.9em;">
-            <p>© 2026 SciMSPT — Scientific Mesh for Science, Matter, Physics & Time</p>
-        </footer>
+
+        <div class="content">
+            <a href="../index.html" class="back-link">← Back to SciMSPT</a>
+            
+            <div class="meta-tags">
+                <span class="tag">Time Mechanics</span>
+                <span class="tag">Causality</span>
+                <span class="tag">Dynamics</span>
+                <span class="tag">Domain: Time (T)</span>
+            </div>
+
+            <h2>Abstract</h2>
+            <p>This research short investigates the fundamental mechanisms governing temporal phenomena across physical systems. Understanding how time operates—from quantum mechanical time evolution to relativistic spacetime geometry—is essential for modeling dynamic processes within the SciMSPT interdisciplinary framework.</p>
+
+            <h2>Fundamental Concepts of Time</h2>
+
+            <p><strong>Arrow of Time:</strong></p>
+            <ul>
+                <li>Thermodynamic arrow: Entropy increase in isolated systems defining past-to-future direction</li>
+                <li>Causal arrow: Causes precede effects in all observed physical processes</li>
+                <li>Psychological arrow: Human perception of time's flow from remembered past to unknown future</li>
+                <li>Cosmological arrow: Universe expansion from Big Bang singularity providing global time direction</li>
+            </ul>
+
+            <p><strong>Time in Physical Theories:</strong></p>
+            <ul>
+                <li>Newtonian mechanics: Absolute time parameter independent of observer or reference frame</li>
+                <li>Special relativity: Time dilation effects depending on relative velocity between observers</li>
+                <li>General relativity: Curvature of spacetime by mass-energy affecting clock rates (gravitational time dilation)</li>
+                <li>Quantum mechanics: Time parameter external to quantum state (problematic for quantum gravity)</li>
+            </ul>
+
+            <div class="key-insight">
+                <p><strong>Time Reversal Symmetry:</strong> Most fundamental microscopic laws (except weak interactions) are symmetric under time reversal—yet macroscopic irreversibility emerges from statistical mechanics through the second law of thermodynamics. This tension between micro-reversibility and macro-irreversibility remains a deep conceptual challenge.</p>
+            </div>
+
+            <h2>Temporal Dynamics in Physical Systems</h2>
+
+            <ol>
+                <li><strong>Relaxation processes:</strong> Systems perturbed from equilibrium return to equilibrium over characteristic timescales governed by underlying microscopic dynamics and coupling to environments.</li>
+                
+                <li><strong>Oscillations & periodicity:</strong> Stable limit cycles, resonant frequencies, and synchronization phenomena emerging from nonlinear temporal interactions.</li>
+                
+                <li><strong>Non-equilibrium steady states:</strong> Systems maintaining constant fluxes while exhibiting time-independent statistical properties, relevant to biological and materials processing applications.</li>
+            </ol>
+
+            <h2>Time Measurement & Precision</h2>
+            
+            <ul>
+                <li><strong>Atomic clocks:</strong> Optical lattice clocks achieving 10⁻¹⁸ frequency precision enabling tests of fundamental physics and geodetic applications</li>
+                <li><strong>Pulsar timing:</strong> Millisecond pulsars as natural clocks for gravitational wave detection and spacecraft navigation</li>
+                <li><strong>Geological dating:</strong> Radiometric methods establishing absolute timescales for Earth history and cosmic evolution</li>
+                <li><strong>Ultrafast science:</strong> Attosecond pulses resolving electron dynamics in real-time, opening "electron cinematography"</li>
+            </ul>
+
+            <footer>
+                <p><strong>SD-T-03 — Temporal Mechanics</strong></p>
+                <p style="margin-top: 8px;">© 2026 SciMSPT — Scientific Mesh for Science, Matter, Physics & Time</p>
+                <p style="margin-top: 12px; font-size: 0.82em; opacity: 0.7;">Research Short | Domain: Time (T)</p>
+            </footer>
+        </div>
     </div>
 </body>
 </html>

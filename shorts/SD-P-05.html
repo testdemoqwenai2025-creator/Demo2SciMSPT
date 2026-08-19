@@ -4,36 +4,110 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SD-P-05 — Quantum Physics | SciMSPT Research</title>
-    <meta name="description" content="SD-P-05: Quantum Physics - Quantum mechanical phenomena and their applications in modern physics.">
+    <meta name="description" content="SD-P-05: Quantum mechanical phenomena and applications within the SciMSPT Physics domain.">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #333; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; padding: 20px; }
-        .container { max-width: 900px; margin: 0 auto; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border-radius: 15px; padding: 40px; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1); }
-        h1 { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 10px; }
-        .meta { color: #666; margin-bottom: 30px; padding-bottom: 20px; border-bottom: 2px solid #eee; }
-        .back-link { display: inline-block; margin-bottom: 20px; color: #667eea; text-decoration: none; font-weight: 500; }
-        h2 { color: #667eea; margin-top: 30px; margin-bottom: 15px; }
-        p { margin-bottom: 15px; }
-        .tag { display: inline-block; padding: 4px 12px; background: #e8f4f8; color: #2980b9; border-radius: 20px; font-size: 0.85em; margin-right: 8px; }
+        :root {
+            --primary: #f093fb; --secondary: #f5576c;
+            --text-dark: #2d3748; --text-light: #718096;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.7; color: var(--text-dark);
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            min-height: 100vh; padding: 20px;
+        }
+        .container { max-width: 850px; margin: 0 auto; background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1); }
+        .hero-section { background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%); padding: 50px; text-align: center; color: white; }
+        .hero-icon { width: 80px; height: 80px; margin-bottom: 20px; filter: brightness(10); }
+        .hero-section h1 { font-size: 2rem; font-weight: 700; margin-bottom: 10px; }
+        .hero-section p { opacity: 0.9; font-size: 1.05rem; }
+        .content { padding: 45px; }
+        .back-link { display: inline-flex; align-items: center; gap: 6px; margin-bottom: 25px; color: #db2777; text-decoration: none; font-weight: 600; font-size: 0.95rem; transition: all 0.3s ease; }
+        .back-link:hover { gap: 10px; color: var(--secondary); }
+        .meta-tags { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 30px; }
+        .tag { padding: 6px 14px; background: #fce7f3; color: #be185d; border-radius: 20px; font-size: 0.85em; font-weight: 600; }
+        h2 { color: #db2777; margin-top: 35px; margin-bottom: 16px; font-size: 1.55rem; font-weight: 700; position: relative; padding-left: 16px; }
+        h2::before { content: ''; position: absolute; left: 0; top: 6px; bottom: 6px; width: 4px; background: linear-gradient(180deg, var(--primary), var(--secondary)); border-radius: 2px; }
+        p { margin-bottom: 16px; color: var(--text-dark); font-size: 1.02rem; line-height: 1.75; }
+        ul, ol { margin-left: 22px; margin-bottom: 18px; }
+        li { margin-bottom: 9px; color: var(--text-dark); font-size: 1rem; line-height: 1.65; }
+        strong { color: var(--text-dark); font-weight: 600; }
+        .key-insight { background: linear-gradient(135deg, #f093fb08 0%, #f5576c08 100%); padding: 25px; border-radius: 12px; margin: 28px 0; border: 1px solid #e2e8f0; }
+        footer { margin-top: 45px; padding-top: 25px; border-top: 2px solid #f0f0f0; color: var(--text-light); font-size: 0.9rem; text-align: center; }
+        @media (max-width: 768px) { .content { padding: 30px 24px; } .hero-section { padding: 35px 25px; } h1 { font-size: 1.65rem; } }
     </style>
 </head>
 <body>
     <div class="container">
-        <a href="../index.html" class="back-link">← Back to SciMSPT</a>
-        <h1>SD-P-05 — Quantum Physics</h1>
-        <div class="meta">
-            <span class="tag">Quantum Mechanics</span>
-            <span class="tag">Physics</span>
-            <p><strong>Domain:</strong> Physics</p>
+        <div class="hero-section">
+            <img src="../assets/images/thumb-SD-P-05.png" alt="Quantum Physics" class="hero-icon">
+            <h1>SD-P-05 — Quantum Physics</h1>
+            <p>Quantum mechanical phenomena and applications</p>
         </div>
-        <h2>Overview</h2>
-        <p>This research short examines quantum physical phenomena and their theoretical underpinnings within the SciMSPT framework.</p>
-        <h2>Research Topics</h2>
-        <p><strong>Wave-Particle Duality:</strong> Fundamental quantum behavior of matter and energy.</p>
-        <p><strong>Quantum Entanglement:</strong> Non-local correlations between quantum systems.</p>
-        <footer style="margin-top: 40px; padding-top: 20px; border-top: 2px solid #eee; color: #666; font-size: 0.9em;">
-            <p>© 2026 SciMSPT — Scientific Mesh for Science, Matter, Physics & Time</p>
-        </footer>
+
+        <div class="content">
+            <a href="../index.html" class="back-link">← Back to SciMSPT</a>
+            
+            <div class="meta-tags">
+                <span class="tag">Quantum Mechanics</span>
+                <span class="tag">Wave Functions</span>
+                <span class="tag">Entanglement</span>
+                <span class="tag">Domain: Physics (P)</span>
+            </div>
+
+            <h2>Abstract</h2>
+            <p>This research short presents fundamental concepts of quantum physics that govern behavior at atomic and subatomic scales. Quantum mechanics provides the theoretical foundation for understanding material properties, chemical reactions, and emerging quantum technologies that are central to multiple SciMSPT research domains.</p>
+
+            <h2>Core Principles of Quantum Mechanics</h2>
+
+            <p><strong>Wave-Particle Duality:</strong></p>
+            <ul>
+                <li>All quantum objects exhibit both wave-like and particle-like properties depending on experimental context</li>
+                <li>de Broglie wavelength λ = h/p relates particle momentum to spatial periodicity</li>
+                <li>Double-slit interference demonstrates superposition principle even for single particles</li>
+                <li>Complementarity: Position and momentum cannot be simultaneously measured with arbitrary precision</li>
+            </ul>
+
+            <p><strong>The Schrödinger Equation:</strong></p>
+            <ul>
+                <li>Time-dependent form: iℏ ∂Ψ/∂t = ĤΨ governing quantum state evolution</li>
+                <li>Time-independent form: Ĥψ = Eψ yielding stationary states and energy eigenvalues</li>
+                <li>Wave function Ψ contains complete information about system's quantum state</li>
+                <li>Born rule: |Ψ|² gives probability density for measurement outcomes</li>
+            </ul>
+
+            <div class="key-insight">
+                <p><strong>Quantum Superposition:</strong> A quantum system can exist in a linear combination of multiple basis states simultaneously—this property underlies quantum parallelism enabling exponential speedups in quantum algorithms and is essential for understanding chemical bonding and molecular structure.</p>
+            </div>
+
+            <h2>Quantum Phenomena & Applications</h2>
+
+            <ol>
+                <li><strong>Quantum Entanglement:</strong> Non-classical correlations between spatially separated systems violating Bell inequalities, enabling quantum teleportation, superdense coding, and device-independent cryptography.</li>
+                
+                <li><strong>Tunneling Effects:</strong> Finite probability for particles to penetrate classically forbidden energy barriers, explaining alpha decay, enabling scanning tunneling microscopy, and exploited in tunnel diodes and flash memory.</li>
+                
+                <li><strong>Quantization & Discrete Spectra:</strong> Bound systems possess discrete energy levels leading to atomic spectra, band structures in solids, and quantized conductance in nanostructures.</li>
+                
+                <li><strong>Spin & Angular Momentum:</strong> Intrinsic angular momentum with half-integer values for fermions, integer for bosons, underlying magnetic properties and Pauli exclusion principle.</li>
+            </ol>
+
+            <h2>Relevance to SciMSPT Framework</h2>
+            
+            <ul>
+                <li><strong>Matter domain:</strong> Electronic structure calculations determining material properties from first principles</li>
+                <li><strong>Physics domain:</strong> Quantum field theory describing fundamental particles and forces</li>
+                <li><strong>Time domain:</strong> Unitary time evolution preserving probability, decoherence modeling quantum-to-classical transition</li>
+                <li><strong>Science domain:</strong> Quantum measurement theory informing experimental design and interpretation</li>
+            </ul>
+
+            <footer>
+                <p><strong>SD-P-05 — Quantum Physics</strong></p>
+                <p style="margin-top: 8px;">© 2026 SciMSPT — Scientific Mesh for Science, Matter, Physics & Time</p>
+                <p style="margin-top: 12px; font-size: 0.82em; opacity: 0.7;">Research Short | Domain: Physics (P)</p>
+            </footer>
+        </div>
     </div>
 </body>
 </html>

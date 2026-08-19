@@ -4,36 +4,108 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SD-M-02 — Computing Theory | SciMSPT Research</title>
-    <meta name="description" content="SD-M-02: Computing Theory - Theoretical foundations of computation and information processing.">
+    <meta name="description" content="SD-M-02: Theoretical foundations of computation, algorithms, and computational complexity within the SciMSPT framework.">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #333; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; padding: 20px; }
-        .container { max-width: 900px; margin: 0 auto; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border-radius: 15px; padding: 40px; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1); }
-        h1 { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 10px; }
-        .meta { color: #666; margin-bottom: 30px; padding-bottom: 20px; border-bottom: 2px solid #eee; }
-        .back-link { display: inline-block; margin-bottom: 20px; color: #667eea; text-decoration: none; font-weight: 500; }
-        h2 { color: #667eea; margin-top: 30px; margin-bottom: 15px; }
-        p { margin-bottom: 15px; }
-        .tag { display: inline-block; padding: 4px 12px; background: #e8f4f8; color: #2980b9; border-radius: 20px; font-size: 0.85em; margin-right: 8px; }
+        :root {
+            --primary: #764ba2; --secondary: #f093fb;
+            --text-dark: #2d3748; --text-light: #718096;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.7; color: var(--text-dark);
+            background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
+            min-height: 100vh; padding: 20px;
+        }
+        .container { max-width: 850px; margin: 0 auto; background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1); }
+        .hero-section { background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%); padding: 50px; text-align: center; color: white; }
+        .hero-icon { width: 80px; height: 80px; margin-bottom: 20px; filter: brightness(10); }
+        .hero-section h1 { font-size: 2rem; font-weight: 700; margin-bottom: 10px; }
+        .hero-section p { opacity: 0.9; font-size: 1.05rem; }
+        .content { padding: 45px; }
+        .back-link { display: inline-flex; align-items: center; gap: 6px; margin-bottom: 25px; color: var(--primary); text-decoration: none; font-weight: 600; font-size: 0.95rem; transition: all 0.3s ease; }
+        .back-link:hover { gap: 10px; color: var(--secondary); }
+        .meta-tags { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 30px; }
+        .tag { padding: 6px 14px; background: #faf5ff; color: #7c3aed; border-radius: 20px; font-size: 0.85em; font-weight: 600; }
+        h2 { color: var(--primary); margin-top: 35px; margin-bottom: 16px; font-size: 1.55rem; font-weight: 700; position: relative; padding-left: 16px; }
+        h2::before { content: ''; position: absolute; left: 0; top: 6px; bottom: 6px; width: 4px; background: linear-gradient(180deg, var(--primary), var(--secondary)); border-radius: 2px; }
+        p { margin-bottom: 16px; color: var(--text-dark); font-size: 1.02rem; line-height: 1.75; }
+        ul, ol { margin-left: 22px; margin-bottom: 18px; }
+        li { margin-bottom: 9px; color: var(--text-dark); font-size: 1rem; line-height: 1.65; }
+        strong { color: var(--text-dark); font-weight: 600; }
+        .key-insight { background: linear-gradient(135deg, #764ba208 0%, #f093fb08 100%); padding: 25px; border-radius: 12px; margin: 28px 0; border: 1px solid #e2e8f0; }
+        footer { margin-top: 45px; padding-top: 25px; border-top: 2px solid #f0f0f0; color: var(--text-light); font-size: 0.9rem; text-align: center; }
+        @media (max-width: 768px) { .content { padding: 30px 24px; } .hero-section { padding: 35px 25px; } h1 { font-size: 1.65rem; } }
     </style>
 </head>
 <body>
     <div class="container">
-        <a href="../index.html" class="back-link">← Back to SciMSPT</a>
-        <h1>SD-M-02 — Computing Theory</h1>
-        <div class="meta">
-            <span class="tag">Computer Science</span>
-            <span class="tag">Algorithms</span>
-            <p><strong>Domain:</strong> Computing & Mathematics</p>
+        <div class="hero-section">
+            <img src="../assets/images/thumb-SD-M-02.png" alt="Computing Theory" class="hero-icon">
+            <h1>SD-M-02 — Computing Theory</h1>
+            <p>Theoretical foundations of computation and algorithms</p>
         </div>
-        <h2>Overview</h2>
-        <p>This research short explores theoretical computing frameworks and their applications to scientific problems within the SciMSPT domain.</p>
-        <h2>Key Areas</h2>
-        <p><strong>Computational Complexity:</strong> Bounds on algorithm efficiency for physical simulations.</p>
-        <p><strong>Quantum Information Theory:</strong> Quantum bits, entanglement, and quantum algorithms.</p>
-        <footer style="margin-top: 40px; padding-top: 20px; border-top: 2px solid #eee; color: #666; font-size: 0.9em;">
-            <p>© 2026 SciMSPT — Scientific Mesh for Science, Matter, Physics & Time</p>
-        </footer>
+
+        <div class="content">
+            <a href="../index.html" class="back-link">← Back to SciMSPT</a>
+            
+            <div class="meta-tags">
+                <span class="tag">Computing Theory</span>
+                <span class="tag">Algorithms</span>
+                <span class="tag">Complexity</span>
+                <span class="tag">Domain: Math (M)</span>
+            </div>
+
+            <h2>Abstract</h2>
+            <p>This research short explores the theoretical underpinnings of computation that enable scientific discovery through simulation, data analysis, and optimization. Understanding computational limits and capabilities is essential for designing efficient algorithms that tackle complex problems across the SciMSPT research domains.</p>
+
+            <h2>Fundamental Concepts</h2>
+
+            <p><strong>Computational Complexity Classes:</strong></p>
+            <ul>
+                <li>P class: Problems solvable in polynomial time—efficiently computable including sorting, shortest path, linear programming</li>
+                <li>NP class: Problems verifiable in polynomial time including satisfiability, traveling salesman, graph coloring</li>
+                <li>P vs NP question: Whether problems with efficiently verifiable solutions also have efficient solution methods remains open</li>
+                <li>BQP class: Problems efficiently solvable by quantum computers including factoring and unstructured search</li>
+            </ul>
+
+            <p><strong>Algorithm Design Paradigms:</strong></p>
+            <ul>
+                <li>Divide-and-conquer strategies reducing problem size recursively (FFT, merge sort, Strassen multiplication)</li>
+                <li>Dynamic programming building solutions from overlapping subproblems (sequence alignment, optimal control)</li>
+                <li>Greedy algorithms making locally optimal choices with global optimality guarantees (minimum spanning trees)</li>
+                <li>Approximation algorithms providing provably near-optimal solutions for NP-hard problems</li>
+            </ul>
+
+            <div class="key-insight">
+                <p><strong>Quantum Advantage:</strong> Quantum algorithms exploit superposition and entanglement to achieve exponential or polynomial speedups for specific problem classes, potentially transforming computational approaches to materials simulation, cryptography, and optimization within the SciMSPT framework.</p>
+            </div>
+
+            <h2>Computational Methods for Science</h2>
+
+            <ol>
+                <li><strong>Numerical Algorithms:</strong> Finite element methods solving PDEs governing physical systems, Monte Carlo integration evaluating high-dimensional integrals in statistical mechanics, and fast multipole methods accelerating N-body simulations.</li>
+                
+                <li><strong>Machine Learning Theory:</strong> PAC learning framework quantifying sample complexity, VC dimension measuring model capacity, and optimization landscape analysis explaining generalization performance.</li>
+                
+                <li><strong>Data Structures & Indexing:</strong> Spatial data structures (kd-trees, ball trees) enabling efficient nearest-neighbor queries for materials databases, suffix arrays for genomic sequence analysis, and graph structures representing molecular networks.</li>
+            </ol>
+
+            <h2>Complexity in Scientific Applications</h2>
+            
+            <ul>
+                <li><strong>Electronic structure:</strong> DFT scales as O(N³)—polynomial but prohibitive for large systems; linear-scaling methods exploit locality for O(N) complexity</li>
+                <li><strong>Molecular dynamics:</strong> Force calculation O(N²) naive; Ewald summation and particle-mesh methods reduce to O(N log N)</li>
+                <li><strong>Quantum simulation:</strong> Exact diagonalization exponential in system size; tensor network methods polynomial for limited entanglement</li>
+                <li><strong>Protein folding:</strong> Conformational search space grows exponentially with amino acid count; ML-guided sampling navigates efficiently</li>
+            </ul>
+
+            <footer>
+                <p><strong>SD-M-02 — Computing Theory</strong></p>
+                <p style="margin-top: 8px;">© 2026 SciMSPT — Scientific Mesh for Science, Matter, Physics & Time</p>
+                <p style="margin-top: 12px; font-size: 0.82em; opacity: 0.7;">Research Short | Domain: Mathematics (M)</p>
+            </footer>
+        </div>
     </div>
 </body>
 </html>

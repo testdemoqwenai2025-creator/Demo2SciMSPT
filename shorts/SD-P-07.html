@@ -4,36 +4,108 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SD-P-07 — Particle Dynamics | SciMSPT Research</title>
-    <meta name="description" content="SD-P-07: Particle Dynamics - Study of particle interactions and fundamental forces.">
+    <meta name="description" content="SD-P-07: Subatomic particle behavior and interactions within the SciMSPT Physics domain.">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #333; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; padding: 20px; }
-        .container { max-width: 900px; margin: 0 auto; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border-radius: 15px; padding: 40px; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1); }
-        h1 { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 10px; }
-        .meta { color: #666; margin-bottom: 30px; padding-bottom: 20px; border-bottom: 2px solid #eee; }
-        .back-link { display: inline-block; margin-bottom: 20px; color: #667eea; text-decoration: none; font-weight: 500; }
-        h2 { color: #667eea; margin-top: 30px; margin-bottom: 15px; }
-        p { margin-bottom: 15px; }
-        .tag { display: inline-block; padding: 4px 12px; background: #e8f4f8; color: #2980b9; border-radius: 20px; font-size: 0.85em; margin-right: 8px; }
+        :root {
+            --primary: #f5576c; --secondary: #ff6b9d;
+            --text-dark: #2d3748; --text-light: #718096;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.7; color: var(--text-dark);
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+            min-height: 100vh; padding: 20px;
+        }
+        .container { max-width: 850px; margin: 0 auto; background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1); }
+        .hero-section { background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%); padding: 50px; text-align: center; color: white; }
+        .hero-icon { width: 80px; height: 80px; margin-bottom: 20px; filter: brightness(10); }
+        .hero-section h1 { font-size: 2rem; font-weight: 700; margin-bottom: 10px; }
+        .hero-section p { opacity: 0.9; font-size: 1.05rem; }
+        .content { padding: 45px; }
+        .back-link { display: inline-flex; align-items: center; gap: 6px; margin-bottom: 25px; color: #e11d48; text-decoration: none; font-weight: 600; font-size: 0.95rem; transition: all 0.3s ease; }
+        .back-link:hover { gap: 10px; color: var(--secondary); }
+        .meta-tags { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 30px; }
+        .tag { padding: 6px 14px; background: #ffe4e6; color: #be123c; border-radius: 20px; font-size: 0.85em; font-weight: 600; }
+        h2 { color: #e11d48; margin-top: 35px; margin-bottom: 16px; font-size: 1.55rem; font-weight: 700; position: relative; padding-left: 16px; }
+        h2::before { content: ''; position: absolute; left: 0; top: 6px; bottom: 6px; width: 4px; background: linear-gradient(180deg, var(--primary), var(--secondary)); border-radius: 2px; }
+        p { margin-bottom: 16px; color: var(--text-dark); font-size: 1.02rem; line-height: 1.75; }
+        ul, ol { margin-left: 22px; margin-bottom: 18px; }
+        li { margin-bottom: 9px; color: var(--text-dark); font-size: 1rem; line-height: 1.65; }
+        strong { color: var(--text-dark); font-weight: 600; }
+        .key-insight { background: linear-gradient(135deg, #f5576c08 0%, #ff6b9d08 100%); padding: 25px; border-radius: 12px; margin: 28px 0; border: 1px solid #e2e8f0; }
+        footer { margin-top: 45px; padding-top: 25px; border-top: 2px solid #f0f0f0; color: var(--text-light); font-size: 0.9rem; text-align: center; }
+        @media (max-width: 768px) { .content { padding: 30px 24px; } .hero-section { padding: 35px 25px; } h1 { font-size: 1.65rem; } }
     </style>
 </head>
 <body>
     <div class="container">
-        <a href="../index.html" class="back-link">← Back to SciMSPT</a>
-        <h1>SD-P-07 — Particle Dynamics</h1>
-        <div class="meta">
-            <span class="tag">Particle Physics</span>
-            <span class="tag">Dynamics</span>
-            <p><strong>Domain:</strong> Physics</p>
+        <div class="hero-section">
+            <img src="../assets/images/thumb-SD-P-07.png" alt="Particle Dynamics" class="hero-icon">
+            <h1>SD-P-07 — Particle Dynamics</h1>
+            <p>Subatomic particle behavior and interactions</p>
         </div>
-        <h2>Overview</h2>
-        <p>This research short investigates particle dynamics and the fundamental forces governing particle interactions.</p>
-        <h2>Key Topics</h2>
-        <p><strong>Standard Model:</strong> Fundamental particles and their interactions via gauge bosons.</p>
-        <p><strong>Beyond Standard Model:</strong> Dark matter candidates and physics at high energy scales.</p>
-        <footer style="margin-top: 40px; padding-top: 20px; border-top: 2px solid #eee; color: #666; font-size: 0.9em;">
-            <p>© 2026 SciMSPT — Scientific Mesh for Science, Matter, Physics & Time</p>
-        </footer>
+
+        <div class="content">
+            <a href="../index.html" class="back-link">← Back to SciMSPT</a>
+            
+            <div class="meta-tags">
+                <span class="tag">Particle Physics</span>
+                <span class="tag">Standard Model</span>
+                <span class="tag">Interactions</span>
+                <span class="tag">Domain: Physics (P)</span>
+            </div>
+
+            <h2>Abstract</h2>
+            <p>This research short examines the dynamics of fundamental particles and their interactions as described by the Standard Model of particle physics. Understanding subatomic processes provides insight into the building blocks of matter and forces that govern their behavior across energy scales relevant to materials science and cosmology.</p>
+
+            <h2>The Standard Model Framework</h2>
+
+            <p><strong>Matter Particles (Fermions):</strong></p>
+            <ul>
+                <li>Quarks (up, down, charm, strange, top, bottom): Experience strong nuclear force, combine to form protons and neutrons</li>
+                <li>Leptons (electron, muon, tau + corresponding neutrinos): Do not experience strong force, electrons govern chemistry</li>
+                <li>Antiparticles: Each fermion has corresponding antiparticle with opposite quantum numbers</li>
+                <li>Three generations of increasing mass, with ordinary matter composed solely of first-generation particles</li>
+            </ul>
+
+            <p><strong>Force Carriers (Bosons):</strong></p>
+            <ul>
+                <li>Gluons (g): Mediate strong interaction between quarks, carry color charge themselves</li>
+                <li>Photons (γ): Mediate electromagnetic interaction, massless gauge bosons</li>
+                <li>W± and Z bosons: Mediate weak nuclear force responsible for radioactive decay</li>
+                <li>Higgs boson (H): Imparts mass to other particles through the Higgs mechanism</li>
+            </ul>
+
+            <div class="key-insight">
+                <p><strong>Fundamental Interactions:</strong> The four fundamental forces—gravity, electromagnetism, strong nuclear, and weak nuclear—govern all particle interactions. At the energies relevant to condensed matter physics, electromagnetism dominates material properties while residual strong effects bind atomic nuclei.</p>
+            </div>
+
+            <h2>Particle Detection & Accelerators</h2>
+
+            <ol>
+                <li><strong>Collider experiments:</strong> Large Hadron Collider (LHC) achieving 13 TeV center-of-mass energy probing physics at attometer length scales, discovering Higgs boson in 2012.</li>
+                
+                <li><strong>Detection technologies:</strong> Silicon trackers measuring charged particle trajectories, calorimeters measuring energy deposition, Cherenkov detectors identifying particle velocities.</li>
+                
+                <li><strong>Data analysis:</strong> Processing petabytes of collision data using machine learning for event reconstruction and rare signal extraction from backgrounds.</li>
+            </ol>
+
+            <h2>Beyond Standard Model Physics</h2>
+            
+            <ul>
+                <li><strong>Dark matter:</strong> Astrophysical evidence for non-luminous matter comprising ~27% of universe's energy density, potentially composed of Weakly Interacting Massive Particles (WIMPs) or axions</li>
+                <li><strong>Neutrino masses:</strong> Neutrino oscillations implying physics beyond minimal Standard Model, possibly involving seesaw mechanisms or sterile neutrinos</li>
+                <li><strong>Matter-antimatter asymmetry:</strong> Observed excess of matter over antimatter requiring CP violation beyond Standard Model predictions</li>
+                <li><strong>Quantum gravity:</strong> Unification of general relativity with quantum mechanics at Planck scale (~10¹⁹ GeV), potentially involving string theory or loop quantum gravity</li>
+            </ul>
+
+            <footer>
+                <p><strong>SD-P-07 — Particle Dynamics</strong></p>
+                <p style="margin-top: 8px;">© 2026 SciMSPT — Scientific Mesh for Science, Matter, Physics & Time</p>
+                <p style="margin-top: 12px; font-size: 0.82em; opacity: 0.7;">Research Short | Domain: Physics (P)</p>
+            </footer>
+        </div>
     </div>
 </body>
 </html>

@@ -4,36 +4,143 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CMOS 2nm Technology | SciMSPT Portfolio</title>
-    <meta name="description" content="CMOS 2nm Technology: Next-generation semiconductor manufacturing and transistor design at 2 nanometer scale.">
+    <meta name="description" content="CMOS 2nm Technology: Frontier semiconductor technology at the 2nm process node, exploring transistor physics, manufacturing challenges, and future scaling limits.">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #333; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; padding: 20px; }
-        .container { max-width: 900px; margin: 0 auto; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border-radius: 15px; padding: 40px; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1); }
-        h1 { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 10px; }
-        .meta { color: #666; margin-bottom: 30px; padding-bottom: 20px; border-bottom: 2px solid #eee; }
-        .back-link { display: inline-block; margin-bottom: 20px; color: #667eea; text-decoration: none; font-weight: 500; }
-        h2 { color: #667eea; margin-top: 30px; margin-bottom: 15px; }
-        p { margin-bottom: 15px; }
-        .tag { display: inline-block; padding: 4px 12px; background: #e8f4f8; color: #2980b9; border-radius: 20px; font-size: 0.85em; margin-right: 8px; }
+        :root {
+            --primary: #a8edea; --secondary: #fed6e3;
+            --text-dark: #2d3748; --text-light: #718096;
+            --accent: #6366f1;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.7; color: var(--text-dark);
+            background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
+            min-height: 100vh; padding: 20px;
+        }
+        .container { max-width: 900px; margin: 0 auto; background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1); }
+        .hero-banner { width: 100%; height: 280px; object-fit: cover; display: block; }
+        .content { padding: 50px; }
+        .back-link { display: inline-flex; align-items: center; gap: 6px; margin-bottom: 25px; color: var(--accent); text-decoration: none; font-weight: 600; font-size: 0.95rem; transition: all 0.3s ease; }
+        .back-link:hover { gap: 10px; color: #4f46e5; }
+        h1 { font-size: 2.5rem; font-weight: 800; background: linear-gradient(135deg, var(--accent) 0%, #8b5cf6 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 15px; letter-spacing: -0.02em; }
+        .meta { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-bottom: 35px; padding-bottom: 30px; border-bottom: 2px solid #f0f0f0; }
+        .tag { display: inline-flex; padding: 6px 16px; background: linear-gradient(135deg, var(--accent) 0%, #8b5cf6 100%); color: white; border-radius: 25px; font-size: 0.85em; font-weight: 600; }
+        .domain-badge { padding: 6px 16px; background: #eef2ff; color: #4338ca; border-radius: 25px; font-size: 0.85em; font-weight: 600; }
+        h2 { color: var(--accent); margin-top: 40px; margin-bottom: 18px; font-size: 1.75rem; font-weight: 700; position: relative; padding-left: 18px; }
+        h2::before { content: ''; position: absolute; left: 0; top: 8px; bottom: 8px; width: 4px; background: linear-gradient(180deg, var(--accent), #8b5cf6); border-radius: 2px; }
+        p { margin-bottom: 18px; color: var(--text-dark); font-size: 1.05rem; }
+        ul, ol { margin-left: 24px; margin-bottom: 20px; }
+        li { margin-bottom: 10px; color: var(--text-dark); font-size: 1.02rem; }
+        strong { color: var(--text-dark); font-weight: 600; }
+        .highlight-box { background: linear-gradient(135deg, #a8edea08 0%, #fed6e308 100%); border-left: 4px solid var(--accent); padding: 25px 30px; border-radius: 12px; margin: 30px 0; }
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin: 35px 0; }
+        .stat-card { background: #f5f3ff; padding: 25px; border-radius: 14px; text-align: center; transition: transform 0.3s ease; }
+        .stat-card:hover { transform: translateY(-5px); }
+        .stat-number { font-size: 2.2rem; font-weight: 800; color: var(--accent); display: block; margin-bottom: 8px; }
+        .stat-label { font-size: 0.92rem; color: var(--text-light); font-weight: 500; }
+        footer { margin-top: 50px; padding-top: 30px; border-top: 2px solid #f0f0f0; color: var(--text-light); font-size: 0.92rem; text-align: center; }
+        @media (max-width: 768px) { .content { padding: 30px 25px; } h1 { font-size: 2rem; } h2 { font-size: 1.45rem; } .hero-banner { height: 200px; } }
     </style>
 </head>
 <body>
     <div class="container">
-        <a href="../index.html" class="back-link">← Back to SciMSPT</a>
-        <h1>CMOS 2nm Technology</h1>
-        <div class="meta">
-            <span class="tag">Semiconductors</span>
-            <span class="tag">Nanotechnology</span>
-            <p><strong>Research Domain:</strong> Physics & Engineering</p>
+        <img src="../assets/images/portfolio-P-cmos-2nm.png" alt="CMOS 2nm Technology" class="hero-banner">
+        
+        <div class="content">
+            <a href="../index.html" class="back-link">← Back to SciMSPT</a>
+            
+            <h1>CMOS 2nm Technology</h1>
+            <div class="meta">
+                <span class="tag">Semiconductors</span>
+                <span class="tag">Nanotechnology</span>
+                <span class="tag">Process Engineering</span>
+                <span class="domain-badge">Electronics & Physics</span>
+            </div>
+
+            <h2>Executive Summary</h2>
+            <p>This portfolio analysis provides a comprehensive examination of CMOS technology at the 2nm process node—the current frontier of semiconductor manufacturing. At this scale, transistors comprise only ~50 atoms across their channel width, pushing against fundamental physical limits and requiring revolutionary device architectures and materials innovations.</p>
+
+            <div class="highlight-box">
+                <p><strong>Milestone Achievement:</strong> The 2nm node represents a transistor density of ~500 million transistors per mm²—approximately 2× the density of 3nm technology and 45× that of the 7nm node used in previous-generation processors. A typical 2nm chip contains over 50 billion individual transistors.</p>
+            </div>
+
+            <h2>Revolutionary Device Architectures</h2>
+
+            <p><strong>GAA-FET (Gate-All-Around Field Effect Transistor):</strong></p>
+            <ul>
+                <li>Nanosheet/nanowire channels completely surrounded by gate electrode on all four sides</li>
+                <li>Superior electrostatic control enabling continued voltage scaling with minimal leakage</li>
+                <li>Design flexibility through variable nanosheet width tuning drive current vs. density trade-offs</li>
+                <li>Back-side power delivery network separating power and signal routing for improved efficiency</li>
+            </ul>
+
+            <p><strong>CFET (Complementary FET):</strong></p>
+            <ul>
+                <li>3D stacking of NMOS and PMOS transistors reducing standard cell area by 30-40%</li>
+                <li>Interleaved transistor layers connected by monolithic interlayer vias</li>
+                <li>Enables continued Moore's Law scaling beyond planar limitations</li>
+                <li>Requires novel thermal management solutions for stacked active devices</li>
+            </ul>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <span class="stat-number">2 nm</span>
+                    <span class="stat-label">Gate Length (nominal)</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">500M</span>
+                    <span class="stat-label">Transistors/mm²</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">0.7 V</span>
+                    <span class="stat-label">Operating Voltage</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">50 atoms</span>
+                    <span class="stat-label">Channel Width</span>
+                </div>
+            </div>
+
+            <h2>Materials & Process Innovations</h2>
+
+            <ol>
+                <li><strong>High-mobility channel materials:</strong> Integration of silicon-germanium (SiGe) and III-V compounds (InGaAs) for PMOS and NMOS respectively, boosting carrier mobility 2-3× over pure silicon.</li>
+                
+                <li><strong>Advanced dielectrics:</strong> High-k materials with equivalent oxide thickness below 0.5 nm maintaining gate capacitance while suppressing leakage currents through atomically precise deposition.</li>
+                
+                <li><strong>EUV lithography evolution:</strong> High-numerical-aperture (NA=0.55) EUV systems achieving 8nm resolution for single-expose patterning of 2nm features, complemented by multi-patterning where needed.</li>
+                
+                <li><strong>Novel interconnects:</strong> Molybdenum and ruthenium metallization replacing copper at narrow dimensions, plus air-gap dielectrics reducing line-to-line capacitance.</li>
+            </ol>
+
+            <h2>Manufacturing Challenges & Solutions</h2>
+            <p>The transition to 2nm manufacturing presents unprecedented challenges requiring holistic innovation:</p>
+
+            <div class="highlight-box">
+                <ul style="margin-top: 12px; margin-bottom: 0;">
+                    <li><strong>Stochastic variation:</strong> Atomic-level roughness causing device-to-device variability addressed through design-for-manufacturing and statistical timing analysis</li>
+                    <li><strong>Heat dissipation:</strong> Power densities exceeding 100 W/cm² requiring advanced cooling solutions including immersion cooling and on-chip thermal management</li>
+                    <li><strong>Yield optimization:</strong> Machine learning-based process control maintaining >90% yield despite exponential defect sensitivity at atomic dimensions</li>
+                    <li><strong>Cosmic ray sensitivity:</strong> Alpha particles and neutrons causing soft errors in ultra-dense circuits necessitating radiation-hardened design techniques</li>
+                </ul>
+            </div>
+
+            <h2>Beyond 2nm: Future Roadmap</h2>
+            <p>The semiconductor industry trajectory points toward several post-2nm developments:</p>
+            
+            <ul>
+                <li><strong>1.4nm node (2027-2028):</strong> Further GAA optimizations, introduction of CFET in high-volume manufacturing</li>
+                <li><strong>1nm node (2029-2030):</strong> Atomic-precision manufacturing, potential transition to 2D channel materials (MoS₂, WS₂)</li>
+                <li><strong>Post-CMOS era:</strong> Quantum computing integration, neuromorphic architectures, and potentially entirely new computing paradigms</li>
+            </ul>
+
+            <footer>
+                <p><strong>CMOS 2nm Technology</strong></p>
+                <p style="margin-top: 8px;">© 2026 SciMSPT — Scientific Mesh for Science, Matter, Physics & Time</p>
+                <p style="margin-top: 12px; font-size: 0.85em; opacity: 0.7;">Portfolio Analysis | Last Updated: August 2026</p>
+            </footer>
         </div>
-        <h2>Overview</h2>
-        <p>This portfolio segment examines CMOS technology at the 2nm process node, representing the cutting edge of semiconductor manufacturing.</p>
-        <h2>Technical Considerations</h2>
-        <p><strong>Gate-All-Around (GAA) Transistors:</strong> New transistor architectures needed for sub-3nm nodes.</p>
-        <p><strong>Quantum Effects:</strong> Managing tunneling and other quantum phenomena at atomic scales.</p>
-        <footer style="margin-top: 40px; padding-top: 20px; border-top: 2px solid #eee; color: #666; font-size: 0.9em;">
-            <p>© 2026 SciMSPT — Scientific Mesh for Science, Matter, Physics & Time</p>
-        </footer>
     </div>
 </body>
 </html>
