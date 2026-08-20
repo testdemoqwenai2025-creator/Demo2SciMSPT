@@ -3786,9 +3786,9 @@
       </p>
       
       <div class="hero-actions">
-        <a href="#get-started" class="btn-primary" onclick="openGetStartedModal()">
-          <span class="material-icons-round">rocket_launch</span>
-          Get Started Free
+        <a href="quantum.html" class="btn-primary">
+          <span class="material-icons-round">psychology</span>
+          Explore Quantum Platform
         </a>
         <a href="platform.html" class="btn-secondary">
           <span class="material-icons-round">explore</span>
@@ -3974,10 +3974,10 @@
           </p>
           
           <div class="cta-buttons">
-            <button class="btn-primary" onclick="openGetStartedModal()">
+            <a href="quantum.html" class="btn-primary">
               <span class="material-icons-round">play_arrow</span>
-              Get Instant Access
-            </button>
+              Try Quantum Workspace
+            </a>
             <a href="startups.html" class="btn-secondary">
               <span class="material-icons-round">visibility</span>
               View This Week's Startups
@@ -4065,59 +4065,8 @@
     </div>
   </footer>
 
-  <!-- Get Started Modal -->
-  <div class="modal-overlay" id="getStartedModal">
-    <div class="modal-box">
-      <div class="modal-header">
-        <h3 class="modal-title">Configure Your Access</h3>
-        <p class="modal-subtitle">Select your research interests to personalize your experience</p>
-      </div>
-      
-      <div class="quick-options">
-        <label class="quick-option">
-          <input type="checkbox" name="research_access" checked>
-          <span class="option-content">
-            <strong>Research Tools</strong>
-            <small>Paper analysis & trend detection</small>
-          </span>
-        </label>
-        
-        <label class="quick-option">
-          <input type="checkbox" name="startup_data" checked>
-          <span class="option-content">
-            <strong>Startup Intelligence</strong>
-            <small>Weekly validated startup reports</small>
-          </span>
-        </label>
-        
-        <label class="quick-option">
-          <input type="checkbox" name="api_access">
-          <span class="option-content">
-            <strong>API Integration</strong>
-            <small>Programmatic access to all features</small>
-          </span>
-        </label>
-        
-        <label class="quick-option">
-          <input type="checkbox" name="notifications" checked>
-          <span class="option-content">
-            <strong>Smart Notifications</strong>
-            <small>Real-time alerts on breakthrough papers</small>
-          </span>
-        </label>
-        
-        <label class="quick-option">
-          <input type="checkbox" name="collaboration">
-          <span class="option-content">
-            <strong>Collaborative Workspace</strong>
-            <small>Team research & shared pipelines</small>
-          </span>
-        </label>
-      </div>
-      
-      <button class="btn-submit" onclick="quickAccess()">Get Instant Access</button>
-    </div>
-  </div>
+  <!-- Get Started Modal - REMOVED: Redirected to quantum.html for better UX -->
+  <!-- Modal was causing confusion; users now go directly to Quantum workspace -->
 
   <script>
     // ============================================
@@ -4298,13 +4247,15 @@
       window.location.href = 'platform.html#collaboration';
     }
     
-    // Get Started Modal
+    // Get Started Modal - DISABLED (removed, redirects to quantum.html)
     function openGetStartedModal() {
-      document.getElementById('getStartedModal').classList.add('show');
+      // Modal removed - redirecting to quantum workspace instead
+      window.location.href = 'quantum.html';
     }
     
     function closeGetStartedModal() {
-      document.getElementById('getStartedModal').classList.remove('show');
+      // Modal removed - no action needed
+      return;
     }
     
     // Quick Access Handler
@@ -4370,12 +4321,16 @@
       }, 1500);
     }
     
-    // Close modal on overlay click
-    document.getElementById('getStartedModal').addEventListener('click', (e) => {
-      if (e.target.id === 'getStartedModal') {
-        closeGetStartedModal();
-      }
-    });
+    // Close modal on overlay click - DISABLED (modal removed)
+    try {
+      document.getElementById('getStartedModal')?.addEventListener('click', (e) => {
+        if (e.target.id === 'getStartedModal') {
+          closeGetStartedModal();
+        }
+      });
+    } catch(e) {
+      // Modal element removed - ignoring
+    }
     
     // Keyboard shortcuts
     document.addEventListener('keydown', (e) => {
