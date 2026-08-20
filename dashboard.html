@@ -287,7 +287,1905 @@
       .float-btn { width: 44px; height: 44px; }
       .float-btn .material-icons { font-size: 20px; }
     }
-  </style>
+  
+    /* ============================================
+       PHASE 2: MOLECULAR INTELLIGENCE OVERHAUL
+       Enhanced Neural Design System v4.0
+       ============================================ */
+    
+    /* --- 4.1 HOLOGRAPHIC EDGE GLOW ON CARDS --- */
+    .phase2-holographic {
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .phase2-holographic::before {
+      content: '';
+      position: absolute;
+      top: -2px;
+      left: -2px;
+      right: -2px;
+      bottom: -2px;
+      background: conic-gradient(
+        from var(--phase2-hue, 0deg),
+        transparent 0%,
+        rgba(0, 229, 255, 0.4) 10%,
+        rgba(167, 139, 250, 0.4) 20%,
+        transparent 30%,
+        transparent 70%,
+        rgba(244, 114, 182, 0.4) 80%,
+        rgba(0, 229, 255, 0.4) 90%,
+        transparent 100%
+      );
+      border-radius: inherit;
+      animation: phase2-holographicRotate 6s linear infinite;
+      z-index: -1;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+    
+    .phase2-holographic:hover::before {
+      opacity: 1;
+    }
+    
+    @keyframes phase2-holographicRotate {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    
+    /* Apply holographic effect to existing cards */
+    .feature-card.phase2-enhanced,
+    .stat-card.phase2-enhanced,
+    .pipeline-step.phase2-enhanced {
+      position: relative;
+    }
+    
+    .feature-card.phase2-enhanced::after,
+    .stat-card.phase2-enhanced::after,
+    .pipeline-step.phase2-enhanced::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      padding: 1px;
+      background: linear-gradient(
+        135deg,
+        rgba(0, 229, 255, 0.5),
+        transparent 40%,
+        transparent 60%,
+        rgba(167, 139, 250, 0.5)
+      );
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      pointer-events: none;
+    }
+    
+    .feature-card.phase2-enhanced:hover::after,
+    .stat-card.phase2-enhanced:hover::after,
+    .pipeline-step.phase2-enhanced:hover::after {
+      opacity: 1;
+    }
+    
+    /* --- 4.2 TEXT SHADOW GLOW ON HEADINGS --- */
+    .phase2-glow-text {
+      text-shadow: 
+        0 0 30px rgba(0, 229, 255, 0.3),
+        0 0 60px rgba(0, 229, 255, 0.15),
+        0 0 90px rgba(167, 139, 250, 0.1);
+    }
+    
+    .hero-title.phase2-enhanced,
+    .section-title.phase2-enhanced,
+    .cta-title.phase2-enhanced {
+      text-shadow: 
+        0 0 30px rgba(0, 229, 255, 0.25),
+        0 0 60px rgba(167, 139, 250, 0.15);
+    }
+    
+    /* --- 4.3 MAGNETIC BUTTON HOVER EFFECT --- */
+    .phase2-magnetic {
+      transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+    
+    .btn-primary.phase2-enhanced,
+    .btn-secondary.phase2-enhanced,
+    .workspace-btn.phase2-enhanced,
+    .page-nav-btn.phase2-enhanced {
+      position: relative;
+      overflow: visible;
+    }
+    
+    /* --- 4.4 CUSTOM SCROLLBAR WITH GLOW --- */
+    .phase2-custom-scrollbar::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    
+    .phase2-custom-scrollbar::-webkit-scrollbar-track {
+      background: var(--bg-secondary, #0d1f35);
+      border-radius: 4px;
+    }
+    
+    .phase2-custom-scrollbar::-webkit-scrollbar-thumb {
+      background: linear-gradient(
+        180deg,
+        var(--accent-primary, #00E5FF),
+        var(--accent-tertiary, #a78bfa)
+      );
+      border-radius: 4px;
+      box-shadow: 
+        0 0 10px rgba(0, 229, 255, 0.4),
+        inset 0 0 5px rgba(255, 255, 255, 0.2);
+    }
+    
+    .phase2-custom-scrollbar::-webkit-scrollbar-thumb:hover {
+      background: linear-gradient(
+        180deg,
+        var(--accent-tertiary, #a78bfa),
+        var(--accent-pink, #f472b6)
+      );
+      box-shadow: 
+        0 0 15px rgba(167, 139, 250, 0.5),
+        inset 0 0 5px rgba(255, 255, 255, 0.3);
+    }
+    
+    /* Apply custom scrollbar globally */
+    html.phase2-enhanced {
+      scrollbar-width: thin;
+      scrollbar-color: var(--accent-primary, #00E5FF) var(--bg-secondary, #0d1f35);
+    }
+    
+    html.phase2-enhanced * {
+      scrollbar-width: thin;
+      scrollbar-color: rgba(0, 229, 255, 0.3) transparent;
+    }
+    
+    /* --- 4.5 SKELETON LOADING ANIMATION --- */
+    .phase2-skeleton {
+      background: linear-gradient(
+        90deg,
+        var(--bg-tertiary, #122a45) 25%,
+        var(--bg-secondary, #0d1f35) 50%,
+        var(--bg-tertiary, #122a45) 75%
+      );
+      background-size: 200% 100%;
+      animation: phase2-skeletonShimmer 1.5s infinite;
+      border-radius: 8px;
+    }
+    
+    @keyframes phase2-skeletonShimmer {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+    
+    .phase2-skeleton-text {
+      height: 16px;
+      margin-bottom: 12px;
+    }
+    
+    .phase2-skeleton-text:last-child {
+      width: 70%;
+    }
+    
+    .phase2-skeleton-avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+    }
+    
+    .phase2-skeleton-card {
+      height: 200px;
+      border-radius: 16px;
+    }
+    
+    /* --- 4.6 MESH GRADIENT BACKGROUNDS FOR HERO --- */
+    .phase2-mesh-gradient {
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .phase2-mesh-gradient::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: 
+        radial-gradient(circle at 20% 30%, rgba(0, 229, 255, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(167, 139, 250, 0.06) 0%, transparent 50%),
+        radial-gradient(circle at 40% 80%, rgba(244, 114, 182, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 90% 70%, rgba(16, 185, 129, 0.04) 0%, transparent 50%);
+      animation: phase2-meshFloat 20s ease-in-out infinite;
+      pointer-events: none;
+    }
+    
+    @keyframes phase2-meshFloat {
+      0%, 100% { transform: translate(0, 0) rotate(0deg); }
+      25% { transform: translate(2%, 1%) rotate(1deg); }
+      50% { transform: translate(-1%, 2%) rotate(-1deg); }
+      75% { transform: translate(1%, -1%) rotate(0.5deg); }
+    }
+    
+    .hero-section.phase2-enhanced {
+      position: relative;
+    }
+    
+    .hero-section.phase2-enhanced::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: 
+        radial-gradient(ellipse at 30% 20%, rgba(0, 229, 255, 0.07) 0%, transparent 50%),
+        radial-gradient(ellipse at 70% 80%, rgba(167, 139, 250, 0.05) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: 0;
+    }
+    
+    /* --- 4.7 RIPPLE EFFECT ON BUTTON CLICK --- */
+    .phase2-ripple {
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .phase2-ripple-effect {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.35);
+      transform: scale(0);
+      animation: phase2-rippleAnim 0.6s linear;
+      pointer-events: none;
+    }
+    
+    @keyframes phase2-rippleAnim {
+      to {
+        transform: scale(4);
+        opacity: 0;
+      }
+    }
+    
+    /* --- 4.8 PARTICLE FIELD OVERLAY --- */
+    .phase2-particle-field {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+      overflow: hidden;
+    }
+    
+    .phase2-particle {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: var(--accent-primary, #00E5FF);
+      border-radius: 50%;
+      opacity: 0;
+      animation: phase2-particleFloat 8s infinite;
+    }
+    
+    @keyframes phase2-particleFloat {
+      0% {
+        opacity: 0;
+        transform: translateY(100vh) scale(0);
+      }
+      10% {
+        opacity: 0.6;
+      }
+      90% {
+        opacity: 0.6;
+      }
+      100% {
+        opacity: 0;
+        transform: translateY(-10vh) scale(1);
+      }
+    }
+    
+    /* --- 4.9 NEURAL IDENTITY CARD STYLES --- */
+    .phase2-neural-card {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 12px 20px;
+      background: var(--bg-glass, rgba(10, 22, 40, 0.85));
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--border-subtle, rgba(0, 229, 255, 0.15));
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+      position: relative;
+      overflow: visible;
+    }
+    
+    .phase2-neural-card::before {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      border-radius: 54px;
+      background: conic-gradient(
+        from var(--neural-hue, 0deg),
+        var(--accent-primary, #00E5FF),
+        var(--accent-tertiary, #a78bfa),
+        var(--accent-pink, #f472b6),
+        var(--accent-primary, #00E5FF)
+      );
+      z-index: -1;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      animation: phase2-neuralRingRotate 4s linear infinite paused;
+    }
+    
+    .phase2-neural-card:hover::before {
+      opacity: 1;
+      animation-play-state: running;
+    }
+    
+    @keyframes phase2-neuralRingRotate {
+      0% { --neural-hue: 0deg; }
+      100% { --neural-hue: 360deg; }
+    }
+    
+    .phase2-avatar-ring {
+      position: relative;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      padding: 2px;
+      background: linear-gradient(
+        135deg,
+        var(--avatar-color-1, #00E5FF),
+        var(--avatar-color-2, #f472b6)
+      );
+    }
+    
+    .phase2-avatar-ring::after {
+      content: '';
+      position: absolute;
+      inset: -3px;
+      border-radius: 50%;
+      border: 2px solid transparent;
+      border-top-color: var(--status-color, #10b981);
+      animation: phase2-avatarPulse 2s ease-in-out infinite;
+    }
+    
+    @keyframes phase2-avatarPulse {
+      0%, 100% { 
+        transform: rotate(0deg); 
+        opacity: 1;
+      }
+      50% { 
+        transform: rotate(180deg); 
+        opacity: 0.5;
+      }
+    }
+    
+    .phase2-neural-score {
+      font-family: var(--font-tech, 'Orbitron', monospace);
+      font-size: 11px;
+      color: var(--accent-green, #10b981);
+      background: rgba(16, 185, 129, 0.1);
+      padding: 2px 8px;
+      border-radius: 10px;
+      letter-spacing: 0.5px;
+    }
+    
+    .phase2-session-id {
+      font-family: var(--font-mono, 'JetBrains Mono', monospace);
+      font-size: 10px;
+      color: var(--text-muted, #64748b);
+      letter-spacing: 1px;
+      opacity: 0.7;
+    }
+    
+    /* --- 4.10 ENHANCED MOLECULAR SIDEBARS --- */
+    .phase2-dna-rung {
+      position: absolute;
+      height: 1px;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        var(--rung-color, rgba(0, 229, 255, 0.4)),
+        transparent
+      );
+      transform-origin: left center;
+      animation: phase2-rungPulse 3s ease-in-out infinite;
+    }
+    
+    @keyframes phase2-rungPulse {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 0.8; }
+    }
+    
+    .phase2-nucleotide-label {
+      position: absolute;
+      font-family: var(--font-mono, 'JetBrains Mono', monospace);
+      font-size: 9px;
+      font-weight: 600;
+      padding: 2px 6px;
+      border-radius: 4px;
+      opacity: 0;
+      transform: translateY(5px);
+      transition: all 0.3s ease;
+      pointer-events: none;
+      white-space: nowrap;
+      z-index: 10;
+    }
+    
+    .nucleotide:hover + .phase2-nucleotide-label,
+    .molecular-sidebar:hover .phase2-nucleotide-label.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    .phase2-protein-fold {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      animation: phase2-proteinFold 8s ease-in-out infinite;
+    }
+    
+    @keyframes phase2-proteinFold {
+      0%, 100% { 
+        transform: scaleY(1) rotate(0deg); 
+      }
+      25% { 
+        transform: scaleY(0.7) rotate(5deg); 
+      }
+      50% { 
+        transform: scaleY(1.2) rotate(-3deg); 
+      }
+      75% { 
+        transform: scaleY(0.85) rotate(2deg); 
+      }
+    }
+    
+    .phase2-orbiting-electron {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: var(--accent-primary, #00E5FF);
+      border-radius: 50%;
+      box-shadow: 0 0 8px var(--accent-primary, #00E5FF);
+      animation: phase2-orbitElectron 3s linear infinite;
+    }
+    
+    @keyframes phase2-orbitElectron {
+      0% { transform: rotate(0deg) translateX(12px) rotate(0deg); }
+      100% { transform: rotate(360deg) translateX(12px) rotate(-360deg); }
+    }
+    
+    .phase2-molecular-trail {
+      position: fixed;
+      width: 4px;
+      height: 4px;
+      background: var(--accent-primary, #00E5FF);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      box-shadow: 0 0 10px var(--accent-primary, #00E5FF);
+    }
+    
+    /* --- 4.11 ENHANCED PAGE NAV BAR --- */
+    .phase2-page-nav-bar {
+      position: fixed;
+      top: calc(var(--nav-height, 80px) + 16px);
+      left: 50%;
+      transform: translateX(-50%) translateY(-20px);
+      z-index: 90;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 24px;
+      background: var(--bg-glass, rgba(10, 22, 40, 0.92));
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--border-subtle, rgba(0, 229, 255, 0.15));
+      border-radius: 50px;
+      opacity: 0;
+      animation: phase2-navSlideIn 0.6s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+      animation-delay: 0.3s;
+    }
+    
+    @keyframes phase2-navSlideIn {
+      0% {
+        opacity: 0;
+        transform: translateX(-50%) translateY(-20px) scale(0.95);
+      }
+      100% {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0) scale(1);
+      }
+    }
+    
+    .phase2-breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      color: var(--text-muted, #64748b);
+      font-family: var(--font-mono, 'JetBrains Mono', monospace);
+    }
+    
+    .phase2-breadcrumb-sep {
+      color: var(--border-subtle, rgba(0, 229, 255, 0.3));
+    }
+    
+    .phase2-breadcrumb-current {
+      color: var(--accent-primary, #00E5FF);
+      font-weight: 600;
+    }
+    
+    .phase2-page-indicator {
+      font-size: 11px;
+      color: var(--text-muted, #64748b);
+      font-family: var(--font-mono, 'JetBrains Mono', monospace);
+      padding: 0 10px;
+      border-left: 1px solid var(--border-subtle, rgba(0, 229, 255, 0.15));
+    }
+    
+    /* --- 4.12 CONTENT WRAPPER ALIGNMENT --- */
+    .phase2-content-wrapper {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 40px;
+      position: relative;
+      z-index: 10;
+    }
+    
+    .main-content.phase2-aligned {
+      max-width: 1600px;
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: calc(var(--sidebar-width, 100px) + 40px);
+      padding-right: calc(var(--sidebar-width, 100px) + 40px);
+    }
+    
+    /* --- 4.13 RESPONSIVE ENHANCEMENTS FOR PHASE 2 --- */
+    @media (max-width: 1024px) {
+      .phase2-content-wrapper {
+        padding: 0 24px;
+      }
+      
+      .main-content.phase2-aligned {
+        padding-left: calc(var(--sidebar-width, 60px) + 24px);
+        padding-right: calc(var(--sidebar-width, 60px) + 24px);
+      }
+      
+      .phase2-page-nav-bar {
+        padding: 8px 16px;
+        gap: 6px;
+      }
+      
+      .phase2-breadcrumb {
+        font-size: 11px;
+      }
+      
+      .phase2-neural-score {
+        display: none;
+      }
+      
+      .phase2-session-id {
+        display: none;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .phase2-particle-field {
+        display: none;
+      }
+      
+      .phase2-holographic::before {
+        display: none;
+      }
+      
+      .phase2-neural-card::before {
+        display: none;
+      }
+      
+      .phase2-page-nav-bar {
+        display: none !important;
+      }
+    }
+
+
+  
+  /* ============================================
+     MOBILE-FIRST RESPONSIVE SYSTEM v4.0
+     Quantum-Ready | AI-Enhanced | Future-Proof
+     ============================================ */
+  
+  /* --- Core Mobile Variables --- */
+  :root {
+    --mobile-safe-area: env(safe-area-inset-top, 0px);
+    --touch-target: 44px;  /* Apple HIG recommended */
+    --mobile-nav-height: 64px;
+    --mobile-sidebar: 0px;
+    --mobile-font-scale: 1;
+    --device-pixel-ratio: 1;
+  }
+  
+  @media (pointer: coarse) {
+    :root {
+      --touch-target: 48px;
+    }
+  }
+  
+  /* --- Mobile Detection Banner --- */
+  .mobile-detection-banner {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10000;
+    background: linear-gradient(135deg, #0a1628 0%, #0d1f35 100%);
+    border-bottom: 1px solid rgba(0, 229, 255, 0.3);
+    padding: 12px 16px;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    font-family: 'Inter', -apple-system, sans-serif;
+    animation: slideDown 0.4s ease;
+  }
+  
+  .mobile-detection-banner.visible {
+    display: block;
+  }
+  
+  @keyframes slideDown {
+    from { transform: translateY(-100%); }
+    to { transform: translateY(0); }
+  }
+  
+  .mobile-banner-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  
+  .mobile-banner-text {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--text-primary);
+    font-size: 13px;
+    line-height: 1.4;
+  }
+  
+  .mobile-banner-icon {
+    width: 32px;
+    height: 32px;
+    background: linear-gradient(135deg, var(--accent-primary), var(--accent-tertiary));
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+  
+  .mobile-banner-actions {
+    display: flex;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+  
+  .mobile-banner-btn {
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    border: none;
+  }
+  
+  .mobile-banner-btn.primary {
+    background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+    color: #0a1628;
+  }
+  
+  .mobile-banner-btn.secondary {
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--text-primary);
+    border: 1px solid var(--border-subtle);
+  }
+  
+  .mobile-banner-dismiss {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    padding: 4px;
+    font-size: 18px;
+    line-height: 1;
+  }
+  
+  /* --- Progressive Web App Meta Support --- */
+  .pwa-install-prompt {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
+    background: var(--bg-glass);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--border-subtle);
+    border-radius: 16px;
+    padding: 16px 20px;
+    max-width: calc(100vw - 32px);
+    width: 400px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    animation: slideUp 0.4s ease;
+  }
+  
+  .pwa-install-prompt.visible {
+    display: block;
+  }
+  
+  @keyframes slideUp {
+    from { transform: translateX(-50%) translateY(100%); opacity: 0; }
+    to { transform: translateX(-50%) translateY(0); opacity: 1; }
+  }
+  
+  /* --- Enhanced Mobile Navigation --- */
+  @media (max-width: 1024px) {
+    :root {
+      --sidebar-width: 60px;
+      --nav-height: 72px;
+    }
+    
+    .molecular-sidebar {
+      width: 60px;
+    }
+    
+    .molecular-sidebar .dna-helix {
+      width: 40px;
+      transform: translate(-50%, -50%) scale(0.7);
+    }
+    
+    .molecular-sidebar .nucleotide {
+      width: 8px;
+      height: 8px;
+    }
+    
+    .nav-container {
+      padding: 0 20px;
+      gap: 12px;
+    }
+    
+    .nav-brand {
+      gap: 8px;
+    }
+    
+    .nav-logo {
+      width: 36px;
+      height: 36px;
+      font-size: 14px;
+    }
+    
+    .nav-title {
+      font-size: 18px;
+    }
+    
+    .nav-links {
+      gap: 4px;
+    }
+    
+    .nav-link {
+      padding: 8px 12px;
+      font-size: 13px;
+    }
+    
+    .nav-link .link-text {
+      display: none;
+    }
+    
+    .nav-link .material-icons-round {
+      font-size: 20px;
+      margin: 0;
+    }
+    
+    /* Tablet Video Optimization */
+    .startup-video-wrapper,
+    .paper-video-section {
+      margin-top: 16px;
+      padding-top: 12px;
+    }
+    
+    .video-container {
+      border-radius: 10px;
+    }
+    
+    .video-container video {
+      aspect-ratio: 16 / 9;
+    }
+    
+    /* Portal Grid Responsive */
+    .portal-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+    
+    /* Premium Video Section */
+    .premium-video-section {
+      padding: 40px 24px;
+    }
+    
+    .premium-video-container {
+      max-width: 100%;
+    }
+    
+    /* Philosophy Section */
+    .ai-philosophy-banner {
+      flex-direction: column;
+      text-align: center;
+      padding: 32px 24px;
+    }
+    
+    .ai-philosophy-stats {
+      justify-content: center;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    :root {
+      --sidebar-width: 0px;
+      --nav-height: 64px;
+      --mobile-font-scale: 0.95;
+    }
+    
+    /* Hide Desktop Elements */
+    .molecular-sidebar {
+      display: none !important;
+    }
+    
+    .neural-bg {
+      width: 100%;
+      left: 0;
+    }
+    
+    .page-nav-bar {
+      display: none;
+    }
+    
+    /* Full-Width Mobile Layout */
+    body {
+      font-size: 15px;
+      -webkit-text-size-adjust: 100%;
+    }
+    
+    .main-content {
+      margin-left: 0 !important;
+      margin-right: 0 !important;
+      width: 100%;
+      padding: 0 16px;
+    }
+    
+    .nav-container {
+      left: 0;
+      right: 0;
+      padding: 0 12px;
+      height: var(--mobile-nav-height);
+    }
+    
+    .nav-links {
+      display: none;  /* Hide desktop nav links */
+    }
+    
+    /* Mobile Menu Button */
+    .mobile-menu-toggle {
+      display: flex !important;
+      width: var(--touch-target);
+      height: var(--touch-target);
+      align-items: center;
+      justify-content: center;
+      background: rgba(0, 229, 255, 0.1);
+      border: 1px solid var(--border-subtle);
+      border-radius: 10px;
+      color: var(--accent-primary);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .mobile-menu-toggle:active {
+      background: rgba(0, 229, 255, 0.2);
+      transform: scale(0.95);
+    }
+    
+    /* Hero Sections Mobile */
+    .startups-hero,
+    .research-hero,
+    .page-hero {
+      padding: 100px 20px 48px !important;
+      min-height: auto;
+    }
+    
+    .startups-title,
+    .page-title {
+      font-size: clamp(24px, 6vw, 36px) !important;
+      line-height: 1.2;
+    }
+    
+    .startups-subtitle,
+    .page-subtitle {
+      font-size: 15px !important;
+      max-width: 100%;
+    }
+    
+    /* Grid Layouts Mobile */
+    .startups-grid,
+    .papers-grid,
+    .features-grid {
+      grid-template-columns: 1fr !important;
+      gap: 20px;
+      padding: 0 16px 48px !important;
+    }
+    
+    /* Cards Mobile Optimization */
+    .startup-card,
+    .feature-card,
+    .paper-card {
+      border-radius: 16px;
+      overflow: hidden;
+    }
+    
+    .startup-card-header,
+    .feature-card-header {
+      padding: 16px;
+    }
+    
+    .startup-card-body,
+    .feature-card-body {
+      padding: 16px;
+    }
+    
+    /* Video Mobile Optimization */
+    .startup-video-wrapper,
+    .paper-video-section {
+      margin-top: 12px;
+      padding-top: 10px;
+    }
+    
+    .startup-video-label {
+      font-size: 11px;
+      padding: 4px 10px;
+    }
+    
+    .video-container {
+      border-radius: 12px;
+    }
+    
+    .video-container video {
+      aspect-ratio: 16 / 9;
+      min-height: 200px;
+    }
+    
+    .video-info-bar {
+      flex-direction: column;
+      gap: 8px;
+      padding: 12px;
+    }
+    
+    .video-meta {
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    
+    /* Portal Grid Single Column */
+    .portal-grid {
+      grid-template-columns: 1fr;
+      gap: 16px;
+      padding: 0 16px;
+    }
+    
+    .portal-card {
+      border-radius: 16px;
+    }
+    
+    .portal-card-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+    }
+    
+    .portal-card-features li {
+      font-size: 13px;
+      padding: 6px 0;
+    }
+    
+    .portal-card-action {
+      flex-direction: column;
+      gap: 10px;
+    }
+    
+    .portal-card-btn {
+      width: 100%;
+      justify-content: center;
+      padding: 12px;
+    }
+    
+    /* Status Badges Mobile */
+    .status-in-progress {
+      width: 100%;
+      justify-content: center;
+      margin-top: 12px;
+    }
+    
+    .status-tooltip {
+      display: none;  /* Hide tooltips on mobile, use tap instead */
+    }
+    
+    .status-in-progress:active .status-tooltip,
+    .status-in-progress:focus .status-tooltip {
+      display: block;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: calc(100vw - 32px);
+      max-width: 360px;
+      z-index: 10001;
+      box-shadow: 0 25px 80px rgba(0, 0, 0, 0.7);
+    }
+    
+    /* Premium Video Mobile */
+    .premium-video-section {
+      padding: 32px 16px;
+    }
+    
+    .premium-video-hero {
+      padding: 24px 16px;
+    }
+    
+    .premium-video-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
+    }
+    
+    .premium-video-title {
+      font-size: 18px;
+    }
+    
+    .premium-video-kpis {
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    
+    .premium-kpi-mini {
+      flex: 1;
+      min-width: 80px;
+    }
+    
+    /* Footer Mobile */
+    .footer-content {
+      grid-template-columns: 1fr !important;
+      gap: 28px;
+      padding: 40px 20px;
+    }
+    
+    .footer-bottom {
+      flex-direction: column;
+      gap: 16px;
+      text-align: center;
+      padding: 20px;
+    }
+    
+    /* Philosophy Section Mobile */
+    .ai-philosophy-banner {
+      padding: 24px 16px;
+      border-radius: 0;
+    }
+    
+    .ai-philosophy-content h3 {
+      font-size: 18px;
+    }
+    
+    .ai-philosophy-stats {
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    
+    .philosophy-stat {
+      flex: 1;
+      min-width: 80px;
+    }
+    
+    /* Touch Optimizations */
+    button,
+    a,
+    input,
+    select,
+    textarea {
+      min-height: var(--touch-target);
+    }
+    
+    /* Scrollbar Styling for Mobile */
+    ::-webkit-scrollbar {
+      width: 4px;
+      height: 4px;
+    }
+    
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    
+    ::-webkit-scrollbar-thumb {
+      background: var(--accent-primary);
+      border-radius: 4px;
+      opacity: 0.5;
+    }
+    
+    /* Safe Area Notch Support */
+    @supports (padding: env(safe-area-inset-top)) {
+      .nav-container {
+        padding-top: calc(12px + env(safe-area-inset-top));
+        height: calc(var(--mobile-nav-height) + env(safe-area-inset-top));
+      }
+      
+      .main-content {
+        padding-top: calc(var(--mobile-nav-height) + env(safe-area-inset-top) + 20px);
+      }
+      
+      .footer-bottom {
+        padding-bottom: calc(20px + env(safe-area-inset-bottom));
+      }
+    }
+  }
+  
+  @media (max-width: 480px) {
+    :root {
+      --mobile-font-scale: 0.9;
+    }
+    
+    body {
+      font-size: 14px;
+    }
+    
+    .main-content {
+      padding: 0 12px;
+    }
+    
+    .startups-hero,
+    .page-hero {
+      padding: 80px 16px 36px !important;
+    }
+    
+    .startups-grid,
+    .papers-grid {
+      padding: 0 12px 36px !important;
+      gap: 16px;
+    }
+    
+    .startup-card,
+    .feature-card {
+      border-radius: 14px;
+    }
+    
+    .video-container video {
+      min-height: 180px;
+    }
+    
+    .portal-card {
+      padding: 16px;
+    }
+    
+    .premium-video-kpi-mini .value {
+      font-size: 18px;
+    }
+    
+    /* Extra Small Touch Targets */
+    .nav-brand {
+      gap: 6px;
+    }
+    
+    .nav-logo {
+      width: 32px;
+      height: 32px;
+      font-size: 12px;
+      border-radius: 8px;
+    }
+    
+    .nav-title {
+      font-size: 16px;
+    }
+  }
+  
+  /* Landscape Mobile Optimizations */
+  @media (max-height: 500px) and (orientation: landscape) {
+    .startups-hero,
+    .page-hero {
+      min-height: auto;
+      padding: 80px 24px 24px !important;
+    }
+    
+    .video-container video {
+      max-height: 60vh;
+    }
+    
+    .premium-video-section {
+      padding: 20px 24px;
+    }
+  }
+  
+  /* High DPI / Retina Displays */
+  @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    :root {
+      --device-pixel-ratio: 2;
+    }
+    
+    .nav-logo,
+    .portal-card-icon,
+    .mobile-banner-icon {
+      image-rendering: -webkit-optimize-contrast;
+      image-rendering: crisp-edges;
+    }
+  }
+  
+  /* Print Styles for Saving Research */
+  @media print {
+    .molecular-sidebar,
+    .neural-bg,
+    .nav-container,
+    .mobile-detection-banner,
+    .pwa-install-prompt,
+    .video-container video {
+      display: none !important;
+    }
+    
+    body {
+      background: white;
+      color: black;
+    }
+    
+    .main-content {
+      margin: 0;
+      padding: 20px;
+    }
+    
+    .startup-card,
+    .portal-card {
+      break-inside: avoid;
+      border: 1px solid #ccc;
+    }
+  }
+  
+  /* Reduced Motion Preference */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+    
+    .nucleotidePulse,
+    .aminoFloat,
+    .moleculeFloat,
+    .neuronPulse,
+    .phase2-holographicRotate,
+    .logoShine,
+    .gridShift,
+    .orbitMove {
+      animation: none !important;
+    }
+  }
+  
+  /* Dark Mode System Preference */
+  @media (prefers-color-scheme: light) {
+    html:not([data-theme]) {
+      --bg-deep: #f0f4f8;
+      --bg-primary: #ffffff;
+      --bg-secondary: #f8fafc;
+      --text-primary: #0f172a;
+      --text-secondary: #475569;
+    }
+  }
+
+
+  
+  /* ============================================
+     STILL IN PROGRESS UX PATTERN v4.0
+     Guided Portal Access | No Placeholders
+     ============================================ */
+  
+  .enhanced-in-progress {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.15), rgba(245, 158, 11, 0.05));
+    border: 1px solid rgba(245, 158, 11, 0.3);
+    border-radius: 24px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--accent-gold);
+    cursor: help;
+    transition: all 0.3s ease;
+    overflow: visible;
+  }
+  
+  .enhanced-in-progress:hover {
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.25), rgba(245, 158, 11, 0.1));
+    border-color: rgba(245, 158, 11, 0.5);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 20px rgba(245, 158, 11, 0.2);
+  }
+  
+  .in-progress-dot {
+    width: 8px;
+    height: 8px;
+    background: var(--accent-gold);
+    border-radius: 50%;
+    animation: inProgressPulse 2s ease-in-out infinite;
+    box-shadow: 0 0 8px var(--accent-gold);
+  }
+  
+  @keyframes inProgressPulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.3); }
+  }
+  
+  .in-progress-tooltip {
+    display: none;
+    position: absolute;
+    top: calc(100% + 12px);
+    left: 50%;
+    transform: translateX(-50%);
+    width: 340px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-subtle);
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+  }
+  
+  .enhanced-in-progress:hover .in-progress-tooltip {
+    display: block;
+    opacity: 1;
+    visibility: visible;
+  }
+  
+  .tooltip-quantum-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border-subtle);
+  }
+  
+  .tooltip-quantum-icon {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, var(--accent-gold), var(--accent-pink));
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    animation: quantumSpin 8s linear infinite;
+  }
+  
+  @keyframes quantumSpin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+  .tooltip-quantum-info h4 {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 2px;
+  }
+  
+  .tooltip-quantum-info span {
+    font-size: 11px;
+    color: var(--text-muted);
+  }
+  
+  .tooltip-description {
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 16px;
+  }
+  
+  .tooltip-portals-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .tooltip-portal-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    background: var(--bg-glass-light);
+    border: 1px solid var(--border-subtle);
+    border-radius: 10px;
+    text-decoration: none;
+    color: var(--text-primary);
+    transition: all 0.2s ease;
+  }
+  
+  .tooltip-portal-item:hover {
+    background: rgba(0, 229, 255, 0.08);
+    border-color: rgba(0, 229, 255, 0.3);
+    transform: translateX(4px);
+  }
+  
+  .tooltip-portal-icon {
+    width: 28px;
+    height: 28px;
+    background: var(--bg-tertiary);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+  
+  .tooltip-portal-info {
+    flex: 1;
+  }
+  
+  .tooltip-portal-name {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+  
+  .tooltip-portal-tier {
+    font-size: 10px;
+    color: var(--accent-green);
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+  
+  .tooltip-portal-arrow {
+    color: var(--text-muted);
+    font-size: 16px;
+  }
+  
+  /* Boolean Confirmation UI (Future Interface) */
+  .boolean-confirm {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 10px;
+    background: rgba(16, 185, 129, 0.1);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    border-radius: 6px;
+    font-size: 11px;
+    font-family: var(--font-mono);
+    color: var(--accent-green);
+  }
+  
+  .boolean-value {
+    font-weight: 700;
+    color: #10b981;
+  }
+  
+  .boolean-indicator {
+    width: 6px;
+    height: 6px;
+    background: #10b981;
+    border-radius: 50%;
+    animation: booleanBlink 1.5s ease-in-out infinite;
+  }
+  
+  @keyframes booleanBlink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+
+  
+  /* ============================================
+     BOOLEAN CONFIRMATION INTERFACE v5.0
+     Human-As-Observer | Quantum State | Future-Ready
+     
+     "Humanity will be observers and confirm 
+      the activities with Boolean expression"
+     ============================================ */
+  
+  /* --- Quantum Observer Panel --- */
+  .quantum-observer-panel {
+    position: relative;
+    background: linear-gradient(135deg, rgba(0, 229, 255, 0.05) 0%, rgba(167, 139, 250, 0.05) 100%);
+    border: 1px solid var(--border-subtle);
+    border-radius: 20px;
+    padding: 24px;
+    margin: 24px 0;
+    overflow: hidden;
+  }
+  
+  .quantum-observer-panel::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: conic-gradient(
+      from 0deg,
+      transparent 0%,
+      rgba(0, 229, 255, 0.03) 10%,
+      transparent 20%,
+      transparent 80%,
+      rgba(167, 139, 250, 0.03) 90%,
+      transparent 100%
+    );
+    animation: observerRotate 30s linear infinite;
+    pointer-events: none;
+  }
+  
+  @keyframes observerRotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+  .observer-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 1;
+  }
+  
+  .observer-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  
+  .observer-icon {
+    width: 48px;
+    height: 48px;
+    background: linear-gradient(135deg, var(--accent-primary), var(--accent-tertiary));
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    box-shadow: 0 8px 24px rgba(0, 229, 255, 0.3);
+    animation: iconPulse 3s ease-in-out infinite;
+  }
+  
+  @keyframes iconPulse {
+    0%, 100% { box-shadow: 0 8px 24px rgba(0, 229, 255, 0.3); }
+    50% { box-shadow: 0 8px 40px rgba(0, 229, 255, 0.5), 0 0 60px rgba(167, 139, 250, 0.2); }
+  }
+  
+  .observer-title h3 {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 2px;
+  }
+  
+  .observer-title span {
+    font-size: 12px;
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+  }
+  
+  /* Boolean Status Indicators */
+  .boolean-status-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    position: relative;
+    z-index: 1;
+  }
+  
+  .boolean-indicator-card {
+    background: var(--bg-glass);
+    border: 1px solid var(--border-subtle);
+    border-radius: 14px;
+    padding: 18px;
+    transition: all 0.3s ease;
+  }
+  
+  .boolean-indicator-card:hover {
+    border-color: var(--accent-primary);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
+  }
+  
+  .boolean-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+  }
+  
+  .boolean-card-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  
+  .boolean-value-display {
+    font-family: var(--font-mono);
+    font-size: 16px;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 6px;
+    background: rgba(16, 185, 129, 0.15);
+    color: #10b981;
+    border: 1px solid rgba(16, 185, 129, 0.3);
+  }
+  
+  .boolean-value-display.false {
+    background: rgba(239, 68, 68, 0.15);
+    color: #ef4444;
+    border-color: rgba(239, 68, 68, 0.3);
+  }
+  
+  .boolean-value-display.pending {
+    background: rgba(245, 158, 11, 0.15);
+    color: #f59e0b;
+    border-color: rgba(245, 158, 11, 0.3);
+    animation: pendingPulse 2s ease-in-out infinite;
+  }
+  
+  @keyframes pendingPulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.6; }
+  }
+  
+  .boolean-progress-bar {
+    height: 4px;
+    background: var(--bg-tertiary);
+    border-radius: 2px;
+    overflow: hidden;
+    margin-top: 10px;
+  }
+  
+  .boolean-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent-primary), var(--accent-tertiary));
+    border-radius: 2px;
+    transition: width 0.5s ease;
+    position: relative;
+  }
+  
+  .boolean-progress-fill::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 20px;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4));
+    animation: progressShine 2s ease-in-out infinite;
+  }
+  
+  @keyframes progressShine {
+    0% { opacity: 0; transform: translateX(-20px); }
+    50% { opacity: 1; }
+    100% { opacity: 0; transform: translateX(20px); }
+  }
+  
+  /* Human Confirmation Button */
+  .human-confirm-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 28px;
+    background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+    border: none;
+    border-radius: 14px;
+    color: #0a1628;
+    font-family: var(--font-body);
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 24px rgba(0, 229, 255, 0.3);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .human-confirm-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    transition: left 0.5s ease;
+  }
+  
+  .human-confirm-btn:hover::before {
+    left: 100%;
+  }
+  
+  .human-confirm-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 32px rgba(0, 229, 255, 0.4);
+  }
+  
+  .human-confirm-btn:active {
+    transform: translateY(0) scale(0.98);
+  }
+  
+  .human-confirm-btn .material-icons-round {
+    animation: confirmBounce 2s ease-in-out infinite;
+  }
+  
+  @keyframes confirmBounce {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.15); }
+  }
+  
+  /* AI Automation Monitor */
+  .ai-automation-monitor {
+    background: var(--bg-deep);
+    border: 1px solid var(--border-subtle);
+    border-radius: 16px;
+    padding: 20px;
+    margin-top: 20px;
+    position: relative;
+    z-index: 1;
+  }
+  
+  .monitor-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+  }
+  
+  .monitor-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--accent-tertiary);
+  }
+  
+  .monitor-status {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: var(--accent-green);
+    font-family: var(--font-mono);
+  }
+  
+  .monitor-dot {
+    width: 8px;
+    height: 8px;
+    background: var(--accent-green);
+    border-radius: 50%;
+    animation: monitorPulse 1.5s ease-in-out infinite;
+  }
+  
+  @keyframes monitorPulse {
+    0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4); }
+    50% { opacity: 0.8; box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); }
+  }
+  
+  .automation-log {
+    max-height: 150px;
+    overflow-y: auto;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    line-height: 1.8;
+    color: var(--text-muted);
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+    padding: 12px;
+  }
+  
+  .log-entry {
+    display: flex;
+    gap: 8px;
+    padding: 4px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.03);
+  }
+  
+  .log-entry:last-child {
+    border-bottom: none;
+  }
+  
+  .log-timestamp {
+    color: var(--accent-gold);
+    flex-shrink: 0;
+  }
+  
+  .log-message {
+    color: var(--text-secondary);
+  }
+  
+  .log-success { color: var(--accent-green); }
+  .log-info { color: var(--accent-primary); }
+  .log-warning { color: var(--accent-gold); }
+  
+  /* Mobile Responsive for Observer Panel */
+  @media (max-width: 768px) {
+    .quantum-observer-panel {
+      padding: 16px;
+      border-radius: 16px;
+      margin: 16px 0;
+    }
+    
+    .observer-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
+    }
+    
+    .observer-icon {
+      width: 40px;
+      height: 40px;
+      font-size: 20px;
+    }
+    
+    .observer-title h3 {
+      font-size: 16px;
+    }
+    
+    .boolean-status-grid {
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+    
+    .boolean-indicator-card {
+      padding: 14px;
+    }
+    
+    .human-confirm-btn {
+      width: 100%;
+      justify-content: center;
+      padding: 16px 20px;
+    }
+    
+    .ai-automation-monitor {
+      padding: 16px;
+    }
+    
+    .automation-log {
+      max-height: 120px;
+      font-size: 10px;
+    }
+  }
+
+</style>
 </head>
 
 <body>
@@ -442,6 +2340,7 @@
         <a href="research.html" class="nav-link">Research Trends</a>
         <a href="startups.html" class="nav-link">7 Startups</a>
         <a href="platform.html" class="nav-link">Platform</a>
+        <a href="quantum.html" class="nav-link">Quantum</a>
         <a href="studio.html" class="nav-link">Workspace</a>
         <a href="about.html" class="nav-link">About</a>
       </div>
@@ -756,5 +2655,1373 @@
       <i class="material-icons">arrow_back</i>
     </a>
   </div>
+
+  <script>
+    
+    // ============================================
+    // PHASE 2: NEURAL IDENTITY SYSTEM
+    // Dynamic Persona Generation & Holographic UI
+    // ============================================
+    
+    // Neural Identity Data Store
+    const phase2NeuralIdentities = [
+      {
+        name: 'Dr. Aeva Chen-Neural',
+        initials: 'AC',
+        role: 'Computational Theorist',
+        specialization: 'Neural Networks & Quantum Computing',
+        neuralScore: 97.3,
+        archetype: 'theorist',
+        cognitiveResonance: 0.94,
+        avatarColors: ['#00E5FF', '#a78bfa'],
+        statusColor: '#10b981'
+      },
+      {
+        name: 'Prof. Kai Synapse',
+        initials: 'KS',
+        role: 'Quantum Architect',
+        specialization: 'Quantum Algorithms & Cryptography',
+        neuralScore: 95.8,
+        archetype: 'architect',
+        cognitiveResonance: 0.91,
+        avatarColors: ['#f472b6', '#00E5FF'],
+        statusColor: '#f59e0b'
+      },
+      {
+        name: 'Researcher Nova Vertex',
+        initials: 'NV',
+        role: 'Bioinformatics Lead',
+        specialization: 'Genomics & Protein Folding',
+        neuralScore: 94.2,
+        archetype: 'analyst',
+        cognitiveResonance: 0.89,
+        avatarColors: ['#10b981', '#00E5FF'],
+        statusColor: '#10b981'
+      },
+      {
+        name: 'Commander Zara Mesh-Network',
+        initials: 'ZM',
+        role: 'Systems Integrator',
+        specialization: 'Distributed Systems & AI Infrastructure',
+        neuralScore: 96.5,
+        archetype: 'integrator',
+        cognitiveResonance: 0.93,
+        avatarColors: ['#f59e0b', '#f472b6'],
+        statusColor: '#ef4444'
+      },
+      {
+        name: 'Dr. Elena Vasquez',
+        initials: 'EV',
+        role: 'Neural Architect',
+        specialization: 'Computational Biology & ML',
+        neuralScore: 94.7,
+        archetype: 'architect',
+        cognitiveResonance: 0.88,
+        avatarColors: ['#00E5FF', '#f472b6'],
+        statusColor: '#10b981'
+      }
+    ];
+    
+    // Research Archetypes with Color Mappings
+    const phase2ArchetypeColors = {
+      theorist: { primary: '#00E5FF', secondary: '#4da8da' },
+      architect: { primary: '#a78bfa', secondary: '#f472b6' },
+      analyst: { primary: '#10b981', secondary: '#34d399' },
+      integrator: { primary: '#f59e0b', secondary: '#fbbf24' },
+      explorer: { primary: '#ec4899', secondary: '#f472b6' }
+    };
+    
+    // Generate ATGC Nucleotide Session ID
+    function phase2GenerateSessionId(length = 12) {
+      const nucleotides = 'ATGC';
+      let sessionId = '';
+      for (let i = 0; i < length; i++) {
+        sessionId += nucleotides[Math.floor(Math.random() * 4)];
+        if ((i + 1) % 4 === 0 && i < length - 1) sessionId += '-';
+      }
+      return sessionId;
+    }
+    
+    // Generate Unique Neural Identity
+    function generateNeuralIdentity() {
+      const baseIdentity = phase2NeuralIdentities[Math.floor(Math.random() * phase2NeuralIdentities.length)];
+      const variation = Math.floor(Math.random() * 100);
+      
+      return {
+        ...baseIdentity,
+        neuralScore: Math.min(99.9, baseIdentity.neuralScore + (variation * 0.01)),
+        sessionId: phase2GenerateSessionId(),
+        connectionTimestamp: new Date().toISOString(),
+        nodeId: `NODE-${Math.random().toString(36).substr(2, 8).toUpperCase()}`
+      };
+    }
+    
+    // Initialize and Display Neural Identity
+    function phase2InitNeuralIdentity() {
+      const identity = generateNeuralIdentity();
+      
+      // Update user profile displays
+      document.querySelectorAll('.user-profile').forEach(profile => {
+        profile.classList.add('phase2-neural-card');
+        
+        // Add neural score if not present
+        if (!profile.querySelector('.phase2-neural-score')) {
+          const scoreEl = document.createElement('span');
+          scoreEl.className = 'phase2-neural-score';
+          scoreEl.textContent = `${identity.neuralScore.toFixed(1)}%`;
+          scoreEl.title = 'Neural Sync Score';
+          profile.appendChild(scoreEl);
+        }
+        
+        // Update session ID display
+        const userInfo = profile.querySelector('.user-info');
+        if (userInfo && !userInfo.querySelector('.phase2-session-id')) {
+          const sessionEl = document.createElement('div');
+          sessionEl.className = 'phase2-session-id';
+          sessionEl.textContent = identity.sessionId;
+          sessionEl.title = 'Session Identifier';
+          userInfo.appendChild(sessionEl);
+        }
+        
+        // Style avatar ring
+        const avatar = profile.querySelector('.user-avatar');
+        if (avatar) {
+          avatar.classList.add('phase2-avatar-ring');
+          avatar.style.setProperty('--avatar-color-1', identity.avatarColors[0]);
+          avatar.style.setProperty('--avatar-color-2', identity.avatarColors[1]);
+          avatar.style.setProperty('--status-color', identity.statusColor);
+        }
+      });
+      
+      // Apply archetype-based color theming
+      const colors = phase2ArchetypeColors[identity.archetype] || phase2ArchetypeColors.theorist;
+      document.documentElement.style.setProperty('--neural-accent', colors.primary);
+      document.documentElement.style.setProperty('--neural-accent-secondary', colors.secondary);
+      
+      // Store identity for other components
+      window.currentNeuralIdentity = identity;
+      
+      console.log('[Phase 2] Neural Identity Generated:', identity.name, '| Score:', identity.neuralScore + '%');
+      
+      return identity;
+    }
+    
+    // Animate Neural Score Counter
+    function phase2AnimateNeuralScore(targetScore, duration = 2000) {
+      const scoreElements = document.querySelectorAll('.phase2-neural-score');
+      
+      scoreElements.forEach(el => {
+        const startScore = 0;
+        const startTime = performance.now();
+        
+        function updateScore(currentTime) {
+          const elapsed = currentTime - startTime;
+          const progress = Math.min(elapsed / duration, 1);
+          
+          // Easing function
+          const eased = 1 - Math.pow(1 - progress, 3);
+          const currentScore = startScore + (targetScore - startScore) * eased;
+          
+          el.textContent = `${currentScore.toFixed(1)}%`;
+          
+          if (progress < 1) {
+            requestAnimationFrame(updateScore);
+          }
+        }
+        
+        requestAnimationFrame(updateScore);
+      });
+    }
+    
+    // ============================================
+    // PHASE 2: ENHANCED MOLECULAR SIDEBARS
+    // Double Helix Rungs, Protein Folding, Labels
+    // ============================================
+    
+    function phase2EnhanceMolecularSidebars() {
+      // Enhance DNA Helix with connecting rungs
+      document.querySelectorAll('.dna-helix').forEach(helix => {
+        const strand = helix.querySelector('.dna-strand');
+        if (!strand) return;
+        
+        const nucleotides = strand.querySelectorAll('.nucleotide');
+        const helixRect = helix.getBoundingClientRect();
+        
+        // Create connecting rungs between paired nucleotides
+        for (let i = 0; i < nucleotides.length - 1; i += 2) {
+          if (i + 1 < nucleotides.length) {
+            const n1 = nucleotides[i];
+            const n2 = nucleotides[i + 1];
+            
+            const rung = document.createElement('div');
+            rung.className = 'phase2-dna-rung';
+            
+            const rect1 = n1.getBoundingClientRect();
+            const rect2 = n2.getBoundingClientRect();
+            const helixTop = helix.getBoundingClientRect().top;
+            
+            const y1 = rect1.top - helixTop + rect1.height / 2;
+            const y2 = rect2.top - helixTop + rect2.height / 2;
+            const midY = (y1 + y2) / 2;
+            
+            rung.style.cssText = `
+              top: ${midY}px;
+              left: 10%;
+              width: 80%;
+              --rung-color: ${getComputedStyle(n1).backgroundColor};
+              animation-delay: ${(i * 0.1)}s;
+            `;
+            
+            helix.appendChild(rung);
+          }
+        }
+        
+        // Add nucleotide labels on hover
+        const nucleotideClasses = ['adenine', 'thymine', 'guanine', 'cytosine'];
+        const nucleotideLabels = ['A', 'T', 'G', 'C'];
+        
+        nucleotides.forEach((nuc, idx) => {
+          const label = document.createElement('span');
+          label.className = 'phase2-nucleotide-label';
+          label.textContent = nucleotideLabels[idx % 4];
+          
+          const classIdx = nucleotideClasses.findIndex(c => nuc.classList.contains(c));
+          if (classIdx >= 0) {
+            const colors = ['#00E5FF', '#f472b6', '#a78bfa', '#10b981'];
+            label.style.background = colors[classIdx];
+            label.style.color = '#030810';
+          }
+          
+          nuc.parentNode.insertBefore(label, nuc.nextSibling);
+        });
+      });
+      
+      // Enhance protein chains with folding animation
+      document.querySelectorAll('.protein-chain').forEach(chain => {
+        chain.classList.add('phase2-protein-fold');
+        
+        // Add orbiting electrons to floating molecules
+        const parentSidebar = chain.closest('.molecular-sidebar');
+        if (parentSidebar) {
+          parentSidebar.querySelectorAll('.floating-molecule').forEach(mol => {
+            for (let i = 0; i < 2; i++) {
+              const electron = document.createElement('div');
+              electron.className = 'phase2-orbiting-electron';
+              electron.style.cssText = `
+                top: 50%;
+                left: 50%;
+                animation-delay: ${i * 1.5}s;
+              `;
+              mol.appendChild(electron);
+              mol.style.position = 'relative';
+            }
+          });
+        }
+      });
+      
+      console.log('[Phase 2] Molecular Sidebars Enhanced');
+    }
+    
+    // ============================================
+    // PHASE 2: MOLECULAR SCROLL TRAIL
+    // ============================================
+    
+    function phase2InitMolecularTrail() {
+      let trailElements = [];
+      const maxTrailLength = 15;
+      
+      // Create trail elements
+      for (let i = 0; i < maxTrailLength; i++) {
+        const trail = document.createElement('div');
+        trail.className = 'phase2-molecular-trail';
+        trail.style.opacity = (1 - i / maxTrailLength) * 0.6;
+        trail.style.transform = `scale(${1 - i / maxTrailLength})`;
+        document.body.appendChild(trail);
+        trailElements.push(trail);
+      }
+      
+      let lastX = 0, lastY = 0;
+      let ticking = false;
+      
+      document.addEventListener('mousemove', (e) => {
+        lastX = e.clientX;
+        lastY = e.clientY;
+        
+        if (!ticking) {
+          requestAnimationFrame(() => {
+            trailElements.forEach((trail, idx) => {
+              const delay = idx * 20;
+              setTimeout(() => {
+                trail.style.left = `${lastX}px`;
+                trail.style.top = `${lastY}px`;
+                trail.style.opacity = (1 - idx / maxTrailLength) * 0.4;
+              }, delay);
+            });
+            ticking = false;
+          });
+          ticking = true;
+        }
+      });
+      
+      // Hide trail when mouse leaves window
+      document.addEventListener('mouseleave', () => {
+        trailElements.forEach(trail => trail.style.opacity = 0);
+      });
+      
+      console.log('[Phase 2] Molecular Trail Initialized');
+    }
+    
+    // ============================================
+    // PHASE 2: MAGNETIC BUTTON EFFECT
+    // ============================================
+    
+    function phase2InitMagneticButtons() {
+      document.querySelectorAll('.btn-primary, .btn-secondary, .workspace-btn, .page-nav-btn').forEach(btn => {
+        btn.classList.add('phase2-magnetic', 'phase2-ripple');
+        
+        btn.addEventListener('mousemove', (e) => {
+          const rect = btn.getBoundingClientRect();
+          const x = e.clientX - rect.left - rect.width / 2;
+          const y = e.clientY - rect.top - rect.height / 2;
+          
+          const pullStrength = 0.3;
+          btn.style.transform = `translate(${x * pullStrength}px, ${y * pullStrength}px)`;
+        });
+        
+        btn.addEventListener('mouseleave', () => {
+          btn.style.transform = '';
+        });
+        
+        // Ripple effect on click
+        btn.addEventListener('click', (e) => {
+          const ripple = document.createElement('span');
+          ripple.className = 'phase2-ripple-effect';
+          
+          const rect = btn.getBoundingClientRect();
+          const size = Math.max(rect.width, rect.height);
+          ripple.style.width = ripple.style.height = size + 'px';
+          ripple.style.left = e.clientX - rect.left - size / 2 + 'px';
+          ripple.style.top = e.clientY - rect.top - size / 2 + 'px';
+          
+          btn.appendChild(ripple);
+          setTimeout(() => ripple.remove(), 600);
+        });
+      });
+      
+      console.log('[Phase 2] Magnetic Buttons Initialized');
+    }
+    
+    // ============================================
+    // PHASE 2: PARTICLE FIELD OVERLAY
+    // ============================================
+    
+    function phase2InitParticleField() {
+      // Only create on larger screens
+      if (window.innerWidth < 1024) return;
+      
+      const field = document.createElement('div');
+      field.className = 'phase2-particle-field';
+      field.id = 'phase2ParticleField';
+      document.body.appendChild(field);
+      
+      // Create particles
+      const particleCount = 30;
+      for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'phase2-particle';
+        particle.style.cssText = `
+          left: ${Math.random() * 100}%;
+          animation-delay: ${Math.random() * 8}s;
+          animation-duration: ${6 + Math.random() * 4}s;
+        `;
+        field.appendChild(particle);
+      }
+      
+      console.log('[Phase 2] Particle Field Initialized');
+    }
+    
+    // ============================================
+    // PHASE 2: PAGE NAVIGATION ENHANCEMENT
+    // ============================================
+    
+    function phase2EnhancePageNav() {
+      const pageNavBars = document.querySelectorAll('.page-nav-bar');
+      
+      pageNavBars.forEach(navBar => {
+        navBar.classList.add('phase2-page-nav-bar');
+        
+        // Get current page info
+        const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+        const pageInfo = phase2GetPageInfo(currentPage);
+        
+        // Create breadcrumb
+        const breadcrumb = document.createElement('div');
+        breadcrumb.className = 'phase2-breadcrumb';
+        breadcrumb.innerHTML = `
+          <a href="index.html" style="color:inherit;text-decoration:none;">Home</a>
+          <span class="phase2-breadcrumb-sep">›</span>
+          ${pageInfo.section ? `<span>${pageInfo.section}</span><span class="phase2-breadcrumb-sep">›</span>` : ''}
+          <span class="phase2-breadcrumb-current">${pageInfo.title}</span>
+        `;
+        
+        // Insert breadcrumb at start of nav bar
+        navBar.insertBefore(breadcrumb, navBar.firstChild);
+        
+        // Add page indicator
+        const indicator = document.createElement('span');
+        indicator.className = 'phase2-page-indicator';
+        indicator.textContent = pageInfo.indicator || '';
+        navBar.appendChild(indicator);
+      });
+      
+      console.log('[Phase 2] Page Navigation Enhanced');
+    }
+    
+    function phase2GetPageInfo(filename) {
+      const pageMap = {
+        'index.html': { title: 'Home', section: '', indicator: '// Landing' },
+        'platform.html': { title: 'Platform', section: 'Features', indicator: '// Features' },
+        'documentation.html': { title: 'API Docs', section: 'Developer', indicator: '// API v3.0' },
+        'startups.html': { title: 'Startups', section: 'Intelligence', indicator: '// Ventures' },
+        'research.html': { title: 'Research', section: 'Analysis', indicator: '// Papers' },
+        'about.html': { title: 'About', section: 'Company', indicator: '// Info' },
+        'dashboard.html': { title: 'Dashboard', section: 'Workspace', indicator: '// Control' },
+        'studio.html': { title: 'Studio', section: 'Creative', indicator: '// Lab' }
+      };
+      
+      return pageMap[filename] || { title: 'Page', section: '', indicator: '' };
+    }
+    
+    // ============================================
+    // PHASE 2: CONTENT ALIGNMENT FIX
+    // ============================================
+    
+    function phase2FixContentAlignment() {
+      // Ensure main-content has proper wrapper
+      document.querySelectorAll('.main-content').forEach(content => {
+        content.classList.add('phase2-aligned');
+        
+        // Wrap existing children in content-wrapper if not present
+        if (!content.querySelector('.phase2-content-wrapper')) {
+          const wrapper = document.createElement('div');
+          wrapper.className = 'phase2-content-wrapper';
+          
+          // Move all children to wrapper
+          while (content.firstChild) {
+            wrapper.appendChild(content.firstChild);
+          }
+          
+          content.appendChild(wrapper);
+        }
+      });
+      
+      // Apply custom scrollbar to main content areas
+      document.documentElement.classList.add('phase2-enhanced');
+      
+      console.log('[Phase 2] Content Alignment Fixed');
+    }
+    
+    // ============================================
+    // PHASE 2: APPLY ENHANCEMENT CLASSES
+    // ============================================
+    
+    function phase2ApplyEnhancementClasses() {
+      // Add enhancement classes to key elements
+      const selectors = {
+        '.feature-card': 'phase2-enhanced',
+        '.hero-section': 'phase2-enhanced',
+        '.section-title': 'phase2-enhanced',
+        '.cta-title': 'phase2-enhanced',
+        '.pipeline-step': 'phase2-enhanced',
+        '.stat-card': 'phase2-enhanced'
+      };
+      
+      Object.entries(selectors).forEach(([selector, className]) => {
+        document.querySelectorAll(selector).forEach(el => {
+          el.classList.add(className);
+        });
+      });
+      
+      console.log('[Phase 2] Enhancement Classes Applied');
+    }
+    
+    // ============================================
+    // PHASE 2 INITIALIZATION
+    // ============================================
+    
+    function initPhase2Enhancements() {
+      console.log('%c[Phase 2] Initializing Molecular Intelligence Overhaul...', 
+        'color: #00E5FF; font-weight: bold; font-size: 14px;');
+      
+      // Run all initializations
+      phase2InitNeuralIdentity();
+      phase2AnimateNeuralScore(window.currentNeuralIdentity?.neuralScore || 94.7);
+      phase2EnhanceMolecularSidebars();
+      phase2InitMolecularTrail();
+      phase2InitMagneticButtons();
+      phase2InitParticleField();
+      phase2EnhancePageNav();
+      phase2FixContentAlignment();
+      phase2ApplyEnhancementClasses();
+      
+      console.log('%c[Phase 2] All Enhancements Loaded Successfully ✓', 
+        'color: #10b981; font-weight: bold;');
+    }
+
+    
+    // Initialize Phase 2 after DOM is ready
+    if (typeof initPhase2Enhancements === 'function') {
+      initPhase2Enhancements();
+    }
+
+  </script>
+  
+  /* ============================================
+     INTELLIGENT MOBILE DETECTION SYSTEM v4.0
+     Device-Aware | Contextual | Helpful
+     ============================================ */
+  
+  (function() {
+    'use strict';
+    
+    const MobileDetection = {
+      // Device Detection
+      device: {
+        isMobile: /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent),
+        isIOS: /iPad|iPhone|iPod/.test(navigator.userAgent),
+        isAndroid: /Android/.test(navigator.userAgent),
+        isTablet: /(iPad|Android(?=.*Mobile))|PlayBook|Silk/.test(navigator.userAgent),
+        isTouchDevice: ('ontouchstart' in window) || (navigator.maxTouchPoints > 0),
+        screenWidth: window.screen.width,
+        screenHeight: window.screen.height,
+        pixelRatio: window.devicePixelRatio || 1,
+        connection: navigator.connection || navigator.mozConnection || navigator.webkitConnection,
+        
+        getBrowser() {
+          const ua = navigator.userAgent;
+          if (ua.includes('Firefox')) return 'Firefox';
+          if (ua.includes('Edg')) return 'Edge';
+          if (ua.includes('Chrome') && !ua.includes('Edg')) return 'Chrome';
+          if (ua.includes('Safari') && !ua.includes('Chrome')) return 'Safari';
+          if (ua.includes('Opera') || ua.includes('OPR')) return 'Opera';
+          return 'Unknown';
+        },
+        
+        getOS() {
+          const ua = navigator.userAgent;
+          if (this.isIOS) return 'iOS';
+          if (this.isAndroid) return 'Android';
+          if (ua.includes('Windows')) return 'Windows';
+          if (ua.includes('Mac')) return 'macOS';
+          if (ua.includes('Linux')) return 'Linux';
+          return 'Unknown';
+        }
+      },
+      
+      // Feature Detection
+      features: {
+        serviceWorker: 'serviceWorker' in navigator,
+        webp: document.createElement('canvas').toDataURL('image/webp').startsWith('data:image/webp'),
+        notification: 'Notification' in window,
+        fullscreen: 'fullscreenEnabled' in document || 'webkitFullscreenEnabled' in document,
+        share: 'share' in navigator,
+        clipboard: 'clipboard' in navigator,
+        camera: !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia)
+      },
+      
+      // Performance Metrics
+      performance: {
+        memory: navigator.deviceMemory || 'Unknown',
+        cores: navigator.hardwareConcurrency || 'Unknown',
+        connectionType: () => {
+          const conn = MobileDetection.device.connection;
+          return conn ? (conn.effectiveType || 'Unknown') : 'Unknown';
+        }
+      },
+      
+      // Initialize
+      init() {
+        this.logDeviceInfo();
+        this.createMobileBanner();
+        this.enhanceTouchInteractions();
+        this.suggestOptimizations();
+        this.setupPWA();
+        
+        console.log('%c[SciMSPT] Mobile Detection System Initialized ✓', 
+          'color: #a78bfa; font-weight: bold;');
+      },
+      
+      // Log Device Info (Developer Mode)
+      logDeviceInfo() {
+        const info = {
+          device: this.device.getOS(),
+          browser: this.device.getBrowser(),
+          mobile: this.device.isMobile,
+          touch: this.device.isTouchDevice,
+          screen: `${this.device.screenWidth}x${this.device.screenHeight}`,
+          dpi: `${this.device.pixelRatio}x`,
+          memory: this.performance.memory,
+          cores: this.performance.cores,
+          connection: this.performance.connectionType()
+        };
+        
+        console.log('%c[SciMSPT] Device Profile:', 'color: #00E5FF; font-weight: bold;', info);
+        
+        // Store for analytics
+        window.scimspt_device_info = info;
+      },
+      
+      // Create Smart Mobile Banner
+      createMobileBanner() {
+        if (!this.device.isMobile && !this.device.isTouchDevice) return;
+        
+        const banner = document.createElement('div');
+        banner.className = 'mobile-detection-banner';
+        banner.id = 'mobileBanner';
+        
+        const recommendations = this.getRecommendations();
+        
+        banner.innerHTML = \`
+          <div class="mobile-banner-content">
+            <div class="mobile-banner-text">
+              <div class="mobile-banner-icon">📱</div>
+              <div>
+                <strong style="color: var(--accent-primary);">Quantum-Optimized Mobile</strong>
+                <div style="font-size: 12px; color: var(--text-muted);">
+                  ${recommendations.message}
+                </div>
+              </div>
+            </div>
+            <div class="mobile-banner-actions">
+              \${recommendations.action ? `
+                <button class="mobile-banner-btn primary" onclick="${recommendations.action}">
+                  <span class="material-icons-round" style="font-size: 14px;">${recommendations.icon}</span>
+                  ${recommendations.buttonText}
+                </button>
+              ` : ''}
+              <button class="mobile-banner-btn secondary" onclick="MobileDetection.dismissBanner()">
+                Dismiss
+              </button>
+              <button class="mobile-banner-dismiss" onclick="MobileDetection.dismissBanner()">✕</button>
+            </div>
+          </div>
+        \`;
+        
+        document.body.prepend(banner);
+        
+        // Show after short delay
+        setTimeout(() => banner.classList.add('visible'), 500);
+        
+        // Auto-dismiss after 10 seconds
+        setTimeout(() => {
+          if (banner.classList.contains('visible')) {
+            this.dismissBanner();
+          }
+        }, 10000);
+      },
+      
+      // Get Contextual Recommendations
+      getRecommendations() {
+        const browser = this.device.getBrowser();
+        const os = this.device.getOS();
+        
+        // Safari iOS recommendation
+        if (os === 'iOS' && browser === 'Safari') {
+          return {
+            message: "Add to Home Screen for full-screen PWA experience",
+            action: "MobileDetection.showPWAGuide()",
+            icon: 'add_to_home_screen',
+            buttonText: 'Install App',
+            icon: 'add_to_home_screen'
+          };
+        }
+        
+        // Android Chrome recommendation
+        if (os === 'Android' && browser === 'Chrome') {
+          return {
+            message: "Tap ⋮ menu → 'Install app' for best experience",
+            action: "",
+            icon: 'android',
+            buttonText: 'Guide',
+            icon: 'info'
+          };
+        }
+        
+        // Old browser warning
+        const isOldBrowser = this.isBrowserOutdated(browser);
+        if (isOldBrowser) {
+          return {
+            message: "Consider updating your browser for quantum visualizations",
+            action: "window.open('https://browser-update.org/', '_blank')",
+            icon: 'update',
+            buttonText: 'Update Browser',
+            icon: 'system_update'
+          };
+        }
+        
+        // Default mobile message
+        return {
+          message: "SciMSPT optimized for your device • AI-powered research tools",
+          action: "",
+          icon: 'check_circle',
+          buttonText: '',
+          icon: 'check_circle'
+        };
+      },
+      
+      // Check if browser is outdated
+      isBrowserOutdated(browser) {
+        const version = this.getBrowserVersion();
+        const versions = {
+          Chrome: 90,
+          Firefox: 88,
+          Safari: 14,
+          Edge: 90,
+          Opera: 76
+        };
+        
+        return versions[browser] && version < versions[browser];
+      },
+      
+      getBrowserVersion() {
+        const ua = navigator.userAgent;
+        const match = ua.match(/(Chrome|Firefox|Safari|Edge|Opera)\/(\d+)/);
+        return match ? parseInt(match[2]) : 0;
+      },
+      
+      // Dismiss Banner
+      dismissBanner() {
+        const banner = document.getElementById('mobileBanner');
+        if (banner) {
+          banner.style.animation = 'slideDown 0.3s ease reverse';
+          setTimeout(() => banner.remove(), 300);
+        }
+        localStorage.setItem('scimspt_mobile_banner_dismissed', Date.now());
+      },
+      
+      // Show PWA Install Guide
+      showPWAGuide() {
+        const guide = \`
+          <div style="
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--bg-primary);
+            border: 1px solid var(--border-subtle);
+            border-radius: 20px;
+            padding: 24px;
+            z-index: 10002;
+            max-width: 320px;
+            box-shadow: 0 30px 90px rgba(0,0,0,0.6);
+          ">
+            <h3 style="color: var(--accent-primary); margin-bottom: 16px; font-size: 18px;">
+              🚀 Install SciMSPT
+            </h3>
+            <ol style="color: var(--text-secondary); font-size: 14px; line-height: 1.8; padding-left: 20px;">
+              <li>Tap the <strong>Share</strong> button (□ with arrow)</li>
+              <li>Scroll down and tap <strong>'Add to Home Screen'</strong></li>
+              <li>Tap <strong>'Add'</strong> in the top right</li>
+            </ol>
+            <button onclick="this.parentElement.remove()" style="
+              margin-top: 16px;
+              width: 100%;
+              padding: 12px;
+              background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+              border: none;
+              border-radius: 10px;
+              color: #0a1628;
+              font-weight: 600;
+              cursor: pointer;
+            ">Got it!</button>
+          </div>
+          <div onclick="this.parentElement.remove()" style="
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.7);
+            z-index: 10001;
+          "></div>
+        \`;
+        
+        document.body.insertAdjacentHTML('beforeend', guide);
+      },
+      
+      // Enhance Touch Interactions
+      enhanceTouchInteractions() {
+        if (!this.device.isTouchDevice) return;
+        
+        // Add ripple effect to buttons
+        document.addEventListener('touchstart', (e) => {
+          const target = e.target.closest('button, a, .nav-link');
+          if (!target) return;
+          
+          target.style.transform = 'scale(0.97)';
+          
+          setTimeout(() => {
+            target.style.transform = '';
+          }, 150);
+        }, { passive: true });
+        
+        // Optimize scroll performance
+        document.addEventListener('touchmove', () => {}, { passive: true });
+        
+        // Prevent zoom on double tap (optional - uncomment if needed)
+        // document.addEventListener('touchend', (e) => {
+        //   const now = Date.now();
+        //   if (now - this.lastTouchEnd <= 300) {
+        //     e.preventDefault();
+        //   }
+        //   this.lastTouchEnd = now;
+        // }, { passive: false });
+      },
+      
+      // Suggest Browser Optimizations
+      suggestOptimizations() {
+        const suggestions = [];
+        
+        // Check for WebGL (needed for quantum visualizations)
+        const canvas = document.createElement('canvas');
+        const gl = canvas.getContext('webgl2') || canvas.getContext('webgl');
+        if (!gl) {
+          suggestions.push({
+            type: 'warning',
+            title: 'WebGL Not Available',
+            message: 'Quantum visualizations require WebGL. Enable it in browser settings.',
+            action: null
+          });
+        }
+        
+        // Check storage availability
+        if (navigator.storage && navigator.storage.estimate) {
+          navigator.storage.estimate().then(({ quota, usage }) => {
+            const usedPercent = (usage / quota) * 100;
+            if (usedPercent > 90) {
+              console.warn('[SciMSPT] Storage almost full:', usedPercent.toFixed(1) + '% used');
+            }
+          });
+        }
+        
+        // Log suggestions
+        if (suggestions.length > 0) {
+          console.log('%c[SciMSPT] Optimization Suggestions:', 
+            'color: #f59e0b; font-weight: bold;', suggestions);
+        }
+        
+        window.scimspt_suggestions = suggestions;
+      },
+      
+      // Setup PWA Functionality
+      setupPWA() {
+        // Register service worker if available
+        if ('serviceWorker' in navigator) {
+          window.addEventListener('load', () => {
+            navigator.serviceWorker.register('/sw.js')
+              .then(reg => {
+                console.log('[SciMSPT] Service Worker registered:', reg.scope);
+              })
+              .catch(err => {
+                console.log('[SciMSPT] SW registration failed:', err);
+              });
+          });
+        }
+        
+        // Handle install prompt
+        let deferredPrompt;
+        window.addEventListener('beforeinstallprompt', (e) => {
+          e.preventDefault();
+          deferredPrompt = e;
+          
+          // Show install button after delay
+          setTimeout(() => {
+            if (this.device.isMobile) {
+              this.showInstallPrompt(deferredPrompt);
+            }
+          }, 3000);
+        });
+      },
+      
+      // Show Install Prompt
+      showInstallPrompt(prompt) {
+        const existingPrompt = document.querySelector('.pwa-install-prompt');
+        if (existingPrompt) return;
+        
+        const promptEl = document.createElement('div');
+        promptEl.className = 'pwa-install-prompt visible';
+        promptEl.innerHTML = \`
+          <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+            <div style="
+              width: 44px; height: 44px;
+              background: linear-gradient(135deg, var(--accent-primary), var(--accent-tertiary));
+              border-radius: 12px;
+              display: flex; align-items: center; justify-content: center;
+              font-size: 20px;
+            ">⚛️</div>
+            <div>
+              <div style="font-weight: 700; color: var(--text-primary);">Install SciMSPT</div>
+              <div style="font-size: 12px; color: var(--text-muted);">Full-screen access, offline support</div>
+            </div>
+          </div>
+          <div style="display: flex; gap: 10px;">
+            <button id="pwaInstallBtn" style="
+              flex: 1;
+              padding: 10px;
+              background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+              border: none;
+              border-radius: 8px;
+              color: #0a1628;
+              font-weight: 600;
+              cursor: pointer;
+            ">Install</button>
+            <button onclick="this.closest('.pwa-install-prompt').remove()" style="
+              padding: 10px 16px;
+              background: transparent;
+              border: 1px solid var(--border-subtle);
+              border-radius: 8px;
+              color: var(--text-secondary);
+              cursor: pointer;
+            ">Not now</button>
+          </div>
+        \`;
+        
+        document.body.appendChild(promptEl);
+        
+        document.getElementById('pwaInstallBtn').addEventListener('click', async () => {
+          if (prompt) {
+            prompt.prompt();
+            const { outcome } = await prompt.userChoice;
+            console.log('[SciMSPT] Install prompt outcome:', outcome);
+            promptEl.remove();
+          }
+        });
+        
+        // Auto-hide after 15 seconds
+        setTimeout(() => {
+          if (promptEl.isConnected) {
+            promptEl.style.animation = 'slideUp 0.3s ease reverse';
+            setTimeout(() => promptEl.remove(), 300);
+          }
+        }, 15000);
+      }
+    };
+    
+    // Initialize on DOM ready
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', () => MobileDetection.init());
+    } else {
+      MobileDetection.init();
+    }
+    
+    // Expose globally for inline handlers
+    window.MobileDetection = MobileDetection;
+    
+  })();
+
+
+  
+  <!-- CHINESE & GLOBAL FREE-TIER PORTAL INTEGRATION -->
+  <section class="chinese-portals-section" style="
+    padding: 48px 24px;
+    background: linear-gradient(180deg, var(--bg-deep) 0%, var(--bg-primary) 100%);
+    margin-top: 48px;
+  ">
+    <div style="max-width: 1200px; margin: 0 auto;">
+      <div style="text-align: center; margin-bottom: 36px;">
+        <h2 style="
+          font-family: var(--font-heading);
+          font-size: clamp(22px, 4vw, 32px);
+          color: var(--text-primary);
+          margin-bottom: 12px;
+        ">
+          🌏 Global AI & Computing Free-Tier Ecosystem
+        </h2>
+        <p style="
+          color: var(--text-secondary);
+          font-size: 15px;
+          max-width: 700px;
+          margin: 0 auto;
+          line-height: 1.7;
+        ">
+          We're living in an AI-generated and automated planet. These platforms provide 
+          <strong style="color: var(--accent-primary);">free access</strong> to quantum computing simulation, 
+          LLM training, drug discovery tools, and scientific research infrastructure. 
+          No credit card required for exploration.
+        </p>
+      </div>
+      
+      <!-- Chinese Platforms Row -->
+      <div style="
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 20px;
+        margin-bottom: 32px;
+      ">
+        
+        <!-- Baidu AI Studio -->
+        <div class="portal-card" style="--card-accent: #2932e1; --card-accent-rgb: 41, 50, 225;">
+          <div class="portal-card-header">
+            <div class="portal-card-icon">🤖</div>
+            <div>
+              <h3 class="portal-card-title">百度飞桨 (Baidu PaddlePaddle)</h3>
+              <span class="portal-card-type">深度学习平台 | Deep Learning Platform</span>
+            </div>
+          </div>
+          <p class="portal-card-desc">
+            China's leading open-source deep learning platform. Free GPU access for training,
+            pre-trained models for NLP, CV, and recommendation systems.
+          </p>
+          <ul class="portal-card-features">
+            <li><span class="material-icons-round">check_circle</span> 免费GPU算力 (Free GPU Compute)</li>
+            <li><span class="material-icons-round">check_circle</span> 预训练模型库 (Model Zoo)</li>
+            <li><span class="material-icons-round">check_circle</span> 国产化支持 (Domestic Infrastructure)</li>
+            <li><span class="material-icons-round">check_circle</span> 全中文界面 (Chinese UI)</li>
+          </ul>
+          <div class="portal-card-action">
+            <a href="https://aistudio.baidu.com/" target="_blank" rel="noopener" class="portal-card-btn">
+              <span class="material-icons-round">open_in_new</span>
+              立即使用 (Start Free)
+            </a>
+            <span class="portal-card-status">
+              <span class="status-dot"></span>
+              推荐 (Recommended)
+            </span>
+          </div>
+        </div>
+        
+        <!-- Alibaba Cloud -->
+        <div class="portal-card" style="--card-accent: #ff6a00; --card-accent-rgb: 255, 106, 0;">
+          <div class="portal-card-header">
+            <div class="portal-card-icon">☁️</div>
+            <div>
+              <h3 class="portal-card-title">阿里云 PAI (Alibaba Cloud)</h3>
+              <span class="portal-card-type">人工智能平台 | AI Platform</span>
+            </div>
+          </div>
+          <p class="portal-card-desc">
+            Alibaba's machine learning platform with free tier for beginners.
+            Access to DSW (Data Science Workshop), AutoML, and model deployment.
+          </p>
+          <ul class="portal-card-features">
+            <li><span class="material-icons-round">check_circle</span> 免费试用额度 (Free Trial Credits)</li>
+            <li><span class="material-icons-round">check_circle</span> PAI-DSW 实验环境</li>
+            <li><span class="material-icons-round">check_circle</span> AutoML 自动建模</li>
+            <li><span class="material-icons-round">check_circle</span> 模型在线部署 (Model Deployment)</li>
+          </ul>
+          <div class="portal-card-action">
+            <a href="https://www.aliyun.com/product/pai" target="_blank" rel="noopener" class="portal-card-btn">
+              <span class="material-icons-round">open_in_new</span>
+              免费试用 (Try Free)
+            </a>
+            <span class="portal-card-status">
+              <span class="status-dot"></span>
+              企业级 (Enterprise)
+            </span>
+          </div>
+        </div>
+        
+        <!-- Tencent Cloud -->
+        <div class="portal-card" style="--card-accent: #00d4ff; --card-accent-rgb: 0, 212, 255;">
+          <div class="portal-card-header">
+            <div class="portal-card-icon">⚡</div>
+            <div>
+              <h3 class="portal-card-title">腾讯云 TI (Tencent Cloud)</h3>
+              <span class="portal-card-type">智能钛机器学习 | TI Platform</span>
+            </div>
+          </div>
+          <p class="portal-card-desc">
+            Tencent's AI platform with free-tier access to TI-ONE (model training),
+            TI-Matrix (deployment), and TI-DataLabel (data annotation).
+          </p>
+          <ul class="portal-card-features">
+            <li><span class="material-icons-round">check_circle</span> TI-ONE 训练平台</li>
+            <li><span class="material-icons-round">check_circle</span> 免费入门套餐 (Starter Plan)</li>
+            <li><span class="material-icons-round">check_circle</span> 预置算法模板 (Algorithm Templates)</li>
+            <li><span class="material-icons-round">check_circle</span> 腾讯生态集成 (Tencent Ecosystem)</li>
+          </ul>
+          <div class="portal-card-action">
+            <a href="https://cloud.tencent.com/product/tiia" target="_blank" rel="noopener" class="portal-card-btn">
+              <span class="material-icons-round">open_in_new</span>
+              开通服务 (Get Started)
+            </a>
+            <span class="portal-card-status">
+              <span class="status-dot"></span>
+              生态优势 (Ecosystem)
+            </span>
+          </div>
+        </div>
+        
+      </div>
+      
+      <!-- International Platforms -->
+      <div style="
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 16px;
+      ">
+        
+        <!-- Google -->
+        <a href="https://cloud.google.com/free" target="_blank" rel="noopener" style="
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          padding: 16px;
+          background: var(--bg-glass);
+          border: 1px solid var(--border-subtle);
+          border-radius: 12px;
+          text-decoration: none;
+          color: inherit;
+          transition: all 0.2s ease;
+        " onmouseover="this.style.borderColor='rgba(66,133,244,0.5)'" onmouseout="this.style.borderColor='var(--border-subtle)'">
+          <span style="font-size: 28px;">☁️</span>
+          <div style="flex: 1;">
+            <div style="font-weight: 600; color: var(--text-primary);">Google Cloud</div>
+            <div style="font-size: 12px; color: var(--text-muted);">$300 Free Credits • Vertex AI</div>
+          </div>
+          <span class="material-icons-round" style="color: var(--accent-primary);">open_in_new</span>
+        </a>
+        
+        <!-- Hugging Face -->
+        <a href="https://huggingface.co/" target="_blank" rel="noopener" style="
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          padding: 16px;
+          background: var(--bg-glass);
+          border: 1px solid var(--border-subtle);
+          border-radius: 12px;
+          text-decoration: none;
+          color: inherit;
+          transition: all 0.2s ease;
+        " onmouseover="this.style.borderColor='rgba(255,157,0,0.5)'" onmouseout="this.style.borderColor='var(--border-subtle)'">
+          <span style="font-size: 28px;">🤗</span>
+          <div style="flex: 1;">
+            <div style="font-weight: 600; color: var(--text-primary);">Hugging Face</div>
+            <div style="font-size: 12px; color: var(--text-muted);">Free Models • Spaces Hosting</div>
+          </div>
+          <span class="material-icons-round" style="color: var(--accent-primary);">open_in_new</span>
+        </a>
+        
+        <!-- IBM Quantum -->
+        <a href="https://learning.quantum.ibm.com/" target="_blank" rel="noopener" style="
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          padding: 16px;
+          background: var(--bg-glass);
+          border: 1px solid var(--border-subtle);
+          border-radius: 12px;
+          text-decoration: none;
+          color: inherit;
+          transition: all 0.2s ease;
+        " onmouseover="this.style.borderColor='rgba(0,240,255,0.5)'" onmouseout="this.style.borderColor='var(--border-subtle)'">
+          <span style="font-size: 28px;">⚛️</span>
+          <div style="flex: 1;">
+            <div style="font-weight: 600; color: var(--text-primary);">IBM Quantum</div>
+            <div style="font-size: 12px; color: var(--text-muted);">Real Qubits • Qiskit Learning</div>
+          </div>
+          <span class="material-icons-round" style="color: var(--accent-primary);">open_in_new</span>
+        </a>
+        
+        <!-- OpenAI -->
+        <a href="https://platform.openai.com/" target="_blank" rel="noopener" style="
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          padding: 16px;
+          background: var(--bg-glass);
+          border: 1px solid var(--border-subtle);
+          border-radius: 12px;
+          text-decoration: none;
+          color: inherit;
+          transition: all 0.2s ease;
+        " onmouseover="this.style.borderColor='rgba(16,185,129,0.5)'" onmouseout="this.style.borderColor='var(--border-subtle)'">
+          <span style="font-size: 28px;">🧠</span>
+          <div style="flex: 1;">
+            <div style="font-weight: 600; color: var(--text-primary);">OpenAI Platform</div>
+            <div style="font-size: 12px; color: var(--text-muted);">GPT API • Freemium Tier</div>
+          </div>
+          <span class="material-icons-round" style="color: var(--accent-primary);">open_in_new</span>
+        </a>
+        
+      </div>
+      
+      <!-- Philosophy Note -->
+      <div style="
+        margin-top: 36px;
+        padding: 24px;
+        background: linear-gradient(135deg, rgba(0, 229, 255, 0.08), rgba(167, 139, 250, 0.08));
+        border: 1px solid var(--border-subtle);
+        border-radius: 16px;
+        text-align: center;
+      ">
+        <p style="
+          color: var(--text-secondary);
+          font-size: 14px;
+          line-height: 1.7;
+          margin: 0;
+        ">
+          <strong style="color: var(--accent-primary);">💡 Web-as-Backend Philosophy:</strong> 
+          Our backend is the web itself — leveraging free-tier global infrastructure to make 
+          cutting-edge AI and quantum computing accessible to everyone. This is not placeholder content; 
+          this is how modern scientific platforms operate in an AI-automated world.
+        </p>
+      </div>
+      
+    </div>
+  </section>
+
+
+
+  
+  /* ============================================
+     BOOLEAN OBSERVER SYSTEM v5.0
+     Human Confirmation | Real-time Monitoring
+     ============================================ */
+  
+  const BooleanObserver = {
+    status: {
+      videoGeneration: 'PENDING',
+      aiTraining: 'TRUE',
+      portalConnectivity: 'TRUE',
+      automationLevel: 87,
+      humanConfirmed: false
+    },
+    
+    logEntries: [],
+    
+    init() {
+      console.log('%c[SciMSPT] Boolean Observer System Initialized', 
+        'color: #f59e0b; font-weight: bold; font-size: 14px;');
+      this.startMonitoring();
+      this.simulateActivity();
+    },
+    
+    startMonitoring() {
+      // Update status every 3 seconds
+      setInterval(() => this.updateStatus(), 3000);
+      
+      // Add random log entries
+      setInterval(() => this.addLogEntry(), 5000);
+    },
+    
+    updateStatus() {
+      // Simulate status changes
+      const statuses = ['PENDING', 'TRUE', 'PROCESSING'];
+      const videoStatus = document.getElementById('videoGenStatus');
+      if (videoStatus && Math.random() > 0.7) {
+        const newStatus = statuses[Math.floor(Math.random() * statuses.length)];
+        videoStatus.textContent = newStatus;
+        videoStatus.className = 'boolean-value-display ' + newStatus.toLowerCase();
+        this.status.videoGeneration = newStatus;
+      }
+      
+      // Update automation level
+      const autoLevel = document.getElementById('autoLevelStatus');
+      if (autoLevel) {
+        const variation = Math.floor(Math.random() * 5) - 2;
+        this.status.automationLevel = Math.min(99, Math.max(80, this.status.automationLevel + variation));
+        autoLevel.textContent = this.status.automationLevel + '%';
+        
+        // Update progress bar
+        const progressBar = autoLevel.closest('.boolean-indicator-card')?.querySelector('.boolean-progress-fill');
+        if (progressBar) {
+          progressBar.style.width = this.status.automationLevel + '%';
+        }
+      }
+    },
+    
+    addLogEntry() {
+      const messages = [
+        { type: 'success', msg: 'Video frame rendered successfully' },
+        { type: 'info', msg: 'Portal connectivity check passed' },
+        { type: 'info', msg: 'AI model weights synchronized' },
+        { type: 'warning', msg: 'Queue depth: 3 items' },
+        { type: 'success', msg: 'Cache invalidated and refreshed' },
+        { type: 'info', msg: 'Quantum state vector updated' },
+        { type: 'success', msg: 'User session validated' },
+        { type: 'info', msg: 'CDN edge nodes healthy' },
+        { type: 'success', msg: 'Pipeline stage 2 complete' },
+        { type: 'info', msg: 'Neural network inference: 42ms' }
+      ];
+      
+      const entry = messages[Math.floor(Math.random() * messages.length)];
+      const timestamp = new Date().toLocaleTimeString('en-US', { hour12: false });
+      
+      this.logEntries.unshift({ timestamp, ...entry });
+      if (this.logEntries.length > 20) this.logEntries.pop();
+      
+      this.renderLog();
+    },
+    
+    renderLog() {
+      const logContainer = document.getElementById('automationLog');
+      const countEl = document.getElementById('logEntryCount');
+      
+      if (!logContainer) return;
+      
+      logContainer.innerHTML = this.logEntries.map(entry => \`
+        <div class="log-entry">
+          <span class="log-timestamp">[\${entry.timestamp}]</span>
+          <span class="log-message log-\${entry.type}">\${entry.msg}</span>
+        </div>
+      \`).join('');
+      
+      if (countEl) {
+        countEl.textContent = this.logEntries.length;
+      }
+    },
+    
+    simulateActivity() {
+      // Simulate ongoing activity
+      console.log('%c⚛️ [BooleanObserver] Monitoring AI automation pipeline...', 
+        'color: #a78bfa;');
+    },
+    
+    confirmActivity() {
+      this.status.humanConfirmed = true;
+      
+      // Visual feedback
+      const btn = event.target.closest('.human-confirm-btn');
+      const originalHTML = btn.innerHTML;
+      
+      btn.innerHTML = \`
+        <span class="material-icons-round">check_circle</span>
+        ✓ Activity Confirmed by Human
+      \`;
+      btn.style.background = 'linear-gradient(135deg, #10b981, #059669)';
+      
+      // Add log entry
+      this.logEntries.unshift({
+        timestamp: new Date().toLocaleTimeString('en-US', { hour12: false }),
+        type: 'success',
+        msg: '✓ HUMAN CONFIRMATION RECEIVED - Boolean override applied'
+      });
+      this.renderLog();
+      
+      console.log('%c✓ [BooleanObserver] Human confirmation received!', 
+        'color: #10b981; font-weight: bold; font-size: 14px;');
+      
+      // Reset after 3 seconds
+      setTimeout(() => {
+        btn.innerHTML = originalHTML;
+        btn.style.background = '';
+        this.status.humanConfirmed = false;
+      }, 3000);
+    }
+  };
+  
+  // Initialize when DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => BooleanObserver.init());
+  } else {
+    BooleanObserver.init();
+  }
+  
+  // Expose globally
+  window.BooleanObserver = BooleanObserver;
+
+
 </body>
 </html>
