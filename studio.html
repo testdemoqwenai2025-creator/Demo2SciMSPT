@@ -5086,13 +5086,12 @@ document.addEventListener('keydown', (e) => {
   </script>
   
   
+<script>
   (function() {
     'use strict';
     
-<script>
     const MobileDetection = {
       // Device Detection
-</script>
       device: {
         isMobile: /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent),
         isIOS: /iPad|iPhone|iPod/.test(navigator.userAgent),
@@ -5104,7 +5103,6 @@ document.addEventListener('keydown', (e) => {
         pixelRatio: window.devicePixelRatio || 1,
         connection: navigator.connection || navigator.mozConnection || navigator.webkitConnection,
         
-<script>
         getBrowser() {
           const ua = navigator.userAgent;
           if (ua.includes('Firefox')) return 'Firefox';
@@ -5113,10 +5111,8 @@ document.addEventListener('keydown', (e) => {
           if (ua.includes('Safari') && !ua.includes('Chrome')) return 'Safari';
           if (ua.includes('Opera') || ua.includes('OPR')) return 'Opera';
           return 'Unknown';
-</script>
         },
         
-<script>
         getOS() {
           const ua = navigator.userAgent;
           if (this.isIOS) return 'iOS';
@@ -5126,12 +5122,9 @@ document.addEventListener('keydown', (e) => {
           if (ua.includes('Linux')) return 'Linux';
           return 'Unknown';
         }
-</script>
       },
       
-<script>
       // Feature Detection
-</script>
       features: {
         serviceWorker: 'serviceWorker' in navigator,
         webp: document.createElement('canvas').toDataURL('image/webp').startsWith('data:image/webp'),
@@ -5142,21 +5135,16 @@ document.addEventListener('keydown', (e) => {
         camera: !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia)
       },
       
-<script>
       // Performance Metrics
-</script>
       performance: {
         memory: navigator.deviceMemory || 'Unknown',
         cores: navigator.hardwareConcurrency || 'Unknown',
         connectionType: () => {
-<script>
           const conn = MobileDetection.device.connection;
           return conn ? (conn.effectiveType || 'Unknown') : 'Unknown';
         }
-</script>
       },
       
-<script>
       // Initialize
       init() {
         this.logDeviceInfo();
@@ -5166,15 +5154,12 @@ document.addEventListener('keydown', (e) => {
         this.setupPWA();
         
         console.log('%c[SciMSPT] Mobile Detection System Initialized ✓', 
-</script>
           'color: #a78bfa; font-weight: bold;');
       },
       
-<script>
       // Log Device Info (Developer Mode)
       logDeviceInfo() {
         const info = {
-</script>
           device: this.device.getOS(),
           browser: this.device.getBrowser(),
           mobile: this.device.isMobile,
@@ -5186,28 +5171,22 @@ document.addEventListener('keydown', (e) => {
           connection: this.performance.connectionType()
         };
         
-<script>
         console.log('%c[SciMSPT] Device Profile:', 'color: #00E5FF; font-weight: bold;', info);
         
         // Store for analytics
         window.scimspt_device_info = info;
-</script>
       },
       
-<script>
       // Create Smart Mobile Banner
       createMobileBanner() {
         if (!this.device.isMobile && !this.device.isTouchDevice) return;
         
         const banner = document.createElement('div');
-</script>
         banner.className = 'mobile-detection-banner';
         banner.id = 'mobileBanner';
         
-<script>
         const recommendations = this.getRecommendations();
         
-</script>
         banner.innerHTML = \`
           <div class="mobile-banner-content">
             <div class="mobile-banner-text">
@@ -5234,7 +5213,6 @@ document.addEventListener('keydown', (e) => {
           </div>
         \`;
         
-<script>
         document.body.prepend(banner);
         
         // Show after short delay
@@ -5245,11 +5223,9 @@ document.addEventListener('keydown', (e) => {
           if (banner.classList.contains('visible')) {
             this.dismissBanner();
           }
-</script>
         }, 10000);
       },
       
-<script>
       // Get Contextual Recommendations
       getRecommendations() {
         const browser = this.device.getBrowser();
@@ -5258,7 +5234,6 @@ document.addEventListener('keydown', (e) => {
         // Safari iOS recommendation
         if (os === 'iOS' && browser === 'Safari') {
           return {
-</script>
             message: "Add to Home Screen for full-screen PWA experience",
             action: "MobileDetection.showPWAGuide()",
             icon: 'add_to_home_screen',
@@ -5267,11 +5242,9 @@ document.addEventListener('keydown', (e) => {
           };
         }
         
-<script>
         // Android Chrome recommendation
         if (os === 'Android' && browser === 'Chrome') {
           return {
-</script>
             message: "Tap ⋮ menu → 'Install app' for best experience",
             action: "",
             icon: 'android',
@@ -5280,12 +5253,10 @@ document.addEventListener('keydown', (e) => {
           };
         }
         
-<script>
         // Old browser warning
         const isOldBrowser = this.isBrowserOutdated(browser);
         if (isOldBrowser) {
           return {
-</script>
             message: "Consider updating your browser for quantum visualizations",
             action: "window.open('https://browser-update.org/', '_blank')",
             icon: 'update',
@@ -5294,10 +5265,8 @@ document.addEventListener('keydown', (e) => {
           };
         }
         
-<script>
         // Default mobile message
         return {
-</script>
           message: "SciMSPT optimized for your device • AI-powered research tools",
           action: "",
           icon: 'check_circle',
@@ -5306,12 +5275,10 @@ document.addEventListener('keydown', (e) => {
         };
       },
       
-<script>
       // Check if browser is outdated
       isBrowserOutdated(browser) {
         const version = this.getBrowserVersion();
         const versions = {
-</script>
           Chrome: 90,
           Firefox: 88,
           Safari: 14,
@@ -5319,20 +5286,15 @@ document.addEventListener('keydown', (e) => {
           Opera: 76
         };
         
-<script>
         return versions[browser] && version < versions[browser];
-</script>
       },
       
-<script>
       getBrowserVersion() {
         const ua = navigator.userAgent;
         const match = ua.match(/(Chrome|Firefox|Safari|Edge|Opera)\/(\d+)/);
         return match ? parseInt(match[2]) : 0;
-</script>
       },
       
-<script>
       // Dismiss Banner
       dismissBanner() {
         const banner = document.getElementById('mobileBanner');
@@ -5341,19 +5303,15 @@ document.addEventListener('keydown', (e) => {
           setTimeout(() => banner.remove(), 300);
         }
         localStorage.setItem('scimspt_mobile_banner_dismissed', Date.now());
-</script>
       },
       
-<script>
             // Show PWA Install Guide - DISABLED to prevent annoying popup
       showPWAGuide() {
         // PWA install guide disabled - user can install via browser menu if desired
         console.log('[SciMSPT] PWA install guide available but suppressed');
-</script>
         return;
       },,
       
-<script>
       // Enhance Touch Interactions
       enhanceTouchInteractions() {
         if (!this.device.isTouchDevice) return;
@@ -5363,17 +5321,13 @@ document.addEventListener('keydown', (e) => {
           const target = e.target.closest('button, a, .nav-link');
           if (!target) return;
           
-</script>
           target.style.transform = 'scale(0.97)';
           
-<script>
           setTimeout(() => {
-</script>
             target.style.transform = '';
           }, 150);
         }, { passive: true });
         
-<script>
         // Optimize scroll performance
         document.addEventListener('touchmove', () => {}, { passive: true });
         
@@ -5385,10 +5339,8 @@ document.addEventListener('keydown', (e) => {
         //   }
         //   this.lastTouchEnd = now;
         // }, { passive: false });
-</script>
       },
       
-<script>
       // Suggest Browser Optimizations
       suggestOptimizations() {
         const suggestions = [];
@@ -5397,7 +5349,6 @@ document.addEventListener('keydown', (e) => {
         const canvas = document.createElement('canvas');
         const gl = canvas.getContext('webgl2') || canvas.getContext('webgl');
         if (!gl) {
-</script>
           suggestions.push({
             type: 'warning',
             title: 'WebGL Not Available',
@@ -5406,7 +5357,6 @@ document.addEventListener('keydown', (e) => {
           });
         }
         
-<script>
         // Check storage availability
         if (navigator.storage && navigator.storage.estimate) {
           navigator.storage.estimate().then(({ quota, usage }) => {
@@ -5420,16 +5370,12 @@ document.addEventListener('keydown', (e) => {
         // Log suggestions
         if (suggestions.length > 0) {
           console.log('%c[SciMSPT] Optimization Suggestions:', 
-</script>
             'color: #f59e0b; font-weight: bold;', suggestions);
         }
         
-<script>
         window.scimspt_suggestions = suggestions;
-</script>
       },
       
-<script>
       // Setup PWA Functionality
       setupPWA() {
         // Register service worker if available
@@ -5438,10 +5384,8 @@ document.addEventListener('keydown', (e) => {
             navigator.serviceWorker.register('/sw.js')
               .then(reg => {
                 console.log('[SciMSPT] Service Worker registered:', reg.scope);
-</script>
               })
               .catch(err => {
-<script>
                 console.log('[SciMSPT] SW registration failed:', err);
               });
           });
@@ -5450,25 +5394,20 @@ document.addEventListener('keydown', (e) => {
         // Handle install prompt - DISABLED to prevent annoying popup
         let deferredPrompt;
         window.addEventListener('beforeinstallprompt', (e) => {
-</script>
           e.preventDefault();
           deferredPrompt = e;
-<script>
           // Install prompt suppressed - user can install via browser menu if desired
           console.log('[SciMSPT] PWA install available but prompt suppressed');
           // NOT showing any install prompt automatically
         });
-</script>
       },
       
-<script>
       // Show Install Prompt
       showInstallPrompt(prompt) {
         const existingPrompt = document.querySelector('.pwa-install-prompt');
         if (existingPrompt) return;
         
         const promptEl = document.createElement('div');
-</script>
         promptEl.className = 'pwa-install-prompt visible';
         promptEl.innerHTML = \`
           <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
@@ -5506,48 +5445,40 @@ document.addEventListener('keydown', (e) => {
           </div>
         \`;
         
-<script>
         document.body.appendChild(promptEl);
         
         document.getElementById('pwaInstallBtn').addEventListener('click', async () => {
           if (prompt) {
-</script>
             prompt.prompt();
             const { outcome } = await prompt.userChoice;
-<script>
             console.log('[SciMSPT] Install prompt outcome:', outcome);
-</script>
             promptEl.remove();
           }
         });
         
-<script>
         // Auto-hide after 15 seconds
         setTimeout(() => {
           if (promptEl.isConnected) {
             promptEl.style.animation = 'slideUp 0.3s ease reverse';
             setTimeout(() => promptEl.remove(), 300);
           }
-</script>
         }, 15000);
       }
     };
     
-<script>
     // Initialize on DOM ready
     if (document.readyState === 'loading') {
       document.addEventListener('DOMContentLoaded', () => MobileDetection.init());
-</script>
     } else {
       MobileDetection.init();
     }
     
-<script>
     // Expose globally for inline handlers
     window.MobileDetection = MobileDetection;
     
-</script>
   })();
+  })();
+</script>
 
 
   
