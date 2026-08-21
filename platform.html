@@ -6269,5 +6269,36 @@
       });
     }
   </script>
+
+  <!-- FAILSAFE: Force hide skeleton loader after 800ms -->
+  <script>
+    (function() {
+      var loader = document.getElementById('skeletonLoader');
+      if (loader) {
+        setTimeout(function() {
+          loader.style.opacity = '0';
+          loader.style.visibility = 'hidden';
+          setTimeout(function() { if (loader.parentNode) loader.remove(); }, 500);
+        }, 800);
+      }
+    })();
+  </script>
+
+
+  <!-- FAILSAFE: Force hide skeleton loader after 800ms -->
+  <script>
+    (function() {
+      var loader = document.getElementById('skeletonLoader');
+      if (loader) {
+        setTimeout(function() {
+          loader.style.opacity = '0';
+          loader.style.visibility = 'hidden';
+          setTimeout(function() { if (loader.parentNode) loader.remove(); }, 500);
+        }, 800);
+      }
+    })();
+  </script>
+
+</script>
 </body>
 </html>
