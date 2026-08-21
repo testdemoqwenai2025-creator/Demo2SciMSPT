@@ -1,0 +1,1579 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Infrastructure & Scaling — SciMSPT Neural Research Platform</title>
+  <meta name="description" content="SciMSPT Infrastructure: Cloud-native architecture, global CDN, auto-scaling, quantum backend integration, and enterprise-grade reliability for research platforms.">
+  
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+  
+  <style>
+    /* ============================================
+       SCIMSPT NEURAL DESIGN SYSTEM v3.0
+       Infrastructure Command Center
+       ============================================ */
+    
+    :root {
+      --bg-deep: #030810;
+      --bg-primary: #0a1628;
+      --bg-secondary: #0d1f35;
+      --bg-tertiary: #122a45;
+      --bg-glass: rgba(10, 22, 40, 0.85);
+      --bg-glass-light: rgba(255, 255, 255, 0.03);
+      
+      --accent-primary: #00E5FF;
+      --accent-secondary: #4da8da;
+      --accent-tertiary: #a78bfa;
+      --accent-pink: #f472b6;
+      --accent-green: #10b981;
+      --accent-gold: #f59e0b;
+      --accent-red: #ef4444;
+      --accent-orange: #f97316;
+      
+      --text-primary: #e8f4fc;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+      
+      --border-subtle: rgba(0, 229, 255, 0.15);
+      --border-glow: rgba(0, 229, 255, 0.4);
+      
+      --font-heading: 'Playfair Display', Georgia, serif;
+      --font-body: 'Inter', -apple-system, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+      --font-tech: 'Orbitron', sans-serif;
+      
+      --nav-height: 80px;
+      --sidebar-width: 100px;
+      
+      --glow-primary: 0 0 30px rgba(0, 229, 255, 0.3);
+      --glow-secondary: 0 0 60px rgba(167, 139, 250, 0.2);
+    }
+    
+    [data-theme="light"] {
+      --bg-deep: #f0f4f8;
+      --bg-primary: #ffffff;
+      --bg-secondary: #f8fafc;
+      --bg-tertiary: #e2e8f0;
+      --bg-glass: rgba(255, 255, 255, 0.92);
+      --bg-glass-light: rgba(0, 0, 0, 0.02);
+      --text-primary: #0f172a;
+      --text-secondary: #475569;
+      --text-muted: #94a3b8;
+      --border-subtle: rgba(77, 168, 218, 0.25);
+    }
+    
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    
+    body {
+      font-family: var(--font-body);
+      background: var(--bg-deep);
+      color: var(--text-primary);
+      line-height: 1.6;
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+    
+    /* Molecular Sidebars */
+    .molecular-sidebar {
+      position: fixed;
+      top: 0;
+      width: var(--sidebar-width);
+      height: 100vh;
+      z-index: 5;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    
+    .molecular-sidebar.left {
+      left: 0;
+      background: linear-gradient(90deg, rgba(0, 229, 255, 0.08) 0%, transparent 100%);
+      border-right: 1px solid var(--border-subtle);
+    }
+    
+    .molecular-sidebar.right {
+      right: 0;
+      background: linear-gradient(-90deg, rgba(167, 139, 250, 0.08) 0%, transparent 100%);
+      border-left: 1px solid var(--border-subtle);
+    }
+    
+    .dna-helix {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 60px;
+      height: 80vh;
+    }
+    
+    .dna-strand { position: absolute; width: 100%; height: 100%; }
+    
+    .nucleotide {
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      animation: nucleotidePulse 3s ease-in-out infinite;
+    }
+    
+    .nucleotide.adenine { background: var(--accent-primary); box-shadow: 0 0 10px var(--accent-primary); }
+    .nucleotide.thymine { background: var(--accent-pink); box-shadow: 0 0 10px var(--accent-pink); }
+    .nucleotide.guanine { background: var(--accent-tertiary); box-shadow: 0 0 10px var(--accent-tertiary); }
+    .nucleotide.cytosine { background: var(--accent-green); box-shadow: 0 0 10px var(--accent-green); }
+    
+    @keyframes nucleotidePulse {
+      0%, 100% { opacity: 0.6; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.2); }
+    }
+    
+    /* Navigation */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: var(--nav-height);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 48px;
+      background: var(--bg-glass);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border-subtle);
+      transition: all 0.3s ease;
+    }
+    
+    .nav-left { display: flex; align-items: center; gap: 28px; }
+    
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--text-primary);
+      transition: opacity 0.3s ease;
+    }
+    
+    .nav-logo:hover { opacity: 0.85; }
+    .nav-logo img { width: 32px; height: 32px; filter: drop-shadow(0 0 6px var(--accent-secondary)); }
+    .nav-logo-text { font-family: var(--font-heading); font-size: 20px; font-weight: 700; letter-spacing: -0.5px; }
+    .nav-logo-text span { color: var(--accent-primary); }
+    
+    .nav-links { display: flex; align-items: center; gap: 8px; }
+    
+    .nav-link {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-muted);
+      text-decoration: none;
+      padding: 8px 16px;
+      border-radius: 20px;
+      transition: all 0.25s ease;
+      letter-spacing: 0.3px;
+      white-space: nowrap;
+    }
+    
+    .nav-link:hover { color: var(--accent-primary); background: var(--bg-glass-light); }
+    .nav-link.active { color: var(--accent-primary); background: rgba(0, 229, 255, 0.1); }
+    
+    .nav-right { display: flex; align-items: center; gap: 16px; }
+    
+    .theme-toggle {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 16px;
+      background: var(--bg-glass-light);
+      border: 1px solid var(--border-subtle);
+      border-radius: 20px;
+      cursor: pointer;
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-muted);
+      transition: all 0.3s ease;
+      white-space: nowrap;
+    }
+    
+    .theme-toggle:hover { border-color: var(--accent-primary); color: var(--accent-primary); }
+    .theme-toggle .material-icons-round { font-size: 16px; }
+    
+    .mobile-menu-btn {
+      display: none;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--bg-glass-light);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-muted);
+      cursor: pointer;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    /* Hero Section */
+    .hero {
+      min-height: 70vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: calc(var(--nav-height) + 80px) 48px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 800px;
+      height: 800px;
+      background: radial-gradient(circle, rgba(167, 139, 250, 0.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    
+    .hero-content { max-width: 900px; position: relative; z-index: 1; }
+    
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 20px;
+      background: rgba(167, 139, 250, 0.15);
+      border: 1px solid rgba(167, 139, 250, 0.3);
+      border-radius: 30px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--accent-tertiary);
+      margin-bottom: 32px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    
+    .hero-badge .material-icons-round { font-size: 16px; }
+    
+    .hero-title {
+      font-family: var(--font-heading);
+      font-size: clamp(40px, 6vw, 72px);
+      font-weight: 900;
+      line-height: 1.1;
+      margin-bottom: 24px;
+      background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent-tertiary) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .hero-subtitle {
+      font-size: clamp(16px, 2vw, 20px);
+      color: var(--text-secondary);
+      max-width: 700px;
+      margin: 0 auto 40px;
+      line-height: 1.7;
+    }
+    
+    .hero-stats {
+      display: flex;
+      justify-content: center;
+      gap: 48px;
+      flex-wrap: wrap;
+    }
+    
+    .hero-stat { text-align: center; }
+    
+    .hero-stat-value {
+      font-family: var(--font-tech);
+      font-size: 36px;
+      font-weight: 700;
+      color: var(--accent-tertiary);
+      margin-bottom: 4px;
+    }
+    
+    .hero-stat-label {
+      font-size: 13px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    
+    /* Main Content */
+    .main-content {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 80px 48px;
+    }
+    
+    .section { margin-bottom: 100px; }
+    
+    .section-header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+    
+    .section-tag {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--accent-tertiary);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 16px;
+    }
+    
+    .section-title {
+      font-family: var(--font-heading);
+      font-size: clamp(28px, 4vw, 42px);
+      font-weight: 900;
+      margin-bottom: 16px;
+    }
+    
+    .section-desc {
+      font-size: 17px;
+      color: var(--text-secondary);
+      max-width: 700px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+    
+    /* Architecture Diagram */
+    .architecture-container {
+      background: var(--bg-glass);
+      border: 1px solid var(--border-subtle);
+      border-radius: 24px;
+      padding: 48px;
+      margin-top: 48px;
+      overflow-x: auto;
+    }
+    
+    .arch-layers {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      min-width: 800px;
+    }
+    
+    .arch-layer {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      gap: 24px;
+      align-items: start;
+    }
+    
+    .arch-layer-label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-muted);
+      padding-top: 12px;
+    }
+    
+    .arch-components {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    
+    .arch-component {
+      flex: 1;
+      min-width: 160px;
+      background: var(--bg-glass-light);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+    
+    .arch-component:hover {
+      border-color: var(--component-accent, var(--accent-primary));
+      transform: translateY(-2px);
+    }
+    
+    .arch-component.cyan { --component-accent: var(--accent-primary); }
+    .arch-component.purple { --component-accent: var(--accent-tertiary); }
+    .arch-component.green { --component-accent: var(--accent-green); }
+    .arch-component.gold { --component-accent: var(--accent-gold); }
+    .arch-component.pink { --component-accent: var(--accent-pink); }
+    
+    .arch-comp-icon {
+      width: 44px;
+      height: 44px;
+      margin: 0 auto 12px;
+      background: linear-gradient(135deg, var(--component-accent, var(--accent-primary)), rgba(167, 139, 250, 0.3));
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .arch-comp-icon .material-icons-round { font-size: 22px; color: white; }
+    
+    .arch-comp-name {
+      font-weight: 600;
+      font-size: 13px;
+      margin-bottom: 4px;
+    }
+    
+    .arch-comp-desc {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+    
+    /* Infrastructure Grid */
+    .infra-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 28px;
+      margin-top: 48px;
+    }
+    
+    .infra-card {
+      background: var(--bg-glass);
+      border: 1px solid var(--border-subtle);
+      border-radius: 20px;
+      padding: 36px;
+      backdrop-filter: blur(20px);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .infra-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--card-accent, var(--accent-primary)), transparent);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    
+    .infra-card:hover {
+      border-color: var(--card-accent, var(--accent-primary));
+      transform: translateY(-4px);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    }
+    
+    .infra-card:hover::before { opacity: 1; }
+    
+    .infra-card.accent-cyan { --card-accent: var(--accent-primary); }
+    .infra-card.accent-purple { --card-accent: var(--accent-tertiary); }
+    .infra-card.accent-green { --card-accent: var(--accent-green); }
+    .infra-card.accent-gold { --card-accent: var(--accent-gold); }
+    .infra-card.accent-red { --card-accent: var(--accent-red); }
+    .infra-card.accent-pink { --card-accent: var(--accent-pink); }
+    
+    .card-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--card-accent, var(--accent-primary)), rgba(0, 229, 255, 0.3));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 24px;
+    }
+    
+    .card-icon .material-icons-round { font-size: 28px; color: white; }
+    
+    .card-title {
+      font-family: var(--font-heading);
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+    
+    .card-desc {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+    
+    .card-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    
+    .card-list li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
+    
+    .card-list li .material-icons-round { font-size: 16px; color: var(--accent-green); }
+    
+    /* Quantum Backends Section */
+    .quantum-providers {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      margin-top: 48px;
+    }
+    
+    .provider-card {
+      background: var(--bg-glass);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      padding: 28px;
+      transition: all 0.3s ease;
+    }
+    
+    .provider-card:hover {
+      border-color: var(--accent-primary);
+      transform: translateY(-2px);
+    }
+    
+    .provider-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+    
+    .provider-logo {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: var(--bg-glass-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 18px;
+      color: var(--accent-primary);
+    }
+    
+    .provider-name {
+      font-family: var(--font-heading);
+      font-size: 18px;
+      font-weight: 700;
+    }
+    
+    .provider-tier {
+      font-size: 11px;
+      color: var(--accent-green);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    
+    .provider-specs {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    
+    .provider-specs li {
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    
+    .provider-specs li:last-child { border-bottom: none; }
+    
+    .spec-label { color: var(--text-muted); }
+    .spec-value { font-family: var(--font-mono); font-weight: 600; color: var(--text-primary); }
+    
+    /* Scaling Metrics */
+    .scaling-metrics {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      margin-top: 48px;
+    }
+    
+    .metric-card {
+      background: var(--bg-glass);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      padding: 28px;
+      text-align: center;
+    }
+    
+    .metric-value {
+      font-family: var(--font-tech);
+      font-size: 42px;
+      font-weight: 700;
+      color: var(--accent-primary);
+      margin-bottom: 8px;
+    }
+    
+    .metric-label {
+      font-size: 13px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    
+    .metric-desc {
+      font-size: 12px;
+      color: var(--text-secondary);
+      margin-top: 8px;
+    }
+    
+    /* Region Map */
+    .region-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin-top: 32px;
+    }
+    
+    .region-item {
+      background: var(--bg-glass-light);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+    
+    .region-item:hover {
+      border-color: var(--accent-primary);
+      background: rgba(0, 229, 255, 0.05);
+    }
+    
+    .region-name {
+      font-weight: 600;
+      font-size: 14px;
+      margin-bottom: 4px;
+    }
+    
+    .region-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      color: var(--accent-green);
+    }
+    
+    .region-latency {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 8px;
+    }
+    
+    /* Database Architecture */
+    .db-architecture {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 48px;
+    }
+    
+    .db-card {
+      background: var(--bg-glass);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      padding: 28px;
+    }
+    
+    .db-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    
+    .db-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--accent-primary), var(--accent-tertiary));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .db-icon .material-icons-round { color: white; font-size: 20px; }
+    
+    .db-name {
+      font-family: var(--font-heading);
+      font-size: 16px;
+      font-weight: 700;
+    }
+    
+    .db-type {
+      font-size: 11px;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+    }
+    
+    .db-features {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    
+    .db-features li {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
+    
+    .db-features li .material-icons-round { font-size: 14px; color: var(--accent-green); }
+    
+    /* CTA Section */
+    .cta-section {
+      text-align: center;
+      padding: 80px 48px;
+      background: linear-gradient(180deg, transparent, rgba(167, 139, 250, 0.05));
+      border-top: 1px solid var(--border-subtle);
+    }
+    
+    .cta-title {
+      font-family: var(--font-heading);
+      font-size: 32px;
+      font-weight: 900;
+      margin-bottom: 16px;
+    }
+    
+    .cta-desc {
+      font-size: 16px;
+      color: var(--text-secondary);
+      margin-bottom: 32px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    .cta-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 28px;
+      background: linear-gradient(135deg, var(--accent-tertiary), var(--accent-primary));
+      color: var(--bg-deep);
+      font-weight: 600;
+      font-size: 14px;
+      border-radius: 12px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      border: none;
+      cursor: pointer;
+    }
+    
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(167, 139, 250, 0.3);
+    }
+    
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 28px;
+      background: transparent;
+      color: var(--text-primary);
+      font-weight: 600;
+      font-size: 14px;
+      border-radius: 12px;
+      text-decoration: none;
+      border: 1px solid var(--border-subtle);
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+    
+    .btn-secondary:hover {
+      border-color: var(--accent-tertiary);
+      color: var(--accent-tertiary);
+    }
+    
+    /* Footer */
+    footer {
+      background: var(--bg-primary);
+      border-top: 1px solid var(--border-subtle);
+      padding: 60px 48px 30px;
+    }
+    
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 48px;
+      max-width: 1400px;
+      margin: 0 auto 48px;
+    }
+    
+    .footer-brand { max-width: 320px; }
+    
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 16px;
+      text-decoration: none;
+      color: var(--text-primary);
+    }
+    
+    .footer-logo img { width: 28px; height: 28px; filter: drop-shadow(0 0 4px var(--accent-secondary)); }
+    .footer-logo-text { font-family: var(--font-heading); font-size: 18px; font-weight: 700; }
+    .footer-logo-text span { color: var(--accent-primary); }
+    
+    .footer-desc {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+    
+    .footer-col h4 {
+      font-family: var(--font-heading);
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 20px;
+      color: var(--text-primary);
+    }
+    
+    .footer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    
+    .footer-links a {
+      font-size: 13px;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+    
+    .footer-links a:hover { color: var(--accent-primary); }
+    
+    .footer-bottom {
+      border-top: 1px solid var(--border-subtle);
+      padding-top: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    
+    .footer-copy { font-size: 13px; color: var(--text-muted); }
+    
+    .footer-legal {
+      display: flex;
+      gap: 24px;
+    }
+    
+    .footer-legal a {
+      font-size: 13px;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+    
+    .footer-legal a:hover { color: var(--accent-primary); }
+    
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .scaling-metrics { grid-template-columns: repeat(2, 1fr); }
+      .db-architecture { grid-template-columns: 1fr; }
+    }
+    
+    @media (max-width: 768px) {
+      .navbar { padding: 0 20px; }
+      .nav-links { display: none; }
+      .mobile-menu-btn { display: flex; }
+      .main-content { padding: 60px 20px; }
+      .hero { padding: calc(var(--nav-height) + 60px) 20px 60px; }
+      .hero-stats { gap: 32px; }
+      .infra-grid { grid-template-columns: 1fr; }
+      .quantum-providers { grid-template-columns: 1fr; }
+      .scaling-metrics { grid-template-columns: 1fr; }
+      .region-grid { grid-template-columns: repeat(2, 1fr); }
+      .footer-grid { grid-template-columns: 1fr; text-align: center; }
+      .footer-brand { max-width: none; }
+      .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
+      .cta-section { padding: 60px 20px; }
+      .architecture-container { padding: 24px; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Molecular Sidebars -->
+  <div class="molecular-sidebar left">
+    <div class="dna-helix">
+      <div class="dna-strand"></div>
+    </div>
+  </div>
+  <div class="molecular-sidebar right">
+    <div class="dna-helix">
+      <div class="dna-strand"></div>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="nav-left">
+      <a href="index.html" class="nav-logo">
+        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%2300E5FF'/%3E%3Cstop offset='100%25' stop-color='%23a78bfa'/%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle cx='16' cy='16' r='14' fill='url(%23g)'/%3E%3Cpath d='M16 8v16M10 12h12M10 20h12' stroke='%23000' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E" alt="SciMSPT Logo">
+        <span class="nav-logo-text">Sci<span>MSPT</span></span>
+      </a>
+      <div class="nav-links">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="platform.html" class="nav-link">Platform</a>
+        <a href="research.html" class="nav-link">Research</a>
+        <a href="startups.html" class="nav-link">Startups</a>
+        <a href="dashboard.html" class="nav-link">Dashboard</a>
+        <a href="quantum.html" class="nav-link">Quantum</a>
+        <a href="studio.html" class="nav-link">Studio</a>
+        <a href="security.html" class="nav-link">Security</a>
+        <a href="infrastructure.html" class="nav-link active">Infrastructure</a>
+        <a href="monitoring.html" class="nav-link">Monitoring</a>
+      </div>
+    </div>
+    <div class="nav-right">
+      <button class="theme-toggle" onclick="toggleTheme()">
+        <span class="material-icons-round">light_mode</span>
+        Theme
+      </button>
+      <button class="mobile-menu-btn">
+        <span class="material-icons-round">menu</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span class="material-icons-round">cloud_queue</span>
+        Cloud-Native Architecture
+      </div>
+      <h1 class="hero-title">Infrastructure Built<br>for Infinite Scale</h1>
+      <p class="hero-subtitle">
+        Global edge network, quantum-ready backends, and auto-scaling compute 
+        that grows with your research ambitions—from prototype to planet-scale.
+      </p>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="hero-stat-value">99.99%</div>
+          <div class="hero-stat-label">Uptime SLA</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-value">&lt;50ms</div>
+          <div class="hero-stat-label">Global Latency</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-value">6+</div>
+          <div class="hero-stat-label">Quantum Backends</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    
+    <!-- System Architecture -->
+    <section class="section">
+      <div class="section-header">
+        <div class="section-tag">// SYSTEM_ARCHITECTURE</div>
+        <h2 class="section-title">Cloud-Native Stack Overview</h2>
+        <p class="section-desc">
+          Layered architecture designed for security, scalability, and quantum computing integration.
+        </p>
+      </div>
+      
+      <div class="architecture-container">
+        <div class="arch-layers">
+          <!-- Edge Layer -->
+          <div class="arch-layer">
+            <div class="arch-layer-label">Edge / CDN</div>
+            <div class="arch-components">
+              <div class="arch-component cyan">
+                <div class="arch-comp-icon"><span class="material-icons-round">public</span></div>
+                <div class="arch-comp-name">Global CDN</div>
+                <div class="arch-comp-desc">200+ PoPs worldwide</div>
+              </div>
+              <div class="arch-component purple">
+                <div class="arch-comp-icon"><span class="material-icons-round">shield</span></div>
+                <div class="arch-comp-name">DDoS Protection</div>
+                <div class="arch-comp-desc">Enterprise-grade WAF</div>
+              </div>
+              <div class="arch-component green">
+                <div class="arch-comp-icon"><span class="material-icons-round">speed</span></div>
+                <div class="arch-comp-name">Edge Computing</div>
+                <div class="arch-comp-desc">Worker-level execution</div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Application Layer -->
+          <div class="arch-layer">
+            <div class="arch-layer-label">Application</div>
+            <div class="arch-components">
+              <div class="arch-component gold">
+                <div class="arch-comp-icon"><span class="material-icons-round">dns</span></div>
+                <div class="arch-comp-name">API Gateway</div>
+                <div class="arch-comp-desc">Rate limiting & routing</div>
+              </div>
+              <div class="arch-component pink">
+                <div class="arch-comp-icon"><span class="material-icons-round">web</span></div>
+                <div class="arch-comp-name">Web Frontend</div>
+                <div class="arch-comp-desc">Static + SSR rendering</div>
+              </div>
+              <div class="arch-component cyan">
+                <div class="arch-comp-icon"><span class="material-icons-round">api</span></div>
+                <div class="arch-comp-name">Backend Services</div>
+                <div class="arch-comp-desc">Microservices architecture</div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Data Layer -->
+          <div class="arch-layer">
+            <div class="arch-layer-label">Data Storage</div>
+            <div class="arch-components">
+              <div class="arch-component purple">
+                <div class="arch-comp-icon"><span class="material-icons-round">storage</span></div>
+                <div class="arch-comp-name">Primary DB</div>
+                <div class="arch-comp-desc">PostgreSQL cluster</div>
+              </div>
+              <div class="arch-component green">
+                <div class="arch-comp-icon"><span class="material-icons-round">flash_on</span></div>
+                <div class="arch-comp-name">Cache Layer</div>
+                <div class="arch-comp-desc">Redis distributed</div>
+              </div>
+              <div class="arch-component gold">
+                <div class="arch-comp-icon"><span class="material-icons-round">folder</span></div>
+                <div class="arch-comp-name">Object Storage</div>
+                <div class="arch-comp-desc">S3-compatible blob</div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Quantum Layer -->
+          <div class="arch-layer">
+            <div class="arch-layer-label">Quantum Backends</div>
+            <div class="arch-components">
+              <div class="arch-component pink">
+                <div class="arch-comp-icon"><span class="material-icons-round">psychology</span></div>
+                <div class="arch-comp-name">IBM Quantum</div>
+                <div class="arch-comp-desc">127-qubit Eagle</div>
+              </div>
+              <div class="arch-component cyan">
+                <div class="arch-comp-icon"><span class="material-icons-round">auto_awesome</span></div>
+                <div class="arch-comp-name">Google QC</div>
+                <div class="arch-comp-desc">Cirq simulator</div>
+              </div>
+              <div class="arch-component purple">
+                <div class="arch-comp-icon"><span class="material-icons-round">hub</span></div>
+                <div class="arch-comp-name">Azure Quantum</div>
+                <div class="arch-comp-desc">IonQ + Quantinuum</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Scaling Capabilities -->
+    <section class="section">
+      <div class="section-header">
+        <div class="section-tag">// AUTO_SCALING</div>
+        <h2 class="section-title">Elastic Infrastructure</h2>
+        <p class="section-desc">
+          Automatically scale from zero to millions of requests. Pay only for what you use.
+        </p>
+      </div>
+      
+      <div class="scaling-metrics">
+        <div class="metric-card">
+          <div class="metric-value">∞</div>
+          <div class="metric-label">Horizontal Scale</div>
+          <div class="metric-desc">Auto-scaling instances based on load</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-value">&lt;100ms</div>
+          <div class="metric-label">Cold Start</div>
+          <div class="metric-desc">Serverless function initialization</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-value">10K+</div>
+          <div class="metric-label">Concurrent Users</div>
+          <div class="metric-desc">Supported out-of-the-box</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-value">99.99%</div>
+          <div class="metric-label">Availability</div>
+          <div class="metric-desc">Multi-region failover</div>
+        </div>
+      </div>
+      
+      <div class="infra-grid" style="margin-top: 64px;">
+        <div class="infra-card accent-cyan">
+          <div class="card-icon">
+            <span class="material-icons-round">trending_up</span>
+          </div>
+          <h3 class="card-title">Auto-Scaling Compute</h3>
+          <p class="card-desc">
+            Serverless functions that automatically scale from 0 to thousands 
+            of concurrent executions based on demand.
+          </p>
+          <ul class="card-list">
+            <li><span class="material-icons-round">check_circle</span>Request-based scaling (0 to ∞)</li>
+            <li><span class="material-icons-round">check_circle</span>Geographic distribution</li>
+            <li><span class="material-icons-round">check_circle</span>Pre-warmed instance pools</li>
+            <li><span class="material-icons-round">check_circle</span>Cost optimization rules</li>
+          </ul>
+        </div>
+        
+        <div class="infra-card accent-purple">
+          <div class="card-icon">
+            <span class="material-icons-round">cloud_done</span>
+          </div>
+          <h3 class="card-title">Global Content Delivery</h3>
+          <p class="card-desc">
+            Static assets served from 200+ edge locations worldwide for 
+            sub-50ms response times globally.
+          </p>
+          <ul class="card-list">
+            <li><span class="material-icons-round">check_circle</span>200+ CDN points of presence</li>
+            <li><span class="material-icons-round">check_circle</span>Automatic cache invalidation</li>
+            <li><span class="material-icons-round">check_circle</span>Image/video optimization</li>
+            <li><span class="material-icons-round">check_circle</span>Brotli/GZIP compression</li>
+          </ul>
+        </div>
+        
+        <div class="infra-card accent-green">
+          <div class="card-icon">
+            <span class="material-icons-round">balance</span>
+          </div>
+          <h3 class="card-title">Load Balancing</h3>
+          <p class="card-desc">
+            Intelligent traffic distribution across healthy endpoints with 
+            automatic health checks and failover.
+          </p>
+          <ul class="card-list">
+            <li><span class="material-icons-round">check_circle</span>Layer 7 HTTP routing</li>
+            <li><span class="material-icons-round">check_circle</span>Session affinity support</li>
+            <li><span class="material-icons-round">check_circle</span>Circuit breaker pattern</li>
+            <li><span class="material-icons-round">check_circle</span>Weighted round-robin</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Quantum Backend Integrations -->
+    <section class="section">
+      <div class="section-header">
+        <div class="section-tag">// QUANTUM_BACKENDS</div>
+        <h2 class="section-title">Unified Quantum Access</h2>
+        <p class="section-desc">
+          Single interface to all major quantum computing providers. Free tier access 
+          for prototyping, seamless upgrade to production hardware.
+        </p>
+      </div>
+      
+      <div class="quantum-providers">
+        <div class="provider-card">
+          <div class="provider-header">
+            <div class="provider-logo">IB</div>
+            <div>
+              <div class="provider-name">IBM Quantum</div>
+              <div class="provider-tier">Free Tier Available</div>
+            </div>
+          </div>
+          <ul class="provider-specs">
+            <li><span class="spec-label">Max Qubits</span><span class="spec-value">127 (Eagle)</span></li>
+            <li><span class="spec-label">Free Tier</span><span class="spec-value">30 qubits</span></li>
+            <li><span class="spec-label">SDK</span><span class="spec-value">Qiskit</span></li>
+            <li><span class="spec-label">Queue Time</span><span class="spec-value">~2-5 min</span></li>
+            <li><span class="spec-label">Status</span><span class="spec-value" style="color: var(--accent-green);">● Active</span></li>
+          </ul>
+        </div>
+        
+        <div class="provider-card">
+          <div class="provider-header">
+            <div class="provider-logo">G</div>
+            <div>
+              <div class="provider-name">Google Quantum AI</div>
+              <div class="provider-tier">Free Tier Available</div>
+            </div>
+          </div>
+          <ul class="provider-specs">
+            <li><span class="spec-label">Max Qubits</span><span class="spec-value">105 (Willow)</span></li>
+            <li><span class="spec-label">Free Tier</span><span class="spec-value">Simulator only</span></li>
+            <li><span class="spec-label">SDK</span><span class="spec-value">Cirq</span></li>
+            <li><span class="spec-label">Queue Time</span><span class="spec-value">~5-15 min</span></li>
+            <li><span class="spec-label">Status</span><span class="spec-value" style="color: var(--accent-green);">● Active</span></li>
+          </ul>
+        </div>
+        
+        <div class="provider-card">
+          <div class="provider-header">
+            <div class="provider-logo">AZ</div>
+            <div>
+              <div class="provider-name">Microsoft Azure Quantum</div>
+              <div class="provider-tier">$500 Free Credits</div>
+            </div>
+          </div>
+          <ul class="provider-specs">
+            <li><span class="spec-label">Partners</span><span class="spec-value">IonQ, Quantinuum</span></li>
+            <li><span class="spec-label">Free Credits</span><span class="spec-value">$500/month</span></li>
+            <li><span class="spec-label">SDK</span><span class="spec-value">Q# + Python</span></li>
+            <li><span class="spec-label">Queue Time</span><span class="spec-value">~3-8 min</span></li>
+            <li><span class="spec-label">Status</span><span class="spec-value" style="color: var(--accent-green);">● Active</span></li>
+          </ul>
+        </div>
+        
+        <div class="provider-card">
+          <div class="provider-header">
+            <div class="provider-logo">RQ</div>
+            <div>
+              <div class="provider-name">Rigetti Computing</div>
+              <div class="provider-tier">Free Tier Available</div>
+            </div>
+          </div>
+          <ul class="provider-specs">
+            <li><span class="spec-label">Max Qubits</span><span class="spec-value">84 (Ankaa)</span></li>
+            <li><span class="spec-label">Free Tier</span><span class="spec-value">QPU access</span></li>
+            <li><span class="spec-label">SDK</span><span class="spec-value">PyQuil</span></li>
+            <li><span class="spec-label">Queue Time</span><span class="spec-value">~1-3 min</span></li>
+            <li><span class="spec-label">Status</span><span class="spec-value" style="color: var(--accent-green);">● Active</span></li>
+          </ul>
+        </div>
+        
+        <div class="provider-card">
+          <div class="provider-header">
+            <div class="provider-logo">IQ</div>
+            <div>
+              <div class="provider-name">IonQ</div>
+              <div class="provider-tier">Via Azure/AWS</div>
+            </div>
+          </div>
+          <ul class="provider-specs">
+            <li><span class="spec-label">Max Qubits</span><span class="spec-value">36 (Forte)</span></li>
+            <li><span class="spec-label">Access</span><span class="spec-value">Cloud marketplaces</span></li>
+            <li><span class="spec-label">SDK</span><span class="spec-value">PennyLane</span></li>
+            <li><span class="spec-label">Queue Time</span><span class="spec-value">~5-10 min</span></li>
+            <li><span class="spec-label">Status</span><span class="spec-value" style="color: var(--accent-green);">● Active</span></li>
+          </ul>
+        </div>
+        
+        <div class="provider-card">
+          <div class="provider-header">
+            <div class="provider-logo">XD</div>
+            <div>
+              <div class="provider-name">Xanadu</div>
+              <div class="provider-tier">Free Simulator</div>
+            </div>
+          </div>
+          <ul class="provider-specs">
+            <li><span class="spec-label">Type</span><span class="spec-value">Photonic</span></li>
+            <li><span class="spec-label">Free Tier</span><span class="spec-value">Unlimited sim</span></li>
+            <li><span class="spec-label">SDK</span><span class="spec-value">Strawberry Fields</span></li>
+            <li><span class="spec-label">Specialty</span><span class="spec-value">ML/QML</span></li>
+            <li><span class="spec-label">Status</span><span class="spec-value" style="color: var(--accent-green);">● Active</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Global Regions -->
+    <section class="section">
+      <div class="section-header">
+        <div class="section-tag">// GLOBAL_PRESENCE</div>
+        <h2 class="section-title">Multi-Region Deployment</h2>
+        <p class="section-desc">
+          Data residency options with low-latency access from anywhere in the world.
+        </p>
+      </div>
+      
+      <div class="region-grid">
+        <div class="region-item">
+          <div class="region-name">🇺🇸 US East (Virginia)</div>
+          <div class="region-status"><span style="width: 8px; height: 8px; background: var(--accent-green); border-radius: 50%; display: inline-block;"></span> Primary</div>
+          <div class="region-latency">Avg: 12ms</div>
+        </div>
+        <div class="region-item">
+          <div class="region-name">🇺🇸 US West (Oregon)</div>
+          <div class="region-status"><span style="width: 8px; height: 8px; background: var(--accent-green); border-radius: 50%; display: inline-block;"></span> Active</div>
+          <div class="region-latency">Avg: 18ms</div>
+        </div>
+        <div class="region-item">
+          <div class="region-name">🇪🇺 EU West (Frankfurt)</div>
+          <div class="region-status"><span style="width: 8px; height: 8px; background: var(--accent-green); border-radius: 50%; display: inline-block;"></span> Active</div>
+          <div class="region-latency">Avg: 15ms</div>
+        </div>
+        <div class="region-item">
+          <div class="region-name">🇯🇵 Asia Pacific (Tokyo)</div>
+          <div class="region-status"><span style="width: 8px; height: 8px; background: var(--accent-green); border-radius: 50%; display: inline-block;"></span> Active</div>
+          <div class="region-latency">Avg: 22ms</div>
+        </div>
+        <div class="region-item">
+          <div class="region-name">🇸🇬 Asia Pacific (Singapore)</div>
+          <div class="region-status"><span style="width: 8px; height: 8px; background: var(--accent-gold); border-radius: 50%; display: inline-block;"></span> Coming Q4</div>
+          <div class="region-latency">Avg: 35ms</div>
+        </div>
+        <div class="region-item">
+          <div class="region-name">🇦🇺 Australia (Sydney)</div>
+          <div class="region-status"><span style="width: 8px; height: 8px; background: var(--accent-gold); border-radius: 50%; display: inline-block;"></span> Planned 2026</div>
+          <div class="region-latency">Avg: 45ms</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Database Architecture -->
+    <section class="section">
+      <div class="section-header">
+        <div class="section-tag">// DATA_LAYER</div>
+        <h2 class="section-title">Database Architecture</h2>
+        <p class="section-desc">
+          Purpose-built data stores optimized for different access patterns and consistency requirements.
+        </p>
+      </div>
+      
+      <div class="db-architecture">
+        <div class="db-card">
+          <div class="db-header">
+            <div class="db-icon"><span class="material-icons-round">storage</span></div>
+            <div>
+              <div class="db-name">PostgreSQL Cluster</div>
+              <div class="db-type">Primary Relational Store</div>
+            </div>
+          </div>
+          <ul class="db-features">
+            <li><span class="material-icons-round">check_circle</span>ACID transactions</li>
+            <li><span class="material-icons-round">check_circle</span>Automatic failover</li>
+            <li><span class="material-icons-round">check_circle</span>Point-in-time recovery</li>
+            <li><span class="material-icons-round">check_circle</span>Read replicas (3)</li>
+            <li><span class="material-icons-round">check_circle</span>Encrypted at rest</li>
+          </ul>
+        </div>
+        
+        <div class="db-card">
+          <div class="db-header">
+            <div class="db-icon"><span class="material-icons-round">flash_on</span></div>
+            <div>
+              <div class="db-name">Redis Cluster</div>
+              <div class="db-type">Cache & Session Store</div>
+            </div>
+          </div>
+          <ul class="db-features">
+            <li><span class="material-icons-round">check_circle</span>Sub-millisecond latency</li>
+            <li><span class="material-icons-round">check_circle</span>Distributed caching</li>
+            <li><span class="material-icons-round">check_circle</span>Session management</li>
+            <li><span class="material-icons-round">check_circle</span>Rate limiting counters</li>
+            <li><span class="material-icons-round">check_circle</span>Pub/Sub messaging</li>
+          </ul>
+        </div>
+        
+        <div class="db-card">
+          <div class="db-header">
+            <div class="db-icon"><span class="material-icons-round">folder_special</span></div>
+            <div>
+              <div class="db-name">Object Storage</div>
+              <div class="db-type">Blob & Media Files</div>
+            </div>
+          </div>
+          <ul class="db-features">
+            <li><span class="material-icons-round">check_circle</span>S3-compatible API</li>
+            <li><span class="material-icons-round">check_circle</span>CDN integration</li>
+            <li><span class="material-icons-round">check_circle</span>Versioning enabled</li>
+            <li><span class="material-icons-round">check_circle</span>Lifecycle policies</li>
+            <li><span class="material-icons-round">check_circle</span>Cross-region replication</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- CI/CD Pipeline -->
+    <section class="section">
+      <div class="section-header">
+        <div class="section-tag">// DEVOPS_PIPELINE</div>
+        <h2 class="section-title">Continuous Delivery Pipeline</h2>
+        <p class="section-desc">
+          Automated testing, deployment, and rollback procedures ensuring reliable releases.
+        </p>
+      </div>
+      
+      <div class="infra-grid">
+        <div class="infra-card accent-cyan">
+          <div class="card-icon">
+            <span class="material-icons-round">build_circle</span>
+          </div>
+          <h3 class="card-title">CI/CD Automation</h3>
+          <p class="card-desc">
+            Every commit triggers automated builds, tests, and deployments 
+            across staging and production environments.
+          </p>
+          <ul class="card-list">
+            <li><span class="material-icons-round">check_circle</span>GitHub Actions workflows</li>
+            <li><span class="material-icons-round">check_circle</span>Automated test suite (500+ tests)</li>
+            <li><span class="material-icons-round">check_circle</span>Blue-green deployments</li>
+            <li><span class="material-icons-round">check_circle</span>Instant rollback capability</li>
+          </ul>
+        </div>
+        
+        <div class="infra-card accent-purple">
+          <div class="card-icon">
+            <span class="material-icons-round">code</span>
+          </div>
+          <h3 class="card-title">Infrastructure as Code</h3>
+          <p class="card-desc">
+            Entire infrastructure defined in code, versioned, and reproducible 
+            across environments.
+          </p>
+          <ul class="card-list">
+            <li><span class="material-icons-round">check_circle</span>Terraform configurations</li>
+            <li><span class="material-icons-round">check_circle</span>Kubernetes manifests</li>
+            <li><span class="material-icons-round">check_circle</span>Environment parity</li>
+            <li><span class="material-icons-round">check_circle</span>Drift detection alerts</li>
+          </ul>
+        </div>
+        
+        <div class="infra-card accent-green">
+          <div class="card-icon">
+            <span class="material-icons-round">security</span>
+          </div>
+          <h3 class="card-title">Secret Management</h3>
+          <p class="card-desc">
+            Enterprise-grade secrets management with rotation, auditing, 
+            and fine-grained access controls.
+          </p>
+          <ul class="card-list">
+            <li><span class="material-icons-round">check_circle</span>AWS Parameter Store / HashiCorp Vault</li>
+            <li><span class="material-icons-round">check_circle</span>Automatic key rotation (90 days)</li>
+            <li><span class="material-icons-round">check_circle</span>Access audit logging</li>
+            <li><span class="material-icons-round">check_circle</span>Zero-exposure deployment</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- CTA Section -->
+  <section class="cta-section">
+    <h2 class="cta-title">Ready to Scale Your Research?</h2>
+    <p class="cta-desc">
+      Explore our infrastructure documentation or contact our solutions team for custom deployment options.
+    </p>
+    <div class="cta-buttons">
+      <a href="#" class="btn-primary">
+        <span class="material-icons-round">architecture</span>
+        View Architecture Docs
+      </a>
+      <a href="#" class="btn-secondary">
+        <span class="material-icons-round">contact_support</span>
+        Contact Solutions Team
+      </a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="footer-logo">
+          <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%2300E5FF'/%3E%3Cstop offset='100%25' stop-color='%23a78bfa'/%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle cx='16' cy='16' r='14' fill='url(%23g)'/%3E%3Cpath d='M16 8v16M10 12h12M10 20h12' stroke='%23000' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E" alt="SciMSPT">
+          <span class="footer-logo-text">Sci<span>MSPT</span></span>
+        </a>
+        <p class="footer-desc">
+          Neural Research Intelligence Platform — transforming peer-reviewed science into strategic opportunities through molecular computing.
+        </p>
+      </div>
+      
+      <div class="footer-col">
+        <h4>Platform</h4>
+        <ul class="footer-links">
+          <li><a href="platform.html">Features</a></li>
+          <li><a href="quantum.html">Quantum Computing</a></li>
+          <li><a href="research.html">Research Pipeline</a></li>
+          <li><a href="startups.html">Startup Portfolio</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <ul class="footer-links">
+          <li><a href="documentation.html">Documentation</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="studio.html">Media Studio</a></li>
+          <li><a href="#">API Reference</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-col">
+        <h4>Trust & Safety</h4>
+        <ul class="footer-links">
+          <li><a href="security.html">Security Center</a></li>
+          <li><a href="infrastructure.html">Infrastructure</a></li>
+          <li><a href="monitoring.html">Status Page</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <p class="footer-copy">&copy; 2025 SciMSPT. Neural Research Intelligence Platform.</p>
+      <div class="footer-legal">
+        <a href="#">Terms of Service</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Cookie Policy</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Theme Toggle
+    function toggleTheme() {
+      const html = document.documentElement;
+      const currentTheme = html.getAttribute('data-theme');
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', newTheme);
+      localStorage.setItem('scimspt-theme', newTheme);
+    }
+    
+    // Load saved theme
+    document.addEventListener('DOMContentLoaded', () => {
+      const savedTheme = localStorage.getItem('scimspt-theme') || 'dark';
+      document.documentElement.setAttribute('data-theme', savedTheme);
+    });
+    
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+  </script>
+</body>
+</html>

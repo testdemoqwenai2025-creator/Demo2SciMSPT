@@ -1,0 +1,1883 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Monitoring & Observability — SciMSPT Neural Research Platform</title>
+  <meta name="description" content="SciMSPT Monitoring: Real-time uptime tracking, performance metrics, alerting systems, and comprehensive logging for quantum research platforms.">
+  
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+  
+  <style>
+    /* ============================================
+       SCIMSPT NEURAL DESIGN SYSTEM v3.0
+       Monitoring Command Center
+       ============================================ */
+    
+    :root {
+      --bg-deep: #030810;
+      --bg-primary: #0a1628;
+      --bg-secondary: #0d1f35;
+      --bg-tertiary: #122a45;
+      --bg-glass: rgba(10, 22, 40, 0.85);
+      --bg-glass-light: rgba(255, 255, 255, 0.03);
+      
+      --accent-primary: #00E5FF;
+      --accent-secondary: #4da8da;
+      --accent-tertiary: #a78bfa;
+      --accent-pink: #f472b6;
+      --accent-green: #10b981;
+      --accent-gold: #f59e0b;
+      --accent-red: #ef4444;
+      --accent-orange: #f97316;
+      
+      --text-primary: #e8f4fc;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+      
+      --border-subtle: rgba(0, 229, 255, 0.15);
+      --border-glow: rgba(0, 229, 255, 0.4);
+      
+      --font-heading: 'Playfair Display', Georgia, serif;
+      --font-body: 'Inter', -apple-system, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+      --font-tech: 'Orbitron', sans-serif;
+      
+      --nav-height: 80px;
+      --sidebar-width: 100px;
+      
+      --glow-primary: 0 0 30px rgba(0, 229, 255, 0.3);
+      --glow-secondary: 0 0 60px rgba(167, 139, 250, 0.2);
+    }
+    
+    [data-theme="light"] {
+      --bg-deep: #f0f4f8;
+      --bg-primary: #ffffff;
+      --bg-secondary: #f8fafc;
+      --bg-tertiary: #e2e8f0;
+      --bg-glass: rgba(255, 255, 255, 0.92);
+      --bg-glass-light: rgba(0, 0, 0, 0.02);
+      --text-primary: #0f172a;
+      --text-secondary: #475569;
+      --text-muted: #94a3b8;
+      --border-subtle: rgba(77, 168, 218, 0.25);
+    }
+    
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    
+    body {
+      font-family: var(--font-body);
+      background: var(--bg-deep);
+      color: var(--text-primary);
+      line-height: 1.6;
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+    
+    /* Molecular Sidebars */
+    .molecular-sidebar {
+      position: fixed;
+      top: 0;
+      width: var(--sidebar-width);
+      height: 100vh;
+      z-index: 5;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    
+    .molecular-sidebar.left {
+      left: 0;
+      background: linear-gradient(90deg, rgba(0, 229, 255, 0.08) 0%, transparent 100%);
+      border-right: 1px solid var(--border-subtle);
+    }
+    
+    .molecular-sidebar.right {
+      right: 0;
+      background: linear-gradient(-90deg, rgba(167, 139, 250, 0.08) 0%, transparent 100%);
+      border-left: 1px solid var(--border-subtle);
+    }
+    
+    .dna-helix {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 60px;
+      height: 80vh;
+    }
+    
+    .dna-strand { position: absolute; width: 100%; height: 100%; }
+    
+    .nucleotide {
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      animation: nucleotidePulse 3s ease-in-out infinite;
+    }
+    
+    .nucleotide.adenine { background: var(--accent-primary); box-shadow: 0 0 10px var(--accent-primary); }
+    .nucleotide.thymine { background: var(--accent-pink); box-shadow: 0 0 10px var(--accent-pink); }
+    .nucleotide.guanine { background: var(--accent-tertiary); box-shadow: 0 0 10px var(--accent-tertiary); }
+    .nucleotide.cytosine { background: var(--accent-green); box-shadow: 0 0 10px var(--accent-green); }
+    
+    @keyframes nucleotidePulse {
+      0%, 100% { opacity: 0.6; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.2); }
+    }
+    
+    /* Navigation */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: var(--nav-height);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 48px;
+      background: var(--bg-glass);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border-subtle);
+      transition: all 0.3s ease;
+    }
+    
+    .nav-left { display: flex; align-items: center; gap: 28px; }
+    
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--text-primary);
+      transition: opacity 0.3s ease;
+    }
+    
+    .nav-logo:hover { opacity: 0.85; }
+    .nav-logo img { width: 32px; height: 32px; filter: drop-shadow(0 0 6px var(--accent-secondary)); }
+    .nav-logo-text { font-family: var(--font-heading); font-size: 20px; font-weight: 700; letter-spacing: -0.5px; }
+    .nav-logo-text span { color: var(--accent-primary); }
+    
+    .nav-links { display: flex; align-items: center; gap: 8px; }
+    
+    .nav-link {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-muted);
+      text-decoration: none;
+      padding: 8px 16px;
+      border-radius: 20px;
+      transition: all 0.25s ease;
+      letter-spacing: 0.3px;
+      white-space: nowrap;
+    }
+    
+    .nav-link:hover { color: var(--accent-primary); background: var(--bg-glass-light); }
+    .nav-link.active { color: var(--accent-primary); background: rgba(0, 229, 255, 0.1); }
+    
+    .nav-right { display: flex; align-items: center; gap: 16px; }
+    
+    .theme-toggle {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 16px;
+      background: var(--bg-glass-light);
+      border: 1px solid var(--border-subtle);
+      border-radius: 20px;
+      cursor: pointer;
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-muted);
+      transition: all 0.3s ease;
+      white-space: nowrap;
+    }
+    
+    .theme-toggle:hover { border-color: var(--accent-primary); color: var(--accent-primary); }
+    .theme-toggle .material-icons-round { font-size: 16px; }
+    
+    .mobile-menu-btn {
+      display: none;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--bg-glass-light);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-muted);
+      cursor: pointer;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    /* Hero Section */
+    .hero {
+      min-height: 70vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: calc(var(--nav-height) + 80px) 48px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 800px;
+      height: 800px;
+      background: radial-gradient(circle, rgba(16, 185, 129, 0.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    
+    .hero-content { max-width: 900px; position: relative; z-index: 1; }
+    
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 20px;
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      border-radius: 30px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--accent-green);
+      margin-bottom: 32px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    
+    .hero-badge .material-icons-round { font-size: 16px; }
+    
+    .hero-title {
+      font-family: var(--font-heading);
+      font-size: clamp(40px, 6vw, 72px);
+      font-weight: 900;
+      line-height: 1.1;
+      margin-bottom: 24px;
+      background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent-green) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .hero-subtitle {
+      font-size: clamp(16px, 2vw, 20px);
+      color: var(--text-secondary);
+      max-width: 700px;
+      margin: 0 auto 40px;
+      line-height: 1.7;
+    }
+    
+    .hero-stats {
+      display: flex;
+      justify-content: center;
+      gap: 48px;
+      flex-wrap: wrap;
+    }
+    
+    .hero-stat { text-align: center; }
+    
+    .hero-stat-value {
+      font-family: var(--font-tech);
+      font-size: 36px;
+      font-weight: 700;
+      color: var(--accent-green);
+      margin-bottom: 4px;
+    }
+    
+    .hero-stat-label {
+      font-size: 13px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    
+    /* Main Content */
+    .main-content {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 80px 48px;
+    }
+    
+    .section { margin-bottom: 100px; }
+    
+    .section-header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+    
+    .section-tag {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--accent-green);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 16px;
+    }
+    
+    .section-title {
+      font-family: var(--font-heading);
+      font-size: clamp(28px, 4vw, 42px);
+      font-weight: 900;
+      margin-bottom: 16px;
+    }
+    
+    .section-desc {
+      font-size: 17px;
+      color: var(--text-secondary);
+      max-width: 700px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+    
+    /* Status Dashboard */
+    .status-dashboard {
+      background: var(--bg-glass);
+      border: 1px solid var(--border-subtle);
+      border-radius: 24px;
+      overflow: hidden;
+      margin-top: 48px;
+    }
+    
+    .status-header {
+      padding: 24px 32px;
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: linear-gradient(90deg, rgba(16, 185, 129, 0.05), transparent);
+    }
+    
+    .status-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-family: var(--font-heading);
+      font-size: 18px;
+      font-weight: 700;
+    }
+    
+    .status-indicator {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--accent-green);
+      animation: pulse 2s ease-in-out infinite;
+    }
+    
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.7; transform: scale(1.1); }
+    }
+    
+    .status-time {
+      font-size: 13px;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+    }
+    
+    .status-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+    
+    .status-item {
+      padding: 24px 32px;
+      border-bottom: 1px solid var(--border-subtle);
+      border-right: 1px solid var(--border-subtle);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: background 0.2s ease;
+    }
+    
+    .status-item:hover { background: var(--bg-glass-light); }
+    
+    .status-item:nth-child(n+5) { border-bottom: none; }
+    .status-item:nth-child(3n) { border-right: none; }
+    
+    .service-name {
+      font-weight: 600;
+      font-size: 14px;
+    }
+    
+    .service-status {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+    
+    .service-status.operational { color: var(--accent-green); }
+    .service-status.degraded { color: var(--accent-gold); }
+    .service-status.down { color: var(--accent-red); }
+    
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+    
+    .status-dot.green { background: var(--accent-green); }
+    .status-dot.gold { background: var(--accent-gold); }
+    .status-dot.red { background: var(--accent-red); }
+    
+    /* Metrics Grid */
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 28px;
+      margin-top: 48px;
+    }
+    
+    .metric-card {
+      background: var(--bg-glass);
+      border: 1px solid var(--border-subtle);
+      border-radius: 20px;
+      padding: 28px;
+      transition: all 0.3s ease;
+    }
+    
+    .metric-card:hover {
+      border-color: var(--accent-primary);
+      transform: translateY(-2px);
+    }
+    
+    .metric-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: start;
+      margin-bottom: 20px;
+    }
+    
+    .metric-info h4 {
+      font-family: var(--font-heading);
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    
+    .metric-info p {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+    
+    .metric-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--metric-color, var(--accent-primary)), rgba(0, 229, 255, 0.2));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .metric-icon .material-icons-round { font-size: 22px; color: white; }
+    
+    .metric-value {
+      font-family: var(--font-tech);
+      font-size: 36px;
+      font-weight: 700;
+      color: var(--metric-color, var(--accent-primary));
+      margin-bottom: 12px;
+    }
+    
+    .metric-chart {
+      height: 60px;
+      display: flex;
+      align-items: end;
+      gap: 4px;
+    }
+    
+    .chart-bar {
+      flex: 1;
+      background: linear-gradient(to top, var(--metric-color, var(--accent-primary)), rgba(0, 229, 255, 0.2));
+      border-radius: 3px 3px 0 0;
+      min-height: 10px;
+      transition: height 0.3s ease;
+    }
+    
+    .metric-card:hover .chart-bar {
+      animation: chartPulse 1s ease-in-out infinite alternate;
+    }
+    
+    @keyframes chartPulse {
+      from { opacity: 0.7; }
+      to { opacity: 1; }
+    }
+    
+    /* Uptime Timeline */
+    .uptime-timeline {
+      background: var(--bg-glass);
+      border: 1px solid var(--border-subtle);
+      border-radius: 20px;
+      padding: 32px;
+      margin-top: 48px;
+    }
+    
+    .timeline-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+    }
+    
+    .timeline-title {
+      font-family: var(--font-heading);
+      font-size: 20px;
+      font-weight: 700;
+    }
+    
+    .timeline-range {
+      display: flex;
+      gap: 8px;
+    }
+    
+    .range-btn {
+      padding: 6px 14px;
+      background: transparent;
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-family: var(--font-body);
+    }
+    
+    .range-btn:hover,
+    .range-btn.active {
+      border-color: var(--accent-primary);
+      color: var(--accent-primary);
+      background: rgba(0, 229, 255, 0.05);
+    }
+    
+    .uptime-visual {
+      display: flex;
+      gap: 4px;
+      margin-bottom: 24px;
+    }
+    
+    .uptime-bar {
+      flex: 1;
+      height: 40px;
+      border-radius: 4px;
+      background: var(--accent-green);
+      position: relative;
+    }
+    
+    .uptime-bar.incident {
+      background: var(--accent-red);
+    }
+    
+    .uptime-bar.degraded {
+      background: var(--accent-gold);
+    }
+    
+    .uptime-summary {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border-subtle);
+    }
+    
+    .summary-item {
+      text-align: center;
+    }
+    
+    .summary-value {
+      font-family: var(--font-tech);
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--accent-green);
+    }
+    
+    .summary-label {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+    
+    /* Alert System */
+    .alert-system {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+      margin-top: 48px;
+    }
+    
+    .alert-panel {
+      background: var(--bg-glass);
+      border: 1px solid var(--border-subtle);
+      border-radius: 20px;
+      padding: 28px;
+    }
+    
+    .panel-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+    
+    .panel-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--panel-color, var(--accent-primary)), rgba(0, 229, 255, 0.2));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .panel-icon .material-icons-round { font-size: 20px; color: white; }
+    
+    .panel-title {
+      font-family: var(--font-heading);
+      font-size: 18px;
+      font-weight: 700;
+    }
+    
+    .alert-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    
+    .alert-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px;
+      background: var(--bg-glass-light);
+      border-radius: 12px;
+      border-left: 3px solid var(--alert-color, var(--accent-primary));
+    }
+    
+    .alert-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: var(--alert-bg, rgba(0, 229, 255, 0.1));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    
+    .alert-icon .material-icons-round { font-size: 16px; color: var(--alert-color, var(--accent-primary)); }
+    
+    .alert-content { flex: 1; }
+    
+    .alert-title {
+      font-weight: 600;
+      font-size: 13px;
+      margin-bottom: 2px;
+    }
+    
+    .alert-time {
+      font-size: 11px;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+    }
+    
+    .alert-severity {
+      padding: 4px 10px;
+      border-radius: 8px;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    
+    .alert-severity.info {
+      background: rgba(0, 229, 255, 0.15);
+      color: var(--accent-primary);
+    }
+    
+    .alert-severity.warning {
+      background: rgba(245, 158, 11, 0.15);
+      color: var(--accent-gold);
+    }
+    
+    .alert-severity.critical {
+      background: rgba(239, 68, 68, 0.15);
+      color: var(--accent-red);
+    }
+    
+    /* Logging Preview */
+    .log-preview {
+      background: var(--bg-deep);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 20px;
+      margin-top: 24px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      max-height: 320px;
+      overflow-y: auto;
+    }
+    
+    .log-line {
+      display: flex;
+      gap: 12px;
+      padding: 6px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+    }
+    
+    .log-line:last-child { border-bottom: none; }
+    
+    .log-time { color: var(--text-muted); white-space: nowrap; }
+    .log-level { font-weight: 600; min-width: 50px; }
+    .log-level.info { color: var(--accent-primary); }
+    .log-level.warn { color: var(--accent-gold); }
+    .log-level.error { color: var(--accent-red); }
+    .log-message { color: var(--text-secondary); word-break: break-all; }
+    
+    /* Incident History */
+    .incident-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 24px;
+    }
+    
+    .incident-table th {
+      text-align: left;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-muted);
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    
+    .incident-table td {
+      padding: 16px;
+      font-size: 14px;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    
+    .incident-table tr:last-child td { border-bottom: none; }
+    .incident-table tr:hover td { background: var(--bg-glass-light); }
+    
+    .incident-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 12px;
+      border-radius: 12px;
+      font-size: 11px;
+      font-weight: 600;
+    }
+    
+    .incident-status.resolved {
+      background: rgba(16, 185, 129, 0.15);
+      color: var(--accent-green);
+    }
+    
+    .incident-status.monitoring {
+      background: rgba(245, 158, 11, 0.15);
+      color: var(--accent-gold);
+    }
+    
+    /* CTA Section */
+    .cta-section {
+      text-align: center;
+      padding: 80px 48px;
+      background: linear-gradient(180deg, transparent, rgba(16, 185, 129, 0.05));
+      border-top: 1px solid var(--border-subtle);
+    }
+    
+    .cta-title {
+      font-family: var(--font-heading);
+      font-size: 32px;
+      font-weight: 900;
+      margin-bottom: 16px;
+    }
+    
+    .cta-desc {
+      font-size: 16px;
+      color: var(--text-secondary);
+      margin-bottom: 32px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    .cta-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 28px;
+      background: linear-gradient(135deg, var(--accent-green), var(--accent-primary));
+      color: var(--bg-deep);
+      font-weight: 600;
+      font-size: 14px;
+      border-radius: 12px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      border: none;
+      cursor: pointer;
+    }
+    
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(16, 185, 129, 0.3);
+    }
+    
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 28px;
+      background: transparent;
+      color: var(--text-primary);
+      font-weight: 600;
+      font-size: 14px;
+      border-radius: 12px;
+      text-decoration: none;
+      border: 1px solid var(--border-subtle);
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+    
+    .btn-secondary:hover {
+      border-color: var(--accent-green);
+      color: var(--accent-green);
+    }
+    
+    /* Footer */
+    footer {
+      background: var(--bg-primary);
+      border-top: 1px solid var(--border-subtle);
+      padding: 60px 48px 30px;
+    }
+    
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 48px;
+      max-width: 1400px;
+      margin: 0 auto 48px;
+    }
+    
+    .footer-brand { max-width: 320px; }
+    
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 16px;
+      text-decoration: none;
+      color: var(--text-primary);
+    }
+    
+    .footer-logo img { width: 28px; height: 28px; filter: drop-shadow(0 0 4px var(--accent-secondary)); }
+    .footer-logo-text { font-family: var(--font-heading); font-size: 18px; font-weight: 700; }
+    .footer-logo-text span { color: var(--accent-primary); }
+    
+    .footer-desc {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+    
+    .footer-col h4 {
+      font-family: var(--font-heading);
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 20px;
+      color: var(--text-primary);
+    }
+    
+    .footer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    
+    .footer-links a {
+      font-size: 13px;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+    
+    .footer-links a:hover { color: var(--accent-primary); }
+    
+    .footer-bottom {
+      border-top: 1px solid var(--border-subtle);
+      padding-top: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    
+    .footer-copy { font-size: 13px; color: var(--text-muted); }
+    
+    .footer-legal {
+      display: flex;
+      gap: 24px;
+    }
+    
+    .footer-legal a {
+      font-size: 13px;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+    
+    .footer-legal a:hover { color: var(--accent-primary); }
+    
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .alert-system { grid-template-columns: 1fr; }
+      .uptime-summary { grid-template-columns: repeat(2, 1fr); }
+    }
+    
+    @media (max-width: 768px) {
+      .navbar { padding: 0 20px; }
+      .nav-links { display: none; }
+      .mobile-menu-btn { display: flex; }
+      .main-content { padding: 60px 20px; }
+      .hero { padding: calc(var(--nav-height) + 60px) 20px 60px; }
+      .hero-stats { gap: 32px; }
+      .metrics-grid { grid-template-columns: 1fr; }
+      .status-grid { grid-template-columns: 1fr; }
+      .status-item { border-right: none; }
+      .uptime-summary { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; text-align: center; }
+      .footer-brand { max-width: none; }
+      .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
+      .cta-section { padding: 60px 20px; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Molecular Sidebars -->
+  <div class="molecular-sidebar left">
+    <div class="dna-helix">
+      <div class="dna-strand"></div>
+    </div>
+  </div>
+  <div class="molecular-sidebar right">
+    <div class="dna-helix">
+      <div class="dna-strand"></div>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="nav-left">
+      <a href="index.html" class="nav-logo">
+        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%2300E5FF'/%3E%3Cstop offset='100%25' stop-color='%23a78bfa'/%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle cx='16' cy='16' r='14' fill='url(%23g)'/%3E%3Cpath d='M16 8v16M10 12h12M10 20h12' stroke='%23000' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E" alt="SciMSPT Logo">
+        <span class="nav-logo-text">Sci<span>MSPT</span></span>
+      </a>
+      <div class="nav-links">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="platform.html" class="nav-link">Platform</a>
+        <a href="research.html" class="nav-link">Research</a>
+        <a href="startups.html" class="nav-link">Startups</a>
+        <a href="dashboard.html" class="nav-link">Dashboard</a>
+        <a href="quantum.html" class="nav-link">Quantum</a>
+        <a href="studio.html" class="nav-link">Studio</a>
+        <a href="security.html" class="nav-link">Security</a>
+        <a href="infrastructure.html" class="nav-link">Infrastructure</a>
+        <a href="monitoring.html" class="nav-link active">Monitoring</a>
+      </div>
+    </div>
+    <div class="nav-right">
+      <button class="theme-toggle" onclick="toggleTheme()">
+        <span class="material-icons-round">light_mode</span>
+        Theme
+      </button>
+      <button class="mobile-menu-btn">
+        <span class="material-icons-round">menu</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span class="material-icons-round">monitor_heart</span>
+        Real-Time Observability
+      </div>
+      <h1 class="hero-title">Every Metric.<br>Always Visible.</h1>
+      <p class="hero-subtitle">
+        Enterprise-grade monitoring with sub-second alerting, 99.99% uptime SLA, 
+        and complete visibility into your research infrastructure.
+      </p>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="hero-stat-value">99.99%</div>
+          <div class="hero-stat-label">Uptime SLA</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-value">&lt;30s</div>
+          <div class="hero-stat-label">Alert Response</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-value">24/7</div>
+          <div class="hero-stat-label">Monitoring</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    
+    <!-- Live Status Dashboard -->
+    <section class="section">
+      <div class="section-header">
+        <div class="section-tag">// STATUS_DASHBOARD</div>
+        <h2 class="section-title">System Status Overview</h2>
+        <p class="section-desc">
+          Real-time health status of all platform services and integrations.
+        </p>
+      </div>
+      
+      <div class="status-dashboard">
+        <div class="status-header">
+          <div class="status-title">
+            <span class="status-indicator"></span>
+            All Systems Operational
+          </div>
+          <span class="status-time">Last updated: Just now</span>
+        </div>
+        
+        <div class="status-grid">
+          <div class="status-item">
+            <span class="service-name">Web Application</span>
+            <span class="service-status operational">
+              <span class="status-dot green"></span>
+              Operational
+            </span>
+          </div>
+          
+          <div class="status-item">
+            <span class="service-name">API Gateway</span>
+            <span class="service-status operational">
+              <span class="status-dot green"></span>
+              Operational
+            </span>
+          </div>
+          
+          <div class="status-item">
+            <span class="service-name">Database Cluster</span>
+            <span class="service-status operational">
+              <span class="status-dot green"></span>
+              Operational
+            </span>
+          </div>
+          
+          <div class="status-item">
+            <span class="service-name">CDN / Edge Network</span>
+            <span class="service-status operational">
+              <span class="status-dot green"></span>
+              Operational
+            </span>
+          </div>
+          
+          <div class="status-item">
+            <span class="service-name">IBM Quantum Backend</span>
+            <span class="service-status operational">
+              <span class="status-dot green"></span>
+              Operational
+            </span>
+          </div>
+          
+          <div class="status-item">
+            <span class="service-name">Google Cirq Integration</span>
+            <span class="service-status operational">
+              <span class="status-dot green"></span>
+              Operational
+            </span>
+          </div>
+          
+          <div class="status-item">
+            <span class="service-name">Authentication (OAuth)</span>
+            <span class="service-status operational">
+              <span class="status-dot green"></span>
+              Operational
+            </span>
+          </div>
+          
+          <div class="status-item">
+            <span class="service-name">Email Notifications</span>
+            <span class="service-status degraded">
+              <span class="status-dot gold"></span>
+              Degraded
+            </span>
+          </div>
+          
+          <div class="status-item">
+            <span class="service-name">Background Workers</span>
+            <span class="service-status operational">
+              <span class="status-dot green"></span>
+              Operational
+            </span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Performance Metrics -->
+    <section class="section">
+      <div class="section-header">
+        <div class="section-tag">// PERFORMANCE_METRICS</div>
+        <h2 class="section-title">Key Performance Indicators</h2>
+        <p class="section-desc">
+          Real-time metrics showing platform performance and user experience.
+        </p>
+      </div>
+      
+      <div class="metrics-grid">
+        <div class="metric-card" style="--metric-color: var(--accent-primary);">
+          <div class="metric-header">
+            <div class="metric-info">
+              <h4>Response Time</h4>
+              <p>Average API latency</p>
+            </div>
+            <div class="metric-icon" style="--metric-color: var(--accent-primary);">
+              <span class="material-icons-round">speed</span>
+            </div>
+          </div>
+          <div class="metric-value">47ms</div>
+          <div class="metric-chart">
+            <div class="chart-bar" style="height: 45%;"></div>
+            <div class="chart-bar" style="height: 62%;"></div>
+            <div class="chart-bar" style="height: 38%;"></div>
+            <div class="chart-bar" style="height: 71%;"></div>
+            <div class="chart-bar" style="height: 55%;"></div>
+            <div class="chart-bar" style="height: 42%;"></div>
+            <div class="chart-bar" style="height: 58%;"></div>
+            <div class="chart-bar" style="height: 49%;"></div>
+            <div class="chart-bar" style="height: 67%;"></div>
+            <div class="chart-bar" style="height: 53%;"></div>
+            <div class="chart-bar" style="height: 44%;"></div>
+            <div class="chart-bar" style="height: 61%;"></div>
+          </div>
+        </div>
+        
+        <div class="metric-card" style="--metric-color: var(--accent-green);">
+          <div class="metric-header">
+            <div class="metric-info">
+              <h4>Uptime</h4>
+              <p>Last 30 days availability</p>
+            </div>
+            <div class="metric-icon" style="--metric-color: var(--accent-green);">
+              <span class="material-icons-round">check_circle</span>
+            </div>
+          </div>
+          <div class="metric-value">99.98%</div>
+          <div class="metric-chart">
+            <div class="chart-bar" style="height: 95%;"></div>
+            <div class="chart-bar" style="height: 100%;"></div>
+            <div class="chart-bar" style="height: 100%;"></div>
+            <div class="chart-bar" style="height: 98%;"></div>
+            <div class="chart-bar" style="height: 100%;"></div>
+            <div class="chart-bar" style="height: 99%;"></div>
+            <div class="chart-bar" style="height: 100%;"></div>
+            <div class="chart-bar" style="height: 100%;"></div>
+            <div class="chart-bar" style="height: 97%;"></div>
+            <div class="chart-bar" style="height: 100%;"></div>
+            <div class="chart-bar" style="height: 100%;"></div>
+            <div class="chart-bar" style="height: 99%;"></div>
+          </div>
+        </div>
+        
+        <div class="metric-card" style="--metric-color: var(--accent-tertiary);">
+          <div class="metric-header">
+            <div class="metric-info">
+              <h4>Active Users</h4>
+              <p>Concurrent sessions</p>
+            </div>
+            <div class="metric-icon" style="--metric-color: var(--accent-tertiary);">
+              <span class="material-icons-round">people</span>
+            </div>
+          </div>
+          <div class="metric-value">1,247</div>
+          <div class="metric-chart">
+            <div class="chart-bar" style="height: 55%;"></div>
+            <div class="chart-bar" style="height: 72%;"></div>
+            <div class="chart-bar" style="height: 68%;"></div>
+            <div class="chart-bar" style="height: 81%;"></div>
+            <div class="chart-bar" style="height: 75%;"></div>
+            <div class="chart-bar" style="height: 89%;"></div>
+            <div class="chart-bar" style="height: 92%;"></div>
+            <div class="chart-bar" style="height: 78%;"></div>
+            <div class="chart-bar" style="height: 85%;"></div>
+            <div class="chart-bar" style="height: 94%;"></div>
+            <div class="chart-bar" style="height: 88%;"></div>
+            <div class="chart-bar" style="height: 91%;"></div>
+          </div>
+        </div>
+        
+        <div class="metric-card" style="--metric-color: var(--accent-gold);">
+          <div class="metric-header">
+            <div class="metric-info">
+              <h4>Error Rate</h4>
+              <p>Failed requests %</p>
+            </div>
+            <div class="metric-icon" style="--metric-color: var(--accent-gold);">
+              <span class="material-icons-round">warning</span>
+            </div>
+          </div>
+          <div class="metric-value">0.02%</div>
+          <div class="metric-chart">
+            <div class="chart-bar" style="height: 8%;"></div>
+            <div class="chart-bar" style="height: 5%;"></div>
+            <div class="chart-bar" style="height: 12%;"></div>
+            <div class="chart-bar" style="height: 3%;"></div>
+            <div class="chart-bar" style="height: 7%;"></div>
+            <div class="chart-bar" style="height: 4%;"></div>
+            <div class="chart-bar" style="height: 9%;"></div>
+            <div class="chart-bar" style="height: 6%;"></div>
+            <div class="chart-bar" style="height: 5%;"></div>
+            <div class="chart-bar" style="height: 8%;"></div>
+            <div class="chart-bar" style="height: 4%;"></div>
+            <div class="chart-bar" style="height: 7%;"></div>
+          </div>
+        </div>
+        
+        <div class="metric-card" style="--metric-color: var(--accent-pink);">
+          <div class="metric-header">
+            <div class="metric-info">
+              <h4>Throughput</h4>
+              <p>Requests per second</p>
+            </div>
+            <div class="metric-icon" style="--metric-color: var(--accent-pink);">
+              <span class="material-icons-round">trending_up</span>
+            </div>
+          </div>
+          <div class="metric-value">3.2K</div>
+          <div class="metric-chart">
+            <div class="chart-bar" style="height: 65%;"></div>
+            <div class="chart-bar" style="height: 72%;"></div>
+            <div class="chart-bar" style="height: 58%;"></div>
+            <div class="chart-bar" style="height: 79%;"></div>
+            <div class="chart-bar" style="height: 84%;"></div>
+            <div class="chart-bar" style="height: 71%;"></div>
+            <div class="chart-bar" style="height: 88%;"></div>
+            <div class="chart-bar" style="height: 92%;"></div>
+            <div class="chart-bar" style="height: 76%;"></div>
+            <div class="chart-bar" style="height: 83%;"></div>
+            <div class="chart-bar" style="height: 89%;"></div>
+            <div class="chart-bar" style="height: 94%;"></div>
+          </div>
+        </div>
+        
+        <div class="metric-card" style="--metric-color: var(--accent-orange);">
+          <div class="metric-header">
+            <div class="metric-info">
+              <h4>Quantum Jobs</h4>
+              <p>Completed today</p>
+            </div>
+            <div class="metric-icon" style="--metric-color: var(--accent-orange);">
+              <span class="material-icons-round">psychology</span>
+            </div>
+          </div>
+          <div class="metric-value">847</div>
+          <div class="metric-chart">
+            <div class="chart-bar" style="height: 45%;"></div>
+            <div class="chart-bar" style="height: 58%;"></div>
+            <div class="chart-bar" style="height: 52%;"></div>
+            <div class="chart-bar" style="height: 67%;"></div>
+            <div class="chart-bar" style="height: 71%;"></div>
+            <div class="chart-bar" style="height: 63%;"></div>
+            <div class="chart-bar" style="height: 78%;"></div>
+            <div class="chart-bar" style="height: 82%;"></div>
+            <div class="chart-bar" style="height: 69%;"></div>
+            <div class="chart-bar" style="height: 75%;"></div>
+            <div class="chart-bar" style="height: 84%;"></div>
+            <div class="chart-bar" style="height: 88%;"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Uptime Timeline -->
+    <section class="section">
+      <div class="section-header">
+        <div class="section-tag">// UPTIME_HISTORY</div>
+        <h2 class="section-title">Uptime Timeline</h2>
+        <p class="section-desc">
+          90-day uptime history with incident details.
+        </p>
+      </div>
+      
+      <div class="uptime-timeline">
+        <div class="timeline-header">
+          <h3 class="timeline-title">System Availability</h3>
+          <div class="timeline-range">
+            <button class="range-btn active">90 Days</button>
+            <button class="range-btn">30 Days</button>
+            <button class="range-btn">7 Days</button>
+            <button class="range-btn">24 Hours</button>
+          </div>
+        </div>
+        
+        <div class="uptime-visual">
+          <!-- 90 days of uptime bars (simulated) -->
+          <div class="uptime-bar" title="Day 1: 100% uptime"></div>
+          <div class="uptime-bar" title="Day 2: 100% uptime"></div>
+          <div class="uptime-bar" title="Day 3: 100% uptime"></div>
+          <div class="uptime-bar" title="Day 4: 100% uptime"></div>
+          <div class="uptime-bar" title="Day 5: 100% uptime"></div>
+          <div class="uptime-bar" title="Day 6: 100% uptime"></div>
+          <div class="uptime-bar" title="Day 7: 100% uptime"></div>
+          <div class="uptime-bar" title="Day 8: 100% uptime"></div>
+          <div class="uptime-bar" title="Day 9: 100% uptime"></div>
+          <div class="uptime-bar" title="Day 10: 100% uptime"></div>
+          <div class="uptime-bar" title="Day 11: 100% uptime"></div>
+          <div class="uptime-bar" title="Day 12: 100% uptime"></div>
+          <div class="uptime-bar" title="Day 13: 100% uptime"></div>
+          <div class="uptime-bar" title="Day 14: 100% uptime"></div>
+          <div class="uptime-bar" title="Day 15: 100% uptime"></div>
+          <div class="uptime-bar" title="Day 16: 100% uptime"></div>
+          <div class="uptime-bar" title="Day 17: 100% uptime"></div>
+          <div class="uptime-bar" title="Day 18: 100% uptime"></div>
+          <div class="uptime-bar" title="Day 19: 100% uptime"></div>
+          <div class="uptime-bar" title="Day 20: 100% uptime"></div>
+          <div class="uptime-bar" title="Day 21: 100% uptime"></div>
+          <div class="uptime-bar" title="Day 22: 100% uptime"></div>
+          <div class="uptime-bar" title="Day 23: 100% uptime"></div>
+          <div class="uptime-bar" title="Day 24: 100% uptime"></div>
+          <div class="uptime-bar" title="Day 25: 100% uptime"></div>
+          <div class="uptime-bar" title="Day 26: 100% uptime"></div>
+          <div class="uptime-bar" title="Day 27: 100% uptime"></div>
+          <div class="uptime-bar" title="Day 28: 100% uptime"></div>
+          <div class="uptime-bar" title="Day 29: 100% uptime"></div>
+          <div class="uptime-bar" title="Day 30: 100% uptime"></div>
+          <div class="uptime-bar" title="Day 31: 100% uptime"></div>
+          <div class="uptime-bar" title="Day 32: 100% uptime"></div>
+          <div class="uptime-bar" title="Day 33: 100% uptime"></div>
+          <div class="uptime-bar" title="Day 34: 100% uptime"></div>
+          <div class="uptime-bar" title="Day 35: 100% uptime"></div>
+          <div class="uptime-bar" title="Day 36: 100% uptime"></div>
+          <div class="uptime-bar" title="Day 37: 100% uptime"></div>
+          <div class="uptime-bar" title="Day 38: 100% uptime"></div>
+          <div class="uptime-bar" title="Day 39: 100% uptime"></div>
+          <div class="uptime-bar" title="Day 40: 100% uptime"></div>
+          <div class="uptime-bar" title="Day 41: 100% uptime"></div>
+          <div class="uptime-bar" title="Day 42: 100% uptime"></div>
+          <div class="uptime-bar" title="Day 43: 100% uptime"></div>
+          <div class="uptime-bar" title="Day 44: 100% uptime"></div>
+          <div class="uptime-bar" title="Day 45: 100% uptime"></div>
+          <div class="uptime-bar" title="Day 46: 100% uptime"></div>
+          <div class="uptime-bar" title="Day 47: 100% uptime"></div>
+          <div class="uptime-bar" title="Day 48: 100% uptime"></div>
+          <div class="uptime-bar" title="Day 49: 100% uptime"></div>
+          <div class="uptime-bar" title="Day 50: 100% uptime"></div>
+          <div class="uptime-bar" title="Day 51: 100% uptime"></div>
+          <div class="uptime-bar" title="Day 52: 100% uptime"></div>
+          <div class="uptime-bar" title="Day 53: 100% uptime"></div>
+          <div class="uptime-bar" title="Day 54: 100% uptime"></div>
+          <div class="uptime-bar" title="Day 55: 100% uptime"></div>
+          <div class="uptime-bar" title="Day 56: 100% uptime"></div>
+          <div class="uptime-bar" title="Day 57: 100% uptime"></div>
+          <div class="uptime-bar" title="Day 58: 100% uptime"></div>
+          <div class="uptime-bar" title="Day 59: 100% uptime"></div>
+          <div class="uptime-bar" title="Day 60: 100% uptime"></div>
+          <div class="uptime-bar" title="Day 61: 100% uptime"></div>
+          <div class="uptime-bar" title="Day 62: 100% uptime"></div>
+          <div class="uptime-bar" title="Day 63: 100% uptime"></div>
+          <div class="uptime-bar" title="Day 64: 100% uptime"></div>
+          <div class="uptime-bar" title="Day 65: 100% uptime"></div>
+          <div class="uptime-bar" title="Day 66: 100% uptime"></div>
+          <div class="uptime-bar" title="Day 67: 100% uptime"></div>
+          <div class="uptime-bar" title="Day 68: 100% uptime"></div>
+          <div class="uptime-bar" title="Day 69: 100% uptime"></div>
+          <div class="uptime-bar" title="Day 70: 100% uptime"></div>
+          <div class="uptime-bar" title="Day 71: 100% uptime"></div>
+          <div class="uptime-bar" title="Day 72: 100% uptime"></div>
+          <div class="uptime-bar" title="Day 73: 100% uptime"></div>
+          <div class="uptime-bar" title="Day 74: 100% uptime"></div>
+          <div class="uptime-bar" title="Day 75: 100% uptime"></div>
+          <div class="uptime-bar" title="Day 76: 100% uptime"></div>
+          <div class="uptime-bar" title="Day 77: 100% uptime"></div>
+          <div class="uptime-bar" title="Day 78: 100% uptime"></div>
+          <div class="uptime-bar" title="Day 79: 100% uptime"></div>
+          <div class="uptime-bar" title="Day 80: 100% uptime"></div>
+          <div class="uptime-bar" title="Day 81: 100% uptime"></div>
+          <div class="uptime-bar" title="Day 82: 100% uptime"></div>
+          <div class="uptime-bar" title="Day 83: 100% uptime"></div>
+          <div class="uptime-bar" title="Day 84: 100% uptime"></div>
+          <div class="uptime-bar" title="Day 85: 100% uptime"></div>
+          <div class="uptime-bar" title="Day 86: 100% uptime"></div>
+          <div class="uptime-bar" title="Day 87: 100% uptime"></div>
+          <div class="uptime-bar" title="Day 88: 100% uptime"></div>
+          <div class="uptime-bar" title="Day 89: 100% uptime"></div>
+          <div class="uptime-bar" title="Day 90: 100% uptime"></div>
+        </div>
+        
+        <div class="uptime-summary">
+          <div class="summary-item">
+            <div class="summary-value">99.98%</div>
+            <div class="summary-label">Overall Uptime</div>
+          </div>
+          <div class="summary-item">
+            <div class="summary-value">0</div>
+            <div class="summary-label">Critical Incidents</div>
+          </div>
+          <div class="summary-item">
+            <div class="summary-value">2</div>
+            <div class="summary-label">Minor Incidents</div>
+          </div>
+          <div class="summary-item">
+            <div class="summary-value">&lt;5min</div>
+            <div class="summary-label">Avg Resolution</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Alert System & Logs -->
+    <section class="section">
+      <div class="section-header">
+        <div class="section-tag">// ALERTING_LOGGING</div>
+        <h2 class="section-title">Alerting & Log Management</h2>
+        <p class="section-desc">
+          Proactive monitoring with intelligent alerting and centralized log aggregation.
+        </p>
+      </div>
+      
+      <div class="alert-system">
+        <!-- Active Alerts Panel -->
+        <div class="alert-panel">
+          <div class="panel-header" style="--panel-color: var(--accent-gold);">
+            <div class="panel-icon" style="--panel-color: var(--accent-gold);">
+              <span class="material-icons-round">notifications_active</span>
+            </div>
+            <h3 class="panel-title">Active Alerts</h3>
+          </div>
+          
+          <div class="alert-list">
+            <div class="alert-item" style="--alert-color: var(--accent-gold); --alert-bg: rgba(245, 158, 11, 0.1);">
+              <div class="alert-icon">
+                <span class="material-icons-round">email</span>
+              </div>
+              <div class="alert-content">
+                <div class="alert-title">Email Delivery Delayed</div>
+                <div class="alert-time">2025-08-22T14:32:01Z</div>
+              </div>
+              <span class="alert-severity warning">Warning</span>
+            </div>
+            
+            <div class="alert-item" style="--alert-color: var(--accent-primary); --alert-bg: rgba(0, 229, 255, 0.1);">
+              <div class="alert-icon">
+                <span class="material-icons-round">info</span>
+              </div>
+              <div class="alert-content">
+                <div class="alert-title">High Traffic Detected</div>
+                <div class="alert-time">2025-08-22T14:28:45Z</div>
+              </div>
+              <span class="alert-severity info">Info</span>
+            </div>
+            
+            <div class="alert-item" style="--alert-color: var(--accent-gold); --alert-bg: rgba(245, 158, 11, 0.1);">
+              <div class="alert-icon">
+                <span class="material-icons-round">memory</span>
+              </div>
+              <div class="alert-content">
+                <div class="alert-title">IBM Queue > 10 Jobs</div>
+                <div class="alert-time">2025-08-22T14:15:22Z</div>
+              </div>
+              <span class="alert-severity warning">Warning</span>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Recent Logs Panel -->
+        <div class="alert-panel">
+          <div class="panel-header" style="--panel-color: var(--accent-primary);">
+            <div class="panel-icon" style="--panel-color: var(--accent-primary);">
+              <span class="material-icons-round">terminal</span>
+            </div>
+            <h3 class="panel-title">Recent Logs</h3>
+          </div>
+          
+          <div class="log-preview">
+            <div class="log-line">
+              <span class="log-time">14:32:01</span>
+              <span class="log-level info">INFO</span>
+              <span class="log-message">[api] GET /api/v1/status 200 47ms</span>
+            </div>
+            <div class="log-line">
+              <span class="log-time">14:31:58</span>
+              <span class="log-level info">INFO</span>
+              <span class="log-message">[quantum] Job q9x7k2 completed successfully</span>
+            </div>
+            <div class="log-line">
+              <span class="log-time">14:31:45</span>
+              <span class="log-level warn">WARN</span>
+              <span class="log-message">[email] SMTP connection timeout, retrying...</span>
+            </div>
+            <div class="log-line">
+              <span class="log-time">14:31:32</span>
+              <span class="log-level info">INFO</span>
+              <span class="log-message">[auth] User a3f8c2 authenticated via GitHub OAuth</span>
+            </div>
+            <div class="log-line">
+              <span class="log-time">14:31:15</span>
+              <span class="log-level info">INFO</span>
+              <span class="log-message">[cache] Redis HIT for session:b7d1e9</span>
+            </div>
+            <div class="log-line">
+              <span class="log-time">14:30:58</span>
+              <span class="log-level error">ERROR</span>
+              <span class="log-message">[worker] Job p3m8x1 failed: Quantum backend timeout</span>
+            </div>
+            <div class="log-line">
+              <span class="log-time">14:30:45</span>
+              <span class="log-level info">INFO</span>
+              <span class="log-message">[cdn] Cache invalidated for /dashboard</span>
+            </div>
+            <div class="log-line">
+              <span class="log-time">14:30:22</span>
+              <span class="log-level info">INFO</span>
+              <span class="log-message">[db] Connection pool healthy (8/10 active)</span>
+            </div>
+            <div class="log-line">
+              <span class="log-time">14:29:58</span>
+              <span class="log-level info">INFO</span>
+              <span class="log-message">[api] POST /api/v1/jobs 201 123ms</span>
+            </div>
+            <div class="log-line">
+              <span class="log-time">14:29:33</span>
+              <span class="log-level info">INFO</span>
+              <span class="log-message">[auth] Token refreshed for user c4f2a8</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Incident History -->
+    <section class="section">
+      <div class="section-header">
+        <div class="section-tag">// INCIDENT_HISTORY</div>
+        <h2 class="section-title">Incident Report</h2>
+        <p class="section-desc">
+          Transparent communication about past incidents and resolutions.
+        </p>
+      </div>
+      
+      <div class="status-dashboard">
+        <table class="incident-table">
+          <thead>
+            <tr>
+              <th>Incident</th>
+              <th>Status</th>
+              <th>Duration</th>
+              <th>Date</th>
+              <th>Impact</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Email Service Degradation</strong></td>
+              <td><span class="incident-status resolved"><span class="material-icons-round" style="font-size: 12px;">check</span> Resolved</span></td>
+              <td>23 minutes</td>
+              <td>Aug 22, 2025</td>
+              <td>Notification delays only</td>
+            </tr>
+            <tr>
+              <td><strong>Scheduled Maintenance</strong></td>
+              <td><span class="incident-status resolved"><span class="material-icons-round" style="font-size: 12px;">check</span> Resolved</span></td>
+              <td>2 hours (planned)</td>
+              <td>Aug 15, 2025</td>
+              <td>No impact (maintenance window)</td>
+            </tr>
+            <tr>
+              <td><strong>CDN Configuration Update</strong></td>
+              <td><span class="incident-status resolved"><span class="material-icons-round" style="font-size: 12px;">check</span> Resolved</span></td>
+              <td>8 minutes</td>
+              <td>Aug 8, 2025</td>
+              <td>Minor cache misses</td>
+            </tr>
+            <tr>
+              <td><strong>Database Failover Test</strong></td>
+              <td><span class="incident-status resolved"><span class="material-icons-round" style="font-size: 12px;">check</span> Resolved</span></td>
+              <td>45 seconds</td>
+              <td>Jul 28, 2025</td>
+              <td>No user impact</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Monitoring Tools -->
+    <section class="section">
+      <div class="section-header">
+        <div class="section-tag">// MONITORING_STACK</div>
+        <h2 class="section-title">Observability Stack</h2>
+        <p class="section-desc">
+          Enterprise-grade tools powering our monitoring infrastructure.
+        </p>
+      </div>
+      
+      <div class="metrics-grid">
+        <div class="metric-card" style="--metric-color: var(--accent-primary);">
+          <div class="metric-header">
+            <div class="metric-info">
+              <h4>Application Performance</h4>
+              <p>APM & tracing</p>
+            </div>
+            <div class="metric-icon" style="--metric-color: var(--accent-primary);">
+              <span class="material-icons-round">insights</span>
+            </div>
+          </div>
+          <ul class="card-list" style="list-style: none; display: flex; flex-direction: column; gap: 10px;">
+            <li style="display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--text-secondary);">
+              <span class="material-icons-round" style="color: var(--accent-green); font-size: 16px;">check_circle</span>
+              Distributed tracing (OpenTelemetry)
+            </li>
+            <li style="display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--text-secondary);">
+              <span class="material-icons-round" style="color: var(--accent-green); font-size: 16px;">check_circle</span>
+              Real user monitoring (RUM)
+            </li>
+            <li style="display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--text-secondary);">
+              <span class="material-icons-round" style="color: var(--accent-green); font-size: 16px;">check_circle</span>
+              Error tracking & source maps
+            </li>
+            <li style="display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--text-secondary);">
+              <span class="material-icons-round" style="color: var(--accent-green); font-size: 16px;">check_circle</span>
+              Custom dashboards
+            </li>
+          </ul>
+        </div>
+        
+        <div class="metric-card" style="--metric-color: var(--accent-tertiary);">
+          <div class="metric-header">
+            <div class="metric-info">
+              <h4>Log Aggregation</h4>
+              <p>Centralized logging</p>
+            </div>
+            <div class="metric-icon" style="--metric-color: var(--accent-tertiary);">
+              <span class="material-icons-round">description</span>
+            </div>
+          </div>
+          <ul class="card-list" style="list-style: none; display: flex; flex-direction: column; gap: 10px;">
+            <li style="display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--text-secondary);">
+              <span class="material-icons-round" style="color: var(--accent-green); font-size: 16px;">check_circle</span>
+              Structured JSON logs
+            </li>
+            <li style="display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--text-secondary);">
+              <span class="material-icons-round" style="color: var(--accent-green); font-size: 16px;">check_circle</span>
+              Full-text search (30-day retention)
+            </li>
+            <li style="display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--text-secondary);">
+              <span class="material-icons-round" style="color: var(--accent-green); font-size: 16px;">check_circle</span>
+              Log-based alerting
+            </li>
+            <li style="display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--text-secondary);">
+              <span class="material-icons-round" style="color: var(--accent-green); font-size: 16px;">check_circle</span>
+              PII redaction rules
+            </li>
+          </ul>
+        </div>
+        
+        <div class="metric-card" style="--metric-color: var(--accent-green);">
+          <div class="metric-header">
+            <div class="metric-info">
+              <h4>Infrastructure Monitoring</h4>
+              <p>Server & network health</p>
+            </div>
+            <div class="metric-icon" style="--metric-color: var(--accent-green);">
+              <span class="material-icons-round">dns</span>
+            </div>
+          </div>
+          <ul class="card-list" style="list-style: none; display: flex; flex-direction: column; gap: 10px;">
+            <li style="display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--text-secondary);">
+              <span class="material-icons-round" style="color: var(--accent-green); font-size: 16px;">check_circle</span>
+              Server CPU/Memory/Disk metrics
+            </li>
+            <li style="display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--text-secondary);">
+              <span class="material-icons-round" style="color: var(--accent-green); font-size: 16px;">check_circle</span>
+              Container orchestration monitoring
+            </li>
+            <li style="display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--text-secondary);">
+              <span class="material-icons-round" style="color: var(--accent-green); font-size: 16px;">check_circle</span>
+              Network latency & throughput
+            </li>
+            <li style="display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--text-secondary);">
+              <span class="material-icons-round" style="color: var(--accent-green); font-size: 16px;">check_circle</span>
+              SSL certificate expiry alerts
+            </li>
+          </ul>
+        </div>
+        
+        <div class="metric-card" style="--metric-color: var(--accent-gold);">
+          <div class="metric-header">
+            <div class="metric-info">
+              <h4>Alerting & On-Call</h4>
+              <p>Incident response</p>
+            </div>
+            <div class="metric-icon" style="--metric-color: var(--accent-gold);">
+              <span class="material-icons-round">notifications</span>
+            </div>
+          </div>
+          <ul class="card-list" style="list-style: none; display: flex; flex-direction: column; gap: 10px;">
+            <li style="display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--text-secondary);">
+              <span class="material-icons-round" style="color: var(--accent-green); font-size: 16px;">check_circle</span>
+              Multi-channel alerts (Slack, Email, SMS)
+            </li>
+            <li style="display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--text-secondary);">
+              <span class="material-icons-round" style="color: var(--accent-green); font-size: 16px;">check_circle</span>
+              Escalation policies
+            </li>
+            <li style="display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--text-secondary);">
+              <span class="material-icons-round" style="color: var(--accent-green); font-size: 16px;">check_circle</span>
+              Runbook automation
+            </li>
+            <li style="display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--text-secondary);">
+              <span class="material-icons-round" style="color: var(--accent-green); font-size: 16px;">check_circle</span>
+              Post-incident reviews
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- CTA Section -->
+  <section class="cta-section">
+    <h2 class="cta-title">Need System Status Updates?</h2>
+    <p class="cta-desc">
+      Subscribe to our status page RSS feed or integrate with your monitoring tools via our public API.
+    </p>
+    <div class="cta-buttons">
+      <a href="#" class="btn-primary">
+        <span class="material-icons-round">rss_feed</span>
+        Subscribe to Status Feed
+      </a>
+      <a href="#" class="btn-secondary">
+        <span class="material-icons-round">code</span>
+        View API Documentation
+      </a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="footer-logo">
+          <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%2300E5FF'/%3E%3Cstop offset='100%25' stop-color='%23a78bfa'/%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle cx='16' cy='16' r='14' fill='url(%23g)'/%3E%3Cpath d='M16 8v16M10 12h12M10 20h12' stroke='%23000' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E" alt="SciMSPT">
+          <span class="footer-logo-text">Sci<span>MSPT</span></span>
+        </a>
+        <p class="footer-desc">
+          Neural Research Intelligence Platform — transforming peer-reviewed science into strategic opportunities through molecular computing.
+        </p>
+      </div>
+      
+      <div class="footer-col">
+        <h4>Platform</h4>
+        <ul class="footer-links">
+          <li><a href="platform.html">Features</a></li>
+          <li><a href="quantum.html">Quantum Computing</a></li>
+          <li><a href="research.html">Research Pipeline</a></li>
+          <li><a href="startups.html">Startup Portfolio</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <ul class="footer-links">
+          <li><a href="documentation.html">Documentation</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="studio.html">Media Studio</a></li>
+          <li><a href="#">API Reference</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-col">
+        <h4>Trust & Safety</h4>
+        <ul class="footer-links">
+          <li><a href="security.html">Security Center</a></li>
+          <li><a href="infrastructure.html">Infrastructure</a></li>
+          <li><a href="monitoring.html">Status Page</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <p class="footer-copy">&copy; 2025 SciMSPT. Neural Research Intelligence Platform.</p>
+      <div class="footer-legal">
+        <a href="#">Terms of Service</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Cookie Policy</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Theme Toggle
+    function toggleTheme() {
+      const html = document.documentElement;
+      const currentTheme = html.getAttribute('data-theme');
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', newTheme);
+      localStorage.setItem('scimspt-theme', newTheme);
+    }
+    
+    // Load saved theme
+    document.addEventListener('DOMContentLoaded', () => {
+      const savedTheme = localStorage.getItem('scimspt-theme') || 'dark';
+      document.documentElement.setAttribute('data-theme', savedTheme);
+    });
+    
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+    
+    // Uptime range buttons
+    document.querySelectorAll('.range-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('.range-btn').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+      });
+    });
+  </script>
+</body>
+</html>

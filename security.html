@@ -1,0 +1,1461 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Security & Compliance — SciMSPT Neural Research Platform</title>
+  <meta name="description" content="SciMSPT Security: Enterprise-grade security, GDPR compliance, OAuth authentication, end-to-end encryption, and data protection for quantum research platforms.">
+  
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+  
+  <style>
+    /* ============================================
+       SCIMSPT NEURAL DESIGN SYSTEM v3.0
+       Security Command Center
+       ============================================ */
+    
+    :root {
+      --bg-deep: #030810;
+      --bg-primary: #0a1628;
+      --bg-secondary: #0d1f35;
+      --bg-tertiary: #122a45;
+      --bg-glass: rgba(10, 22, 40, 0.85);
+      --bg-glass-light: rgba(255, 255, 255, 0.03);
+      
+      --accent-primary: #00E5FF;
+      --accent-secondary: #4da8da;
+      --accent-tertiary: #a78bfa;
+      --accent-pink: #f472b6;
+      --accent-green: #10b981;
+      --accent-gold: #f59e0b;
+      --accent-red: #ef4444;
+      --accent-orange: #f97316;
+      
+      --text-primary: #e8f4fc;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+      
+      --border-subtle: rgba(0, 229, 255, 0.15);
+      --border-glow: rgba(0, 229, 255, 0.4);
+      
+      --font-heading: 'Playfair Display', Georgia, serif;
+      --font-body: 'Inter', -apple-system, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+      --font-tech: 'Orbitron', sans-serif;
+      
+      --nav-height: 80px;
+      --sidebar-width: 100px;
+      
+      --glow-primary: 0 0 30px rgba(0, 229, 255, 0.3);
+      --glow-secondary: 0 0 60px rgba(167, 139, 250, 0.2);
+    }
+    
+    [data-theme="light"] {
+      --bg-deep: #f0f4f8;
+      --bg-primary: #ffffff;
+      --bg-secondary: #f8fafc;
+      --bg-tertiary: #e2e8f0;
+      --bg-glass: rgba(255, 255, 255, 0.92);
+      --bg-glass-light: rgba(0, 0, 0, 0.02);
+      --text-primary: #0f172a;
+      --text-secondary: #475569;
+      --text-muted: #94a3b8;
+      --border-subtle: rgba(77, 168, 218, 0.25);
+    }
+    
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    
+    body {
+      font-family: var(--font-body);
+      background: var(--bg-deep);
+      color: var(--text-primary);
+      line-height: 1.6;
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+    
+    /* Molecular Sidebars */
+    .molecular-sidebar {
+      position: fixed;
+      top: 0;
+      width: var(--sidebar-width);
+      height: 100vh;
+      z-index: 5;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    
+    .molecular-sidebar.left {
+      left: 0;
+      background: linear-gradient(90deg, rgba(0, 229, 255, 0.08) 0%, transparent 100%);
+      border-right: 1px solid var(--border-subtle);
+    }
+    
+    .molecular-sidebar.right {
+      right: 0;
+      background: linear-gradient(-90deg, rgba(167, 139, 250, 0.08) 0%, transparent 100%);
+      border-left: 1px solid var(--border-subtle);
+    }
+    
+    .dna-helix {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 60px;
+      height: 80vh;
+    }
+    
+    .dna-strand { position: absolute; width: 100%; height: 100%; }
+    
+    .nucleotide {
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      animation: nucleotidePulse 3s ease-in-out infinite;
+    }
+    
+    .nucleotide.adenine { background: var(--accent-primary); box-shadow: 0 0 10px var(--accent-primary); }
+    .nucleotide.thymine { background: var(--accent-pink); box-shadow: 0 0 10px var(--accent-pink); }
+    .nucleotide.guanine { background: var(--accent-tertiary); box-shadow: 0 0 10px var(--accent-tertiary }
+    .nucleotide.cytosine { background: var(--accent-green); box-shadow: 0 0 10px var(--accent-green); }
+    
+    @keyframes nucleotidePulse {
+      0%, 100% { opacity: 0.6; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.2); }
+    }
+    
+    /* Navigation */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: var(--nav-height);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 48px;
+      background: var(--bg-glass);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border-subtle);
+      transition: all 0.3s ease;
+    }
+    
+    .nav-left { display: flex; align-items: center; gap: 28px; }
+    
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--text-primary);
+      transition: opacity 0.3s ease;
+    }
+    
+    .nav-logo:hover { opacity: 0.85; }
+    .nav-logo img { width: 32px; height: 32px; filter: drop-shadow(0 0 6px var(--accent-secondary)); }
+    .nav-logo-text { font-family: var(--font-heading); font-size: 20px; font-weight: 700; letter-spacing: -0.5px; }
+    .nav-logo-text span { color: var(--accent-primary); }
+    
+    .nav-links { display: flex; align-items: center; gap: 8px; }
+    
+    .nav-link {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-muted);
+      text-decoration: none;
+      padding: 8px 16px;
+      border-radius: 20px;
+      transition: all 0.25s ease;
+      letter-spacing: 0.3px;
+      white-space: nowrap;
+    }
+    
+    .nav-link:hover { color: var(--accent-primary); background: var(--bg-glass-light); }
+    .nav-link.active { color: var(--accent-primary); background: rgba(0, 229, 255, 0.1); }
+    
+    .nav-right { display: flex; align-items: center; gap: 16px; }
+    
+    .theme-toggle {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 16px;
+      background: var(--bg-glass-light);
+      border: 1px solid var(--border-subtle);
+      border-radius: 20px;
+      cursor: pointer;
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-muted);
+      transition: all 0.3s ease;
+      white-space: nowrap;
+    }
+    
+    .theme-toggle:hover { border-color: var(--accent-primary); color: var(--accent-primary); }
+    .theme-toggle .material-icons-round { font-size: 16px; }
+    
+    .mobile-menu-btn {
+      display: none;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--bg-glass-light);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-muted);
+      cursor: pointer;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    /* Hero Section */
+    .hero {
+      min-height: 70vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: calc(var(--nav-height) + 80px) 48px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 800px;
+      height: 800px;
+      background: radial-gradient(circle, rgba(0, 229, 255, 0.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    
+    .hero-content { max-width: 900px; position: relative; z-index: 1; }
+    
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 20px;
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      border-radius: 30px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--accent-green);
+      margin-bottom: 32px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    
+    .hero-badge .material-icons-round { font-size: 16px; }
+    
+    .hero-title {
+      font-family: var(--font-heading);
+      font-size: clamp(40px, 6vw, 72px);
+      font-weight: 900;
+      line-height: 1.1;
+      margin-bottom: 24px;
+      background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent-primary) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .hero-subtitle {
+      font-size: clamp(16px, 2vw, 20px);
+      color: var(--text-secondary);
+      max-width: 700px;
+      margin: 0 auto 40px;
+      line-height: 1.7;
+    }
+    
+    .hero-stats {
+      display: flex;
+      justify-content: center;
+      gap: 48px;
+      flex-wrap: wrap;
+    }
+    
+    .hero-stat { text-align: center; }
+    
+    .hero-stat-value {
+      font-family: var(--font-tech);
+      font-size: 36px;
+      font-weight: 700;
+      color: var(--accent-primary);
+      margin-bottom: 4px;
+    }
+    
+    .hero-stat-label {
+      font-size: 13px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    
+    /* Main Content */
+    .main-content {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 80px 48px;
+    }
+    
+    .section { margin-bottom: 100px; }
+    
+    .section-header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+    
+    .section-tag {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--accent-tertiary);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 16px;
+    }
+    
+    .section-title {
+      font-family: var(--font-heading);
+      font-size: clamp(28px, 4vw, 42px);
+      font-weight: 900;
+      margin-bottom: 16px;
+    }
+    
+    .section-desc {
+      font-size: 17px;
+      color: var(--text-secondary);
+      max-width: 700px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+    
+    /* Security Grid */
+    .security-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 28px;
+      margin-top: 48px;
+    }
+    
+    .security-card {
+      background: var(--bg-glass);
+      border: 1px solid var(--border-subtle);
+      border-radius: 20px;
+      padding: 36px;
+      backdrop-filter: blur(20px);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .security-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--card-accent, var(--accent-primary)), transparent);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    
+    .security-card:hover {
+      border-color: var(--card-accent, var(--accent-primary));
+      transform: translateY(-4px);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    }
+    
+    .security-card:hover::before { opacity: 1; }
+    
+    .security-card.accent-cyan { --card-accent: var(--accent-primary); }
+    .security-card.accent-purple { --card-accent: var(--accent-tertiary); }
+    .security-card.accent-green { --card-accent: var(--accent-green); }
+    .security-card.accent-gold { --card-accent: var(--accent-gold); }
+    .security-card.accent-red { --card-accent: var(--accent-red); }
+    .security-card.accent-pink { --card-accent: var(--accent-pink); }
+    
+    .card-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--card-accent, var(--accent-primary)), rgba(0, 229, 255, 0.3));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 24px;
+    }
+    
+    .card-icon .material-icons-round {
+      font-size: 28px;
+      color: white;
+    }
+    
+    .card-title {
+      font-family: var(--font-heading);
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+    
+    .card-desc {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+    
+    .card-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    
+    .card-list li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
+    
+    .card-list li .material-icons-round {
+      font-size: 16px;
+      color: var(--accent-green);
+    }
+    
+    /* Compliance Section */
+    .compliance-container {
+      background: var(--bg-glass);
+      border: 1px solid var(--border-subtle);
+      border-radius: 24px;
+      overflow: hidden;
+    }
+    
+    .compliance-header {
+      padding: 40px;
+      border-bottom: 1px solid var(--border-subtle);
+      background: linear-gradient(135deg, rgba(0, 229, 255, 0.05), rgba(167, 139, 250, 0.05));
+    }
+    
+    .compliance-title {
+      font-family: var(--font-heading);
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    
+    .compliance-desc {
+      font-size: 15px;
+      color: var(--text-secondary);
+    }
+    
+    .compliance-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    }
+    
+    .compliance-item {
+      padding: 32px 40px;
+      border-bottom: 1px solid var(--border-subtle);
+      border-right: 1px solid var(--border-subtle);
+      transition: all 0.3s ease;
+    }
+    
+    .compliance-item:hover {
+      background: var(--bg-glass-light);
+    }
+    
+    .compliance-item:nth-child(n+4) { border-bottom: none; }
+    .compliance-item:nth-child(3n) { border-right: none; }
+    
+    .compliance-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--accent-green);
+      margin-bottom: 16px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    
+    .compliance-badge.pending {
+      background: rgba(245, 158, 11, 0.15);
+      border-color: rgba(245, 158, 11, 0.3);
+      color: var(--accent-gold);
+    }
+    
+    .compliance-name {
+      font-family: var(--font-heading);
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    
+    .compliance-detail {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+    
+    /* Authentication Flow */
+    .auth-flow {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      margin-top: 48px;
+    }
+    
+    .auth-step {
+      background: var(--bg-glass);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      padding: 28px;
+      text-align: center;
+      position: relative;
+    }
+    
+    .auth-step-number {
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 24px;
+      height: 24px;
+      background: var(--accent-primary);
+      color: var(--bg-deep);
+      border-radius: 50%;
+      font-size: 12px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .auth-step-icon {
+      width: 48px;
+      height: 48px;
+      margin: 0 auto 16px;
+      background: linear-gradient(135deg, var(--accent-primary), var(--accent-tertiary));
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .auth-step-icon .material-icons-round { color: white; font-size: 24px; }
+    
+    .auth-step-title {
+      font-weight: 600;
+      font-size: 14px;
+      margin-bottom: 8px;
+    }
+    
+    .auth-step-desc {
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+    
+    .auth-arrow {
+      position: absolute;
+      right: -16px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--accent-primary);
+      font-size: 20px;
+    }
+    
+    /* Encryption Table */
+    .encryption-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 32px;
+      background: var(--bg-glass);
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid var(--border-subtle);
+    }
+    
+    .encryption-table th {
+      background: rgba(0, 229, 255, 0.1);
+      padding: 16px 20px;
+      text-align: left;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--accent-primary);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    
+    .encryption-table td {
+      padding: 16px 20px;
+      font-size: 14px;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    
+    .encryption-table tr:last-child td { border-bottom: none; }
+    .encryption-table tr:hover td { background: var(--bg-glass-light); }
+    
+    .encryption-type {
+      font-family: var(--font-mono);
+      font-weight: 600;
+      color: var(--accent-primary);
+    }
+    
+    .encryption-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 12px;
+      border-radius: 12px;
+      font-size: 11px;
+      font-weight: 600;
+    }
+    
+    .encryption-status.active {
+      background: rgba(16, 185, 129, 0.15);
+      color: var(--accent-green);
+    }
+    
+    .encryption-status .material-icons-round { font-size: 14px; }
+    
+    /* Audit Log Preview */
+    .audit-preview {
+      background: var(--bg-deep);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 24px;
+      margin-top: 24px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      max-height: 300px;
+      overflow-y: auto;
+    }
+    
+    .audit-line {
+      display: flex;
+      gap: 16px;
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    
+    .audit-line:last-child { border-bottom: none; }
+    
+    .audit-time { color: var(--text-muted); white-space: nowrap; }
+    .audit-event { color: var(--accent-primary); }
+    .audit-detail { color: var(--text-secondary); }
+    
+    /* CTA Section */
+    .cta-section {
+      text-align: center;
+      padding: 80px 48px;
+      background: linear-gradient(180deg, transparent, rgba(0, 229, 255, 0.05));
+      border-top: 1px solid var(--border-subtle);
+    }
+    
+    .cta-title {
+      font-family: var(--font-heading);
+      font-size: 32px;
+      font-weight: 900;
+      margin-bottom: 16px;
+    }
+    
+    .cta-desc {
+      font-size: 16px;
+      color: var(--text-secondary);
+      margin-bottom: 32px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    .cta-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 28px;
+      background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+      color: var(--bg-deep);
+      font-weight: 600;
+      font-size: 14px;
+      border-radius: 12px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      border: none;
+      cursor: pointer;
+    }
+    
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(0, 229, 255, 0.3);
+    }
+    
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 28px;
+      background: transparent;
+      color: var(--text-primary);
+      font-weight: 600;
+      font-size: 14px;
+      border-radius: 12px;
+      text-decoration: none;
+      border: 1px solid var(--border-subtle);
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+    
+    .btn-secondary:hover {
+      border-color: var(--accent-primary);
+      color: var(--accent-primary);
+    }
+    
+    /* Footer */
+    footer {
+      background: var(--bg-primary);
+      border-top: 1px solid var(--border-subtle);
+      padding: 60px 48px 30px;
+    }
+    
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 48px;
+      max-width: 1400px;
+      margin: 0 auto 48px;
+    }
+    
+    .footer-brand { max-width: 320px; }
+    
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 16px;
+      text-decoration: none;
+      color: var(--text-primary);
+    }
+    
+    .footer-logo img { width: 28px; height: 28px; filter: drop-shadow(0 0 4px var(--accent-secondary)); }
+    .footer-logo-text { font-family: var(--font-heading); font-size: 18px; font-weight: 700; }
+    .footer-logo-text span { color: var(--accent-primary); }
+    
+    .footer-desc {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+    
+    .footer-col h4 {
+      font-family: var(--font-heading);
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 20px;
+      color: var(--text-primary);
+    }
+    
+    .footer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    
+    .footer-links a {
+      font-size: 13px;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+    
+    .footer-links a:hover { color: var(--accent-primary); }
+    
+    .footer-bottom {
+      border-top: 1px solid var(--border-subtle);
+      padding-top: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    
+    .footer-copy {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+    
+    .footer-legal {
+      display: flex;
+      gap: 24px;
+    }
+    
+    .footer-legal a {
+      font-size: 13px;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+    
+    .footer-legal a:hover { color: var(--accent-primary); }
+    
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .auth-flow { grid-template-columns: repeat(2, 1fr); }
+      .auth-step:nth-child(2) .auth-arrow,
+      .auth-step:nth-child(4) .auth-arrow { display: none; }
+    }
+    
+    @media (max-width: 768px) {
+      .navbar { padding: 0 20px; }
+      .nav-links { display: none; }
+      .mobile-menu-btn { display: flex; }
+      .main-content { padding: 60px 20px; }
+      .hero { padding: calc(var(--nav-height) + 60px) 20px 60px; }
+      .hero-stats { gap: 32px; }
+      .security-grid { grid-template-columns: 1fr; }
+      .compliance-grid { grid-template-columns: 1fr; }
+      .compliance-item { border-right: none; }
+      .auth-flow { grid-template-columns: 1fr; }
+      .auth-arrow { display: none; }
+      .footer-grid { grid-template-columns: 1fr; text-align: center; }
+      .footer-brand { max-width: none; }
+      .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
+      .cta-section { padding: 60px 20px; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Molecular Sidebars -->
+  <div class="molecular-sidebar left">
+    <div class="dna-helix">
+      <div class="dna-strand"></div>
+    </div>
+  </div>
+  <div class="molecular-sidebar right">
+    <div class="dna-helix">
+      <div class="dna-strand"></div>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="nav-left">
+      <a href="index.html" class="nav-logo">
+        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%2300E5FF'/%3E%3Cstop offset='100%25' stop-color='%23a78bfa'/%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle cx='16' cy='16' r='14' fill='url(%23g)'/%3E%3Cpath d='M16 8v16M10 12h12M10 20h12' stroke='%23000' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E" alt="SciMSPT Logo">
+        <span class="nav-logo-text">Sci<span>MSPT</span></span>
+      </a>
+      <div class="nav-links">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="platform.html" class="nav-link">Platform</a>
+        <a href="research.html" class="nav-link">Research</a>
+        <a href="startups.html" class="nav-link">Startups</a>
+        <a href="dashboard.html" class="nav-link">Dashboard</a>
+        <a href="quantum.html" class="nav-link">Quantum</a>
+        <a href="studio.html" class="nav-link">Studio</a>
+        <a href="security.html" class="nav-link active">Security</a>
+        <a href="infrastructure.html" class="nav-link">Infrastructure</a>
+        <a href="monitoring.html" class="nav-link">Monitoring</a>
+      </div>
+    </div>
+    <div class="nav-right">
+      <button class="theme-toggle" onclick="toggleTheme()">
+        <span class="material-icons-round">light_mode</span>
+        Theme
+      </button>
+      <button class="mobile-menu-btn">
+        <span class="material-icons-round">menu</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span class="material-icons-round">verified_user</span>
+        Enterprise-Grade Security
+      </div>
+      <h1 class="hero-title">Security & Compliance<br>Built for Research</h1>
+      <p class="hero-subtitle">
+        Military-grade encryption, GDPR compliance, and multi-layer authentication 
+        protecting your quantum research data. Your intellectual property deserves 
+        bank-level security.
+      </p>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="hero-stat-value">256-bit</div>
+          <div class="hero-stat-label">AES Encryption</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-value">99.99%</div>
+          <div class="hero-stat-label">Uptime SLA</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-value">SOC 2</div>
+          <div class="hero-stat-label">Compliant</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    
+    <!-- Core Security Features -->
+    <section class="section">
+      <div class="section-header">
+        <div class="section-tag">// CORE_SECURITY_FEATURES</div>
+        <h2 class="section-title">Multi-Layer Protection Architecture</h2>
+        <p class="section-desc">
+          Defense in depth across every layer of your research workflow—from authentication to data at rest.
+        </p>
+      </div>
+      
+      <div class="security-grid">
+        <div class="security-card accent-cyan">
+          <div class="card-icon">
+            <span class="material-icons-round">enhanced_encryption</span>
+          </div>
+          <h3 class="card-title">End-to-End Encryption</h3>
+          <p class="card-desc">
+            All data encrypted in transit (TLS 1.3) and at rest (AES-256-GCM). 
+            Quantum-safe algorithms ready for post-quantum era.
+          </p>
+          <ul class="card-list">
+            <li><span class="material-icons-round">check_circle</span>TLS 1.3 for all connections</li>
+            <li><span class="material-icons-round">check_circle</span>AES-256-GCM encryption</li>
+            <li><span class="material-icons-round">check_circle</span>Post-quantum cryptography roadmap</li>
+            <li><span class="material-icons-round">check_circle</span>Zero-knowledge proof architecture</li>
+          </ul>
+        </div>
+        
+        <div class="security-card accent-purple">
+          <div class="card-icon">
+            <span class="material-icons-round">admin_panel_settings</span>
+          </div>
+          <h3 class="card-title">OAuth 2.0 / OIDC Authentication</h3>
+          <p class="card-desc">
+            Enterprise SSO integration with major identity providers. 
+            No passwords stored—delegated authentication you trust.
+          </p>
+          <ul class="card-list">
+            <li><span class="material-icons-round">check_circle</span>GitHub OAuth integration</li>
+            <li><span class="material-icons-round">check_circle</span>Google Workspace SSO</li>
+            <li><span class="material-icons-round">check_circle</span>LinkedIn Identity</li>
+            <li><span class="material-icons-round">check_circle</span>Twitter/X OAuth</li>
+          </ul>
+        </div>
+        
+        <div class="security-card accent-green">
+          <div class="card-icon">
+            <span class="material-icons-round">policy</span>
+          </div>
+          <h3 class="card-title">GDPR & Data Privacy</h3>
+          <p class="card-desc">
+            Full GDPR compliance with data portability, right to erasure, 
+            and privacy-by-design architecture built from day one.
+          </p>
+          <ul class="card-list">
+            <li><span class="material-icons-round">check_circle</span>Data Processing Agreement templates</li>
+            <li><span class="material-icons-round">check_circle</span>Right to erasure automation</li>
+            <li><span class="material-icons-round">check_circle</span>Cookie consent management</li>
+            <li><span class="material-icons-round">check_circle</span>EU data residency option</li>
+          </ul>
+        </div>
+        
+        <div class="security-card accent-gold">
+          <div class="card-icon">
+            <span class="material-icons-round">shield</span>
+          </div>
+          <h3 class="card-title">API Security Gateway</h3>
+          <p class="card-desc">
+            Rate limiting, request validation, and threat detection 
+            protecting all API endpoints from abuse and attacks.
+          </p>
+          <ul class="card-list">
+            <li><span class="material-icons-round">check_circle</span>JWT token validation</li>
+            <li><span class="material-icons-round">check_circle</span>Rate limiting (1000 req/min)</li>
+            <li><span class="material-icons-round">check_circle</span>SQL injection prevention</li>
+            <li><span class="material-icons-round">check_circle</span>XSS protection headers</li>
+          </ul>
+        </div>
+        
+        <div class="security-card accent-red">
+          <div class="card-icon">
+            <span class="material-icons-round">storage</span>
+          </div>
+          <h3 class="card-title">Secure Data Storage</h3>
+          <p class="card-desc">
+            Encrypted databases with field-level encryption for sensitive 
+            research data. Keys rotated automatically every 90 days.
+          </p>
+          <ul class="card-list">
+            <li><span class="material-icons-round">check_circle</span>AES-256 database encryption</li>
+            <li><span class="material-icons-round">check_circle</span>Automatic key rotation</li>
+            <li><span class="material-icons-round">check_circle</span>Secure backup with immutability</li>
+            <li><span class="material-icons-round">check_circle</span>Geographic redundancy</li>
+          </ul>
+        </div>
+        
+        <div class="security-card accent-pink">
+          <div class="card-icon">
+            <span class="material-icons-round">visibility_off</span>
+          </div>
+          <h3 class="card-title">Privacy Controls</h3>
+          <p class="card-desc">
+            User-controlled privacy settings including anonymous mode, 
+            data export, and granular sharing permissions.
+          </p>
+          <ul class="card-list">
+            <li><span class="material-icons-round">check_circle</span>Anonymous research mode</li>
+            <li><span class="material-icons-round">check_circle</span>Granular permission controls</li>
+            <li><span class="material-icons-round">check_circle</span>Complete data export (JSON/CSV)</li>
+            <li><span class="material-icons-round">check_circle</span>Activity audit logs</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Authentication Flow -->
+    <section class="section">
+      <div class="section-header">
+        <div class="section-tag">// AUTHENTICATION_FLOW</div>
+        <h2 class="section-title">Enterprise Authentication Pipeline</h2>
+        <p class="section-desc">
+          Secure OAuth 2.0 flow with PKCE extension for public clients. 
+          No credentials ever touch our servers.
+        </p>
+      </div>
+      
+      <div class="auth-flow">
+        <div class="auth-step">
+          <div class="auth-step-number">1</div>
+          <div class="auth-step-icon">
+            <span class="material-icons-round">login</span>
+          </div>
+          <h4 class="auth-step-title">User Initiation</h4>
+          <p class="auth-step-desc">User clicks "Sign in with GitHub/Google"</p>
+          <span class="auth-arrow material-icons-round">arrow_forward</span>
+        </div>
+        
+        <div class="auth-step">
+          <div class="auth-step-number">2</div>
+          <div class="auth-step-icon">
+            <span class="material-icons-round">open_in_new</span>
+          </div>
+          <h4 class="auth-step-title">Provider Redirect</h4>
+          <p class="auth-step-desc">Redirected to IdP with PKCE challenge</p>
+          <span class="auth-arrow material-icons-round">arrow_forward</span>
+        </div>
+        
+        <div class="auth-step">
+          <div class="auth-step-number">3</div>
+          <div class="auth-step-icon">
+            <span class="material-icons-round">how_to_reg</span>
+          </div>
+          <h4 class="auth-step-title">User Authorization</h4>
+          <p class="auth-step-desc">User authenticates with trusted provider</p>
+          <span class="auth-arrow material-icons-round">arrow_forward</span>
+        </div>
+        
+        <div class="auth-step">
+          <div class="auth-step-number">4</div>
+          <div class="auth-step-icon">
+            <span class="material-icons-round">verified_user</span>
+          </div>
+          <h4 class="auth-step-title">Token Exchange</h4>
+          <p class="auth-step-desc">Secure token exchange, session created</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Compliance Matrix -->
+    <section class="section">
+      <div class="section-header">
+        <div class="section-tag">// COMPLIANCE_FRAMEWORK</div>
+        <h2 class="section-title">Regulatory Compliance Status</h2>
+        <p class="section-desc">
+          Built for global research institutions requiring strict data governance 
+          and regulatory adherence.
+        </p>
+      </div>
+      
+      <div class="compliance-container">
+        <div class="compliance-header">
+          <h3 class="compliance-title">Compliance Certification Matrix</h3>
+          <p class="compliance-desc">
+            Current certification status and implementation timeline for enterprise requirements
+          </p>
+        </div>
+        
+        <div class="compliance-grid">
+          <div class="compliance-item">
+            <div class="compliance-badge">
+              <span class="material-icons-round" style="font-size: 12px;">check</span>
+              Compliant
+            </div>
+            <h4 class="compliance-name">GDPR (EU)</h4>
+            <p class="compliance-detail">
+              Full compliance with Articles 5-12, 13-23. DPA templates available. 
+              EU data hosting option enabled.
+            </p>
+          </div>
+          
+          <div class="compliance-item">
+            <div class="compliance-badge">
+              <span class="material-icons-round" style="font-size: 12px;">check</span>
+              Compliant
+            </div>
+            <h4 class="compliance-name">CCPA (California)</h4>
+            <p class="compliance-detail">
+              California Consumer Privacy Act compliant. Opt-out mechanisms, 
+              data deletion within 45 days guaranteed.
+            </p>
+          </div>
+          
+          <div class="compliance-item">
+            <div class="compliance-badge pending">
+              <span class="material-icons-round" style="font-size: 12px;">schedule</span>
+              In Progress
+            </div>
+            <h4 class="compliance-name">SOC 2 Type II</h4>
+            <p class="compliance-detail">
+              SOC 2 Type I complete. Type II audit scheduled Q4 2025. 
+              Security controls documented and tested.
+            </p>
+          </div>
+          
+          <div class="compliance-item">
+            <div class="compliance-badge pending">
+              <span class="material-icons-round" style="font-size: 12px;">schedule</span>
+              In Progress
+            </div>
+            <h4 class="compliance-name">ISO 27001</h4>
+            <p class="compliance-detail">
+              ISMS framework implemented. Formal certification audit 
+              planned for H1 2026 with enterprise pilot partners.
+            </p>
+          </div>
+          
+          <div class="compliance-item">
+            <div class="compliance-badge">
+              <span class="material-icons-round" style="font-size: 12px;">check</span>
+              Compliant
+            </div>
+            <h4 class="compliance-name">HIPAA Ready</h4>
+            <p class="compliance-detail">
+              Healthcare data handling capabilities. BAA agreements 
+              available for medical research applications.
+            </p>
+          </div>
+          
+          <div class="compliance-item">
+            <div class="compliance-badge pending">
+              <span class="material-icons-round" style="font-size: 12px;">schedule</span>
+              Roadmap
+            </div>
+            <h4 class="compliance-name">FedRAMP Authorized</h4>
+            <p class="compliance-detail">
+              Federal government compliance pathway defined. 
+              Targeting Moderate impact level authorization.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Encryption Standards Table -->
+    <section class="section">
+      <div class="section-header">
+        <div class="section-tag">// ENCRYPTION_STANDARDS</div>
+        <h2 class="section-title">Cryptographic Infrastructure</h2>
+        <p class="section-desc">
+          Industry-standard encryption protocols protecting data at every stage.
+        </p>
+      </div>
+      
+      <table class="encryption-table">
+        <thead>
+          <tr>
+            <th>Data State</th>
+            <th>Algorithm</th>
+            <th>Key Length</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="encryption-type">In Transit</span></td>
+            <td>TLS 1.3</td>
+            <td>ECDHE (P-256)</td>
+            <td><span class="encryption-status active"><span class="material-icons-round">check_circle</span> Active</span></td>
+          </tr>
+          <tr>
+            <td><span class="encryption-type">At Rest</span></td>
+            <td>AES-256-GCM</td>
+            <td>256-bit</td>
+            <td><span class="encryption-status active"><span class="material-icons-round">check_circle</span> Active</span></td>
+          </tr>
+          <tr>
+            <td><span class="encryption-type">Database Fields</span></td>
+            <td>AES-256-CBC</td>
+            <td>256-bit per-field</td>
+            <td><span class="encryption-status active"><span class="material-icons-round">check_circle</span> Active</span></td>
+          </tr>
+          <tr>
+            <td><span class="encryption-type">API Tokens</span></td>
+            <td>HMAC-SHA512</td>
+            <td>512-bit</td>
+            <td><span class="encryption-status active"><span class="material-icons-round">check_circle</span> Active</span></td>
+          </tr>
+          <tr>
+            <td><span class="encryption-type">Password Hashes</span></td>
+            <td>Argon2id</td>
+            <td>Variable (memory-hard)</td>
+            <td><span class="encryption-status active"><span class="material-icons-round">check_circle</span> Active</span></td>
+          </tr>
+          <tr>
+            <td><span class="encryption-type">Session Tokens</span></td>
+            <td>JWT + RS256</td>
+            <td>2048-bit RSA</td>
+            <td><span class="encryption-status active"><span class="material-icons-round">check_circle</span> Active</span></td>
+          </tr>
+        </tbody>
+      </table>
+      
+      <!-- Sample Audit Log -->
+      <h3 style="margin-top: 48px; margin-bottom: 16px; font-family: var(--font-heading); font-size: 20px;">
+        Live Audit Log Preview
+      </h3>
+      <div class="audit-preview">
+        <div class="audit-line">
+          <span class="audit-time">2025-08-22T14:32:01Z</span>
+          <span class="audit-event">AUTH_SUCCESS</span>
+          <span class="audit-detail">user_id=a3f8c2 | provider=github | ip=185.xxx.xxx.xxx</span>
+        </div>
+        <div class="audit-line">
+          <span class="audit-time">2025-08-22T14:31:45Z</span>
+          <span class="audit-event">QUANTUM_JOB_SUBMIT</span>
+          <span class="audit-detail">job_id=q9x7k2 | backend=ibmq_manila | circuit_depth=1200</span>
+        </div>
+        <div class="audit-line">
+          <span class="audit-time">2025-08-22T14:30:22Z</span>
+          <span class="audit-event">DATA_EXPORT</span>
+          <span class="audit-detail">user_id=b7d1e9 | format=json | records_count=47</span>
+        </div>
+        <div class="audit-line">
+          <span class="audit-time">2025-08-22T14:29:58Z</span>
+          <span class="audit-event">PERMISSION_CHANGE</span>
+          <span class="audit-detail">resource=startup_P5 | role=admin→viewer | by=user_admin</span>
+        </div>
+        <div class="audit-line">
+          <span class="audit-time">2025-08-22T14:28:33Z</span>
+          <span class="audit-event">API_KEY_ROTATE</span>
+          <span class="audit-detail">key_id=ak_live_xxx | reason=scheduled_90day</span>
+        </div>
+        <div class="audit-line">
+          <span class="audit-time">2025-08-22T14:27:15Z</span>
+          <span class="audit-event">SESSION_INVALIDATE</span>
+          <span class="audit-detail">user_id=c4f2a8 | reason=password_change | sessions_revoked=3</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Security Best Practices -->
+    <section class="section">
+      <div class="section-header">
+        <div class="section-tag">// SECURITY_BEST_PRACTICES</div>
+        <h2 class="section-title">Research Data Protection</h2>
+        <p class="section-desc">
+          Specialized protections for sensitive scientific research and intellectual property.
+        </p>
+      </div>
+      
+      <div class="security-grid">
+        <div class="security-card accent-cyan">
+          <div class="card-icon">
+            <span class="material-icons-round">science</span>
+          </div>
+          <h3 class="card-title">IP Protection Mode</h3>
+          <p class="card-desc">
+            Enhanced protections for pre-publication research. Automatic watermarking, 
+            access logging, and download restrictions.
+          </p>
+          <ul class="card-list">
+            <li><span class="material-icons-round">check_circle</span>Document watermarking</li>
+            <li><span class="material-icons-round">check_circle</span>Access request workflows</li>
+            <li><span class="material-icons-round">check_circle</span>Export restrictions</li>
+            <li><span class="material-icons-round">check_circle</span>Collaboration NDA tracking</li>
+          </ul>
+        </div>
+        
+        <div class="security-card accent-purple">
+          <div class="card-icon">
+            <span class="material-icons-round">bug_report</span>
+          </div>
+          <h3 class="card-title">Bug Bounty Program</h3>
+          <p class="card-desc">
+            Responsible disclosure program with rewards up to $10,000 
+            for critical security vulnerabilities.
+          </p>
+          <ul class="card-list">
+            <li><span class="material-icons-round">check_circle</span>HackerOne integration</li>
+            <li><span class="material-icons-round">check_circle</span>$100-$10,000 bounties</li>
+            <li><span class="material-icons-round">check_circle</span>48-hour response SLA</li>
+            <li><span class="material-icons-round">check_circle</span>Public hall of fame</li>
+          </ul>
+        </div>
+        
+        <div class="security-card accent-green">
+          <div class="card-icon">
+            <span class="material-icons-round">update</span>
+          </div>
+          <h3 class="card-title">Security Updates</h3>
+          <p class="card-desc">
+            Continuous dependency monitoring and automated patching 
+            for zero-day vulnerabilities.
+          </p>
+          <ul class="card-list">
+            <li><span class="material-icons-round">check_circle</span>Dependabot integration</li>
+            <li><span class="material-icons-round">check_circle</span>Automated patch deployment</li>
+            <li><span class="material-icons-round">check_circle</span>CVE scanning pipeline</li>
+            <li><span class="material-icons-round">check_circle</span>Monthly security audits</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- CTA Section -->
+  <section class="cta-section">
+    <h2 class="cta-title">Ready for Enterprise Security Review?</h2>
+    <p class="cta-desc">
+      Download our security whitepaper or schedule a technical deep-dive with our security team.
+    </p>
+    <div class="cta-buttons">
+      <a href="#" class="btn-primary">
+        <span class="material-icons-round">description</span>
+        Security Whitepaper
+      </a>
+      <a href="#" class="btn-secondary">
+        <span class="material-icons-round">calendar_today</span>
+        Schedule Security Review
+      </a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="footer-logo">
+          <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%2300E5FF'/%3E%3Cstop offset='100%25' stop-color='%23a78bfa'/%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle cx='16' cy='16' r='14' fill='url(%23g)'/%3E%3Cpath d='M16 8v16M10 12h12M10 20h12' stroke='%23000' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E" alt="SciMSPT">
+          <span class="footer-logo-text">Sci<span>MSPT</span></span>
+        </a>
+        <p class="footer-desc">
+          Neural Research Intelligence Platform — transforming peer-reviewed science into strategic opportunities through molecular computing.
+        </p>
+      </div>
+      
+      <div class="footer-col">
+        <h4>Platform</h4>
+        <ul class="footer-links">
+          <li><a href="platform.html">Features</a></li>
+          <li><a href="quantum.html">Quantum Computing</a></li>
+          <li><a href="research.html">Research Pipeline</a></li>
+          <li><a href="startups.html">Startup Portfolio</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <ul class="footer-links">
+          <li><a href="documentation.html">Documentation</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="studio.html">Media Studio</a></li>
+          <li><a href="#">API Reference</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-col">
+        <h4>Trust & Safety</h4>
+        <ul class="footer-links">
+          <li><a href="security.html">Security Center</a></li>
+          <li><a href="infrastructure.html">Infrastructure</a></li>
+          <li><a href="monitoring.html">Status Page</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <p class="footer-copy">&copy; 2025 SciMSPT. Neural Research Intelligence Platform.</p>
+      <div class="footer-legal">
+        <a href="#">Terms of Service</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Cookie Policy</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Theme Toggle
+    function toggleTheme() {
+      const html = document.documentElement;
+      const currentTheme = html.getAttribute('data-theme');
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', newTheme);
+      localStorage.setItem('scimspt-theme', newTheme);
+    }
+    
+    // Load saved theme
+    document.addEventListener('DOMContentLoaded', () => {
+      const savedTheme = localStorage.getItem('scimspt-theme') || 'dark';
+      document.documentElement.setAttribute('data-theme', savedTheme);
+    });
+    
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
