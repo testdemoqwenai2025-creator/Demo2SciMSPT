@@ -1,0 +1,2761 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Changelog & Roadmap — SciMSPT Neural Research Platform</title>
+  <meta name="description" content="SciMSPT Changelog & Roadmap — Track our development progress, upcoming features, and platform evolution. Building the future of neural molecular simulation.">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%2300E5FF'/%3E%3Cstop offset='100%25' stop-color='%23a78bfa'/%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle cx='16' cy='16' r='14' fill='url(%23g)'/%3E%3Cpath d='M16 8v16M10 12h12M10 20h12' stroke='%23000' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E">
+  <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Crect width='180' height='180' rx='36' fill='%230a1628'/%3E%3Ctext x='90' y='110' font-size='100' text-anchor='middle' fill='%2300E5FF' font-family='system-ui'%3E𝒮%3C/text%3E%3C/svg%3E">
+
+  <!-- Open Graph / Social Sharing -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Changelog & Roadmap — SciMSPT Neural Research Platform">
+  <meta property="og:description" content="Track SciMSPT development progress, upcoming features, and platform vision. Active development, transparent communication.">
+  <meta property="og:url" content="https://testdemoqwenai2025-creator.github.io/Demo2SciMSPT/changelog.html">
+  <meta property="og:image" content="https://testdemoqwenai2025-creator.github.io/Demo2SciMSPT/assets/og-image.svg">
+  <meta property="og:site_name" content="SciMSPT">
+  <meta property="og:locale" content="en_US">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Changelog & Roadmap — SciMSPT">
+  <meta name="twitter:description" content="Track SciMSPT development progress and future roadmap. Building the future of neural molecular simulation.">
+  <meta name="twitter:image" content="https://testdemoqwenai2025-creator.github.io/Demo2SciMSPT/assets/og-image.svg">
+
+  <!-- Additional SEO -->
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="SciMSPT Team">
+  <link rel="canonical" href="https://testdemoqwenai2025-creator.github.io/Demo2SciMSPT/changelog.html">
+  
+  <!-- PWA Manifest -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#00E5FF">
+  <link rel="apple-touch-icon" href="assets/icon-192.svg">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="SciMSPT">
+  
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+  
+  <style>
+    /* ============================================
+       SCIMSPT NEURAL DESIGN SYSTEM v4.0
+       Changelog & Roadmap Edition
+       ============================================ */
+    
+    :root {
+      --bg-deep: #030810;
+      --bg-primary: #0a1628;
+      --bg-secondary: #0d1f35;
+      --bg-tertiary: #122a45;
+      --bg-glass: rgba(10, 22, 40, 0.85);
+      --bg-glass-light: rgba(255, 255, 255, 0.03);
+      
+      --accent-primary: #00E5FF;
+      --accent-secondary: #4da8da;
+      --accent-tertiary: #a78bfa;
+      --accent-pink: #f472b6;
+      --accent-green: #10b981;
+      --accent-gold: #f59e0b;
+      --accent-red: #ef4444;
+      
+      --text-primary: #e8f4fc;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+      
+      --border-subtle: rgba(0, 229, 255, 0.15);
+      --border-glow: rgba(0, 229, 255, 0.4);
+      
+      --font-heading: 'Playfair Display', Georgia, serif;
+      --font-body: 'Inter', -apple-system, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+      --font-tech: 'Orbitron', sans-serif;
+      
+      --nav-height: 80px;
+      --sidebar-width: 100px;
+      
+      --glow-primary: 0 0 30px rgba(0, 229, 255, 0.3);
+      --glow-secondary: 0 0 60px rgba(167, 139, 250, 0.2);
+    }
+    
+    [data-theme="light"] {
+      --bg-deep: #f0f4f8;
+      --bg-primary: #ffffff;
+      --bg-secondary: #f8fafc;
+      --bg-tertiary: #e2e8f0;
+      --bg-glass: rgba(255, 255, 255, 0.92);
+      --bg-glass-light: rgba(0, 0, 0, 0.02);
+      --text-primary: #0f172a;
+      --text-secondary: #475569;
+      --text-muted: #94a3b8;
+      --border-subtle: rgba(77, 168, 218, 0.25);
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    html {
+      scroll-behavior: smooth;
+    }
+    
+    body {
+      font-family: var(--font-body);
+      background: var(--bg-deep);
+      color: var(--text-primary);
+      line-height: 1.6;
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+
+    /* Skip Link for Accessibility */
+    .skip-link {
+      position: absolute;
+      top: -100%;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--accent-primary);
+      color: var(--bg-deep);
+      padding: 12px 24px;
+      border-radius: 0 0 12px 12px;
+      z-index: 10000;
+      font-weight: 600;
+      transition: top 0.3s ease;
+      text-decoration: none;
+    }
+    
+    .skip-link:focus {
+      top: 0;
+    }
+
+    /* ============================================
+       MOLECULAR SIDE BARS
+       ============================================ */
+    
+    .molecular-sidebar {
+      position: fixed;
+      top: 0;
+      width: var(--sidebar-width);
+      height: 100vh;
+      z-index: 5;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    
+    .molecular-sidebar.left {
+      left: 0;
+      background: linear-gradient(90deg, rgba(0, 229, 255, 0.08) 0%, transparent 100%);
+      border-right: 1px solid var(--border-subtle);
+    }
+    
+    .molecular-sidebar.right {
+      right: 0;
+      background: linear-gradient(-90deg, rgba(167, 139, 250, 0.08) 0%, transparent 100%);
+      border-left: 1px solid var(--border-subtle);
+    }
+
+    /* ============================================
+       NAVIGATION SYSTEM
+       ============================================ */
+    
+    .nav-container {
+      position: fixed;
+      top: 0;
+      left: var(--sidebar-width);
+      right: var(--sidebar-width);
+      height: var(--nav-height);
+      z-index: 100;
+      background: var(--bg-glass);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 40px;
+    }
+    
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--text-primary);
+    }
+    
+    .nav-logo {
+      width: 42px;
+      height: 42px;
+      background: linear-gradient(135deg, var(--accent-primary), var(--accent-tertiary));
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-tech);
+      font-weight: 900;
+      font-size: 16px;
+      color: var(--bg-deep);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .nav-logo::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: conic-gradient(from 0deg, transparent, rgba(255,255,255,0.3), transparent);
+      animation: logoShine 4s linear infinite;
+    }
+    
+    @keyframes logoShine {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    
+    .nav-title {
+      font-family: var(--font-heading);
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+    }
+    
+    .nav-title span {
+      color: var(--accent-primary);
+    }
+    
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .nav-link {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 10px 18px;
+      text-decoration: none;
+      color: var(--text-secondary);
+      font-size: 14px;
+      font-weight: 500;
+      border-radius: 10px;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .nav-link::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 2px;
+      background: var(--accent-primary);
+      transition: width 0.3s ease;
+    }
+    
+    .nav-link:hover {
+      color: var(--text-primary);
+      background: var(--bg-glass-light);
+    }
+    
+    .nav-link:hover::before {
+      width: 60%;
+    }
+    
+    .nav-link.active {
+      color: var(--accent-primary);
+      background: rgba(0, 229, 255, 0.08);
+    }
+    
+    .nav-link.active::before {
+      width: 60%;
+    }
+    
+    .nav-link .material-icons-round {
+      font-size: 18px;
+    }
+    
+    /* Mobile Menu Button */
+    .mobile-menu-btn {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      background: rgba(0, 229, 255, 0.1);
+      border: 1px solid rgba(0, 229, 255, 0.2);
+      border-radius: 10px;
+      color: var(--accent-primary);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .mobile-menu-btn:hover {
+      background: rgba(0, 229, 255, 0.2);
+      transform: scale(1.05);
+    }
+    
+    .mobile-menu-btn .material-icons-round {
+      font-size: 24px;
+    }
+
+    /* Mobile Navigation */
+    .mobile-nav {
+      display: none;
+      position: fixed;
+      top: var(--nav-height);
+      left: var(--sidebar-width);
+      right: var(--sidebar-width);
+      bottom: 0;
+      background: var(--bg-glass);
+      backdrop-filter: blur(20px);
+      z-index: 99;
+      padding: 24px;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-20px);
+      transition: all 0.3s ease;
+    }
+    
+    .mobile-nav.show {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+    
+    .mobile-nav .nav-link {
+      display: flex;
+      padding: 16px;
+      margin-bottom: 8px;
+      font-size: 16px;
+    }
+
+    /* ============================================
+       HERO SECTION
+       ============================================ */
+    
+    .hero-section {
+      position: relative;
+      min-height: 70vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: calc(var(--nav-height) + 60px) 40px 80px;
+      overflow: hidden;
+    }
+    
+    .hero-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        radial-gradient(ellipse at 20% 20%, rgba(0, 229, 255, 0.15) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 80%, rgba(167, 139, 250, 0.15) 0%, transparent 50%),
+        linear-gradient(180deg, var(--bg-deep) 0%, var(--bg-primary) 100%);
+      z-index: 0;
+    }
+    
+    /* Particle Animation */
+    .particles-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: 1;
+    }
+    
+    .particle {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: var(--accent-primary);
+      border-radius: 50%;
+      opacity: 0.6;
+      animation: particleFloat 15s infinite ease-in-out;
+    }
+    
+    .particle:nth-child(odd) {
+      background: var(--accent-tertiary);
+      animation-duration: 20s;
+    }
+    
+    .particle:nth-child(3n) {
+      background: var(--accent-pink);
+      animation-duration: 25s;
+    }
+    
+    @keyframes particleFloat {
+      0%, 100% {
+        transform: translateY(0) translateX(0);
+        opacity: 0.3;
+      }
+      25% {
+        transform: translateY(-100px) translateX(50px);
+        opacity: 0.8;
+      }
+      50% {
+        transform: translateY(-200px) translateX(-30px);
+        opacity: 0.5;
+      }
+      75% {
+        transform: translateY(-100px) translateX(-50px);
+        opacity: 0.7;
+      }
+    }
+    
+    /* Grid Pattern Overlay */
+    .grid-pattern {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        linear-gradient(rgba(0, 229, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 229, 255, 0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+      z-index: 1;
+      animation: gridMove 30s linear infinite;
+    }
+    
+    @keyframes gridMove {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(60px, 60px); }
+    }
+    
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      max-width: 900px;
+    }
+    
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 20px;
+      background: linear-gradient(135deg, rgba(0, 229, 255, 0.15), rgba(167, 139, 250, 0.15));
+      border: 1px solid var(--border-subtle);
+      border-radius: 50px;
+      font-family: var(--font-mono);
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--accent-primary);
+      margin-bottom: 28px;
+      animation: fadeInDown 0.8s ease-out;
+    }
+    
+    .hero-badge .material-icons-round {
+      font-size: 18px;
+    }
+    
+    .hero-title {
+      font-family: var(--font-heading);
+      font-size: clamp(36px, 7vw, 72px);
+      font-weight: 900;
+      line-height: 1.1;
+      margin-bottom: 20px;
+      background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent-primary) 50%, var(--accent-tertiary) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: fadeInUp 0.8s ease-out 0.2s both;
+    }
+    
+    .hero-subtitle {
+      font-size: clamp(18px, 2.5vw, 24px);
+      color: var(--text-secondary);
+      margin-bottom: 16px;
+      font-weight: 300;
+      letter-spacing: -0.3px;
+      animation: fadeInUp 0.8s ease-out 0.4s both;
+    }
+    
+    .hero-date {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-mono);
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-bottom: 36px;
+      animation: fadeInUp 0.8s ease-out 0.6s both;
+    }
+    
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      animation: fadeInUp 0.8s ease-out 0.8s both;
+    }
+    
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 32px;
+      background: linear-gradient(135deg, var(--accent-primary), var(--accent-tertiary));
+      color: var(--bg-deep);
+      font-weight: 600;
+      font-size: 15px;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      box-shadow: var(--glow-primary);
+    }
+    
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 0 40px rgba(0, 229, 255, 0.5);
+    }
+    
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 32px;
+      background: transparent;
+      color: var(--text-primary);
+      font-weight: 500;
+      font-size: 15px;
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    
+    .btn-secondary:hover {
+      border-color: var(--accent-primary);
+      background: rgba(0, 229, 255, 0.05);
+    }
+    
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ============================================
+       MAIN CONTENT LAYOUT
+       ============================================ */
+    
+    .main-content {
+      position: relative;
+      z-index: 10;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 40px 100px;
+    }
+    
+    .section {
+      margin-bottom: 100px;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    .section-header {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+    
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--accent-primary);
+      margin-bottom: 16px;
+    }
+    
+    .section-title {
+      font-family: var(--font-heading);
+      font-size: clamp(28px, 4vw, 48px);
+      font-weight: 900;
+      margin-bottom: 16px;
+      line-height: 1.2;
+    }
+    
+    .section-description {
+      font-size: 17px;
+      color: var(--text-secondary);
+      max-width: 650px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    /* ============================================
+       CHANGELOG SECTION
+       ============================================ */
+    
+    .changelog-timeline {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+    
+    .changelog-timeline::before {
+      content: '';
+      position: absolute;
+      left: 24px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(
+        to bottom,
+        var(--accent-primary),
+        var(--accent-tertiary),
+        var(--accent-pink)
+      );
+      opacity: 0.3;
+    }
+    
+    .changelog-entry {
+      position: relative;
+      display: flex;
+      gap: 32px;
+      padding-left: 64px;
+    }
+    
+    .changelog-marker {
+      position: absolute;
+      left: 14px;
+      top: 24px;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--bg-deep);
+      border: 3px solid var(--accent-primary);
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .changelog-marker::after {
+      content: '';
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent-primary);
+      animation: markerPulse 2s ease-in-out infinite;
+    }
+    
+    @keyframes markerPulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.5); opacity: 0.5; }
+    }
+    
+    .changelog-card {
+      flex: 1;
+      background: var(--bg-glass);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--border-subtle);
+      border-radius: 20px;
+      padding: 32px;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .changelog-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent-primary), var(--accent-tertiary));
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    
+    .changelog-card:hover {
+      border-color: var(--accent-primary);
+      transform: translateX(8px);
+      box-shadow: var(--glow-primary);
+    }
+    
+    .changelog-card:hover::before {
+      opacity: 1;
+    }
+    
+    .changelog-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    
+    .version-info {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    
+    .version-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 18px;
+      font-family: var(--font-tech);
+      font-size: 14px;
+      font-weight: 700;
+      border-radius: 10px;
+      letter-spacing: 0.5px;
+    }
+    
+    .version-badge.v4 {
+      background: linear-gradient(135deg, rgba(0, 229, 255, 0.2), rgba(0, 229, 255, 0.1));
+      color: var(--accent-primary);
+      border: 1px solid rgba(0, 229, 255, 0.3);
+    }
+    
+    .version-badge.v3 {
+      background: linear-gradient(135deg, rgba(167, 139, 250, 0.2), rgba(167, 139, 250, 0.1));
+      color: var(--accent-tertiary);
+      border: 1px solid rgba(167, 139, 250, 0.3);
+    }
+    
+    .version-badge.v2 {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(16, 185, 129, 0.1));
+      color: var(--accent-green);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+    
+    .version-badge.v1 {
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.2), rgba(245, 158, 11, 0.1));
+      color: var(--accent-gold);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+    }
+    
+    .version-phase {
+      font-size: 13px;
+      color: var(--text-secondary);
+      padding: 6px 14px;
+      background: var(--bg-glass-light);
+      border-radius: 8px;
+      font-weight: 500;
+    }
+    
+    .version-date {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+    
+    .version-date .material-icons-round {
+      font-size: 16px;
+    }
+    
+    .feature-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 12px;
+      list-style: none;
+    }
+    
+    .feature-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 12px 16px;
+      background: var(--bg-glass-light);
+      border-radius: 10px;
+      transition: all 0.2s ease;
+    }
+    
+    .feature-item:hover {
+      background: rgba(0, 229, 255, 0.05);
+      transform: translateX(4px);
+    }
+    
+    .feature-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, rgba(0, 229, 255, 0.15), rgba(167, 139, 250, 0.15));
+      flex-shrink: 0;
+    }
+    
+    .feature-icon .material-icons-round {
+      font-size: 16px;
+      color: var(--accent-primary);
+    }
+    
+    .feature-text {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+    
+    .changelog-footer {
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    
+    .view-demo-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--accent-primary);
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+    
+    .view-demo-link:hover {
+      gap: 10px;
+    }
+    
+    .view-demo-link .material-icons-round {
+      font-size: 18px;
+      transition: transform 0.2s ease;
+    }
+    
+    .view-demo-link:hover .material-icons-round {
+      transform: translateX(4px);
+    }
+
+    /* ============================================
+       ROADMAP SECTION
+       ============================================ */
+    
+    .roadmap-container {
+      display: flex;
+      flex-direction: column;
+      gap: 48px;
+    }
+    
+    .roadmap-phase {
+      position: relative;
+    }
+    
+    .phase-header {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 28px;
+      flex-wrap: wrap;
+    }
+    
+    .phase-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 24px;
+      font-family: var(--font-tech);
+      font-size: 14px;
+      font-weight: 700;
+      border-radius: 14px;
+      letter-spacing: 1px;
+    }
+    
+    .phase-badge.q4-2025 {
+      background: linear-gradient(135deg, rgba(0, 229, 255, 0.2), rgba(0, 229, 255, 0.05));
+      color: var(--accent-primary);
+      border: 1px solid rgba(0, 229, 255, 0.3);
+    }
+    
+    .phase-badge.q1-2026 {
+      background: linear-gradient(135deg, rgba(167, 139, 250, 0.2), rgba(167, 139, 250, 0.05));
+      color: var(--accent-tertiary);
+      border: 1px solid rgba(167, 139, 250, 0.3);
+    }
+    
+    .phase-badge.q2-2026 {
+      background: linear-gradient(135deg, rgba(244, 114, 182, 0.2), rgba(244, 114, 182, 0.05));
+      color: var(--accent-pink);
+      border: 1px solid rgba(244, 114, 182, 0.3);
+    }
+    
+    .phase-title {
+      font-family: var(--font-heading);
+      font-size: 24px;
+      font-weight: 700;
+    }
+    
+    .phase-description {
+      font-size: 15px;
+      color: var(--text-muted);
+    }
+    
+    .phase-progress {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-left: auto;
+    }
+    
+    .progress-bar-container {
+      width: 150px;
+      height: 8px;
+      background: var(--bg-tertiary);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    
+    .progress-bar-fill {
+      height: 100%;
+      border-radius: 4px;
+      background: linear-gradient(90deg, var(--accent-primary), var(--accent-tertiary));
+      transition: width 1s ease-out;
+    }
+    
+    .progress-label {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+    
+    .roadmap-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 20px;
+    }
+    
+    .roadmap-card {
+      background: var(--bg-glass);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      padding: 24px;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .roadmap-card:hover {
+      border-color: var(--accent-tertiary);
+      transform: translateY(-4px);
+      box-shadow: var(--glow-secondary);
+    }
+    
+    .roadmap-card-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+    
+    .roadmap-card-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, rgba(0, 229, 255, 0.1), rgba(167, 139, 250, 0.1));
+    }
+    
+    .roadmap-card-icon .material-icons-round {
+      font-size: 26px;
+      color: var(--accent-primary);
+    }
+    
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      border-radius: 20px;
+    }
+    
+    .status-planned {
+      background: rgba(100, 116, 139, 0.2);
+      color: var(--text-muted);
+    }
+    
+    .status-in-progress {
+      background: rgba(245, 158, 11, 0.2);
+      color: var(--accent-gold);
+    }
+    
+    .status-beta {
+      background: rgba(0, 229, 255, 0.2);
+      color: var(--accent-primary);
+    }
+    
+    .status-done {
+      background: rgba(16, 185, 129, 0.2);
+      color: var(--accent-green);
+    }
+    
+    .status-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: currentColor;
+    }
+    
+    .status-planned .status-dot { animation: statusPulse 2s ease-in-out infinite; }
+    .status-in-progress .status-dot { animation: statusPulse 1s ease-in-out infinite; }
+    
+    @keyframes statusPulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+    
+    .roadmap-card-title {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--text-primary);
+    }
+    
+    .roadmap-card-description {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+    
+    .roadmap-card-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+    
+    .timeline-estimate {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-family: var(--font-mono);
+    }
+
+    /* ============================================
+       METRICS SECTION
+       ============================================ */
+    
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 24px;
+    }
+    
+    .metric-card {
+      background: var(--bg-glass);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--border-subtle);
+      border-radius: 20px;
+      padding: 32px;
+      text-align: center;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .metric-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, rgba(0, 229, 255, 0.03), rgba(167, 139, 250, 0.03));
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    
+    .metric-card:hover {
+      border-color: var(--accent-primary);
+      transform: translateY(-6px);
+      box-shadow: var(--glow-primary);
+    }
+    
+    .metric-card:hover::before {
+      opacity: 1;
+    }
+    
+    .metric-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 64px;
+      height: 64px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, rgba(0, 229, 255, 0.15), rgba(167, 139, 250, 0.15));
+      margin-bottom: 20px;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .metric-icon .material-icons-round {
+      font-size: 32px;
+      color: var(--accent-primary);
+    }
+    
+    .metric-value {
+      font-family: var(--font-mono);
+      font-size: clamp(32px, 5vw, 48px);
+      font-weight: 700;
+      color: var(--text-primary);
+      line-height: 1;
+      margin-bottom: 8px;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .metric-value .suffix {
+      font-size: 0.6em;
+      color: var(--accent-primary);
+      margin-left: 4px;
+    }
+    
+    .metric-label {
+      font-size: 15px;
+      color: var(--text-secondary);
+      font-weight: 500;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .metric-description {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: 8px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ============================================
+       STAY UPDATED SECTION
+       ============================================ */
+    
+    .stay-updated-wrapper {
+      background: var(--bg-glass);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--border-subtle);
+      border-radius: 24px;
+      padding: 56px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .stay-updated-wrapper::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--accent-primary), var(--accent-tertiary), var(--accent-pink));
+    }
+    
+    .stay-updated-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        radial-gradient(circle at 20% 20%, rgba(0, 229, 255, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 80% 80%, rgba(167, 139, 250, 0.08) 0%, transparent 40%);
+      pointer-events: none;
+    }
+    
+    .stay-updated-content {
+      position: relative;
+      z-index: 1;
+    }
+    
+    .stay-updated-title {
+      font-family: var(--font-heading);
+      font-size: clamp(24px, 3vw, 36px);
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+    
+    .stay-updated-description {
+      font-size: 16px;
+      color: var(--text-secondary);
+      margin-bottom: 36px;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    .email-form {
+      display: flex;
+      gap: 12px;
+      max-width: 480px;
+      margin: 0 auto 32px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    
+    .email-input {
+      flex: 1;
+      min-width: 260px;
+      padding: 16px 24px;
+      background: var(--bg-deep);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      color: var(--text-primary);
+      font-family: var(--font-body);
+      font-size: 15px;
+      outline: none;
+      transition: all 0.3s ease;
+    }
+    
+    .email-input:focus {
+      border-color: var(--accent-primary);
+      box-shadow: 0 0 0 3px rgba(0, 229, 255, 0.15);
+    }
+    
+    .email-input::placeholder {
+      color: var(--text-muted);
+    }
+    
+    .submit-btn {
+      padding: 16px 32px;
+      background: linear-gradient(135deg, var(--accent-primary), var(--accent-tertiary));
+      color: var(--bg-deep);
+      font-weight: 600;
+      font-size: 15px;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      white-space: nowrap;
+    }
+    
+    .submit-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--glow-primary);
+    }
+    
+    .social-links {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    
+    .social-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 24px;
+      background: var(--bg-deep);
+      border: 1px solid var(--border-subtle);
+      border-radius: 50px;
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+    
+    .social-link:hover {
+      border-color: var(--accent-primary);
+      color: var(--accent-primary);
+      transform: translateY(-2px);
+    }
+    
+    .social-link .material-icons-round {
+      font-size: 20px;
+    }
+    
+    .github-star-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 28px;
+      background: #24292e;
+      border: 1px solid #30363d;
+      border-radius: 50px;
+      color: #fff;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+    
+    .github-star-btn:hover {
+      background: #30363d;
+      border-color: var(--accent-primary);
+      transform: translateY(-2px);
+    }
+    
+    .rss-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      color: var(--text-muted);
+      text-decoration: none;
+      margin-top: 24px;
+      transition: color 0.2s ease;
+    }
+    
+    .rss-link:hover {
+      color: var(--accent-primary);
+    }
+
+    /* ============================================
+       FOOTER
+       ============================================ */
+    
+    .footer {
+      position: relative;
+      background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.3));
+      padding: 80px 40px 40px;
+      margin-left: var(--sidebar-width);
+      margin-right: var(--sidebar-width);
+      border-top: 1px solid var(--border-subtle);
+    }
+    
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 48px;
+      margin-bottom: 48px;
+    }
+    
+    .footer-brand {
+      max-width: 320px;
+    }
+    
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    
+    .footer-logo-icon {
+      width: 44px;
+      height: 44px;
+      background: linear-gradient(135deg, var(--accent-primary), var(--accent-tertiary));
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-tech);
+      font-weight: 900;
+      font-size: 18px;
+      color: var(--bg-deep);
+    }
+    
+    .footer-logo-text {
+      font-family: var(--font-heading);
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+    
+    .footer-desc {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+    
+    .footer-column h4 {
+      font-family: var(--font-heading);
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 20px;
+    }
+    
+    .footer-links {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    
+    .footer-links a {
+      font-size: 14px;
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+    
+    .footer-links a:hover {
+      color: var(--accent-primary);
+      transform: translateX(4px);
+    }
+    
+    .footer-bottom {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding-top: 32px;
+      border-top: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    
+    .footer-copyright {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+    
+    .footer-social {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    
+    .footer-social a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: var(--bg-glass-light);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    
+    .footer-social a:hover {
+      border-color: var(--accent-primary);
+      color: var(--accent-primary);
+      transform: translateY(-2px);
+    }
+    
+    .footer-social .material-icons-round {
+      font-size: 20px;
+    }
+
+    /* ============================================
+       RESPONSIVE DESIGN
+       ============================================ */
+    
+    @media (max-width: 1024px) {
+      .molecular-sidebar {
+        display: none;
+      }
+      
+      .nav-container {
+        left: 0;
+        right: 0;
+        padding: 0 24px;
+      }
+      
+      .mobile-nav {
+        left: 0;
+        right: 0;
+      }
+      
+      .footer {
+        margin-left: 0;
+        margin-right: 0;
+      }
+      
+      .footer-content {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+      
+      .mobile-menu-btn {
+        display: flex;
+      }
+      
+      .mobile-nav {
+        display: block;
+      }
+      
+      .hero-section {
+        padding: calc(var(--nav-height) + 40px) 24px 60px;
+        min-height: 60vh;
+      }
+      
+      .main-content {
+        padding: 0 24px 80px;
+      }
+      
+      .section {
+        margin-bottom: 64px;
+      }
+      
+      .changelog-timeline::before {
+        left: 16px;
+      }
+      
+      .changelog-entry {
+        padding-left: 48px;
+        gap: 20px;
+      }
+      
+      .changelog-marker {
+        left: 6px;
+        width: 20px;
+        height: 20px;
+      }
+      
+      .changelog-card {
+        padding: 24px;
+      }
+      
+      .feature-list {
+        grid-template-columns: 1fr;
+      }
+      
+      .roadmap-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .phase-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      
+      .phase-progress {
+        margin-left: 0;
+        width: 100%;
+      }
+      
+      .progress-bar-container {
+        flex: 1;
+      }
+      
+      .metrics-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      .stay-updated-wrapper {
+        padding: 36px 24px;
+      }
+      
+      .email-form {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      
+      .email-input {
+        min-width: auto;
+      }
+      
+      .footer-content {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+      
+      .footer-bottom {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .hero-title {
+        font-size: 32px;
+      }
+      
+      .hero-subtitle {
+        font-size: 16px;
+      }
+      
+      .metrics-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .social-links {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      
+      .social-link {
+        justify-content: center;
+      }
+    }
+
+    /* Focus Styles for Accessibility */
+    *:focus-visible {
+      outline: 2px solid var(--accent-primary);
+      outline-offset: 2px;
+    }
+    
+    /* Reduced Motion */
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Skip Link for Accessibility -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- Molecular Sidebars -->
+  <div class="molecular-sidebar left" aria-hidden="true"></div>
+  <div class="molecular-sidebar right" aria-hidden="true"></div>
+
+  <!-- Navigation -->
+  <nav class="nav-container" role="navigation" aria-label="Main navigation">
+    <a href="index.html" class="nav-brand">
+      <div class="nav-logo">S</div>
+      <span class="nav-title">Sci<span>MSPT</span></span>
+    </a>
+    
+    <div class="nav-links">
+      <a href="index.html" class="nav-link">
+        <span class="material-icons-round">home</span>
+        Home
+      </a>
+      <a href="platform.html" class="nav-link">
+        <span class="material-icons-round">rocket_launch</span>
+        Platform
+      </a>
+      <a href="research.html" class="nav-link">
+        <span class="material-icons-round">science</span>
+        Research
+      </a>
+      <a href="startups.html" class="nav-link">
+        <span class="material-icons-round">trending_up</span>
+        Startups
+      </a>
+      <a href="dashboard.html" class="nav-link">
+        <span class="material-icons-round">dashboard</span>
+        Dashboard
+      </a>
+      <a href="changelog.html" class="nav-link active" aria-current="page">
+        <span class="material-icons-round">history</span>
+        Changelog
+      </a>
+    </div>
+    
+    <button class="mobile-menu-btn" aria-label="Toggle navigation menu" onclick="toggleMobileNav()">
+      <span class="material-icons-round">menu</span>
+    </button>
+  </nav>
+
+  <!-- Mobile Navigation -->
+  <div class="mobile-nav" id="mobileNav" role="navigation" aria-label="Mobile navigation">
+    <a href="index.html" class="nav-link"><span class="material-icons-round">home</span> Home</a>
+    <a href="platform.html" class="nav-link"><span class="material-icons-round">rocket_launch</span> Platform</a>
+    <a href="research.html" class="nav-link"><span class="material-icons-round">science</span> Research</a>
+    <a href="startups.html" class="nav-link"><span class="material-icons-round">trending_up</span> Startups</a>
+    <a href="dashboard.html" class="nav-link"><span class="material-icons-round">dashboard</span> Dashboard</a>
+    <a href="changelog.html" class="nav-link active"><span class="material-icons-round">history</span> Changelog</a>
+  </div>
+
+  <!-- Hero Section -->
+  <header class="hero-section" role="banner">
+    <div class="hero-bg"></div>
+    <div class="particles-container" aria-hidden="true">
+      <div class="particle" style="left: 10%; top: 20%; animation-delay: 0s;"></div>
+      <div class="particle" style="left: 20%; top: 60%; animation-delay: 2s;"></div>
+      <div class="particle" style="left: 35%; top: 30%; animation-delay: 4s;"></div>
+      <div class="particle" style="left: 50%; top: 70%; animation-delay: 1s;"></div>
+      <div class="particle" style="left: 65%; top: 25%; animation-delay: 3s;"></div>
+      <div class="particle" style="left: 75%; top: 55%; animation-delay: 5s;"></div>
+      <div class="particle" style="left: 85%; top: 35%; animation-delay: 2.5s;"></div>
+      <div class="particle" style="left: 90%; top: 80%; animation-delay: 4.5s;"></div>
+      <div class="particle" style="left: 45%; top: 45%; animation-delay: 1.5s;"></div>
+      <div class="particle" style="left: 55%; top: 15%; animation-delay: 3.5s;"></div>
+      <div class="particle" style="left: 25%; top: 85%; animation-delay: 0.5s;"></div>
+      <div class="particle" style="left: 70%; top: 90%; animation-delay: 5.5s;"></div>
+    </div>
+    <div class="grid-pattern" aria-hidden="true"></div>
+    
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span class="material-icons-round">rocket_launch</span>
+        v4.0 — Investor Preview
+      </div>
+      <h1 class="hero-title">Changelog & Roadmap</h1>
+      <p class="hero-subtitle">Building the future of neural molecular simulation</p>
+      <div class="hero-date">
+        <span class="material-icons-round">schedule</span>
+        Last updated: August 2025
+      </div>
+      <div class="hero-actions">
+        <a href="#changelog" class="btn-primary">
+          <span class="material-icons-round">history</span>
+          View Changes
+        </a>
+        <a href="#roadmap" class="btn-secondary">
+          <span class="material-icons-round">map</span>
+          See Roadmap
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main id="main-content" class="main-content" role="main">
+    
+    <!-- What's New Section (Changelog) -->
+    <section id="changelog" class="section" aria-labelledby="changelog-title">
+      <div class="section-header">
+        <div class="section-label">
+          <span class="material-icons-round" style="font-size: 18px;">auto_awesome</span>
+          What's New
+        </div>
+        <h2 id="changelog-title" class="section-title">Development History</h2>
+        <p class="section-description">
+          Track our journey from initial concept to production-ready platform. 
+          Every update brings us closer to transforming scientific discovery.
+        </p>
+      </div>
+      
+      <div class="changelog-timeline">
+        
+        <!-- v4.0 Entry -->
+        <article class="changelog-entry">
+          <div class="changelog-marker" aria-hidden="true"></div>
+          <div class="changelog-card">
+            <div class="changelog-header">
+              <div class="version-info">
+                <span class="version-badge v4">v4.0</span>
+                <span class="version-phase">Investor Preview</span>
+              </div>
+              <span class="version-date">
+                <span class="material-icons-round">calendar_today</span>
+                August 2025
+              </span>
+            </div>
+            <ul class="feature-list">
+              <li class="feature-item">
+                <span class="feature-icon"><span class="material-icons-round">widgets</span></span>
+                <span class="feature-text">Live Dashboard Widgets with real-time metrics</span>
+              </li>
+              <li class="feature-item">
+                <span class="feature-icon"><span class="material-icons-round">dark_mode</span></span>
+                <span class="feature-text">Enhanced Dark Mode with smooth transitions</span>
+              </li>
+              <li class="feature-item">
+                <span class="feature-icon"><span class="material-icons-round">insert_chart</span></span>
+                <span class="feature-text">Interactive Charts and Activity Feeds</span>
+              </li>
+              <li class="feature-item">
+                <span class="feature-icon"><span class="material-icons-round">groups</span></span>
+                <span class="feature-text">Active Users Simulation for demos</span>
+              </li>
+              <li class="feature-item">
+                <span class="feature-icon"><span class="material-icons-round">monitor_heart</span></span>
+                <span class="feature-text">System Health Monitoring Panel</span>
+              </li>
+            </ul>
+            <div class="changelog-footer">
+              <a href="dashboard.html" class="view-demo-link">
+                View Demo
+                <span class="material-icons-round">arrow_forward</span>
+              </a>
+            </div>
+          </div>
+        </article>
+        
+        <!-- v3.0 Entry -->
+        <article class="changelog-entry">
+          <div class="changelog-marker" aria-hidden="true"></div>
+          <div class="changelog-card">
+            <div class="changelog-header">
+              <div class="version-info">
+                <span class="version-badge v3">v3.0</span>
+                <span class="version-phase">Production Infrastructure</span>
+              </div>
+              <span class="version-date">
+                <span class="material-icons-round">calendar_today</span>
+                August 2025
+              </span>
+            </div>
+            <ul class="feature-list">
+              <li class="feature-item">
+                <span class="feature-icon"><span class="material-icons-round">lock</span></span>
+                <span class="feature-text">Supabase Authentication Integration</span>
+              </li>
+              <li class="feature-item">
+                <span class="feature-icon"><span class="material-icons-round">phone_android</span></span>
+                <span class="feature-text">PWA Support with Offline Mode</span>
+              </li>
+              <li class="feature-item">
+                <span class="feature-icon"><span class="material-icons-round">analytics</span></span>
+                <span class="feature-text">Umami Privacy Analytics Ready</span>
+              </li>
+              <li class="feature-item">
+                <span class="feature-icon"><span class="material-icons-round">accessibility_new</span></span>
+                <span class="feature-text">WCAG 2.1 AA Accessibility Compliance</span>
+              </li>
+              <li class="feature-item">
+                <span class="feature-icon"><span class="material-icons-round">share</span></span>
+                <span class="feature-text">Social Sharing with OG Images</span>
+              </li>
+            </ul>
+            <div class="changelog-footer">
+              <a href="infrastructure.html" class="view-demo-link">
+                View Infrastructure Details
+                <span class="material-icons-round">arrow_forward</span>
+              </a>
+            </div>
+          </div>
+        </article>
+        
+        <!-- v2.0 Entry -->
+        <article class="changelog-entry">
+          <div class="changelog-marker" aria-hidden="true"></div>
+          <div class="changelog-card">
+            <div class="changelog-header">
+              <div class="version-info">
+                <span class="version-badge v2">v2.0</span>
+                <span class="version-phase">Core Features</span>
+              </div>
+              <span class="version-date">
+                <span class="material-icons-round">calendar_today</span>
+                August 2025
+              </span>
+            </div>
+            <ul class="feature-list">
+              <li class="feature-item">
+                <span class="feature-icon"><span class="material-icons-round">atom</span></span>
+                <span class="feature-text">IBM Quantum Integration</span>
+              </li>
+              <li class="feature-item">
+                <span class="feature-icon"><span class="material-icons-round">biotech</span></span>
+                <span class="feature-text">Synthetic Data Pipeline Studio</span>
+              </li>
+              <li class="feature-item">
+                <span class="feature-icon"><span class="material-icons-round">cloud_done</span></span>
+                <span class="feature-text">Free Tier Infrastructure Setup</span>
+              </li>
+              <li class="feature-item">
+                <span class="feature-icon"><span class="material-icons-round">responsive_layout</span></span>
+                <span class="feature-text">Mobile Responsive Design</span>
+              </li>
+              <li class="feature-item">
+                <span class="feature-icon"><span class="material-icons-round">gradient</span></span>
+                <span class="feature-text">Skeleton Loading Screens</span>
+              </li>
+            </ul>
+            <div class="changelog-footer">
+              <a href="quantum.html" class="view-demo-link">
+                Try Quantum Demo
+                <span class="material-icons-round">arrow_forward</span>
+              </a>
+            </div>
+          </div>
+        </article>
+        
+        <!-- v1.0 Entry -->
+        <article class="changelog-entry">
+          <div class="changelog-marker" aria-hidden="true"></div>
+          <div class="changelog-card">
+            <div class="changelog-header">
+              <div class="version-info">
+                <span class="version-badge v1">v1.0</span>
+                <span class="version-phase">Platform Launch</span>
+              </div>
+              <span class="version-date">
+                <span class="material-icons-round">calendar_today</span>
+                August 2025
+              </span>
+            </div>
+            <ul class="feature-list">
+              <li class="feature-item">
+                <span class="feature-icon"><span class="material-icons-round">rocket_launch</span></span>
+                <span class="feature-text">Initial 13-page platform</span>
+              </li>
+              <li class="feature-item">
+                <span class="feature-icon"><span class="material-icons-round">psychology</span></span>
+                <span class="feature-text">Neural Design System v1.0</span>
+              </li>
+              <li class="feature-item">
+                <span class="feature-icon"><span class="material-icons-round">menu_book</span></span>
+                <span class="feature-text">Research & Startups Modules</span>
+              </li>
+              <li class="feature-item">
+                <span class="feature-icon"><span class="material-icons-round">security</span></span>
+                <span class="feature-text">Security & Monitoring Dashboards</span>
+              </li>
+              <li class="feature-item">
+                <span class="feature-icon"><span class="material-icons-round">palette</span></span>
+                <span class="feature-text">Glass-morphism UI Framework</span>
+              </li>
+            </ul>
+            <div class="changelog-footer">
+              <a href="index.html" class="view-demo-link">
+                Explore Platform
+                <span class="material-icons-round">arrow_forward</span>
+              </a>
+            </div>
+          </div>
+        </article>
+        
+      </div>
+    </section>
+
+    <!-- Roadmap Section -->
+    <section id="roadmap" class="section" aria-labelledby="roadmap-title">
+      <div class="section-header">
+        <div class="section-label">
+          <span class="material-icons-round" style="font-size: 18px;">explore</span>
+          Future Vision
+        </div>
+        <h2 id="roadmap-title" class="section-title">Product Roadmap</h2>
+        <p class="section-description">
+          Our strategic plan for growth, scaling, and ecosystem building. 
+          Each phase builds upon the last to create lasting impact.
+        </p>
+      </div>
+      
+      <div class="roadmap-container">
+        
+        <!-- Q4 2025 Phase -->
+        <div class="roadmap-phase">
+          <div class="phase-header">
+            <div>
+              <span class="phase-badge q4-2025">Q4 2025</span>
+              <h3 class="phase-title">Growth Phase</h3>
+              <p class="phase-description">Expanding user base and core capabilities</p>
+            </div>
+            <div class="phase-progress">
+              <div class="progress-bar-container">
+                <div class="progress-bar-fill" style="width: 15%;"></div>
+              </div>
+              <span class="progress-label">15%</span>
+            </div>
+          </div>
+          
+          <div class="roadmap-grid">
+            <div class="roadmap-card">
+              <div class="roadmap-card-header">
+                <div class="roadmap-card-icon">
+                  <span class="material-icons-round">vpn_key</span>
+                </div>
+                <span class="status-badge status-in-progress">
+                  <span class="status-dot"></span>
+                  In Progress
+                </span>
+              </div>
+              <h4 class="roadmap-card-title">Real User Authentication</h4>
+              <p class="roadmap-card-description">Supabase OAuth integration with Google, GitHub, and enterprise SSO providers.</p>
+              <div class="roadmap-card-meta">
+                <span class="timeline-estimate">
+                  <span class="material-icons-round" style="font-size: 14px;">schedule</span>
+                  Oct 2025
+                </span>
+                <span>High Priority</span>
+              </div>
+            </div>
+            
+            <div class="roadmap-card">
+              <div class="roadmap-card-header">
+                <div class="roadmap-card-icon">
+                  <span class="material-icons-round">handshake</span>
+                </div>
+                <span class="status-badge status-planned">
+                  <span class="status-dot"></span>
+                  Planned
+                </span>
+              </div>
+              <h4 class="roadmap-card-title">Team Collaboration Features</h4>
+              <p class="roadmap-card-description">Real-time collaboration workspaces with shared projects and commenting.</p>
+              <div class="roadmap-card-meta">
+                <span class="timeline-estimate">
+                  <span class="material-icons-round" style="font-size: 14px;">schedule</span>
+                  Nov 2025
+                </span>
+                <span>Medium Priority</span>
+              </div>
+            </div>
+            
+            <div class="roadmap-card">
+              <div class="roadmap-card-header">
+                <div class="roadmap-card-icon">
+                  <span class="material-icons-round">trending_up</span>
+                </div>
+                <span class="status-badge status-planned">
+                  <span class="status-dot"></span>
+                  Planned
+                </span>
+              </div>
+              <h4 class="roadmap-card-title">Advanced Analytics Dashboard</h4>
+              <p class="roadmap-card-description">Deep insights into research trends, portfolio performance, and predictions.</p>
+              <div class="roadmap-card-meta">
+                <span class="timeline-estimate">
+                  <span class="material-icons-round" style="font-size: 14px;">schedule</span>
+                  Dec 2025
+                </span>
+                <span>High Priority</span>
+              </div>
+            </div>
+            
+            <div class="roadmap-card">
+              <div class="roadmap-card-header">
+                <div class="roadmap-card-icon">
+                  <span class="material-icons-round">language</span>
+                </div>
+                <span class="status-badge status-planned">
+                  <span class="status-dot"></span>
+                  Planned
+                </span>
+              </div>
+              <h4 class="roadmap-card-title">Multi-language Support</h4>
+              <p class="roadmap-card-description">Full localization for English, Chinese (中文), Spanish, and Japanese.</p>
+              <div class="roadmap-card-meta">
+                <span class="timeline-estimate">
+                  <span class="material-icons-round" style="font-size: 14px;">schedule</span>
+                  Dec 2025
+                </span>
+                <span>Medium Priority</span>
+              </div>
+            </div>
+            
+            <div class="roadmap-card">
+              <div class="roadmap-card-header">
+                <div class="roadmap-card-icon">
+                  <span class="material-icons-round">smartphone</span>
+                </div>
+                <span class="status-badge status-planned">
+                  <span class="status-dot"></span>
+                  Planned
+                </span>
+              </div>
+              <h4 class="roadmap-card-title">Native Mobile Apps</h4>
+              <p class="roadmap-card-description">React Native applications for iOS and Android with offline sync.</p>
+              <div class="roadmap-card-meta">
+                <span class="timeline-estimate">
+                  <span class="material-icons-round" style="font-size: 14px;">schedule</span>
+                  Dec 2025
+                </span>
+                <span>Stretch Goal</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Q1 2026 Phase -->
+        <div class="roadmap-phase">
+          <div class="phase-header">
+            <div>
+              <span class="phase-badge q1-2026">Q1 2026</span>
+              <h3 class="phase-title">Scale Phase</h3>
+              <p class="phase-description">Enterprise features and infrastructure scaling</p>
+            </div>
+            <div class="phase-progress">
+              <div class="progress-bar-container">
+                <div class="progress-bar-fill" style="width: 5%;"></div>
+              </div>
+              <span class="progress-label">5%</span>
+            </div>
+          </div>
+          
+          <div class="roadmap-grid">
+            <div class="roadmap-card">
+              <div class="roadmap-card-header">
+                <div class="roadmap-card-icon">
+                  <span class="material-icons-round">cloud_queue</span>
+                </div>
+                <span class="status-badge status-planned">
+                  <span class="status-dot"></span>
+                  Planned
+                </span>
+              </div>
+              <h4 class="roadmap-card-title">Cloud Deployment Options</h4>
+              <p class="roadmap-card-description">AWS and GCP deployment templates with auto-scaling configurations.</p>
+              <div class="roadmap-card-meta">
+                <span class="timeline-estimate">
+                  <span class="material-icons-round" style="font-size: 14px;">schedule</span>
+                  Jan 2026
+                </span>
+                <span>High Priority</span>
+              </div>
+            </div>
+            
+            <div class="roadmap-card">
+              <div class="roadmap-card-header">
+                <div class="roadmap-card-icon">
+                  <span class="material-icons-round">smart_toy</span>
+                </div>
+                <span class="status-badge status-planned">
+                  <span class="status-dot"></span>
+                  Planned
+                </span>
+              </div>
+              <h4 class="roadmap-card-title">AI-Powered Insights Engine</h4>
+              <p class="roadmap-card-description">Machine learning models for predictive analytics and recommendations.</p>
+              <div class="roadmap-card-meta">
+                <span class="timeline-estimate">
+                  <span class="material-icons-round" style="font-size: 14px;">schedule</span>
+                  Feb 2026
+                </span>
+                <span>High Priority</span>
+              </div>
+            </div>
+            
+            <div class="roadmap-card">
+              <div class="roadmap-card-header">
+                <div class="roadmap-card-icon">
+                  <span class="material-icons-round">assessment</span>
+                </div>
+                <span class="status-badge status-planned">
+                  <span class="status-dot"></span>
+                  Planned
+                </span>
+              </div>
+              <h4 class="roadmap-card-title">Custom Report Builder</h4>
+              <p class="roadmap-card-description">Drag-and-drop report creation with export to PDF, Excel, and PowerPoint.</p>
+              <div class="roadmap-card-meta">
+                <span class="timeline-estimate">
+                  <span class="material-icons-round" style="font-size: 14px;">schedule</span>
+                  Feb 2026
+                </span>
+                <span>Medium Priority</span>
+              </div>
+            </div>
+            
+            <div class="roadmap-card">
+              <div class="roadmap-card-header">
+                <div class="roadmap-card-icon">
+                  <span class="material-icons-round">power</span>
+                </div>
+                <span class="status-badge status-planned">
+                  <span class="status-dot"></span>
+                  Planned
+                </span>
+              </div>
+              <h4 class="roadmap-card-title">Public API & Webhooks</h4>
+              <p class="roadmap-card-description">RESTful API with comprehensive documentation and webhook support.</p>
+              <div class="roadmap-card-meta">
+                <span class="timeline-estimate">
+                  <span class="material-icons-round" style="font-size: 14px;">schedule</span>
+                  Mar 2026
+                </span>
+                <span>High Priority</span>
+              </div>
+            </div>
+            
+            <div class="roadmap-card">
+              <div class="roadmap-card-header">
+                <div class="roadmap-card-icon">
+                  <span class="material-icons-round">business</span>
+                </div>
+                <span class="status-badge status-planned">
+                  <span class="status-dot"></span>
+                  Planned
+                </span>
+              </div>
+              <h4 class="roadmap-card-title">Enterprise SSO Integration</h4>
+              <p class="roadmap-card-description">SAML 2.0 and OIDC support for Okta, Azure AD, and OneLogin.</p>
+              <div class="roadmap-card-meta">
+                <span class="timeline-estimate">
+                  <span class="material-icons-round" style="font-size: 14px;">schedule</span>
+                  Mar 2026
+                </span>
+                <span>Enterprise Tier</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Q2 2026 Phase -->
+        <div class="roadmap-phase">
+          <div class="phase-header">
+            <div>
+              <span class="phase-badge q2-2026">Q2 2026</span>
+              <h3 class="phase-title">Ecosystem Phase</h3>
+              <p class="phase-description">Community building and partner integrations</p>
+            </div>
+            <div class="phase-progress">
+              <div class="progress-bar-container">
+                <div class="progress-bar-fill" style="width: 0%;"></div>
+              </div>
+              <span class="progress-label">0%</span>
+            </div>
+          </div>
+          
+          <div class="roadmap-grid">
+            <div class="roadmap-card">
+              <div class="roadmap-card-header">
+                <div class="roadmap-card-icon">
+                  <span class="material-icons-round">extension</span>
+                </div>
+                <span class="status-badge status-planned">
+                  <span class="status-dot"></span>
+                  Planned
+                </span>
+              </div>
+              <h4 class="roadmap-card-title">Plugin Marketplace</h4>
+              <p class="roadmap-card-description">Third-party plugin ecosystem with monetization for developers.</p>
+              <div class="roadmap-card-meta">
+                <span class="timeline-estimate">
+                  <span class="material-icons-round" style="font-size: 14px;">schedule</span>
+                  Apr 2026
+                </span>
+                <span>Vision</span>
+              </div>
+            </div>
+            
+            <div class="roadmap-card">
+              <div class="roadmap-card-header">
+                <div class="roadmap-card-icon">
+                  <span class="material-icons-round">menu_book</span>
+                </div>
+                <span class="status-badge status-planned">
+                  <span class="status-dot"></span>
+                  Planned
+                </span>
+              </div>
+              <h4 class="roadmap-card-title">Community Documentation Hub</h4>
+              <p class="roadmap-card-description">Wiki-style documentation with community contributions and tutorials.</p>
+              <div class="roadmap-card-meta">
+                <span class="timeline-estimate">
+                  <span class="material-icons-round" style="font-size: 14px;">schedule</span>
+                  May 2026
+                </span>
+                <span>Vision</span>
+              </div>
+            </div>
+            
+            <div class="roadmap-card">
+              <div class="roadmap-card-header">
+                <div class="roadmap-card-icon">
+                  <span class="material-icons-round">school</span>
+                </div>
+                <span class="status-badge status-planned">
+                  <span class="status-dot"></span>
+                  Planned
+                </span>
+              </div>
+              <h4 class="roadmap-card-title">Certification Program</h4>
+              <p class="roadmap-card-description">Official certification for researchers and data scientists using SciMSPT.</p>
+              <div class="roadmap-card-meta">
+                <span class="timeline-estimate">
+                  <span class="material-icons-round" style="font-size: 14px;">schedule</span>
+                  May 2026
+                </span>
+                <span>Vision</span>
+              </div>
+            </div>
+            
+            <div class="roadmap-card">
+              <div class="roadmap-card-header">
+                <div class="roadmap-card-icon">
+                  <span class="material-icons-round">diversity_3</span>
+                </div>
+                <span class="status-badge status-planned">
+                  <span class="status-dot"></span>
+                  Planned
+                </span>
+              </div>
+              <h4 class="roadmap-card-title">Partner Integrations</h4>
+              <p class="roadmap-card-description">Strategic partnerships with quantum providers, cloud platforms, and academia.</p>
+              <div class="roadmap-card-meta">
+                <span class="timeline-estimate">
+                  <span class="material-icons-round" style="font-size: 14px;">schedule</span>
+                  Jun 2026
+                </span>
+                <span>Vision</span>
+              </div>
+            </div>
+            
+            <div class="roadmap-card">
+              <div class="roadmap-card-header">
+                <div class="roadmap-card-icon">
+                  <span class="material-icons-round">public</span>
+                </div>
+                <span class="status-badge status-planned">
+                  <span class="status-dot"></span>
+                  Planned
+                </span>
+              </div>
+              <h4 class="roadmap-card-title">Global CDN Distribution</h4>
+              <p class="roadmap-card-description">Edge caching worldwide for sub-second load times globally.</p>
+              <div class="roadmap-card-meta">
+                <span class="timeline-estimate">
+                  <span class="material-icons-round" style="font-size: 14px;">schedule</span>
+                  Jun 2026
+                </span>
+                <span>Vision</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+    </section>
+
+    <!-- Metrics Section -->
+    <section id="metrics" class="section" aria-labelledby="metrics-title">
+      <div class="section-header">
+        <div class="section-label">
+          <span class="material-icons-round" style="font-size: 18px;">speed</span>
+          Platform Stats
+        </div>
+        <h2 id="metrics-title" class="section-title">By The Numbers</h2>
+        <p class="section-description">
+          Real metrics that demonstrate our commitment to quality, performance, 
+          and accessibility in every release.
+        </p>
+      </div>
+      
+      <div class="metrics-grid">
+        <div class="metric-card">
+          <div class="metric-icon">
+            <span class="material-icons-round">pages</span>
+          </div>
+          <div class="metric-value" data-target="13">
+            0<span class="suffix">+</span>
+          </div>
+          <div class="metric-label">Pages Built</div>
+          <div class="metric-description">Complete platform modules</div>
+        </div>
+        
+        <div class="metric-card">
+          <div class="metric-icon">
+            <span class="material-icons-round">code</span>
+          </div>
+          <div class="metric-value" data-target="4786">
+            0<span class="suffix"></span>
+          </div>
+          <div class="metric-label">Lines of Code</div>
+          <div class="metric-description">Across all components</div>
+        </div>
+        
+        <div class="metric-card">
+          <div class="metric-icon">
+            <span class="material-icons-round">verified</span>
+          </div>
+          <div class="metric-value" data-target="99.8" data-suffix="%">
+            0<span class="suffix">%</span>
+          </div>
+          <div class="metric-label">Uptime Target</div>
+          <div class="metric-description">Production reliability goal</div>
+        </div>
+        
+        <div class="metric-card">
+          <div class="metric-icon">
+            <span class="material-icons-round">bolt</span>
+          </div>
+          <div class="metric-value" data-target="2" data-prefix="<">
+            0<span class="suffix">s</span>
+          </div>
+          <div class="metric-label">Load Time</div>
+          <div class="metric-description">Average page performance</div>
+        </div>
+        
+        <div class="metric-card">
+          <div class="metric-icon">
+            <span class="material-icons-round">accessibility</span>
+          </div>
+          <div class="metric-value" data-target="21" data-prefix="AA">
+            WCAG<span class="suffix"> 2.1 AA</span>
+          </div>
+          <div class="metric-label">Accessibility</div>
+          <div class="metric-description">Compliance standard met</div>
+        </div>
+        
+        <div class="metric-card">
+          <div class="metric-icon">
+            <span class="material-icons-round">download</span>
+          </div>
+          <div class="metric-value" data-target="100" data-suffix="%">
+            PWA<span class="suffix"> Ready</span>
+          </div>
+          <div class="metric-label">Installable</div>
+          <div class="metric-description">Offline capable app</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Stay Updated Section -->
+    <section id="subscribe" class="section" aria-labelledby="subscribe-title">
+      <div class="stay-updated-wrapper">
+        <div class="stay-updated-bg" aria-hidden="true"></div>
+        <div class="stay-updated-content">
+          <h2 id="subscribe-title" class="stay-updated-title">Stay Updated</h2>
+          <p class="stay-updated-description">
+            Get notified about new releases, feature updates, and roadmap milestones. 
+            Join our community of forward-thinking researchers.
+          </p>
+          
+          <form class="email-form" onsubmit="handleSubscribe(event)">
+            <input 
+              type="email" 
+              class="email-input" 
+              placeholder="Enter your email address"
+              aria-label="Email address for updates"
+              required
+            >
+            <button type="submit" class="submit-btn">
+              Subscribe
+              <span class="material-icons-round" style="font-size: 18px;">send</span>
+            </button>
+          </form>
+          
+          <div class="social-links">
+            <a href="https://github.com/testdemoqwenai2025-creator/SciMSPT2" target="_blank" rel="noopener noreferrer" class="github-star-btn">
+              <span class="material-icons-round" style="font-size: 20px;">star</span>
+              Star on GitHub
+            </a>
+            <a href="#" class="social-link" title="Twitter/X">
+              <span class="material-icons-round">alternate_email</span>
+              Follow @SciMSPT
+            </a>
+            <a href="#" class="social-link" title="LinkedIn">
+              <span class="material-icons-round">work</span>
+              LinkedIn
+            </a>
+            <a href="#" class="social-link" title="Discord Community">
+              <span class="material-icons-round">discord</span>
+              Discord
+            </a>
+          </div>
+          
+          <a href="#" class="rss-link">
+            <span class="material-icons-round" style="font-size: 16px;">rss_feed</span>
+            RSS Feed available (coming soon)
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer" role="contentinfo">
+    <div class="footer-content">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <div class="footer-logo-icon">S</div>
+          <span class="footer-logo-text">SciMSPT</span>
+        </div>
+        <p class="footer-desc">
+          Transforming scientific discovery into strategic opportunity through 
+          neural intelligence and molecular computing.
+        </p>
+      </div>
+      
+      <div class="footer-column">
+        <h4>Platform</h4>
+        <div class="footer-links">
+          <a href="platform.html">Features</a>
+          <a href="platform.html#ai-api">AI Integration</a>
+          <a href="platform.html#cloud-storage">Cloud Sync</a>
+          <a href="platform.html#collaboration">Workspaces</a>
+          <a href="changelog.html">Changelog</a>
+        </div>
+      </div>
+      
+      <div class="footer-column">
+        <h4>Resources</h4>
+        <div class="footer-links">
+          <a href="documentation.html">API Documentation</a>
+          <a href="research.html">Research Papers</a>
+          <a href="startups.html">Startup Database</a>
+          <a href="studio.html">Studio</a>
+          <a href="slides.html">Presentations</a>
+        </div>
+      </div>
+      
+      <div class="footer-column">
+        <h4>Company</h4>
+        <div class="footer-links">
+          <a href="about.html">About Us</a>
+          <a href="#">Careers</a>
+          <a href="#">Blog</a>
+          <a href="#">Contact</a>
+          <a href="#">Privacy Policy</a>
+        </div>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <span class="footer-copyright">&copy; 2025 SciMSPT — Neural Research Intelligence. All rights reserved.</span>
+      <div class="footer-social">
+        <a href="https://github.com/testdemoqwenai2025-creator/SciMSPT2" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+          <span class="material-icons-round">github</span>
+        </a>
+        <a href="#" title="Coming soon" aria-label="Twitter">
+          <span class="material-icons-round">twitter</span>
+        </a>
+        <a href="#" title="Coming soon" aria-label="LinkedIn">
+          <span class="material-icons-round">linkedin</span>
+        </a>
+        <a href="#" title="Coming soon" aria-label="Discord">
+          <span class="material-icons-round">discord</span>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Umami Analytics -->
+  <script async defer src="https://analytics.us.umami.is/script.js" data-website-id="7b08d5af-2df0-442a-8a40-dc2535c3eb01" data-domains="testdemoqwenai2025-creator.github.io"></script>
+
+  <script>
+    // ============================================
+    // SCIMSPT CHANGELOG PAGE CONTROLLERS
+    // ============================================
+    
+    // Mobile Navigation Toggle
+    function toggleMobileNav() {
+      const mobileNav = document.getElementById('mobileNav');
+      mobileNav.classList.toggle('show');
+    }
+    
+    // Close mobile nav when clicking outside
+    document.addEventListener('click', function(e) {
+      const mobileNav = document.getElementById('mobileNav');
+      const menuBtn = document.querySelector('.mobile-menu-btn');
+      if (!mobileNav.contains(e.target) && !menuBtn.contains(e.target)) {
+        mobileNav.classList.remove('show');
+      }
+    });
+    
+    // Email Subscribe Handler (UI only)
+    function handleSubscribe(e) {
+      e.preventDefault();
+      const input = e.target.querySelector('.email-input');
+      const btn = e.target.querySelector('.submit-btn');
+      const originalText = btn.innerHTML;
+      
+      if (input.value) {
+        btn.innerHTML = '<span class="material-icons-round" style="font-size: 18px;">check</span> Subscribed!';
+        btn.style.background = 'linear-gradient(135deg, #10b981, #059669)';
+        input.value = '';
+        
+        setTimeout(() => {
+          btn.innerHTML = originalText;
+          btn.style.background = '';
+        }, 3000);
+      }
+    }
+    
+    // ============================================
+    // INTERSECTION OBSERVER FOR ANIMATIONS
+    // ============================================
+    
+    const observerOptions = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.1
+    };
+    
+    // Section fade-in animation
+    const sectionObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, observerOptions);
+    
+    document.querySelectorAll('.section').forEach(section => {
+      sectionObserver.observe(section);
+    });
+    
+    // Counter animation for metrics
+    const counterObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          animateCounter(entry.target);
+          counterObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.5 });
+    
+    document.querySelectorAll('.metric-value').forEach(counter => {
+      counterObserver.observe(counter);
+    });
+    
+    function animateCounter(element) {
+      const target = parseInt(element.dataset.target) || 0;
+      const suffix = element.dataset.suffix || '';
+      const prefix = element.dataset.prefix || '';
+      const duration = 2000;
+      const start = 0;
+      const startTime = performance.now();
+      
+      // Special handling for specific values
+      if (element.textContent.includes('WCAG') || element.textContent.includes('PWA')) {
+        // Static values that don't need counting
+        return;
+      }
+      
+      function updateCounter(currentTime) {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        
+        // Easing function for smooth animation
+        const easeOutQuart = 1 - Math.pow(1 - progress, 4);
+        const current = Math.floor(start + (target - start) * easeOutQuart);
+        
+        if (target >= 100) {
+          element.innerHTML = current.toLocaleString() + '<span class="suffix">' + suffix + '</span>';
+        } else if (target < 10) {
+          element.innerHTML = prefix + current.toFixed(1).replace(/\.0$/, '') + '<span class="suffix">' + suffix + '</span>';
+        } else {
+          element.innerHTML = current + '<span class="suffix">' + suffix + '</span>';
+        }
+        
+        if (progress < 1) {
+          requestAnimationFrame(updateCounter);
+        }
+      }
+      
+      requestAnimationFrame(updateCounter);
+    }
+    
+    // ============================================
+    // SMOOTH SCROLL FOR ANCHOR LINKS
+    // ============================================
+    
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href');
+        if (targetId === '#') return;
+        
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+          const navHeight = document.querySelector('.nav-container').offsetHeight;
+          const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - navHeight - 20;
+          
+          window.scrollTo({
+            top: targetPosition,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+    
+    // ============================================
+    // UMIAMI EVENT TRACKING HELPER
+    // ============================================
+    
+    window.trackEvent = function(eventName, eventData = {}) {
+      if (typeof umami !== 'undefined') {
+        umami.track(eventName, eventData);
+      }
+      console.log('[Analytics]', eventName, eventData);
+    };
+    
+    // Track page interactions
+    document.querySelectorAll('a[href$=".html"]').forEach(link => {
+      link.addEventListener('click', () => {
+        trackEvent('Page Navigation', { 
+          destination: link.getAttribute('href'),
+          page: 'changelog'
+        });
+      });
+    });
+    
+    // Track external links
+    document.querySelectorAll('a[target="_blank"]').forEach(link => {
+      link.addEventListener('click', () => {
+        trackEvent('External Link Click', {
+          url: link.href,
+          page: 'changelog'
+        });
+      });
+    });
+    
+    // ============================================
+    // SERVICE WORKER REGISTRATION (PWA)
+    // ============================================
+    
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/Demo2SciMSPT/sw.js')
+          .then(registration => {
+            console.log('✅ SW registered:', registration.scope);
+          })
+          .catch(error => {
+            console.warn('⚠️ SW registration failed:', error);
+          });
+      });
+    }
+    
+    // Console branding
+    console.log(
+      '%c🚀 SciMSPT Changelog %cv4.0 %c— Investor Preview',
+      'color: #00E5FF; font-weight: bold; font-size: 16px;',
+      'color: #a78bfa; font-weight: bold;',
+      'color: #94a3b8;'
+    );
+  </script>
+</body>
+</html>
