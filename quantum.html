@@ -1752,6 +1752,1347 @@
         padding: 28px 20px;
       }
     }
+
+    /* ============================================
+       IBM QUANTUM INTEGRATION WORKSPACE
+       Comprehensive Qiskit Integration Section
+       ============================================ */
+
+    .ibm-quantum-section {
+      background: linear-gradient(180deg, var(--bg-deep) 0%, rgba(0, 102, 255, 0.03) 50%, var(--bg-deep) 100%);
+      border-top: 1px solid rgba(0, 102, 255, 0.2);
+      border-bottom: 1px solid rgba(0, 102, 255, 0.2);
+      padding: 100px 40px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .ibm-quantum-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 800px;
+      height: 800px;
+      background: radial-gradient(circle, rgba(0, 102, 255, 0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .ibm-quantum-container {
+      max-width: 1600px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .ibm-quantum-header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .ibm-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 20px;
+      background: linear-gradient(135deg, rgba(0, 102, 255, 0.15), rgba(0, 102, 255, 0.05));
+      border: 1px solid rgba(0, 102, 255, 0.3);
+      border-radius: 30px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: #0066FF;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 20px;
+    }
+
+    .ibm-quantum-title {
+      font-family: var(--font-tech);
+      font-size: clamp(28px, 4vw, 48px);
+      font-weight: 900;
+      color: var(--text-primary);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+    }
+
+    .ibm-logo-icon {
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(135deg, #0066FF, #0044CC);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      color: white;
+      font-size: 18px;
+    }
+
+    .ibm-quantum-subtitle {
+      font-size: 17px;
+      color: var(--text-secondary);
+      max-width: 700px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    /* Workspace Grid Layout */
+    .ibm-workspace-grid {
+      display: grid;
+      grid-template-columns: 320px 1fr 340px;
+      gap: 24px;
+      margin-bottom: 48px;
+    }
+
+    /* Connection Panel */
+    .connection-panel {
+      background: var(--bg-glass);
+      border: 1px solid var(--border-subtle);
+      border-radius: 20px;
+      padding: 24px;
+      backdrop-filter: blur(10px);
+      height: fit-content;
+    }
+
+    .panel-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .panel-title {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: #0066FF;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .connection-status {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .status-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      animation: statusPulse 2s infinite;
+    }
+
+    .status-dot.disconnected { background: #64748b; animation: none; }
+    .status-dot.connected { background: #10B981; }
+    .status-dot.error { background: #EF4444; }
+    .status-dot.connecting { background: #F59E0B; }
+
+    @keyframes statusPulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.6; transform: scale(1.1); }
+    }
+
+    .connection-status.disconnected { color: #64748b; }
+    .connection-status.connected { color: #10B981; }
+    .connection-status.error { color: #EF4444; }
+    .connection-status.connecting { color: #F59E0B; }
+
+    /* API Token Input */
+    .token-input-group {
+      margin-bottom: 16px;
+    }
+
+    .token-label {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    .token-input-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .token-input {
+      width: 100%;
+      padding: 14px 44px 14px 16px;
+      border-radius: 12px;
+      border: 1px solid var(--border-subtle);
+      background: var(--bg-deep);
+      color: var(--text-primary);
+      font-family: var(--font-mono);
+      font-size: 13px;
+      transition: all 0.3s ease;
+    }
+
+    .token-input:focus {
+      outline: none;
+      border-color: #0066FF;
+      box-shadow: 0 0 0 3px rgba(0, 102, 255, 0.15);
+    }
+
+    .token-toggle {
+      position: absolute;
+      right: 12px;
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      padding: 4px;
+      transition: color 0.2s ease;
+    }
+
+    .token-toggle:hover {
+      color: var(--text-primary);
+    }
+
+    .token-actions {
+      display: flex;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .btn-token {
+      flex: 1;
+      padding: 10px 16px;
+      border-radius: 10px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      border: 1px solid var(--border-subtle);
+      background: var(--bg-deep);
+      color: var(--text-secondary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .btn-token:hover {
+      border-color: #0066FF;
+      color: #0066FF;
+    }
+
+    .btn-token.primary {
+      background: linear-gradient(135deg, #0066FF, #0052CC);
+      border: none;
+      color: white;
+    }
+
+    .btn-token.primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 15px rgba(0, 102, 255, 0.3);
+    }
+
+    .get-token-link {
+      display: block;
+      text-align: center;
+      font-size: 11px;
+      color: #0066FF;
+      text-decoration: none;
+      margin-top: 12px;
+      padding: 8px;
+      border-radius: 8px;
+      transition: all 0.2s ease;
+    }
+
+    .get-token-link:hover {
+      background: rgba(0, 102, 255, 0.08);
+    }
+
+    .save-option {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 16px;
+      padding: 12px;
+      background: var(--bg-glass-light);
+      border-radius: 10px;
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+
+    .save-option input[type="checkbox"] {
+      accent-color: #0066FF;
+    }
+
+    /* Backend Selector */
+    .backend-selector {
+      margin-top: 24px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    .backend-list {
+      list-style: none;
+    }
+
+    .backend-item {
+      padding: 14px 16px;
+      border-radius: 12px;
+      margin-bottom: 8px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      border: 1px solid transparent;
+      background: var(--bg-glass-light);
+    }
+
+    .backend-item:hover {
+      border-color: var(--border-subtle);
+      background: rgba(0, 102, 255, 0.04);
+    }
+
+    .backend-item.active {
+      border-color: #0066FF;
+      background: rgba(0, 102, 255, 0.08);
+    }
+
+    .backend-item.disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .backend-name-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 6px;
+    }
+
+    .backend-name {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .backend-type-badge {
+      font-size: 9px;
+      padding: 3px 8px;
+      border-radius: 6px;
+      text-transform: uppercase;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+
+    .badge-simulator {
+      background: rgba(16, 185, 129, 0.15);
+      color: #10B981;
+    }
+
+    .badge-hardware {
+      background: rgba(245, 158, 11, 0.15);
+      color: #F59E0B;
+    }
+
+    .backend-meta {
+      font-size: 11px;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .queue-info {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .queue-info.queued { color: #F59E0B; }
+    .queue-info.available { color: #10B981; }
+
+    /* Backend Details Panel */
+    .backend-details {
+      background: var(--bg-glass);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      padding: 16px;
+      margin-top: 16px;
+    }
+
+    .detail-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .detail-item {
+      padding: 10px;
+      background: var(--bg-deep);
+      border-radius: 8px;
+    }
+
+    .detail-label {
+      font-size: 10px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 4px;
+    }
+
+    .detail-value {
+      font-family: var(--font-mono);
+      font-size: 14px;
+      color: var(--quantum-primary);
+      font-weight: 600;
+    }
+
+    /* Main Content Area */
+    .ibm-main-content {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    /* Circuit Builder */
+    .circuit-builder {
+      background: var(--bg-glass);
+      border: 1px solid var(--border-subtle);
+      border-radius: 20px;
+      overflow: hidden;
+    }
+
+    .circuit-header {
+      background: var(--bg-secondary);
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .circuit-title {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--text-secondary);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .circuit-stats {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .circuit-stat {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .circuit-stat-value {
+      font-family: var(--font-mono);
+      color: var(--quantum-primary);
+      font-weight: 600;
+    }
+
+    /* Gate Palette */
+    .gate-palette {
+      padding: 16px 20px;
+      background: var(--bg-deep);
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .palette-label {
+      font-size: 11px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-right: 8px;
+    }
+
+    .gate-btn {
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      border: 1px solid var(--border-subtle);
+      background: var(--bg-secondary);
+      color: var(--text-primary);
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .gate-btn:hover {
+      border-color: var(--quantum-primary);
+      background: rgba(0, 229, 255, 0.1);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 229, 255, 0.2);
+    }
+
+    .gate-btn.selected {
+      border-color: var(--quantum-primary);
+      background: rgba(0, 229, 255, 0.15);
+      color: var(--quantum-primary);
+    }
+
+    .gate-btn.gate-x { --gate-color: #EC4899; }
+    .gate-btn.gate-y { --gate-color: #10B981; }
+    .gate-btn.gate-z { --gate-color: #0066FF; }
+    .gate-btn.gate-h { --gate-color: #7C3AED; }
+    .gate-btn.gate-cnot { --gate-color: #F59E0B; }
+    .gate-btn.gate-rx, .gate-btn.gate-ry, .gate-btn.gate-rz { --gate-color: #06B6D4; }
+    .gate-btn.gate-measure { --gate-color: #EF4444; }
+
+    /* Circuit Canvas */
+    .circuit-canvas {
+      padding: 24px;
+      min-height: 280px;
+      background: 
+        linear-gradient(var(--bg-deep) 1px, transparent 1px),
+        linear-gradient(90deg, var(--bg-deep) 1px, transparent 1px);
+      background-size: 60px 50px;
+      background-color: var(--bg-primary);
+      position: relative;
+    }
+
+    .qubit-register {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .qubit-line {
+      display: flex;
+      align-items: center;
+      height: 50px;
+      position: relative;
+    }
+
+    .qubit-label {
+      width: 80px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding-right: 16px;
+    }
+
+    .qubit-number {
+      width: 22px;
+      height: 22px;
+      border-radius: 6px;
+      background: var(--bg-tertiary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-secondary);
+    }
+
+    .qubit-wire {
+      flex: 1;
+      height: 2px;
+      background: var(--border-subtle);
+      position: relative;
+      margin-left: 16px;
+    }
+
+    .wire-active {
+      background: linear-gradient(90deg, var(--quantum-primary), var(--quantum-secondary));
+      box-shadow: 0 0 8px rgba(0, 229, 255, 0.3);
+    }
+
+    /* Gate on Wire */
+    .circuit-gate {
+      position: absolute;
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      color: white;
+      transform: translateX(-50%) translateY(-50%);
+      top: 25px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      z-index: 10;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .circuit-gate:hover {
+      transform: translateX(-50%) translateY(-50%) scale(1.15);
+      z-index: 20;
+    }
+
+    .circuit-gate.gate-x { background: linear-gradient(135deg, #EC4899, #DB2777); }
+    .circuit-gate.gate-y { background: linear-gradient(135deg, #10B981, #059669); }
+    .circuit-gate.gate-z { background: linear-gradient(135deg, #0066FF, #0052CC); }
+    .circuit-gate.gate-h { background: linear-gradient(135deg, #7C3AED, #6D28D9); }
+    .circuit-gate.gate-cnot { background: linear-gradient(135deg, #F59E0B, #D97706); }
+    .circuit-gate.gate-rx, .circuit-gate.gate-ry, .circuit-gate.gate-rz { background: linear-gradient(135deg, #06B6D4, #0891B2); }
+    .circuit-gate.gate-measure { background: linear-gradient(135deg, #EF4444, #DC2626); }
+
+    /* CNOT connector */
+    .cnot-connector {
+      position: absolute;
+      width: 2px;
+      background: #F59E0B;
+      left: 0;
+      z-index: 5;
+    }
+
+    .cnot-target {
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      border: 2px solid #F59E0B;
+      border-radius: 50%;
+      transform: translateX(-50%) translateY(-50%);
+      top: 25px;
+      background: var(--bg-primary);
+      z-index: 10;
+    }
+
+    /* Timeline */
+    .circuit-timeline {
+      display: flex;
+      padding: 0 96px 0 112px;
+      gap: 0;
+      margin-top: 8px;
+    }
+
+    .timeline-step {
+      flex: 1;
+      text-align: center;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--text-muted);
+      padding: 4px;
+      border-left: 1px dashed var(--border-subtle);
+    }
+
+    .timeline-step:first-child {
+      border-left: none;
+    }
+
+    /* Code Editor Panel */
+    .code-editor-panel {
+      background: var(--bg-glass);
+      border: 1px solid var(--border-subtle);
+      border-radius: 20px;
+      overflow: hidden;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .editor-tabs {
+      display: flex;
+      background: var(--bg-secondary);
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 0 16px;
+      overflow-x: auto;
+    }
+
+    .editor-tab {
+      padding: 14px 20px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-muted);
+      background: none;
+      border: none;
+      border-bottom: 2px solid transparent;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .editor-tab:hover {
+      color: var(--text-secondary);
+      background: var(--bg-glass-light);
+    }
+
+    .editor-tab.active {
+      color: #0066FF;
+      border-bottom-color: #0066FF;
+    }
+
+    .editor-toolbar-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 16px;
+      background: var(--bg-deep);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .toolbar-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .toolbar-btn {
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      border: 1px solid var(--border-subtle);
+      background: var(--bg-secondary);
+      color: var(--text-secondary);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .toolbar-btn:hover {
+      border-color: #0066FF;
+      color: #0066FF;
+    }
+
+    .toolbar-btn.run-sim {
+      background: linear-gradient(135deg, #10B981, #059669);
+      border: none;
+      color: white;
+    }
+
+    .toolbar-btn.run-hw {
+      background: linear-gradient(135deg, #0066FF, #0052CC);
+      border: none;
+      color: white;
+    }
+
+    .toolbar-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    /* Code Area */
+    .code-area-wrapper {
+      display: flex;
+      flex: 1;
+      overflow: hidden;
+    }
+
+    .line-numbers {
+      padding: 20px 12px;
+      background: var(--bg-deep);
+      border-right: 1px solid var(--border-subtle);
+      font-family: var(--font-mono);
+      font-size: 13px;
+      line-height: 1.7;
+      color: var(--text-muted);
+      text-align: right;
+      user-select: none;
+      min-width: 48px;
+      overflow: hidden;
+    }
+
+    .code-textarea {
+      flex: 1;
+      padding: 20px;
+      background: var(--bg-deep);
+      border: none;
+      color: var(--text-primary);
+      font-family: var(--font-mono);
+      font-size: 13px;
+      line-height: 1.7;
+      resize: none;
+      outline: none;
+      tab-size: 4;
+    }
+
+    .code-textarea::placeholder {
+      color: var(--text-muted);
+    }
+
+    /* Right Sidebar - Execution & Results */
+    .execution-sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    /* Run Panel */
+    .run-panel {
+      background: var(--bg-glass);
+      border: 1px solid var(--border-subtle);
+      border-radius: 20px;
+      padding: 24px;
+      backdrop-filter: blur(10px);
+    }
+
+    .run-options {
+      margin-bottom: 20px;
+    }
+
+    .option-group {
+      margin-bottom: 16px;
+    }
+
+    .option-label {
+      font-size: 12px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    .shots-selector {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+
+    .shot-btn {
+      padding: 12px;
+      border-radius: 10px;
+      border: 1px solid var(--border-subtle);
+      background: var(--bg-deep);
+      color: var(--text-secondary);
+      font-family: var(--font-mono);
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-align: center;
+    }
+
+    .shot-btn:hover {
+      border-color: var(--quantum-primary);
+    }
+
+    .shot-btn.active {
+      border-color: var(--quantum-primary);
+      background: rgba(0, 229, 255, 0.1);
+      color: var(--quantum-primary);
+    }
+
+    .mode-toggle {
+      display: flex;
+      background: var(--bg-deep);
+      border-radius: 10px;
+      padding: 4px;
+    }
+
+    .mode-btn {
+      flex: 1;
+      padding: 10px 16px;
+      border: none;
+      background: transparent;
+      color: var(--text-muted);
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      border-radius: 8px;
+      transition: all 0.2s ease;
+    }
+
+    .mode-btn.active {
+      background: var(--bg-tertiary);
+      color: var(--text-primary);
+    }
+
+    .run-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .btn-run-main {
+      width: 100%;
+      padding: 16px 24px;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .btn-run-sim {
+      background: linear-gradient(135deg, #10B981, #059669);
+      color: white;
+      box-shadow: 0 4px 20px rgba(16, 185, 129, 0.3);
+    }
+
+    .btn-run-sim:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(16, 185, 129, 0.4);
+    }
+
+    .btn-run-hw {
+      background: linear-gradient(135deg, #0066FF, #0052CC);
+      color: white;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-run-hw.disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .btn-run-hw:not(.disabled):hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(0, 102, 255, 0.4);
+    }
+
+    .upgrade-prompt {
+      font-size: 11px;
+      color: var(--text-muted);
+      text-align: center;
+      margin-top: 8px;
+      padding: 8px;
+      background: var(--bg-glass-light);
+      border-radius: 8px;
+    }
+
+    .upgrade-prompt a {
+      color: #0066FF;
+      text-decoration: none;
+    }
+
+    /* Results Panel */
+    .results-panel {
+      background: var(--bg-glass);
+      border: 1px solid var(--border-subtle);
+      border-radius: 20px;
+      padding: 24px;
+      backdrop-filter: blur(10px);
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .results-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .results-title {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--quantum-green);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .results-status {
+      font-size: 11px;
+      padding: 4px 12px;
+      border-radius: 20px;
+      background: var(--bg-glass-light);
+      color: var(--text-muted);
+    }
+
+    .results-status.success {
+      background: rgba(16, 185, 129, 0.15);
+      color: #10B981;
+    }
+
+    .results-status.running {
+      background: rgba(245, 158, 11, 0.15);
+      color: #F59E0B;
+    }
+
+    /* Histogram */
+    .histogram-container {
+      margin-bottom: 20px;
+    }
+
+    .histogram {
+      display: flex;
+      align-items: flex-end;
+      gap: 8px;
+      height: 160px;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .histogram-bar-wrapper {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      height: 100%;
+      justify-content: flex-end;
+    }
+
+    .histogram-bar {
+      width: 100%;
+      max-width: 50px;
+      background: linear-gradient(180deg, var(--quantum-primary), var(--quantum-secondary));
+      border-radius: 6px 6px 0 0;
+      min-height: 4px;
+      transition: height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+    }
+
+    .histogram-bar::after {
+      content: attr(data-count);
+      position: absolute;
+      top: -20px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--text-secondary);
+      white-space: nowrap;
+    }
+
+    .histogram-label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 8px;
+    }
+
+    /* Counts Table */
+    .counts-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+    }
+
+    .counts-table th,
+    .counts-table td {
+      padding: 10px 12px;
+      text-align: left;
+      border-bottom: 1px solid var(--bg-glass-light);
+    }
+
+    .counts-table th {
+      font-size: 10px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 600;
+    }
+
+    .counts-table td {
+      font-family: var(--font-mono);
+    }
+
+    .state-ket {
+      color: var(--quantum-primary);
+    }
+
+    .prob-bar-cell {
+      width: 120px;
+    }
+
+    .prob-bar {
+      height: 6px;
+      background: var(--bg-tertiary);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+
+    .prob-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--quantum-primary), var(--quantum-secondary));
+      border-radius: 3px;
+      transition: width 0.5s ease;
+    }
+
+    /* Job Info */
+    .job-info {
+      margin-top: 16px;
+      padding: 16px;
+      background: var(--bg-deep);
+      border-radius: 12px;
+      font-size: 11px;
+    }
+
+    .job-info-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 6px 0;
+      color: var(--text-muted);
+    }
+
+    .job-info-row span:last-child {
+      font-family: var(--font-mono);
+      color: var(--text-secondary);
+    }
+
+    .download-results-btn {
+      width: 100%;
+      margin-top: 16px;
+      padding: 12px;
+      border-radius: 10px;
+      border: 1px solid var(--border-subtle);
+      background: var(--bg-deep);
+      color: var(--text-secondary);
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .download-results-btn:hover {
+      border-color: var(--quantum-primary);
+      color: var(--quantum-primary);
+    }
+
+    /* Example Workflows */
+    .example-workflows {
+      margin-top: 48px;
+    }
+
+    .workflows-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .workflows-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      gap: 24px;
+    }
+
+    .workflow-card {
+      background: var(--bg-glass);
+      border: 1px solid var(--border-subtle);
+      border-radius: 20px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .workflow-card:hover {
+      border-color: rgba(0, 102, 255, 0.4);
+      transform: translateY(-4px);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+    }
+
+    .workflow-header {
+      padding: 24px;
+      background: linear-gradient(135deg, rgba(0, 102, 255, 0.1), rgba(124, 58, 237, 0.05));
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .workflow-number {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: #0066FF;
+      margin-bottom: 8px;
+    }
+
+    .workflow-title {
+      font-family: var(--font-heading);
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 8px;
+    }
+
+    .workflow-description {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    .workflow-code {
+      padding: 20px;
+      background: var(--bg-deep);
+      max-height: 350px;
+      overflow: auto;
+    }
+
+    .workflow-code pre {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      line-height: 1.7;
+      color: var(--text-secondary);
+      margin: 0;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    .workflow-code .keyword { color: var(--quantum-tertiary); }
+    .workflow-code .function { color: var(--quantum-primary); }
+    .workflow-code .string { color: var(--quantum-green); }
+    .workflow-code .comment { color: var(--text-muted); font-style: italic; }
+    .workflow-code .number { color: var(--quantum-gold); }
+
+    .workflow-footer {
+      padding: 16px 24px;
+      background: var(--bg-secondary);
+      border-top: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .workflow-tags {
+      display: flex;
+      gap: 8px;
+    }
+
+    .workflow-tag {
+      font-size: 10px;
+      padding: 4px 10px;
+      border-radius: 6px;
+      background: var(--bg-glass-light);
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .btn-load-example {
+      padding: 8px 16px;
+      border-radius: 8px;
+      border: 1px solid #0066FF;
+      background: transparent;
+      color: #0066FF;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-load-example:hover {
+      background: rgba(0, 102, 255, 0.1);
+    }
+
+    /* Loading Animation */
+    .loading-spinner {
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      border: 2px solid currentColor;
+      border-right-color: transparent;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Empty State */
+    .empty-state {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+      color: var(--text-muted);
+      text-align: center;
+    }
+
+    .empty-state-icon {
+      font-size: 48px;
+      margin-bottom: 16px;
+      opacity: 0.5;
+    }
+
+    .empty-state-text {
+      font-size: 14px;
+      margin-bottom: 8px;
+    }
+
+    .empty-state-hint {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    /* Responsive Design for IBM Section */
+    @media (max-width: 1400px) {
+      .ibm-workspace-grid {
+        grid-template-columns: 280px 1fr 300px;
+      }
+    }
+
+    @media (max-width: 1200px) {
+      .ibm-workspace-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .connection-panel, .execution-sidebar {
+        order: 2;
+      }
+
+      .ibm-main-content {
+        order: 1;
+      }
+
+      .workflows-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .ibm-quantum-section {
+        padding: 60px 20px;
+      }
+
+      .gate-palette {
+        justify-content: center;
+      }
+
+      .shots-selector {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .circuit-canvas {
+        padding: 16px;
+        overflow-x: auto;
+      }
+    }
   </style>
 </head>
 <body>
@@ -1777,8 +3118,8 @@
       <li><a href="security.html">Security</a></li>
       <li><a href="scaling.html">Scaling</a></li>
       <li><a href="monitoring.html">Monitoring</a></li>
+      <li><a href="pipeline.html">Pipeline</a></li>
       <li><a href="quantum-demo.html">Quantum Lab</a></li>
-      <li><a href="pipeline-demo.html">Pipeline</a></li>
     </ul>
     
     <div class="nav-actions">
@@ -2575,8 +3916,616 @@ print(f"Optimal Parameters: {result.optimal_parameters}")</textarea>
     </div>
   </section>
 
+  <!-- IBM Quantum Integration Workspace -->
+  <section class="ibm-quantum-section" id="ibm-quantum-workspace">
+    <div class="ibm-quantum-container">
+      <!-- Section Header -->
+      <div class="ibm-quantum-header">
+        <div class="ibm-badge">
+          <span class="material-icons-round" style="font-size: 14px;">hub</span>
+          IBM Quantum / Qiskit Integration
+        </div>
+        <h2 class="ibm-quantum-title">
+          <div class="ibm-logo-icon">IB</div>
+          IBM Quantum Integration Workspace
+        </h2>
+        <p class="ibm-quantum-subtitle">
+          Connect to IBM Quantum systems, build circuits visually, write Qiskit code, 
+          and execute jobs on simulators or real quantum hardware — all from your browser.
+        </p>
+      </div>
+
+      <!-- Main Workspace Grid -->
+      <div class="ibm-workspace-grid">
+        
+        <!-- Left Sidebar: Connection & Backend Selection -->
+        <aside class="connection-panel">
+          <div class="panel-header">
+            <span class="panel-title">
+              <span class="material-icons-round" style="font-size: 16px;">link</span>
+              Connection
+            </span>
+            <div class="connection-status disconnected" id="connectionStatus">
+              <span class="status-dot disconnected"></span>
+              <span id="statusText">Disconnected</span>
+            </div>
+          </div>
+
+          <!-- API Token Input -->
+          <div class="token-input-group">
+            <label class="token-label">IBM Quantum API Token</label>
+            <div class="token-input-wrapper">
+              <input type="password" class="token-input" id="apiTokenInput" placeholder="Enter your API token..." autocomplete="off">
+              <button class="token-toggle" onclick="toggleTokenVisibility()" title="Show/Hide token">
+                <span class="material-icons-round" style="font-size: 18px;" id="toggleIcon">visibility_off</span>
+              </button>
+            </div>
+            <div class="token-actions">
+              <button class="btn-token primary" onclick="testConnection()">
+                <span class="material-icons-round" style="font-size: 14px;">wifi_tethering</span>
+                Test Connection
+              </button>
+              <button class="btn-token" onclick="clearToken()">
+                <span class="material-icons-round" style="font-size: 14px;">clear</span>
+                Clear
+              </button>
+            </div>
+            <a href="https://quantum.ibm.com/" target="_blank" rel="noopener" class="get-token-link">
+              ↗ Get Free API Token at quantum.ibm.com
+            </a>
+            <label class="save-option">
+              <input type="checkbox" id="saveTokenCheck" checked>
+              Save token to browser storage (localStorage)
+            </label>
+          </div>
+
+          <!-- Backend Selector -->
+          <div class="backend-selector">
+            <span class="panel-title" style="margin-bottom: 16px;">
+              <span class="material-icons-round" style="font-size: 16px;">dns</span>
+              Quantum Backend
+            </span>
+            <ul class="backend-list" id="backendList">
+              <li class="backend-item active" data-backend="aer_simulator" onclick="selectBackend(this)">
+                <div class="backend-name-row">
+                  <span class="backend-name">
+                    <span class="material-icons-round" style="font-size: 16px; color: #10B981;">computer</span>
+                    Aer Simulator
+                  </span>
+                  <span class="backend-type-badge badge-simulator">Simulator</span>
+                </div>
+                <div class="backend-meta">
+                  <span>∞ qubits</span>
+                  <span class="queue-info available">
+                    <span class="material-icons-round" style="font-size: 12px;">check_circle</span>
+                    Available
+                  </span>
+                </div>
+              </li>
+              <li class="backend-item" data-backend="qasm_simulator" onclick="selectBackend(this)">
+                <div class="backend-name-row">
+                  <span class="backend-name">
+                    <span class="material-icons-round" style="font-size: 16px; color: #10B981;">computer</span>
+                    QASM Simulator
+                  </span>
+                  <span class="backend-type-badge badge-simulator">Simulator</span>
+                </div>
+                <div class="backend-meta">
+                  <span>32 qubits</span>
+                  <span class="queue-info available">
+                    <span class="material-icons-round" style="font-size: 12px;">check_circle</span>
+                    Available
+                  </span>
+                </div>
+              </li>
+              <li class="backend-item" data-backend="statevector_simulator" onclick="selectBackend(this)">
+                <div class="backend-name-row">
+                  <span class="backend-name">
+                    <span class="material-icons-round" style="font-size: 16px; color: #10B981;">computer</span>
+                    Statevector Sim
+                  </span>
+                  <span class="backend-type-badge badge-simulator">Simulator</span>
+                </div>
+                <div class="backend-meta">
+                  <span>30 qubits</span>
+                  <span class="queue-info available">
+                    <span class="material-icons-round" style="font-size: 12px;">check_circle</span>
+                    Available
+                  </span>
+                </div>
+              </li>
+              <li class="backend-item disabled" data-backend="ibm_brisbane" onclick="selectBackend(this)">
+                <div class="backend-name-row">
+                  <span class="backend-name">
+                    <span class="material-icons-round" style="font-size: 16px; color: #F59E0B;">memory</span>
+                    IBM Brisbane
+                  </span>
+                  <span class="backend-type-badge badge-hardware">Hardware</span>
+                </div>
+                <div class="backend-meta">
+                  <span>127 qubits</span>
+                  <span class="queue-info queued">
+                    <span class="material-icons-round" style="font-size: 12px;">schedule</span>
+                    Queue: 3 jobs
+                  </span>
+                </div>
+              </li>
+              <li class="backend-item disabled" data-backend="ibm_kyoto" onclick="selectBackend(this)">
+                <div class="backend-name-row">
+                  <span class="backend-name">
+                    <span class="material-icons-round" style="font-size: 16px; color: #F59E0B;">memory</span>
+                    IBM Kyoto
+                  </span>
+                  <span class="backend-type-badge badge-hardware">Hardware</span>
+                </div>
+                <div class="backend-meta">
+                  <span>127 qubits</span>
+                  <span class="queue-info queued">
+                    <span class="material-icons-round" style="font-size: 12px;">schedule</span>
+                    Queue: 5 jobs
+                  </span>
+                </div>
+              </li>
+            </ul>
+
+            <!-- Backend Details -->
+            <div class="backend-details" id="backendDetails">
+              <div class="detail-grid">
+                <div class="detail-item">
+                  <div class="detail-label">Qubits</div>
+                  <div class="detail-value" id="detailQubits">∞</div>
+                </div>
+                <div class="detail-item">
+                  <div class="detail-label">Basis Gates</div>
+                  <div class="detail-value" id="detailGates">Full</div>
+                </div>
+                <div class="detail-item">
+                  <div class="detail-label">Error Rate</div>
+                  <div class="detail-value" id="detailError">0%</div>
+                </div>
+                <div class="detail-item">
+                  <div class="detail-label">Status</div>
+                  <div class="detail-value" id="detailStatus" style="color: #10B981;">Active</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </aside>
+
+        <!-- Main Content Area: Circuit Builder + Code Editor -->
+        <main class="ibm-main-content">
+          
+          <!-- Circuit Builder Panel -->
+          <div class="circuit-builder">
+            <div class="circuit-header">
+              <span class="circuit-title">
+                <span class="material-icons-round" style="font-size: 18px;">account_tree</span>
+                Circuit Builder
+              </span>
+              <div class="circuit-stats">
+                <div class="circuit-stat">
+                  <span>Qubits:</span>
+                  <span class="circuit-stat-value" id="qubitCount">5</span>
+                </div>
+                <div class="circuit-stat">
+                  <span>Depth:</span>
+                  <span class="circuit-stat-value" id="circuitDepth">0</span>
+                </div>
+                <div class="circuit-stat">
+                  <span>Gates:</span>
+                  <span class="circuit-stat-value" id="gateCount">0</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Gate Palette -->
+            <div class="gate-palette">
+              <span class="palette-label">Gates:</span>
+              <button class="gate-btn gate-x" data-gate="X" onclick="selectGate('X')" title="Pauli-X Gate">X</button>
+              <button class="gate-btn gate-y" data-gate="Y" onclick="selectGate('Y')" title="Pauli-Y Gate">Y</button>
+              <button class="gate-btn gate-z" data-gate="Z" onclick="selectGate('Z')" title="Pauli-Z Gate">Z</button>
+              <button class="gate-btn gate-h" data-gate="H" onclick="selectGate('H')" title="Hadamard Gate">H</button>
+              <button class="gate-btn gate-cnot" data-gate="CX" onclick="selectGate('CX')" title="CNOT Gate">CNOT</button>
+              <button class="gate-btn gate-rx" data-gate="RX" onclick="selectGate('RX')" title="Rotation-X Gate">Rx</button>
+              <button class="gate-btn gate-ry" data-gate="RY" onclick="selectGate('RY')" title="Rotation-Y Gate">Ry</button>
+              <button class="gate-btn gate-rz" data-gate="RZ" onclick="selectGate('RZ')" title="Rotation-Z Gate">Rz</button>
+              <button class="gate-btn gate-measure" data-gate="M" onclick="selectGate('M')" title="Measure">M</button>
+              <button class="btn-token" style="margin-left: auto;" onclick="clearCircuit()">
+                <span class="material-icons-round" style="font-size: 14px;">refresh</span>
+                Clear
+              </button>
+            </div>
+
+            <!-- Circuit Canvas -->
+            <div class="circuit-canvas" id="circuitCanvas" onclick="addGateToCanvas(event)">
+              <div class="qubit-register" id="qubitRegister">
+                <!-- Qubit lines will be generated by JavaScript -->
+              </div>
+              <div class="circuit-timeline" id="circuitTimeline">
+                <!-- Timeline steps will be generated by JavaScript -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Code Editor Panel -->
+          <div class="code-editor-panel">
+            <div class="editor-tabs">
+              <button class="editor-tab active" data-tab="bell" onclick="switchCodeTab(this, 'bell')">
+                <span class="material-icons-round" style="font-size: 16px;">fiber_manual_record</span>
+                Bell State
+              </button>
+              <button class="editor-tab" data-tab="ghz" onclick="switchCodeTab(this, 'ghz')">
+                <span class="material-icons-round" style="font-size: 16px;">share</span>
+                GHZ State
+              </button>
+              <button class="editor-tab" data-tab="qft" onclick="switchCodeTab(this, 'qft')">
+                <span class="material-icons-round" style="font-size: 16px;">waves</span>
+                QFT
+              </button>
+              <button class="editor-tab" data-tab="grover" onclick="switchCodeTab(this, 'grover')">
+                <span class="material-icons-round" style="font-size: 16px;">search</span>
+                Grover
+              </button>
+              <button class="editor-tab" data-tab="vqe" onclick="switchCodeTab(this, 'vqe')">
+                <span class="material-icons-round" style="font-size: 16px;">science</span>
+                VQE
+              </button>
+            </div>
+            
+            <div class="editor-toolbar-row">
+              <div class="toolbar-group">
+                <button class="toolbar-btn" onclick="copyCode()">
+                  <span class="material-icons-round" style="font-size: 14px;">content_copy</span>
+                  Copy
+                </button>
+                <button class="toolbar-btn" onclick="formatCode()">
+                  <span class="material-icons-round" style="font-size: 14px;">format_align_left</span>
+                  Format
+                </button>
+              </div>
+              <div class="toolbar-group">
+                <button class="toolbar-btn run-sim" onclick="runQuantumJob('simulator')">
+                  <span class="material-icons-round" style="font-size: 14px;">play_arrow</span>
+                  Run on Simulator
+                </button>
+              </div>
+            </div>
+
+            <div class="code-area-wrapper">
+              <div class="line-numbers" id="lineNumbers">1</div>
+              <textarea class="code-textarea" id="qiskitCodeEditor" spellcheck="false"># Bell State Circuit - IBM Quantum/Qiskit
+# Creates maximally entangled two-qubit state
+
+from qiskit import QuantumCircuit, transpile
+from qiskit_aer import AerSimulator
+from qiskit.visualization import plot_histogram
+
+# Create a 2-qubit quantum circuit
+qc = QuantumCircuit(2, 2)
+
+# Apply Hadamard to qubit 0 (creates superposition)
+qc.h(0)
+
+# Apply CNOT with control=0, target=1 (creates entanglement)
+qc.cx(0, 1)
+
+# Measure both qubits
+qc.measure([0, 1], [0, 1])
+
+# Display the circuit
+print("Bell State Circuit:")
+print(qc.draw())
+
+# Execute on simulator
+simulator = AerSimulator()
+compiled_circuit = transpile(qc, simulator)
+job = simulator.run(compiled_circuits=compiled_circuit, shots=1024)
+result = job.result()
+counts = result.get_counts()
+
+print("\nMeasurement Results:")
+print(counts)
+
+# Expected: {'00': ~0, '01': ~0, '10': ~0, '11': ~512}
+# The entangled pair always collapses to same state!</textarea>
+            </div>
+          </div>
+        </main>
+
+        <!-- Right Sidebar: Execution & Results -->
+        <aside class="execution-sidebar">
+          
+          <!-- Run Panel -->
+          <div class="run-panel">
+            <div class="panel-header">
+              <span class="panel-title">
+                <span class="material-icons-round" style="font-size: 16px;">rocket_launch</span>
+                Execution
+              </span>
+            </div>
+
+            <div class="run-options">
+              <div class="option-group">
+                <label class="option-label">Shots (Measurements)</label>
+                <div class="shots-selector">
+                  <button class="shot-btn active" data-shots="1024" onclick="selectShots(this)">1024</button>
+                  <button class="shot-btn" data-shots="4096" onclick="selectShots(this)">4096</button>
+                  <button class="shot-btn" data-shots="8192" onclick="selectShots(this)">8192</button>
+                </div>
+              </div>
+
+              <div class="option-group">
+                <label class="option-label">Execution Mode</label>
+                <div class="mode-toggle">
+                  <button class="mode-btn active" data-mode="sync" onclick="selectMode(this)">Synchronous</button>
+                  <button class="mode-btn" data-mode="async" onclick="selectMode(this)">Async</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="run-buttons">
+              <button class="btn-run-main btn-run-sim" onclick="runQuantumJob('simulator')">
+                <span class="material-icons-round">play_arrow</span>
+                Run on Simulator
+              </button>
+              <button class="btn-run-main btn-run-hw disabled" id="hwRunBtn" onclick="runQuantumJob('hardware')">
+                <span class="material-icons-round">memory</span>
+                Submit to Real Hardware
+              </button>
+              <div class="upgrade-prompt" id="upgradePrompt">
+                🔒 Requires valid API token. <a href="#apiTokenInput">Connect now →</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Results Panel -->
+          <div class="results-panel" id="resultsPanel">
+            <div class="results-header">
+              <span class="results-title">
+                <span class="material-icons-round" style="font-size: 16px;">analytics</span>
+                Results
+              </span>
+              <span class="results-status" id="resultsStatus">Idle</span>
+            </div>
+
+            <!-- Empty State (shown when no results) -->
+            <div class="empty-state" id="emptyResults">
+              <div class="empty-state-icon">📊</div>
+              <div class="empty-state-text">No results yet</div>
+              <div class="empty-state-hint">Run a circuit to see measurement outcomes</div>
+            </div>
+
+            <!-- Results Content (hidden initially) -->
+            <div id="resultsContent" style="display: none;">
+              <!-- Histogram -->
+              <div class="histogram-container">
+                <div class="histogram" id="histogram">
+                  <!-- Bars generated by JS -->
+                </div>
+              </div>
+
+              <!-- Counts Table -->
+              <table class="counts-table" id="countsTable">
+                <thead>
+                  <tr>
+                    <th>State</th>
+                    <th>Counts</th>
+                    <th class="prob-bar-cell">Probability</th>
+                  </tr>
+                </thead>
+                <tbody id="countsBody">
+                  <!-- Rows generated by JS -->
+                </tbody>
+              </table>
+
+              <!-- Job Info -->
+              <div class="job-info" id="jobInfo">
+                <div class="job-info-row">
+                  <span>Job ID</span>
+                  <span id="jobIdValue">—</span>
+                </div>
+                <div class="job-info-row">
+                  <span>Backend</span>
+                  <span id="jobBackendValue">—</span>
+                </div>
+                <div class="job-info-row">
+                  <span>Shots</span>
+                  <span id="jobShotsValue">—</span>
+                </div>
+                <div class="job-info-row">
+                  <span>Execution Time</span>
+                  <span id="jobTimeValue">—</span>
+                </div>
+              </div>
+
+              <button class="download-results-btn" onclick="downloadResults()">
+                <span class="material-icons-round" style="font-size: 16px;">download</span>
+                Download Results (JSON)
+              </button>
+            </div>
+          </div>
+        </aside>
+      </div>
+
+      <!-- Example Workflows Section -->
+      <div class="example-workflows">
+        <div class="workflows-header">
+          <span class="ibm-badge" style="margin-bottom: 20px;">
+            <span class="material-icons-round" style="font-size: 14px;">auto_awesome</span>
+            Example Workflows
+          </span>
+          <h3 class="section-title" style="font-size: 32px; margin-bottom: 12px;">Complete Qiskit Workflow Examples</h3>
+          <p class="section-description">
+            Ready-to-use templates demonstrating real quantum computing patterns. 
+            Click "Load Example" to copy the code into the editor.
+          </p>
+        </div>
+
+        <div class="workflows-grid">
+          <!-- Workflow 1: Hello Quantum (Bell State) -->
+          <div class="workflow-card">
+            <div class="workflow-header">
+              <div class="workflow-number">WORKFLOW 01</div>
+              <h4 class="workflow-title">Hello Quantum World</h4>
+              <p class="workflow-description">
+                Your first quantum program! Creates a Bell state to demonstrate 
+                quantum entanglement and interpret the measurement results.
+              </p>
+            </div>
+            <div class="workflow-code">
+              <pre><span class="comment"># Hello Quantum - Bell State with Results Interpretation</span>
+<span class="keyword">from</span> qiskit <span class="keyword">import</span> QuantumCircuit, transpile
+<span class="keyword">from</span> qiskit_aer <span class="keyword">import</span> AerSimulator
+
+<span class="comment"># Step 1: Create circuit</span>
+qc = QuantumCircuit(<span class="number">2</span>, <span class="number">2</span>)
+qc.h(<span class="number">0</span>)       <span class="comment"># Superposition</span>
+qc.cx(<span class="number">0</span>, <span class="number">1</span>)   <span class="comment"># Entanglement</span>
+qc.measure_all()
+
+<span class="comment"># Step 2: Execute</span>
+simulator = AerSimulator()
+result = simulator.run(transpile(qc, simulator), shots=<span class="number">1024</span>).result()
+counts = result.get_counts()
+
+<span class="comment"># Step 3: Interpret results</span>
+<span class="function">print</span>(<span class="string">f"00 count: {counts.get('00', 0)}"</span>)
+<span class="function">print</span>(<span class="string">f"11 count: {counts.get('11', 0)}"</span>)
+<span class="function">print</span>(<span class="string">f"\nEntanglement verified: {abs(counts.get('00',0)-counts.get('11',0))<50}"</span>)</pre>
+            </div>
+            <div class="workflow-footer">
+              <div class="workflow-tags">
+                <span class="workflow-tag">Beginner</span>
+                <span class="workflow-tag">Entanglement</span>
+                <span class="workflow-tag">2 Qubits</span>
+              </div>
+              <button class="btn-load-example" onclick="loadExample('bell')">
+                <span class="material-icons-round" style="font-size: 14px;">add_circle</span>
+                Load Example
+              </button>
+            </div>
+          </div>
+
+          <!-- Workflow 2: Chemistry Simulation (H2) -->
+          <div class="workflow-card">
+            <div class="workflow-header">
+              <div class="workflow-number">WORKFLOW 02</div>
+              <h4 class="workflow-title">Chemistry Simulation</h4>
+              <p class="workflow-description">
+                Calculate H₂ molecule ground state energy using VQE algorithm. 
+                A practical template for quantum chemistry research.
+              </p>
+            </div>
+            <div class="workflow-code">
+              <pre><span class="comment"># H2 Molecule Energy Calculation using VQE</span>
+<span class="keyword">from</span> qiskit_nature.second_q.drivers <span class="keyword">import</span> PySCFDriver
+<span class="keyword">from</span> qiskit_nature.second_q.mappers <span class="keyword">import</span> JordanWignerMapper
+<span class="keyword">from</span> qiskit_algorithms.minimum_eigensolvers <span class="keyword">import</span> VQE
+<span class="keyword">from</span> qiskit_algorithms.optimizers <span class="keyword">import</span> COBYLA
+<span class="keyword">from</span> qiskit.circuit.library <span class="keyword">import</span> TwoLocal
+
+<span class="comment"># Define H2 molecule at equilibrium bond length</span>
+driver = PySCFDriver(atom=<span class="string">f"H 0 0 0; H 0 0 0.735"</span>)
+molecule = driver.run()
+
+<span class="comment"># Map to qubit Hamiltonian</span>
+mapper = JordanWignerMapper()
+qubit_op = mapper.map(molecule.hamiltonian.second_q_op())
+
+<span class="comment"># Define variational ansatz (parameterized circuit)</span>
+ansatz = TwoLocal(
+    rotation_blocks=[<span class="string">'ry'</span>, <span class="string">'rz'</span>],
+    entanglement_blocks=<span class="string">'cx'</span>,
+    reps=<span class="number">3</span>,
+    num_qubits=qubit_op.num_qubits
+)
+
+<span class="comment"># Run VQE optimization</span>
+optimizer = COBYLA(maxiter=<span class="number">200</span>)
+vqe = VQE(ansatz, optimizer)
+result = vqe.compute_minimum_eigenvalue(qubit_op)
+
+<span class="function">print</span>(<span class="string">f"Ground State Energy: {result.eigenvalue:.6f} Ha"</span>)
+<span class="function">print</span>(<span class="string">f"Optimal params: {result.optimal_parameters}"</span>)</pre>
+            </div>
+            <div class="workflow-footer">
+              <div class="workflow-tags">
+                <span class="workflow-tag">Chemistry</span>
+                <span class="workflow-tag">VQE</span>
+                <span class="workflow-tag">Intermediate</span>
+              </div>
+              <button class="btn-load-example" onclick="loadExample('chemistry')">
+                <span class="material-icons-round" style="font-size: 14px;">add_circle</span>
+                Load Example
+              </button>
+            </div>
+          </div>
+
+          <!-- Workflow 3: Machine Learning (VQE Classifier) -->
+          <div class="workflow-card">
+            <div class="workflow-header">
+              <div class="workflow-number">WORKFLOW 03</div>
+              <h4 class="workflow-title">Quantum Machine Learning</h4>
+              <p class="workflow-description">
+                VQE-based quantum classifier skeleton. Train quantum circuits 
+                for classification tasks using hybrid quantum-classical approach.
+              </p>
+            </div>
+            <div class="workflow-code">
+              <pre><span class="comment"># VQE Classifier Skeleton - Quantum ML Template</span>
+<span class="keyword">import</span> numpy <span class="keyword">as</span> np
+<span class="keyword">from</span> qiskit <span class="keyword">import</span> QuantumCircuit
+<span class="keyword">from</span> qiskit_machine_learning.algorithms <span class="keyword">import</span> VQC
+<span class="keyword">from</span> qiskit_machine_learning.circuit.library <span class="keyword">import</span> RawFeatureVector
+<span class="keyword">from</span> qiskit_algorithms.optimizers <span class="keyword">import</span> COBYLA
+
+<span class="comment"># Prepare dataset (example: binary classification)</span>
+num_features = <span class="number">2</span>
+X_train = np.array([[<span class="number">0</span>, <span class="number">0</span>], [<span class="number">0</span>, <span class="number">1</span>], [<span class="number">1</span>, <span class="number">0</span>], [<span class="number">1</span>, <span class="number">1</span>]])
+y_train = np.array([<span class="number">1</span>, -<span class="number">1</span>, -<span class="number">1</span>, <span class="number">1</span>])  <span class="comment"># XOR labels</span>
+
+<span class="comment"># Define quantum feature map</span>
+feature_map = RawFeatureMap(feature_dimension=num_features)
+
+<span class="comment"># Define ansatz (variational circuit)</span>
+ansatz = TwoLocal(
+    num_qubits=num_features,
+    rotation_blocks=[<span class="string">'ry'</span>],
+    entanglement_blocks=<span class="string">'cx'</span>,
+    reps=<span class="number">2</span>,
+    final_measurement_layer=<span class="string">'pz'</span>
+)
+
+<span class="comment"># Initialize and train classifier</span>
+vqc = VQC(
+    feature_map=feature_map,
+    ansatz=ansatz,
+    optimizer=COBYLA(maxiter=<span class="number">100</span>)
+)
+vqc.fit(X_train, y_train)
+
+<span class="comment"># Evaluate</span>
+predictions = vqc.predict(X_test)
+<span class="function">print</span>(<span class="string">f"Accuracy: {np.mean(predictions == y_test):.2%}"</span>)</pre>
+            </div>
+            <div class="workflow-footer">
+              <div class="workflow-tags">
+                <span class="workflow-tag">Machine Learning</span>
+                <span class="workflow-tag">VQC</span>
+                <span class="workflow-tag">Advanced</span>
+              </div>
+              <button class="btn-load-example" onclick="loadExample('qml')">
+                <span class="material-icons-round" style="font-size: 14px;">add_circle</span>
+                Load Example
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Footer -->
-  <footer class="footer">
     <div class="footer-content">
       <div class="footer-brand">
         <a href="index.html" class="nav-logo">
@@ -2796,6 +4745,944 @@ print(f"Optimal Parameters: {result.optimal_parameters}")</textarea>
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
+    }
+
+    // ============================================
+    // IBM QUANTUM INTEGRATION WORKSPACE - JAVASCRIPT
+    // ============================================
+
+    // State Management
+    let ibmQuantumState = {
+      connected: false,
+      token: '',
+      selectedBackend: 'aer_simulator',
+      selectedGate: null,
+      selectedShots: 1024,
+      executionMode: 'sync',
+      circuitGates: [], // Array of {qubit, position, gate}
+      numQubits: 5,
+      lastResults: null,
+      jobId: null
+    };
+
+    // Code Examples for Tabs
+    const codeExamples = {
+      bell: `# Bell State Circuit - IBM Quantum/Qiskit
+# Creates maximally entangled two-qubit state
+
+from qiskit import QuantumCircuit, transpile
+from qiskit_aer import AerSimulator
+from qiskit.visualization import plot_histogram
+
+# Create a 2-qubit quantum circuit
+qc = QuantumCircuit(2, 2)
+
+# Apply Hadamard to qubit 0 (creates superposition)
+qc.h(0)
+
+# Apply CNOT with control=0, target=1 (creates entanglement)
+qc.cx(0, 1)
+
+# Measure both qubits
+qc.measure([0, 1], [0, 1])
+
+# Display the circuit
+print("Bell State Circuit:")
+print(qc.draw())
+
+# Execute on simulator
+simulator = AerSimulator()
+compiled_circuit = transpile(qc, simulator)
+job = simulator.run(compiled_circuits=compiled_circuit, shots=1024)
+result = job.result()
+counts = result.get_counts()
+
+print("\\nMeasurement Results:")
+print(counts)
+
+# Expected: {'00': ~0, '01': ~0, '10': ~0, '11': ~512}
+# The entangled pair always collapses to same state!`,
+
+      ghz: `# GHZ (Greenberger-Horne-Zeilinger) State Circuit
+# Multi-qubit entanglement demonstration
+
+from qiskit import QuantumCircuit, transpile
+from qiskit_aer import AerSimulator
+
+# Create n-qubit GHZ state
+n_qubits = 5
+qc = QuantumCircuit(n_qubits, n_qubits)
+
+# Step 1: Initialize superposition on first qubit
+qc.h(0)
+
+# Step 2: Create chain of entanglement (CNOT cascade)
+for i in range(n_qubits - 1):
+    qc.cx(i, i + 1)
+
+# Measure all qubits
+qc.measure(range(n_qubits), range(n_qubits))
+
+print(f"GHZ State Circuit ({n_qubits} qubits):")
+print(qc.draw())
+
+# Execute
+simulator = AerSimulator()
+result = simulator.run(transpile(qc, simulator), shots=8192).result()
+counts = result.get_counts()
+
+print("\\nGHZ Measurement Results:")
+for state, count in sorted(counts.items()):
+    prob = count / 8192 * 100
+    print(f"|{state}⟩: {count} ({prob:.1f}%)")
+
+# Expected: |00000> and |11111> each ~50%`,
+
+      qft: `# Quantum Fourier Transform (QFT) Circuit
+# Essential building block for many quantum algorithms
+
+from qiskit import QuantumCircuit, transpile
+from qiskit_aer import AerSimulator
+import numpy as np
+
+def qft_rotations(circuit, n):
+    """Apply QFT rotations to n qubits"""
+    if n == 0:
+        return
+    n -= 1
+    circuit.h(n)
+    for qubit in range(n):
+        circuit.cp(np.pi / 2 ** (n - qubit), qubit, n)
+    qft_rotations(circuit, n)
+
+def swap_registers(circuit, n):
+    """Swap qubits to match standard QFT output"""
+    for qubit in range(n // 2):
+        circuit.swap(qubit, n - qubit - 1)
+
+def qft(circuit, n):
+    """Full QFT on n qubits"""
+    qft_rotations(circuit, n)
+    swap_registers(circuit, n)
+    return circuit
+
+# Create 4-qubit QFT circuit
+n = 4
+qc = QuantumCircuit(n, n)
+
+# Prepare initial state (example: |1001>)
+qc.x(0)
+qc.x(3)
+
+# Apply QFT
+qft(qc, n)
+qc.measure(range(n), range(n))
+
+print("QFT Circuit:")
+print(qc.draw('text'))
+
+# Execute
+simulator = AerSimulator()
+result = simulator.run(transpile(qc, simulator), shots=4096).result()
+counts = result.get_counts()
+print("\\nQFT Results:", counts)`,
+
+      grover: `# Grover's Search Algorithm (2-qubit example)
+# Quadratic speedup for unstructured search
+
+from qiskit import QuantumCircuit, transpile
+from qiskit_aer import AerSimulator
+import numpy as np
+
+def grover_circuit(target_state='11'):
+    """Grover's algorithm to find target_state"""
+    qc = QuantumCircuit(2, 2)
+    
+    # Initialize superposition
+    qc.h([0, 1])
+    
+    # Oracle for target state (marks the solution)
+    if target_state == '00':
+        qc.x([0, 1])
+    elif target_state == '01':
+        qc.x(0)
+    elif target_state == '10':
+        qc.x(1)
+    
+    # Phase oracle (CZ gate marks |11>)
+    qc.cz(0, 1)
+    
+    # Undo the X gates
+    if target_state == '00':
+        qc.x([0, 1])
+    elif target_state == '01':
+        qc.x(0)
+    elif target_state == '10':
+        qc.x(1)
+    
+    # Diffusion operator (inversion about mean)
+    qc.h([0, 1])
+    qc.x([0, 1])
+    qc.h(0)
+    qc.cx(0, 1)
+    qc.h(0)
+    qc.x([0, 1])
+    qc.h([0, 1])
+    
+    qc.measure([0, 1], [0, 1])
+    return qc
+
+# Search for |11⟩
+target = '11'
+qc = grover_circuit(target)
+
+print(f"Grover's Search for |{target}⟩:")
+print(qc.draw())
+
+# Execute
+simulator = AerSimulator()
+result = simulator.run(transpile(qc, simulator), shots=1024).result()
+counts = result.get_counts()
+
+print(f"\\nSearch Results (target: |{target}⟩):")
+for state, count in sorted(counts.items()):
+    print(f"|{state}⟩: {count} ({count/1024*100:.1f}%")`,
+
+      vqe: `# Variational Quantum Eigensolver (VQE) Template
+# For finding ground state energies of quantum systems
+
+from qiskit.circuit.library import TwoLocal, EfficientSU2
+from qiskit_algorithms.optimizers import COBYLA, SPSA, L_BFGS_B
+from qiskit_algorithms.minimum_eigensolvers import VQE
+from qiskit.primitives import Estimator
+import numpy as np
+
+# Define the problem Hamiltonian (example: 2-qubit Ising model)
+# H = -Z⊗Z - 0.5*X⊗X (can be encoded as Pauli operators)
+from qiskit.quantum_info import SparsePauliOp
+
+hamiltonian = SparsePauliOp.from_list([
+    ('ZZ', -1.0),
+    ('XX', -0.5)
+])
+
+print("Hamiltonian:", hamiltonian)
+
+# Define variational ansatz (parameterized circuit)
+ansatz = EfficientSU2(
+    num_qubits=2,
+    reps=2,
+    su2_gates=['ry'],
+    entanglement='linear',
+    final_measurement_layer=False
+)
+
+print(f"\\nAnsatz parameters: {ansatz.num_parameters}")
+print("Ansatz circuit:")
+print(ansatz.decompose().draw('text'))
+
+# Choose optimizer
+optimizer = COBYLA(maxiter=100)
+
+# Set up VQE with primitive-based approach
+estimator = Estimator()
+vqe = VQE(estimator, ansatz, optimizer)
+
+# Run optimization
+result = vqe.compute_minimum_eigenvalue(hamiltonian)
+
+# Display results
+print("\\n" + "="*50)
+print("VQE RESULTS")
+print("="*50)
+print(f"Ground State Energy: {result.eigenvalue:.6f}")
+print(f"Optimal Parameters: {result.optimal_parameters}")
+print(f"Number of Evaluations: {result.cost_function_evals}")
+print(f"Convergence: {'✓ Achieved' if result.converged else '✗ Not converged'}")`
+    };
+
+    // Example workflows code for "Load Example" buttons
+    const workflowExamples = {
+      bell: `# Hello Quantum - Bell State with Results Interpretation
+from qiskit import QuantumCircuit, transpile
+from qiskit_aer import AerSimulator
+
+# Step 1: Create circuit
+qc = QuantumCircuit(2, 2)
+qc.h(0)       # Superposition
+qc.cx(0, 1)   # Entanglement
+qc.measure_all()
+
+# Step 2: Execute
+simulator = AerSimulator()
+result = simulator.run(transpile(qc, simulator), shots=1024).result()
+counts = result.get_counts()
+
+# Step 3: Interpret results
+print(f"00 count: {counts.get('00', 0)}")
+print(f"11 count: {counts.get('11', 0)}")
+print(f"\\nEntanglement verified: {abs(counts.get('00',0)-counts.get('11',0))<50}")`,
+
+      chemistry: `# H2 Molecule Energy Calculation using VQE
+from qiskit_nature.second_q.drivers import PySCFDriver
+from qiskit_nature.second_q.mappers import JordanWignerMapper
+from qiskit_algorithms.minimum_eigensolvers import VQE
+from qiskit_algorithms.optimizers import COBYLA
+from qiskit.circuit.library import TwoLocal
+
+# Define H2 molecule at equilibrium bond length
+driver = PySCFDriver(atom=f"H 0 0 0; H 0 0 0.735")
+molecule = driver.run()
+
+# Map to qubit Hamiltonian
+mapper = JordanWignerMapper()
+qubit_op = mapper.map(molecule.hamiltonian.second_q_op())
+
+# Define variational ansatz (parameterized circuit)
+ansatz = TwoLocal(
+    rotation_blocks=['ry', 'rz'],
+    entanglement_blocks='cx',
+    reps=3,
+    num_qubits=qubit_op.num_qubits
+)
+
+# Run VQE optimization
+optimizer = COBYLA(maxiter=200)
+vqe = VQE(ansatz, optimizer)
+result = vqe.compute_minimum_eigenvalue(qubit_op)
+
+print(f"Ground State Energy: {result.eigenvalue:.6f} Ha")
+print(f"Optimal params: {result.optimal_parameters}")`,
+
+      qml: `# VQE Classifier Skeleton - Quantum ML Template
+import numpy as np
+from qiskit import QuantumCircuit
+from qiskit_machine_learning.algorithms import VQC
+from qiskit_machine_learning.circuit.library import RawFeatureVector
+from qiskit_algorithms.optimizers import COBYLA
+
+# Prepare dataset (example: binary classification)
+num_features = 2
+X_train = np.array([[0, 0], [0, 1], [1, 0], [1, 1]])
+y_train = np.array([1, -1, -1, 1])  # XOR labels
+
+# Define quantum feature map
+feature_map = RawFeatureVector(feature_dimension=num_features)
+
+# Define ansatz (variational circuit)
+ansatz = TwoLocal(
+    num_qubits=num_features,
+    rotation_blocks=['ry'],
+    entanglement_blocks='cx',
+    reps=2,
+    final_measurement_layer='pz'
+)
+
+# Initialize and train classifier
+vqc = VQC(
+    feature_map=feature_map,
+    ansatz=ansatz,
+    optimizer=COBYLA(maxiter=100)
+)
+vqc.fit(X_train, y_train)
+
+# Evaluate
+predictions = vqc.predict(X_test)
+print(f"Accuracy: {np.mean(predictions == y_test):.2%}")`
+    };
+
+    // Backend configurations
+    const backendConfigs = {
+      aer_simulator: { qubits: '∞', gates: 'Full', error: '0%', status: 'Active', statusColor: '#10B981' },
+      qasm_simulator: { qubits: '32', gates: 'Full', error: '0%', status: 'Active', statusColor: '#10B981' },
+      statevector_simulator: { qubits: '30', gates: 'Full', error: '0%', status: 'Active', statusColor: '#10B981' },
+      ibm_brisbane: { qubits: '127', gates: 'Eagle', error: '0.05%', status: 'Queued', statusColor: '#F59E0B' },
+      ibm_kyoto: { qubits: '127', gates: 'Eagle', error: '0.04%', status: 'Queued', statusColor: '#F59E0B' }
+    };
+
+    // Initialize workspace on DOM ready
+    document.addEventListener('DOMContentLoaded', function() {
+      initIBMWorkspace();
+    });
+
+    function initIBMWorkspace() {
+      // Load saved token from localStorage
+      const savedToken = localStorage.getItem('ibm_quantum_token');
+      if (savedToken) {
+        document.getElementById('apiTokenInput').value = savedToken;
+        ibmQuantumState.token = savedToken;
+      }
+
+      // Initialize circuit canvas
+      initCircuitCanvas();
+
+      // Update line numbers for code editor
+      updateLineNumbers();
+
+      // Add input listener for code editor
+      const codeEditor = document.getElementById('qiskitCodeEditor');
+      if (codeEditor) {
+        codeEditor.addEventListener('input', updateLineNumbers);
+        codeEditor.addEventListener('scroll', syncScroll);
+      }
+    }
+
+    // ============================================
+    // CONNECTION MANAGEMENT
+    // ============================================
+
+    function toggleTokenVisibility() {
+      const input = document.getElementById('apiTokenInput');
+      const icon = document.getElementById('toggleIcon');
+      
+      if (input.type === 'password') {
+        input.type = 'text';
+        icon.textContent = 'visibility';
+      } else {
+        input.type = 'password';
+        icon.textContent = 'visibility_off';
+      }
+    }
+
+    function testConnection() {
+      const token = document.getElementById('apiTokenInput').value.trim();
+      const statusEl = document.getElementById('connectionStatus');
+      const statusText = document.getElementById('statusText');
+
+      if (!token) {
+        showConnectionError('Please enter an API token');
+        return;
+      }
+
+      // Show connecting state
+      setConnectionStatus('connecting', 'Connecting...');
+
+      // Simulate connection test (real implementation would call IBM API)
+      setTimeout(() => {
+        // Simulate successful connection for demo purposes
+        // In production, this would validate against IBM Quantum API
+        const isValid = token.length >= 10; // Basic validation
+        
+        if (isValid) {
+          setConnectionStatus('connected', 'Connected');
+          ibmQuantumState.connected = true;
+          ibmQuantumState.token = token;
+
+          // Save token if checkbox is checked
+          if (document.getElementById('saveTokenCheck').checked) {
+            localStorage.setItem('ibm_quantum_token', token);
+          }
+
+          // Enable hardware button
+          document.getElementById('hwRunBtn').classList.remove('disabled');
+          document.getElementById('upgradePrompt').style.display = 'none';
+
+          // Enable hardware backends
+          document.querySelectorAll('.backend-item.disabled').forEach(item => {
+            item.classList.remove('disabled');
+            item.style.opacity = '1';
+            item.style.cursor = 'pointer';
+          });
+        } else {
+          setConnectionStatus('error', 'Invalid Token');
+          ibmQuantumState.connected = false;
+        }
+      }, 1500);
+    }
+
+    function setConnectionStatus(status, text) {
+      const statusEl = document.getElementById('connectionStatus');
+      const statusTextEl = document.getElementById('statusText');
+      const dot = statusEl.querySelector('.status-dot');
+
+      statusEl.className = 'connection-status ' + status;
+      dot.className = 'status-dot ' + status;
+      statusTextEl.textContent = text;
+    }
+
+    function showConnectionError(message) {
+      setConnectionStatus('error', message);
+    }
+
+    function clearToken() {
+      document.getElementById('apiTokenInput').value = '';
+      localStorage.removeItem('ibm_quantum_token');
+      ibmQuantumState.token = '';
+      ibmQuantumState.connected = false;
+      setConnectionStatus('disconnected', 'Disconnected');
+
+      // Disable hardware button
+      document.getElementById('hwRunBtn').classList.add('disabled');
+      document.getElementById('upgradePrompt').style.display = 'block';
+
+      // Disable hardware backends
+      document.querySelectorAll('.backend-item[data-backend="ibm_brisbane"], .backend-item[data-backend="ibm_kyoto"]').forEach(item => {
+        item.classList.add('disabled');
+        item.style.opacity = '0.6';
+        item.style.cursor = 'not-allowed';
+      });
+    }
+
+    // ============================================
+    // BACKEND SELECTION
+    // ============================================
+
+    function selectBackend(element) {
+      if (element.classList.contains('disabled') && !ibmQuantumState.connected) {
+        return; // Can't select hardware without connection
+      }
+
+      // Update active state
+      document.querySelectorAll('.backend-item').forEach(item => {
+        item.classList.remove('active');
+      });
+      element.classList.add('active');
+
+      // Get backend name
+      const backend = element.dataset.backend;
+      ibmQuantumState.selectedBackend = backend;
+
+      // Update details panel
+      const config = backendConfigs[backend];
+      if (config) {
+        document.getElementById('detailQubits').textContent = config.qubits;
+        document.getElementById('detailGates').textContent = config.gates;
+        document.getElementById('detailError').textContent = config.error;
+        document.getElementById('detailStatus').textContent = config.status;
+        document.getElementById('detailStatus').style.color = config.statusColor;
+      }
+    }
+
+    // ============================================
+    // CIRCUIT BUILDER
+    // ============================================
+
+    function initCircuitCanvas() {
+      const register = document.getElementById('qubitRegister');
+      const timeline = document.getElementById('circuitTimeline');
+      
+      register.innerHTML = '';
+      timeline.innerHTML = '';
+
+      // Create qubit lines
+      for (let i = 0; i < ibmQuantumState.numQubits; i++) {
+        const line = document.createElement('div');
+        line.className = 'qubit-line';
+        line.dataset.qubit = i;
+        line.innerHTML = `
+          <div class="qubit-label">
+            <div class="qubit-number">q${i}</div>
+          </div>
+          <div class="qubit-wire"></div>
+        `;
+        register.appendChild(line);
+
+        // Timeline step
+        const step = document.createElement('div');
+        step.className = 'timeline-step';
+        step.textContent = `t${i}`;
+        timeline.appendChild(step);
+      }
+    }
+
+    function selectGate(gate) {
+      // Toggle selection
+      if (ibmQuantumState.selectedGate === gate) {
+        ibmQuantumState.selectedGate = null;
+        document.querySelectorAll('.gate-btn').forEach(btn => btn.classList.remove('selected'));
+      } else {
+        ibmQuantumState.selectedGate = gate;
+        document.querySelectorAll('.gate-btn').forEach(btn => {
+          btn.classList.toggle('selected', btn.dataset.gate === gate);
+        });
+      }
+    }
+
+    function addGateToCanvas(event) {
+      const canvas = document.getElementById('circuitCanvas');
+      const rect = canvas.getBoundingClientRect();
+      
+      // Calculate click position relative to canvas
+      const x = event.clientX - rect.left;
+      const y = event.clientY - rect.top;
+
+      // Determine which qubit was clicked
+      const qubitHeight = 50;
+      const clickedQubit = Math.floor(y / qubitHeight);
+      
+      if (clickedQubit < 0 || clickedQubit >= ibmQuantumState.numQubits) return;
+      if (!ibmQuantumState.selectedGate) return;
+
+      // Determine position (column) based on x coordinate
+      const wireStartX = 96; // Offset for qubit labels
+      const columnWidth = 60;
+      const position = Math.max(0, Math.floor((x - wireStartX) / columnWidth));
+
+      // Add gate to state
+      const newGate = {
+        qubit: clickedQubit,
+        position: position,
+        gate: ibmQuantumState.selectedGate,
+        id: Date.now()
+      };
+      ibmQuantumState.circuitGates.push(newGate);
+
+      // Render gate on canvas
+      renderCircuitGate(newGate);
+      
+      // Update stats
+      updateCircuitStats();
+    }
+
+    function renderCircuitGate(gateData) {
+      const register = document.getElementById('qubitRegister');
+      const qubitLine = register.children[gateData.qubit];
+      const wire = qubitLine.querySelector('.qubit-wire');
+
+      // Position calculation
+      const wireStartX = 96;
+      const columnWidth = 60;
+      const leftPos = wireStartX + (gateData.position * columnWidth) + (columnWidth / 2);
+
+      // Create gate element
+      const gateEl = document.createElement('div');
+      gateEl.className = `circuit-gate gate-${gateData.gate.toLowerCase()}`;
+      gateEl.style.left = leftPos + 'px';
+      gateEl.dataset.id = gateData.id;
+      gateEl.textContent = gateData.gate;
+      gateEl.title = `${gateData.gate} on q${gateData.qubit}`;
+
+      // Handle CNOT specially
+      if (gateData.gate === 'CX') {
+        // Find next qubit for target (simplified - just uses next qubit)
+        if (gateData.qubit < ibmQuantumState.numQubits - 1) {
+          const targetQubit = gateData.qubit + 1;
+          
+          // Add connector line
+          const connector = document.createElement('div');
+          connector.className = 'cnot-connector';
+          connector.style.left = leftPos + 'px';
+          connector.style.top = '25px';
+          connector.style.height = ((targetQubit - gateData.qubit) * 50) + 'px';
+          wire.parentElement.appendChild(connector);
+
+          // Add target circle
+          const targetCircle = document.createElement('div');
+          targetCircle.className = 'cnot-target';
+          targetCircle.style.left = leftPos + 'px';
+          targetCircle.style.top = ((targetQubit * 50) + 25) + 'px';
+          wire.parentElement.appendChild(targetCircle);
+        }
+      }
+
+      // Activate wire visual
+      wire.classList.add('wire-active');
+
+      wire.parentElement.appendChild(gateEl);
+    }
+
+    function updateCircuitStats() {
+      const gateCount = ibmQuantumState.circuitGates.length;
+      
+      // Calculate depth (max position + 1)
+      let maxDepth = 0;
+      ibmQuantumState.circuitGates.forEach(g => {
+        if (g.position > maxDepth) maxDepth = g.position;
+      });
+
+      document.getElementById('gateCount').textContent = gateCount;
+      document.getElementById('circuitDepth').textContent = gateCount > 0 ? maxDepth + 1 : 0;
+    }
+
+    function clearCircuit() {
+      ibmQuantumState.circuitGates = [];
+      initCircuitCanvas();
+      updateCircuitStats();
+      
+      // Clear selected gate
+      ibmQuantumState.selectedGate = null;
+      document.querySelectorAll('.gate-btn').forEach(btn => btn.classList.remove('selected'));
+    }
+
+    // ============================================
+    // CODE EDITOR
+    // ============================================
+
+    function switchCodeTab(tabElement, tabName) {
+      // Update tab styles
+      document.querySelectorAll('.editor-tab').forEach(tab => tab.classList.remove('active'));
+      tabElement.classList.add('active');
+
+      // Load corresponding code
+      const codeEditor = document.getElementById('qiskitCodeEditor');
+      if (codeExamples[tabName]) {
+        codeEditor.value = codeExamples[tabName];
+        updateLineNumbers();
+      }
+    }
+
+    function copyCode() {
+      const codeEditor = document.getElementById('qiskitCodeEditor');
+      navigator.clipboard.writeText(codeEditor.value).then(() => {
+        // Visual feedback could be added here
+        alert('Code copied to clipboard!');
+      });
+    }
+
+    function formatCode() {
+      // Simple formatting - in real implementation would use proper formatter
+      const codeEditor = document.getElementById('qiskitCodeEditor');
+      let code = codeEditor.value;
+      
+      // Basic cleanup
+      code = code.replace(/\s+$/gm, ''); // Remove trailing whitespace
+      code = code.replace(/\n{3,}/g, '\n\n'); // Remove excessive blank lines
+      
+      codeEditor.value = code;
+      updateLineNumbers();
+    }
+
+    function updateLineNumbers() {
+      const codeEditor = document.getElementById('qiskitCodeEditor');
+      const lineNumbers = document.getElementById('lineNumbers');
+      
+      if (!codeEditor || !lineNumbers) return;
+      
+      const lines = codeEditor.value.split('\n').length;
+      lineNumbers.innerHTML = Array.from({length: lines}, (_, i) => i + 1).join('\n');
+    }
+
+    function syncScroll() {
+      const codeEditor = document.getElementById('qiskitCodeEditor');
+      const lineNumbers = document.getElementById('lineNumbers');
+      
+      if (codeEditor && lineNumbers) {
+        lineNumbers.scrollTop = codeEditor.scrollTop;
+      }
+    }
+
+    // ============================================
+    // EXECUTION CONTROLS
+    // ============================================
+
+    function selectShots(button) {
+      document.querySelectorAll('.shot-btn').forEach(btn => btn.classList.remove('active'));
+      button.classList.add('active');
+      ibmQuantumState.selectedShots = parseInt(button.dataset.shots);
+    }
+
+    function selectMode(button) {
+      document.querySelectorAll('.mode-btn').forEach(btn => btn.classList.remove('active'));
+      button.classList.add('active');
+      ibmQuantumState.executionMode = button.dataset.mode;
+    }
+
+    // ============================================
+    // JOB EXECUTION & RESULTS
+    // ============================================
+
+    function runQuantumJob(type) {
+      const resultsStatus = document.getElementById('resultsStatus');
+      const emptyResults = document.getElementById('emptyResults');
+      const resultsContent = document.getElementById('resultsContent');
+
+      // Validate
+      if (type === 'hardware' && !ibmQuantumState.connected) {
+        alert('Please connect with a valid API token first.');
+        return;
+      }
+
+      // Show running state
+      resultsStatus.className = 'results-status running';
+      resultsStatus.textContent = 'Running...';
+      emptyResults.style.display = 'none';
+      resultsContent.style.display = 'none';
+
+      // Generate job ID
+      ibmQuantumState.jobId = 'cj-' + Math.random().toString(36).substr(2, 12).toUpperCase();
+
+      // Simulate execution time based on type and mode
+      const baseTime = type === 'hardware' ? 3000 : 1500;
+      const execTime = ibmQuantumState.executionMode === 'async' ? 500 : baseTime;
+
+      setTimeout(() => {
+        // Generate mock results based on current code context
+        const mockResults = generateMockResults(type);
+        ibmQuantumState.lastResults = mockResults;
+
+        // Display results
+        displayResults(mockResults, type, execTime);
+
+      }, execTime);
+    }
+
+    function generateMockResults(jobType) {
+      const shots = ibmQuantumState.selectedShots;
+      const backend = ibmQuantumState.selectedBackend;
+      
+      // Generate probabilistic distribution based on typical quantum circuits
+      // This simulates realistic measurement outcomes
+      
+      // Default: Bell-like distribution (entangled states)
+      let distribution;
+      
+      if (backend.includes('brisbane') || backend.includes('kyoto')) {
+        // Hardware has more noise
+        distribution = generateNoisyDistribution(shots, 0.08);
+      } else {
+        // Simulator is cleaner
+        distribution = generateCleanDistribution(shots);
+      }
+
+      return {
+        counts: distribution,
+        shots: shots,
+        backend: backend,
+        jobId: ibmQuantumState.jobId,
+        timestamp: new Date().toISOString(),
+        executionTime: jobType === 'hardware' ? 
+          Math.floor(Math.random() * 30000 + 10000) : 
+          Math.floor(Math.random() * 2000 + 500)
+      };
+    }
+
+    function generateCleanDistribution(shots) {
+      // Simulate Bell state results: mostly |00> and |11>
+      const base00 = Math.floor(shots * (0.48 + Math.random() * 0.04));
+      const base11 = shots - base00 - Math.floor(Math.random() * 20);
+      const remainder = shots - base00 - base11;
+      
+      const halfRemainder = Math.floor(remainder / 2);
+      
+      return {
+        '00': base00,
+        '11': base11,
+        '01': halfRemainder,
+        '10': remainder - halfRemainder
+      };
+    }
+
+    function generateNoisyDistribution(shots, noiseLevel) {
+      // More uniform distribution simulating hardware noise
+      const base = Math.floor(shots * (0.45 + Math.random() * 0.1));
+      const remaining = shots - base;
+      const perOther = Math.floor(remaining / 3);
+      
+      return {
+        '00': base + Math.floor(Math.random() * perOther),
+        '11': Math.floor(remaining * 0.5) + perOther,
+        '01': perOther + Math.floor(Math.random() * 20),
+        '10': perOther + Math.floor(Math.random() * 20)
+      };
+    }
+
+    function displayResults(results, jobType, simulatedTime) {
+      const resultsStatus = document.getElementById('resultsStatus');
+      const emptyResults = document.getElementById('emptyResults');
+      const resultsContent = document.getElementById('resultsContent');
+      const histogram = document.getElementById('histogram');
+      const countsBody = document.getElementById('countsBody');
+
+      // Update status
+      resultsStatus.className = 'results-status success';
+      resultsStatus.textContent = 'Complete';
+
+      // Show content, hide empty state
+      emptyResults.style.display = 'none';
+      resultsContent.style.display = 'block';
+
+      // Render histogram
+      histogram.innerHTML = '';
+      const entries = Object.entries(results.counts).sort((a, b) => b[1] - a[1]);
+      const maxCount = Math.max(...Object.values(results.counts));
+
+      entries.forEach(([state, count]) => {
+        const wrapper = document.createElement('div');
+        wrapper.className = 'histogram-bar-wrapper';
+
+        const bar = document.createElement('div');
+        bar.className = 'histogram-bar';
+        bar.style.height = ((count / maxCount) * 120) + 'px';
+        bar.setAttribute('data-count', count.toString());
+
+        const label = document.createElement('span');
+        label.className = 'histogram-label';
+        label.textContent = `|${state}⟩`;
+
+        wrapper.appendChild(bar);
+        wrapper.appendChild(label);
+        histogram.appendChild(wrapper);
+      });
+
+      // Render counts table
+      countsBody.innerHTML = '';
+      entries.forEach(([state, count]) => {
+        const prob = ((count / results.shots) * 100).toFixed(2);
+        
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td><span class="state-ket">|${state}⟩</span></td>
+          <td>${count}</td>
+          <td class="prob-bar-cell">
+            <div class="prob-bar">
+              <div class="prob-fill" style="width: ${prob}%"></div>
+            </div>
+          </td>
+        `;
+        countsBody.appendChild(row);
+      });
+
+      // Update job info
+      document.getElementById('jobIdValue').textContent = results.jobId;
+      document.getElementById('jobBackendValue').textContent = results.backend;
+      document.getElementById('jobShotsValue').textContent = results.shots.toLocaleString();
+      document.getElementById('jobTimeValue').textContent = formatExecutionTime(results.executionTime);
+    }
+
+    function formatExecutionTime(ms) {
+      if (ms < 1000) return ms + 'ms';
+      return (ms / 1000).toFixed(2) + 's';
+    }
+
+    function downloadResults() {
+      if (!ibmQuantumState.lastResults) {
+        alert('No results to download. Run a circuit first.');
+        return;
+      }
+
+      const dataStr = JSON.stringify(ibmQuantumState.lastResults, null, 2);
+      const blob = new Blob([dataStr], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = `quantum-results-${ibmQuantumState.jobId}.json`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+    }
+
+    // ============================================
+    // EXAMPLE WORKFLOW LOADER
+    // ============================================
+
+    function loadExample(exampleName) {
+      const codeEditor = document.getElementById('qiskitCodeEditor');
+      
+      if (workflowExamples[exampleName]) {
+        codeEditor.value = workflowExamples[exampleName];
+        updateLineNumbers();
+
+        // Switch to custom tab or highlight that it's loaded
+        document.querySelectorAll('.editor-tab').forEach(tab => tab.classList.remove('active'));
+        
+        // Scroll to editor
+        document.querySelector('.code-editor-panel').scrollIntoView({ 
+          behavior: 'smooth', 
+          block: 'start' 
+        });
+      }
     }
   </script>
 </body>

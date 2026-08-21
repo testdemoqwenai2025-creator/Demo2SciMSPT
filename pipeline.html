@@ -1,0 +1,3661 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Synthetic Data Pipeline Studio — SciMSPT</title>
+  <meta name="description" content="SciMSPT Pipeline Studio: Generate, transform, and analyze research datasets on-demand with our interactive synthetic data pipeline.">
+  
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+  
+  <style>
+    /* ============================================
+       SCIMSPT NEURAL DESIGN SYSTEM v3.0
+       Synthetic Data Pipeline Studio
+       ============================================ */
+    
+    :root {
+      --bg-deep: #030810;
+      --bg-primary: #0a1628;
+      --bg-secondary: #0d1f35;
+      --bg-tertiary: #122a45;
+      --bg-glass: rgba(10, 22, 40, 0.85);
+      --bg-glass-light: rgba(255, 255, 255, 0.03);
+      
+      --accent-primary: #00E5FF;
+      --accent-secondary: #4da8da;
+      --accent-tertiary: #a78bfa;
+      --accent-pink: #f472b6;
+      --accent-green: #10b981;
+      --accent-gold: #f59e0b;
+      --accent-red: #ef4444;
+      
+      --text-primary: #e8f4fc;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+      
+      --border-subtle: rgba(0, 229, 255, 0.15);
+      --border-glow: rgba(0, 229, 255, 0.4);
+      
+      --font-heading: 'Playfair Display', Georgia, serif;
+      --font-body: 'Inter', -apple-system, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+      --font-tech: 'Orbitron', sans-serif;
+      
+      --nav-height: 80px;
+      --sidebar-width: 100px;
+      
+      --glow-primary: 0 0 30px rgba(0, 229, 255, 0.3);
+      --glow-secondary: 0 0 60px rgba(167, 139, 250, 0.2);
+    }
+    
+    [data-theme="light"] {
+      --bg-deep: #f0f4f8;
+      --bg-primary: #ffffff;
+      --bg-secondary: #f8fafc;
+      --bg-tertiary: #e2e8f0;
+      --bg-glass: rgba(255, 255, 255, 0.92);
+      --bg-glass-light: rgba(0, 0, 0, 0.02);
+      --text-primary: #0f172a;
+      --text-secondary: #475569;
+      --text-muted: #94a3b8;
+      --border-subtle: rgba(77, 168, 218, 0.25);
+    }
+    
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    
+    body {
+      font-family: var(--font-body);
+      background: var(--bg-deep);
+      color: var(--text-primary);
+      line-height: 1.6;
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+
+    /* ============================================
+       MOLECULAR SIDE BARS
+       ============================================ */
+    
+    .molecular-sidebar {
+      position: fixed;
+      top: 0;
+      width: var(--sidebar-width);
+      height: 100vh;
+      z-index: 5;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    
+    .molecular-sidebar.left {
+      left: 0;
+      background: linear-gradient(90deg, rgba(0, 229, 255, 0.08) 0%, transparent 100%);
+      border-right: 1px solid var(--border-subtle);
+    }
+    
+    .molecular-sidebar.right {
+      right: 0;
+      background: linear-gradient(-90deg, rgba(167, 139, 250, 0.08) 0%, transparent 100%);
+      border-left: 1px solid var(--border-subtle);
+    }
+    
+    .dna-helix {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 60px;
+      height: 80vh;
+    }
+    
+    .nucleotide {
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      animation: nucleotidePulse 3s ease-in-out infinite;
+    }
+    
+    .nucleotide.adenine { background: var(--accent-primary); box-shadow: 0 0 10px var(--accent-primary); }
+    .nucleotide.thymine { background: var(--accent-pink); box-shadow: 0 0 10px var(--accent-pink); }
+    .nucleotide.guanine { background: var(--accent-tertiary); box-shadow: 0 0 10px var(--accent-tertiary); }
+    .nucleotide.cytosine { background: var(--accent-green); box-shadow: 0 0 10px var(--accent-green); }
+    
+    @keyframes nucleotidePulse {
+      0%, 100% { opacity: 0.6; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.2); }
+    }
+    
+    .backbone-line {
+      position: absolute;
+      width: 2px;
+      height: 100%;
+      left: 50%;
+      background: linear-gradient(to bottom, transparent, var(--accent-primary) 20%, var(--accent-tertiary) 50%, var(--accent-pink) 80%, transparent);
+      opacity: 0.3;
+    }
+
+    /* ============================================
+       NAVIGATION SYSTEM
+       ============================================ */
+    
+    .nav-container {
+      position: fixed;
+      top: 0;
+      left: var(--sidebar-width);
+      right: var(--sidebar-width);
+      height: var(--nav-height);
+      z-index: 100;
+      background: var(--bg-glass);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 40px;
+    }
+    
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--text-primary);
+    }
+    
+    .nav-logo {
+      width: 42px;
+      height: 42px;
+      background: linear-gradient(135deg, var(--accent-primary), var(--accent-tertiary));
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-tech);
+      font-weight: 900;
+      font-size: 16px;
+      color: var(--bg-deep);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .nav-logo::before {
+      content: '';
+      position: absolute;
+      top: -50%; left: -50%;
+      width: 200%; height: 200%;
+      background: conic-gradient(from 0deg, transparent, rgba(255,255,255,0.3), transparent);
+      animation: logoShine 4s linear infinite;
+    }
+    
+    @keyframes logoShine {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    
+    .nav-title {
+      font-family: var(--font-heading);
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+    }
+    
+    .nav-title span { color: var(--accent-primary); }
+    
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    
+    .nav-link {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 10px 16px;
+      text-decoration: none;
+      color: var(--text-secondary);
+      font-size: 13px;
+      font-weight: 500;
+      border-radius: 10px;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .nav-link::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 2px;
+      background: var(--accent-primary);
+      transition: width 0.3s ease;
+    }
+    
+    .nav-link:hover {
+      color: var(--text-primary);
+      background: var(--bg-glass-light);
+    }
+    
+    .nav-link:hover::before { width: 60%; }
+    
+    .nav-link.active {
+      color: var(--accent-primary);
+      background: rgba(0, 229, 255, 0.08);
+    }
+    
+    .nav-link.active::before { width: 60%; }
+    
+    .nav-link .material-icons-round { font-size: 18px; }
+    
+    .workspace-btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 24px;
+      background: linear-gradient(135deg, var(--accent-primary), var(--accent-tertiary));
+      color: var(--bg-deep);
+      font-weight: 600;
+      font-size: 14px;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: var(--glow-primary);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .workspace-btn::before {
+      content: '';
+      position: absolute;
+      top: 0; left: -100%;
+      width: 100%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+      transition: left 0.5s ease;
+    }
+    
+    .workspace-btn:hover::before { left: 100%; }
+    .workspace-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 40px rgba(0, 229, 255, 0.5);
+    }
+    
+    .theme-toggle {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: var(--bg-glass-light);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-secondary);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+    
+    .theme-toggle:hover {
+      border-color: var(--accent-primary);
+      color: var(--accent-primary);
+    }
+    
+    .user-profile {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 16px 8px 8px;
+      background: var(--bg-glass-light);
+      border: 1px solid var(--border-subtle);
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .user-profile:hover {
+      border-color: var(--accent-primary);
+      box-shadow: 0 0 20px rgba(0, 229, 255, 0.2);
+    }
+    
+    .user-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent-primary), var(--accent-pink));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 14px;
+      color: white;
+    }
+    
+    /* ============================================
+       MAIN CONTENT AREA
+       ============================================ */
+    
+    .main-content {
+      margin-left: var(--sidebar-width);
+      margin-right: var(--sidebar-width);
+      padding-top: calc(var(--nav-height) + 40px);
+      min-height: 100vh;
+      position: relative;
+      z-index: 10;
+    }
+    
+    /* ============================================
+       HERO SECTION
+       ============================================ */
+    
+    .hero-section {
+      padding: 60px 40px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .hero-bg-pattern {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: 
+        radial-gradient(circle at 20% 30%, rgba(0, 229, 255, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(167, 139, 250, 0.08) 0%, transparent 50%);
+      pointer-events: none;
+    }
+    
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 20px;
+      background: rgba(0, 229, 255, 0.1);
+      border: 1px solid var(--border-subtle);
+      border-radius: 50px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--accent-primary);
+      margin-bottom: 28px;
+      animation: fadeInDown 0.8s ease;
+    }
+    
+    .hero-badge .material-icons-round { font-size: 18px; }
+    
+    .hero-title {
+      font-family: var(--font-heading);
+      font-size: clamp(36px, 5vw, 64px);
+      font-weight: 900;
+      line-height: 1.1;
+      margin-bottom: 20px;
+      animation: fadeInUp 0.8s ease 0.2s both;
+    }
+    
+    .hero-title .gradient-text {
+      background: linear-gradient(135deg, var(--accent-primary), var(--accent-tertiary), var(--accent-pink));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .hero-subtitle {
+      font-size: clamp(16px, 2vw, 20px);
+      color: var(--text-secondary);
+      max-width: 650px;
+      margin: 0 auto 40px;
+      animation: fadeInUp 0.8s ease 0.4s both;
+    }
+    
+    .hero-stats {
+      display: flex;
+      justify-content: center;
+      gap: 48px;
+      flex-wrap: wrap;
+      animation: fadeInUp 0.8s ease 0.6s both;
+    }
+    
+    .stat-item {
+      text-align: center;
+    }
+    
+    .stat-value {
+      font-family: var(--font-tech);
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--accent-primary);
+      line-height: 1;
+    }
+    
+    .stat-label {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: 6px;
+    }
+    
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    /* ============================================
+       PIPELINE BUILDER SECTION
+       ============================================ */
+    
+    .section {
+      padding: 40px;
+      max-width: 1600px;
+      margin: 0 auto;
+    }
+    
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 32px;
+    }
+    
+    .section-title {
+      font-family: var(--font-heading);
+      font-size: 28px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    
+    .section-title .icon-box {
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(135deg, rgba(0, 229, 255, 0.2), rgba(167, 139, 250, 0.2));
+      border: 1px solid var(--border-subtle);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .section-title .icon-box .material-icons-round {
+      color: var(--accent-primary);
+      font-size: 26px;
+    }
+    
+    .pipeline-builder {
+      background: var(--bg-glass);
+      border: 1px solid var(--border-subtle);
+      border-radius: 24px;
+      padding: 40px;
+      backdrop-filter: blur(20px);
+    }
+    
+    .pipeline-flow {
+      display: flex;
+      align-items: stretch;
+      gap: 0;
+      position: relative;
+    }
+    
+    .pipeline-stage {
+      flex: 1;
+      min-width: 220px;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-subtle);
+      border-radius: 20px;
+      padding: 24px;
+      position: relative;
+      transition: all 0.3s ease;
+    }
+    
+    .pipeline-stage:hover {
+      border-color: var(--accent-primary);
+      box-shadow: var(--glow-primary);
+    }
+    
+    .pipeline-stage.active {
+      border-color: var(--accent-primary);
+      background: rgba(0, 229, 255, 0.05);
+    }
+    
+    .stage-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    
+    .stage-number {
+      width: 36px;
+      height: 36px;
+      background: linear-gradient(135deg, var(--accent-primary), var(--accent-tertiary));
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-tech);
+      font-weight: 700;
+      font-size: 14px;
+      color: var(--bg-deep);
+    }
+    
+    .stage-title {
+      font-weight: 600;
+      font-size: 16px;
+    }
+    
+    .stage-options {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    
+    .stage-option {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 16px;
+      background: var(--bg-tertiary);
+      border: 1px solid transparent;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-size: 14px;
+    }
+    
+    .stage-option:hover {
+      border-color: var(--border-subtle);
+      background: var(--bg-glass-light);
+    }
+    
+    .stage-option.selected {
+      border-color: var(--accent-primary);
+      background: rgba(0, 229, 255, 0.1);
+      color: var(--accent-primary);
+    }
+    
+    .stage-option .material-icons-round {
+      font-size: 18px;
+      opacity: 0.7;
+    }
+    
+    .stage-option.selected .material-icons-round {
+      opacity: 1;
+    }
+    
+    .pipeline-arrow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 8px;
+      flex-shrink: 0;
+    }
+    
+    .arrow-icon {
+      color: var(--accent-primary);
+      font-size: 28px;
+      animation: arrowPulse 2s ease-in-out infinite;
+    }
+    
+    @keyframes arrowPulse {
+      0%, 100% { opacity: 0.5; transform: translateX(0); }
+      50% { opacity: 1; transform: translateX(4px); }
+    }
+    
+    /* ============================================
+       EXECUTION PANEL
+       ============================================ */
+    
+    .execution-panel {
+      background: var(--bg-glass);
+      border: 1px solid var(--border-subtle);
+      border-radius: 24px;
+      padding: 32px;
+      margin-top: 32px;
+      backdrop-filter: blur(20px);
+    }
+    
+    .exec-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 24px;
+    }
+    
+    .exec-title {
+      font-family: var(--font-heading);
+      font-size: 22px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    
+    .run-btn {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 32px;
+      background: linear-gradient(135deg, var(--accent-green), #059669);
+      color: white;
+      font-weight: 600;
+      font-size: 15px;
+      border: none;
+      border-radius: 14px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 30px rgba(16, 185, 129, 0.3);
+    }
+    
+    .run-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 40px rgba(16, 185, 129, 0.5);
+    }
+    
+    .run-btn.running {
+      background: linear-gradient(135deg, var(--accent-gold), #d97706);
+      pointer-events: none;
+    }
+    
+    .run-btn.complete {
+      background: linear-gradient(135deg, var(--accent-green), #059669);
+    }
+    
+    .progress-stepper {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 28px;
+      padding: 20px;
+      background: var(--bg-secondary);
+      border-radius: 16px;
+    }
+    
+    .step-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      flex: 1;
+    }
+    
+    .step-circle {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--bg-tertiary);
+      border: 2px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      transition: all 0.3s ease;
+    }
+    
+    .step-circle.pending { color: var(--text-muted); }
+    .step-circle.active {
+      border-color: var(--accent-gold);
+      color: var(--accent-gold);
+      animation: stepPulse 1s ease-in-out infinite;
+    }
+    .step-circle.complete {
+      background: var(--accent-green);
+      border-color: var(--accent-green);
+      color: white;
+    }
+    
+    @keyframes stepPulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.4); }
+      50% { box-shadow: 0 0 0 10px rgba(245, 158, 11, 0); }
+    }
+    
+    .step-line {
+      flex: 1;
+      height: 2px;
+      background: var(--border-subtle);
+      margin: 0 12px;
+      margin-bottom: 24px;
+      position: relative;
+      top: -12px;
+    }
+    
+    .step-line.active {
+      background: linear-gradient(90deg, var(--accent-gold), var(--border-subtle));
+      animation: lineProgress 1s ease-in-out infinite;
+    }
+    
+    .step-line.complete {
+      background: var(--accent-green);
+    }
+    
+    @keyframes lineProgress {
+      0% { background-position: 0% 0%; }
+      100% { background-position: 200% 0%; }
+    }
+    
+    .step-label {
+      font-size: 12px;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+    
+    .step-item.active .step-label,
+    .step-item.complete .step-label {
+      color: var(--text-primary);
+    }
+    
+    /* Log Output */
+    .log-container {
+      background: var(--bg-deep);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 24px;
+      max-height: 200px;
+      overflow-y: auto;
+      font-family: var(--font-mono);
+      font-size: 13px;
+    }
+    
+    .log-entry {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--bg-secondary);
+      opacity: 0;
+      animation: logFadeIn 0.3s ease forwards;
+    }
+    
+    .log-entry:last-child { border-bottom: none; }
+    
+    @keyframes logFadeIn {
+      to { opacity: 1; }
+    }
+    
+    .log-time {
+      color: var(--text-muted);
+      flex-shrink: 0;
+    }
+    
+    .log-message {
+      color: var(--text-secondary);
+    }
+    
+    .log-message.success { color: var(--accent-green); }
+    .log-message.info { color: var(--accent-primary); }
+    .log-message.warning { color: var(--accent-gold); }
+    
+    .log-status {
+      margin-left: auto;
+      flex-shrink: 0;
+    }
+    
+    .log-status.success { color: var(--accent-green); }
+    .log-status.pending { color: var(--accent-gold); }
+    
+    /* Results Preview */
+    .results-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      margin-top: 24px;
+    }
+    
+    .result-card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      padding: 20px;
+    }
+    
+    .result-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+    
+    .result-card-title {
+      font-weight: 600;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .result-card-title .material-icons-round {
+      font-size: 18px;
+      color: var(--accent-primary);
+    }
+    
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+    }
+    
+    .data-table th,
+    .data-table td {
+      padding: 10px 12px;
+      text-align: left;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    
+    .data-table th {
+      background: var(--bg-tertiary);
+      color: var(--text-muted);
+      font-weight: 600;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    
+    .data-table td {
+      font-family: var(--font-mono);
+      color: var(--text-secondary);
+    }
+    
+    .data-table tr:hover td {
+      background: var(--bg-glass-light);
+    }
+    
+    .exec-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 16px;
+      margin-top: 24px;
+    }
+    
+    .exec-stat {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-subtle);
+      border-radius: 14px;
+      padding: 20px;
+      text-align: center;
+    }
+    
+    .exec-stat-value {
+      font-family: var(--font-tech);
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--accent-primary);
+    }
+    
+    .exec-stat-label {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 6px;
+    }
+    
+    /* ============================================
+       TEMPLATES SECTION
+       ============================================ */
+    
+    .templates-section {
+      padding: 60px 40px;
+      max-width: 1600px;
+      margin: 0 auto;
+    }
+    
+    .templates-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 24px;
+      margin-top: 32px;
+    }
+    
+    .template-card {
+      background: var(--bg-glass);
+      border: 1px solid var(--border-subtle);
+      border-radius: 20px;
+      padding: 28px;
+      backdrop-filter: blur(20px);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .template-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--accent-primary), var(--accent-tertiary));
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    
+    .template-card:hover {
+      border-color: var(--accent-primary);
+      transform: translateY(-4px);
+      box-shadow: var(--glow-primary);
+    }
+    
+    .template-card:hover::before { opacity: 1; }
+    
+    .template-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      font-size: 28px;
+    }
+    
+    .template-icon.quantum {
+      background: linear-gradient(135deg, rgba(0, 229, 255, 0.2), rgba(167, 139, 250, 0.2));
+    }
+    
+    .template-icon.clinical {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(0, 229, 255, 0.2));
+    }
+    
+    .template-icon.fraud {
+      background: linear-gradient(135deg, rgba(239, 68, 68, 0.2), rgba(245, 158, 11, 0.2));
+    }
+    
+    .template-icon.molecular {
+      background: linear-gradient(135deg, rgba(167, 139, 250, 0.2), rgba(244, 114, 182, 0.2));
+    }
+    
+    .template-icon .material-icons-round {
+      font-size: 28px;
+    }
+    
+    .template-name {
+      font-family: var(--font-heading);
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+    
+    .template-desc {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+    
+    .template-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+    
+    .template-tag {
+      padding: 6px 12px;
+      background: var(--bg-tertiary);
+      border-radius: 8px;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+    
+    .template-btn {
+      width: 100%;
+      padding: 14px;
+      background: transparent;
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      color: var(--text-primary);
+      font-weight: 600;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    
+    .template-btn:hover {
+      background: rgba(0, 229, 255, 0.1);
+      border-color: var(--accent-primary);
+      color: var(--accent-primary);
+    }
+    
+    /* ============================================
+       CUSTOMIZATION PANEL
+       ============================================ */
+    
+    .customization-section {
+      padding: 60px 40px;
+      max-width: 1600px;
+      margin: 0 auto;
+    }
+    
+    .customization-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-top: 32px;
+    }
+    
+    .custom-panel {
+      background: var(--bg-glass);
+      border: 1px solid var(--border-subtle);
+      border-radius: 20px;
+      padding: 24px;
+      backdrop-filter: blur(20px);
+    }
+    
+    .panel-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    
+    .panel-title {
+      font-weight: 600;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .panel-title .material-icons-round {
+      color: var(--accent-primary);
+      font-size: 20px;
+    }
+    
+    .field-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      max-height: 280px;
+      overflow-y: auto;
+    }
+    
+    .field-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 16px;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      transition: all 0.2s ease;
+    }
+    
+    .field-item:hover {
+      border-color: var(--accent-primary);
+    }
+    
+    .field-type-badge {
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 600;
+      font-family: var(--font-mono);
+    }
+    
+    .field-type-badge.int { background: rgba(0, 229, 255, 0.15); color: var(--accent-primary); }
+    .field-type-badge.float { background: rgba(167, 139, 250, 0.15); color: var(--accent-tertiary); }
+    .field-type-badge.cat { background: rgba(16, 185, 129, 0.15); color: var(--accent-green); }
+    .field-type-badge.text { background: rgba(245, 158, 11, 0.15); color: var(--accent-gold); }
+    .field-type-badge.datetime { background: rgba(244, 114, 182, 0.15); color: var(--accent-pink); }
+    
+    .field-name {
+      flex: 1;
+      font-size: 14px;
+    }
+    
+    .field-actions {
+      display: flex;
+      gap: 6px;
+    }
+    
+    .field-action-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: transparent;
+      border: 1px solid var(--border-subtle);
+      color: var(--text-muted);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+    }
+    
+    .field-action-btn:hover {
+      border-color: var(--accent-red);
+      color: var(--accent-red);
+    }
+    
+    .field-action-btn.add {
+      border-color: var(--accent-green);
+      color: var(--accent-green);
+    }
+    
+    .field-action-btn.add:hover {
+      background: rgba(16, 185, 129, 0.1);
+    }
+    
+    .add-field-btn {
+      width: 100%;
+      padding: 12px;
+      background: var(--bg-secondary);
+      border: 2px dashed var(--border-subtle);
+      border-radius: 12px;
+      color: var(--text-muted);
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 12px;
+    }
+    
+    .add-field-btn:hover {
+      border-color: var(--accent-primary);
+      color: var(--accent-primary);
+      background: rgba(0, 229, 255, 0.05);
+    }
+    
+    /* Constraint Form */
+    .constraint-form {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    
+    .form-label {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-secondary);
+    }
+    
+    .form-input {
+      padding: 12px 16px;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-subtle);
+      border-radius: 10px;
+      color: var(--text-primary);
+      font-size: 14px;
+      font-family: var(--font-mono);
+      transition: all 0.2s ease;
+    }
+    
+    .form-input:focus {
+      outline: none;
+      border-color: var(--accent-primary);
+      box-shadow: 0 0 0 3px rgba(0, 229, 255, 0.1);
+    }
+    
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    
+    /* Correlation Matrix Preview */
+    .correlation-preview {
+      display: grid;
+      grid-template-columns: auto repeat(4, 1fr);
+      gap: 4px;
+      font-size: 11px;
+      margin-top: 16px;
+    }
+    
+    .corr-cell {
+      padding: 8px;
+      text-align: center;
+      background: var(--bg-secondary);
+      border-radius: 6px;
+      font-family: var(--font-mono);
+    }
+    
+    .corr-cell.header {
+      background: var(--bg-tertiary);
+      color: var(--text-muted);
+      font-weight: 600;
+      font-size: 10px;
+    }
+    
+    .corr-cell.positive { color: var(--accent-green); }
+    .corr-cell.negative { color: var(--accent-red); }
+    .corr-cell.neutral { color: var(--text-muted); }
+    
+    /* Sample Preview */
+    .sample-preview {
+      background: var(--bg-deep);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 16px;
+      margin-top: 16px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      max-height: 200px;
+      overflow-y: auto;
+    }
+    
+    .sample-row {
+      display: flex;
+      gap: 16px;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--bg-secondary);
+    }
+    
+    .sample-row:last-child { border-bottom: none; }
+    
+    .sample-field {
+      flex: 1;
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    
+    .sample-field-name {
+      color: var(--text-muted);
+      font-size: 10px;
+      margin-bottom: 2px;
+    }
+    
+    .sample-field-value {
+      color: var(--accent-primary);
+    }
+    
+    /* ============================================
+       CODE EXPORT SECTION
+       ============================================ */
+    
+    .code-section {
+      padding: 60px 40px;
+      max-width: 1600px;
+      margin: 0 auto;
+    }
+    
+    .code-container {
+      background: var(--bg-glass);
+      border: 1px solid var(--border-subtle);
+      border-radius: 24px;
+      overflow: hidden;
+      backdrop-filter: blur(20px);
+    }
+    
+    .code-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 24px;
+      background: var(--bg-secondary);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    
+    .code-tabs {
+      display: flex;
+      gap: 8px;
+    }
+    
+    .code-tab {
+      padding: 8px 16px;
+      background: transparent;
+      border: 1px solid transparent;
+      border-radius: 8px;
+      color: var(--text-muted);
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    
+    .code-tab:hover {
+      color: var(--text-primary);
+      background: var(--bg-glass-light);
+    }
+    
+    .code-tab.active {
+      background: var(--accent-primary);
+      color: var(--bg-deep);
+      border-color: var(--accent-primary);
+    }
+    
+    .code-actions {
+      display: flex;
+      gap: 10px;
+    }
+    
+    .code-action-btn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 16px;
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      color: var(--text-secondary);
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    
+    .code-action-btn:hover {
+      border-color: var(--accent-primary);
+      color: var(--accent-primary);
+    }
+    
+    .code-action-btn .material-icons-round {
+      font-size: 16px;
+    }
+    
+    .code-body {
+      padding: 24px;
+      max-height: 450px;
+      overflow-y: auto;
+    }
+    
+    .code-block {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      line-height: 1.7;
+      white-space: pre;
+      color: var(--text-secondary);
+    }
+    
+    .code-keyword { color: var(--accent-pink); }
+    .code-function { color: var(--accent-primary); }
+    .code-string { color: var(--accent-green); }
+    .code-number { color: var(--accent-gold); }
+    .code-comment { color: var(--text-muted); font-style: italic; }
+    .code-class { color: var(--accent-tertiary); }
+    
+    /* ============================================
+       FOOTER
+       ============================================ */
+    
+    .footer {
+      margin-left: var(--sidebar-width);
+      margin-right: var(--sidebar-width);
+      padding: 40px;
+      border-top: 1px solid var(--border-subtle);
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 14px;
+    }
+    
+    .footer a {
+      color: var(--accent-primary);
+      text-decoration: none;
+    }
+    
+    /* ============================================
+       RESPONSIVE DESIGN
+       ============================================ */
+    
+    @media (max-width: 1400px) {
+      .pipeline-flow {
+        flex-wrap: wrap;
+        gap: 16px;
+      }
+      
+      .pipeline-stage {
+        min-width: calc(50% - 8px);
+      }
+      
+      .pipeline-arrow {
+        display: none;
+      }
+    }
+    
+    @media (max-width: 1024px) {
+      .nav-container {
+        padding: 0 20px;
+      }
+      
+      .nav-links {
+        display: none;
+      }
+      
+      .molecular-sidebar {
+        display: none;
+      }
+      
+      .main-content {
+        margin-left: 0;
+        margin-right: 0;
+      }
+      
+      .footer {
+        margin-left: 0;
+        margin-right: 0;
+      }
+      
+      .customization-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .hero-section {
+        padding: 40px 20px;
+      }
+      
+      .section {
+        padding: 24px 16px;
+      }
+      
+      .templates-section,
+      .customization-section,
+      .code-section {
+        padding: 40px 16px;
+      }
+      
+      .pipeline-stage {
+        min-width: 100%;
+      }
+      
+      .hero-stats {
+        gap: 24px;
+      }
+      
+      .templates-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .progress-stepper {
+        flex-wrap: wrap;
+        gap: 16px;
+      }
+      
+      .step-line {
+        display: none;
+      }
+    }
+    
+    /* ============================================
+       ANIMATIONS & UTILITIES
+       ============================================ */
+    
+    .fade-in {
+      animation: fadeInUp 0.6s ease forwards;
+    }
+    
+    .delay-1 { animation-delay: 0.1s; }
+    .delay-2 { animation-delay: 0.2s; }
+    .delay-3 { animation-delay: 0.3s; }
+    .delay-4 { animation-delay: 0.4s; }
+    
+    /* Scrollbar Styling */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    
+    ::-webkit-scrollbar-track {
+      background: var(--bg-secondary);
+    }
+    
+    ::-webkit-scrollbar-thumb {
+      background: var(--border-subtle);
+      border-radius: 4px;
+    }
+    
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--accent-primary);
+    }
+    
+    /* Toast Notification */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      padding: 16px 24px;
+      background: var(--bg-glass);
+      border: 1px solid var(--border-subtle);
+      border-radius: 14px;
+      backdrop-filter: blur(20px);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      z-index: 1000;
+      transform: translateY(100px);
+      opacity: 0;
+      transition: all 0.3s ease;
+    }
+    
+    .toast.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    
+    .toast.success { border-color: var(--accent-green); }
+    .toast.error { border-color: var(--accent-red); }
+    
+    .toast-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .toast.success .toast-icon {
+      background: rgba(16, 185, 129, 0.2);
+      color: var(--accent-green);
+    }
+    
+    .toast-message {
+      font-size: 14px;
+      font-weight: 500;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Molecular Sidebars -->
+  <div class="molecular-sidebar left">
+    <div class="dna-helix">
+      <div class="backbone-line"></div>
+      <div class="dna-strand"></div>
+    </div>
+  </div>
+  
+  <div class="molecular-sidebar right">
+    <div class="dna-helix">
+      <div class="backbone-line"></div>
+      <div class="dna-strand"></div>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <nav class="nav-container">
+    <a href="index.html" class="nav-brand">
+      <div class="nav-logo">S</div>
+      <span class="nav-title">Sci<span>MSPT</span></span>
+    </a>
+    
+    <div class="nav-links">
+      <a href="index.html" class="nav-link">
+        <span class="material-icons-round">home</span>
+        Home
+      </a>
+      <a href="research.html" class="nav-link">
+        <span class="material-icons-round">biotech</span>
+        Research
+      </a>
+      <a href="startups.html" class="nav-link">
+        <span class="material-icons-round">rocket_launch</span>
+        Startups
+      </a>
+      <a href="platform.html" class="nav-link">
+        <span class="material-icons-round">dashboard</span>
+        Platform
+      </a>
+      <a href="quantum.html" class="nav-link">
+        <span class="material-icons-round">psychology</span>
+        Quantum
+      </a>
+      <a href="studio.html" class="nav-link">
+        <span class="material-icons-round">palette</span>
+        Studio
+      </a>
+      <a href="security.html" class="nav-link">
+        <span class="material-icons-round">shield</span>
+        Security
+      </a>
+      <a href="infrastructure.html" class="nav-link">
+        <span class="material-icons-round">dns</span>
+        Infrastructure
+      </a>
+      <a href="monitoring.html" class="nav-link">
+        <span class="material-icons-round">monitor_heart</span>
+        Monitoring
+      </a>
+      <a href="pipeline.html" class="nav-link active">
+        <span class="material-icons-round">account_tree</span>
+        Pipeline
+      </a>
+    </div>
+    
+    <div style="display: flex; align-items: center; gap: 16px;">
+      <button class="theme-toggle" onclick="toggleTheme()" title="Toggle theme">
+        <span class="material-icons-round" id="themeIcon">dark_mode</span>
+      </button>
+      
+      <button class="workspace-btn" onclick="savePipeline()">
+        <span class="material-icons-round">save</span>
+        Save Pipeline
+      </button>
+      
+      <div class="user-profile">
+        <div class="user-avatar">AE</div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="hero-bg-pattern"></div>
+      
+      <div class="hero-badge">
+        <span class="material-icons-round">auto_awesome</span>
+        Neural Data Synthesis Engine v3.0
+      </div>
+      
+      <h1 class="hero-title">
+        <span class="gradient-text">Synthetic Data</span><br>
+        Pipeline Studio
+      </h1>
+      
+      <p class="hero-subtitle">
+        Generate, transform, and analyze research datasets on-demand with our interactive pipeline builder.
+        Create production-ready synthetic data for ML training, testing, and research validation.
+      </p>
+      
+      <div class="hero-stats">
+        <div class="stat-item">
+          <div class="stat-value" id="pipelineCount">10K+</div>
+          <div class="stat-label">Pipelines Run</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value" id="dataPointsCount">1B+</div>
+          <div class="stat-label">Data Points Generated</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value">15+</div>
+          <div class="stat-label">Supported Formats</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value">&lt;100ms</div>
+          <div class="stat-label">Avg Generation Time</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pipeline Builder Section -->
+    <section class="section">
+      <div class="section-header">
+        <h2 class="section-title">
+          <div class="icon-box">
+            <span class="material-icons-round">account_tree</span>
+          </div>
+          Interactive Pipeline Builder
+        </h2>
+        <button class="code-action-btn" onclick="resetPipeline()">
+          <span class="material-icons-round">refresh</span>
+          Reset Pipeline
+        </button>
+      </div>
+      
+      <div class="pipeline-builder">
+        <div class="pipeline-flow" id="pipelineFlow">
+          
+          <!-- Stage 1: Data Source -->
+          <div class="pipeline-stage active" data-stage="source">
+            <div class="stage-header">
+              <div class="stage-number">1</div>
+              <span class="stage-title">Data Source</span>
+            </div>
+            <div class="stage-options">
+              <div class="stage-option selected" data-value="gaussian" onclick="selectOption(this, 'source')">
+                <span class="material-icons-round">functions</span>
+                Gaussian Random
+              </div>
+              <div class="stage-option" data-value="uniform" onclick="selectOption(this, 'source')">
+                <span class="material-icons-round">straighten</span>
+                Uniform Distribution
+              </div>
+              <div class="stage-option" data-value="poisson" onclick="selectOption(this, 'source')">
+                <span class="material-icons-round">scatter_plot</span>
+                Poisson Process
+              </div>
+              <div class="stage-option" data-value="csv" onclick="selectOption(this, 'source')">
+                <span class="material-icons-round">table_view</span>
+                CSV Upload
+              </div>
+              <div class="stage-option" data-value="sql" onclick="selectOption(this, 'source')">
+                <span class="material-icons-round">storage</span>
+                SQL Query
+              </div>
+              <div class="stage-option" data-value="api" onclick="selectOption(this, 'source')">
+                <span class="material-icons-round">api</span>
+                API Endpoint
+              </div>
+            </div>
+          </div>
+          
+          <div class="pipeline-arrow">
+            <span class="material-icons-round arrow-icon">arrow_forward</span>
+          </div>
+          
+          <!-- Stage 2: Transformation -->
+          <div class="pipeline-stage" data-stage="transform">
+            <div class="stage-header">
+              <div class="stage-number">2</div>
+              <span class="stage-title">Transformation</span>
+            </div>
+            <div class="stage-options">
+              <div class="stage-option selected" data-value="normalize" onclick="selectOption(this, 'transform')">
+                <span class="material-icons-round">tune</span>
+                Normalization
+              </div>
+              <div class="stage-option" data-value="feature" onclick="selectOption(this, 'transform')">
+                <span class="material-icons-round">extension</span>
+                Feature Engineering
+              </div>
+              <div class="stage-option" data-value="encode" onclick="selectOption(this, 'transform')">
+                <span class="material-icons-round">code</span>
+                Encoding
+              </div>
+              <div class="stage-option" data-value="resample" onclick="selectOption(this, 'transform')">
+                <span class="material-icons-round">shuffle</span>
+                Resampling
+              </div>
+              <div class="stage-option" data-value="impute" onclick="selectOption(this, 'transform')">
+                <span class="material-icons-round">healing</span>
+                Imputation
+              </div>
+            </div>
+          </div>
+          
+          <div class="pipeline-arrow">
+            <span class="material-icons-round arrow-icon">arrow_forward</span>
+          </div>
+          
+          <!-- Stage 3: Analysis -->
+          <div class="pipeline-stage" data-stage="analysis">
+            <div class="stage-header">
+              <div class="stage-number">3</div>
+              <span class="stage-title">Analysis</span>
+            </div>
+            <div class="stage-options">
+              <div class="stage-option selected" data-value="stats" onclick="selectOption(this, 'analysis')">
+                <span class="material-icons-round">analytics</span>
+                Statistical Summary
+              </div>
+              <div class="stage-option" data-value="visualize" onclick="selectOption(this, 'analysis')">
+                <span class="material-icons-round">insert_chart</span>
+                Visualization
+              </div>
+              <div class="stage-option" data-value="ml" onclick="selectOption(this, 'analysis')">
+                <span class="material-icons-round">model_training</span>
+                ML Training
+              </div>
+              <div class="stage-option" data-value="anomaly" onclick="selectOption(this, 'analysis')">
+                <span class="material-icons-round">warning</span>
+                Anomaly Detection
+              </div>
+            </div>
+          </div>
+          
+          <div class="pipeline-arrow">
+            <span class="material-icons-round arrow-icon">arrow_forward</span>
+          </div>
+          
+          <!-- Stage 4: Output -->
+          <div class="pipeline-stage" data-stage="output">
+            <div class="stage-header">
+              <div class="stage-number">4</div>
+              <span class="stage-title">Output</span>
+            </div>
+            <div class="stage-options">
+              <div class="stage-option selected" data-value="json" onclick="selectOption(this, 'output')">
+                <span class="material-icons-round">data_object</span>
+                JSON Export
+              </div>
+              <div class="stage-option" data-value="csv" onclick="selectOption(this, 'output')">
+                <span class="material-icons-round">csv</span>
+                CSV Download
+              </div>
+              <div class="stage-option" data-value="parquet" onclick="selectOption(this, 'output')">
+                <span class="material-icons-round">table_chart</span>
+                Parquet Format
+              </div>
+              <div class="stage-option" data-value="database" onclick="selectOption(this, 'output')">
+                <span class="material-icons-round">cloud_upload</span>
+                Push to DB
+              </div>
+              <div class="stage-option" data-value="report" onclick="selectOption(this, 'output')">
+                <span class="material-icons-round">summarize</span>
+                Generate Report
+              </div>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+      
+      <!-- Execution Panel -->
+      <div class="execution-panel">
+        <div class="exec-header">
+          <h3 class="exec-title">
+            <span class="material-icons-round" style="color: var(--accent-green);">play_circle</span>
+            Live Execution Panel
+          </h3>
+          <button class="run-btn" id="runBtn" onclick="runPipeline()">
+            <span class="material-icons-round">play_arrow</span>
+            Run Pipeline
+          </button>
+        </div>
+        
+        <!-- Progress Stepper -->
+        <div class="progress-stepper" id="progressStepper">
+          <div class="step-item" id="step1">
+            <div class="step-circle pending">
+              <span class="material-icons-round">data_source</span>
+            </div>
+            <span class="step-label">Generate Data</span>
+          </div>
+          <div class="step-line" id="line1"></div>
+          <div class="step-item" id="step2">
+            <div class="step-circle pending">
+              <span class="material-icons-round">transform</span>
+            </div>
+            <span class="step-label">Transform</span>
+          </div>
+          <div class="step-line" id="line2"></div>
+          <div class="step-item" id="step3">
+            <div class="step-circle pending">
+              <span class="material-icons-round">analytics</span>
+            </div>
+            <span class="step-label">Analyze</span>
+          </div>
+          <div class="step-line" id="line3"></div>
+          <div class="step-item" id="step4">
+            <div class="step-circle pending">
+              <span class="material-icons-round">download</span>
+            </div>
+            <span class="step-label">Output</span>
+          </div>
+        </div>
+        
+        <!-- Log Container -->
+        <div class="log-container" id="logContainer">
+          <div class="log-entry">
+            <span class="log-time">[00:00:00]</span>
+            <span class="log-message info">Pipeline initialized. Ready to execute...</span>
+          </div>
+        </div>
+        
+        <!-- Results Grid -->
+        <div class="results-grid" id="resultsGrid" style="display: none;">
+          <div class="result-card">
+            <div class="result-card-header">
+              <span class="result-card-title">
+                <span class="material-icons-round">table_view</span>
+                Generated Data Preview
+              </span>
+            </div>
+            <table class="data-table" id="dataTable">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Feature A</th>
+                  <th>Feature B</th>
+                  <th>Feature C</th>
+                  <th>Label</th>
+                </tr>
+              </thead>
+              <tbody id="dataTableBody">
+              </tbody>
+            </table>
+          </div>
+          
+          <div class="result-card">
+            <div class="result-card-header">
+              <span class="result-card-title">
+                <span class="material-icons-round">insights</span>
+                Statistical Summary
+              </span>
+            </div>
+            <table class="data-table" id="statsTable">
+              <thead>
+                <tr>
+                  <th>Metric</th>
+                  <th>Feature A</th>
+                  <th>Feature B</th>
+                  <th>Feature C</th>
+                </tr>
+              </thead>
+              <tbody id="statsTableBody">
+              </tbody>
+            </table>
+          </div>
+        </div>
+        
+        <!-- Execution Stats -->
+        <div class="exec-stats" id="execStats" style="display: none;">
+          <div class="exec-stat">
+            <div class="exec-stat-value" id="timeTaken">0.00s</div>
+            <div class="exec-stat-label">Time Taken</div>
+          </div>
+          <div class="exec-stat">
+            <div class="exec-stat-value" id="recordsProcessed">0</div>
+            <div class="exec-stat-label">Records Processed</div>
+          </div>
+          <div class="exec-stat">
+            <div class="exec-stat-value" id="memoryUsed">0 MB</div>
+            <div class="exec-stat-label">Memory Used</div>
+          </div>
+          <div class="exec-stat">
+            <div class="exec-stat-value" id="throughput">0 rec/s</div>
+            <div class="exec-stat-label">Throughput</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Templates Section -->
+    <section class="templates-section">
+      <div class="section-header">
+        <h2 class="section-title">
+          <div class="icon-box">
+            <span class="material-icons-round">dashboard_customize</span>
+          </div>
+          Pre-built Pipeline Templates
+        </h2>
+      </div>
+      
+      <div class="templates-grid">
+        <!-- Template 1: Quantum Research -->
+        <div class="template-card">
+          <div class="template-icon quantum">
+            <span class="material-icons-round" style="color: var(--accent-primary);">science</span>
+          </div>
+          <h3 class="template-name">Quantum Research Dataset</h3>
+          <p class="template-desc">
+            Generate quantum experiment logs with realistic noise patterns, 
+            qubit measurements, and coherence times for quantum computing research.
+          </p>
+          <div class="template-tags">
+            <span class="template-tag">Quantum Computing</span>
+            <span class="template-tag">Noise Simulation</span>
+            <span class="template-tag">Qubit Data</span>
+          </div>
+          <button class="template-btn" onclick="loadTemplate('quantum')">
+            <span class="material-icons-round">play_arrow</span>
+            Use Template
+          </button>
+        </div>
+        
+        <!-- Template 2: Clinical Trial -->
+        <div class="template-card">
+          <div class="template-icon clinical">
+            <span class="material-icons-round" style="color: var(--accent-green);">medical_services</span>
+          </div>
+          <h3 class="template-name">Clinical Trial Simulator</h3>
+          <p class="template-desc">
+            Patient demographics, treatment assignments, biomarker measurements,
+            and outcome predictions for clinical trial analysis.
+          </p>
+          <div class="template-tags">
+            <span class="template-tag">Healthcare</span>
+            <span class="template-tag">Patient Data</span>
+            <span class="template-tag">Outcomes</span>
+          </div>
+          <button class="template-btn" onclick="loadTemplate('clinical')">
+            <span class="material-icons-round">play_arrow</span>
+            Use Template
+          </button>
+        </div>
+        
+        <!-- Template 3: Financial Fraud -->
+        <div class="template-card">
+          <div class="template-icon fraud">
+            <span class="material-icons-round" style="color: var(--accent-red);">credit_card_off</span>
+          </div>
+          <h3 class="template-name">Financial Fraud Detection</h3>
+          <p class="template-desc">
+            Transaction datasets with embedded fraud patterns, temporal anomalies,
+            and labeled fraud indicators for ML model training.
+          </p>
+          <div class="template-tags">
+            <span class="template-tag">Finance</span>
+            <span class="template-tag">Fraud Labels</span>
+            <span class="template-tag">Time Series</span>
+          </div>
+          <button class="template-btn" onclick="loadTemplate('fraud')">
+            <span class="material-icons-round">play_arrow</span>
+            Use Template
+          </button>
+        </div>
+        
+        <!-- Template 4: Molecular Properties -->
+        <div class="template-card">
+          <div class="template-icon molecular">
+            <span class="material-icons-round" style="color: var(--accent-tertiary);">biotech</span>
+          </div>
+          <h3 class="template-name">Molecular Properties</h3>
+          <p class="template-desc">
+            SMILES strings with computed molecular descriptors, solubility scores,
+            and drug-likeness metrics for cheminformatics research.
+          </p>
+          <div class="template-tags">
+            <span class="template-tag">Chemistry</span>
+            <span class="template-tag">SMILES</span>
+            <span class="template-tag">Descriptors</span>
+          </div>
+          <button class="template-btn" onclick="loadTemplate('molecular')">
+            <span class="material-icons-round">play_arrow</span>
+            Use Template
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Customization Panel -->
+    <section class="customization-section">
+      <div class="section-header">
+        <h2 class="section-title">
+          <div class="icon-box">
+            <span class="material-icons-round">tune</span>
+          </div>
+          Dataset Customization
+        </h2>
+      </div>
+      
+      <div class="customization-grid">
+        <!-- Field Editor Panel -->
+        <div class="custom-panel">
+          <div class="panel-header">
+            <span class="panel-title">
+              <span class="material-icons-round">list</span>
+              Field Editor
+            </span>
+            <span style="color: var(--text-muted); font-size: 13px;" id="fieldCount">5 fields</span>
+          </div>
+          
+          <div class="field-list" id="fieldList">
+            <div class="field-item">
+              <span class="field-type-badge int">int</span>
+              <span class="field-name">id</span>
+              <div class="field-actions">
+                <button class="field-action-btn"><span class="material-icons-round" style="font-size: 14px;">edit</span></button>
+                <button class="field-action-btn"><span class="material-icons-round" style="font-size: 14px;">delete</span></button>
+              </div>
+            </div>
+            <div class="field-item">
+              <span class="field-type-badge float">float</span>
+              <span class="field-name">feature_a</span>
+              <div class="field-actions">
+                <button class="field-action-btn"><span class="material-icons-round" style="font-size: 14px;">edit</span></button>
+                <button class="field-action-btn"><span class="material-icons-round" style="font-size: 14px;">delete</span></button>
+              </div>
+            </div>
+            <div class="field-item">
+              <span class="field-type-badge float">float</span>
+              <span class="field-name">feature_b</span>
+              <div class="field-actions">
+                <button class="field-action-btn"><span class="material-icons-round" style="font-size: 14px;">edit</span></button>
+                <button class="field-action-btn"><span class="material-icons-round" style="font-size: 14px;">delete</span></button>
+              </div>
+            </div>
+            <div class="field-item">
+              <span class="field-type-badge cat">cat</span>
+              <span class="field-name">category</span>
+              <div class="field-actions">
+                <button class="field-action-btn"><span class="material-icons-round" style="font-size: 14px;">edit</span></button>
+                <button class="field-action-btn"><span class="material-icons-round" style="font-size: 14px;">delete</span></button>
+              </div>
+            </div>
+            <div class="field-item">
+              <span class="field-type-badge float">float</span>
+              <span class="field-name">target</span>
+              <div class="field-actions">
+                <button class="field-action-btn"><span class="material-icons-round" style="font-size: 14px;">edit</span></button>
+                <button class="field-action-btn"><span class="material-icons-round" style="font-size: 14px;">delete</span></button>
+              </div>
+            </div>
+          </div>
+          
+          <button class="add-field-btn" onclick="addField()">
+            <span class="material-icons-round">add</span>
+            Add New Field
+          </button>
+        </div>
+        
+        <!-- Constraints Panel -->
+        <div class="custom-panel">
+          <div class="panel-header">
+            <span class="panel-title">
+              <span class="material-icons-round">rule</span>
+              Constraint Rules
+            </span>
+          </div>
+          
+          <div class="constraint-form">
+            <div class="form-group">
+              <label class="form-label">Selected Field</label>
+              <select class="form-input" id="constraintField">
+                <option value="feature_a">feature_a (float)</option>
+                <option value="feature_b">feature_b (float)</option>
+                <option value="category">category (categorical)</option>
+                <option value="target">target (float)</option>
+              </select>
+            </div>
+            
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">Min Value</label>
+                <input type="number" class="form-input" id="minValue" placeholder="-∞" value="0">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Max Value</label>
+                <input type="number" class="form-input" id="maxValue" placeholder="+∞" value="100">
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label class="form-label">Enum Values (comma-separated)</label>
+              <input type="text" class="form-input" id="enumValues" placeholder="A, B, C, D">
+            </div>
+            
+            <div class="form-group">
+              <label class="form-label">Regex Pattern</label>
+              <input type="text" class="form-input" id="regexPattern" placeholder="^[a-zA-Z0-9]+$">
+            </div>
+            
+            <div class="form-group">
+              <label class="form-label">Null Probability (%)</label>
+              <input type="range" min="0" max="50" value="5" id="nullProb" style="width: 100%;">
+              <span style="font-size: 12px; color: var(--text-muted);" id="nullProbVal">5%</span>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Correlation Matrix Panel -->
+        <div class="custom-panel">
+          <div class="panel-header">
+            <span class="panel-title">
+              <span class="material-icons-round">grid_on</span>
+              Correlation Matrix
+            </span>
+          </div>
+          
+          <div class="correlation-preview" id="corrMatrix">
+            <div class="corr-cell header"></div>
+            <div class="corr-cell header">feat_a</div>
+            <div class="corr-cell header">feat_b</div>
+            <div class="corr-cell header">cat</div>
+            <div class="corr-cell header">target</div>
+            
+            <div class="corr-cell header">feat_a</div>
+            <div class="corr-cell positive">1.00</div>
+            <div class="corr-cell positive">0.72</div>
+            <div class="corr-cell neutral">0.15</div>
+            <div class="corr-cell positive">0.85</div>
+            
+            <div class="corr-cell header">feat_b</div>
+            <div class="corr-cell positive">0.72</div>
+            <div class="corr-cell positive">1.00</div>
+            <div class="corr-cell negative">-0.23</div>
+            <div class="corr-cell positive">0.61</div>
+            
+            <div class="corr-cell header">cat</div>
+            <div class="corr-cell neutral">0.15</div>
+            <div class="corr-cell negative">-0.23</div>
+            <div class="corr-cell positive">1.00</div>
+            <div class="corr-cell neutral">0.08</div>
+            
+            <div class="corr-cell header">target</div>
+            <div class="corr-cell positive">0.85</div>
+            <div class="corr-cell positive">0.61</div>
+            <div class="corr-cell neutral">0.08</div>
+            <div class="corr-cell positive">1.00</div>
+          </div>
+        </div>
+        
+        <!-- Sample Preview Panel -->
+        <div class="custom-panel">
+          <div class="panel-header">
+            <span class="panel-title">
+              <span class="material-icons-round">preview</span>
+              Live Preview
+            </span>
+            <button class="code-action-btn" onclick="generatePreview()" style="padding: 6px 12px; font-size: 12px;">
+              <span class="material-icons-round" style="font-size: 14px;">refresh</span>
+              Refresh
+            </button>
+          </div>
+          
+          <div class="sample-preview" id="samplePreview">
+            <div class="sample-row">
+              <div class="sample-field">
+                <div class="sample-field-name">id</div>
+                <div class="sample-field-value">1</div>
+              </div>
+              <div class="sample-field">
+                <div class="sample-field-name">feature_a</div>
+                <div class="sample-field-value">42.57</div>
+              </div>
+              <div class="sample-field">
+                <div class="sample-field-name">feature_b</div>
+                <div class="sample-field-value">78.23</div>
+              </div>
+              <div class="sample-field">
+                <div class="sample-field-name">category</div>
+                <div class="sample-field-value">B</div>
+              </div>
+              <div class="sample-field">
+                <div class="sample-field-name">target</div>
+                <div class="sample-field-value">0.892</div>
+              </div>
+            </div>
+            <div class="sample-row">
+              <div class="sample-field">
+                <div class="sample-field-name">id</div>
+                <div class="sample-field-value">2</div>
+              </div>
+              <div class="sample-field">
+                <div class="sample-field-name">feature_a</div>
+                <div class="sample-field-value">15.34</div>
+              </div>
+              <div class="sample-field">
+                <div class="sample-field-name">feature_b</div>
+                <div class="sample-field-value">91.07</div>
+              </div>
+              <div class="sample-field">
+                <div class="sample-field-name">category</div>
+                <div class="sample-field-value">A</div>
+              </div>
+              <div class="sample-field">
+                <div class="sample-field-name">target</div>
+                <div class="sample-field-value">0.654</div>
+              </div>
+            </div>
+            <div class="sample-row">
+              <div class="sample-field">
+                <div class="sample-field-name">id</div>
+                <div class="sample-field-value">3</div>
+              </div>
+              <div class="sample-field">
+                <div class="sample-field-name">feature_a</div>
+                <div class="sample-field-value">88.91</div>
+              </div>
+              <div class="sample-field">
+                <div class="sample-field-name">feature_b</div>
+                <div class="sample-field-value">33.45</div>
+              </div>
+              <div class="sample-field">
+                <div class="sample-field-name">category</div>
+                <div class="sample-field-value">C</div>
+              </div>
+              <div class="sample-field">
+                <div class="sample-field-name">target</div>
+                <div class="sample-field-value">0.421</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Code Export Section -->
+    <section class="code-section">
+      <div class="section-header">
+        <h2 class="section-title">
+          <div class="icon-box">
+            <span class="material-icons-round">code</span>
+          </div>
+          Code Export
+        </h2>
+      </div>
+      
+      <div class="code-container">
+        <div class="code-header">
+          <div class="code-tabs">
+            <button class="code-tab active" onclick="switchCodeTab(this, 'python')">Python</button>
+            <button class="code-tab" onclick="switchCodeTab(this, 'requirements')">requirements.txt</button>
+            <button class="code-tab" onclick="switchCodeTab(this, 'config')">Config JSON</button>
+          </div>
+          <div class="code-actions">
+            <button class="code-action-btn" onclick="copyCode()">
+              <span class="material-icons-round">content_copy</span>
+              Copy Code
+            </button>
+            <button class="code-action-btn" onclick="downloadCode()">
+              <span class="material-icons-round">download</span>
+              Download .py
+            </button>
+          </div>
+        </div>
+        
+        <div class="code-body">
+          <pre class="code-block" id="codeBlock"><span class="code-comment"># SciMSPT Synthetic Data Pipeline</span>
+<span class="code-comment"># Auto-generated pipeline configuration</span>
+
+<span class="code-keyword">import</span> pandas <span class="code-keyword">as</span> pd
+<span class="code-keyword">import</span> numpy <span class="code-keyword">as</span> np
+<span class="code-keyword">from</span> sklearn.preprocessing <span class="code-keyword">import</span> StandardScaler, LabelEncoder
+<span class="code-keyword">from</span> sklearn.model_selection <span class="code-keyword">import</span> train_test_split
+
+<span class="code-class">class</span> <span class="code-function">SyntheticDataPipeline</span>:
+    <span class="code-string">"""SciMSPT Synthetic Data Generator"""
+    
+    </span><span class="code-keyword">def</span> <span class="code-function">__init__</span>(self, n_samples=<span class="code-number">5000</span>, random_state=<span class="code-number">42</span>):
+        self.n_samples = n_samples
+        self.random_state = random_state
+        np.random.seed(random_state)
+    
+    <span class="code-keyword">def</span> <span class="code-function">generate_gaussian_data</span>(self, means, stds, corr_matrix=None):
+        <span class="code-string">"""Generate correlated Gaussian features"""
+        </span>n_features = len(means)
+        data = np.random.randn(self.n_samples, n_features)
+        
+        <span class="code-comment"># Apply correlations if provided
+        </span><span class="code-keyword">if</span> corr_matrix <span class="code-keyword">is not None</span>:
+            L = np.linalg.cholesky(corr_matrix)
+            data = data @ L.T
+        
+        <span class="code-comment"># Scale by means and stds
+        </span>data = data * stds + means
+        
+        <span class="code-keyword">return</span> pd.DataFrame(data, columns=[<span class="code-string">f'feature_{i}'</span> <span class="code-keyword">for</span> i <span class="code-keyword">in</span> range(n_features)])
+    
+    <span class="code-keyword">def</span> <span class="code-function">normalize</span>(self, df, method=<span class="code-string">'standard'</span>):
+        <span class="code-string">"""Apply normalization transformation"""
+        </span><span class="code-keyword">if</span> method == <span class="code-string">'standard'</span>:
+            scaler = StandardScaler()
+            numeric_cols = df.select_dtypes(include=[np.number]).columns
+            df[numeric_cols] = scaler.fit_transform(df[numeric_cols])
+        <span class="code-keyword">elif</span> method == <span class="code-string">'minmax'</span>:
+            df = (df - df.min()) / (df.max() - df.min())
+        <span class="code-keyword">return</span> df
+    
+    <span class="code-keyword">def</span> <span class="code-function">generate_report</span>(self, df):
+        <span class="code-string">"""Generate statistical summary report"""
+        </span>report = {
+            <span class="code-string">'shape'</span>: df.shape,
+            <span class="code-string">'dtypes'</span>: df.dtypes.to_dict(),
+            <span class="code-string">'describe'</span>: df.describe().to_dict(),
+            <span class="code-string">'missing'</span>: df.isnull().sum().to_dict(),
+            <span class="code-string">'correlations'</span>: df.corr().to_dict()
+        }
+        <span class="code-keyword">return</span> report
+
+
+<span class="code-comment"># Execute Pipeline</span>
+<span class="code-keyword">if</span> __name__ == <span class="code-string">'__main__'</span>:
+    pipeline = SyntheticDataPipeline(n_samples=<span class="code-number">5000</span>)
+    
+    <span class="code-comment"># Configuration
+    </span>means = [<span class="code-number">50.0</span>, <span class="code-number">25.0</span>, <span class="code-number">0.5</span>]
+    stds = [<span class="code-number">15.0</span>, <span class="code-number">10.0</span>, <span class="code-number">0.2</span>]
+    
+    <span class="comment"># Generate data
+    </span>df = pipeline.generate_gaussian_data(means, stds)
+    
+    <span class="code-comment"># Transform
+    </span>df_normalized = pipeline.normalize(df)
+    
+    <span class="code-comment"># Export
+    </span>df_normalized.to_csv(<span class="code-string">'synthetic_output.csv'</span>, index=<span class="code-keyword">False</span>)
+    
+    print(<span class="code-string">f"Generated {len(df_normalized)} records"</span>)
+    print(pipeline.generate_report(df_normalized))</pre>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>&copy; 2025 <a href="#">SciMSPT</a> — Neural Research Intelligence Platform. Pipeline Studio v3.0</p>
+  </footer>
+
+  <!-- Toast Notification -->
+  <div class="toast" id="toast">
+    <div class="toast-icon">
+      <span class="material-icons-round">check_circle</span>
+    </div>
+    <span class="toast-message" id="toastMessage">Pipeline saved successfully!</span>
+  </div>
+
+  <script>
+    // ============================================
+    // PIPELINE STATE MANAGEMENT
+    // ============================================
+    
+    let pipelineState = {
+      source: 'gaussian',
+      transform: 'normalize',
+      analysis: 'stats',
+      output: 'json',
+      fields: [
+        { name: 'id', type: 'int', min: null, max: null },
+        { name: 'feature_a', type: 'float', min: 0, max: 100 },
+        { name: 'feature_b', type: 'float', min: 0, max: 100 },
+        { name: 'category', type: 'cat', enum: ['A', 'B', 'C', 'D'] },
+        { name: 'target', type: 'float', min: 0, max: 1 }
+      ],
+      constraints: {},
+      isRunning: false
+    };
+    
+    // Load saved state from localStorage
+    function loadPipelineState() {
+      const saved = localStorage.getItem('scimspt_pipeline');
+      if (saved) {
+        pipelineState = { ...pipelineState, ...JSON.parse(saved) };
+        applySavedState();
+      }
+    }
+    
+    function applySavedState() {
+      // Restore selections
+      document.querySelectorAll('.stage-option').forEach(opt => {
+        opt.classList.remove('selected');
+      });
+      
+      document.querySelectorAll(`[data-stage="source"] [data-value="${pipelineState.source}"]`).forEach(el => el.classList.add('selected'));
+      document.querySelectorAll(`[data-stage="transform"] [data-value="${pipelineState.transform}"]`).forEach(el => el.classList.add('selected'));
+      document.querySelectorAll(`[data-stage="analysis"] [data-value="${pipelineState.analysis}"]`).forEach(el => el.classList.add('selected'));
+      document.querySelectorAll(`[data-stage="output"] [data-value="${pipelineState.output}"]`).forEach(el => el.classList.add('selected'));
+    }
+    
+    function savePipeline() {
+      localStorage.setItem('scimspt_pipeline', JSON.stringify(pipelineState));
+      showToast('Pipeline saved successfully!', 'success');
+    }
+    
+    function resetPipeline() {
+      pipelineState = {
+        source: 'gaussian',
+        transform: 'normalize',
+        analysis: 'stats',
+        output: 'json',
+        fields: [
+          { name: 'id', type: 'int' },
+          { name: 'feature_a', type: 'float', min: 0, max: 100 },
+          { name: 'feature_b', type: 'float', min: 0, max: 100 },
+          { name: 'category', type: 'cat', enum: ['A', 'B', 'C', 'D'] },
+          { name: 'target', type: 'float', min: 0, max: 1 }
+        ],
+        constraints: {}
+      };
+      applySavedState();
+      showToast('Pipeline reset to defaults', 'success');
+    }
+    
+    // ============================================
+    // PIPELINE OPTION SELECTION
+    // ============================================
+    
+    function selectOption(element, stage) {
+      const parent = element.closest('.pipeline-stage');
+      parent.querySelectorAll('.stage-option').forEach(opt => opt.classList.remove('selected'));
+      element.classList.add('selected');
+      pipelineState[stage] = element.dataset.value;
+      
+      // Update stage visual state
+      document.querySelectorAll('.pipeline-stage').forEach(s => s.classList.remove('active'));
+      parent.classList.add('active');
+    }
+    
+    // ============================================
+    // PIPELINE EXECUTION
+    // ============================================
+    
+    async function runPipeline() {
+      if (pipelineState.isRunning) return;
+      
+      pipelineState.isRunning = true;
+      const runBtn = document.getElementById('runBtn');
+      runBtn.classList.add('running');
+      runBtn.innerHTML = '<span class="material-icons-round">hourglass_empty</span> Running...';
+      
+      // Reset progress
+      resetProgress();
+      
+      // Show results area
+      document.getElementById('resultsGrid').style.display = 'grid';
+      document.getElementById('execStats').style.display = 'grid';
+      
+      const startTime = performance.now();
+      
+      try {
+        // Stage 1: Generate Data
+        await executeStage(1, 'Generating synthetic data...', generateData);
+        
+        // Stage 2: Transform
+        await executeStage(2, 'Applying transformations...', transformData);
+        
+        // Stage 3: Analyze
+        await executeStage(3, 'Running analysis...', analyzeData);
+        
+        // Stage 4: Output
+        await executeStage(4, 'Formatting output...', formatOutput);
+        
+        const endTime = performance.now();
+        const totalTime = ((endTime - startTime) / 1000).toFixed(2);
+        
+        // Update stats
+        updateExecutionStats(totalTime);
+        
+        runBtn.classList.remove('running');
+        runBtn.classList.add('complete');
+        runBtn.innerHTML = '<span class="material-icons-round">check</span> Complete!';
+        
+        addLog('Pipeline execution complete!', 'success', true);
+        
+        setTimeout(() => {
+          runBtn.classList.remove('complete');
+          runBtn.innerHTML = '<span class="material-icons-round">play_arrow</span> Run Pipeline';
+          pipelineState.isRunning = false;
+        }, 3000);
+        
+      } catch (error) {
+        addLog(`Error: ${error.message}`, 'error', false);
+        runBtn.classList.remove('running');
+        runBtn.innerHTML = '<span class="material-icons-round">play_arrow</span> Run Pipeline';
+        pipelineState.isRunning = false;
+      }
+    }
+    
+    function resetProgress() {
+      for (let i = 1; i <= 4; i++) {
+        const step = document.getElementById(`step${i}`);
+        const circle = step.querySelector('.step-circle');
+        circle.className = 'step-circle pending';
+        circle.innerHTML = getStepIcon(i);
+        
+        if (i < 4) {
+          document.getElementById(`line${i}`).className = 'step-line';
+        }
+      }
+      
+      document.getElementById('logContainer').innerHTML = '';
+    }
+    
+    function getStepIcon(step) {
+      const icons = {
+        1: '<span class="material-icons-round">data_source</span>',
+        2: '<span class="material-icons-round">transform</span>',
+        3: '<span class="material-icons-round">analytics</span>',
+        4: '<span class="material-icons-round">download</span>'
+      };
+      return icons[step];
+    }
+    
+    async function executeStage(stageNum, message, action) {
+      const step = document.getElementById(`step${stageNum}`);
+      const circle = step.querySelector('.step-circle');
+      
+      // Set active
+      circle.className = 'step-circle active';
+      step.className = 'step-item active';
+      
+      if (stageNum > 1) {
+        document.getElementById(`line${stageNum - 1}`).className = 'step-line active';
+      }
+      
+      addLog(message, 'info', false);
+      
+      const stageStart = performance.now();
+      await action();
+      const stageTime = ((performance.now() - stageStart) / 1000).toFixed(1);
+      
+      // Set complete
+      circle.className = 'step-circle complete';
+      circle.innerHTML = '<span class="material-icons-round">check</span>';
+      step.className = 'step-item complete';
+      
+      if (stageNum > 1) {
+        document.getElementById(`line${stageNum - 1}`).className = 'step-line complete';
+      }
+      
+      addLog(`${message.replace('...', '')} ✓ (${stageTime}s)`, 'success', true);
+    }
+    
+    async function generateData() {
+      await sleep(800 + Math.random() * 500);
+      const data = [];
+      const n = 5000;
+      
+      for (let i = 0; i < Math.min(n, 10); i++) {
+        data.push({
+          id: i + 1,
+          feature_a: gaussianRandom(50, 15),
+          feature_b: gaussianRandom(25, 10),
+          category: ['A', 'B', 'C', 'D'][Math.floor(Math.random() * 4)],
+          target: Math.random()
+        });
+      }
+      
+      populateDataTable(data);
+    }
+    
+    async function transformData() {
+      await sleep(1200 + Math.random() * 400);
+    }
+    
+    async function analyzeData() {
+      await sleep(2000 + Math.random() * 600);
+      populateStatsTable();
+    }
+    
+    async function formatOutput() {
+      await sleep(400 + Math.random() * 200);
+    }
+    
+    function populateDataTable(data) {
+      const tbody = document.getElementById('dataTableBody');
+      tbody.innerHTML = data.map(row => `
+        <tr>
+          <td>${row.id}</td>
+          <td>${row.feature_a.toFixed(2)}</td>
+          <td>${row.feature_b.toFixed(2)}</td>
+          <td>${row.category}</td>
+          <td>${row.target.toFixed(4)}</td>
+        </tr>
+      `).join('');
+    }
+    
+    function populateStatsTable() {
+      const stats = [
+        { metric: 'Mean', a: '50.23', b: '24.87', c: '0.52' },
+        { metric: 'Std Dev', a: '14.89', b: '9.94', c: '0.29' },
+        { metric: 'Min', a: '1.02', b: '0.15', c: '0.001' },
+        { metric: '25%', a: '40.12', b: '18.23', c: '0.28' },
+        { metric: 'Median', a: '50.01', b: '24.95', c: '0.51' },
+        { metric: '75%', a: '60.34', b: '31.51', c: '0.76' },
+        { metric: 'Max', a: '99.87', b: '49.92', c: '0.999' }
+      ];
+      
+      const tbody = document.getElementById('statsTableBody');
+      tbody.innerHTML = stats.map(row => `
+        <tr>
+          <td style="font-weight: 600;">${row.metric}</td>
+          <td>${row.a}</td>
+          <td>${row.b}</td>
+          <td>${row.c}</td>
+        </tr>
+      `).join('');
+    }
+    
+    function updateExecutionStats(totalTime) {
+      const records = 5000;
+      const memory = (2.4 + Math.random() * 0.8).toFixed(1);
+      const throughput = Math.round(records / totalTime);
+      
+      animateValue('timeTaken', 0, parseFloat(totalTime), 500, 's');
+      animateValue('recordsProcessed', 0, records, 800, '');
+      document.getElementById('memoryUsed').textContent = `${memory} MB`;
+      document.getElementById('throughput').textContent = `${throughput} rec/s`;
+    }
+    
+    function animateValue(id, start, end, duration, suffix) {
+      const el = document.getElementById(id);
+      const range = end - start;
+      const startTime = performance.now();
+      
+      function update(currentTime) {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const current = start + range * progress;
+        el.textContent = (suffix === 's' ? current.toFixed(2) : Math.round(current)) + suffix;
+        
+        if (progress < 1) requestAnimationFrame(update);
+      }
+      
+      requestAnimationFrame(update);
+    }
+    
+    // ============================================
+    // LOGGING
+    // ============================================
+    
+    function addLog(message, type, success) {
+      const container = document.getElementById('logContainer');
+      const time = new Date().toLocaleTimeString();
+      
+      const entry = document.createElement('div');
+      entry.className = 'log-entry';
+      entry.innerHTML = `
+        <span class="log-time">[${time}]</span>
+        <span class="log-message ${type}">${message}</span>
+        <span class="log-status ${success ? 'success' : 'pending'}">${success ? '✓' : '→'}</span>
+      `;
+      
+      container.appendChild(entry);
+      container.scrollTop = container.scrollHeight;
+    }
+    
+    // ============================================
+    // TEMPLATES
+    // ============================================
+    
+    function loadTemplate(templateName) {
+      const templates = {
+        quantum: {
+          source: 'gaussian',
+          transform: 'normalize',
+          analysis: 'anomaly',
+          output: 'parquet',
+          fields: [
+            { name: 'qubit_id', type: 'int' },
+            { name: 'coherence_time', type: 'float', min: 0, max: 100 },
+            { name: 'gate_fidelity', type: 'float', min: 0.9, max: 1 },
+            { name: 'readout_error', type: 'float', min: 0, max: 0.1 },
+            { name: 'noise_level', type: 'float', min: 0, max: 1 },
+            { name: 'anomaly_score', type: 'float', min: 0, max: 1 }
+          ]
+        },
+        clinical: {
+          source: 'poisson',
+          transform: 'impute',
+          analysis: 'ml',
+          output: 'report',
+          fields: [
+            { name: 'patient_id', type: 'int' },
+            { name: 'age', type: 'int', min: 18, max: 85 },
+            { name: 'gender', type: 'cat', enum: ['M', 'F', 'O'] },
+            { name: 'biomarker_a', type: 'float' },
+            { name: 'biomarker_b', type: 'float' },
+            { name: 'treatment_group', type: 'cat', enum: ['Control', 'Treatment A', 'Treatment B'] },
+            { name: 'outcome', type: 'cat', enum: ['Recovered', 'Improved', 'Stable', 'Declined'] }
+          ]
+        },
+        fraud: {
+          source: 'poisson',
+          transform: 'encode',
+          analysis: 'anomaly',
+          output: 'json',
+          fields: [
+            { name: 'transaction_id', type: 'int' },
+            { name: 'amount', type: 'float', min: 0, max: 10000 },
+            { name: 'merchant_category', type: 'cat', enum: ['Retail', 'Food', 'Travel', 'Online', 'ATM'] },
+            { name: 'location_risk', type: 'float', min: 0, max: 1 },
+            { name: 'time_since_last', type: 'int', min: 0, max: 720 },
+            { name: 'is_fraud', type: 'int', enum: [0, 1] }
+          ]
+        },
+        molecular: {
+          source: 'gaussian',
+          transform: 'feature',
+          analysis: 'stats',
+          output: 'csv',
+          fields: [
+            { name: 'molecule_id', type: 'int' },
+            { name: 'smiles', type: 'text' },
+            { name: 'mol_weight', type: 'float', min: 100, max: 800 },
+            { name: 'logp', type: 'float', min: -2, max: 6 },
+            { name: 'tpsa', type: 'float', min: 0, max: 200 },
+            { name: 'hbd', type: 'int', min: 0, max: 10 },
+            { name: 'hba', type: 'int', min: 0, max: 15 },
+            { name: 'druglikeness', type: 'float', min: 0, max: 1 }
+          ]
+        }
+      };
+      
+      const template = templates[templateName];
+      if (!template) return;
+      
+      pipelineState = { ...pipelineState, ...template };
+      applySavedState();
+      
+      // Update field list UI
+      updateFieldListUI(template.fields);
+      
+      showToast(`Template "${templateName}" loaded!`, 'success');
+      
+      // Scroll to builder
+      document.querySelector('.pipeline-builder').scrollIntoView({ behavior: 'smooth' });
+    }
+    
+    function updateFieldListUI(fields) {
+      const fieldList = document.getElementById('fieldList');
+      const typeLabels = { int: 'int', float: 'float', cat: 'cat', text: 'text', datetime: 'datetime' };
+      
+      fieldList.innerHTML = fields.map(field => `
+        <div class="field-item">
+          <span class="field-type-badge ${field.type}">${typeLabels[field.type] || field.type}</span>
+          <span class="field-name">${field.name}</span>
+          <div class="field-actions">
+            <button class="field-action-btn"><span class="material-icons-round" style="font-size: 14px;">edit</span></button>
+            <button class="field-action-btn"><span class="material-icons-round" style="font-size: 14px;">delete</span></button>
+          </div>
+        </div>
+      `).join('');
+      
+      document.getElementById('fieldCount').textContent = `${fields.length} fields`;
+    }
+    
+    // ============================================
+    // CUSTOMIZATION PANEL
+    // ============================================
+    
+    function addField() {
+      const name = prompt('Enter field name:');
+      if (!name) return;
+      
+      const types = ['int', 'float', 'cat', 'text', 'datetime'];
+      const type = prompt(`Enter type (${types.join(', ')}):`, 'float') || 'float';
+      
+      pipelineState.fields.push({ name, type });
+      updateFieldListUI(pipelineState.fields);
+      showToast(`Field "${name}" added!`, 'success');
+    }
+    
+    function generatePreview() {
+      const preview = document.getElementById('samplePreview');
+      const categories = ['A', 'B', 'C', 'D'];
+      
+      let html = '';
+      for (let i = 0; i < 3; i++) {
+        html += `<div class="sample-row">`;
+        html += `<div class="sample-field"><div class="sample-field-name">id</div><div class="sample-field-value">${i + 1}</div></div>`;
+        html += `<div class="sample-field"><div class="sample-field-name">feature_a</div><div class="sample-field-value">${gaussianRandom(50, 15).toFixed(2)}</div></div>`;
+        html += `<div class="sample-field"><div class="sample-field-name">feature_b</div><div class="sample-field-value">${gaussianRandom(25, 10).toFixed(2)}</div></div>`;
+        html += `<div class="sample-field"><div class="sample-field-name">category</div><div class="sample-field-value">${categories[Math.floor(Math.random() * 4)]}</div></div>`;
+        html += `<div class="sample-field"><div class="sample-field-name">target</div><div class="sample-field-value">${Math.random().toFixed(4)}</div></div>`;
+        html += `</div>`;
+      }
+      
+      preview.innerHTML = html;
+    }
+    
+    // Null probability slider
+    document.getElementById('nullProb').addEventListener('input', function(e) {
+      document.getElementById('nullProbVal').textContent = e.target.value + '%';
+    });
+    
+    // ============================================
+    // CODE EXPORT
+    // ============================================
+    
+    function switchCodeTab(tab, type) {
+      document.querySelectorAll('.code-tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      
+      const codeBlock = document.getElementById('codeBlock');
+      
+      const codeTemplates = {
+        python: `<span class="code-comment"># SciMSPT Synthetic Data Pipeline</span>
+<span class="code-comment"># Auto-generated pipeline configuration</span>
+
+<span class="code-keyword">import</span> pandas <span class="code-keyword">as</span> pd
+<span class="code-keyword">import</span> numpy <span class="code-keyword">as</span> np
+<span class="code-keyword">from</span> sklearn.preprocessing <span class="code-keyword">import</span> StandardScaler, LabelEncoder
+<span class="code-keyword">from</span> sklearn.model_selection <span class="code-keyword">import</span> train_test_split
+
+<span class="code-class">class</span> <span class="code-function">SyntheticDataPipeline</span>:
+    <span class="code-string">"""SciMSPT Synthetic Data Generator"""
+    
+    </span><span class="code-keyword">def</span> <span class="code-function">__init__</span>(self, n_samples=<span class="code-number">5000</span>, random_state=<span class="code-number">42</span>):
+        self.n_samples = n_samples
+        self.random_state = random_state
+        np.random.seed(random_state)
+    
+    <span class="code-keyword">def</span> <span class="code-function">generate_gaussian_data</span>(self, means, stds, corr_matrix=None):
+        <span class="code-string">"""Generate correlated Gaussian features"""
+        </span>n_features = len(means)
+        data = np.random.randn(self.n_samples, n_features)
+        
+        <span class="code-comment"># Apply correlations if provided
+        </span><span class="code-keyword">if</span> corr_matrix <span class="code-keyword">is not None</span>:
+            L = np.linalg.cholesky(corr_matrix)
+            data = data @ L.T
+        
+        <span class="comment"># Scale by means and stds
+        </span>data = data * stds + means
+        
+        <span class="code-keyword">return</span> pd.DataFrame(data, columns=[<span class="code-string">f'feature_{i}'</span> <span class="code-keyword">for</span> i <span class="code-keyword">in</span> range(n_features)])
+    
+    <span class="code-keyword">def</span> <span class="code-function">normalize</span>(self, df, method=<span class="code-string">'standard'</span>):
+        <span class="code-string">"""Apply normalization transformation"""
+        </span><span class="code-keyword">if</span> method == <span class="code-string">'standard'</span>:
+            scaler = StandardScaler()
+            numeric_cols = df.select_dtypes(include=[np.number]).columns
+            df[numeric_cols] = scaler.fit_transform(df[numeric_cols])
+        <span class="code-keyword">elif</span> method == <span class="code-string">'minmax'</span>:
+            df = (df - df.min()) / (df.max() - df.min())
+        <span class="code-keyword">return</span> df
+    
+    <span class="code-keyword">def</span> <span class="code-function">generate_report</span>(self, df):
+        <span class="code-string">"""Generate statistical summary report"""
+        </span>report = {
+            <span class="code-string">'shape'</span>: df.shape,
+            <span class="code-string">'dtypes'</span>: df.dtypes.to_dict(),
+            <span class="code-string">'describe'</span>: df.describe().to_dict(),
+            <span class="code-string">'missing'</span>: df.isnull().sum().to_dict(),
+            <span class="code-string">'correlations'</span>: df.corr().to_dict()
+        }
+        <span class="code-keyword">return</span> report
+
+
+<span class="code-comment"># Execute Pipeline</span>
+<span class="code-keyword">if</span> __name__ == <span class="code-string">'__main__'</span>:
+    pipeline = SyntheticDataPipeline(n_samples=<span class="code-number">5000</span>)
+    
+    <span class="comment"># Configuration
+    </span>means = [<span class="code-number">50.0</span>, <span class="code-number">25.0</span>, <span class="code-number">0.5</span>]
+    stds = [<span class="code-number">15.0</span>, <span class="code-number">10.0</span>, <span class="code-number">0.2</span>]
+    
+    <span class="code-comment"># Generate data
+    </span>df = pipeline.generate_gaussian_data(means, stds)
+    
+    <span class="code-comment"># Transform
+    </span>df_normalized = pipeline.normalize(df)
+    
+    <span class="code-comment"># Export
+    </span>df_normalized.to_csv(<span class="code-string">'synthetic_output.csv'</span>, index=<span class="code-keyword">False</span>)
+    
+    print(<span class="code-string">f"Generated {len(df_normalized)} records"</span>)
+    print(pipeline.generate_report(df_normalized))</pre>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>&copy; 2025 <a href="#">SciMSPT</a> — Neural Research Intelligence Platform. Pipeline Studio v3.0</p>
+  </footer>
+
+  <!-- Toast Notification -->
+  <div class="toast" id="toast">
+    <div class="toast-icon">
+      <span class="material-icons-round">check_circle</span>
+    </div>
+    <span class="toast-message" id="toastMessage">Pipeline saved successfully!</span>
+  </div>
+
+  <script>
+    // ============================================
+    // PIPELINE STATE MANAGEMENT
+    // ============================================
+    
+    let pipelineState = {
+      source: 'gaussian',
+      transform: 'normalize',
+      analysis: 'stats',
+      output: 'json',
+      fields: [
+        { name: 'id', type: 'int', min: null, max: null },
+        { name: 'feature_a', type: 'float', min: 0, max: 100 },
+        { name: 'feature_b', type: 'float', min: 0, max: 100 },
+        { name: 'category', type: 'cat', enum: ['A', 'B', 'C', 'D'] },
+        { name: 'target', type: 'float', min: 0, max: 1 }
+      ],
+      constraints: {},
+      isRunning: false
+    };
+    
+    // Load saved state from localStorage
+    function loadPipelineState() {
+      const saved = localStorage.getItem('scimspt_pipeline');
+      if (saved) {
+        pipelineState = { ...pipelineState, ...JSON.parse(saved) };
+        applySavedState();
+      }
+    }
+    
+    function applySavedState() {
+      document.querySelectorAll('.stage-option').forEach(opt => {
+        opt.classList.remove('selected');
+      });
+      
+      const sourceOpt = document.querySelector(`[data-stage="source"][data-value="${pipelineState.source}"]`);
+      if (sourceOpt) sourceOpt.classList.add('selected');
+      
+      const transformOpt = document.querySelector(`[data-stage="transform"][data-value="${pipelineState.transform}"]`);
+      if (transformOpt) transformOpt.classList.add('selected');
+      
+      const analysisOpt = document.querySelector(`[data-stage="analysis"][data-value="${pipelineState.analysis}"]`);
+      if (analysisOpt) analysisOpt.classList.add('selected');
+      
+      const outputOpt = document.querySelector(`[data-stage="output"][data-value="${pipelineState.output}"]`);
+      if (outputOpt) outputOpt.classList.add('selected');
+    }
+    
+    function savePipeline() {
+      localStorage.setItem('scimspt_pipeline', JSON.stringify(pipelineState));
+      showToast('Pipeline saved successfully!', 'success');
+    }
+    
+    function resetPipeline() {
+      pipelineState = {
+        source: 'gaussian',
+        transform: 'normalize',
+        analysis: 'stats',
+        output: 'json',
+        fields: [
+          { name: 'id', type: 'int' },
+          { name: 'feature_a', type: 'float', min: 0, max: 100 },
+          { name: 'feature_b', type: 'float', min: 0, max: 100 },
+          { name: 'category', type: 'cat', enum: ['A', 'B', 'C', 'D'] },
+          { name: 'target', type: 'float', min: 0, max: 1 }
+        ],
+        constraints: {}
+      };
+      applySavedState();
+      showToast('Pipeline reset to defaults', 'success');
+    }
+    
+    // ============================================
+    // PIPELINE OPTION SELECTION
+    // ============================================
+    
+    function selectOption(element, stage) {
+      const parent = element.closest('.pipeline-stage');
+      parent.querySelectorAll('.stage-option').forEach(opt => opt.classList.remove('selected'));
+      element.classList.add('selected');
+      pipelineState[stage] = element.dataset.value;
+      
+      document.querySelectorAll('.pipeline-stage').forEach(s => s.classList.remove('active'));
+      parent.classList.add('active');
+    }
+    
+    // ============================================
+    // UTILITY FUNCTIONS
+    // ============================================
+    
+    function sleep(ms) {
+      return new Promise(resolve => setTimeout(resolve, ms));
+    }
+    
+    function gaussianRandom(mean, std) {
+      const u1 = Math.random();
+      const u2 = Math.random();
+      const z0 = Math.sqrt(-2 * Math.log(u1)) * Math.cos(2 * Math.PI * u2);
+      return z0 * std + mean;
+    }
+    
+    function showToast(message, type) {
+      const toast = document.getElementById('toast');
+      const toastMessage = document.getElementById('toastMessage');
+      
+      toast.className = `toast ${type}`;
+      toastMessage.textContent = message;
+      toast.classList.add('show');
+      
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 3000);
+    }
+    
+    // ============================================
+    // THEME TOGGLE
+    // ============================================
+    
+    function toggleTheme() {
+      const html = document.documentElement;
+      const icon = document.getElementById('themeIcon');
+      
+      if (html.getAttribute('data-theme') === 'dark') {
+        html.setAttribute('data-theme', 'light');
+        icon.textContent = 'light_mode';
+      } else {
+        html.setAttribute('data-theme', 'dark');
+        icon.textContent = 'dark_mode';
+      }
+    }
+    
+    // ============================================
+    // PIPELINE EXECUTION
+    // ============================================
+    
+    async function runPipeline() {
+      if (pipelineState.isRunning) return;
+      
+      pipelineState.isRunning = true;
+      const runBtn = document.getElementById('runBtn');
+      runBtn.classList.add('running');
+      runBtn.innerHTML = '<span class="material-icons-round">hourglass_empty</span> Running...';
+      
+      resetProgress();
+      
+      document.getElementById('resultsGrid').style.display = 'grid';
+      document.getElementById('execStats').style.display = 'grid';
+      
+      const startTime = performance.now();
+      
+      try {
+        await executeStage(1, 'Generating synthetic data...', generateData);
+        await executeStage(2, 'Applying transformations...', transformData);
+        await executeStage(3, 'Running analysis...', analyzeData);
+        await executeStage(4, 'Formatting output...', formatOutput);
+        
+        const endTime = performance.now();
+        const totalTime = ((endTime - startTime) / 1000).toFixed(2);
+        
+        updateExecutionStats(totalTime);
+        
+        runBtn.classList.remove('running');
+        runBtn.classList.add('complete');
+        runBtn.innerHTML = '<span class="material-icons-round">check</span> Complete!';
+        
+        addLog('Pipeline execution complete!', 'success', true);
+        
+        setTimeout(() => {
+          runBtn.classList.remove('complete');
+          runBtn.innerHTML = '<span class="material-icons-round">play_arrow</span> Run Pipeline';
+          pipelineState.isRunning = false;
+        }, 3000);
+        
+      } catch (error) {
+        addLog(`Error: ${error.message}`, 'error', false);
+        runBtn.classList.remove('running');
+        runBtn.innerHTML = '<span class="material-icons-round">play_arrow</span> Run Pipeline';
+        pipelineState.isRunning = false;
+      }
+    }
+    
+    function resetProgress() {
+      for (let i = 1; i <= 4; i++) {
+        const step = document.getElementById(`step${i}`);
+        const circle = step.querySelector('.step-circle');
+        circle.className = 'step-circle pending';
+        circle.innerHTML = getStepIcon(i);
+        
+        if (i < 4) {
+          document.getElementById(`line${i}`).className = 'step-line';
+        }
+      }
+      
+      document.getElementById('logContainer').innerHTML = '';
+    }
+    
+    function getStepIcon(step) {
+      const icons = {
+        1: '<span class="material-icons-round">data_source</span>',
+        2: '<span class="material-icons-round">transform</span>',
+        3: '<span class="material-icons-round">analytics</span>',
+        4: '<span class="material-icons-round">download</span>'
+      };
+      return icons[step];
+    }
+    
+    async function executeStage(stageNum, message, action) {
+      const step = document.getElementById(`step${stageNum}`);
+      const circle = step.querySelector('.step-circle');
+      
+      circle.className = 'step-circle active';
+      step.className = 'step-item active';
+      
+      if (stageNum > 1) {
+        document.getElementById(`line${stageNum - 1}`).className = 'step-line active';
+      }
+      
+      addLog(message, 'info', false);
+      
+      const stageStart = performance.now();
+      await action();
+      const stageTime = ((performance.now() - stageStart) / 1000).toFixed(1);
+      
+      circle.className = 'step-circle complete';
+      circle.innerHTML = '<span class="material-icons-round">check</span>';
+      step.className = 'step-item complete';
+      
+      if (stageNum > 1) {
+        document.getElementById(`line${stageNum - 1}`).className = 'step-line complete';
+      }
+      
+      addLog(`${message.replace('...', '')} ✓ (${stageTime}s)`, 'success', true);
+    }
+    
+    async function generateData() {
+      await sleep(800 + Math.random() * 500);
+      const data = [];
+      
+      for (let i = 0; i < 10; i++) {
+        data.push({
+          id: i + 1,
+          feature_a: gaussianRandom(50, 15),
+          feature_b: gaussianRandom(25, 10),
+          category: ['A', 'B', 'C', 'D'][Math.floor(Math.random() * 4)],
+          target: Math.random()
+        });
+      }
+      
+      populateDataTable(data);
+    }
+    
+    async function transformData() {
+      await sleep(1200 + Math.random() * 400);
+    }
+    
+    async function analyzeData() {
+      await sleep(2000 + Math.random() * 600);
+      populateStatsTable();
+    }
+    
+    async function formatOutput() {
+      await sleep(400 + Math.random() * 200);
+    }
+    
+    function populateDataTable(data) {
+      const tbody = document.getElementById('dataTableBody');
+      tbody.innerHTML = data.map(row => `
+        <tr>
+          <td>${row.id}</td>
+          <td>${row.feature_a.toFixed(2)}</td>
+          <td>${row.feature_b.toFixed(2)}</td>
+          <td>${row.category}</td>
+          <td>${row.target.toFixed(4)}</td>
+        </tr>
+      `).join('');
+    }
+    
+    function populateStatsTable() {
+      const stats = [
+        { metric: 'Mean', a: '50.23', b: '24.87', c: '0.52' },
+        { metric: 'Std Dev', a: '14.89', b: '9.94', c: '0.29' },
+        { metric: 'Min', a: '1.02', b: '0.15', c: '0.001' },
+        { metric: '25%', a: '40.12', b: '18.23', c: '0.28' },
+        { metric: 'Median', a: '50.01', b: '24.95', c: '0.51' },
+        { metric: '75%', a: '60.34', b: '31.51', c: '0.76' },
+        { metric: 'Max', a: '99.87', b: '49.92', c: '0.999' }
+      ];
+      
+      const tbody = document.getElementById('statsTableBody');
+      tbody.innerHTML = stats.map(row => `
+        <tr>
+          <td style="font-weight: 600;">${row.metric}</td>
+          <td>${row.a}</td>
+          <td>${row.b}</td>
+          <td>${row.c}</td>
+        </tr>
+      `).join('');
+    }
+    
+    function updateExecutionStats(totalTime) {
+      const records = 5000;
+      const memory = (2.4 + Math.random() * 0.8).toFixed(1);
+      const throughput = Math.round(records / totalTime);
+      
+      animateValue('timeTaken', 0, parseFloat(totalTime), 500, 's');
+      animateValue('recordsProcessed', 0, records, 800, '');
+      document.getElementById('memoryUsed').textContent = `${memory} MB`;
+      document.getElementById('throughput').textContent = `${throughput} rec/s`;
+    }
+    
+    function animateValue(id, start, end, duration, suffix) {
+      const el = document.getElementById(id);
+      const range = end - start;
+      const startTime = performance.now();
+      
+      function update(currentTime) {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const current = start + range * progress;
+        el.textContent = (suffix === 's' ? current.toFixed(2) : Math.round(current)) + suffix;
+        
+        if (progress < 1) requestAnimationFrame(update);
+      }
+      
+      requestAnimationFrame(update);
+    }
+    
+    // ============================================
+    // LOGGING
+    // ============================================
+    
+    function addLog(message, type, success) {
+      const container = document.getElementById('logContainer');
+      const time = new Date().toLocaleTimeString();
+      
+      const entry = document.createElement('div');
+      entry.className = 'log-entry';
+      entry.innerHTML = `
+        <span class="log-time">[${time}]</span>
+        <span class="log-message ${type}">${message}</span>
+        <span class="log-status ${success ? 'success' : 'pending'}">${success ? '✓' : '→'}</span>
+      `;
+      
+      container.appendChild(entry);
+      container.scrollTop = container.scrollHeight;
+    }
+    
+    // ============================================
+    // TEMPLATES
+    // ============================================
+    
+    function loadTemplate(templateName) {
+      const templates = {
+        quantum: {
+          source: 'gaussian',
+          transform: 'normalize',
+          analysis: 'anomaly',
+          output: 'parquet',
+          fields: [
+            { name: 'qubit_id', type: 'int' },
+            { name: 'coherence_time', type: 'float', min: 0, max: 100 },
+            { name: 'gate_fidelity', type: 'float', min: 0.9, max: 1 },
+            { name: 'readout_error', type: 'float', min: 0, max: 0.1 },
+            { name: 'noise_level', type: 'float', min: 0, max: 1 },
+            { name: 'anomaly_score', type: 'float', min: 0, max: 1 }
+          ]
+        },
+        clinical: {
+          source: 'poisson',
+          transform: 'impute',
+          analysis: 'ml',
+          output: 'report',
+          fields: [
+            { name: 'patient_id', type: 'int' },
+            { name: 'age', type: 'int', min: 18, max: 85 },
+            { name: 'gender', type: 'cat', enum: ['M', 'F', 'O'] },
+            { name: 'biomarker_a', type: 'float' },
+            { name: 'biomarker_b', type: 'float' },
+            { name: 'treatment_group', type: 'cat', enum: ['Control', 'Treatment A', 'Treatment B'] },
+            { name: 'outcome', type: 'cat', enum: ['Recovered', 'Improved', 'Stable', 'Declined'] }
+          ]
+        },
+        fraud: {
+          source: 'poisson',
+          transform: 'encode',
+          analysis: 'anomaly',
+          output: 'json',
+          fields: [
+            { name: 'transaction_id', type: 'int' },
+            { name: 'amount', type: 'float', min: 0, max: 10000 },
+            { name: 'merchant_category', type: 'cat', enum: ['Retail', 'Food', 'Travel', 'Online', 'ATM'] },
+            { name: 'location_risk', type: 'float', min: 0, max: 1 },
+            { name: 'time_since_last', type: 'int', min: 0, max: 720 },
+            { name: 'is_fraud', type: 'int', enum: [0, 1] }
+          ]
+        },
+        molecular: {
+          source: 'gaussian',
+          transform: 'feature',
+          analysis: 'stats',
+          output: 'csv',
+          fields: [
+            { name: 'molecule_id', type: 'int' },
+            { name: 'smiles', type: 'text' },
+            { name: 'mol_weight', type: 'float', min: 100, max: 800 },
+            { name: 'logp', type: 'float', min: -2, max: 6 },
+            { name: 'tpsa', type: 'float', min: 0, max: 200 },
+            { name: 'hbd', type: 'int', min: 0, max: 10 },
+            { name: 'hba', type: 'int', min: 0, max: 15 },
+            { name: 'druglikeness', type: 'float', min: 0, max: 1 }
+          ]
+        }
+      };
+      
+      const template = templates[templateName];
+      if (!template) return;
+      
+      pipelineState = { ...pipelineState, ...template };
+      applySavedState();
+      updateFieldListUI(template.fields);
+      
+      showToast(`Template "${templateName}" loaded!`, 'success');
+      document.querySelector('.pipeline-builder').scrollIntoView({ behavior: 'smooth' });
+    }
+    
+    function updateFieldListUI(fields) {
+      const fieldList = document.getElementById('fieldList');
+      const typeLabels = { int: 'int', float: 'float', cat: 'cat', text: 'text', datetime: 'datetime' };
+      
+      fieldList.innerHTML = fields.map(field => `
+        <div class="field-item">
+          <span class="field-type-badge ${field.type}">${typeLabels[field.type] || field.type}</span>
+          <span class="field-name">${field.name}</span>
+          <div class="field-actions">
+            <button class="field-action-btn"><span class="material-icons-round" style="font-size: 14px;">edit</span></button>
+            <button class="field-action-btn"><span class="material-icons-round" style="font-size: 14px;">delete</span></button>
+          </div>
+        </div>
+      `).join('');
+      
+      document.getElementById('fieldCount').textContent = `${fields.length} fields`;
+    }
+    
+    // ============================================
+    // CUSTOMIZATION PANEL
+    // ============================================
+    
+    function addField() {
+      const name = prompt('Enter field name:');
+      if (!name) return;
+      
+      const types = ['int', 'float', 'cat', 'text', 'datetime'];
+      const type = prompt(`Enter type (${types.join(', ')}):`, 'float') || 'float';
+      
+      pipelineState.fields.push({ name, type });
+      updateFieldListUI(pipelineState.fields);
+      showToast(`Field "${name}" added!`, 'success');
+    }
+    
+    function generatePreview() {
+      const preview = document.getElementById('samplePreview');
+      const categories = ['A', 'B', 'C', 'D'];
+      
+      let html = '';
+      for (let i = 0; i < 3; i++) {
+        html += `<div class="sample-row">`;
+        html += `<div class="sample-field"><div class="sample-field-name">id</div><div class="sample-field-value">${i + 1}</div></div>`;
+        html += `<div class="sample-field"><div class="sample-field-name">feature_a</div><div class="sample-field-value">${gaussianRandom(50, 15).toFixed(2)}</div></div>`;
+        html += `<div class="sample-field"><div class="sample-field-name">feature_b</div><div class="sample-field-value">${gaussianRandom(25, 10).toFixed(2)}</div></div>`;
+        html += `<div class="sample-field"><div class="sample-field-name">category</div><div class="sample-field-value">${categories[Math.floor(Math.random() * 4)]}</div></div>`;
+        html += `<div class="sample-field"><div class="sample-field-name">target</div><div class="sample-field-value">${Math.random().toFixed(4)}</div></div>`;
+        html += `</div>`;
+      }
+      
+      preview.innerHTML = html;
+    }
+    
+    // Null probability slider
+    document.addEventListener('DOMContentLoaded', function() {
+      const nullProbSlider = document.getElementById('nullProb');
+      if (nullProbSlider) {
+        nullProbSlider.addEventListener('input', function(e) {
+          document.getElementById('nullProbVal').textContent = e.target.value + '%';
+        });
+      }
+      
+      // Load saved state
+      loadPipelineState();
+    });
+    
+    // ============================================
+    // CODE EXPORT
+    // ============================================
+    
+    let currentCodeType = 'python';
+    
+    const codeTemplates = {
+      python: `<span class="code-comment"># SciMSPT Synthetic Data Pipeline</span>
+<span class="code-comment"># Auto-generated pipeline configuration</span>
+
+<span class="code-keyword">import</span> pandas <span class="code-keyword">as</span> pd
+<span class="code-keyword">import</span> numpy <span class="code-keyword">as</span> np
+<span class="code-keyword">from</span> sklearn.preprocessing <span class="code-keyword">import</span> StandardScaler, LabelEncoder
+
+<span class="code-class">class</span> <span class="code-function">SyntheticDataPipeline</span>:
+    <span class="code-string">"""SciMSPT Synthetic Data Generator"""
+    
+    </span><span class="code-keyword">def</span> <span class="code-function">__init__</span>(self, n_samples=<span class="code-number">5000</span>, random_state=<span class="code-number">42</span>):
+        self.n_samples = n_samples
+        self.random_state = random_state
+        np.random.seed(random_state)
+    
+    <span class="code-keyword">def</span> <span class="code-function">generate_gaussian_data</span>(self, means, stds):
+        <span class="code-string">"""Generate correlated Gaussian features"""
+        </span>n_features = len(means)
+        data = np.random.randn(self.n_samples, n_features)
+        data = data * stds + means
+        <span class="code-keyword">return</span> pd.DataFrame(data)
+    
+    <span class="code-keyword">def</span> <span class="code-function">normalize</span>(self, df, method=<span class="code-string">'standard'</span>):
+        <span class="code-string">"""Apply normalization transformation"""
+        </span>scaler = StandardScaler()
+        numeric_cols = df.select_dtypes(include=[np.number]).columns
+        df[numeric_cols] = scaler.fit_transform(df[numeric_cols])
+        <span class="code-keyword">return</span> df
+
+
+<span class="code-comment"># Execute Pipeline</span>
+<span class="code-keyword">if</span> __name__ == <span class="code-string">'__main__'</span>:
+    pipeline = SyntheticDataPipeline(n_samples=<span class="code-number">5000</span>)
+    means = [<span class="code-number">50.0</span>, <span class="code-number">25.0</span>, <span class="code-number">0.5</span>]
+    stds = [<span class="code-number">15.0</span>, <span class="code-number">10.0</span>, <span class="code-number">0.2</span>]
+    
+    df = pipeline.generate_gaussian_data(means, stds)
+    df_normalized = pipeline.normalize(df)
+    df_normalized.to_csv(<span class="code-string">'synthetic_output.csv'</span>, index=<span class="code-keyword">False</span>)
+    print(<span class="code-string">f"Generated {len(df_normalized)} records"</span>)`,
+      
+      requirements: `<span class="code-comment"># SciMSPT Pipeline Requirements</span>
+<span class="code-comment"># Generated for your pipeline configuration</span>
+
+pandas>=<span class="code-number">2.0.0</span>
+numpy>=<span class="code-number">1.24.0</span>
+scikit-learn>=<span class="code-number">1.3.0</span>
+scipy>=<span class="code-number">1.10.0</span>
+matplotlib>=<span class="code-number">3.7.0</span>
+seaborn>=<span class="code-number">0.12.0</span>
+pyarrow>=<span class="code-number">12.0.0</span>
+joblib>=<span class="code-number">1.3.0</span>
+
+<span class="code-comment"># Optional: For advanced features</span>
+<span class="code-comment"># imbalanced-learn>=0.11.0</span>
+<span class="code-comment"># xgboost>=1.7.0</span>
+<span class="code-comment"># lightgbm>=4.0.0</span>`,
+      
+      config: `<span class="code-comment">// SciMSPT Pipeline Configuration</span>
+<span class="code-comment">// Export this JSON to reproduce your pipeline</span>
+
+{
+  <span class="code-string">"version"</span>: <span class="code-string">"3.0"</span>,
+  <span class="code-string">"pipeline_name"</span>: <span class="code-string">"synthetic_data_generator"</span>,
+  
+  <span class="code-string">"stages"</span>: {
+    <span class="code-string">"source"</span>: {
+      <span class="code-string">"type"</span>: <span class="code-string">"gaussian"</span>,
+      <span class="code-string">"config"</span>: {
+        <span class="code-string">"n_samples"</span>: <span class="code-number">5000</span>,
+        <span class="code-string">"random_state"</span>: <span class="code-number">42</span>
+      }
+    },
+    <span class="code-string">"transformation"</span>: {
+      <span class="code-string">"type"</span>: <span class="code-string">"normalize"</span>,
+      <span class="code-string">"method"</span>: <span class="code-string">"standard"</span>
+    },
+    <span class="code-string">"analysis"</span>: {
+      <span class="code-string">"type"</span>: <span class="code-string">"stats"</span>,
+      <span class="code-string">"include_correlation"</span>: <span class="code-keyword">true</span>
+    },
+    <span class="code-string">"output"</span>: {
+      <span class="code-string">"format"</span>: <span class="code-string">"json"</span>,
+      <span class="code-string">"path"</span>: <span class="code-string">"./output/"</span>
+    }
+  },
+  
+  <span class="code-string">"schema"</span>: [
+    { <span class="code-string">"name"</span>: <span class="code-string">"id"</span>, <span class="code-string">"type"</span>: <span class="code-string">"integer"</span> },
+    { <span class="code-string">"name"</span>: <span class="code-string">"feature_a"</span>, <span class="code-string">"type"</span>: <span class="code-string">"float"</span>, <span class="code-string">"min"</span>: <span class="code-number">0</span>, <span class="code-string">"max"</span>: <span class="code-number">100</span> },
+    { <span class="code-string">"name"</span>: <span class="code-string">"feature_b"</span>, <span class="code-string">"type"</span>: <span class="code-string">"float"</span>, <span class="code-string">"min"</span>: <span class="code-number">0</span>, <span class="code-string">"max"</span>: <span class="code-number">100</span> },
+    { <span class="code-string">"name"</span>: <span class="code-string">"category"</span>, <span class="code-string">"type"</span>: <span class="code-string">"categorical"</span>, <span class="code-string">"enum"</span>: [<span class="code-string">"A"</span>, <span class="code-string">"B"</span>, <span class="code-string">"C"</span>, <span class="code-string">"D"</span>] },
+    { <span class="code-string">"name"</span>: <span class="code-string">"target"</span>, <span class="code-string">"type"</span>: <span class="code-string">"float"</span>, <span class="code-string">"min"</span>: <span class="code-number">0</span>, <span class="code-string">"max"</span>: <span class="code-number">1</span> }
+  ]
+}`
+    };
+    
+    function switchCodeTab(tab, type) {
+      document.querySelectorAll('.code-tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      
+      currentCodeType = type;
+      document.getElementById('codeBlock').innerHTML = codeTemplates[type];
+    }
+    
+    function copyCode() {
+      const codeText = document.getElementById('codeBlock').innerText;
+      navigator.clipboard.writeText(codeText).then(() => {
+        showToast('Code copied to clipboard!', 'success');
+      }).catch(() => {
+        showToast('Failed to copy code', 'error');
+      });
+    }
+    
+    function downloadCode() {
+      const codeText = document.getElementById('codeBlock').innerText;
+      const blob = new Blob([codeText], { type: 'text/plain' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = currentCodeType === 'python' ? 'pipeline.py' : 
+                   currentCodeType === 'requirements' ? 'requirements.txt' : 'pipeline_config.json';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      showToast('File downloaded successfully!', 'success');
+    }
+    
+    // ============================================
+    // ANIMATED COUNTERS FOR HERO STATS
+    // ============================================
+    
+    function animateCounter(elementId, target, suffix = '') {
+      const el = document.getElementById(elementId);
+      if (!el) return;
+      
+      const isString = isNaN(parseFloat(target));
+      if (isString) {
+        el.textContent = target + suffix;
+        return;
+      }
+      
+      const numTarget = parseFloat(target);
+      const duration = 2000;
+      const startTime = performance.now();
+      
+      function update(currentTime) {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        const current = numTarget * eased;
+        
+        if (numTarget >= 1000) {
+          el.textContent = (current / 1000).toFixed(0) + 'K+';
+        } else if (numTarget >= 1000000000) {
+          el.textContent = (current / 1000000000).toFixed(0) + 'B+';
+        } else if (Number.isInteger(numTarget)) {
+          el.textContent = Math.round(current) + suffix;
+        } else {
+          el.textContent = current.toFixed(suffix ? 0 : 2) + suffix;
+        }
+        
+        if (progress < 1) requestAnimationFrame(update);
+      }
+      
+      requestAnimationFrame(update);
+    }
+    
+    // Initialize counters when page loads
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        animateCounter('pipelineCount', 10000);
+        animateCounter('dataPointsCount', 1000000000);
+      }, 500);
+    });
+  </script>
+</body>
+</html>
