@@ -2450,6 +2450,861 @@
       margin-top: 24px;
       animation: skeletonPulse 1.5s ease-in-out infinite;
     }
+
+
+    /* ═══════════════════════════════════════════════════════════════
+       LIVE DASHBOARD WIDGETS - PROFESSIONAL ENHANCEMENTS
+       $10M Product Quality | Real-time Metrics | Glass-morphism Design
+       ═══════════════════════════════════════════════════════════════ */
+
+    /* --- Enhanced Theme System Variables --- */
+    [data-theme="dark"] {
+      --live-bg-deep: #050d18;
+      --live-bg-card: rgba(15, 30, 55, 0.75);
+      --live-bg-glass: rgba(10, 22, 40, 0.6);
+      --live-border: rgba(0, 229, 255, 0.12);
+      --live-border-hover: rgba(0, 229, 255, 0.35);
+      --live-accent-cyan: #00E5FF;
+      --live-accent-purple: #a78bfa;
+      --live-accent-green: #10b981;
+      --live-accent-amber: #f59e0b;
+      --live-text-primary: #e8f4fc;
+      --live-text-secondary: #94a3b8;
+      --live-text-muted: #64748b;
+      --live-shadow-sm: 0 4px 20px rgba(0, 0, 0, 0.3);
+      --live-shadow-md: 0 8px 40px rgba(0, 0, 0, 0.4);
+      --live-shadow-lg: 0 16px 60px rgba(0, 0, 0, 0.5);
+      --live-glow-cyan: 0 0 30px rgba(0, 229, 255, 0.2);
+      --live-glow-purple: 0 0 30px rgba(167, 139, 250, 0.2);
+      --live-blur: blur(20px);
+      --live-gradient-overlay: linear-gradient(135deg, rgba(0, 229, 255, 0.05) 0%, rgba(167, 139, 250, 0.03) 100%);
+    }
+
+    [data-theme="light"] {
+      --live-bg-deep: #f8fafc;
+      --live-bg-card: rgba(255, 255, 255, 0.92);
+      --live-bg-glass: rgba(248, 250, 252, 0.7);
+      --live-border: rgba(59, 130, 246, 0.15);
+      --live-border-hover: rgba(59, 130, 246, 0.4);
+      --live-accent-cyan: #0891b2;
+      --live-accent-purple: #7c3aed;
+      --live-accent-green: #059669;
+      --live-accent-amber: #d97706;
+      --live-text-primary: #1e293b;
+      --live-text-secondary: #475569;
+      --live-text-muted: #94a3b8;
+      --live-shadow-sm: 0 4px 20px rgba(0, 0, 0, 0.08);
+      --live-shadow-md: 0 8px 40px rgba(0, 0, 0, 0.12);
+      --live-shadow-lg: 0 16px 60px rgba(0, 0, 0, 0.15);
+      --live-glow-cyan: 0 0 25px rgba(8, 145, 178, 0.15);
+      --live-glow-purple: 0 0 25px rgba(124, 58, 237, 0.15);
+      --live-blur: blur(16px);
+      --live-gradient-overlay: linear-gradient(135deg, rgba(59, 130, 246, 0.04) 0%, rgba(124, 58, 237, 0.02) 100%);
+    }
+
+    /* --- Live Metrics Section Container --- */
+    .live-metrics-section {
+      margin-bottom: 40px;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: liveSectionFadeIn 0.8s ease forwards;
+      animation-delay: 0.3s;
+    }
+
+    @keyframes liveSectionFadeIn {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .section-header-live {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--live-border);
+    }
+
+    .section-title-live {
+      font-family: var(--font-heading);
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--live-text-primary);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .section-title-live::before {
+      content: '';
+      width: 4px;
+      height: 24px;
+      background: linear-gradient(180deg, var(--live-accent-cyan), var(--live-accent-purple));
+      border-radius: 2px;
+    }
+
+    .live-indicator {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--live-accent-green);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .live-pulse-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--live-accent-green);
+      border-radius: 50%;
+      animation: livePulse 2s ease-in-out infinite;
+      box-shadow: 0 0 10px var(--live-accent-green);
+    }
+
+    @keyframes livePulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.3); opacity: 0.7; }
+    }
+
+    /* --- Animated Counter Cards Grid --- */
+    .live-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      margin-bottom: 32px;
+    }
+
+    @media (max-width: 1200px) {
+      .live-cards-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 600px) {
+      .live-cards-grid { grid-template-columns: 1fr; }
+    }
+
+    .live-counter-card {
+      position: relative;
+      background: var(--live-bg-card);
+      backdrop-filter: var(--live-blur);
+      -webkit-backdrop-filter: var(--live-blur);
+      border: 1px solid var(--live-border);
+      border-radius: 20px;
+      padding: 24px;
+      overflow: hidden;
+      transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+      cursor: default;
+    }
+
+    .live-counter-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--live-gradient-overlay);
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    .live-counter-card:hover {
+      transform: translateY(-6px);
+      border-color: var(--live-border-hover);
+      box-shadow: var(--live-shadow-lg), var(--live-glow-cyan);
+    }
+
+    .live-counter-card:hover::before {
+      opacity: 1;
+    }
+
+    .live-card-inner {
+      position: relative;
+      z-index: 1;
+    }
+
+    .live-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    .live-icon-wrapper {
+      position: relative;
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.3s ease;
+    }
+
+    .live-counter-card:hover .live-icon-wrapper {
+      transform: scale(1.1) rotate(-5deg);
+    }
+
+    .live-icon-wrapper.cyan {
+      background: linear-gradient(135deg, rgba(0, 229, 255, 0.2), rgba(0, 229, 255, 0.05));
+      border: 1px solid rgba(0, 229, 255, 0.25);
+    }
+
+    .live-icon-wrapper.purple {
+      background: linear-gradient(135deg, rgba(167, 139, 250, 0.2), rgba(167, 139, 250, 0.05));
+      border: 1px solid rgba(167, 139, 250, 0.25);
+    }
+
+    .live-icon-wrapper.green {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(16, 185, 129, 0.05));
+      border: 1px solid rgba(16, 185, 129, 0.25);
+    }
+
+    .live-icon-wrapper.amber {
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.2), rgba(245, 158, 11, 0.05));
+      border: 1px solid rgba(245, 158, 11, 0.25);
+    }
+
+    .live-icon-wrapper .material-icons {
+      font-size: 26px;
+      transition: all 0.3s ease;
+    }
+
+    .live-icon-wrapper.cyan .material-icons { color: var(--live-accent-cyan); }
+    .live-icon-wrapper.purple .material-icons { color: var(--live-accent-purple); }
+    .live-icon-wrapper.green .material-icons { color: var(--live-accent-green); }
+    .live-icon-wrapper.amber .material-icons { color: var(--live-accent-amber); }
+
+    /* Icon pulse animation */
+    .live-icon-pulse {
+      position: absolute;
+      inset: -4px;
+      border-radius: 18px;
+      animation: iconPulseGlow 3s ease-in-out infinite;
+    }
+
+    .live-icon-wrapper.cyan .live-icon-pulse {
+      background: radial-gradient(circle, rgba(0, 229, 255, 0.15) 0%, transparent 70%);
+    }
+
+    .live-icon-wrapper.purple .live-icon-pulse {
+      background: radial-gradient(circle, rgba(167, 139, 250, 0.15) 0%, transparent 70%);
+    }
+
+    .live-icon-wrapper.green .live-icon-pulse {
+      background: radial-gradient(circle, rgba(16, 185, 129, 0.15) 0%, transparent 70%);
+    }
+
+    .live-icon-wrapper.amber .live-icon-pulse {
+      background: radial-gradient(circle, rgba(245, 158, 11, 0.15) 0%, transparent 70%);
+    }
+
+    @keyframes iconPulseGlow {
+      0%, 100% { opacity: 0.5; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.1); }
+    }
+
+    .live-trend-badge {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 6px 12px;
+      border-radius: 20px;
+      letter-spacing: 0.3px;
+    }
+
+    .live-trend-badge.up {
+      background: rgba(16, 185, 129, 0.12);
+      color: var(--live-accent-green);
+    }
+
+    .live-trend-badge.down {
+      background: rgba(239, 68, 68, 0.12);
+      color: #ef4444;
+    }
+
+    .live-trend-badge .material-icons {
+      font-size: 14px;
+    }
+
+    .live-value-container {
+      margin-bottom: 8px;
+    }
+
+    .live-value {
+      font-family: var(--font-num);
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--live-text-primary);
+      line-height: 1.1;
+      letter-spacing: -0.5px;
+    }
+
+    .live-value-suffix {
+      font-size: 18px;
+      font-weight: 500;
+      color: var(--live-text-secondary);
+      margin-left: 4px;
+    }
+
+    .live-label {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--live-text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* Card shimmer loading effect */
+    .live-card-loading {
+      pointer-events: none;
+      position: relative;
+    }
+
+    .live-card-loading::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.08),
+        transparent
+      );
+      animation: cardShimmer 1.5s infinite;
+    }
+
+    [data-theme="light"] .live-card-loading::after {
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(0, 0, 0, 0.04),
+        transparent
+      );
+    }
+
+    @keyframes cardShimmer {
+      to { left: 100%; }
+    }
+
+    /* --- Live Chart Section --- */
+    .live-chart-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 24px;
+      margin-bottom: 32px;
+    }
+
+    @media (max-width: 1024px) {
+      .live-chart-grid { grid-template-columns: 1fr; }
+    }
+
+    .live-chart-card {
+      background: var(--live-bg-card);
+      backdrop-filter: var(--live-blur);
+      -webkit-backdrop-filter: var(--live-blur);
+      border: 1px solid var(--live-border);
+      border-radius: 20px;
+      padding: 28px;
+      transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+
+    .live-chart-card:hover {
+      border-color: var(--live-border-hover);
+      box-shadow: var(--live-shadow-md);
+    }
+
+    .chart-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 24px;
+    }
+
+    .chart-title {
+      font-family: var(--font-heading);
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--live-text-primary);
+    }
+
+    .chart-legend {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      color: var(--live-text-secondary);
+    }
+
+    .legend-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+
+    .legend-dot.cyan { background: var(--live-accent-cyan); box-shadow: 0 0 8px var(--live-accent-cyan); }
+    .legend-dot.purple { background: var(--live-accent-purple); box-shadow: 0 0 8px var(--live-accent-purple); }
+
+    .canvas-container {
+      position: relative;
+      width: 100%;
+      height: 220px;
+      border-radius: 12px;
+      overflow: hidden;
+      background: rgba(0, 0, 0, 0.15);
+    }
+
+    [data-theme="light"] .canvas-container {
+      background: rgba(0, 0, 0, 0.03);
+    }
+
+    #activityChart {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .chart-stats-row {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 1px solid var(--live-border);
+    }
+
+    .chart-stat {
+      text-align: center;
+    }
+
+    .chart-stat-value {
+      font-family: var(--font-num);
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--live-text-primary);
+    }
+
+    .chart-stat-label {
+      font-size: 11px;
+      color: var(--live-text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-top: 4px;
+    }
+
+    /* --- Active Users Feed --- */
+    .users-feed-card {
+      background: var(--live-bg-card);
+      backdrop-filter: var(--live-blur);
+      -webkit-backdrop-filter: var(--live-blur);
+      border: 1px solid var(--live-border);
+      border-radius: 20px;
+      padding: 28px;
+      transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+      display: flex;
+      flex-direction: column;
+      max-height: 400px;
+    }
+
+    .users-feed-card:hover {
+      border-color: var(--live-border-hover);
+      box-shadow: var(--live-shadow-md);
+    }
+
+    .feed-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      flex-shrink: 0;
+    }
+
+    .feed-title {
+      font-family: var(--font-heading);
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--live-text-primary);
+    }
+
+    .user-count-badge {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--live-accent-cyan);
+      background: rgba(0, 229, 255, 0.1);
+      padding: 4px 10px;
+      border-radius: 12px;
+    }
+
+    .users-feed-list {
+      flex: 1;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      padding-right: 8px;
+      /* Custom scrollbar */
+      scrollbar-width: thin;
+      scrollbar-color: var(--live-border) transparent;
+    }
+
+    .users-feed-list::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    .users-feed-list::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    .users-feed-list::-webkit-scrollbar-thumb {
+      background: var(--live-border);
+      border-radius: 2px;
+    }
+
+    .user-feed-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 16px;
+      background: var(--live-bg-glass);
+      border: 1px solid var(--live-border);
+      border-radius: 14px;
+      animation: feedItemFadeIn 0.4s ease forwards;
+      transition: all 0.25s ease;
+    }
+
+    .user-feed-item:hover {
+      border-color: var(--live-border-hover);
+      transform: translateX(4px);
+    }
+
+    @keyframes feedItemFadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .user-avatar-circle {
+      position: relative;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 700;
+      color: white;
+      flex-shrink: 0;
+    }
+
+    .user-avatar-circle.status-active::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 12px;
+      height: 12px;
+      background: var(--live-accent-green);
+      border: 2px solid var(--live-bg-card);
+      border-radius: 50%;
+    }
+
+    .user-avatar-circle.status-idle::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 12px;
+      height: 12px;
+      background: var(--live-accent-amber);
+      border: 2px solid var(--live-bg-card);
+      border-radius: 50%;
+    }
+
+    .user-info-flex {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .user-action-text {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--live-text-primary);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .user-meta-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 4px;
+      font-size: 11px;
+      color: var(--live-text-muted);
+    }
+
+    .user-location {
+      display: flex;
+      align-items: center;
+      gap: 3px;
+    }
+
+    .user-location .material-icons {
+      font-size: 12px;
+    }
+
+    /* --- System Health Panel --- */
+    .health-panel-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    @media (max-width: 1024px) {
+      .health-panel-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 600px) {
+      .health-panel-grid { grid-template-columns: 1fr; }
+    }
+
+    .health-metric-card {
+      background: var(--live-bg-card);
+      backdrop-filter: var(--live-blur);
+      -webkit-backdrop-filter: var(--live-blur);
+      border: 1px solid var(--live-border);
+      border-radius: 16px;
+      padding: 20px;
+      transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+
+    .health-metric-card:hover {
+      border-color: var(--live-border-hover);
+      box-shadow: var(--live-shadow-sm);
+      transform: translateY(-3px);
+    }
+
+    .health-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+
+    .health-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--live-text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .health-value {
+      font-family: var(--font-num);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--live-text-primary);
+    }
+
+    .health-bar-container {
+      height: 8px;
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 4px;
+      overflow: hidden;
+      margin-bottom: 12px;
+    }
+
+    [data-theme="light"] .health-bar-container {
+      background: rgba(0, 0, 0, 0.08);
+    }
+
+    .health-bar-fill {
+      height: 100%;
+      border-radius: 4px;
+      transition: width 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+      position: relative;
+    }
+
+    .health-bar-fill::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+      animation: healthBarShine 2s infinite;
+    }
+
+    @keyframes healthBarShine {
+      from { transform: translateX(-100%); }
+      to { transform: translateX(100%); }
+    }
+
+    .health-bar-fill.cpu { background: linear-gradient(90deg, var(--live-accent-cyan), #06b6d4); }
+    .health-bar-fill.memory { background: linear-gradient(90deg, var(--live-accent-purple), #8b5cf6); }
+    .health-bar-fill.network { background: linear-gradient(90deg, var(--live-accent-green), #34d399); }
+
+    .health-status-text {
+      font-size: 11px;
+      color: var(--live-text-muted);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .status-indicator-mini {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      animation: statusMiniPulse 1.5s ease-in-out infinite;
+    }
+
+    .status-indicator-mini.optimal { background: var(--live-accent-green); }
+    .status-indicator-mini.warning { background: var(--live-accent-amber); }
+    .status-indicator-mini.critical { background: #ef4444; }
+
+    @keyframes statusMiniPulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    /* Uptime counter special styling */
+    .uptime-display {
+      display: flex;
+      align-items: baseline;
+      gap: 4px;
+    }
+
+    .uptime-number {
+      font-family: var(--font-num);
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--live-accent-green);
+    }
+
+    .uptime-unit {
+      font-size: 12px;
+      color: var(--live-text-muted);
+    }
+
+    /* Network pulses animation */
+    .network-pulses {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      height: 24px;
+    }
+
+    .pulse-bar {
+      width: 3px;
+      background: var(--live-accent-green);
+      border-radius: 2px;
+      animation: pulseBarBounce 1s ease-in-out infinite;
+    }
+
+    .pulse-bar:nth-child(1) { height: 30%; animation-delay: 0s; }
+    .pulse-bar:nth-child(2) { height: 60%; animation-delay: 0.15s; }
+    .pulse-bar:nth-child(3) { height: 100%; animation-delay: 0.3s; }
+    .pulse-bar:nth-child(4) { height: 70%; animation-delay: 0.45s; }
+    .pulse-bar:nth-child(5) { height: 40%; animation-delay: 0.6s; }
+
+    @keyframes pulseBarBounce {
+      0%, 100% { transform: scaleY(1); }
+      50% { transform: scaleY(0.4); }
+    }
+
+    /* --- Theme Toggle Enhancements --- */
+    .theme-toggle-enhanced {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .theme-toggle-enhanced .material-icons {
+      transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+
+    .theme-toggle-enhanced:hover .material-icons {
+      transform: rotate(15deg) scale(1.1);
+    }
+
+    .theme-toggle-enhanced.rotating .material-icons {
+      animation: themeIconSpin 0.5s ease;
+    }
+
+    @keyframes themeIconSpin {
+      from { transform: rotate(0deg) scale(1); }
+      50% { transform: rotate(180deg) scale(1.2); }
+      to { transform: rotate(360deg) scale(1); }
+    }
+
+    /* Keyboard shortcut hint */
+    .kbd-shortcut-hint {
+      font-size: 10px;
+      color: var(--live-text-muted);
+      background: var(--live-bg-glass);
+      padding: 2px 6px;
+      border-radius: 4px;
+      border: 1px solid var(--live-border);
+      margin-left: 8px;
+      opacity: 0.7;
+    }
+
+    /* --- Responsive Adjustments for Live Widgets --- */
+    @media (max-width: 768px) {
+      .live-counter-card { padding: 18px; }
+      .live-value { font-size: 26px; }
+      .live-icon-wrapper { width: 44px; height: 44px; }
+      .live-icon-wrapper .material-icons { font-size: 22px; }
+      
+      .live-chart-card, .users-feed-card { padding: 20px; }
+      .canvas-container { height: 180px; }
+      
+      .health-metric-card { padding: 16px; }
+      .health-panel-grid { gap: 12px; }
+      
+      .section-title-live { font-size: 18px; }
+    }
+
+    /* --- Accessibility Improvements --- */
+    .live-counter-card:focus-visible,
+    .live-chart-card:focus-visible,
+    .users-feed-card:focus-visible,
+    .health-metric-card:focus-visible {
+      outline: 2px solid var(--live-accent-cyan);
+      outline-offset: 2px;
+    }
+
+    /* Reduced motion support */
+    @media (prefers-reduced-motion: reduce) {
+      .live-pulse-dot,
+      .live-icon-pulse,
+      .status-indicator-mini,
+      .pulse-bar,
+      .health-bar-fill::after {
+        animation: none;
+      }
+      
+      .live-counter-card,
+      .user-feed-item,
+      .live-metrics-section {
+        animation: none;
+        opacity: 1;
+        transform: none;
+      }
+      
+      * {
+        transition-duration: 0.01ms !important;
+      }
+    }
 </style>
   <!-- Umami Privacy-Friendly Analytics -->
   <script defer src="https://analytics.us.umami.is/script.js" data-website-id="PLACEHOLDER_WEBSITE_ID" data-domains="testdemoqwenai2025-creator.github.io"></script>
@@ -2733,6 +3588,235 @@
       </div>
     </div>
 
+    <!-- ═══════════════════════════════════════════════════════════════
+         LIVE DASHBOARD WIDGETS SECTION
+         Real-time Metrics | Animated Counters | Activity Visualization
+         ═══════════════════════════════════════════════════════════════ -->
+    <section class="live-metrics-section" aria-label="Live Dashboard Metrics">
+      
+      <!-- Section Header with Live Indicator -->
+      <div class="section-header-live">
+        <h2 class="section-title-live">Live Metrics</h2>
+        <div class="live-indicator" aria-live="polite">
+          <span class="live-pulse-dot"></span>
+          <span>Live</span>
+          <span class="kbd-shortcut-hint" title="Keyboard shortcut: Ctrl+Shift+D to toggle theme">⌘⇧D</span>
+        </div>
+      </div>
+
+      <!-- A. Animated Counter Cards (4 cards) -->
+      <div class="live-cards-grid" role="region" aria-label="Key Performance Indicators">
+        
+        <!-- Card 1: Total Simulations Run -->
+        <article class="live-counter-card live-card-loading" tabindex="0" aria-labelledby="label-simulations">
+          <div class="live-card-inner">
+            <div class="live-card-header">
+              <div class="live-icon-wrapper cyan">
+                <span class="live-icon-pulse"></span>
+                <i class="material-icons">psychology</i>
+              </div>
+              <span class="live-trend-badge up">
+                <i class="material-icons">trending_up</i>
+                +12.4%
+              </span>
+            </div>
+            <div class="live-value-container">
+              <span class="live-value" id="counter-simulations" data-target="2847392" data-suffix="">0</span>
+            </div>
+            <span class="live-label" id="label-simulations">Total Simulations Run</span>
+          </div>
+        </article>
+
+        <!-- Card 2: Active Users Now -->
+        <article class="live-counter-card live-card-loading" tabindex="0" aria-labelledby="label-users">
+          <div class="live-card-inner">
+            <div class="live-card-header">
+              <div class="live-icon-wrapper purple">
+                <span class="live-icon-pulse"></span>
+                <i class="material-icons">groups</i>
+              </div>
+              <span class="live-trend-badge up">
+                <i class="material-icons">trending_up</i>
+                +8.2%
+              </span>
+            </div>
+            <div class="live-value-container">
+              <span class="live-value" id="counter-users" data-target="97" data-fluctuate="true" data-min="47" data-max="156">0</span>
+            </div>
+            <span class="live-label" id="label-users">Active Users Now</span>
+          </div>
+        </article>
+
+        <!-- Card 3: Quantum Jobs Completed -->
+        <article class="live-counter-card live-card-loading" tabindex="0" aria-labelledby="label-jobs">
+          <div class="live-card-inner">
+            <div class="live-card-header">
+              <div class="live-icon-wrapper green">
+                <span class="live-icon-pulse"></span>
+                <i class="material-icons">auto_awesome</i>
+              </div>
+              <span class="live-trend-badge up">
+                <i class="material-icons">trending_up</i>
+                +23.7%
+              </span>
+            </div>
+            <div class="live-value-container">
+              <span class="live-value" id="counter-jobs" data-target="128459" data-prefix="" data-format="comma">0</span>
+            </div>
+            <span class="live-label" id="label-jobs">Quantum Jobs Completed</span>
+          </div>
+        </article>
+
+        <!-- Card 4: Data Points Processed -->
+        <article class="live-counter-card live-card-loading" tabindex="0" aria-labelledby="label-data">
+          <div class="live-card-inner">
+            <div class="live-card-header">
+              <div class="live-icon-wrapper amber">
+                <span class="live-icon-pulse"></span>
+                <i class="material-icons">storage</i>
+              </div>
+              <span class="live-trend-badge up">
+                <i class="material-icons">trending_up</i>
+                +45.1%
+              </span>
+            </div>
+            <div class="live-value-container">
+              <span class="live-value" id="counter-data" data-target="89.4" data-suffix=" TB" data-decimal="true">0<span class="live-value-suffix"> TB</span></span>
+            </div>
+            <span class="live-label" id="label-data">Data Points Processed</span>
+          </div>
+        </article>
+
+      </div>
+
+      <!-- B & C. Real-Time Chart + Active Users Feed (Side by Side) -->
+      <div class="live-chart-grid">
+        
+        <!-- B. Real-Time Activity Chart -->
+        <div class="live-chart-card" role="region" aria-label="Activity Over Time Chart">
+          <div class="chart-header">
+            <h3 class="chart-title">Activity Over Time</h3>
+            <div class="chart-legend">
+              <div class="legend-item">
+                <span class="legend-dot cyan"></span>
+                <span>Simulations</span>
+              </div>
+              <div class="legend-item">
+                <span class="legend-dot purple"></span>
+                <span>Jobs</span>
+              </div>
+            </div>
+          </div>
+          <div class="canvas-container">
+            <canvas id="activityChart" aria-label="Line chart showing activity over the last 24 hours"></canvas>
+          </div>
+          <div class="chart-stats-row">
+            <div class="chart-stat">
+              <div class="chart-stat-value" id="chart-peak">2,847</div>
+              <div class="chart-stat-label">Peak</div>
+            </div>
+            <div class="chart-stat">
+              <div class="chart-stat-value" id="chart-average">1,429</div>
+              <div class="chart-stat-label">Average</div>
+            </div>
+            <div class="chart-stat">
+              <div class="chart-stat-value" id="chart-total">34.2K</div>
+              <div class="chart-stat-label">24h Total</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- C. Active Users Feed -->
+        <div class="users-feed-card" role="region" aria-label="Active Users Feed" aria-live="polite">
+          <div class="feed-header">
+            <h3 class="feed-title">Active Users</h3>
+            <span class="user-count-badge" id="activeUserCount">8 online</span>
+          </div>
+          <div class="users-feed-list" id="usersFeedList">
+            <!-- Populated dynamically by JavaScript -->
+          </div>
+        </div>
+
+      </div>
+
+      <!-- D. System Health Panel -->
+      <div class="health-panel-grid" role="region" aria-label="System Health Monitoring">
+        
+        <!-- CPU Usage -->
+        <div class="health-metric-card">
+          <div class="health-card-header">
+            <span class="health-label">CPU Usage</span>
+            <span class="health-value" id="health-cpu-value">62%</span>
+          </div>
+          <div class="health-bar-container">
+            <div class="health-bar-fill cpu" id="health-cpu-bar" style="width: 62%;" role="progressbar" aria-valuenow="62" aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+          <div class="health-status-text">
+            <span class="status-indicator-mini optimal"></span>
+            <span id="health-cpu-status">Optimal performance</span>
+          </div>
+        </div>
+
+        <!-- Memory Usage -->
+        <div class="health-metric-card">
+          <div class="health-card-header">
+            <span class="health-label">Memory</span>
+            <span class="health-value" id="health-memory-value">58%</span>
+          </div>
+          <div class="health-bar-container">
+            <div class="health-bar-fill memory" id="health-memory-bar" style="width: 58%;" role="progressbar" aria-valuenow="58" aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+          <div class="health-status-text">
+            <span class="status-indicator-mini optimal"></span>
+            <span id="health-memory-status">16GB / 32GB used</span>
+          </div>
+        </div>
+
+        <!-- Network I/O -->
+        <div class="health-metric-card">
+          <div class="health-card-header">
+            <span class="health-label">Network I/O</span>
+            <div class="network-pulses" aria-hidden="true">
+              <span class="pulse-bar"></span>
+              <span class="pulse-bar"></span>
+              <span class="pulse-bar"></span>
+              <span class="pulse-bar"></span>
+              <span class="pulse-bar"></span>
+            </div>
+          </div>
+          <div class="health-bar-container">
+            <div class="health-bar-fill network" id="health-network-bar" style="width: 74%;" role="progressbar" aria-valuenow="74" aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+          <div class="health-status-text">
+            <span class="status-indicator-mini optimal"></span>
+            <span id="health-network-status">1.2 Gbps throughput</span>
+          </div>
+        </div>
+
+        <!-- Uptime Counter -->
+        <div class="health-metric-card">
+          <div class="health-card-header">
+            <span class="health-label">System Uptime</span>
+            <i class="material-icons" style="color: var(--live-accent-green); font-size: 20px;">verified</i>
+          </div>
+          <div class="uptime-display">
+            <span class="uptime-number" id="uptime-days">47</span>
+            <span class="uptime-unit">days</span>
+            <span class="uptime-number" id="uptime-hours">12</span>
+            <span class="uptime-unit">hrs</span>
+            <span class="uptime-number" id="uptime-mins">34</span>
+            <span class="uptime-unit">min</span>
+          </div>
+          <div class="health-status-text" style="margin-top: 12px;">
+            <span class="status-indicator-mini optimal"></span>
+            <span>99.97% availability</span>
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
     <!-- Main Grid -->
     <div class="main-grid">
       <!-- Portfolio Overview -->
@@ -3002,6 +4086,833 @@
     });
   </script>
   
+  <!-- ═══════════════════════════════════════════════════════════════
+       LIVE DASHBOARD WIDGETS - JAVASCRIPT ENGINE
+       Real-time Animations | Canvas Charts | User Feed | Health Monitor
+       ═══════════════════════════════════════════════════════════════ -->
+  <script>
+    // ═══════════════════════════════════════════════════════════════
+    // LIVE DASHBOARD WIDGETS CONTROLLER
+    // Professional Real-time Dashboard System v1.0
+    // ═══════════════════════════════════════════════════════════════
+
+    (function() {
+      'use strict';
+
+      // ─── Configuration ──────────────────────────────────────────
+      const CONFIG = {
+        counter: {
+          duration: 2500,
+          easing: t => 1 - Math.pow(1 - t, 4), // easeOutQuart
+          usersFluctuateInterval: 3000
+        },
+        chart: {
+          updateInterval: 5000,
+          maxDataPoints: 288, // 24h * 60min / 5min intervals
+          animationDuration: 1500
+        },
+        usersFeed: {
+          minEntries: 5,
+          maxEntries: 8,
+          addIntervalMin: 8000,
+          addIntervalMax: 15000
+        },
+        health: {
+          updateInterval: 4000,
+          cpu: { min: 45, max: 78 },
+          memory: { min: 52, max: 67 },
+          network: { min: 55, max: 95 }
+        }
+      };
+
+      // ─── Utility Functions ──────────────────────────────────────
+      
+      /**
+       * Format number with commas for display
+       */
+      function formatNumber(num) {
+        if (typeof num === 'string') return num;
+        return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+      }
+
+      /**
+       * Generate random integer in range [min, max]
+       */
+      function randomInt(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+      }
+
+      /**
+       * Generate random float in range [min, max] with decimals
+       */
+      function randomFloat(min, max, decimals = 1) {
+        return parseFloat((Math.random() * (max - min) + min).toFixed(decimals));
+      }
+
+      /**
+       * Check if reduced motion is preferred
+       */
+      function prefersReducedMotion() {
+        return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      }
+
+      // ─── A. Animated Counter Cards ───────────────────────────────
+
+      class AnimatedCounter {
+        constructor(element, options = {}) {
+          this.element = element;
+          this.target = parseFloat(element.dataset.target) || 0;
+          this.isDecimal = element.dataset.decimal === 'true';
+          this.isFluctuating = element.dataset.fluctuate === 'true';
+          this.fluctuateMin = parseInt(element.dataset.min) || 47;
+          this.fluctuateMax = parseInt(element.dataset.max) || 156;
+          this.suffix = element.dataset.suffix || '';
+          this.currentValue = 0;
+          this.animated = false;
+          
+          // Remove loading state after animation
+          const card = element.closest('.live-counter-card');
+          if (card) {
+            setTimeout(() => card.classList.remove('live-card-loading'), CONFIG.counter.duration + 500);
+          }
+        }
+
+        start() {
+          if (this.animated || prefersReducedMotion()) {
+            this.element.textContent = this.formatValue(this.target);
+            if (this.isFluctuating) this.startFluctuation();
+            return;
+          }
+
+          this.animated = true;
+          const startTime = performance.now();
+          const startValue = 0;
+
+          const animate = (currentTime) => {
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(elapsed / CONFIG.counter.duration, 1);
+            const easedProgress = CONFIG.counter.easing(progress);
+
+            this.currentValue = startValue + (this.target - startValue) * easedProgress;
+            this.element.innerHTML = this.formatValue(this.currentValue);
+
+            if (progress < 1) {
+              requestAnimationFrame(animate);
+            } else {
+              this.currentValue = this.target;
+              this.element.innerHTML = this.formatValue(this.target);
+              
+              // Start fluctuation for active users
+              if (this.isFluctuating) {
+                this.startFluctuation();
+              }
+            }
+          };
+
+          requestAnimationFrame(animate);
+        }
+
+        formatValue(value) {
+          let formatted;
+          if (this.isDecimal) {
+            formatted = value.toFixed(1);
+          } else {
+            formatted = formatNumber(Math.round(value));
+          }
+          return this.suffix ? `${formatted}<span class="live-value-suffix">${this.suffix}</span>` : formatted;
+        }
+
+        startFluctuation() {
+          setInterval(() => {
+            const newValue = randomInt(this.fluctuateMin, this.fluctuateMax);
+            this.element.innerHTML = this.formatValue(newValue);
+            
+            // Update user count badge
+            const badge = document.getElementById('activeUserCount');
+            if (badge) badge.textContent = `${newValue} online`;
+          }, CONFIG.counter.usersFluctuateInterval);
+        }
+      }
+
+      // Initialize all counters
+      function initCounters() {
+        const counters = document.querySelectorAll('.live-value[data-target]');
+        counters.forEach((counterEl, index) => {
+          const counter = new AnimatedCounter(counterEl);
+          // Stagger the animations
+          setTimeout(() => counter.start(), index * 200);
+        });
+      }
+
+      // ─── B. Real-Time Activity Chart (Canvas) ────────────────────
+
+      class ActivityChart {
+        constructor(canvasId) {
+          this.canvas = document.getElementById(canvasId);
+          if (!this.canvas) return;
+          
+          this.ctx = this.canvas.getContext('2d');
+          this.dataPoints1 = []; // Simulations data
+          this.dataPoints2 = []; // Jobs data
+          this.animationProgress = 0;
+          this.isAnimating = false;
+          
+          this.setupCanvas();
+          this.generateInitialData();
+          this.bindEvents();
+        }
+
+        setupCanvas() {
+          const container = this.canvas.parentElement;
+          const dpr = window.devicePixelRatio || 1;
+          const rect = container.getBoundingClientRect();
+          
+          this.canvas.width = rect.width * dpr;
+          this.canvas.height = rect.height * dpr;
+          this.ctx.scale(dpr, dpr);
+          
+          this.width = rect.width;
+          this.height = rect.height;
+          this.padding = { top: 20, right: 20, bottom: 30, left: 45 };
+        }
+
+        generateInitialData() {
+          // Generate 24 hours of simulated data points (48 points = every 30 min)
+          const points = 48;
+          for (let i = 0; i < points; i++) {
+            this.dataPoints1.push({
+              x: i,
+              y: Math.max(100, Math.sin(i / 8) * 800 + 1200 + Math.random() * 600),
+              label: `${i % 24}:00`
+            });
+            
+            this.dataPoints2.push({
+              x: i,
+              y: Math.max(50, Math.cos(i / 6) * 400 + 600 + Math.random() * 300),
+              label: ''
+            });
+          }
+        }
+
+        bindEvents() {
+          window.addEventListener('resize', () => {
+            this.setupCanvas();
+            this.draw(1);
+          });
+
+          // Auto-update with new data point
+          setInterval(() => this.addDataPoint(), CONFIG.chart.updateInterval);
+        }
+
+        addDataPoint() {
+          // Shift data and add new point
+          this.dataPoints1.shift();
+          this.dataPoints2.shift();
+
+          const lastX = this.dataPoints1[this.dataPoints1.length - 1].x;
+          
+          this.dataPoints1.push({
+            x: lastX + 1,
+            y: Math.max(100, Math.sin(lastX / 8) * 800 + 1200 + Math.random() * 600),
+            label: ''
+          });
+
+          this.dataPoints2.push({
+            x: lastX + 1,
+            y: Math.max(50, Math.cos(lastX / 6) * 400 + 600 + Math.random() * 300),
+            label: ''
+          });
+
+          // Re-index X values
+          this.dataPoints1.forEach((p, i) => p.x = i);
+          this.dataPoints2.forEach((p, i) => p.x = i);
+
+          // Update stats
+          this.updateStats();
+          
+          // Redraw without full animation
+          this.draw(1);
+        }
+
+        updateStats() {
+          const allValues = [...this.dataPoints1.map(p => p.y), ...this.dataPoints2.map(p => p.y)];
+          const peak = Math.round(Math.max(...this.dataPoints1.map(p => p.y)));
+          const avg1 = Math.round(this.dataPoints1.reduce((a, b) => a + b.y, 0) / this.dataPoints1.length);
+          const total = ((this.dataPoints1.reduce((a, b) => a + b.y, 0)) / 1000).toFixed(1);
+
+          const peakEl = document.getElementById('chart-peak');
+          const avgEl = document.getElementById('chart-average');
+          const totalEl = document.getElementById('chart-total');
+
+          if (peakEl) peakEl.textContent = formatNumber(peak);
+          if (avgEl) avgEl.textContent = formatNumber(avg1);
+          if (totalEl) totalEl.textContent = `${total}K`;
+        }
+
+        draw(progress = 1) {
+          const ctx = this.ctx;
+          const { width, height, padding } = this;
+          const chartWidth = width - padding.left - padding.right;
+          const chartHeight = height - padding.top - padding.bottom;
+
+          // Clear canvas
+          ctx.clearRect(0, 0, width, height);
+
+          // Get theme colors
+          const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+          const colors = {
+            grid: isDark ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.06)',
+            text: isDark ? '#64748b' : '#94a3b8',
+            line1: '#00E5FF',
+            line2: '#a78bfa',
+            fill1: isDark ? 'rgba(0,229,255,0.15)' : 'rgba(0,229,255,0.1)',
+            fill2: isDark ? 'rgba(167,139,250,0.12)' : 'rgba(167,139,250,0.08)'
+          };
+
+          // Draw grid lines
+          ctx.strokeStyle = colors.grid;
+          ctx.lineWidth = 1;
+          
+          // Horizontal grid lines
+          for (let i = 0; i <= 4; i++) {
+            const y = padding.top + (chartHeight / 4) * i;
+            ctx.beginPath();
+            ctx.moveTo(padding.left, y);
+            ctx.lineTo(width - padding.right, y);
+            ctx.stroke();
+          }
+
+          // Y-axis labels
+          ctx.fillStyle = colors.text;
+          ctx.font = '10px JetBrains Mono, monospace';
+          ctx.textAlign = 'right';
+          
+          const maxY = Math.max(...this.dataPoints1.map(p => p.y), ...this.dataPoints2.map(p => p.y));
+          for (let i = 0; i <= 4; i++) {
+            const value = Math.round(maxY - (maxY / 4) * i);
+            const y = padding.top + (chartHeight / 4) * i;
+            ctx.fillText(formatNumber(value), padding.left - 8, y + 4);
+          }
+
+          // X-axis labels
+          ctx.textAlign = 'center';
+          const labels = ['00:00', '06:00', '12:00', '18:00', 'Now'];
+          labels.forEach((label, i) => {
+            const x = padding.left + (chartWidth / (labels.length - 1)) * i;
+            ctx.fillText(label, x, height - 8);
+          });
+
+          // Helper to get Y coordinate from value
+          const getY = (value) => padding.top + chartHeight - (value / maxY) * chartHeight;
+          const getX = (index) => padding.left + (index / (this.dataPoints1.length - 1)) * chartWidth;
+
+          // Draw line 1 (Simulations) with gradient fill
+          this.drawLineWithFill(ctx, this.dataPoints1, getX, getY, colors.line1, colors.fill1, progress, chartHeight, padding);
+          
+          // Draw line 2 (Jobs) with gradient fill
+          this.drawLineWithFill(ctx, this.dataPoints2, getX, getY, colors.line2, colors.fill2, progress, chartHeight, padding);
+        }
+
+        drawLineWithFill(ctx, data, getX, getY, lineColor, fillColor, progress, chartHeight, padding) {
+          if (data.length < 2) return;
+
+          const visiblePoints = Math.floor(data.length * progress);
+          if (visiblePoints < 2) return;
+
+          // Create gradient fill
+          const gradient = ctx.createLinearGradient(0, padding.top, 0, padding.top + chartHeight);
+          gradient.addColorStop(0, fillColor);
+          gradient.addColorStop(1, 'transparent');
+
+          // Draw fill area
+          ctx.beginPath();
+          ctx.moveTo(getX(0), getY(data[0].y));
+          
+          for (let i = 1; i < visiblePoints; i++) {
+            const x = getX(i);
+            const y = getY(data[i].y);
+            
+            // Smooth curve using quadratic bezier
+            if (i > 0) {
+              const prevX = getX(i - 1);
+              const prevY = getY(data[i - 1].y);
+              const cpX = (prevX + x) / 2;
+              ctx.quadraticCurveTo(prevX + (cpX - prevX) * 0.8, prevY, cpX, (prevY + y) / 2);
+            }
+          }
+          
+          const lastX = getX(visiblePoints - 1);
+          const lastY = getY(data[visiblePoints - 1].y);
+          ctx.lineTo(lastX, padding.top + chartHeight);
+          ctx.lineTo(getX(0), padding.top + chartHeight);
+          ctx.closePath();
+          ctx.fillStyle = gradient;
+          ctx.fill();
+
+          // Draw line
+          ctx.beginPath();
+          ctx.moveTo(getX(0), getY(data[0].y));
+          
+          for (let i = 1; i < visiblePoints; i++) {
+            const x = getX(i);
+            const y = getY(data[i].y);
+            
+            if (i > 0) {
+              const prevX = getX(i - 1);
+              const prevY = getY(data[i - 1].y);
+              const cpX = (prevX + x) / 2;
+              ctx.quadraticCurveTo(prevX + (cpX - prevX) * 0.8, prevY, cpX, (prevY + y) / 2);
+            }
+          }
+          
+          ctx.lineTo(lastX, lastY);
+          ctx.strokeStyle = lineColor;
+          ctx.lineWidth = 2.5;
+          ctx.lineCap = 'round';
+          ctx.lineJoin = 'round';
+          ctx.stroke();
+
+          // Draw glow effect on line
+          ctx.shadowColor = lineColor;
+          ctx.shadowBlur = 10;
+          ctx.stroke();
+          ctx.shadowBlur = 0;
+
+          // Draw end point dot
+          if (progress >= 1) {
+            ctx.beginPath();
+            ctx.arc(lastX, lastY, 4, 0, Math.PI * 2);
+            ctx.fillStyle = lineColor;
+            ctx.fill();
+            ctx.beginPath();
+            ctx.arc(lastX, lastY, 7, 0, Math.PI * 2);
+            ctx.strokeStyle = lineColor;
+            ctx.globalAlpha = 0.3;
+            ctx.stroke();
+            ctx.globalAlpha = 1;
+          }
+        }
+
+        animate() {
+          if (prefersReducedMotion()) {
+            this.draw(1);
+            return;
+          }
+
+          this.isAnimating = true;
+          const startTime = performance.now();
+
+          const animate = (currentTime) => {
+            const elapsed = currentTime - startTime;
+            this.animationProgress = Math.min(elapsed / CONFIG.chart.animationDuration, 1);
+            const eased = 1 - Math.pow(1 - this.animationProgress, 3); // easeOutCubic
+            
+            this.draw(eased);
+
+            if (this.animationProgress < 1) {
+              requestAnimationFrame(animate);
+            } else {
+              this.isAnimating = false;
+            }
+          };
+
+          requestAnimationFrame(animate);
+        }
+      }
+
+      // ─── C. Active Users Feed ────────────────────────────────────
+
+      class ActiveUsersFeed {
+        constructor(containerId) {
+          this.container = document.getElementById(containerId);
+          if (!this.container) return;
+          
+          this.users = [];
+          this.maxUsers = CONFIG.usersFeed.maxEntries;
+          
+          this.userNames = [
+            'Dr. Sarah Chen', 'Prof. Marcus Webb', 'Dr. Yuki Tanaka',
+            'Anna Kowalski', 'Dr. James Liu', 'Maria Schmidt',
+            'Dr. Ahmed Hassan', 'Emma Wilson', 'Dr. Pierre Dubois',
+            'Lisa Park', 'Dr. Raj Patel', 'Olga Petrov'
+          ];
+          
+          this.actions = [
+            'Running quantum simulation',
+            'Analyzing pipeline output',
+            'Training neural network',
+            'Processing dataset batch',
+            'Reviewing model results',
+            'Compiling research report',
+            'Running Monte Carlo analysis',
+            'Optimizing hyperparameters'
+          ];
+          
+          this.locations = ['Tokyo', 'London', 'New York', 'Berlin', 'Singapore', 'Sydney', 'Paris', 'Toronto'];
+          
+          this.avatarColors = [
+            ['#00E5FF', '#0891b2'],
+            ['#a78bfa', '#7c3aed'],
+            ['#10b981', '#059669'],
+            ['#f59e0b', '#d97706'],
+            ['#f472b6', '#ec4899'],
+            ['#fb923c', '#ea580c']
+          ];
+
+          this.initUsers();
+          this.startAutoAdd();
+        }
+
+        generateInitials(name) {
+          return name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
+        }
+
+        getRandomItem(arr) {
+          return arr[Math.floor(Math.random() * arr.length)];
+        }
+
+        initUsers() {
+          // Add initial users
+          const initialCount = randomInt(CONFIG.usersFeed.minEntries, CONFIG.usersFeed.maxEntries);
+          for (let i = 0; i < initialCount; i++) {
+            this.addUser(false);
+          }
+        }
+
+        addUser(animate = true) {
+          if (this.users.length >= this.maxUsers) {
+            // Remove oldest user
+            const oldest = this.container.querySelector('.user-feed-item');
+            if (oldest) {
+              if (!prefersReducedMotion()) {
+                oldest.style.opacity = '0';
+                oldest.style.transform = 'translateX(-20px)';
+                setTimeout(() => oldest.remove(), 300);
+              } else {
+                oldest.remove();
+              }
+            }
+            this.users.shift();
+          }
+
+          const name = this.getRandomItem(this.userNames);
+          const action = this.getRandomItem(this.actions);
+          const location = this.getRandomItem(this.locations);
+          const colorPair = this.getRandomItem(this.avatarColors);
+          const status = Math.random() > 0.2 ? 'status-active' : 'status-idle';
+
+          const userEl = document.createElement('div');
+          userEl.className = 'user-feed-item';
+          userEl.style.cssText = animate && !prefersReducedMotion() ? 
+            'opacity: 0; transform: translateY(10px);' : '';
+          
+          userEl.innerHTML = `
+            <div class="user-avatar-circle ${status}" style="background: linear-gradient(135deg, ${colorPair[0]}, ${colorPair[1]});">
+              ${this.generateInitials(name)}
+            </div>
+            <div class="user-info-flex">
+              <div class="user-action-text">${action}</div>
+              <div class="user-meta-row">
+                <span>${name.split(' ')[0]}</span>
+                <span class="user-location">
+                  <i class="material-icons">location_on</i>
+                  ${location}
+                </span>
+                <span>Just now</span>
+              </div>
+            </div>
+          `;
+
+          this.container.insertBefore(userEl, this.container.firstChild);
+          this.users.unshift({ name, action, location, time: Date.now() });
+
+          // Trigger animation
+          if (animate && !prefersReducedMotion()) {
+            requestAnimationFrame(() => {
+              userEl.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+              userEl.style.opacity = '1';
+              userEl.style.transform = 'translateY(0)';
+            });
+          }
+
+          // Update count badge
+          const badge = document.getElementById('activeUserCount');
+          if (badge) {
+            const currentCount = this.container.querySelectorAll('.user-feed-item').length;
+            badge.textContent = `${currentCount} online`;
+          }
+        }
+
+        startAutoAdd() {
+          const scheduleNext = () => {
+            const delay = randomInt(CONFIG.usersFeed.addIntervalMin, CONFIG.usersFeed.addIntervalMax);
+            setTimeout(() => {
+              this addUser();
+              scheduleNext();
+            }, delay);
+          };
+          scheduleNext();
+        }
+      }
+
+      // ─── D. System Health Panel ──────────────────────────────────
+
+      class SystemHealthMonitor {
+        constructor() {
+          this.cpuBar = document.getElementById('health-cpu-bar');
+          this.cpuValue = document.getElementById('health-cpu-value');
+          this.cpuStatus = document.getElementById('health-cpu-status');
+          
+          this.memoryBar = document.getElementById('health-memory-bar');
+          this.memoryValue = document.getElementById('health-memory-value');
+          this.memoryStatus = document.getElementById('health-memory-status');
+          
+          this.networkBar = document.getElementById('health-network-bar');
+          this.networkStatus = document.getElementById('health-network-status');
+          
+          this.uptimeDays = document.getElementById('uptime-days');
+          this.uptimeHours = document.getElementById('uptime-hours');
+          this.uptimeMins = document.getElementById('uptime-mins');
+
+          this.baseUptimeMinutes = 47 * 24 * 60 + 12 * 60 + 34; // Starting uptime
+
+          if (this.cpuBar) {
+            this.startMonitoring();
+            this.startUptimeCounter();
+          }
+        }
+
+        startMonitoring() {
+          // Initial update
+          this.updateAllMetrics();
+          
+          // Periodic updates
+          setInterval(() => this.updateAllMetrics(), CONFIG.health.updateInterval);
+        }
+
+        updateAllMetrics() {
+          this.updateMetric(
+            'cpu',
+            this.cpuBar,
+            this.cpuValue,
+            this.cpuStatus,
+            CONFIG.health.cpu.min,
+            CONFIG.health.cpu.max,
+            '%',
+            'Optimal performance',
+            'High load detected',
+            'Critical load'
+          );
+
+          this.updateMetric(
+            'memory',
+            this.memoryBar,
+            this.memoryValue,
+            this.memoryStatus,
+            CONFIG.health.memory.min,
+            CONFIG.health.memory.max,
+            '%',
+            val => `${Math.round(val * 0.27)}GB / 32GB used`,
+            null,
+            null
+          );
+
+          this.updateMetric(
+            'network',
+            this.networkBar,
+            null,
+            this.networkStatus,
+            CONFIG.health.network.min,
+            CONFIG.health.network.max,
+            '%',
+            val => `${(val / 100 * 1.5).toFixed(1)} Gbps throughput`,
+            null,
+            null
+          );
+        }
+
+        updateMetric(type, barEl, valueEl, statusEl, min, max, unit, optimalMsg, warningMsg, criticalMsg) {
+          if (!barEl) return;
+
+          const newValue = randomFloat(min, max, 1);
+          
+          // Animate bar
+          barEl.style.width = `${newValue}%`;
+          barEl.setAttribute('aria-valuenow', newValue.toFixed(1));
+
+          // Update value text
+          if (valueEl) {
+            valueEl.textContent = `${newValue.toFixed(0)}${unit}`;
+          }
+
+          // Update status
+          if (statusEl) {
+            const statusIndicator = statusEl.previousElementSibling;
+            
+            if (newValue < 60) {
+              statusEl.textContent = typeof optimalMsg === 'function' ? optimalMsg(newValue) : optimalMsg;
+              if (statusIndicator) {
+                statusIndicator.className = 'status-indicator-mini optimal';
+              }
+            } else if (newValue < 80) {
+              statusEl.textContent = typeof warningMsg === 'function' ? warningMsg(newValue) : (warningMsg || 'Moderate load');
+              if (statusIndicator) {
+                statusIndicator.className = 'status-indicator-mini warning';
+              }
+            } else {
+              statusEl.textContent = typeof criticalMsg === 'function' ? criticalMsg(newValue) : (criticalMsg || 'High utilization');
+              if (statusIndicator) {
+                statusIndicator.className = 'status-indicator-mini critical';
+              }
+            }
+          }
+        }
+
+        startUptimeCounter() {
+          if (!this.uptimeDays) return;
+
+          let totalMinutes = this.baseUptimeMinutes;
+
+          const updateUptime = () => {
+            totalMinutes++;
+            
+            const days = Math.floor(totalMinutes / (24 * 60));
+            const hours = Math.floor((totalMinutes % (24 * 60)) / 60);
+            const mins = totalMinutes % 60;
+
+            this.uptimeDays.textContent = days;
+            this.uptimeHours.textContent = hours;
+            this.uptimeMins.textContent = mins.toString().padStart(2, '0');
+          };
+
+          setInterval(updateUptime, 60000); // Update every minute
+        }
+      }
+
+      // ─── E. Enhanced Theme Toggle ────────────────────────────────
+
+      class EnhancedThemeToggle {
+        constructor() {
+          this.toggleBtn = document.querySelector('.theme-toggle');
+          if (this.toggleBtn) {
+            this.toggleBtn.classList.add('theme-toggle-enhanced');
+          }
+          this.initKeyboardShortcut();
+          this.enhanceSetTheme();
+        }
+
+        enhanceSetTheme() {
+          // Store original setTheme
+          const originalSetTheme = window.setTheme;
+          
+          window.setTheme = (theme) => {
+            // Call original
+            originalSetTheme(theme);
+            
+            // Add rotation animation
+            if (this.toggleBtn) {
+              this.toggleBtn.classList.add('rotating');
+              setTimeout(() => {
+                this.toggleBtn.classList.remove('rotating');
+              }, 500);
+            }
+
+            // Redraw chart with new theme colors
+            if (window.activityChartInstance) {
+              setTimeout(() => window.activityChartInstance.draw(1), 100);
+            }
+          };
+        }
+
+        initKeyboardShortcut() {
+          document.addEventListener('keydown', (e) => {
+            // Ctrl/Cmd + Shift + D to toggle theme
+            if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key.toLowerCase() === 'd') {
+              e.preventDefault();
+              toggleTheme();
+              
+              // Show brief visual feedback
+              this.showKeyboardFeedback();
+            }
+          });
+        }
+
+        showKeyboardFeedback() {
+          const indicator = document.createElement('div');
+          indicator.textContent = 'Theme Toggled';
+          indicator.style.cssText = `
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.8);
+            background: var(--live-bg-card, rgba(15,30,55,0.95));
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--live-border, rgba(0,229,255,0.25));
+            color: var(--live-text-primary, #e8f4fc);
+            padding: 16px 32px;
+            border-radius: 12px;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            z-index: 99999;
+            opacity: 0;
+            transition: all 0.3s ease;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+          `;
+          
+          document.body.appendChild(indicator);
+          
+          requestAnimationFrame(() => {
+            indicator.style.opacity = '1';
+            indicator.style.transform = 'translate(-50%, -50%) scale(1)';
+          });
+          
+          setTimeout(() => {
+            indicator.style.opacity = '0';
+            indicator.style.transform = 'translate(-50%, -50%) scale(0.8)';
+            setTimeout(() => indicator.remove(), 300);
+          }, 1200);
+        }
+      }
+
+      // ─── Initialization ──────────────────────────────────────────
+
+      function initLiveDashboard() {
+        console.log('[Live Dashboard] Initializing...');
+        
+        // A. Initialize animated counters
+        initCounters();
+        
+        // B. Initialize activity chart
+        window.activityChartInstance = new ActivityChart('activityChart');
+        if (window.activityChartInstance.canvas) {
+          // Delay chart animation slightly for visual effect
+          setTimeout(() => window.activityChartInstance.animate(), 500);
+        }
+        
+        // C. Initialize active users feed
+        new ActiveUsersFeed('usersFeedList');
+        
+        // D. Initialize system health monitor
+        new SystemHealthMonitor();
+        
+        // E. Initialize enhanced theme toggle
+        new EnhancedThemeToggle();
+        
+        console.log('[Live Dashboard] All widgets initialized successfully ✓');
+      }
+
+      // Start when DOM is ready
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initLiveDashboard);
+      } else {
+        // DOM already loaded
+        initLiveDashboard();
+      }
+
+    })();
+  </script>
+
   <!-- Floating Navigation Buttons -->
   <div class="floating-nav">
     <a href="index.html" class="float-btn home-btn" title="Home">
