@@ -3535,6 +3535,20 @@
     </div>
   </div>
 
+  <!-- Fail-safe: Hide skeleton loader immediately -->
+  <script>
+    (function() {
+      var loader = document.getElementById('skeletonLoader');
+      if (loader) {
+        setTimeout(function() {
+          loader.style.opacity = '0';
+          loader.style.visibility = 'hidden';
+          setTimeout(function() { loader.remove(); }, 500);
+        }, 800);
+      }
+    })();
+  </script>
+
   <!-- Left Molecular Sidebar -->
   <aside class="molecular-sidebar left">
     <div class="molecular-grid"></div>
