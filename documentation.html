@@ -4520,55 +4520,12 @@ result = client.analyze_paper(
         localStorage.setItem('scimspt_mobile_banner_dismissed', Date.now());
       },
       
-      // Show PWA Install Guide
+            // Show PWA Install Guide - DISABLED to prevent annoying popup
       showPWAGuide() {
-        const guide = \`
-          <div style="
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: var(--bg-primary);
-            border: 1px solid var(--border-subtle);
-            border-radius: 20px;
-            padding: 24px;
-            z-index: 10002;
-            max-width: 320px;
-            box-shadow: 0 30px 90px rgba(0,0,0,0.6);
-          ">
-            <h3 style="color: var(--accent-primary); margin-bottom: 16px; font-size: 18px;">
-              🚀 Install SciMSPT
-            </h3>
-            <ol style="color: var(--text-secondary); font-size: 14px; line-height: 1.8; padding-left: 20px;">
-              <li>Tap the <strong>Share</strong> button (□ with arrow)</li>
-              <li>Scroll down and tap <strong>'Add to Home Screen'</strong></li>
-              <li>Tap <strong>'Add'</strong> in the top right</li>
-            </ol>
-            <button onclick="this.parentElement.remove()" style="
-              margin-top: 16px;
-              width: 100%;
-              padding: 12px;
-              background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
-              border: none;
-              border-radius: 10px;
-              color: #0a1628;
-              font-weight: 600;
-              cursor: pointer;
-            ">Got it!</button>
-          </div>
-          <div onclick="this.parentElement.remove()" style="
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0,0,0,0.7);
-            z-index: 10001;
-          "></div>
-        \`;
-        
-        document.body.insertAdjacentHTML('beforeend', guide);
-      },
+        // PWA install guide disabled - user can install via browser menu if desired
+        console.log('[SciMSPT] PWA install guide available but suppressed');
+        return;
+      },,
       
       // Enhance Touch Interactions
       enhanceTouchInteractions() {
@@ -4649,18 +4606,14 @@ result = client.analyze_paper(
           });
         }
         
-        // Handle install prompt
+        // Handle install prompt - DISABLED to prevent annoying popup
         let deferredPrompt;
         window.addEventListener('beforeinstallprompt', (e) => {
           e.preventDefault();
           deferredPrompt = e;
-          
-          // Show install button after delay
-          setTimeout(() => {
-            if (this.device.isMobile) {
-              this.showInstallPrompt(deferredPrompt);
-            }
-          }, 3000);
+          // Install prompt suppressed - user can install via browser menu if desired
+          console.log('[SciMSPT] PWA install available but prompt suppressed');
+          // NOT showing any install prompt automatically
         });
       },
       
