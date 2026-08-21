@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#030810"/>
+      <stop offset="50%" style="stop-color:#0a1628"/>
+      <stop offset="100%" style="stop-color:#122a45"/>
+    </linearGradient>
+    <linearGradient id="accentGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#00E5FF"/>
+      <stop offset="100%" style="stop-color:#a78bfa"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(0,229,255,0.05)" stroke-width="1"/>
+    </pattern>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bgGrad)"/>
+  <rect width="1200" height="630" fill="url(#grid)"/>
+  
+  <!-- Decorative elements -->
+  <circle cx="100" cy="100" r="150" fill="rgba(0,229,255,0.05)" filter="url(#glow)"/>
+  <circle cx="1100" cy="530" r="200" fill="rgba(167,139,250,0.05)" filter="url(#glow)"/>
+  
+  <!-- Logo area -->
+  <rect x="60" y="60" width="80" height="80" rx="20" fill="url(#accentGrad)" filter="url(#glow)"/>
+  <path d="M100 85 L100 115 M80 97 L120 97 M80 113 L120 113" stroke="#000" stroke-width="4" stroke-linecap="round"/>
+  
+  <!-- Title text -->
+  <text x="170" y="105" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="48" font-weight="700" fill="#e8f4fc">
+    SciMSPT
+  </text>
+  <text x="340" y="105" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="32" fill="#00E5FF">
+    Neural Research Platform
+  </text>
+  
+  <!-- Main tagline -->
+  <text x="60" y="280" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="56" font-weight="700" fill="#ffffff">
+    Where Molecular Intelligence
+  </text>
+  <text x="60" y="355" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="56" font-weight="700" fill="#ffffff">
+    Meets Investment Foresight
+  </text>
+  
+  <!-- Feature badges -->
+  <g transform="translate(60, 420)">
+    <!-- Badge 1 -->
+    <rect x="0" y="0" width="180" height="50" rx="25" fill="rgba(0,229,255,0.15)" stroke="rgba(0,229,255,0.4)" stroke-width="1"/>
+    <text x="90" y="33" font-family="system-ui, sans-serif" font-size="18" fill="#00E5FF" text-anchor="middle">⚛️ Quantum Computing</text>
+    
+    <!-- Badge 2 -->
+    <rect x="200" y="0" width="180" height="50" rx="25" fill="rgba(167,139,250,0.15)" stroke="rgba(167,139,250,0.4)" stroke-width="1"/>
+    <text x="290" y="33" font-family="system-ui, sans-serif" font-size="18" fill="#a78bfa" text-anchor="middle">🔬 Research Pipeline</text>
+    
+    <!-- Badge 3 -->
+    <rect x="400" y="0" width="160" height="50" rx="25" fill="rgba(16,185,129,0.15)" stroke="rgba(16,185,129,0.4)" stroke-width="1"/>
+    <text x="480" y="33" font-family="system-ui, sans-serif" font-size="18" fill="#10b981" text-anchor="middle">📊 Data Studio</text>
+    
+    <!-- Badge 4 -->
+    <rect x="580" y="0" width="160" height="50" rx="25" fill="rgba(245,158,11,0.15)" stroke="rgba(245,158,11,0.4)" stroke-width="1"/>
+    <text x="660" y="33" font-family="system-ui, sans-serif" font-size="18" fill="#f59e0b" text-anchor="middle">🔒 Enterprise Security</text>
+  </g>
+  
+  <!-- URL bar -->
+  <rect x="60" y="540" width="400" height="50" rx="10" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+  <text x="80" y="572" font-family="'JetBrains Mono', monospace" font-size="18" fill="#94a3b8">
+    testdemoqwenai2025-creator.github.io/Demo2SciMSPT
+  </text>
+  
+  <!-- Version badge -->
+  <rect x="1040" y="550" width="100" height="36" rx="18" fill="url(#accentGrad)"/>
+  <text x="1090" y="574" font-family="system-ui, sans-serif" font-size="14" font-weight="600" fill="#030810" text-anchor="middle">v2.0</text>
+</svg>

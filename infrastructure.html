@@ -30,6 +30,14 @@
   <meta name="author" content="SciMSPT Team">
   <link rel="canonical" href="https://testdemoqwenai2025-creator.github.io/Demo2SciMSPT/infrastructure.html">
   
+  <!-- PWA Manifest -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#00E5FF">
+  <link rel="apple-touch-icon" href="assets/icon-192.svg">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="SciMSPT">
+  
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
@@ -1116,9 +1124,69 @@
       margin-top: 24px;
       animation: skeletonPulse 1.5s ease-in-out infinite;
     }
-  </style>
+
+  /* Skip Navigation Link (Accessibility) */
+  .skip-link {
+    position: absolute;
+    top: -100px;
+    left: 0;
+    background: var(--accent-primary, #00E5FF);
+    color: var(--bg-deep, #030810);
+    padding: 12px 24px;
+    z-index: 10001;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 0 0 8px 0;
+    transition: top 0.3s ease;
+  }
+
+  .skip-link:focus {
+    top: 0;
+  }
+
+  /* Focus indicators for keyboard navigation (WCAG 2.1 AA) */
+  *:focus-visible {
+    outline: 2px solid var(--accent-primary, #00E5FF);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  /* Remove outline for mouse clicks */
+  *:focus:not(:focus-visible) {
+    outline: none;
+  }
+
+  /* Ensure focus states on interactive elements */
+  a:focus-visible,
+  button:focus-visible,
+  input:focus-visible,
+  select:focus-visible,
+  textarea:focus-visible,
+  [tabindex]:focus-visible {
+    outline: 2px solid var(--accent-primary, #00E5FF);
+    outline-offset: 2px;
+  }
+
+  /* Screen Reader Only Text (Accessibility Utility) */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+</style>
+  <!-- Umami Privacy-Friendly Analytics -->
+  <script defer src="https://analytics.us.umami.is/script.js" data-website-id="PLACEHOLDER_WEBSITE_ID" data-domains="testdemoqwenai2025-creator.github.io"></script>
+  <noscript><img src="https://analytics.us.umami.is/pixel?website=PLACEHOLDER_WEBSITE_ID" alt="" referrerpolicy="no-referrer-when-downgrade"/></noscript>
 </head>
 <body>
+  <!-- Skip Navigation (Accessibility) -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
   <!-- Skeleton Loading Screen -->
   <div class="skeleton-loader" id="skeletonLoader">
     <nav class="skeleton-nav">
@@ -1179,10 +1247,10 @@
   </div>
 
   <!-- Navigation -->
-  <nav class="navbar">
+  <nav class="navbar" role="navigation" aria-label="Main navigation">
     <div class="nav-left">
-      <a href="index.html" class="nav-logo">
-        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%2300E5FF'/%3E%3Cstop offset='100%25' stop-color='%23a78bfa'/%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle cx='16' cy='16' r='14' fill='url(%23g)'/%3E%3Cpath d='M16 8v16M10 12h12M10 20h12' stroke='%23000' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E" alt="SciMSPT Logo">
+      <a href="index.html" class="nav-logo" aria-label="SciMSPT Home">
+        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%2300E5FF'/%3E%3Cstop offset='100%25' stop-color='%23a78bfa'/%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle cx='16' cy='16' r='14' fill='url(%23g)'/%3E%3Cpath d='M16 8v16M10 12h12M10 20h12' stroke='%23000' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E" alt="SciMSPT Logo" aria-hidden="true">
         <span class="nav-logo-text">Sci<span>MSPT</span></span>
       </a>
       <div class="nav-links">
@@ -1240,7 +1308,7 @@
   </section>
 
   <!-- Main Content -->
-  <main class="main-content">
+  <main id="main-content" class="main-content" role="main">
     
     <!-- System Architecture -->
     <section class="section">
@@ -1861,6 +1929,81 @@
         setTimeout(() => loader.remove(), 500);
       }
     }, 3000);
+  </script>
+  <!-- Umami Event Tracking Helper (Accessibility & Analytics) -->
+  <script>
+    // Umami Event Tracking Helper
+    window.trackEvent = function(eventName, eventData = {}) {
+      if (typeof umami !== 'undefined') {
+        umami.track(eventName, eventData);
+      }
+      console.log('[Analytics]', eventName, eventData);
+    };
+
+    // Track page views on SPA-like navigation
+    document.querySelectorAll('a[href$=".html"]').forEach(link => {
+      link.addEventListener('click', () => {
+        trackEvent('Page Navigation', { 
+          destination: link.getAttribute('href'),
+          linkText: link.textContent.trim().substring(0, 50)
+        });
+      });
+    });
+
+    // Track button clicks
+    document.querySelectorAll('button, .btn-primary, .btn-secondary').forEach(btn => {
+      btn.addEventListener('click', () => {
+        trackEvent('Button Click', {
+          buttonText: btn.textContent.trim().substring(0, 50),
+          page: window.location.pathname
+        });
+      });
+    });
+
+    // Track external links
+    document.querySelectorAll('a[target="_blank"]').forEach(link => {
+      link.addEventListener('click', () => {
+        trackEvent('External Link', {
+          url: link.href,
+          text: link.textContent.trim().substring(0, 50)
+        });
+      });
+    });
+
+    // ============================================
+    // PWA SERVICE WORKER REGISTRATION
+    // ============================================
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/Demo2SciMSPT/sw.js')
+          .then(registration => {
+            console.log('✅ SW registered:', registration.scope);
+            
+            // Check for updates
+            registration.addEventListener('updatefound', () => {
+              const newWorker = registration.installing;
+              newWorker.addEventListener('statechange', () => {
+                if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                  // New version available - could show notification to user
+                  console.log('🔄 New version available, refresh to update');
+                }
+              });
+            });
+          })
+          .catch(error => {
+            console.warn('⚠️ SW registration failed:', error);
+          });
+      });
+
+      // Handle controller change (new service worker activated)
+      let refreshing = false;
+      navigator.serviceWorker.addEventListener('controllerchange', () => {
+        if (!refreshing) {
+          refreshing = true;
+          window.location.reload();
+        }
+      });
+    }
   </script>
 </body>
 </html>

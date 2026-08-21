@@ -1,18 +1,24 @@
 /**
  * SciMSPT Authentication Configuration
- * FREE TIER INFRASTRUCTURE
+ * SUPABASE FREE TIER - Ready to Connect
  * 
- * Provider: Supabase Auth (Free Tier - 50K MAU)
- * Alternative: Firebase Auth (Free Tier - No cost for basic auth)
- * 
- * OAuth Providers: Google, GitHub (both free)
+ * Setup Guide:
+ * 1. Create free account at https://supabase.com
+ * 2. New Project → Get URL + anon key
+ * 3. Enable Auth → Providers → Google & GitHub
+ * 4. Replace values below
  */
 
 const AUTH_CONFIG = {
-  // Supabase Configuration (Recommended Free Tier)
+  // Supabase Configuration (Free Tier - 50K MAU)
   supabase: {
-    url: 'https://YOUR_PROJECT.supabase.co', // Users replace with their Supabase URL
-    anonKey: 'YOUR_ANON_KEY', // Users replace with their anon key
+    // === REPLACE THESE WITH YOUR SUPABASE CREDENTIALS ===
+    url: process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://PROJECT_ID.supabase.co',
+    anonKey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'YOUR_ANON_KEY_HERE',
+    
+    // Demo mode settings
+    demoMode: true, // Set to false when real credentials are added
+    
     enabled: true,
     limits: {
       mau: 50000, // Monthly Active Users free tier
@@ -23,10 +29,10 @@ const AUTH_CONFIG = {
   
   // Firebase Configuration (Alternative Free Tier)
   firebase: {
-    apiKey: 'YOUR_API_KEY',
-    authDomain: 'YOUR_PROJECT.firebaseapp.com',
-    projectId: 'YOUR_PROJECT_ID',
-    enabled: false, // Set true to use Firebase instead
+    apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY || '',
+    authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN || '',
+    projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID || '',
+    enabled: false,
     limits: {
       mau: null, // Unlimited free for auth
       storage: 5, // GB free
@@ -38,14 +44,18 @@ const AUTH_CONFIG = {
   providers: {
     google: {
       enabled: true,
+      clientId: process.env.GOOGLE_CLIENT_ID || '',
       scopes: ['email', 'profile', 'openid'],
-      freeTier: true
+      freeTier: true,
+      setupUrl: 'https://console.cloud.google.com/apis/credentials'
     },
     github: {
       enabled: true,
+      clientId: process.env.GITHUB_CLIENT_ID || '',
       scopes: ['read:user', 'user:email'],
       freeTier: true,
-      rateLimit: 5000 // requests/hour
+      rateLimit: 5000,
+      setupUrl: 'https://github.com/settings/developers'
     }
   },
   
@@ -72,6 +82,12 @@ const AUTH_CONFIG = {
       collaborators: 10,
       apiCallsPerHour: 10000
     }
+  },
+  
+  // Environment check
+  isConfigured: function() {
+    return this.supabase.url && !this.supabase.url.includes('PROJECT_ID') && 
+           this.supabase.anonKey && !this.supabase.anonKey.includes('YOUR_');
   }
 };
 
