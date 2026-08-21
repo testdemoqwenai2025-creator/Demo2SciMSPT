@@ -15,7 +15,7 @@
   <meta property="og:title" content="About — SciMSPT Neural Research Platform">
   <meta property="og:description" content="About SciMSPT: Our mission to transform scientific discovery into strategic opportunity through neural intelligence and molecular computing.">
   <meta property="og:url" content="https://testdemoqwenai2025-creator.github.io/Demo2SciMSPT/about.html">
-  <meta property="og:image" content="https://testdemoqwenai2025-creator.github.io/Demo2SciMSPT/assets/og-image.png">
+  <meta property="og:image" content="https://testdemoqwenai2025-creator.github.io/Demo2SciMSPT/assets/og-image.svg">
   <meta property="og:site_name" content="SciMSPT">
   <meta property="og:locale" content="en_US">
 
@@ -23,7 +23,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="About — SciMSPT">
   <meta name="twitter:description" content="About SciMSPT: Our mission to transform scientific discovery into strategic opportunity through neural intelligence and molecular computing.">
-  <meta name="twitter:image" content="https://testdemoqwenai2025-creator.github.io/Demo2SciMSPT/assets/og-image.png">
+  <meta name="twitter:image" content="https://testdemoqwenai2025-creator.github.io/Demo2SciMSPT/assets/og-image.svg">
 
   <!-- Additional SEO -->
   <meta name="robots" content="index, follow">
@@ -331,6 +331,30 @@
     }
     
     .nav-link .material-icons-round { font-size: 18px; }
+    
+    /* Mobile Menu Button */
+    .mobile-menu-btn {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      background: rgba(0, 229, 255, 0.1);
+      border: 1px solid rgba(0, 229, 255, 0.2);
+      border-radius: 10px;
+      color: var(--accent-primary);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .mobile-menu-btn:hover {
+      background: rgba(0, 229, 255, 0.2);
+      transform: scale(1.05);
+    }
+    
+    .mobile-menu-btn .material-icons-round {
+      font-size: 24px;
+    }
     
     .workspace-btn {
       display: flex;
@@ -3490,6 +3514,11 @@
           <span class="user-role">Neural Architect</span>
         </div>
       </div>
+      
+      <!-- Mobile Menu Button -->
+      <button class="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="Toggle navigation menu">
+        <span class="material-icons-round">menu</span>
+      </button>
     </div>
   </nav>
 
@@ -3916,6 +3945,35 @@
           saved === 'dark' ? 'dark_mode' : 'light_mode';
       }
     }
+    
+    // Mobile Menu Toggle
+    function toggleMobileMenu() {
+      const navLinks = document.querySelector('.nav-links');
+      const menuBtn = document.querySelector('.mobile-menu-btn');
+      
+      if (navLinks) {
+        navLinks.classList.toggle('active');
+        
+        if (menuBtn) {
+          const icon = menuBtn.querySelector('.material-icons-round');
+          if (icon) {
+            icon.textContent = navLinks.classList.contains('active') ? 'close' : 'menu';
+          }
+        }
+      }
+    }
+    
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', (e) => {
+      const navLinks = document.querySelector('.nav-links');
+      const menuBtn = document.querySelector('.mobile-menu-btn');
+      
+      if (navLinks && !navLinks.contains(e.target) && menuBtn && !menuBtn.contains(e.target)) {
+        navLinks.classList.remove('active');
+        const icon = menuBtn.querySelector('.material-icons-round');
+        if (icon) icon.textContent = 'menu';
+      }
+    });
     
     // Notification System
     function showNotification(message) {

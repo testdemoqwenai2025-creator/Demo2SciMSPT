@@ -15,7 +15,7 @@
   <meta property="og:title" content="Home — SciMSPT Neural Research Platform">
   <meta property="og:description" content="SciMSPT: Where molecular intelligence meets investment foresight. AI-powered research analysis platform transforming scientific discovery into strategic opportunities.">
   <meta property="og:url" content="https://testdemoqwenai2025-creator.github.io/Demo2SciMSPT/index.html">
-  <meta property="og:image" content="https://testdemoqwenai2025-creator.github.io/Demo2SciMSPT/assets/og-image.png">
+  <meta property="og:image" content="https://testdemoqwenai2025-creator.github.io/Demo2SciMSPT/assets/og-image.svg">
   <meta property="og:site_name" content="SciMSPT">
   <meta property="og:locale" content="en_US">
 
@@ -23,7 +23,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Home — SciMSPT">
   <meta name="twitter:description" content="SciMSPT: Where molecular intelligence meets investment foresight. AI-powered research analysis platform transforming scientific discovery into strategic opportunities.">
-  <meta name="twitter:image" content="https://testdemoqwenai2025-creator.github.io/Demo2SciMSPT/assets/og-image.png">
+  <meta name="twitter:image" content="https://testdemoqwenai2025-creator.github.io/Demo2SciMSPT/assets/og-image.svg">
 
   <!-- Additional SEO -->
   <meta name="robots" content="index, follow">
@@ -432,6 +432,30 @@
     
     .nav-link .material-icons-round {
       font-size: 18px;
+    }
+    
+    /* Mobile Menu Button */
+    .mobile-menu-btn {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      background: rgba(0, 229, 255, 0.1);
+      border: 1px solid rgba(0, 229, 255, 0.2);
+      border-radius: 10px;
+      color: var(--accent-primary);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .mobile-menu-btn:hover {
+      background: rgba(0, 229, 255, 0.2);
+      transform: scale(1.05);
+    }
+    
+    .mobile-menu-btn .material-icons-round {
+      font-size: 24px;
     }
     
     /* Workspace Button */
@@ -1404,6 +1428,32 @@
         left: 0;
         right: 0;
         padding: 0 16px;
+        flex-wrap: wrap;
+        height: auto;
+        min-height: 70px;
+      }
+      
+      /* Mobile Navigation */
+      .nav-links {
+        display: none !important;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: var(--bg-primary, #0a1628);
+        flex-direction: column;
+        padding: 16px;
+        border-bottom: 1px solid var(--border-subtle);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        z-index: 1000;
+      }
+      
+      .nav-links.active {
+        display: flex !important;
+      }
+      
+      .mobile-menu-btn {
+        display: flex !important;
       }
       
       .page-nav-bar {
@@ -3942,6 +3992,11 @@
           </a>
         </div>
       </div>
+      
+      <!-- Mobile Menu Button -->
+      <button class="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="Toggle navigation menu">
+        <span class="material-icons-round">menu</span>
+      </button>
     </div>
   </nav>
 
@@ -4449,6 +4504,36 @@
       // Modal removed - redirecting to quantum workspace instead
       window.location.href = 'quantum.html';
     }
+    
+    // Mobile Menu Toggle
+    function toggleMobileMenu() {
+      const navLinks = document.querySelector('.nav-links');
+      const menuBtn = document.querySelector('.mobile-menu-btn');
+      
+      if (navLinks) {
+        navLinks.classList.toggle('active');
+        
+        // Update button icon
+        if (menuBtn) {
+          const icon = menuBtn.querySelector('.material-icons-round');
+          if (icon) {
+            icon.textContent = navLinks.classList.contains('active') ? 'close' : 'menu';
+          }
+        }
+      }
+    }
+    
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', (e) => {
+      const navLinks = document.querySelector('.nav-links');
+      const menuBtn = document.querySelector('.mobile-menu-btn');
+      
+      if (navLinks && !navLinks.contains(e.target) && !menuBtn.contains(e.target)) {
+        navLinks.classList.remove('active');
+        const icon = menuBtn?.querySelector('.material-icons-round');
+        if (icon) icon.textContent = 'menu';
+      }
+    });
     
     function closeGetStartedModal() {
       // Modal removed - no action needed

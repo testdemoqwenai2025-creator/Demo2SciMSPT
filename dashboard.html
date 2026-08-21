@@ -15,7 +15,7 @@
   <meta property="og:title" content="Dashboard — SciMSPT Neural Research Platform">
   <meta property="og:description" content="SciMSPT Dashboard — Real-time metrics, portfolio performance, weekly digest data, and system monitoring.">
   <meta property="og:url" content="https://testdemoqwenai2025-creator.github.io/Demo2SciMSPT/dashboard.html">
-  <meta property="og:image" content="https://testdemoqwenai2025-creator.github.io/Demo2SciMSPT/assets/og-image.png">
+  <meta property="og:image" content="https://testdemoqwenai2025-creator.github.io/Demo2SciMSPT/assets/og-image.svg">
   <meta property="og:site_name" content="SciMSPT">
   <meta property="og:locale" content="en_US">
 
@@ -23,7 +23,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Dashboard — SciMSPT">
   <meta name="twitter:description" content="SciMSPT Dashboard — Real-time metrics, portfolio performance, weekly digest data, and system monitoring.">
-  <meta name="twitter:image" content="https://testdemoqwenai2025-creator.github.io/Demo2SciMSPT/assets/og-image.png">
+  <meta name="twitter:image" content="https://testdemoqwenai2025-creator.github.io/Demo2SciMSPT/assets/og-image.svg">
 
   <!-- Additional SEO -->
   <meta name="robots" content="index, follow">
@@ -4473,6 +4473,313 @@
         }
       });
     }
+  </script>
+  
+  <!-- Local Storage Persistence Layer -->
+  <script src="js/local-storage-db.js"></script>
+  
+  <!-- Database Persistence Demo Integration -->
+  <script>
+  // ============================================
+  // DATABASE PERSISTENCE DEMO
+  // ============================================
+
+  document.addEventListener('DOMContentLoaded', () => {
+    // Load and display persisted data
+    loadPersistedData();
+    
+    // Setup save handlers
+    setupSaveHandlers();
+    
+    // Listen for database changes
+    if (window.localDB) {
+      window.localDB.onChange((e) => {
+        console.log('[LocalDB] Change detected:', e.detail);
+        loadPersistedData(); // Refresh display on changes
+      });
+    }
+  });
+
+  function loadPersistedData() {
+    try {
+      const stats = localDB.getStats();
+      
+      // Update stats displays if they exist
+      updateElement('statProjects', stats.projects);
+      updateElement('statQuantumJobs', stats.quantum_jobs);
+      updateElement('statPipelineRuns', stats.pipeline_runs);
+      updateElement('statDatasets', stats.datasets);
+      updateElement('statTotalRecords', stats.total_records);
+      updateElement('statStorageUsed', formatBytes(stats.storage_used));
+      
+      console.log('[LocalDB] Loaded:', stats);
+      
+      // Populate recent activity
+      populateRecentActivity();
+      
+      // Populate projects list
+      populateProjectsList();
+      
+    } catch (e) {
+      console.warn('[LocalDB] Error loading:', e);
+    }
+  }
+
+  function updateElement(id, value) {
+    const el = document.getElementById(id);
+    if (el) el.textContent = value;
+  }
+
+  function formatBytes(bytes) {
+    if (bytes === 0) return '0 B';
+    const k = 1024;
+    const sizes = ['B', 'KB', 'MB', 'GB'];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+  }
+
+  function populateRecentActivity() {
+    const container = document.getElementById('recentActivity');
+    if (!container) return;
+    
+    const projects = localDB.getAll('projects').slice(0, 5);
+    const jobs = localDB.getAll('quantum_jobs').slice(0, 3);
+    
+    let html = '';
+    
+    projects.forEach(p => {
+      const iconMap = {
+        'quantum': 'science',
+        'pipeline': 'account_tree',
+        'research': 'biotech',
+        'default': 'folder'
+      };
+      const icon = iconMap[p.type] || iconMap['default'];
+      
+      html += `
+        <div class="activity-item" style="display: flex; align-items: center; gap: 12px; padding: 12px; background: rgba(255,255,255,0.03); border-radius: 8px; margin-bottom: 8px;">
+          <span class="material-icons-round" style="color: var(--accent-primary, #00E5FF);">${icon}</span>
+          <div class="activity-info" style="flex: 1;">
+            <strong style="display: block; font-size: 14px;">${p.name}</strong>
+            <span style="font-size: 12px; color: var(--text-secondary, #94a3b8);">${p.type} • ${p.status}</span>
+          </div>
+          <span class="activity-time" style="font-size: 11px; color: var(--text-muted, #64748b);">${formatTimeAgo(p.created_at)}</span>
+        </div>
+      `;
+    });
+    
+    jobs.forEach(j => {
+      html += `
+        <div class="activity-item" style="display: flex; align-items: center; gap: 12px; padding: 12px; background: rgba(255,255,255,0.03); border-radius: 8px; margin-bottom: 8px;">
+          <span class="material-icons-round" style="color: var(--accent-gold, #f59e0b);">play_arrow</span>
+          <div class="activity-info" style="flex: 1;">
+            <strong style="display: block; font-size: 14px;">Quantum Job #${j.id.substr(-6)}</strong>
+            <span style="font-size: 12px; color: var(--text-secondary, #94a3b8);">${j.backend} • ${j.status}</span>
+          </div>
+          <span class="activity-time" style="font-size: 11px; color: var(--text-muted, #64748b);">${j.execution_time_ms ? j.execution_time_ms + 'ms' : ''}</span>
+        </div>
+      `;
+    });
+    
+    container.innerHTML = html || '<p style="color: var(--text-muted, #64748b); text-align: center; padding: 20px;">No recent activity</p>';
+  }
+
+  function populateProjectsList() {
+    const container = document.getElementById('projectsList');
+    if (!container) return;
+    
+    const projects = localDB.getAll('projects');
+    
+    let html = '';
+    projects.forEach(p => {
+      const statusColors = {
+        'active': '#10b981',
+        'archived': '#6b7280',
+        'draft': '#f59e0b'
+      };
+      const statusColor = statusColors[p.status] || statusColors['draft'];
+      
+      html += `
+        <div class="project-card" data-id="${p.id}" style="
+          background: rgba(255,255,255,0.04);
+          border: 1px solid rgba(255,255,255,0.08);
+          border-radius: 12px;
+          padding: 16px;
+          margin-bottom: 12px;
+          transition: all 0.2s ease;
+        ">
+          <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 8px;">
+            <h4 style="margin: 0; font-size: 16px; color: var(--text-primary, #fff);">${p.name}</h4>
+            <span style="
+              display: inline-flex;
+              align-items: center;
+              gap: 4px;
+              padding: 4px 10px;
+              border-radius: 20px;
+              font-size: 11px;
+              font-weight: 600;
+              text-transform: uppercase;
+              background: ${statusColor}22;
+              color: ${statusColor};
+            ">${p.status}</span>
+          </div>
+          <p style="margin: 0 0 12px; font-size: 13px; color: var(--text-secondary, #94a3b8); line-height: 1.5;">${p.description || 'No description'}</p>
+          <div style="display: flex; gap: 16px; font-size: 12px; color: var(--text-muted, #64748b);">
+            <span>Type: ${p.type}</span>
+            <span>Created: ${formatTimeAgo(p.created_at)}</span>
+          </div>
+        </div>
+      `;
+    });
+    
+    container.innerHTML = html || '<p style="color: var(--text-muted, #64748b);">No projects yet</p>';
+  }
+
+  function formatTimeAgo(dateString) {
+    const seconds = Math.floor((new Date() - new Date(dateString)) / 1000);
+    const intervals = {
+      year: 31536000,
+      month: 2592000,
+      week: 604800,
+      day: 86400,
+      hour: 3600,
+      minute: 60
+    };
+    
+    for (const [unit, secondsInUnit] of Object.entries(intervals)) {
+      const interval = Math.floor(seconds / secondsInUnit);
+      if (interval >= 1) {
+        return `${interval}${unit.charAt(0)} ago`;
+      }
+    }
+    return 'just now';
+  }
+
+  function setupSaveHandlers() {
+    // Example: Save quantum job when run button clicked
+    const runBtns = document.querySelectorAll('.run-sim-btn, [data-action="run"], .quantum-run-btn');
+    runBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        console.log('[LocalDB] Run button clicked, will save job result...');
+        
+        // Simulate saving job result after a delay
+        setTimeout(() => {
+          const jobResult = {
+            circuit_json: { gates: ['h', 'cnot', 'rx', 'ry'], qubits: Math.floor(Math.random() * 4) + 2 },
+            backend: 'qasm_simulator',
+            shots: 1024,
+            results: generateRandomResults(),
+            status: 'completed',
+            execution_time_ms: Math.floor(Math.random() * 500) + 100
+          };
+          
+          localDB.add('quantum_jobs', jobResult);
+          
+          console.log('[LocalDB] Quantum job saved:', jobResult);
+          
+          // Show notification
+          showNotification('Quantum job completed and saved!');
+          
+          // Refresh display
+          loadPersistedData();
+        }, 2000);
+      });
+    });
+
+    // Add project form handler
+    const addProjectForm = document.getElementById('addProjectForm');
+    if (addProjectForm) {
+      addProjectForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const formData = new FormData(addProjectForm);
+        const newProject = {
+          name: formData.get('name'),
+          description: formData.get('description'),
+          type: formData.get('type') || 'research',
+          status: 'active',
+          metadata: {}
+        };
+        
+        localDB.add('projects', newProject);
+        addProjectForm.reset();
+        showNotification('Project created successfully!');
+        loadPersistedData();
+      });
+    }
+  }
+
+  function generateRandomResults() {
+    const states = ['00', '01', '10', '11'];
+    const results = {};
+    let remaining = 1024;
+    states.forEach((state, idx) => {
+      if (idx === states.length - 1) {
+        results[state] = remaining;
+      } else {
+        const count = Math.floor(Math.random() * remaining * 0.5);
+        results[state] = count;
+        remaining -= count;
+      }
+    });
+    return results;
+  }
+
+  function showNotification(message) {
+    // Create or use existing notification container
+    let notifContainer = document.getElementById('localdb-notifications');
+    if (!notifContainer) {
+      notifContainer = document.createElement('div');
+      notifContainer.id = 'localdb-notifications';
+      notifContainer.style.cssText = `
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 10000;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      `;
+      document.body.appendChild(notifContainer);
+    }
+    
+    const notif = document.createElement('div');
+    notif.style.cssText = `
+      background: linear-gradient(135deg, #10b981, #059669);
+      color: white;
+      padding: 12px 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+      animation: slideIn 0.3s ease;
+      font-size: 14px;
+      font-weight: 500;
+    `;
+    notif.textContent = message;
+    notifContainer.appendChild(notif);
+    
+    // Remove after 3 seconds
+    setTimeout(() => {
+      notif.style.animation = 'slideOut 0.3s ease forwards';
+      setTimeout(() => notif.remove(), 300);
+    }, 3000);
+  }
+
+  // Add notification animations
+  const notifStyles = document.createElement('style');
+  notifStyles.textContent = `
+    @keyframes slideIn {
+      from { transform: translateX(100%); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+    @keyframes slideOut {
+      from { transform: translateX(0); opacity: 1; }
+      to { transform: translateX(100%); opacity: 0; }
+    }
+  `;
+  document.head.appendChild(notifStyles);
+
+  // Make functions globally available
+  window.loadPersistedData = loadPersistedData;
+  window.localDB = window.localDB || localDB;
   </script>
 </body>
 </html>

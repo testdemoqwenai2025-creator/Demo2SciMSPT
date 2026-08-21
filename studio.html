@@ -15,7 +15,7 @@
   <meta property="og:title" content="Studio IDE — SciMSPT Neural Research Platform">
   <meta property="og:description" content="Browser-based scientific development environment with AI assistance, file management, and integrated research tools. No installation required.">
   <meta property="og:url" content="https://testdemoqwenai2025-creator.github.io/Demo2SciMSPT/studio.html">
-  <meta property="og:image" content="https://testdemoqwenai2025-creator.github.io/Demo2SciMSPT/assets/og-image.png">
+  <meta property="og:image" content="https://testdemoqwenai2025-creator.github.io/Demo2SciMSPT/assets/og-image.svg">
   <meta property="og:site_name" content="SciMSPT">
   <meta property="og:locale" content="en_US">
 
@@ -23,7 +23,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Studio IDE — SciMSPT">
   <meta name="twitter:description" content="Browser-based scientific development environment with AI assistance, file management, and integrated research tools. No installation required.">
-  <meta name="twitter:image" content="https://testdemoqwenai2025-creator.github.io/Demo2SciMSPT/assets/og-image.png">
+  <meta name="twitter:image" content="https://testdemoqwenai2025-creator.github.io/Demo2SciMSPT/assets/og-image.svg">
 
   <!-- Additional SEO -->
   <meta name="robots" content="index, follow">
@@ -3292,6 +3292,11 @@
       
       <!-- User Avatar -->
       <div class="user-avatar" onclick="toggleUserMenu()">U</div>
+      
+      <!-- Mobile Menu Button -->
+      <button class="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="Toggle navigation menu">
+        <span class="material-icons-round">menu</span>
+      </button>
     </div>
   </nav>
   
@@ -3836,6 +3841,35 @@ function toggleTheme() {
   const icon = document.getElementById('themeIcon');
   icon.textContent = newTheme === 'dark' ? 'dark_mode' : 'light_mode';
 }
+
+// Mobile Menu Toggle
+function toggleMobileMenu() {
+  const navLinks = document.querySelector('.nav-links');
+  const menuBtn = document.querySelector('.mobile-menu-btn');
+  
+  if (navLinks) {
+    navLinks.classList.toggle('active');
+    
+    if (menuBtn) {
+      const icon = menuBtn.querySelector('.material-icons-round');
+      if (icon) {
+        icon.textContent = navLinks.classList.contains('active') ? 'close' : 'menu';
+      }
+    }
+  }
+}
+
+// Close mobile menu when clicking outside
+document.addEventListener('click', (e) => {
+  const navLinks = document.querySelector('.nav-links');
+  const menuBtn = document.querySelector('.mobile-menu-btn');
+  
+  if (navLinks && !navLinks.contains(e.target) && menuBtn && !menuBtn.contains(e.target)) {
+    navLinks.classList.remove('active');
+    const icon = menuBtn.querySelector('.material-icons-round');
+    if (icon) icon.textContent = 'menu';
+  }
+});
 
 // File System Functions
 function toggleFolder(element) {
