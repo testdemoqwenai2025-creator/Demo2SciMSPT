@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard — SciMSPT Research Platform</title>
+  <meta name="description" content="SciMSPT Dashboard — Real-time metrics, portfolio performance, weekly digest data, and system monitoring.">
+  
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-dark: #0a1628;
+      --bg-light: #f5f8fc;
+      --bg-card-dark: rgba(20, 40, 64, 0.7);
+      --bg-card-light: rgba(255, 255, 255, 0.95);
+      --primary-dark: #e8f0f8;
+      --primary-light: #142840;
+      --accent: #4da8da;
+      --accent-glow: #2d7ab3;
+      --muted-dark: #7a9bb8;
+      --muted-light: #5a7a96;
+      --border-dark: rgba(77, 168, 218, 0.25);
+      --border-light: #c0d0e2;
+      --surface-dark: rgba(45, 122, 179, 0.08);
+      --surface-light: #edf2f9;
+      
+      --font-heading: 'Playfair Display', Georgia, serif;
+      --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-num: 'JetBrains Mono', 'Inter', monospace;
+      
+      --nav-height: 72px;
+    }
+    
+    [data-theme="dark"] {
+      --bg: var(--bg-dark); --bg-card: var(--bg-card-dark); --primary: var(--primary-dark);
+      --muted: var(--muted-dark); --border: var(--border-dark); --surface: var(--surface-dark);
+      --shadow: 0 12px 48px rgba(0, 0, 0, 0.4); --nav-bg: rgba(10, 22, 40, 0.95);
+      --glow-color: rgba(77, 168, 218, 0.15);
+    }
+    
+    [data-theme="light"] {
+      --bg: var(--bg-light); --bg-card: var(--bg-card-light); --primary: var(--primary-light);
+      --muted: var(--muted-light); --border: var(--border-light); --surface: var(--surface-light);
+      --shadow: 0 12px 48px rgba(20, 40, 64, 0.1); --nav-bg: rgba(245, 248, 252, 0.95);
+      --glow-color: rgba(45, 122, 179, 0.08);
+    }
+    
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; scroll-padding-top: var(--nav-height); }
+    body {
+      font-family: var(--font-body); background: var(--bg); color: var(--primary);
+      line-height: 1.65; transition: background 0.4s ease, color 0.4s ease;
+      -webkit-font-smoothing: antialiased; overflow-x: hidden;
+    }
+
+    /* Navigation */
+    .navbar {
+      position: fixed; top: 0; left: 0; right: 0; height: var(--nav-height); z-index: 1000;
+      display: flex; align-items: center; justify-content: space-between; padding: 0 48px;
+      background: var(--nav-bg); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border);
+      transition: all 0.3s ease;
+    }
+    .nav-left { display: flex; align-items: center; gap: 28px; }
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--primary); transition: opacity 0.3s ease; }
+    .nav-logo:hover { opacity: 0.85; }
+    .nav-logo img { width: 32px; height: 32px; filter: drop-shadow(0 0 6px var(--accent)); }
+    .nav-logo-text { font-family: var(--font-heading); font-size: 20px; font-weight: 700; letter-spacing: -0.5px; }
+    .nav-logo-text span { color: var(--accent); }
+    .nav-links { display: flex; align-items: center; gap: 8px; }
+    .nav-link {
+      font-size: 13px; font-weight: 500; color: var(--muted); text-decoration: none;
+      padding: 8px 16px; border-radius: 20px; transition: all 0.25s ease; letter-spacing: 0.3px; white-space: nowrap;
+    }
+    .nav-link:hover { color: var(--accent); background: var(--surface); }
+    .nav-link.active { color: var(--accent); background: rgba(77, 168, 218, 0.12); }
+    .nav-right { display: flex; align-items: center; gap: 16px; }
+    .theme-toggle {
+      display: flex; align-items: center; gap: 6px; padding: 8px 16px; background: var(--surface);
+      border: 1px solid var(--border); border-radius: 20px; cursor: pointer; font-family: var(--font-body);
+      font-size: 11px; font-weight: 600; color: var(--muted); transition: all 0.3s ease; white-space: nowrap;
+    }
+    .theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
+    .theme-toggle .material-icons { font-size: 16px; }
+    .mobile-menu-btn {
+      display: none; width: 40px; height: 40px; border-radius: 50%; background: var(--surface);
+      border: 1px solid var(--border); color: var(--muted); cursor: pointer;
+      align-items: center; justify-content: center;
+    }
+
+    /* Dashboard Layout */
+    .dashboard { padding: calc(var(--nav-height) + 48px) 48px 48px; max-width: 1440px; margin: 0 auto; }
+    .dash-header { margin-bottom: 40px; }
+    .dash-title { font-family: var(--font-heading); font-size: clamp(28px, 4vw, 42px); font-weight: 900; margin-bottom: 12px; }
+    .dash-subtitle { font-size: 16px; color: var(--muted); }
+
+    /* Stats Grid */
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; margin-bottom: 40px; }
+    .stat-card {
+      background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px;
+      padding: 24px; backdrop-filter: blur(10px); transition: all 0.3s ease;
+    }
+    .stat-card:hover { border-color: var(--accent); transform: translateY(-2px); box-shadow: var(--shadow); }
+    .stat-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+    .stat-icon { width: 44px; height: 44px; border-radius: 12px; background: linear-gradient(135deg, var(--accent-glow), var(--accent)); display: flex; align-items: center; justify-content: center; }
+    .stat-icon .material-icons { font-size: 24px; color: white; }
+    .stat-trend { font-size: 12px; font-weight: 600; padding: 4px 10px; border-radius: 12px; }
+    .stat-trend.up { background: rgba(74, 222, 128, 0.15); color: #4ade80; }
+    .stat-trend.down { background: rgba(248, 113, 113, 0.15); color: #f87171; }
+    .stat-value { font-family: var(--font-num); font-size: 32px; font-weight: 700; color: var(--primary); line-height: 1; margin-bottom: 4px; }
+    .stat-label { font-size: 13px; color: var(--muted); }
+
+    /* Main Grid */
+    .main-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 24px; margin-bottom: 40px; }
+
+    /* Cards */
+    .card {
+      background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px;
+      padding: 28px; backdrop-filter: blur(10px); transition: all 0.3s ease;
+    }
+    .card:hover { border-color: var(--accent); }
+    .card-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; }
+    .card-title { font-family: var(--font-heading); font-size: 18px; font-weight: 700; }
+    .card-action { font-size: 13px; color: var(--accent); text-decoration: none; font-weight: 600; }
+    .card-action:hover { text-decoration: underline; }
+
+    /* Portfolio Table */
+    .portfolio-table { width: 100%; border-collapse: collapse; }
+    .portfolio-table th {
+      text-align: left; font-size: 11px; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 1px; color: var(--muted); padding: 12px 16px; border-bottom: 1px solid var(--border);
+    }
+    .portfolio-table td { padding: 16px; border-bottom: 1px solid var(--surface); font-size: 14px; }
+    .portfolio-table tr:last-child td { border-bottom: none; }
+    .portfolio-table tr:hover td { background: var(--surface); }
+    .startup-name { font-weight: 600; color: var(--primary); }
+    .tier-badge { 
+      font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
+      padding: 4px 10px; border-radius: 10px; 
+    }
+    .tier-1 { background: rgba(45, 122, 179, 0.9); color: white; }
+    .tier-2 { background: rgba(122, 77, 168, 0.9); color: white; }
+    .tier-3 { background: rgba(77, 168, 218, 0.9); color: white; }
+    .metric-value { font-family: var(--font-num); font-weight: 600; color: var(--accent); }
+
+    /* Digest List */
+    .digest-list { display: flex; flex-direction: column; gap: 12px; }
+    .digest-item {
+      display: flex; align-items: center; gap: 16px; padding: 16px;
+      background: var(--surface); border-radius: 12px; cursor: pointer;
+      transition: all 0.25s ease; text-decoration: none; color: inherit;
+    }
+    .digest-item:hover { background: rgba(77, 168, 218, 0.08); transform: translateX(4px); }
+    .digest-id { font-family: var(--font-num); font-size: 12px; font-weight: 600; color: var(--accent); min-width: 48px; }
+    .digest-info { flex: 1; }
+    .digest-title { font-weight: 600; font-size: 14px; margin-bottom: 2px; }
+    .digest-meta { font-size: 12px; color: var(--muted); }
+    .digest-status { width: 8px; height: 8px; border-radius: 50%; }
+    .status-active { background: #4ade80; }
+    .status-pending { background: #fbbf24; }
+
+    /* Activity Feed */
+    .activity-list { display: flex; flex-direction: column; gap: 16px; }
+    .activity-item { display: flex; gap: 14px; align-items: start; }
+    .activity-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--accent); margin-top: 6px; flex-shrink: 0; }
+    .activity-content { flex: 1; }
+    .activity-text { font-size: 14px; line-height: 1.5; }
+    .activity-time { font-size: 12px; color: var(--muted); margin-top: 4px; }
+
+    /* Bottom Grid */
+    .bottom-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+
+    /* Mini Chart Placeholder */
+    .mini-chart { height: 120px; background: var(--surface); border-radius: 12px; display: flex; align-items: flex-end; justify-content: space-around; padding: 16px; }
+    .chart-bar { width: 24px; background: linear-gradient(to top, var(--accent-glow), var(--accent)); border-radius: 4px 4px 0 0; transition: height 0.3s ease; }
+
+    /* Responsive */
+    @media (max-width: 1024px) { .main-grid { grid-template-columns: 1fr; } .bottom-grid { grid-template-columns: 1fr; } }
+    @media (max-width: 768px) {
+      .navbar { padding: 0 20px; }
+      .dashboard { padding: calc(var(--nav-height) + 32px) 20px 32px; }
+      .nav-links { display: none; }
+      .mobile-menu-btn { display: flex; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .portfolio-table { font-size: 12px; }
+      .portfolio-table th, .portfolio-table td { padding: 10px 8px; }
+    }
+    
+    /* ═══════════════════════════════════════════════════════════════
+       PROFESSIONAL SCIENTIFIC SIDE PANELS
+       ═══════════════════════════════════════════════════════════════ */
+    .side-panel {
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      width: 180px;
+      z-index: 2;
+      pointer-events: none;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .side-panel-inner {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .left-panel {
+      left: 0;
+      background: linear-gradient(180deg, rgba(6, 12, 24, 0.96) 0%, rgba(10, 20, 36, 0.94) 50%, rgba(6, 12, 24, 0.96) 100%);
+      border-right: 1px solid rgba(77, 168, 218, 0.4);
+      box-shadow: 4px 0 30px rgba(77, 168, 218, 0.2), inset -15px 0 40px rgba(77, 168, 218, 0.04);
+    }
+    
+    .right-panel {
+      right: 0;
+      background: linear-gradient(180deg, rgba(6, 12, 24, 0.96) 0%, rgba(10, 20, 36, 0.94) 50%, rgba(6, 12, 24, 0.96) 100%);
+      border-left: 1px solid rgba(167, 139, 250, 0.4);
+      box-shadow: -4px 0 30px rgba(167, 139, 250, 0.2), inset 15px 0 40px rgba(167, 139, 250, 0.04);
+    }
+    
+    .dna-svg, .protein-svg { width: 100%; height: 100%; max-height: 100vh; }
+    
+    .side-panel::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: linear-gradient(rgba(77, 168, 218, 0.06) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(77, 168, 218, 0.06) 1px, transparent 1px);
+      background-size: 20px 20px;
+      pointer-events: none;
+    }
+    
+    .side-panel::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at center, transparent 35%, rgba(6, 12, 24, 0.5) 100%);
+      pointer-events: none;
+    }
+    
+    /* DNA Animation */
+    .dna-helix-group { animation: helixRotate 20s linear infinite; transform-origin: center center; }
+    @keyframes helixRotate { 0% { transform: rotateY(0deg); } 100% { transform: rotateY(360deg); } }
+    
+    .base-node { animation: nodePulse 2s ease-in-out infinite; transform-origin: center; }
+    @keyframes nodePulse { 0%, 100% { transform: scale(1); opacity: 0.8; } 50% { transform: scale(1.25); opacity: 1; } }
+    
+    /* Protein Animation */
+    .protein-structure-group { animation: proteinBreathe 6s ease-in-out infinite; transform-origin: center center; }
+    @keyframes proteinBreathe { 0%, 100% { transform: scale(1) translateY(0); } 33% { transform: scale(1.02) translateY(-3px); } 66% { transform: scale(0.98) translateY(2px); } }
+    
+    .aa-sphere { animation: sphereFloat 4s ease-in-out infinite; transform-origin: center; }
+    @keyframes sphereFloat { 0%, 100% { transform: translateY(0) scale(1); } 50% { transform: translateY(-4px) scale(1.08); } }
+    
+    /* Hide side panels on mobile */
+    @media (max-width: 1024px) { .side-panel { display: none; } }
+    
+    /* Floating Navigation */
+    .floating-nav {
+      position: fixed; bottom: 30px; right: 30px; z-index: 999;
+      display: flex; flex-direction: column; gap: 12px;
+    }
+
+    .float-btn {
+      width: 50px; height: 50px; border-radius: 50%;
+      background: var(--bg-card); border: 1px solid var(--border);
+      color: var(--accent); display: flex; align-items: center; justify-content: center;
+      text-decoration: none; box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+      transition: all 0.3s ease; backdrop-filter: blur(10px);
+    }
+    .float-btn:hover { 
+      transform: translateY(-4px); 
+      border-color: var(--accent); 
+      box-shadow: 0 8px 30px rgba(77,168,218,0.4); 
+    }
+    .float-btn .material-icons { font-size: 24px; }
+    
+    @media (max-width: 768px) {
+      .floating-nav { bottom: 20px; right: 20px; }
+      .float-btn { width: 44px; height: 44px; }
+      .float-btn .material-icons { font-size: 20px; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Professional Scientific Side Panels -->
+  <!-- LEFT PANEL: DNA Double Helix -->
+  <div class="side-panel left-panel" id="leftPanel">
+    <div class="side-panel-inner">
+      <svg viewBox="0 0 180 600" class="dna-svg" preserveAspectRatio="xMidYMid meet">
+        <defs>
+          <linearGradient id="strandBlue" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#4da8da"/><stop offset="50%" stop-color="#2d7ab3"/><stop offset="100%" stop-color="#4da8da"/>
+          </linearGradient>
+          <linearGradient id="strandPurple" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#a78bfa"/><stop offset="50%" stop-color="#7c3aed"/><stop offset="100%" stop-color="#a78bfa"/>
+          </linearGradient>
+          <filter id="glowBlue" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur stdDeviation="3" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+          <filter id="glowPurple" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur stdDeviation="3" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+          <filter id="softGlow" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur stdDeviation="6" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+          <linearGradient id="atPair" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#4da8da"/><stop offset="100%" stop-color="#f472b6"/>
+          </linearGradient>
+          <linearGradient id="gcPair" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#a78bfa"/><stop offset="100%" stop-color="#34d399"/>
+          </linearGradient>
+        </defs>
+        <pattern id="gridPattern" width="20" height="20" patternUnits="userSpaceOnUse">
+          <path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(77,168,218,0.08)" stroke-width="0.5"/>
+        </pattern>
+        <rect width="180" height="600" fill="url(#gridPattern)" opacity="0.5"/>
+        <g class="dna-helix-group">
+          <path d="M45,0 Q75,50 45,100 Q15,150 45,200 Q75,250 45,300 Q15,350 45,400 Q75,450 45,500 Q15,550 45,600" fill="none" stroke="url(#strandBlue)" stroke-width="5" stroke-linecap="round" filter="url(#glowBlue)"/>
+          <path d="M135,0 Q105,50 135,100 Q165,150 135,200 Q105,250 135,300 Q165,350 135,400 Q105,450 135,500 Q165,550 135,600" fill="none" stroke="url(#strandPurple)" stroke-width="5" stroke-linecap="round" filter="url(#glowPurple)"/>
+          <g class="base-pairs">
+            <line x1="48" y1="25" x2="132" y2="25" stroke="url(#atPair)" stroke-width="3" stroke-linecap="round"/>
+            <circle cx="48" cy="25" r="5" fill="#4da8da" filter="url(#softGlow)" class="base-node" style="animation-delay:0s"/><circle cx="132" cy="25" r="5" fill="#f472b6" filter="url(#softGlow)" class="base-node" style="animation-delay:0.05s"/>
+            <line x1="30" y1="75" x2="150" y2="75" stroke="url(#gcPair)" stroke-width="3" stroke-linecap="round"/>
+            <circle cx="30" cy="75" r="5" fill="#a78bfa" filter="url(#softGlow)" class="base-node" style="animation-delay:0.1s"/><circle cx="150" cy="75" r="5" fill="#34d399" filter="url(#softGlow)" class="base-node" style="animation-delay:0.15s"/>
+            <line x1="42" y1="125" x2="138" y2="125" stroke="url(#atPair)" stroke-width="3" stroke-linecap="round"/>
+            <circle cx="42" cy="125" r="5" fill="#4da8da" filter="url(#softGlow)" class="base-node" style="animation-delay:0.2s"/><circle cx="138" cy="125" r="5" fill="#f472b6" filter="url(#softGlow)" class="base-node" style="animation-delay:0.25s"/>
+            <line x1="25" y1="175" x2="155" y2="175" stroke="url(#gcPair)" stroke-width="3" stroke-linecap="round"/>
+            <circle cx="25" cy="175" r="5" fill="#a78bfa" filter="url(#softGlow)" class="base-node" style="animation-delay:0.3s"/><circle cx="155" cy="175" r="5" fill="#34d399" filter="url(#softGlow)" class="base-node" style="animation-delay:0.35s"/>
+            <line x1="40" y1="225" x2="140" y2="225" stroke="url(#atPair)" stroke-width="3" stroke-linecap="round"/>
+            <circle cx="40" cy="225" r="5" fill="#4da8da" filter="url(#softGlow)" class="base-node" style="animation-delay:0.4s"/><circle cx="140" cy="225" r="5" fill="#f472b6" filter="url(#softGlow)" class="base-node" style="animation-delay:0.45s"/>
+            <line x1="28" y1="275" x2="152" y2="275" stroke="url(#gcPair)" stroke-width="3" stroke-linecap="round"/>
+            <circle cx="28" cy="275" r="5" fill="#a78bfa" filter="url(#softGlow)" class="base-node" style="animation-delay:0.5s"/><circle cx="152" cy="275" r="5" fill="#34d399" filter="url(#softGlow)" class="base-node" style="animation-delay:0.55s"/>
+            <line x1="44" y1="325" x2="136" y2="325" stroke="url(#atPair)" stroke-width="3" stroke-linecap="round"/>
+            <circle cx="44" cy="325" r="5" fill="#4da8da" filter="url(#softGlow)" class="base-node" style="animation-delay:0.6s"/><circle cx="136" cy="325" r="5" fill="#f472b6" filter="url(#softGlow)" class="base-node" style="animation-delay:0.65s"/>
+            <line x1="22" y1="375" x2="158" y2="375" stroke="url(#gcPair)" stroke-width="3" stroke-linecap="round"/>
+            <circle cx="22" cy="375" r="5" fill="#a78bfa" filter="url(#softGlow)" class="base-node" style="animation-delay:0.7s"/><circle cx="158" cy="375" r="5" fill="#34d399" filter="url(#softGlow)" class="base-node" style="animation-delay:0.75s"/>
+            <line x1="38" y1="425" x2="142" y2="425" stroke="url(#atPair)" stroke-width="3" stroke-linecap="round"/>
+            <circle cx="38" cy="425" r="5" fill="#4da8da" filter="url(#softGlow)" class="base-node" style="animation-delay:0.8s"/><circle cx="142" cy="425" r="5" fill="#f472b6" filter="url(#softGlow)" class="base-node" style="animation-delay:0.85s"/>
+            <line x1="26" y1="475" x2="154" y2="475" stroke="url(#gcPair)" stroke-width="3" stroke-linecap="round"/>
+            <circle cx="26" cy="475" r="5" fill="#a78bfa" filter="url(#softGlow)" class="base-node" style="animation-delay:0.9s"/><circle cx="154" cy="475" r="5" fill="#34d399" filter="url(#softGlow)" class="base-node" style="animation-delay:0.95s"/>
+            <line x1="46" y1="525" x2="134" y2="525" stroke="url(#atPair)" stroke-width="3" stroke-linecap="round"/>
+            <circle cx="46" cy="525" r="5" fill="#4da8da" filter="url(#softGlow)" class="base-node" style="animation-delay:1s"/><circle cx="134" cy="525" r="5" fill="#f472b6" filter="url(#softGlow)" class="base-node" style="animation-delay:1.05s"/>
+            <line x1="32" y1="575" x2="148" y2="575" stroke="url(#gcPair)" stroke-width="3" stroke-linecap="round"/>
+            <circle cx="32" cy="575" r="5" fill="#a78bfa" filter="url(#softGlow)" class="base-node" style="animation-delay:1.1s"/><circle cx="148" cy="575" r="5" fill="#34d399" filter="url(#softGlow)" class="base-node" style="animation-delay:1.15s"/>
+          </g>
+        </g>
+        <text x="90" y="592" text-anchor="middle" fill="rgba(77,168,218,0.6)" font-family="var(--font-num)" font-size="9" letter-spacing="2">DNA HELIX</text>
+      </svg>
+    </div>
+  </div>
+  
+  <!-- RIGHT PANEL: Protein Structure -->
+  <div class="side-panel right-panel" id="rightPanel">
+    <div class="side-panel-inner">
+      <svg viewBox="0 0 180 600" class="protein-svg" preserveAspectRatio="xMidYMid meet">
+        <defs>
+          <linearGradient id="helixGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#3b82f6"/><stop offset="50%" stop-color="#60a5fa"/><stop offset="100%" stop-color="#3b82f6"/>
+          </linearGradient>
+          <linearGradient id="sheetGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#a78bfa"/><stop offset="50%" stop-color="#c084fc"/><stop offset="100%" stop-color="#a78bfa"/>
+          </linearGradient>
+          <linearGradient id="loopGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#f472b6"/><stop offset="50%" stop-color="#fb7185"/><stop offset="100%" stop-color="#f472b6"/>
+          </linearGradient>
+          <linearGradient id="sphereGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#60a5fa"/><stop offset="100%" stop-color="#2563eb"/>
+          </linearGradient>
+          <linearGradient id="sphereGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#c084fc"/><stop offset="100%" stop-color="#7c3aed"/>
+          </linearGradient>
+          <radialGradient id="aaSphere" cx="30%" cy="30%" r="70%">
+            <stop offset="0%" stop-color="rgba(255,255,255,0.8)"/><stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+          </radialGradient>
+          <filter id="proteinGlow" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur stdDeviation="4" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+        </defs>
+        <pattern id="gridPatternRight" width="20" height="20" patternUnits="userSpaceOnUse">
+          <path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(167,139,250,0.08)" stroke-width="0.5"/>
+        </pattern>
+        <rect width="180" height="600" fill="url(#gridPatternRight)" opacity="0.5"/>
+        <g class="protein-structure-group">
+          <g class="alpha-helix">
+            <path d="M90,10 C120,25 140,45 130,70 C120,95 60,95 50,70 C40,45 60,25 90,10" fill="none" stroke="url(#helixGrad)" stroke-width="8" stroke-linecap="round" filter="url(#proteinGlow)" opacity="0.9"/>
+            <path d="M90,35 C115,48 132,64 124,84 C116,104 64,104 56,84 C48,64 65,48 90,35" fill="none" stroke="url(#helixGrad)" stroke-width="7" stroke-linecap="round" opacity="0.8"/>
+            <path d="M90,58 C110,69 124,82 118,98 C112,114 68,114 62,98 C56,82 70,69 90,58" fill="none" stroke="url(#helixGrad)" stroke-width="6" stroke-linecap="round" opacity="0.7"/>
+          </g>
+          <path class="loop-region" d="M70,110 Q30,140 50,180 Q70,220 90,200 Q110,180 130,190 Q150,200 140,170 Q130,140 110,120" fill="none" stroke="url(#loopGrad)" stroke-width="4" stroke-linecap="round" opacity="0.8"/>
+          <g class="beta-sheet">
+            <polygon points="45,230 95,215 95,235" fill="url(#sheetGrad)" opacity="0.85" filter="url(#proteinGlow)"/>
+            <polygon points="45,260 95,245 95,265" fill="url(#sheetGrad)" opacity="0.8"/>
+            <polygon points="45,290 95,275 95,295" fill="url(#sheetGrad)" opacity="0.75"/>
+          </g>
+          <path class="loop-region2" d="M95,310 Q140,340 120,380 Q100,420 70,400 Q40,380 55,350 Q70,320 95,310" fill="none" stroke="url(#loopGrad)" stroke-width="4" stroke-linecap="round" opacity="0.75"/>
+          <g class="alpha-helix2">
+            <path d="M75,420 C50,435 35,455 45,480 C55,505 115,505 125,480 C135,455 110,435 85,420" fill="none" stroke="url(#helixGrad)" stroke-width="7" stroke-linecap="round" filter="url(#proteinGlow)" opacity="0.85"/>
+            <path d="M80,445 C58,458 44,472 52,492 C60,512 110,512 118,492 C126,472 102,458 88,445" fill="none" stroke="url(#helixGrad)" stroke-width="6" stroke-linecap="round" opacity="0.75"/>
+          </g>
+          <g class="amino-acids">
+            <circle cx="130" cy="55" r="10" fill="url(#sphereGrad1)" class="aa-sphere" style="animation-delay:0s"/><circle cx="130" cy="55" r="10" fill="url(#aaSphere)" class="aa-highlight"/>
+            <circle cx="50" cy="85" r="8" fill="url(#sphereGrad1)" class="aa-sphere" style="animation-delay:0.2s"/><circle cx="50" cy="85" r="8" fill="url(#aaSphere)" class="aa-highlight"/>
+            <circle cx="45" cy="165" r="9" fill="url(#sphereGrad2)" class="aa-sphere" style="animation-delay:0.4s"/><circle cx="45" cy="165" r="9" fill="url(#aaSphere)" class="aa-highlight"/>
+            <circle cx="135" cy="195" r="7" fill="url(#sphereGrad2)" class="aa-sphere" style="animation-delay:0.5s"/><circle cx="135" cy="195" r="7" fill="url(#aaSphere)" class="aa-highlight"/>
+            <circle cx="125" cy="250" r="8" fill="#fb7185" class="aa-sphere" style="animation-delay:0.7s"/><circle cx="125" cy="250" r="8" fill="url(#aaSphere)" class="aa-highlight"/>
+            <circle cx="60" cy="370" r="9" fill="#fb7185" class="aa-sphere" style="animation-delay:0.9s"/><circle cx="60" cy="370" r="9" fill="url(#aaSphere)" class="aa-highlight"/>
+            <circle cx="40" cy="465" r="10" fill="url(#sphereGrad1)" class="aa-sphere" style="animation-delay:1.1s"/><circle cx="40" cy="465" r="10" fill="url(#aaSphere)" class="aa-highlight"/>
+            <circle cx="130" cy="495" r="8" fill="url(#sphereGrad1)" class="aa-sphere" style="animation-delay:1.3s"/><circle cx="130" cy="495" r="8" fill="url(#aaSphere)" class="aa-highlight"/>
+            <circle cx="90" cy="350" r="12" fill="#fbbf24" class="aa-sphere active-site" style="animation-delay:0.8s" filter="url(#proteinGlow)"/><circle cx="90" cy="350" r="12" fill="url(#aaSphere)" class="aa-highlight"/>
+          </g>
+          <g class="tertiary-bonds" opacity="0.3">
+            <line x1="130" y1="55" x2="135" y2="195" stroke="#a78bfa" stroke-width="1" stroke-dasharray="4,4"/>
+            <line x1="45" y1="165" x2="40" y2="465" stroke="#4da8da" stroke-width="1" stroke-dasharray="4,4"/>
+            <line x1="125" y1="250" x2="130" y2="495" stroke="#f472b6" stroke-width="1" stroke-dasharray="4,4"/>
+          </g>
+        </g>
+        <text x="90" y="592" text-anchor="middle" fill="rgba(167,139,250,0.6)" font-family="var(--font-num)" font-size="9" letter-spacing="2">PROTEIN</text>
+      </svg>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="nav-left">
+      <a href="index.html" class="nav-logo">
+        <img src="assets/icons/icon-science.png" alt="SciMSPT">
+        <span class="nav-logo-text">Sci<span>MSPT</span></span>
+      </a>
+      <div class="nav-links">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="dashboard.html" class="nav-link active">Dashboard</a>
+        <a href="research.html" class="nav-link">Research Trends</a>
+        <a href="startups.html" class="nav-link">7 Startups</a>
+        <a href="platform.html" class="nav-link">Platform</a>
+        <a href="studio.html" class="nav-link">Workspace</a>
+        <a href="about.html" class="nav-link">About</a>
+      </div>
+    </div>
+    <div class="nav-right">
+      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+        <i class="material-icons" id="themeIcon">dark_mode</i>
+        <span id="themeText">Dark</span>
+      </button>
+      <button class="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="Menu"><i class="material-icons">menu</i></button>
+    </div>
+  </nav>
+
+  <!-- Dashboard Content -->
+  <div class="dashboard">
+    <div class="dash-header">
+      <h1 class="dash-title">Dashboard</h1>
+      <p class="dash-subtitle">Real-time overview of SciMSPT research platform metrics, portfolio performance, and weekly digest data.</p>
+    </div>
+
+    <!-- Top Stats -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-header">
+          <div class="stat-icon"><i class="material-icons">business_center</i></div>
+          <span class="stat-trend up">+12%</span>
+        </div>
+        <div class="stat-value">$2.52B</div>
+        <div class="stat-label">Total Portfolio Value</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-header">
+          <div class="stat-icon"><i class="material-icons">rocket_launch</i></div>
+          <span class="stat-trend up">+88%</span>
+        </div>
+        <div class="stat-value">7</div>
+        <div class="stat-label">Active Startups</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-header">
+          <div class="stat-icon"><i class="material-icons">article</i></div>
+          <span class="stat-trend up">+18%</span>
+        </div>
+        <div class="stat-value">264</div>
+        <div class="stat-label">Weekly Articles (W34)</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-header">
+          <div class="stat-icon"><i class="material-icons">science</i></div>
+          <span class="stat-trend up">+6%</span>
+        </div>
+        <div class="stat-value">6</div>
+        <div class="stat-label">ScienceDaily Domains</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-header">
+          <div class="stat-icon"><i class="material-icons">trending_up</i></div>
+          <span class="stat-trend up">+34%</span>
+        </div>
+        <div class="stat-value">$134M</div>
+        <div class="stat-label">Mean NPV (P50)</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-header">
+          <div class="stat-icon"><i class="material-icons">percent</i></div>
+          <span class="stat-trend up">+5%</span>
+        </div>
+        <div class="stat-value">25.3%</div>
+        <div class="stat-label">Mean IRR (P50)</div>
+      </div>
+    </div>
+
+    <!-- Main Grid -->
+    <div class="main-grid">
+      <!-- Portfolio Overview -->
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">Startup Portfolio Overview</h3>
+          <a href="startups.html" class="card-action">View All →</a>
+        </div>
+        <table class="portfolio-table">
+          <thead>
+            <tr>
+              <th>Startup</th>
+              <th>Tier</th>
+              <th>NPV P50</th>
+              <th>IRR P50</th>
+              <th>P(NPV&gt;0)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="startup-name">P1 Compact Stellarator</span></td>
+              <td><span class="tier-badge tier-2">Tier 2</span></td>
+              <td><span class="metric-value">$77M</span></td>
+              <td><span class="metric-value">23.2%</span></td>
+              <td><span class="metric-value">68.8%</span></td>
+            </tr>
+            <tr>
+              <td><span class="startup-name">P2 SMR Fleet OS</span></td>
+              <td><span class="tier-badge tier-2">Tier 2</span></td>
+              <td><span class="metric-value">$50M</span></td>
+              <td><span class="metric-value">23.0%</span></td>
+              <td><span class="metric-value">68.8%</span></td>
+            </tr>
+            <tr>
+              <td><span class="startup-name">P3 Solid-State Battery</span></td>
+              <td><span class="tier-badge tier-1">Tier 1</span></td>
+              <td><span class="metric-value">$80M</span></td>
+              <td><span class="metric-value">17.9%</span></td>
+              <td><span class="metric-value">65.8%</span></td>
+            </tr>
+            <tr>
+              <td><span class="startup-name">P4 Iron-Air LDES</span></td>
+              <td><span class="tier-badge tier-2">Tier 2</span></td>
+              <td><span class="metric-value">$44M</span></td>
+              <td><span class="metric-value">23.4%</span></td>
+              <td><span class="metric-value">68.2%</span></td>
+            </tr>
+            <tr>
+              <td><span class="startup-name">P5 Super-Steel Electrolyzer</span></td>
+              <td><span class="tier-badge tier-1">Tier 1</span></td>
+              <td><span class="metric-value">$43M</span></td>
+              <td><span class="metric-value">17.7%</span></td>
+              <td><span class="metric-value">65.3%</span></td>
+            </tr>
+            <tr>
+              <td><span class="startup-name">P6 Detonation H2 Turbine</span></td>
+              <td><span class="tier-badge tier-2">Tier 2</span></td>
+              <td><span class="metric-value">$34M</span></td>
+              <td><span class="metric-value">23.3%</span></td>
+              <td><span class="metric-value">69.0%</span></td>
+            </tr>
+            <tr>
+              <td><span class="startup-name">P7 Room-Temp Quantum Materials</span></td>
+              <td><span class="tier-badge tier-3">Tier 3</span></td>
+              <td><span class="metric-value">$107M</span></td>
+              <td><span class="metric-value">34.3%</span></td>
+              <td><span class="metric-value">77.1%</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Right Column -->
+      <div style="display: flex; flex-direction: column; gap: 24px;">
+        <!-- Weekly Digest Status -->
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">Latest Digests</h3>
+            <a href="research.html" class="card-action">View All →</a>
+          </div>
+          <div class="digest-list">
+            <a href="research.html#SD-M-01" class="digest-item">
+              <span class="digest-id">SD-M-01</span>
+              <div class="digest-info">
+                <div class="digest-title">Mathematical Foundations Week</div>
+                <div class="digest-meta">W32 · 8 min read · Audio ✓</div>
+              </div>
+              <div class="digest-status status-active"></div>
+            </a>
+            <a href="research.html#SD-M-02" class="digest-item">
+              <span class="digest-id">SD-M-02</span>
+              <div class="digest-info">
+                <div class="digest-title">Computing Theory Advances</div>
+                <div class="digest-meta">W33 · 10 min read · Audio ✓</div>
+              </div>
+              <div class="digest-status status-active"></div>
+            </a>
+            <a href="research.html#SD-P-05" class="digest-item">
+              <span class="digest-id">SD-P-05</span>
+              <div class="digest-info">
+                <div class="digest-title">Quantum Physics Breakthroughs</div>
+                <div class="digest-meta">W31 · 9 min read · Audio ✓</div>
+              </div>
+              <div class="digest-status status-active"></div>
+            </a>
+            <a href="research.html#SD-T-03" class="digest-item">
+              <span class="digest-id">SD-T-03</span>
+              <div class="digest-info">
+                <div class="digest-title">Temporal Mechanics Frontiers</div>
+                <div class="digest-meta">W28 · 9 min read · Audio ✓</div>
+              </div>
+              <div class="digest-status status-pending"></div>
+            </a>
+            <a href="research.html#SD-S-04" class="digest-item">
+              <span class="digest-id">SD-S-04</span>
+              <div class="digest-info">
+                <div class="digest-title">Scientific Methods Innovation</div>
+                <div class="digest-meta">W29 · 7 min read · Audio ✓</div>
+              </div>
+              <div class="digest-status status-active"></div>
+            </a>
+          </div>
+        </div>
+
+        <!-- Recent Activity -->
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">Recent Activity</h3>
+          </div>
+          <div class="activity-list">
+            <div class="activity-item">
+              <div class="activity-dot"></div>
+              <div class="activity-content">
+                <div class="activity-text">Monte Carlo analysis completed for 7 startups (10,000 runs)</div>
+                <div class="activity-time">2 hours ago</div>
+              </div>
+            </div>
+            <div class="activity-item">
+              <div class="activity-dot"></div>
+              <div class="activity-content">
+                <div class="activity-text">Weekly digest W34 published — 264 articles across 4 axes</div>
+                <div class="activity-time">5 hours ago</div>
+              </div>
+            </div>
+            <div class="activity-item">
+              <div class="activity-dot"></div>
+              <div class="activity-content">
+                <div class="activity-text">New ScienceDaily feed: space_time (50 articles this week)</div>
+                <div class="activity-time">1 day ago</div>
+              </div>
+            </div>
+            <div class="activity-item">
+              <div class="activity-dot"></div>
+              <div class="activity-content">
+                <div class="activity-text">P7 Room-Temp Quantum Materials upgraded to Tier 3</div>
+                <div class="activity-time">2 days ago</div>
+              </div>
+            </div>
+            <div class="activity-item">
+              <div class="activity-dot"></div>
+              <div class="activity-content">
+                <div class="activity-text">Foresight Series Vol. 02 PDF generated and uploaded</div>
+                <div class="activity-time">3 days ago</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Charts Row -->
+    <div class="bottom-grid">
+      <div class="card">
+        <div class="card-header"><h3 class="card-title">NPV Distribution (P50)</h3></div>
+        <div class="mini-chart">
+          <div class="chart-bar" style="height: 60%;"></div>
+          <div class="chart-bar" style="height: 39%;"></div>
+          <div class="chart-bar" style="height: 62%;"></div>
+          <div class="chart-bar" style="height: 34%;"></div>
+          <div class="chart-bar" style="height: 33%;"></div>
+          <div class="chart-bar" style="height: 26%;"></div>
+          <div class="chart-bar" style="height: 83%;"></div>
+        </div>
+        <p style="margin-top: 16px; font-size: 13px; color: var(--muted); text-align: center;">P7 leads with $107M NPV at P50</p>
+      </div>
+      <div class="card">
+        <div class="card-header"><h3 class="card-title">IRR Distribution (P50)</h3></div>
+        <div class="mini-chart">
+          <div class="chart-bar" style="height: 67%;"></div>
+          <div class="chart-bar" style="height: 66%;"></div>
+          <div class="chart-bar" style="height: 52%;"></div>
+          <div class="chart-bar" style="height: 68%;"></div>
+          <div class="chart-bar" style="height: 51%;"></div>
+          <div class="chart-bar" style="height: 68%;"></div>
+          <div class="chart-bar" style="height: 99%;"></div>
+        </div>
+        <p style="margin-top: 16px; font-size: 13px; color: var(--muted); text-align: center;">P7 achieves 34.3% IRR (highest risk-adjusted return)</p>
+      </div>
+      <div class="card">
+        <div class="card-header"><h3 class="card-title">Success Probability P(NPV>0)</h3></div>
+        <div class="mini-chart">
+          <div class="chart-bar" style="height: 89%;"></div>
+          <div class="chart-bar" style="height: 89%;"></div>
+          <div class="chart-bar" style="height: 85%;"></div>
+          <div class="chart-bar" style="height: 88%;"></div>
+          <div class="chart-bar" style="height: 85%;"></div>
+          <div class="chart-bar" style="height: 90%;"></div>
+          <div class="chart-bar" style="height: 100%;"></div>
+        </div>
+        <p style="margin-top: 16px; font-size: 13px; color: var(--muted); text-align: center;">All startups show >65% probability of positive NPV</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Theme Toggle
+    function initTheme() {
+      const saved = localStorage.getItem('scimspt-theme');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      setTheme(saved || (prefersDark ? 'dark' : 'light'));
+    }
+    function setTheme(theme) {
+      document.documentElement.setAttribute('data-theme', theme);
+      const icon = document.getElementById('themeIcon'), text = document.getElementById('themeText');
+      if (theme === 'dark') { icon.textContent = 'dark_mode'; text.textContent = 'Dark'; }
+      else { icon.textContent = 'light_mode'; text.textContent = 'Light'; }
+      localStorage.setItem('scimspt-theme', theme);
+    }
+    function toggleTheme() { setTheme(document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'); }
+    initTheme();
+    function toggleMobileMenu() { alert('Navigation:\n• Home\n• Dashboard\n• Research Trends\n• 7 Startups\n• About'); }
+  </script>
+  
+  <!-- Floating Navigation Buttons -->
+  <div class="floating-nav">
+    <a href="index.html" class="float-btn home-btn" title="Home">
+      <i class="material-icons">home</i>
+    </a>
+    <a href="javascript:history.back()" class="float-btn back-btn" title="Go Back">
+      <i class="material-icons">arrow_back</i>
+    </a>
+  </div>
+</body>
+</html>

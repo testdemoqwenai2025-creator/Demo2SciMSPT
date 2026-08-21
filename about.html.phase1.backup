@@ -1,0 +1,1428 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About — SciMSPT Neural Research Intelligence</title>
+  <meta name="description" content="About SciMSPT: Our mission to transform scientific discovery into strategic opportunity through neural intelligence and molecular computing.">
+  
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-deep: #030810;
+      --bg-primary: #0a1628;
+      --bg-secondary: #0d1f35;
+      --bg-tertiary: #122a45;
+      --bg-glass: rgba(10, 22, 40, 0.85);
+      --bg-glass-light: rgba(255, 255, 255, 0.03);
+      
+      --accent-primary: #00E5FF;
+      --accent-secondary: #4da8da;
+      --accent-tertiary: #a78bfa;
+      --accent-pink: #f472b6;
+      --accent-green: #10b981;
+      --accent-gold: #f59e0b;
+      
+      --text-primary: #e8f4fc;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+      
+      --border-subtle: rgba(0, 229, 255, 0.15);
+      
+      --font-heading: 'Playfair Display', Georgia, serif;
+      --font-body: 'Inter', -apple-system, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+      --font-tech: 'Orbitron', sans-serif;
+      
+      --nav-height: 80px;
+      --sidebar-width: 100px;
+    }
+    
+    [data-theme="light"] {
+      --bg-deep: #f0f4f8;
+      --bg-primary: #ffffff;
+      --bg-secondary: #f8fafc;
+      --bg-tertiary: #e2e8f0;
+      --bg-glass: rgba(255, 255, 255, 0.92);
+      --bg-glass-light: rgba(0, 0, 0, 0.02);
+      --text-primary: #0f172a;
+      --text-secondary: #475569;
+      --text-muted: #94a3b8;
+      --border-subtle: rgba(77, 168, 218, 0.25);
+    }
+    
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    
+    body {
+      font-family: var(--font-body);
+      background: var(--bg-deep);
+      color: var(--text-primary);
+      line-height: 1.6;
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+    
+    /* Molecular Sidebars */
+    .molecular-sidebar {
+      position: fixed;
+      top: 0;
+      width: var(--sidebar-width);
+      height: 100vh;
+      z-index: 5;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    
+    .molecular-sidebar.left {
+      left: 0;
+      background: linear-gradient(90deg, rgba(0, 229, 255, 0.08) 0%, transparent 100%);
+      border-right: 1px solid var(--border-subtle);
+    }
+    
+    .molecular-sidebar.right {
+      right: 0;
+      background: linear-gradient(-90deg, rgba(167, 139, 250, 0.08) 0%, transparent 100%);
+      border-left: 1px solid var(--border-subtle);
+    }
+    
+    .dna-helix {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 60px;
+      height: 80vh;
+    }
+    
+    .nucleotide {
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      animation: nucleotidePulse 3s ease-in-out infinite;
+    }
+    
+    .nucleotide.adenine { background: var(--accent-primary); box-shadow: 0 0 10px var(--accent-primary); }
+    .nucleotide.thymine { background: var(--accent-pink); box-shadow: 0 0 10px var(--accent-pink); }
+    .nucleotide.guanine { background: var(--accent-tertiary); box-shadow: 0 0 10px var(--accent-tertiary); }
+    .nucleotide.cytosine { background: var(--accent-green); box-shadow: 0 0 10px var(--accent-green); }
+    
+    @keyframes nucleotidePulse {
+      0%, 100% { opacity: 0.6; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.2); }
+    }
+    
+    .backbone-line {
+      position: absolute;
+      width: 2px;
+      height: 100%;
+      left: 50%;
+      background: linear-gradient(to bottom, transparent, var(--accent-primary) 20%, var(--accent-tertiary) 50%, var(--accent-pink) 80%, transparent);
+      opacity: 0.3;
+    }
+    
+    .protein-chain { position: absolute; width: 40px; height: 200px; top: 20%; }
+    
+    .amino-acid {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      border-radius: 2px;
+      background: var(--accent-gold);
+      opacity: 0.7;
+      animation: aminoFloat 4s ease-in-out infinite;
+    }
+    
+    @keyframes aminoFloat {
+      0%, 100% { transform: translateX(0) rotate(0deg); }
+      50% { transform: translateX(10px) rotate(180deg); }
+    }
+    
+    .molecular-grid {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-image: 
+        radial-gradient(circle at 20% 30%, rgba(0, 229, 255, 0.05) 1px, transparent 1px),
+        radial-gradient(circle at 70% 60%, rgba(167, 139, 250, 0.05) 1px, transparent 1px);
+      background-size: 30px 30px, 50px 50px;
+      animation: gridShift 20s linear infinite;
+    }
+    
+    @keyframes gridShift {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(30px); }
+    }
+    
+    .floating-molecule {
+      position: absolute;
+      border: 1px solid var(--border-subtle);
+      border-radius: 50%;
+      animation: moleculeFloat 8s ease-in-out infinite;
+    }
+    
+    .floating-molecule::before {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 4px; height: 4px;
+      background: var(--accent-primary);
+      border-radius: 50%;
+    }
+    
+    @keyframes moleculeFloat {
+      0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.5; }
+      50% { transform: translateY(-30px) rotate(180deg); opacity: 0.8; }
+    }
+    
+    /* Neural Background */
+    .neural-bg {
+      position: fixed;
+      top: 0;
+      left: calc(var(--sidebar-width));
+      width: calc(100% - 2 * var(--sidebar-width));
+      height: 100%;
+      z-index: 0;
+      overflow: hidden;
+    }
+    
+    .neuron {
+      position: absolute;
+      width: 4px; height: 4px;
+      background: var(--accent-primary);
+      border-radius: 50%;
+      opacity: 0.4;
+      animation: neuronPulse 4s ease-in-out infinite;
+    }
+    
+    @keyframes neuronPulse {
+      0%, 100% { opacity: 0.2; transform: scale(1); }
+      50% { opacity: 0.6; transform: scale(1.5); }
+    }
+    
+    /* Navigation */
+    .nav-container {
+      position: fixed;
+      top: 0;
+      left: var(--sidebar-width);
+      right: var(--sidebar-width);
+      height: var(--nav-height);
+      z-index: 100;
+      background: var(--bg-glass);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 40px;
+    }
+    
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--text-primary);
+    }
+    
+    .nav-logo {
+      width: 42px; height: 42px;
+      background: linear-gradient(135deg, var(--accent-primary), var(--accent-tertiary));
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-tech);
+      font-weight: 900;
+      font-size: 16px;
+      color: var(--bg-deep);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .nav-logo::before {
+      content: '';
+      position: absolute;
+      top: -50%; left: -50%;
+      width: 200%; height: 200%;
+      background: conic-gradient(from 0deg, transparent, rgba(255,255,255,0.3), transparent);
+      animation: logoShine 4s linear infinite;
+    }
+    
+    @keyframes logoShine {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    
+    .nav-title {
+      font-family: var(--font-heading);
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+    }
+    
+    .nav-title span { color: var(--accent-primary); }
+    
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .nav-link {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 10px 18px;
+      text-decoration: none;
+      color: var(--text-secondary);
+      font-size: 14px;
+      font-weight: 500;
+      border-radius: 10px;
+      transition: all 0.3s ease;
+    }
+    
+    .nav-link:hover {
+      color: var(--text-primary);
+      background: var(--bg-glass-light);
+    }
+    
+    .nav-link.active {
+      color: var(--accent-primary);
+      background: rgba(0, 229, 255, 0.08);
+    }
+    
+    .nav-link .material-icons-round { font-size: 18px; }
+    
+    .workspace-btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 24px;
+      background: linear-gradient(135deg, var(--accent-primary), var(--accent-tertiary));
+      color: var(--bg-deep);
+      font-weight: 600;
+      font-size: 14px;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 30px rgba(0, 229, 255, 0.3);
+    }
+    
+    .workspace-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 40px rgba(0, 229, 255, 0.5);
+    }
+    
+    .user-profile {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 16px 8px 8px;
+      background: var(--bg-glass-light);
+      border: 1px solid var(--border-subtle);
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .user-profile:hover {
+      border-color: var(--accent-primary);
+      box-shadow: 0 0 20px rgba(0, 229, 255, 0.2);
+    }
+    
+    .user-avatar {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent-primary), var(--accent-pink));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 14px;
+      color: white;
+      position: relative;
+    }
+    
+    .user-avatar::after {
+      content: '';
+      position: absolute;
+      bottom: 0; right: 0;
+      width: 10px; height: 10px;
+      background: var(--accent-green);
+      border-radius: 50%;
+      border: 2px solid var(--bg-primary);
+    }
+    
+    .user-info { display: flex; flex-direction: column; gap: 2px; }
+    .user-name { font-size: 13px; font-weight: 600; color: var(--text-primary); }
+    .user-role { font-size: 11px; color: var(--accent-primary); font-family: var(--font-mono); }
+    
+    .theme-toggle {
+      width: 44px; height: 44px;
+      border-radius: 12px;
+      background: var(--bg-glass-light);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-secondary);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+    
+    .theme-toggle:hover {
+      color: var(--accent-primary);
+      border-color: var(--accent-primary);
+    }
+    
+    /* Page Navigation */
+    .page-nav-bar {
+      position: fixed;
+      top: calc(var(--nav-height) + 16px);
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 90;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 20px;
+      background: var(--bg-glass);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--border-subtle);
+      border-radius: 50px;
+    }
+    
+    .page-nav-btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      background: transparent;
+      border: 1px solid var(--border-subtle);
+      border-radius: 25px;
+      color: var(--text-secondary);
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+    }
+    
+    .page-nav-btn:hover {
+      background: var(--bg-glass-light);
+      border-color: var(--accent-primary);
+      color: var(--accent-primary);
+    }
+    
+    .page-indicator {
+      font-size: 12px;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+      padding: 0 8px;
+    }
+    
+    /* Main Content */
+    .main-content {
+      position: relative;
+      z-index: 10;
+      margin-left: var(--sidebar-width);
+      margin-right: var(--sidebar-width);
+      padding-top: calc(var(--nav-height) + 24px);
+      min-height: 100vh;
+    }
+    
+    /* About Hero */
+    .about-hero {
+      padding: 80px 60px;
+      text-align: center;
+    }
+    
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 20px;
+      background: rgba(0, 229, 255, 0.1);
+      border: 1px solid rgba(0, 229, 255, 0.3);
+      border-radius: 50px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--accent-primary);
+      margin-bottom: 32px;
+      font-family: var(--font-mono);
+    }
+    
+    .hero-badge .pulse-dot {
+      width: 8px; height: 8px;
+      background: var(--accent-primary);
+      border-radius: 50%;
+      animation: pulse 2s ease-in-out infinite;
+    }
+    
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(1.5); }
+    }
+    
+    .about-title {
+      font-family: var(--font-heading);
+      font-size: clamp(42px, 6vw, 72px);
+      font-weight: 900;
+      line-height: 1.05;
+      margin-bottom: 24px;
+      letter-spacing: -2px;
+    }
+    
+    .about-title .gradient-text {
+      background: linear-gradient(135deg, var(--accent-primary), var(--accent-tertiary), var(--accent-pink));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .about-subtitle {
+      font-size: clamp(17px, 2vw, 22px);
+      color: var(--text-secondary);
+      max-width: 700px;
+      margin: 0 auto 48px;
+      line-height: 1.6;
+    }
+    
+    /* Mission Section */
+    .mission-section {
+      padding: 80px 60px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .section-header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+    
+    .section-tag {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: var(--accent-primary);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 16px;
+    }
+    
+    .section-title {
+      font-family: var(--font-heading);
+      font-size: clamp(32px, 4vw, 48px);
+      font-weight: 800;
+      margin-bottom: 20px;
+      letter-spacing: -1px;
+    }
+    
+    .section-desc {
+      font-size: 18px;
+      color: var(--text-secondary);
+      max-width: 650px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+    
+    /* Values Grid */
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 28px;
+      margin-top: 48px;
+    }
+    
+    .value-card {
+      background: var(--bg-glass);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--border-subtle);
+      border-radius: 24px;
+      padding: 36px;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .value-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent-primary), var(--accent-tertiary));
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    
+    .value-card:hover {
+      transform: translateY(-8px);
+      border-color: var(--accent-primary);
+      box-shadow: 0 20px 60px rgba(0, 229, 255, 0.15);
+    }
+    
+    .value-card:hover::before {
+      opacity: 1;
+    }
+    
+    .value-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, rgba(0, 229, 255, 0.15), rgba(167, 139, 250, 0.15));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 24px;
+    }
+    
+    .value-icon .material-icons-round {
+      font-size: 28px;
+      color: var(--accent-primary);
+    }
+    
+    .value-title {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+    
+    .value-desc {
+      font-size: 15px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+    
+    /* Team Section */
+    .team-section {
+      padding: 80px 60px;
+      background: var(--bg-glass-light);
+      border-top: 1px solid var(--border-subtle);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 28px;
+      max-width: 1200px;
+      margin: 64px auto 0;
+    }
+    
+    .team-member {
+      background: var(--bg-glass);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--border-subtle);
+      border-radius: 24px;
+      padding: 32px;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+    
+    .team-member:hover {
+      border-color: var(--accent-primary);
+      transform: translateY(-4px);
+    }
+    
+    .member-avatar {
+      width: 96px;
+      height: 96px;
+      border-radius: 50%;
+      margin: 0 auto 20px;
+      background: linear-gradient(135deg, var(--accent-primary), var(--accent-tertiary));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 32px;
+      color: white;
+      position: relative;
+    }
+    
+    .member-avatar::after {
+      content: '';
+      position: absolute;
+      bottom: 4px;
+      right: 4px;
+      width: 16px;
+      height: 16px;
+      background: var(--accent-green);
+      border-radius: 50%;
+      border: 3px solid var(--bg-glass);
+    }
+    
+    .member-name {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+    
+    .member-role {
+      font-size: 14px;
+      color: var(--accent-primary);
+      font-family: var(--font-mono);
+      margin-bottom: 12px;
+    }
+    
+    .member-bio {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+    
+    /* Timeline Section */
+    .timeline-section {
+      padding: 80px 60px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    
+    .timeline-item {
+      display: flex;
+      gap: 32px;
+      padding: 32px 0;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    
+    .timeline-year {
+      font-family: var(--font-tech);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--accent-primary);
+      min-width: 80px;
+    }
+    
+    .timeline-content h4 {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    
+    .timeline-content p {
+      font-size: 15px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+    
+    /* CTA Section */
+    .cta-section {
+      padding: 80px 60px;
+      text-align: center;
+    }
+    
+    .cta-box {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 64px;
+      background: linear-gradient(135deg, rgba(0, 229, 255, 0.08), rgba(167, 139, 250, 0.08));
+      border: 1px solid var(--border-subtle);
+      border-radius: 32px;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .cta-box::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: conic-gradient(from 0deg, transparent, rgba(0, 229, 255, 0.1), transparent, rgba(167, 139, 250, 0.1), transparent);
+      animation: ctaRotate 15s linear infinite;
+    }
+    
+    @keyframes ctaRotate {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    
+    .cta-content {
+      position: relative;
+      z-index: 1;
+    }
+    
+    .cta-title {
+      font-family: var(--font-heading);
+      font-size: 36px;
+      font-weight: 800;
+      margin-bottom: 16px;
+    }
+    
+    .cta-desc {
+      font-size: 17px;
+      color: var(--text-secondary);
+      margin-bottom: 32px;
+    }
+    
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 18px 36px;
+      background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+      color: var(--bg-deep);
+      font-size: 16px;
+      font-weight: 600;
+      border: none;
+      border-radius: 14px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+    }
+    
+    .btn-primary:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px rgba(0, 229, 255, 0.35);
+    }
+    
+    /* Footer */
+    .footer {
+      padding: 60px;
+      border-top: 1px solid var(--border-subtle);
+      background: var(--bg-glass);
+    }
+    
+    .footer-content {
+      display: grid;
+      grid-template-columns: 2fr repeat(3, 1fr);
+      gap: 48px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .footer-brand { display: flex; flex-direction: column; gap: 20px; }
+    
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    
+    .footer-logo-icon {
+      width: 40px; height: 40px;
+      background: linear-gradient(135deg, var(--accent-primary), var(--accent-tertiary));
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-tech);
+      font-weight: 900;
+      font-size: 14px;
+      color: var(--bg-deep);
+    }
+    
+    .footer-logo-text {
+      font-family: var(--font-heading);
+      font-size: 20px;
+      font-weight: 700;
+    }
+    
+    .footer-desc {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+    
+    .footer-column h4 {
+      font-size: 14px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 20px;
+      color: var(--text-primary);
+    }
+    
+    .footer-links {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    
+    .footer-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 14px;
+      transition: color 0.2s ease;
+    }
+    
+    .footer-links a:hover { color: var(--accent-primary); }
+    
+    .footer-links::-webkit-scrollbar { height: 6px; }
+    .footer-links::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 3px; }
+    
+    .footer-bottom {
+      margin-top: 48px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border-subtle);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+    
+    .footer-social { display: flex; gap: 16px; }
+    .footer-social a { color: var(--text-muted); transition: color 0.2s ease; }
+    .footer-social a:hover { color: var(--accent-primary); }
+    
+    /* Responsive */
+    @media (max-width: 1024px) {
+      :root { --sidebar-width: 60px; }
+      .molecular-sidebar { width: 60px; }
+      .dna-helix { width: 40px; }
+      .nucleotide { width: 8px; height: 8px; }
+      .nav-container { padding: 0 20px; }
+      .nav-links { display: none; }
+      .main-content { padding-left: 20px; padding-right: 20px; }
+      .about-hero, .mission-section, .team-section, .timeline-section { padding-left: 30px; padding-right: 30px; }
+      .footer-content { grid-template-columns: 1fr 1fr; }
+    }
+    
+    @media (max-width: 768px) {
+      :root { --sidebar-width: 0px; --nav-height: 70px; }
+      .molecular-sidebar { display: none; }
+      .neural-bg { width: 100%; left: 0; }
+      .main-content { margin-left: 0; margin-right: 0; }
+      .nav-container { left: 0; right: 0; padding: 0 16px; }
+      .page-nav-bar { display: none; }
+      .about-title { font-size: 32px; }
+      .values-grid, .team-grid { grid-template-columns: 1fr; }
+      .timeline-item { flex-direction: column; gap: 12px; }
+      .footer-content { grid-template-columns: 1fr; gap: 32px; }
+      .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Left Molecular Sidebar -->
+  <aside class="molecular-sidebar left">
+    <div class="molecular-grid"></div>
+    <div class="dna-helix">
+      <div class="backbone-line"></div>
+      <div class="dna-strand" id="leftDnaStrand"></div>
+    </div>
+    <div class="protein-chain" id="leftProteinChain"></div>
+    <div class="floating-molecule" style="width: 20px; height: 20px; top: 15%; left: 30%;"></div>
+    <div class="floating-molecule" style="width: 14px; height: 14px; top: 45%; left: 55%;"></div>
+    <div class="floating-molecule" style="width: 18px; height: 18px; top: 75%; left: 25%;"></div>
+  </aside>
+
+  <!-- Right Molecular Sidebar -->
+  <aside class="molecular-sidebar right">
+    <div class="molecular-grid"></div>
+    <div class="dna-helix">
+      <div class="backbone-line"></div>
+      <div class="dna-strand" id="rightDnaStrand"></div>
+    </div>
+    <div class="protein-chain" id="rightProteinChain"></div>
+    <div class="floating-molecule" style="width: 16px; height: 16px; top: 25%; left: 40%;"></div>
+    <div class="floating-molecule" style="width: 22px; height: 22px; top: 55%; left: 60%;"></div>
+    <div class="floating-molecule" style="width: 12px; height: 12px; top: 85%; left: 35%;"></div>
+  </aside>
+
+  <!-- Neural Background -->
+  <div class="neural-bg" id="neuralBg"></div>
+
+  <!-- Navigation -->
+  <nav class="nav-container">
+    <a href="index.html" class="nav-brand">
+      <div class="nav-logo">S</div>
+      <span class="nav-title">Sci<span>MSPT</span></span>
+    </a>
+    
+    <div class="nav-links">
+      <a href="index.html" class="nav-link"><span class="material-icons-round">home</span> Home</a>
+      <a href="research.html" class="nav-link"><span class="material-icons-round">biotech</span> Research</a>
+      <a href="startups.html" class="nav-link"><span class="material-icons-round">rocket_launch</span> Startups</a>
+      <a href="platform.html" class="nav-link"><span class="material-icons-round">dashboard</span> Platform</a>
+      <a href="documentation.html" class="nav-link"><span class="material-icons-round">code</span> API Docs</a>
+      <a href="about.html" class="nav-link active"><span class="material-icons-round">info</span> About</a>
+    </div>
+    
+    <div style="display: flex; align-items: center; gap: 16px;">
+      <button class="theme-toggle" onclick="toggleTheme()">
+        <span class="material-icons-round" id="themeIcon">dark_mode</span>
+      </button>
+      
+      <button class="workspace-btn" onclick="location.href='platform.html#collaboration'">
+        <span class="material-icons-round">workspaces</span>
+        Workspace
+      </button>
+      
+      <div class="user-profile">
+        <div class="user-avatar">EV</div>
+        <div class="user-info">
+          <span class="user-name">Dr. Elena Vasquez</span>
+          <span class="user-role">Neural Architect</span>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page Navigation Bar -->
+  <div class="page-nav-bar">
+    <a href="javascript:history.back()" class="page-nav-btn">
+      <span class="material-icons-round">arrow_back</span>
+      Back
+    </a>
+    <span class="page-indicator">|</span>
+    <a href="index.html" class="page-nav-btn">
+      <span class="material-icons-round">home</span>
+      Home
+    </a>
+    <span class="page-indicator">|</span>
+    <a href="#team" class="page-nav-btn">
+      <span class="material-icons-round">groups</span>
+      Team
+    </a>
+  </div>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <!-- About Hero -->
+    <section class="about-hero">
+      <div class="hero-badge">
+        <span class="pulse-dot"></span>
+        Neural Intelligence Since 2023
+      </div>
+      
+      <h1 class="about-title">
+        About <span class="gradient-text">SciMSPT</span>
+      </h1>
+      
+      <p class="about-subtitle">
+        We're building the neural infrastructure that transforms how humanity 
+        discovers, analyzes, and acts upon scientific knowledge.
+      </p>
+    </section>
+
+    <!-- Mission Section -->
+    <section class="mission-section">
+      <div class="section-header">
+        <p class="section-tag">// Our Mission</p>
+        <h2 class="section-title">Bridging Science & Strategy</h2>
+        <p class="section-desc">
+          Our mission is to democratize access to frontier technology intelligence 
+          by leveraging advanced AI to extract actionable insights from global research.
+        </p>
+      </div>
+      
+      <div class="values-grid">
+        <article class="value-card">
+          <div class="value-icon">
+            <span class="material-icons-round">psychology</span>
+          </div>
+          <h3 class="value-title">Neural-First Approach</h3>
+          <p class="value-desc">
+            Every aspect of our platform is built on neural architectures that 
+            understand context, identify patterns, and generate insights beyond 
+            human capability alone.
+          </p>
+        </article>
+        
+        <article class="value-card">
+          <div class="value-icon">
+            <span class="material-icons-round">verified</span>
+          </div>
+          <h3 class="value-title">Scientific Rigor</h3>
+          <p class="value-desc">
+            We maintain the highest standards of academic integrity, ensuring 
+            every analysis is traceable, reproducible, and grounded in 
+            peer-reviewed research.
+          </p>
+        </article>
+        
+        <article class="value-card">
+          <div class="value-icon">
+            <span class="material-icons-round">diversity_3</span>
+          </div>
+          <h3 class="value-title">Open Collaboration</h3>
+          <p class="value-desc">
+            We believe in the power of collective intelligence. Our platform 
+            enables researchers, investors, and innovators to collaborate 
+            seamlessly across boundaries.
+          </p>
+        </article>
+        
+        <article class="value-card">
+          <div class="value-icon">
+            <span class="material-icons-round">rocket_launch</span>
+          </div>
+          <h3 class="value-title">Impact-Driven</h3>
+          <p class="value-desc">
+            Every feature we build is focused on accelerating the path from 
+            discovery to deployment, helping breakthrough technologies 
+            reach the world faster.
+          </p>
+        </article>
+        
+        <article class="value-card">
+          <div class="value-icon">
+            <span class="material-icons-round">shield</span>
+          </div>
+          <h3 class="value-title">Privacy Preserving</h3>
+          <p class="value-desc">
+            We employ cutting-edge cryptographic techniques to ensure your 
+            research interests and strategies remain confidential while 
+            benefiting from collective insights.
+          </p>
+        </article>
+        
+        <article class="value-card">
+          <div class="value-icon">
+            <span class="material-icons-round">auto_awesome</span>
+          </div>
+          <h3 class="value-title">Continuous Evolution</h3>
+          <p class="value-desc">
+            Our models learn and improve continuously, incorporating new 
+            research methodologies and expanding our understanding of 
+            the innovation landscape.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="team-section" id="team">
+      <div class="section-header">
+        <p class="section-tag">// The Team</p>
+        <h2 class="section-title">Meet Our Neural Architects</h2>
+        <p class="section-desc">
+          A multidisciplinary team of researchers, engineers, and visionaries 
+          united by a passion for advancing scientific discovery.
+        </p>
+      </div>
+      
+      <div class="team-grid">
+        <article class="team-member">
+          <div class="member-avatar">EV</div>
+          <h4 class="member-name">Dr. Elena Vasquez</h4>
+          <p class="member-role">Founder & CEO</p>
+          <p class="member-bio">
+            Former quantum computing researcher at MIT. PhD in Computational 
+            Biology with focus on neural network applications in drug discovery.
+          </p>
+        </article>
+        
+        <article class="team-member">
+          <div class="member-avatar" style="background: linear-gradient(135deg, #10b981, #059669);">MC</div>
+          <h4 class="member-name">Marcus Chen</h4>
+          <p class="member-role">CTO</p>
+          <p class="member-bio">
+            Ex-Google Brain engineer specializing in large language models 
+            and distributed systems. Led infrastructure for models serving 
+            billions of users.
+          </p>
+        </article>
+        
+        <article class="team-member">
+          <div class="member-avatar" style="background: linear-gradient(135deg, #f59e0b, #d97706);">AP</div>
+          <h4 class="member-name">Dr. Aisha Patel</h4>
+          <p class="member-role">Head of Research</p>
+          <p class="member-bio">
+            Published author in Nature and Science. Expertise in genomics, 
+            CRISPR technology, and computational biology with 15+ years 
+            of academic experience.
+          </p>
+        </article>
+        
+        <article class="team-member">
+          <div class="member-avatar" style="background: linear-gradient(135deg, #ef4444, #dc2626);">JK</div>
+          <h4 class="member-name">James Kim</h4>
+          <p class="member-role">VP of Engineering</p>
+          <p class="member-bio">
+            Full-stack architect with deep expertise in real-time systems 
+            and collaborative platforms. Previously led engineering at 
+            a YC-backed ML startup.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Timeline Section -->
+    <section class="timeline-section">
+      <div class="section-header">
+        <p class="section-tag">// Our Journey</p>
+        <h2 class="section-title">Key Milestones</h2>
+      </div>
+      
+      <div class="timeline-item">
+        <div class="timeline-year">2023</div>
+        <div class="timeline-content">
+          <h4>Founding & Vision</h4>
+          <p>SciMSPT was founded with the mission to bridge the gap between academic research and investment opportunities using AI.</p>
+        </div>
+      </div>
+      
+      <div class="timeline-item">
+        <div class="timeline-year">Q1 2024</div>
+        <div class="timeline-content">
+          <h4>Neural Engine v1.0</h4>
+          <p>Launched our proprietary analysis engine capable of processing 10,000+ papers daily with 95% accuracy.</p>
+        </div>
+      </div>
+      
+      <div class="timeline-item">
+        <div class="timeline-year">Q2 2024</div>
+        <div class="timeline-content">
+          <h4>Platform Launch</h4>
+          <p>Released the full platform including collaborative workspaces, API access, and pipeline builder tools.</p>
+        </div>
+      </div>
+      
+      <div class="timeline-item">
+        <div class="timeline-year">Q3 2024</div>
+        <div class="timeline-content">
+          <h4>Enterprise Adoption</h4>
+          <p>Onboarded first enterprise clients including leading VCs and pharmaceutical companies.</p>
+        </div>
+      </div>
+      
+      <div class="timeline-item">
+        <div class="timeline-year">2025</div>
+        <div class="timeline-content">
+          <h4>Global Expansion</h4>
+          <p>Scaling to serve researchers and investors worldwide with enhanced multilingual support and regional partnerships.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+      <div class="cta-box">
+        <div class="cta-content">
+          <h2 class="cta-title">Join the Neural Revolution</h2>
+          <p class="cta-desc">
+            Be part of the community transforming how we discover and invest in 
+            frontier technology.
+          </p>
+          
+          <a href="#" class="btn-primary" onclick="showNotification('Welcome to SciMSPT!')">
+            <span class="material-icons-round">rocket_launch</span>
+            Get Started Free
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <div class="footer-logo-icon">S</div>
+          <span class="footer-logo-text">SciMSPT</span>
+        </div>
+        <p class="footer-desc">
+          Transforming scientific discovery into strategic opportunity through 
+          neural intelligence and molecular computing.
+        </p>
+      </div>
+      
+      <div class="footer-column">
+        <h4>Company</h4>
+        <div class="footer-links">
+          <a href="#">About Us</a>
+          <a href="#">Careers</a>
+          <a href="#">Blog</a>
+          <a href="#">Press Kit</a>
+          <a href="#">Contact</a>
+        </div>
+      </div>
+      
+      <div class="footer-column">
+        <h4>Resources</h4>
+        <div class="footer-links">
+          <a href="documentation.html">API Documentation</a>
+          <a href="research.html">Research Papers</a>
+          <a href="startups.html">Startup Database</a>
+          <a href="platform.html">Platform Features</a>
+        </div>
+      </div>
+      
+      <div class="footer-column">
+        <h4>Legal</h4>
+        <div class="footer-links">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+          <a href="#">Cookie Policy</a>
+          <a href="#">GDPR Compliance</a>
+        </div>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <span>&copy; 2025 SciMSPT — Neural Research Intelligence. All rights reserved.</span>
+      <div class="footer-social">
+        <a href="#"><span class="material-icons-round">github</span></a>
+        <a href="#"><span class="material-icons-round">twitter</span></a>
+        <a href="#"><span class="material-icons-round">linkedin</span></a>
+        <a href="#"><span class="material-icons-round">discord</span></a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Initialize DNA Helix
+    function initDnaHelix() {
+      const strands = [
+        { container: 'leftDnaStrand', offset: 0 },
+        { container: 'rightDnaStrand', offset: 50 }
+      ];
+      
+      const nucleotides = ['adenine', 'thymine', 'guanine', 'cytosine'];
+      
+      strands.forEach(({ container, offset }) => {
+        const strand = document.getElementById(container);
+        if (!strand) return;
+        
+        for (let i = 0; i < 20; i++) {
+          const nucleotide = document.createElement('div');
+          nucleotide.className = `nucleotide ${nucleotides[i % 4]}`;
+          
+          const y = (i / 20) * 100;
+          const x = 50 + Math.sin((i + offset) * 0.5) * 35;
+          const delay = (i * 0.15) % 3;
+          
+          nucleotide.style.cssText = `
+            top: ${y}%;
+            left: ${x}%;
+            transform: translate(-50%, -50%);
+            animation-delay: ${delay}s;
+          `;
+          
+          strand.appendChild(nucleotide);
+        }
+      });
+    }
+    
+    // Initialize Protein Chains
+    function initProteinChains() {
+      const chains = ['leftProteinChain', 'rightProteinChain'];
+      
+      chains.forEach(chainId => {
+        const chain = document.getElementById(chainId);
+        if (!chain) return;
+        
+        for (let i = 0; i < 12; i++) {
+          const amino = document.createElement('div');
+          amino.className = 'amino-acid';
+          
+          const y = (i / 12) * 100;
+          const x = Math.sin(i * 0.8) * 15;
+          const delay = (i * 0.3) % 4;
+          const hue = (i * 30) % 360;
+          
+          amino.style.cssText = `
+            top: ${y}%;
+            left: calc(50% + ${x}px);
+            transform: translate(-50%, -50%);
+            animation-delay: ${delay}s;
+            background: hsl(${hue}, 70%, 60%);
+          `;
+          
+          chain.appendChild(amino);
+        }
+      });
+    }
+    
+    // Initialize Neural Background
+    function initNeuralBackground() {
+      const bg = document.getElementById('neuralBg');
+      if (!bg) return;
+      
+      for (let i = 0; i < 50; i++) {
+        const neuron = document.createElement('div');
+        neuron.className = 'neuron';
+        neuron.style.cssText = `
+          left: ${Math.random() * 100}%;
+          top: ${Math.random() * 100}%;
+          animation-delay: ${Math.random() * 4}s;
+        `;
+        bg.appendChild(neuron);
+      }
+    }
+    
+    // Theme Toggle
+    function toggleTheme() {
+      const html = document.documentElement;
+      const icon = document.getElementById('themeIcon');
+      const isDark = html.getAttribute('data-theme') === 'dark';
+      
+      html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+      icon.textContent = isDark ? 'light_mode' : 'dark_mode';
+      localStorage.setItem('theme', isDark ? 'light' : 'dark');
+    }
+    
+    // Load saved theme
+    function loadTheme() {
+      const saved = localStorage.getItem('theme');
+      if (saved) {
+        document.documentElement.setAttribute('data-theme', saved);
+        document.getElementById('themeIcon').textContent = 
+          saved === 'dark' ? 'dark_mode' : 'light_mode';
+      }
+    }
+    
+    // Notification System
+    function showNotification(message) {
+      const notification = document.createElement('div');
+      notification.style.cssText = `
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        padding: 20px 28px;
+        background: linear-gradient(135deg, var(--accent-primary), var(--accent-tertiary));
+        color: var(--bg-deep);
+        border-radius: 14px;
+        font-weight: 600;
+        z-index: 9999;
+        animation: slideIn 0.4s ease;
+        box-shadow: 0 10px 40px rgba(0, 229, 255, 0.3);
+      `;
+      notification.textContent = message;
+      document.body.appendChild(notification);
+      
+      setTimeout(() => {
+        notification.style.animation = 'slideOut 0.3s ease forwards';
+        setTimeout(() => notification.remove(), 300);
+      }, 4000);
+    }
+    
+    // Add CSS animations
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes slideIn {
+        from { transform: translateX(100px); opacity: 0; }
+        to { transform: translateX(0); opacity: 1; }
+      }
+      @keyframes slideOut {
+        from { transform: translateX(0); opacity: 1; }
+        to { transform: translateX(100px); opacity: 0; }
+      }
+    `;
+    document.head.appendChild(style);
+    
+    // Initialize
+    document.addEventListener('DOMContentLoaded', () => {
+      loadTheme();
+      initDnaHelix();
+      initProteinChains();
+      initNeuralBackground();
+    });
+  </script>
+</body>
+</html>

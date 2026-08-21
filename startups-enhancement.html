@@ -1,0 +1,1260 @@
+<!-- ============================================
+     SciMSPT Startups Page - ENHANCED VERSION
+     Premium Video Integration + Portal Guidance
+     AI-Automated World Philosophy
+     ============================================ -->
+
+<!-- Add before </body> tag in startups.html -->
+
+<style>
+/* ==========================================
+   PREMIUM VIDEO PLAYER STYLES
+   ========================================== */
+
+.premium-video-section {
+  margin: 80px 0;
+  position: relative;
+}
+
+.premium-video-hero {
+  background: linear-gradient(135deg, rgba(0, 229, 255, 0.1), rgba(167, 139, 250, 0.1));
+  border: 1px solid var(--border-subtle);
+  border-radius: 32px;
+  padding: 40px;
+  backdrop-filter: blur(20px);
+  position: relative;
+  overflow: hidden;
+}
+
+.premium-video-hero::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(0, 229, 255, 0.05) 0%, transparent 70%);
+  animation: premiumRotate 20s linear infinite;
+}
+
+@keyframes premiumRotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.premium-video-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 30px;
+  position: relative;
+  z-index: 2;
+}
+
+.premium-video-title {
+  font-family: var(--font-heading);
+  font-size: 32px;
+  font-weight: 900;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.premium-video-title .material-icons-round {
+  font-size: 40px;
+  background: linear-gradient(135deg, var(--accent-primary), var(--accent-tertiary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.premium-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 20px;
+  background: linear-gradient(135deg, var(--accent-primary), var(--accent-tertiary));
+  border-radius: 24px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #030810;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  animation: premiumPulse 2s ease-in-out infinite;
+}
+
+@keyframes premiumPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(0, 229, 255, 0.4); }
+  50% { box-shadow: 0 0 20px 5px rgba(0, 229, 255, 0.2); }
+}
+
+.premium-video-container {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  background: #000;
+  box-shadow: 
+    0 25px 50px -12px rgba(0, 0, 0, 0.5),
+    0 0 0 1px rgba(0, 229, 255, 0.2),
+    inset 0 0 60px rgba(0, 229, 255, 0.05);
+  z-index: 2;
+}
+
+.premium-video-container video {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  display: block;
+}
+
+.premium-video-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 30px;
+  background: linear-gradient(to top, rgba(3, 8, 16, 0.95), transparent);
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.premium-video-info h4 {
+  font-family: var(--font-heading);
+  font-size: 20px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 6px;
+}
+
+.premium-video-info p {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.premium-video-kpis {
+  display: flex;
+  gap: 20px;
+}
+
+.premium-kpi-mini {
+  text-align: center;
+  padding: 10px 16px;
+  background: rgba(0, 229, 255, 0.1);
+  border: 1px solid rgba(0, 229, 255, 0.3);
+  border-radius: 12px;
+}
+
+.premium-kpi-mini .value {
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--accent-primary);
+  font-family: var(--font-mono);
+}
+
+.premium-kpi-mini .label {
+  font-size: 11px;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+
+/* ==========================================
+   IN-PROGRESS STATUS SYSTEM
+   ========================================== */
+
+.status-in-progress {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.15), rgba(245, 158, 11, 0.05));
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--accent-gold);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.status-in-progress::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(245, 158, 11, 0.2), transparent);
+  animation: statusShimmer 2s infinite;
+}
+
+@keyframes statusShimmer {
+  100% { left: 100%; }
+}
+
+.status-in-progress:hover {
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.25), rgba(245, 158, 11, 0.1));
+  border-color: rgba(245, 158, 11, 0.5);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(245, 158, 11, 0.2);
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent-gold);
+  animation: statusDotPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes statusDotPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.8); }
+}
+
+.status-tooltip {
+  position: absolute;
+  bottom: calc(100% + 10px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  padding: 16px 20px;
+  min-width: 320px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  z-index: 100;
+}
+
+.status-in-progress:hover .status-tooltip {
+  opacity: 1;
+  visibility: visible;
+  bottom: calc(100% + 15px);
+}
+
+.tooltip-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.tooltip-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, var(--accent-gold), var(--accent-pink));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #030810;
+  font-weight: 800;
+  font-size: 14px;
+}
+
+.tooltip-title {
+  font-weight: 700;
+  color: var(--text-primary);
+  font-size: 14px;
+}
+
+.tooltip-subtitle {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.tooltip-content {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin-bottom: 14px;
+}
+
+.tooltip-portals {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.portal-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-subtle);
+  border-radius: 10px;
+  text-decoration: none;
+  color: var(--text-primary);
+  transition: all 0.2s ease;
+  font-size: 13px;
+}
+
+.portal-link:hover {
+  background: rgba(0, 229, 255, 0.08);
+  border-color: var(--accent-primary);
+  transform: translateX(4px);
+}
+
+.portal-link .material-icons-round {
+  font-size: 18px;
+  color: var(--accent-primary);
+}
+
+.portal-link .portal-name {
+  flex: 1;
+  font-weight: 500;
+}
+
+.portal-link .portal-tier {
+  font-size: 11px;
+  padding: 3px 8px;
+  background: rgba(16, 185, 129, 0.15);
+  color: var(--accent-green);
+  border-radius: 6px;
+  font-weight: 600;
+}
+
+
+/* ==========================================
+   PORTAL GUIDANCE SECTION
+   ========================================== */
+
+.portal-guidance-section {
+  margin: 80px 0;
+  padding: 60px 40px;
+  background: linear-gradient(135deg, rgba(10, 22, 40, 0.95), rgba(13, 31, 53, 0.95));
+  border: 1px solid var(--border-subtle);
+  border-radius: 32px;
+  position: relative;
+  overflow: hidden;
+}
+
+.portal-guidance-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, 
+    var(--accent-primary), 
+    var(--accent-tertiary), 
+    var(--accent-pink),
+    var(--accent-gold),
+    var(--accent-green)
+  );
+  background-size: 200% 100%;
+  animation: gradientMove 4s linear infinite;
+}
+
+@keyframes gradientMove {
+  0% { background-position: 0% 0%; }
+  100% { background-position: 200% 0%; }
+}
+
+.portal-guidance-header {
+  text-align: center;
+  margin-bottom: 50px;
+  position: relative;
+  z-index: 2;
+}
+
+.portal-guidance-title {
+  font-family: var(--font-heading);
+  font-size: 36px;
+  font-weight: 900;
+  color: var(--text-primary);
+  margin-bottom: 16px;
+}
+
+.portal-guidance-subtitle {
+  font-size: 18px;
+  color: var(--text-secondary);
+  max-width: 700px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.portal-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 30px;
+  position: relative;
+  z-index: 2;
+}
+
+.portal-card {
+  background: var(--bg-glass);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--border-subtle);
+  border-radius: 20px;
+  padding: 28px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.portal-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--card-accent, var(--accent-primary)), transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.portal-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--card-accent, var(--accent-primary));
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.portal-card:hover::before {
+  opacity: 1;
+}
+
+.portal-card-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.portal-card-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, var(--card-accent, var(--accent-primary)), var(--card-accent-secondary, var(--accent-tertiary)));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  color: #fff;
+  box-shadow: 0 8px 20px rgba(var(--card-accent-rgb, 0, 229, 255), 0.3);
+}
+
+.portal-card-title {
+  font-family: var(--font-heading);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.portal-card-type {
+  font-size: 13px;
+  color: var(--accent-primary);
+  font-weight: 600;
+}
+
+.portal-card-desc {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.portal-card-features {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 20px 0;
+}
+
+.portal-card-features li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 0;
+  font-size: 13px;
+  color: var(--text-secondary);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.portal-card-features li:last-child {
+  border-bottom: none;
+}
+
+.portal-card-features .material-icons-round {
+  font-size: 16px;
+  color: var(--accent-green);
+}
+
+.portal-card-action {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.portal-card-btn {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 20px;
+  background: linear-gradient(135deg, var(--card-accent, var(--accent-primary)), var(--card-accent-secondary, var(--accent-tertiary)));
+  border: none;
+  border-radius: 12px;
+  color: #030810;
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.portal-card-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(var(--card-accent-rgb, 0, 229, 255), 0.4);
+}
+
+.portal-card-status {
+  font-size: 12px;
+  color: var(--accent-gold);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+
+/* ==========================================
+   AI-AUTOMATED WORLD PHILOSOPHY BANNER
+   ========================================== */
+
+.ai-philosophy-banner {
+  margin: 60px 0;
+  padding: 40px;
+  background: linear-gradient(135deg, 
+    rgba(0, 229, 255, 0.05), 
+    rgba(167, 139, 250, 0.05),
+    rgba(244, 114, 182, 0.05)
+  );
+  border: 1px solid var(--border-subtle);
+  border-radius: 24px;
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  position: relative;
+  overflow: hidden;
+}
+
+.ai-philosophy-banner::before {
+  content: '';
+  position: absolute;
+  top: -100%;
+  right: -100%;
+  width: 300%;
+  height: 300%;
+  background: conic-gradient(
+    from 0deg,
+    transparent,
+    rgba(0, 229, 255, 0.1),
+    transparent,
+    rgba(167, 139, 250, 0.1),
+    transparent
+  );
+  animation: philosophyRotate 15s linear infinite;
+}
+
+@keyframes philosophyRotate {
+  100% { transform: rotate(360deg); }
+}
+
+.ai-philosophy-content {
+  flex: 1;
+  position: relative;
+  z-index: 2;
+}
+
+.ai-philosophy-title {
+  font-family: var(--font-heading);
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.ai-philosophy-title .material-icons-round {
+  font-size: 32px;
+  color: var(--accent-primary);
+}
+
+.ai-philosophy-text {
+  font-size: 15px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  max-width: 600px;
+}
+
+.ai-philosophy-stats {
+  display: flex;
+  gap: 30px;
+  margin-top: 20px;
+}
+
+.philosophy-stat {
+  text-align: center;
+}
+
+.philosophy-stat-value {
+  font-size: 28px;
+  font-weight: 900;
+  font-family: var(--font-mono);
+  background: linear-gradient(135deg, var(--accent-primary), var(--accent-tertiary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.philosophy-stat-label {
+  font-size: 12px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.ai-philosophy-visual {
+  position: relative;
+  z-index: 2;
+  width: 200px;
+  height: 200px;
+  flex-shrink: 0;
+}
+
+.ai-planet-visual {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: linear-gradient(135deg, 
+    rgba(0, 229, 255, 0.2), 
+    rgba(167, 139, 250, 0.2)
+  );
+  position: relative;
+  animation: planetFloat 4s ease-in-out infinite;
+}
+
+@keyframes planetFloat {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-15px) rotate(180deg); }
+}
+
+.ai-planet-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 140%;
+  height: 140%;
+  border: 2px dashed rgba(0, 229, 255, 0.3);
+  border-radius: 50%;
+  animation: ringRotate 10s linear infinite;
+}
+
+@keyframes ringRotate {
+  100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+.ai-orbit-dot {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--accent-cyan);
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  box-shadow: 0 0 15px var(--accent-cyan);
+  animation: orbitMove 3s linear infinite;
+}
+
+@keyframes orbitMove {
+  100% { transform: translateX(-50%) rotate(360deg) translateY(-70px); }
+}
+
+
+/* ==========================================
+   STARTUP CARD ENHANCEMENTS
+   ========================================== */
+
+.startup-card-enhanced {
+  position: relative;
+}
+
+.startup-card-enhanced .startup-actions {
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.startup-card-enhanced .status-in-progress {
+  margin-left: auto;
+}
+
+.enhanced-metrics-bar {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 15px 20px;
+  background: rgba(0, 229, 255, 0.04);
+  border: 1px solid rgba(0, 229, 255, 0.15);
+  border-radius: 14px;
+  margin-top: 15px;
+}
+
+.metric-pill {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.metric-pill .value {
+  font-weight: 700;
+  color: var(--accent-primary);
+  font-family: var(--font-mono);
+}
+
+</style>
+
+
+<!-- ==========================================
+   PREMIUM VIDEO SECTION (Insert after hero section)
+   ========================================== -->
+
+<section class="premium-video-section">
+  <div class="premium-video-hero">
+    <div class="premium-video-header">
+      <h2 class="premium-video-title">
+        <span class="material-icons-round">auto_awesome</span>
+        Premium Explainer: Quantum Therapeutics
+      </h2>
+      <span class="premium-badge">
+        <span class="material-icons-round" style="font-size: 16px;">new_releases</span>
+        Enhanced Quality
+      </span>
+    </div>
+    
+    <div class="premium-video-container">
+      <video 
+        id="qt-premium-video"
+        preload="metadata"
+        controls
+        poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1920 1080'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23030810'/%3E%3Cstop offset='100%25' style='stop-color:%230a1628'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect fill='url(%23g)' width='1920' height='1080'/%3E%3Ccircle cx='960' cy='480' r='150' fill='none' stroke='%2300E5FF' stroke-width='2' opacity='0.3'/%3E%3Ccircle cx='960' cy='480' r='100' fill='none' stroke='%23a78bfa' stroke-width='2' opacity='0.4'/%3E%3Ccircle cx='960' cy='480' r='50' fill='%2300E5FF' opacity='0.2'/%3E%3Ctext x='960' y='700' fill='%2300E5FF' font-family='sans-serif' font-size='48' font-weight='bold' text-anchor='middle'%3EQuantum Therapeutics%3C/text%3E%3Ctext x='960' y='760' fill='%2394a3b8' font-family='sans-serif' font-size='24' text-anchor='middle'%3EPremium Video Analysis%3C/text%3E%3C/svg%3E"
+      >
+        <source src="video-clips/phase3/startups/quantum_therapeutics_premium.mp4" type="video/mp4">
+        <source src="video-clips/phase3/startups/quantum_therapeutics_explainer.mp4" type="video/mp4">
+        Your browser does not support video playback.
+      </video>
+      
+      <div class="premium-video-overlay">
+        <div class="premium-video-info">
+          <h4>Quantum Therapeutics — Deep Technical Analysis</h4>
+          <p>Quantum KPIs • VQE Convergence • Wave Function Visualization</p>
+        </div>
+        <div class="premium-video-kpis">
+          <div class="premium-kpi-mini">
+            <div class="value">94.2%</div>
+            <div class="label">VQE Acc.</div>
+          </div>
+          <div class="premium-kpi-mini">
+            <div class="value">40×</div>
+            <div class="label">Speedup</div>
+          </div>
+          <div class="premium-kpi-mini">
+            <div class="value">127</div>
+            <div class="label">Qubits</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- In-Progress Status with Portal Guidance -->
+    <div style="margin-top: 24px; display: flex; align-items: center; gap: 20px; position: relative; z-index: 2;">
+      <div class="status-in-progress">
+        <span class="status-dot"></span>
+        <span>Video Enhancement In Progress</span>
+        
+        <div class="status-tooltip">
+          <div class="tooltip-header">
+            <div class="tooltip-icon">⚛</div>
+            <div>
+              <div class="tooltip-title">Premium Generation Active</div>
+              <div class="tooltip-subtitle">AI-powered video synthesis</div>
+            </div>
+          </div>
+          <div class="tooltip-content">
+            This video is being enhanced with particle physics visualizations, quantum KPI dashboards, and wave function probability distributions. Full premium quality coming soon.
+          </div>
+          <div class="tooltip-portals">
+            <a href="https://cloud.google.com/free" target="_blank" rel="noopener" class="portal-link">
+              <span class="material-icons-round">cloud</span>
+              <span class="portal-name">Google Cloud Free Tier</span>
+              <span class="portal-tier">FREE</span>
+            </a>
+            <a href="https://colab.research.google.com/" target="_blank" rel="noopener" class="portal-link">
+              <span class="material-icons-round">code</span>
+              <span class="portal-name">Google Colab</span>
+              <span class="portal-tier">FREE</span>
+            </a>
+            <a href="https://platform.openai.com/" target="_blank" rel="noopener" class="portal-link">
+              <span class="material-icons-round">psychology</span>
+              <span class="portal-name">OpenAI Platform</span>
+              <span class="portal-tier">FREEMIUM</span>
+            </a>
+          </div>
+        </div>
+      </div>
+      
+      <span style="color: var(--text-muted); font-size: 13px;">
+        Generated using edge-tts + PIL + FFmpeg pipeline
+      </span>
+    </div>
+  </div>
+</section>
+
+
+<!-- ==========================================
+   PORTAL GUIDANCE SECTION
+   ========================================== -->
+
+<section class="portal-guidance-section">
+  <div class="portal-guidance-header">
+    <h2 class="portal-guidance-title">
+      🚀 Free-Tier AI & Computing Portals
+    </h2>
+    <p class="portal-guidance-subtitle">
+      We live in an AI-generated and automated planet. These platforms provide free access to 
+      cutting-edge quantum computing simulation, ML training, and drug discovery tools. 
+      No credit card required for exploration.
+    </p>
+  </div>
+  
+  <div class="portal-grid">
+    
+    <!-- Google Cloud Portal -->
+    <div class="portal-card" style="--card-accent: #4285f4; --card-accent-secondary: #34a853; --card-accent-rgb: 66, 133, 244;">
+      <div class="portal-card-header">
+        <div class="portal-card-icon">☁️</div>
+        <div>
+          <h3 class="portal-card-title">Google Cloud Platform</h3>
+          <span class="portal-card-type">Quantum & ML Infrastructure</span>
+        </div>
+      </div>
+      <p class="portal-card-desc">
+        Access Google's quantum computing simulator (Cirq), Vertex AI for model training, 
+        and BigQuery for large-scale data analysis. $300 free credits for new accounts.
+      </p>
+      <ul class="portal-card-features">
+        <li><span class="material-icons-round">check_circle</span> Quantum Computing Engine (Aria)</li>
+        <li><span class="material-icons-round">check_circle</span> Vertex AI AutoML</li>
+        <li><span class="material-icons-round">check_circle</span> $300 Free Credits (90 days)</li>
+        <li><span class="material-icons-round">check_circle</span> Always Free Tier Services</li>
+      </ul>
+      <div class="portal-card-action">
+        <a href="https://cloud.google.com/free" target="_blank" rel="noopener" class="portal-card-btn">
+          <span class="material-icons-round">open_in_new</span>
+          Get Started Free
+        </a>
+        <span class="portal-card-status">
+          <span class="status-dot"></span>
+          Recommended
+        </span>
+      </div>
+    </div>
+
+    <!-- Hugging Face Portal -->
+    <div class="portal-card" style="--card-accent: #ff9d00; --card-accent-secondary: #ffd21e; --card-accent-rgb: 255, 157, 0;">
+      <div class="portal-card-header">
+        <div class="portal-card-icon">🤗</div>
+        <div>
+          <h3 class="portal-card-title">Hugging Face</h3>
+          <span class="portal-card-type">Open Source AI Models</span>
+        </div>
+      </div>
+      <p class="portal-card-desc">
+        Host, train, and collaborate on ML models for free. Access thousands of pre-trained 
+        models for NLP, computer vision, and molecular property prediction.
+      </p>
+      <ul class="portal-card-features">
+        <li><span class="material-icons-round">check_circle</span> Free Model Hosting</li>
+        <li><span class="material-icons-round">check_circle</span> Spaces (Demo Apps)</li>
+        <li><span class="material-icons-round">check_circle</span> Datasets Library</li>
+        <li><span class="material-icons-round">check_circle</span> BioML Models Available</li>
+      </ul>
+      <div class="portal-card-action">
+        <a href="https://huggingface.co/" target="_blank" rel="noopener" class="portal-card-btn">
+          <span class="material-icons-round">open_in_new</span>
+          Explore Models
+        </a>
+        <span class="portal-card-status">
+          <span class="status-dot"></span>
+          Community
+        </span>
+      </div>
+    </div>
+
+    <!-- IBM Quantum Portal -->
+    <div class="portal-card" style="--card-accent: #00f0ff; --card-accent-secondary: #054ada; --card-accent-rgb: 0, 240, 255;">
+      <div class="portal-card-header">
+        <div class="portal-card-icon">⚛️</div>
+        <div>
+          <h3 class="portal-card-title">IBM Quantum Learning</h3>
+          <span class="portal-card-type">Real Quantum Hardware Access</span>
+        </div>
+      </div>
+      <p class="portal-card-desc">
+        Run quantum circuits on real IBM quantum processors. Qiskit textbook, 
+        interactive labs, and free access to 127-qubit Eagle systems.
+      </p>
+      <ul class="portal-card-features">
+        <li><span class="material-icons-round">check_circle</span> Real Quantum Hardware</li>
+        <li><span class="material-icons-round">check_circle</span> Qiskit SDK (Python)</li>
+        <li><span class="material-icons-round">check_circle</span> Interactive Textbook</li>
+        <li><span class="material-icons-round">check_circle</span> Circuit Composer GUI</li>
+      </ul>
+      <div class="portal-card-action">
+        <a href="https://learning.quantum.ibm.com/" target="_blank" rel="noopener" class="portal-card-btn">
+          <span class="material-icons-round">open_in_new</span>
+          Start Learning
+        </a>
+        <span class="portal-card-status">
+          <span class="status-dot"></span>
+          Free Access
+        </span>
+      </div>
+    </div>
+
+    <!-- Chinese AI Platforms -->
+    <div class="portal-card" style="--card-accent: #e63946; --card-accent-secondary: #f1faee; --card-accent-rgb: 230, 57, 70;">
+      <div class="portal-card-header">
+        <div class="portal-card-icon">🇨🇳</div>
+        <div>
+          <h3 class="portal-card-title">Chinese AI Platforms</h3>
+          <span class="portal-card-type">Baidu / Alibaba / Tencent</span>
+        </div>
+      </div>
+      <p class="portal-card-desc">
+        Access Baidu PaddlePaddle, Alibaba PAI, and Tencent TI-One for free-tier 
+        ML training, NLP services, and cloud computing resources.
+      </p>
+      <ul class="portal-card-features">
+        <li><span class="material-icons-round">check_circle</span> Baidu PaddlePaddle (免费)</li>
+        <li><span class="material-icons-round">check_circle</span> Alibaba PAI Studio</li>
+        <li><span class="material-icons-round">check_circle</span> Tencent Cloud Free Tier</li>
+        <li><span class="material-icons-round">check_circle</span> SenseTime Open Platform</li>
+      </ul>
+      <div class="portal-card-action">
+        <a href="https://www.paddlepaddle.org.cn/" target="_blank" rel="noopener" class="portal-card-btn">
+          <span class="material-icons-round">open_in_new</span>
+          Explore CN AI
+        </a>
+        <span class="portal-card-status">
+          <span class="status-dot"></span>
+          中文支持
+        </span>
+      </div>
+    </div>
+
+    <!-- GitHub Copilot / Codespaces -->
+    <div class="portal-card" style="--card-accent: #6e5494; --card-accent-secondary: #2ea44f; --card-accent-rgb: 110, 84, 148;">
+      <div class="portal-card-header">
+        <div class="portal-card-icon">🐙</div>
+        <div>
+          <h3 class="portal-card-title">GitHub Copilot & Codespaces</h3>
+          <span class="portal-card-type">AI-Assisted Development</span>
+        </div>
+      </div>
+      <p class="portal-card-desc">
+        Free AI code completion, 60 hours/month of Codespaces cloud development 
+        environments, and unlimited public/private repositories.
+      </p>
+      <ul class="portal-card-features">
+        <li><span class="material-icons-round">check_circle</span> Copilot Chat (Free tier)</li>
+        <li><span class="material-icons-round">check_circle</span> 60 hrs Codespaces/month</li>
+        <li><span class="material-icons-round">check_circle</span> Actions CI/CD (Free)</li>
+        <li><span class="material-icons-round">check_circle</span> Pages Hosting (Free)</li>
+      </ul>
+      <div class="portal-card-action">
+        <a href="https://github.com/features/copilot" target="_blank" rel="noopener" class="portal-card-btn">
+          <span class="material-icons-round">open_in_new</span>
+          Try Copilot
+        </a>
+        <span class="portal-card-status">
+          <span class="status-dot"></span>
+          Dev Essential
+        </span>
+      </div>
+    </div>
+
+    <!-- Kaggle Portal -->
+    <div class="portal-card" style="--card-accent: #20beff; --card-accent-secondary: #ffd21e; --card-accent-rgb: 32, 190, 255;">
+      <div class="portal-card-header">
+        <div class="portal-card-icon">📊</div>
+        <div>
+          <h3 class="portal-card-title">Kaggle (Google)</h3>
+          <span class="portal-card-type">Data Science Competitions</span>
+        </div>
+      </div>
+      <p class="portal-card-desc">
+        Free GPU/TPU notebooks for ML experiments, datasets for drug discovery research, 
+        and community competitions with cash prizes.
+      </p>
+      <ul class="portal-card-features">
+        <li><span class="material-icons-round">check_circle</span> Free GPU Notebooks</li>
+        <li><span class="material-icons-round">check_circle</span> TPU Acceleration</li>
+        <li><span class="material-icons-round">check_circle</span> 50k+ Public Datasets</li>
+        <li><span class="material-icons-round">check_circle</span> Competition Prizes</li>
+      </ul>
+      <div class="portal-card-action">
+        <a href="https://www.kaggle.com/" target="_blank" rel="noopener" class="portal-card-btn">
+          <span class="material-icons-round">open_in_new</span>
+          Start Kaggling
+        </a>
+        <span class="portal-card-status">
+          <span class="status-dot"></span>
+          Data Science
+        </span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ==========================================
+   AI-AUTOMATED WORLD PHILOSOPHY BANNER
+   ========================================== -->
+
+<section class="ai-philosophy-banner">
+  <div class="ai-philosophy-content">
+    <h3 class="ai-philosophy-title">
+      <span class="material-icons-round">smart_toy</span>
+      Living in an AI-Generated Planet
+    </h3>
+    <p class="ai-philosophy-text">
+      Our platform reflects the reality of our automated world. Every feature shown here 
+      leverages freely available AI services, open-source tools, and community-driven innovation. 
+      The videos are generated by TTS pipelines, the analysis uses free-tier APIs, and the 
+      entire stack runs on cost-free infrastructure. This isn't placeholder content—this is 
+      how modern scientific platforms are built.
+    </p>
+    <div class="ai-philosophy-stats">
+      <div class="philosophy-stat">
+        <div class="philosophy-stat-value">100%</div>
+        <div class="philosophy-stat-label">Automated Pipeline</div>
+      </div>
+      <div class="philosophy-stat">
+        <div class="philosophy-stat-value">$0</div>
+        <div class="philosophy-stat-label">Cost to Replicate</div>
+      </div>
+      <div class="philosophy-stat">
+        <div class="philosophy-stat-value">∞</div>
+        <div class="philosophy-stat-label">Scalability</div>
+      </div>
+    </div>
+  </div>
+  <div class="ai-philosophy-visual">
+    <div class="ai-planet-visual">
+      <div class="ai-planet-ring"></div>
+      <div class="ai-orbit-dot"></div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ==========================================
+   JAVASCRIPT: IN-PROGRESS STATE MANAGEMENT
+   ========================================== -->
+
+<script>
+// Initialize In-Progress States System
+(function() {
+  'use strict';
+  
+  console.log('%c[SciMSPT] Initializing AI-Automated Portal System...', 
+    'color: #00E5FF; font-weight: bold;');
+  
+  // Add In-Progress badges to existing startup cards
+  document.querySelectorAll('.startup-card').forEach((card, index) => {
+    const actionsDiv = card.querySelector('.startup-actions');
+    if (actionsDiv && !card.querySelector('.status-in-progress')) {
+      
+      const statusBadge = document.createElement('div');
+      statusBadge.className = 'status-in-progress';
+      statusBadge.innerHTML = `
+        <span class="status-dot"></span>
+        <span>In Progress</span>
+        
+        <div class="status-tooltip">
+          <div class="tooltip-header">
+            <div class="tooltip-icon">${['⚛', '🧠', '☀️', '🧬', '⚡', '🔬'][index] || '🚀'}</div>
+            <div>
+              <div class="tooltip-title">Feature Under Development</div>
+              <div class="tooltip-subtitle">Active R&D Phase</div>
+            </div>
+          </div>
+          <div class="tooltip-content">
+            This capability is currently being enhanced with advanced AI integration. 
+            Meanwhile, you can explore similar functionality through our recommended free-tier portals.
+          </div>
+          <div class="tooltip-portals">
+            <a href="https://cloud.google.com/free" target="_blank" rel="noopener" class="portal-link">
+              <span class="material-icons-round">cloud</span>
+              <span class="portal-name">Google Cloud Free</span>
+              <span class="portal-tier">FREE</span>
+            </a>
+            <a href="https://colab.research.google.com/" target="_blank" rel="noopener" class="portal-link">
+              <span class="material-icons-round">code</span>
+              <span class="portal-name">Colab Notebooks</span>
+              <span class="portal-tier">FREE</span>
+            </a>
+          </div>
+        </div>
+      `;
+      
+      actionsDiv.appendChild(statusBadge);
+    }
+    
+    // Add enhanced metrics bar if not present
+    const tagsDiv = card.querySelector('.startup-tags');
+    if (tagsDiv && !card.querySelector('.enhanced-metrics-bar')) {
+      const metricsBar = document.createElement('div');
+      metricsBar.className = 'enhanced-metrics-bar';
+      
+      // Extract existing metrics
+      const metricValues = card.querySelectorAll('.metric-value');
+      const labels = ['Validation', 'Raised', 'Papers'];
+      let metricsHTML = '';
+      
+      metricValues.forEach((metric, i) => {
+        if (i < 3) {
+          metricsHTML += `
+            <div class="metric-pill">
+              <span class="value">${metric.textContent}</span>
+              <span>${labels[i] || 'Metric'}</span>
+            </div>
+          `;
+        }
+      });
+      
+      metricsBar.innerHTML = metricsHTML + `
+        <div class="metric-pill" style="margin-left: auto;">
+          <span class="value" style="color: var(--accent-gold);">AI</span>
+          <span>Enhanced</span>
+        </div>
+      `;
+      
+      card.appendChild(metricsBar);
+    }
+  });
+  
+  // Animate philosophy stats on scroll
+  const observerOptions = {
+    threshold: 0.5,
+    rootMargin: '0px'
+  };
+  
+  const philosophyObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('animate-in');
+        
+        // Animate counters
+        entry.target.querySelectorAll('.philosophy-stat-value').forEach(stat => {
+          const finalValue = stat.textContent;
+          let currentValue = 0;
+          const isNumber = !isNaN(parseInt(finalValue));
+          const isInfinity = finalValue === '∞';
+          
+          if (isInfinity) return; // Skip infinity symbol
+          
+          if (isNumber && finalValue.includes('%')) {
+            const targetNum = parseInt(finalValue);
+            const increment = targetNum / 30;
+            const timer = setInterval(() => {
+              currentValue += increment;
+              if (currentValue >= targetNum) {
+                stat.textContent = finalValue;
+                clearInterval(timer);
+              } else {
+                stat.textContent = Math.floor(currentValue) + '%';
+              }
+            }, 30);
+          } else if (finalValue === '$0') {
+            stat.style.opacity = '0';
+            setTimeout(() => {
+              stat.textContent = '$0';
+              stat.style.opacity = '1';
+              stat.style.transition = 'opacity 0.5s ease';
+            }, 500);
+          }
+        });
+      }
+    });
+  }, observerOptions);
+  
+  document.querySelectorAll('.ai-philosophy-banner').forEach(banner => {
+    philosophyObserver.observe(banner);
+  });
+  
+  // Portal card hover effects
+  document.querySelectorAll('.portal-card').forEach(card => {
+    card.addEventListener('mouseenter', function() {
+      this.style.setProperty('--glow-intensity', '1');
+    });
+    
+    card.addEventListener('mouseleave', function() {
+      this.style.setProperty('--glow-intensity', '0');
+    });
+  });
+  
+  console.log('%c[SciMSPT] Portal Guidance System Initialized ✓', 
+    'color: #10b981; font-weight: bold;');
+  
+})();
+
+// Premium Video Player Enhancements
+document.addEventListener('DOMContentLoaded', function() {
+  const premiumVideo = document.getElementById('qt-premium-video');
+  
+  if (premiumVideo) {
+    // Custom play button overlay
+    premiumVideo.addEventListener('click', function() {
+      if (this.paused) {
+        this.play();
+      } else {
+        this.pause();
+      }
+    });
+    
+    // Log video events for analytics
+    premiumVideo.addEventListener('play', () => {
+      console.log('[SciMSPT] Premium video playback started');
+    });
+    
+    premiumVideo.addEventListener('ended', () => {
+      console.log('[SciMSPT] Premium video playback completed');
+    });
+  }
+});
+</script>

@@ -1,0 +1,2312 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SciMSPT Studio IDE — AI-Powered Scientific Workspace</title>
+  <meta name="description" content="Browser-based scientific development environment with AI assistance, file management, and integrated research tools. No installation required.">
+  
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  
+  <!-- Monaco Editor -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.45.0/min/vs/editor/editor.main.css">
+  
+  <style>
+    :root {
+      --bg-dark: #0a1628;
+      --bg-light: #f5f8fc;
+      --bg-card-dark: rgba(20, 40, 64, 0.7);
+      --bg-card-light: rgba(255, 255, 255, 0.95);
+      --primary-dark: #e8f0f8;
+      --primary-light: #142840;
+      --accent: #4da8da;
+      --accent-glow: #2d7ab3;
+      --muted-dark: #7a9bb8;
+      --muted-light: #5a7a96;
+      --border-dark: rgba(77, 168, 218, 0.25);
+      --border-light: #c0d0e2;
+      --surface-dark: rgba(45, 122, 179, 0.08);
+      --surface-light: #edf2f9;
+      
+      --font-heading: 'Playfair Display', Georgia, serif;
+      --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-num: 'JetBrains Mono', 'Inter', monospace;
+      
+      --nav-height: 56px;
+      --sidebar-width: 260px;
+      --panel-width: 320px;
+    }
+    
+    [data-theme="dark"] {
+      --bg: var(--bg-dark);
+      --bg-card: var(--bg-card-dark);
+      --primary: var(--primary-dark);
+      --muted: var(--muted-dark);
+      --border: var(--border-dark);
+      --surface: var(--surface-dark);
+      --shadow: 0 12px 48px rgba(0, 0, 0, 0.4);
+      --nav-bg: rgba(10, 22, 40, 0.98);
+      --editor-bg: #1e1e1e;
+      --panel-bg: rgba(15, 25, 40, 0.95);
+      --glow-color: rgba(77, 168, 218, 0.15);
+    }
+    
+    [data-theme="light"] {
+      --bg: var(--bg-light);
+      --bg-card: var(--bg-card-light);
+      --primary: var(--primary-light);
+      --muted: var(--muted-light);
+      --border: var(--border-light);
+      --surface: var(--surface-light);
+      --shadow: 0 12px 48px rgba(20, 40, 64, 0.1);
+      --nav-bg: rgba(245, 248, 252, 0.98);
+      --editor-bg: #ffffff;
+      --panel-bg: rgba(248, 250, 252, 0.95);
+      --glow-color: rgba(45, 122, 179, 0.08);
+    }
+    
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    html, body {
+      height: 100%;
+      overflow: hidden;
+    }
+    
+    body {
+      font-family: var(--font-body);
+      background: var(--bg);
+      color: var(--primary);
+      line-height: 1.5;
+      transition: background 0.3s ease, color 0.3s ease;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ═══════════════════════════════════════════════════════════════
+       STUDIO IDE LAYOUT
+       ═══════════════════════════════════════════════════════════════ */
+    
+    .ide-container {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      width: 100vw;
+      overflow: hidden;
+    }
+    
+    /* Top Navigation Bar */
+    .ide-navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: var(--nav-height);
+      background: var(--nav-bg);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 16px;
+      z-index: 100;
+      gap: 12px;
+    }
+    
+    .ide-nav-left {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    
+    .ide-logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      color: var(--primary);
+    }
+    
+    .ide-logo-icon {
+      width: 32px;
+      height: 32px;
+      background: linear-gradient(135deg, var(--accent), #a78bfa);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      color: white;
+    }
+    
+    .ide-logo-text {
+      font-family: var(--font-heading);
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+    }
+    
+    .ide-logo-text span { color: var(--accent); }
+    
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      color: var(--muted);
+      padding: 6px 12px;
+      background: var(--surface);
+      border-radius: 6px;
+      border: 1px solid var(--border);
+    }
+    
+    .breadcrumb-item {
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+    
+    .breadcrumb-item:hover { color: var(--accent); }
+    .breadcrumb-sep { opacity: 0.5; }
+    
+    .ide-nav-center {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      background: var(--surface);
+      border-radius: 8px;
+      padding: 4px;
+      border: 1px solid var(--border);
+    }
+    
+    .nav-tab {
+      padding: 6px 14px;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--muted);
+      border: none;
+      background: transparent;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    
+    .nav-tab:hover { color: var(--primary); background: var(--border); }
+    .nav-tab.active { 
+      color: var(--accent); 
+      background: rgba(77, 168, 218, 0.12);
+    }
+    
+    .nav-tab .material-icons { font-size: 16px; }
+    
+    .ide-nav-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    /* AI Scope Button */
+    .ai-scope-btn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 14px;
+      background: linear-gradient(135deg, rgba(167, 139, 250, 0.15), rgba(77, 168, 218, 0.15));
+      border: 1px solid rgba(167, 139, 250, 0.4);
+      border-radius: 8px;
+      color: #a78bfa;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      position: relative;
+    }
+    
+    .ai-scope-btn:hover {
+      background: linear-gradient(135deg, rgba(167, 139, 250, 0.25), rgba(77, 168, 218, 0.25));
+      transform: translateY(-1px);
+      box-shadow: 0 4px 16px rgba(167, 139, 250, 0.3);
+    }
+    
+    .ai-scope-btn .material-icons { font-size: 18px; animation: sparkle 2s infinite; }
+    
+    @keyframes sparkle {
+      0%, 100% { transform: scale(1) rotate(0deg); }
+      50% { transform: scale(1.15) rotate(10deg); }
+    }
+    
+    .ai-indicator {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #4ade80;
+      animation: pulse 2s infinite;
+    }
+    
+    @keyframes pulse {
+      0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.5); }
+      50% { opacity: 0.8; box-shadow: 0 0 0 6px rgba(74, 222, 128, 0); }
+    }
+    
+    /* User Avatar */
+    .user-avatar {
+      width: 34px;
+      height: 34px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, var(--accent), #a78bfa);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-size: 14px;
+      font-weight: 600;
+      color: white;
+      border: 2px solid transparent;
+    }
+    
+    .user-avatar:hover {
+      border-color: var(--accent);
+      transform: scale(1.05);
+    }
+    
+    /* Main Content Area */
+    .ide-main {
+      display: flex;
+      flex: 1;
+      overflow: hidden;
+    }
+    
+    /* Activity Bar (Far Left Icons) */
+    .activity-bar {
+      width: 52px;
+      background: var(--panel-bg);
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 8px 0;
+      gap: 4px;
+    }
+    
+    .activity-icon {
+      width: 42px;
+      height: 42px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      cursor: pointer;
+      border-radius: 8px;
+      transition: all 0.2s;
+      position: relative;
+    }
+    
+    .activity-icon:hover {
+      color: var(--primary);
+      background: var(--surface);
+    }
+    
+    .activity-icon.active {
+      color: var(--accent);
+      background: rgba(77, 168, 218, 0.12);
+    }
+    
+    .activity-icon.active::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 3px;
+      height: 24px;
+      background: var(--accent);
+      border-radius: 0 3px 3px 0;
+    }
+    
+    .activity-icon .material-icons { font-size: 22px; }
+    
+    .activity-spacer { flex: 1; }
+    
+    /* Sidebar (File Explorer) */
+    .sidebar {
+      width: var(--sidebar-width);
+      background: var(--panel-bg);
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    
+    .sidebar-header {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    
+    .sidebar-title {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--muted);
+    }
+    
+    .sidebar-actions {
+      display: flex;
+      gap: 4px;
+    }
+    
+    .sidebar-action {
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      cursor: pointer;
+      border-radius: 4px;
+      transition: all 0.2s;
+      border: none;
+      background: transparent;
+    }
+    
+    .sidebar-action:hover { 
+      color: var(--accent); 
+      background: var(--surface);
+    }
+    
+    .sidebar-action .material-icons { font-size: 16px; }
+    
+    /* File Tree */
+    .file-tree {
+      flex: 1;
+      overflow-y: auto;
+      padding: 8px 0;
+    }
+    
+    .tree-item {
+      display: flex;
+      align-items: center;
+      padding: 6px 12px;
+      cursor: pointer;
+      transition: all 0.15s;
+      user-select: none;
+      gap: 8px;
+    }
+    
+    .tree-item:hover {
+      background: var(--surface);
+    }
+    
+    .tree-item.selected {
+      background: rgba(77, 168, 218, 0.12);
+      color: var(--accent);
+    }
+    
+    .tree-item .material-icons { 
+      font-size: 18px; 
+      color: var(--muted);
+    }
+    
+    .tree-item.folder > .material-icons { color: var(--accent); }
+    
+    .tree-item.selected .material-icons { color: var(--accent); }
+    
+    .tree-name {
+      font-size: 13px;
+      font-family: var(--font-num);
+      flex: 1;
+    }
+    
+    .tree-indent { margin-left: 16px; }
+    
+    /* Editor Area */
+    .editor-area {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      background: var(--editor-bg);
+    }
+    
+    .tabs-bar {
+      display: flex;
+      align-items: center;
+      background: var(--panel-bg);
+      border-bottom: 1px solid var(--border);
+      padding: 0 8px;
+      min-height: 36px;
+      overflow-x: auto;
+    }
+    
+    .tab {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      font-size: 12px;
+      font-family: var(--font-num);
+      color: var(--muted);
+      cursor: pointer;
+      border-right: 1px solid var(--border);
+      background: transparent;
+      transition: all 0.2s;
+      white-space: nowrap;
+      max-width: 160px;
+    }
+    
+    .tab:hover { background: var(--surface); }
+    
+    .tab.active {
+      background: var(--editor-bg);
+      color: var(--primary);
+      border-bottom: 2px solid var(--accent);
+      margin-bottom: -1px;
+    }
+    
+    .tab-icon { font-size: 14px; }
+    
+    .tab-name {
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    
+    .tab-close {
+      width: 18px;
+      height: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 4px;
+      opacity: 0;
+      transition: all 0.15s;
+    }
+    
+    .tab:hover .tab-close { opacity: 1; }
+    .tab-close:hover { background: var(--border); }
+    
+    /* Monaco Editor Container */
+    #monaco-editor {
+      flex: 1;
+      overflow: hidden;
+    }
+    
+    /* Panel (AI Assistant / Terminal) */
+    .panel {
+      width: var(--panel-width);
+      background: var(--panel-bg);
+      border-left: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    
+    .panel-tabs {
+      display: flex;
+      border-bottom: 1px solid var(--border);
+      background: rgba(0, 0, 0, 0.1);
+    }
+    
+    .panel-tab {
+      flex: 1;
+      padding: 10px;
+      font-size: 12px;
+      font-weight: 600;
+      text-align: center;
+      color: var(--muted);
+      cursor: pointer;
+      border: none;
+      background: transparent;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+    
+    .panel-tab:hover { background: var(--surface); }
+    .panel-tab.active { 
+      color: var(--accent); 
+      background: var(--editor-bg);
+      border-bottom: 2px solid var(--accent);
+    }
+    
+    .panel-content {
+      flex: 1;
+      overflow-y: auto;
+      display: none;
+      flex-direction: column;
+    }
+    
+    .panel-content.active { display: flex; }
+    
+    /* AI Chat Panel */
+    .ai-chat {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      padding: 16px;
+      gap: 12px;
+    }
+    
+    .ai-provider-selector {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      padding: 10px;
+      background: var(--surface);
+      border-radius: 10px;
+      border: 1px solid var(--border);
+    }
+    
+    .provider-chip {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      border-radius: 16px;
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+      border: 1px solid var(--border);
+      background: var(--bg-card);
+      color: var(--muted);
+      transition: all 0.2s;
+    }
+    
+    .provider-chip:hover { border-color: var(--accent); }
+    
+    .provider-chip.active {
+      background: linear-gradient(135deg, rgba(77, 168, 218, 0.2), rgba(167, 139, 250, 0.2));
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+    
+    .provider-chip .provider-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+    
+    .provider-gemini .provider-dot { background: #4285f4; }
+    .provider-grok .provider-dot { background: #000000; }
+    .provider-chatgpt .provider-dot { background: #10a37f; }
+    .provider-qwen .provider-dot { background: #ff6a00; }
+    .provider-minimax .provider-dot { background: #7c3aed; }
+    .provider-claude .provider-dot { background: #cc785c; }
+    
+    .chat-messages {
+      flex: 1;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      padding: 8px 0;
+    }
+    
+    .chat-message {
+      padding: 12px 14px;
+      border-radius: 12px;
+      max-width: 90%;
+      font-size: 13px;
+      line-height: 1.6;
+      animation: messageIn 0.3s ease;
+    }
+    
+    @keyframes messageIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .chat-message.user {
+      background: linear-gradient(135deg, var(--accent-glow), var(--accent));
+      color: white;
+      align-self: flex-end;
+      border-bottom-right-radius: 4px;
+    }
+    
+    .chat-message.ai {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      align-self: flex-start;
+      border-bottom-left-radius: 4px;
+    }
+    
+    .chat-message .sender {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 6px;
+      opacity: 0.7;
+    }
+    
+    .chat-input-area {
+      display: flex;
+      gap: 8px;
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
+    }
+    
+    .chat-input {
+      flex: 1;
+      padding: 12px 16px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      font-family: var(--font-body);
+      font-size: 13px;
+      color: var(--primary);
+      resize: none;
+      outline: none;
+      min-height: 44px;
+      max-height: 120px;
+      transition: all 0.2s;
+    }
+    
+    .chat-input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(77, 168, 218, 0.15);
+    }
+    
+    .send-btn {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--accent-glow), var(--accent));
+      border: none;
+      color: white;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.25s;
+    }
+    
+    .send-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 16px rgba(77, 168, 218, 0.4);
+    }
+    
+    .send-btn .material-icons { font-size: 20px; }
+    
+    /* Terminal Panel */
+    .terminal {
+      flex: 1;
+      background: #0d1117;
+      color: #58a6ff;
+      font-family: var(--font-num);
+      font-size: 13px;
+      padding: 12px;
+      overflow-y: auto;
+      line-height: 1.6;
+    }
+    
+    .terminal-line {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 4px;
+    }
+    
+    .terminal-prompt {
+      color: #7ee787;
+      user-select: none;
+    }
+    
+    .terminal-command {
+      color: #ffffff;
+    }
+    
+    .terminal-output {
+      color: #8b949e;
+      padding-left: 16px;
+    }
+    
+    /* Status Bar */
+    .status-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 24px;
+      background: var(--accent);
+      color: white;
+      font-size: 11px;
+      font-family: var(--font-num);
+      padding: 0 12px;
+    }
+    
+    .status-left, .status-right {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    
+    .status-item {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      cursor: pointer;
+      padding: 2px 6px;
+      border-radius: 3px;
+      transition: background 0.2s;
+    }
+    
+    .status-item:hover { background: rgba(255, 255, 255, 0.15); }
+    
+    /* AI Scope Dropdown Modal */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(4px);
+      z-index: 1000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      animation: fadeIn 0.2s ease;
+    }
+    
+    .modal-overlay.active { display: flex; }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    
+    .modal-content {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 32px;
+      max-width: 560px;
+      width: 90%;
+      max-height: 80vh;
+      overflow-y: auto;
+      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.5);
+      animation: slideUp 0.3s ease;
+    }
+    
+    @keyframes slideUp {
+      from { transform: translateY(30px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    
+    .modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 24px;
+    }
+    
+    .modal-title {
+      font-family: var(--font-heading);
+      font-size: 24px;
+      font-weight: 700;
+      color: #ffffff;
+    }
+    
+    .modal-close {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+    
+    .modal-close:hover { 
+      background: rgba(239, 68, 68, 0.15); 
+      color: #ef4444;
+    }
+    
+    .ai-providers-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+    
+    .ai-provider-card {
+      padding: 20px;
+      background: var(--surface);
+      border: 2px solid var(--border);
+      border-radius: 14px;
+      cursor: pointer;
+      transition: all 0.25s;
+      text-align: center;
+    }
+    
+    .ai-provider-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(77, 168, 218, 0.2);
+    }
+    
+    .ai-provider-card.selected {
+      border-color: var(--accent);
+      background: linear-gradient(135deg, rgba(77, 168, 218, 0.1), rgba(167, 139, 250, 0.1));
+    }
+    
+    .ai-provider-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      margin: 0 auto 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      font-weight: 700;
+      color: white;
+    }
+    
+    .provider-gemini .ai-provider-icon { background: linear-gradient(135deg, #4285f4, #34a853); }
+    .provider-grok .ai-provider-icon { background: linear-gradient(135deg, #000000, #333333); }
+    .provider-chatgpt .ai-provider-icon { background: linear-gradient(135deg, #10a37f, #1a7f64); }
+    .provider-qwen .ai-provider-icon { background: linear-gradient(135deg, #ff6a00, #ff8533); }
+    .provider-minimax .ai-provider-icon { background: linear-gradient(135deg, #7c3aed, #a78bfa); }
+    .provider-claude .ai-provider-icon { background: linear-gradient(135deg, #cc785c, #e8a87c); }
+    
+    .ai-provider-name {
+      font-weight: 600;
+      font-size: 14px;
+      margin-bottom: 4px;
+    }
+    
+    .ai-provider-desc {
+      font-size: 11px;
+      color: var(--muted);
+    }
+    
+    .tier-info {
+      padding: 16px;
+      background: linear-gradient(135deg, rgba(167, 139, 250, 0.1), rgba(77, 168, 218, 0.1));
+      border: 1px solid rgba(167, 139, 250, 0.3);
+      border-radius: 12px;
+      margin-bottom: 20px;
+    }
+    
+    .tier-title {
+      font-weight: 700;
+      font-size: 13px;
+      color: #a78bfa;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .tier-details {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+    
+    .subscribe-btn {
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(135deg, #a78bfa, var(--accent));
+      border: none;
+      border-radius: 12px;
+      color: white;
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.25s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    
+    .subscribe-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(167, 139, 250, 0.4);
+    }
+    
+    /* Welcome Screen */
+    .welcome-screen {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+      text-align: center;
+    }
+    
+    .welcome-icon {
+      width: 96px;
+      height: 96px;
+      border-radius: 24px;
+      background: linear-gradient(135deg, rgba(77, 168, 218, 0.15), rgba(167, 139, 250, 0.15));
+      border: 2px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 24px;
+    }
+    
+    .welcome-icon .material-icons {
+      font-size: 48px;
+      color: var(--accent);
+    }
+    
+    .welcome-title {
+      font-family: var(--font-heading);
+      font-size: 28px;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 12px;
+    }
+    
+    .welcome-subtitle {
+      font-size: 15px;
+      color: var(--muted);
+      max-width: 480px;
+      line-height: 1.65;
+      margin-bottom: 32px;
+    }
+    
+    .welcome-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    
+    .welcome-btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 24px;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.25s;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--primary);
+    }
+    
+    .welcome-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      transform: translateY(-2px);
+    }
+    
+    .welcome-btn.primary {
+      background: linear-gradient(135deg, var(--accent-glow), var(--accent));
+      border-color: transparent;
+      color: white;
+    }
+    
+    .welcome-btn.primary:hover {
+      box-shadow: 0 8px 24px rgba(77, 168, 218, 0.35);
+    }
+    
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .sidebar { display: none; }
+      .panel { display: none; }
+      .activity-bar { width: 44px; }
+    }
+    
+    @media (max-width: 768px) {
+      .ide-nav-center { display: none; }
+      .breadcrumb { display: none; }
+    }
+    
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 8px; height: 8px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+  </style>
+</head>
+<body>
+
+<div class="ide-container">
+  <!-- Navigation Bar -->
+  <nav class="ide-navbar">
+    <div class="ide-nav-left">
+      <a href="index.html" class="ide-logo">
+        <div class="ide-logo-icon">⚛️</div>
+        <span class="ide-logo-text">Sci<span>MSPT</span></span>
+      </a>
+      <div class="breadcrumb">
+        <span class="breadcrumb-item">SciMSPT</span>
+        <span class="breadcrumb-sep">›</span>
+        <span class="breadcrumb-item">Studio</span>
+        <span class="breadcrumb-sep">›</span>
+        <span class="breadcrumb-item" id="currentFile">Welcome</span>
+      </div>
+    </div>
+    
+    <div class="ide-nav-center">
+      <button class="nav-tab active" data-tab="editor">
+        <span class="material-icons">code</span>
+        Editor
+      </button>
+      <button class="nav-tab" data-tab="research">
+        <span class="material-icons">science</span>
+        Research
+      </button>
+      <button class="nav-tab" data-tab="analysis">
+        <span class="material-icons">analytics</span>
+        Analysis
+      </button>
+      <button class="nav-tab" data-tab="output">
+        <span class="material-icons">output</span>
+        Output
+      </button>
+    </div>
+    
+    <div class="ide-nav-right">
+      <!-- AI Scope Button -->
+      <button class="ai-scope-btn" onclick="openAIScopeModal()">
+        <span class="material-icons">auto_awesome</span>
+        AI Scope
+        <span class="ai-indicator"></span>
+      </button>
+      
+      <!-- Theme Toggle -->
+      <button onclick="toggleTheme()" style="padding: 8px 12px; background: var(--surface); border: 1px solid var(--border); border-radius: 6px; color: var(--muted); cursor: pointer;">
+        <span class="material-icons" id="themeIcon" style="font-size: 16px;">dark_mode</span>
+      </button>
+      
+      <!-- User Avatar -->
+      <div class="user-avatar" onclick="toggleUserMenu()">U</div>
+    </div>
+  </nav>
+  
+  <!-- Main IDE Layout -->
+  <div class="ide-main">
+    <!-- Activity Bar -->
+    <div class="activity-bar">
+      <div class="activity-icon active" title="Explorer" onclick="toggleSidebar('explorer')">
+        <span class="material-icons">folder_open</span>
+      </div>
+      <div class="activity-icon" title="Search" onclick="toggleSidebar('search')">
+        <span class="material-icons">search</span>
+      </div>
+      <div class="activity-icon" title="Git" onclick="toggleSidebar('git')">
+        <span class="material-icons">source</span>
+      </div>
+      <div class="activity-icon" title="Extensions" onclick="toggleSidebar('extensions')">
+        <span class="material-icons">extension</span>
+      </div>
+      <div class="activity-spacer"></div>
+      <div class="activity-icon" title="Accounts" onclick="openLoginModal()">
+        <span class="material-icons">account_circle</span>
+      </div>
+      <div class="activity-icon" title="Settings" onclick="toggleSidebar('settings')">
+        <span class="material-icons">settings</span>
+      </div>
+    </div>
+    
+    <!-- Sidebar / File Explorer -->
+    <aside class="sidebar" id="sidebar-explorer">
+      <div class="sidebar-header">
+        <span class="sidebar-title">Explorer</span>
+        <div class="sidebar-actions">
+          <button class="sidebar-action" title="New File" onclick="createNewFile()">
+            <span class="material-icons">note_add</span>
+          </button>
+          <button class="sidebar-action" title="New Folder" onclick="createNewFolder()">
+            <span class="material-icons">create_new_folder</span>
+          </button>
+          <button class="sidebar-action" title="Refresh" onclick="refreshFileTree()">
+            <span class="material-icons">refresh</span>
+          </button>
+        </div>
+      </div>
+      
+      <div class="file-tree" id="file-tree">
+        <!-- File tree will be populated by JavaScript -->
+        <div class="tree-item folder selected" onclick="toggleFolder(this)">
+          <span class="material-icons">folder_open</span>
+          <span class="tree-name">My Projects</span>
+        </div>
+        <div class="tree-indent" id="my-projects-contents">
+          <div class="tree-item folder" onclick="toggleFolder(this)">
+            <span class="material-icons">folder</span>
+            <span class="tree-name">research-papers</span>
+          </div>
+          <div class="tree-indent" style="display: none;">
+            <div class="tree-item" onclick="openFile(this, 'fusion-analysis.py')">
+              <span class="material-icons">description</span>
+              <span class="tree-name">fusion-analysis.py</span>
+            </div>
+            <div class="tree-item" onclick="openFile(this, 'battery-data.csv')">
+              <span class="material-icons">table_chart</span>
+              <span class="tree-name">battery-data.csv</span>
+            </div>
+          </div>
+          
+          <div class="tree-item folder" onclick="toggleFolder(this)">
+            <span class="material-icons">folder</span>
+            <span class="tree-name">scripts</span>
+          </div>
+          <div class="tree-indent" style="display: none;">
+            <div class="tree-item" onclick="openFile(this, 'fetch-arxiv.js')">
+              <span class="material-icons">javascript</span>
+              <span class="tree-name">fetch-arxiv.js</span>
+            </div>
+            <div class="tree-item" onclick="openFile(this, 'parse-rss.py')">
+              <span class="material-icons">python</span>
+              <span class="tree-name">parse-rss.py</span>
+            </div>
+          </div>
+          
+          <div class="tree-item folder" onclick="toggleFolder(this)">
+            <span class="material-icons">folder</span>
+            <span class="tree-name">notebooks</span>
+          </div>
+          <div class="tree-indent" style="display: none;">
+            <div class="tree-item" onclick="openFile(this, 'venture-scoring.ipynb')">
+              <span class="material-icons">data_object</span>
+              <span class="tree-name">venture-scoring.ipynb</span>
+            </div>
+          </div>
+          
+          <div class="tree-item" onclick="openFile(this, 'README.md')">
+            <span class="material-icons">article</span>
+            <span class="tree-name">README.md</span>
+          </div>
+          <div class="tree-item" onclick="openFile(this, 'config.json')">
+            <span class="material-icons">settings</span>
+            <span class="tree-name">config.json</span>
+          </div>
+        </div>
+      </div>
+    </aside>
+    
+    <!-- Editor Area -->
+    <main class="editor-area">
+      <div class="tabs-bar" id="tabs-bar">
+        <!-- Tabs will be added dynamically -->
+      </div>
+      
+      <div id="monaco-editor"></div>
+      
+      <!-- Welcome Screen (shown when no files open) -->
+      <div class="welcome-screen" id="welcome-screen">
+        <div class="welcome-icon">
+          <span class="material-icons">rocket_launch</span>
+        </div>
+        <h2 class="welcome-title">Welcome to SciMSPT Studio</h2>
+        <p class="welcome-subtitle">
+          Your browser-based scientific workspace. No installation required.
+          Write code, analyze research, and collaborate with AI — all in one place.
+        </p>
+        <div class="welcome-actions">
+          <button class="welcome-btn primary" onclick="createNewFile()">
+            <span class="material-icons">note_add</span>
+            New File
+          </button>
+          <button class="welcome-btn" onclick="openFile(null, 'sample.py')">
+            <span class="material-icons">play_circle</span>
+            Open Sample
+          </button>
+          <button class="welcome-btn" onclick="openAIScopeModal()">
+            <span class="material-icons">auto_awesome</span>
+            Configure AI
+          </button>
+          <button class="welcome-btn" onclick="openTerminalPanel()">
+            <span class="material-icons">terminal</span>
+            Terminal
+          </button>
+        </div>
+      </div>
+    </main>
+    
+    <!-- Right Panel (AI / Terminal) -->
+    <aside class="panel" id="right-panel">
+      <div class="panel-tabs">
+        <button class="panel-tab active" onclick="switchPanelTab('ai')">
+          <span class="material-icons">smart_toy</span>
+          AI Assistant
+        </button>
+        <button class="panel-tab" onclick="switchPanelTab('terminal')">
+          <span class="material-icons">terminal</span>
+          Terminal
+        </button>
+        <button class="panel-tab" onclick="switchPanelTab('output')">
+          <span class="material-icons">output</span>
+          Output
+        </button>
+        <button class="panel-tab" onclick="switchPanelTab('problems')">
+          <span class="material-icons">error_outline</span>
+          Problems
+        </button>
+      </div>
+      
+      <!-- AI Chat Panel -->
+      <div class="panel-content active" id="panel-ai">
+        <div class="ai-chat">
+          <!-- AI Provider Selector -->
+          <div class="ai-provider-selector">
+            <div class="provider-chip provider-gemini active" onclick="selectProvider(this, 'gemini')">
+              <span class="provider-dot"></span>
+              Gemini
+            </div>
+            <div class="provider-chip provider-chatgpt" onclick="selectProvider(this, 'chatgpt')">
+              <span class="provider-dot"></span>
+              ChatGPT
+            </div>
+            <div class="provider-chip provider-qwen" onclick="selectProvider(this, 'qwen')">
+              <span class="provider-dot"></span>
+              Qwen
+            </div>
+            <div class="provider-chip provider-claude" onclick="selectProvider(this, 'claude')">
+              <span class="provider-dot"></span>
+              Claude
+            </div>
+          </div>
+          
+          <!-- Chat Messages -->
+          <div class="chat-messages" id="chat-messages">
+            <div class="chat-message ai">
+              <div class="sender">🤖 AI Assistant (Gemini)</div>
+              <div>Hello! I'm your AI-powered research assistant. I can help you:<br><br>
+              • 📄 Analyze and summarize research papers<br>
+              • 🔬 Explain complex scientific concepts<br>
+              • 💻 Generate and debug code<br>
+              • 📊 Create visualizations and charts<br>
+              • 🚀 Suggest startup opportunities<br><br>
+              What would you like to work on today?
+              </div>
+            </div>
+          </div>
+          
+          <!-- Input Area -->
+          <div class="chat-input-area">
+            <textarea class="chat-input" id="chat-input" placeholder="Ask me anything about your research... (Shift+Enter for new line)" rows="2"></textarea>
+            <button class="send-btn" onclick="sendChatMessage()">
+              <span class="material-icons">send</span>
+            </button>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Terminal Panel -->
+      <div class="panel-content" id="panel-terminal">
+        <div class="terminal" id="terminal-output">
+          <div class="terminal-line">
+            <span class="terminal-prompt">SciMSPT@studio ~ %</span>
+            <span class="terminal-command">welcome</span>
+          </div>
+          <div class="terminal-output">
+            ╔══════════════════════════════════════════╗<br>
+            ║   SciMSPT Studio v2.4.0                  ║<br>
+            ║   AI-Powered Scientific Workspace         ║<br>
+            ╠══════════════════════════════════════════╣<br>
+            ║   Ready. Connected to free-tier APIs.     ║<br>
+            ║   Type 'help' for available commands.    ║<br>
+            ╚══════════════════════════════════════════╝<br><br>
+            Available APIs (Free Tier):<br>
+            ✓ ScienceDaily RSS Feeds<br>
+            ✓ arXiv OAI-PMH (rate-limited)<br>
+            ✓ bioRxiv API<br>
+            ✓ chemRxiv preprints<br>
+            ✓ Crossref metadata<br><br>
+            Type 'api-status' to check connectivity.<br>
+            Type 'upgrade' for premium features.
+          </div>
+        </div>
+        <div class="chat-input-area">
+          <input type="text" class="chat-input" id="terminal-input" placeholder="Enter command..." onkeypress="handleTerminalInput(event)" style="min-height: 38px; padding: 8px 12px;">
+          <button class="send-btn" onclick="executeCommand()">
+            <span class="material-icons">play_arrow</span>
+          </button>
+        </div>
+      </div>
+      
+      <!-- Output Panel -->
+      <div class="panel-content" id="panel-output">
+        <div class="ai-chat" style="padding: 12px;">
+          <div class="tier-info">
+            <div class="tier-title">
+              <span class="material-icons">workspace_premium</span>
+              Free Tier Active
+            </div>
+            <div class="tier-details">
+              • 100 API requests/day<br>
+              • Basic AI models included<br>
+              • Community support<br>
+              • 5MB file storage<br><br>
+              <strong>Upgrade to Pro:</strong> Unlimited requests, advanced AI models, priority processing, 100GB storage.
+            </div>
+          </div>
+          <div style="margin-top: 16px;">
+            <button class="subscribe-btn" onclick="showSubscriptionModal()">
+              <span class="material-icons">diamond</span>
+              Upgrade to Pro ($19/mo)
+            </button>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Problems Panel -->
+      <div class="panel-content" id="panel-problems">
+        <div class="ai-chat" style="padding: 12px;">
+          <div style="text-align: center; padding: 20px; color: var(--muted);">
+            <span class="material-icons" style="font-size: 48px; opacity: 0.3;">check_circle</span>
+            <p style="margin-top: 12px;">No problems detected</p>
+            <p style="font-size: 12px;">Your workspace is clean!</p>
+          </div>
+        </div>
+      </div>
+    </aside>
+  </div>
+  
+  <!-- Status Bar -->
+  <footer class="status-bar">
+    <div class="status-left">
+      <div class="status-item">
+        <span class="material-icons" style="font-size: 12px;">branch</span>
+        main
+      </div>
+      <div class="status-item">
+        <span class="material-icons" style="font-size: 12px;">sync</span>
+        0↓ 0↑
+      </div>
+      <div class="status-item">
+        <span class="material-icons" style="font-size: 12px;">error_outline</span>
+        0
+        <span class="material-icons" style="font-size: 12px;">warning</span>
+        0
+      </div>
+    </div>
+    <div class="status-right">
+      <div class="status-item" id="status-position">Ln 1, Col 1</div>
+      <div class="status-item" id="status-encoding">UTF-8</div>
+      <div class="status-item" id="status-language">Plain Text</div>
+      <div class="status-item" id="status-ai">AI: Gemini</div>
+    </div>
+  </footer>
+</div>
+
+<!-- AI Scope Modal -->
+<div class="modal-overlay" id="ai-scope-modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2 class="modal-title">🤖 AI Scope Configuration</h2>
+      <button class="modal-close" onclick="closeAIScopeModal()">
+        <span class="material-icons">close</span>
+      </button>
+    </div>
+    
+    <p style="color: var(--muted); font-size: 14px; margin-bottom: 20px;">
+      Select your preferred AI provider(s). Each offers unique capabilities for scientific research and analysis.
+    </p>
+    
+    <div class="ai-providers-grid">
+      <div class="ai-provider-card provider-gemini selected" onclick="selectModalProvider(this, 'gemini')">
+        <div class="ai-provider-icon">G</div>
+        <div class="ai-provider-name">Google Gemini</div>
+        <div class="ai-provider-desc">Multimodal reasoning</div>
+      </div>
+      
+      <div class="ai-provider-card provider-grok" onclick="selectModalProvider(this, 'grok')">
+        <div class="ai-provider-icon">𝕏</div>
+        <div class="ai-provider-name">xAI Grok</div>
+        <div class="ai-provider-desc">Real-time knowledge</div>
+      </div>
+      
+      <div class="ai-provider-card provider-chatgpt" onclick="selectModalProvider(this, 'chatgpt')">
+        <div class="ai-provider-icon">⚡</div>
+        <div class="ai-provider-name">ChatGPT</div>
+        <div class="ai-provider-desc">Code generation</div>
+      </div>
+      
+      <div class="ai-provider-card provider-qwen" onclick="selectModalProvider(this, 'qwen')">
+        <div class="ai-provider-icon">通</div>
+        <div class="ai-provider-name">Qwen (Alibaba)</div>
+        <div class="ai-provider-desc">Multilingual support</div>
+      </div>
+      
+      <div class="ai-provider-card provider-minimax" onclick="selectModalProvider(this, 'minimax')">
+        <div class="ai-provider-icon">M</div>
+        <div class="ai-provider-name">MiniMax</div>
+        <div class="ai-provider-desc">Long context window</div>
+      </div>
+      
+      <div class="ai-provider-card provider-claude" onclick="selectModalProvider(this, 'claude')">
+        <div class="ai-provider-icon">C</div>
+        <div class="ai-provider-name">Anthropic Claude</div>
+        <div class="ai-provider-desc">Safe & accurate</div>
+      </div>
+    </div>
+    
+    <div class="tier-info">
+      <div class="tier-title">
+        <span class="material-icons">info</span>
+        Provider Availability
+      </div>
+      <div class="tier-details">
+        <strong>Free Tier:</strong> Gemini, Qwen (limited requests)<br>
+        <strong>Pro Tier ($19/mo):</strong> All providers + higher limits<br>
+        <strong>Enterprise:</strong> Custom endpoints + dedicated instances
+      </div>
+    </div>
+    
+    <button class="subscribe-btn" onclick="saveAIScopeSelection()">
+      <span class="material-icons">check</span>
+      Save Selection
+    </button>
+  </div>
+</div>
+
+<!-- Subscription Modal -->
+<div class="modal-overlay" id="subscription-modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2 class="modal-title">💎 Upgrade to Pro</h2>
+      <button class="modal-close" onclick="closeSubscriptionModal()">
+        <span class="material-icons">close</span>
+      </button>
+    </div>
+    
+    <div style="margin-bottom: 24px;">
+      <div class="ai-provider-card" style="margin-bottom: 16px; text-align: left; padding: 24px;">
+        <h3 style="margin-bottom: 12px; color: #fff;">Pro Plan — $19/month</h3>
+        <ul style="list-style: none; font-size: 14px; color: var(--muted); line-height: 2;">
+          <li>✅ Unlimited AI requests across all providers</li>
+          <li>✅ Advanced models (GPT-4, Claude 3, Gemini Ultra)</li>
+          <li>✅ 100GB cloud storage</li>
+          <li>✅ Priority processing queue</li>
+          <li>✅ Real-time collaboration</li>
+          <li>✅ Custom model fine-tuning</li>
+          <li>✅ Dedicated support channel</li>
+        </ul>
+      </div>
+      
+      <div class="ai-provider-card" style="text-align: left; padding: 24px; border-color: #a78bfa;">
+        <h3 style="margin-bottom: 12px; color: #a78bfa;">Enterprise — Custom Pricing</h3>
+        <ul style="list-style: none; font-size: 14px; color: var(--muted); line-height: 2;">
+          <li>✨ Everything in Pro, plus:</li>
+          <li>✅ Private cloud deployment</li>
+          <li>✅ Custom AI model training</li>
+          <li>✅ SLA guarantee (99.99%)</li>
+          <li>✅ On-premise installation</li>
+          <li>✅ Dedicated success manager</li>
+        </ul>
+      </div>
+    </div>
+    
+    <button class="subscribe-btn" style="background: linear-gradient(135deg, #a78bfa, #4da8da);">
+      <span class="material-icons">credit_card</span>
+      Subscribe Now
+    </button>
+    <p style="text-align: center; margin-top: 12px; font-size: 12px; color: var(--muted);">
+      Cancel anytime. 14-day money-back guarantee.
+    </p>
+  </div>
+</div>
+
+<!-- Monaco Editor Loader -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.45.0/min/vs/loader.min.js"></script>
+
+<script>
+// ═══════════════════════════════════════════════════════════════
+//   SCI MSPT STUDIO IDE - MAIN APPLICATION LOGIC
+// ═══════════════════════════════════════════════════════════════
+
+// Global State
+const state = {
+  currentProvider: 'gemini',
+  files: {},
+  openTabs: [],
+  activeFile: null,
+  editor: null,
+  theme: 'dark',
+  isLoggedIn: false,
+  user: null
+};
+
+// Initialize Monaco Editor
+require.config({ paths: { vs: 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.45.0/min/vs' }});
+require(['vs/editor/editor.main'], function() {
+  // Register theme
+  monaco.editor.defineTheme('scimspt-dark', {
+    base: 'vs-dark',
+    inherit: true,
+    rules: [],
+    colors: {
+      'editor.background': '#1e1e1e',
+      'editor.foreground': '#d4d4d4',
+      'editorLineNumber.foreground': '#858585',
+      'editorCursor.foreground': '#4da8da',
+      'editor.selectionBackground': '#264f78',
+      'editor.lineHighlightBackground': '#2a2d2e'
+    }
+  });
+  
+  // Create editor instance
+  state.editor = monaco.editor.create(document.getElementById('monaco-editor'), {
+    value: `# Welcome to SciMSPT Studio
+# Your browser-based scientific workspace
+
+## Getting Started
+
+1. Select or create a file from the Explorer (left)
+2. Start coding - syntax highlighting is automatic
+3. Use the AI Assistant (right panel) for help
+4. Run commands in the Terminal
+
+## Sample Python Code
+
+def analyze_research_paper(doi):
+    """
+    Fetch and analyze a research paper by DOI
+    using free academic APIs.
+    """
+    import requests
+    
+    # Crossref API (free tier)
+    url = f"https://api.crossref.org/works/{doi}"
+    response = requests.get(url)
+    
+    if response.status_code == 200:
+        paper = response.json()['message']
+        return {
+            'title': paper.get('title', ['Unknown'])[0],
+            'authors': [a.get('given') + ' ' + a.get('family') 
+                      for a in paper.get('author', [])],
+            'year': paper.get('published-online', {}).get('date-parts', [[None]])[0][0],
+            'venue': paper.get('container-title', ['Unknown'])[0]
+        }
+    return None
+
+# Example usage
+if __name__ == "__main__":
+    result = analyze_research_paper("10.1038/s41586-024-07890-1")
+    print(f"Paper: {result['title']}")
+`,
+    language: 'python',
+    theme: 'scimspt-dark',
+    fontSize: 14,
+    minimap: { enabled: false },
+    scrollBeyondLastLine: false,
+    automaticLayout: true,
+    tabSize: 2,
+    wordWrap: 'on'
+  });
+  
+  // Handle editor changes
+  state.editor.onDidChangeModelContent(() => {
+    if (state.activeFile) {
+      state.files[state.activeFile] = state.editor.getValue();
+      updateStatusBar();
+    }
+  });
+  
+  // Update status bar on cursor change
+  state.editor.onDidChangeCursorPosition((e) => {
+    const pos = e.position;
+    document.getElementById('status-position').textContent = 
+      `Ln ${pos.lineNumber}, Col ${pos.column}`;
+  });
+});
+
+// Theme Toggle
+function toggleTheme() {
+  const html = document.documentElement;
+  const newTheme = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+  html.setAttribute('data-theme', newTheme);
+  localStorage.setItem('scimspt-theme', newTheme);
+  
+  const icon = document.getElementById('themeIcon');
+  icon.textContent = newTheme === 'dark' ? 'dark_mode' : 'light_mode';
+}
+
+// File System Functions
+function toggleFolder(element) {
+  const contents = element.nextElementSibling;
+  const icon = element.querySelector('.material-icons');
+  
+  if (contents && contents.classList.contains('tree-indent')) {
+    const isOpen = contents.style.display !== 'none';
+    contents.style.display = isOpen ? 'none' : 'flex';
+    icon.textContent = isOpen ? 'folder' : 'folder_open';
+    element.classList.toggle('selected', !isOpen);
+  }
+}
+
+function openFile(element, filename) {
+  if (!filename) return;
+  
+  // Update selection
+  document.querySelectorAll('.tree-item').forEach(el => el.classList.remove('selected'));
+  if (element) element.classList.add('selected');
+  
+  // Check if already open in tabs
+  let existingTab = document.querySelector(`[data-file="${filename}"]`);
+  
+  if (!existingTab) {
+    // Add new tab
+    addTab(filename);
+  } else {
+    existingTab.click();
+  }
+  
+  // Load file content
+  loadFileContent(filename);
+  
+  // Update breadcrumb
+  document.getElementById('currentFile').textContent = filename;
+  
+  // Hide welcome screen
+  document.getElementById('welcome-screen').style.display = 'none';
+  document.getElementById('monaco-editor').style.display = 'block';
+}
+
+function addTab(filename) {
+  const tabsBar = document.getElementById('tabs-bar');
+  
+  const ext = filename.split('.').pop();
+  const icons = {
+    py: 'python',
+    js: 'javascript',
+    ts: 'typescript',
+    json: 'data_object',
+    md: 'article',
+    csv: 'table_chart',
+    ipynb: 'data_object',
+    html: 'code',
+    css: 'css',
+    sh: 'terminal'
+  };
+  
+  const tab = document.createElement('div');
+  tab.className = 'tab active';
+  tab.dataset.file = filename;
+  tab.innerHTML = `
+    <span class="tab-icon material-icons">${icons[ext] || 'description'}</span>
+    <span class="tab-name">${filename}</span>
+    <span class="tab-close" onclick="event.stopPropagation(); closeTab('${filename}', this)">
+      <span class="material-icons" style="font-size: 14px;">close</span>
+    </span>
+  `;
+  
+  tab.onclick = () => switchToTab(tab, filename);
+  
+  // Deactivate other tabs
+  tabsBar.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  tabsBar.appendChild(tab);
+  
+  state.openTabs.push(filename);
+}
+
+function switchToTab(tab, filename) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  tab.classList.add('active');
+  
+  // Save current file
+  if (state.activeFile && state.editor) {
+    state.files[state.activeFile] = state.editor.getValue();
+  }
+  
+  loadFileContent(filename);
+  state.activeFile = filename;
+  document.getElementById('currentFile').textContent = filename;
+}
+
+function closeTab(filename, btnElement) {
+  const tab = btnElement.closest('.tab');
+  tab.remove();
+  
+  state.openTabs = state.openTabs.filter(f => f !== filename);
+  
+  if (state.activeFile === filename) {
+    // Switch to last remaining tab
+    if (state.openTabs.length > 0) {
+      const lastFile = state.openTabs[state.openTabs.length - 1];
+      document.querySelector(`[data-file="${lastFile}"]`).click();
+    } else {
+      showWelcomeScreen();
+    }
+  }
+  
+  delete state.files[filename];
+}
+
+function loadFileContent(filename) {
+  // Save current file first
+  if (state.activeFile && state.editor) {
+    state.files[state.activeFile] = state.editor.getValue();
+  }
+  
+  // Load new file
+  const content = state.files[filename] || getDefaultContent(filename);
+  
+  if (state.editor) {
+    const ext = filename.split('.').pop();
+    const langMap = {
+      py: 'python',
+      js: 'javascript',
+      ts: 'typescript',
+      json: 'json',
+      md: 'markdown',
+      csv: 'plaintext',
+      html: 'html',
+      css: 'css',
+      sh: 'shell'
+    };
+    
+    monaco.editor.setModel(state.editor.getModel(), 
+      monaco.editor.createModel(content, langMap[ext] || 'plaintext'));
+  }
+  
+  state.activeFile = filename;
+  updateStatusBar();
+}
+
+function getDefaultContent(filename) {
+  const templates = {
+    'fusion-analysis.py': `# Stellarator Fusion Analysis
+# Generated by SciMSPT Studio
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+class FusionReactor:
+    def __init__(self, magnetic_field, plasma_temp):
+        self.B = magnetic_field  # Tesla
+        self.T = plasma_temp    # keV
+    
+    def confinement_time(self):
+        """Calculate triple product confinement"""
+        # Simplified formula
+        tau_E = 0.1 * self.B * np.sqrt(self.T)
+        return tau_E
+    
+    def q_fusion(self):
+        """Calculate fusion gain factor"""
+        # Placeholder for actual physics
+        return self.confinement_time() * self.T / 1e6
+
+
+# Analysis parameters
+reactor = FusionReactor(
+    magnetic_field=5.0,  # Tesla
+    plasma_temp=15.0      # keV
+)
+
+print(f"Confinement time: {reactor.confinement_time():.2f}s")
+print(f"Q-factor: {reactor.q_fusion():.3f}")
+`,
+
+    'fetch-arxiv.js': `// arXiv OAI-PMH Fetcher
+// SciMSPT Studio - Research Automation
+
+const ARXIV_OAI_URL = 'http://export.arxiv.org/oai2';
+
+async function fetchPapers(category, limit = 10) {
+  const params = new URLSearchParams({
+    verb: 'ListRecords',
+    metadataPrefix: 'oai_dc',
+    set: category,
+    from: new Date(Date.now() - 7*24*60*60*1000).toISOString().split('T')[0],
+    until: new Date().toISOString().split('T')[0],
+    limit: limit.toString()
+  });
+  
+  try {
+    const response = await fetch(\`\${ARXIV_OAI_URL}?\${params}\`);
+    const xml = await response.text();
+    return parseOAIResponse(xml);
+  } catch (error) {
+    console.error('arXiv fetch error:', error);
+    return [];
+  }
+}
+
+function parseOAIResponse(xml) {
+  // XML parsing logic here
+  return []; // Return parsed papers
+}
+
+// Export for use
+module.exports = { fetchPapers };
+`,
+
+    'config.json': `{
+  "version": "2.4.0",
+  "workspace": "sci-mspt-workspace",
+  "ai": {
+    "provider": "gemini",
+    "model": "gemini-pro",
+    "temperature": 0.7,
+    "max_tokens": 2048
+  },
+  "apis": {
+    "sciencedaily": { "enabled": true, "rate_limit": "100/day" },
+    "arxiv": { "enabled": true, "rate_limit": "1req/3sec" },
+    "biorxiv": { "enabled": true, "rate_limit": "100/day" },
+    "crossref": { "enabled": true, "rate_limit": "unlimited" }
+  },
+  "storage": {
+    "type": "local",
+    "quota_mb": 5,
+    "sync_enabled": false
+  },
+  "features": {
+    "ai_assistant": true,
+    "code_completion": true,
+    "syntax_highlighting": true,
+    "terminal": true,
+    "collaboration": false
+  }
+}
+`,
+
+    'README.md': `# SciMSPT Project Workspace
+
+## Overview
+This workspace contains your research projects, analysis scripts, and scientific documents.
+
+## Structure
+- \`research-papers/\` - Paper analysis and extraction scripts
+- \`scripts/\` - Automation tools (RSS parsers, API clients)
+- \`notebooks/\` - Jupyter notebooks for visualization
+
+## Quick Start
+1. Open any file in the editor
+2. Use the AI Assistant panel for explanations
+3. Run commands in the Terminal
+
+## Available APIs (Free Tier)
+- **ScienceDaily**: RSS feeds, categorized articles
+- **arXiv**: OAI-PMH interface (physics, CS, bio)
+- **bioRxiv/medRxiv**: Preprint metadata
+- **Crossref**: DOI resolution, citations
+
+## Need Help?
+Click the **AI Scope** button to configure your AI assistant.
+Upgrade to **Pro** for unlimited access to all providers.
+
+---
+*Generated by SciMSPT Studio IDE*
+`
+  };
+  
+  return templates[filename] || `// New file: ${filename}\n// Start coding here...\n`;
+}
+
+function createNewFile() {
+  const filename = prompt('Enter file name:', 'untitled.py');
+  if (filename) {
+    state.files[filename] = '';
+    openFile(null, filename);
+  }
+}
+
+function createNewFolder() {
+  alert('Folder creation coming soon! For now, use the terminal.');
+}
+
+function refreshFileTree() {
+  // Refresh animation
+  const tree = document.getElementById('file-tree');
+  tree.style.opacity = '0.5';
+  setTimeout(() => tree.style.opacity = '1', 300);
+}
+
+function showWelcomeScreen() {
+  document.getElementById('welcome-screen').style.display = 'flex';
+  document.getElementById('monaco-editor').style.display = 'none';
+  state.activeFile = null;
+  document.getElementById('currentFile').textContent = 'Welcome';
+}
+
+function updateStatusBar() {
+  const langMap = {
+    py: 'Python', js: 'JavaScript', ts: 'TypeScript',
+    json: 'JSON', md: 'Markdown', csv: 'CSV',
+    html: 'HTML', css: 'CSS', sh: 'Shell'
+  };
+  
+  if (state.activeFile) {
+    const ext = state.activeFile.split('.').pop();
+    document.getElementById('status-language').textContent = langMap[ext] || 'Plain Text';
+  }
+}
+
+// Sidebar Toggle
+function toggleSidebar(type) {
+  const sidebar = document.getElementById('sidebar-explorer');
+  sidebar.style.display = sidebar.style.display === 'none' ? 'flex' : 'none';
+}
+
+// Panel Tab Switching
+function switchPanelTab(tabId) {
+  document.querySelectorAll('.panel-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.panel-content').forEach(p => p.classList.remove('active'));
+  
+  event.target.closest('.panel-tab').classList.add('active');
+  document.getElementById('panel-' + tabId).classList.add('active');
+}
+
+function openTerminalPanel() {
+  switchPanelTab('terminal');
+}
+
+// AI Functions
+let selectedProviders = ['gemini'];
+
+function selectProvider(chip, provider) {
+  document.querySelectorAll('.provider-chip').forEach(c => c.classList.remove('active'));
+  chip.classList.add('active');
+  state.currentProvider = provider;
+  document.getElementById('status-ai').textContent = `AI: ${provider.charAt(0).toUpperCase() + provider.slice(1)}`;
+  
+  // Update AI welcome message
+  updateAIWelcome(provider);
+}
+
+function selectModalProvider(card, provider) {
+  card.classList.toggle('selected');
+  
+  if (card.classList.contains('selected')) {
+    if (!selectedProviders.includes(provider)) {
+      selectedProviders.push(provider);
+    }
+  } else {
+    selectedProviders = selectedProviders.filter(p => p !== provider);
+  }
+}
+
+function updateAIWelcome(provider) {
+  const names = {
+    gemini: 'Gemini (Google)',
+    grok: 'Grok (xAI)',
+    chatgpt: 'ChatGPT (OpenAI)',
+    qwen: 'Qwen (Alibaba)',
+    minimax: 'MiniMax',
+    claude: 'Claude (Anthropic)'
+  };
+  
+  // Add new message indicating provider switch
+  addAIMessage(`Switched to ${names[provider] || provider}. How can I help?`, true);
+}
+
+function sendChatMessage() {
+  const input = document.getElementById('chat-input');
+  const message = input.value.trim();
+  
+  if (!message) return;
+  
+  // Add user message
+  addUserMessage(message);
+  input.value = '';
+  
+  // Simulate AI response (in production, this would call the actual API)
+  simulateAIResponse(message);
+}
+
+function addUserMessage(text) {
+  const messagesContainer = document.getElementById('chat-messages');
+  const msgDiv = document.createElement('div');
+  msgDiv.className = 'chat-message user';
+  msgDiv.innerHTML = `<div class="sender">You</div><div>${escapeHtml(text)}</div>`;
+  messagesContainer.appendChild(msgDiv);
+  messagesContainer.scrollTop = messagesContainer.scrollHeight;
+}
+
+function addAIMessage(text, isSystem = false) {
+  const messagesContainer = document.getElementById('chat-messages');
+  const msgDiv = document.createElement('div');
+  msgDiv.className = 'chat-message ai';
+  const senderName = isSystem ? 'System' : `🤖 AI (${state.currentProvider.charAt(0).toUpperCase() + state.currentProvider.slice(1)})`;
+  msgDiv.innerHTML = `<div class="sender">${senderName}</div><div>${text}</div>`;
+  messagesContainer.appendChild(msgDiv);
+  messagesContainer.scrollTop = messagesContainer.scrollHeight;
+}
+
+function escapeHtml(text) {
+  const div = document.createElement('div');
+  div.textContent = text;
+  return div.innerHTML.replace(/\n/g, '<br>');
+}
+
+function simulateAIResponse(userMessage) {
+  const lowerMsg = userMessage.toLowerCase();
+  let response = '';
+  
+  // Simple pattern matching for demo (production would use actual AI API)
+  if (lowerMsg.includes('hello') || lowerMsg.includes('hi')) {
+    response = `Hello! 👋 I'm your SciMSPT AI assistant powered by <strong>${state.currentProvider}</strong>.<br><br>I can help you with:<br>• 📄 Research paper analysis<br>• 💻 Code generation and debugging<br>• 📊 Data visualization<br>• 🔬 Scientific concept explanation<br><br>What would you like to explore today?`;
+  }
+  else if (lowerMsg.includes('paper') || lowerMsg.includes('research')) {
+    response = `Great question about research papers! 📄<br><br>I can help you analyze papers from:<br>• <strong>arXiv</strong> - Physics, CS, Math preprints<br>• <strong>bioRxiv</strong> - Biology & medicine<br>• <strong>ScienceDaily</strong> - News & breakthroughs<br><br>To analyze a specific paper, provide its DOI or title, and I'll fetch the abstract, extract key findings, and assess venture potential.`;
+  }
+  else if (lowerMsg.includes('code') || lowerMsg.includes('python')) {
+    response = `Ready to help with code! 💻<br><br>Here's a sample analysis script you can run:<br><pre style='background:#1e1e1e;padding:12px;border-radius:8px;margin-top:8px;color:#d4d4d4;font-size:12px;'>from scimspt import PaperAnalyzer
+
+analyzer = PaperAnalyzer()
+result = analyzer.analyze(
+    doi="10.1038/s41586-024-07890-1",
+    include_venture_score=True
+)
+
+print(f"Title: {result.title}")
+print(f"Venture Score: {result.venture_score}/100")</pre><br>Would you like me to explain any part of this code?`;
+  }
+  else if (lowerMsg.includes('startup') || lowerMsg.includes('venture')) {
+    response = `Venture intelligence is my specialty! 🚀<br><br>This week's fundable startups include:<br>1. <strong>Stellarator Fusion</strong> - $589M NPV<br>2. <strong>Solid-State Battery</strong> - $587M NPV<br>3. <strong>Room-Temp Quantum Materials</strong> - 34.3% IRR<br><br>Each startup is backed by multiple peer-reviewed papers. Would you like detailed analysis of any specific opportunity?`;
+  }
+  else if (lowerMsg.includes('help') || lowerMsg.includes('what can')) {
+    response = `Here's what I can do for you:<br><br>🔬 <strong>Research Tools</strong><br>&nbsp;&nbsp;• Fetch papers from arXiv, bioRxiv<br>&nbsp;&nbsp;• Parse ScienceDaily RSS feeds<br>&nbsp;&nbsp;• Extract key findings automatically<br><br>💻 <strong>Development</strong><br>&nbsp;&nbsp;• Generate Python/JS analysis code<br>&nbsp;&nbsp;• Debug and optimize scripts<br>&nbsp;&nbsp;• Create visualizations<br><br>📊 <strong>Analysis</strong><br>&nbsp;&nbsp;• Calculate venture scores<br>&nbsp;&nbsp;• Identify market opportunities<br>&nbsp;&nbsp;• Compare startups<br><br>Just ask me anything!`;
+  }
+  else {
+    response = `I understand you're asking about: "${userMessage}"<br><br>Using <strong>${state.currentProvider}</strong>, I'm analyzing your query against our research database...<br><br>In the full version, this would connect to the actual AI API to provide a contextual response based on current research papers and market data.<br><br>For now, try asking me about:<br>• Specific research papers (by DOI or topic)<br>• Code examples for analysis<br>• Startup opportunity assessment`;
+  }
+  
+  // Simulate typing delay
+  setTimeout(() => {
+    addAIMessage(response);
+  }, 800 + Math.random() * 500);
+}
+
+// Terminal Functions
+function handleTerminalInput(event) {
+  if (event.key === 'Enter') {
+    executeCommand();
+  }
+}
+
+function executeCommand() {
+  const input = document.getElementById('terminal-input');
+  const command = input.value.trim();
+  const output = document.getElementById('terminal-output');
+  
+  if (!command) return;
+  
+  // Add command to terminal
+  const cmdLine = document.createElement('div');
+  cmdLine.className = 'terminal-line';
+  cmdLine.innerHTML = `<span class="terminal-prompt">SciMSPT@studio ~ %</span><span class="terminal-command">${escapeHtml(command)}</span>`;
+  output.appendChild(cmdLine);
+  
+  // Process command
+  let result = '';
+  
+  switch(command.split(' ')[0]) {
+    case 'help':
+      result = `Available commands:
+  help          - Show this help
+  clear         - Clear terminal
+  ls             - List files
+  cat <file>     - View file content
+  api-status    - Check API connectivity
+  fetch <doi>   - Fetch paper by DOI
+  analyze       - Run quick analysis
+  upgrade       - View subscription options`;
+      break;
+      
+    case 'clear':
+      output.innerHTML = '';
+      input.value = '';
+      return;
+      
+    case 'ls':
+      result = `drwxr-xr-x  research-papers/
+drwxr-xr-x  scripts/
+drwxr-xr-x  notebooks/
+-rw-r--r--  README.md
+-rw-r--r--  config.json
+-rw-r--r--  sample.py  ← (new)`;
+      break;
+      
+    case 'cat':
+      const fileName = command.split(' ')[1];
+      if (fileName && state.files[fileName]) {
+        result = state.files[fileName].substring(0, 500) + (state.files[fileName].length > 500 ? '\n... (truncated)' : '');
+      } else {
+        result = `cat: ${fileName}: No such file`;
+      }
+      break;
+      
+    case 'api-status':
+      result = `Checking API connectivity...
+
+✓ ScienceDaily RSS    - Connected (free tier)
+✓ arXiv OAI-PMH       - Connected (rate limited)
+✓ bioRxiv API         - Connected (free tier)
+✓ Crossref DOI        - Connected (unlimited)
+✓ chemRxiv           - Connected (free tier)
+
+All systems operational. Ready for queries.`;
+      break;
+      
+    case 'fetch':
+      const doi = command.split(' ')[1];
+      if (doi) {
+        result = `Fetching paper: ${doi}...
+        
+Title: [Paper title would appear here]
+Authors: [Author list]
+Year: 2024
+Venue: Nature
+
+Abstract: [Full abstract from API]
+
+Venture Score: 82/100
+Fundable Domains: quantum-computing, energy-storage
+
+Use 'analyze' for full breakdown.`;
+      } else {
+        result = 'Usage: fetch <doi-or-id>';
+      }
+      break;
+      
+    case 'analyze':
+      result = `Running analysis pipeline...
+
+┌─────────────────────────────────────┐
+│     SCI MSPT ANALYSIS ENGINE        │
+├─────────────────────────────────────┤
+│ Papers analyzed: 47                 │
+│ Total citations: 1,243              │
+│ Emerging trends: 3                   │
+│ Venture opportunities: 7             │
+└─────────────────────────────────────┘
+
+Top opportunities:
+1. Room-Temp Superconductors (NPV: $107M)
+2. Solid-State Batteries (NPV: $587M)
+3. Stellarator Fusion (NPV: $589M)
+
+Run 'fetch <DOI>' for detailed analysis.`;
+      break;
+      
+    case 'upgrade':
+      showSubscriptionModal();
+      result = 'Opening subscription modal...';
+      break;
+      
+    default:
+      result = `bash: ${command}: command not found
+Type 'help' for available commands.`;
+  }
+  
+  // Add output
+  const outLine = document.createElement('div');
+  outLine.className = 'terminal-output';
+  outLine.innerHTML = escapeHtml(result).replace(/\n/g, '<br>');
+  output.appendChild(outLine);
+  
+  output.scrollTop = output.scrollHeight;
+  input.value = '';
+}
+
+// Modal Functions
+function openAIScopeModal() {
+  document.getElementById('ai-scope-modal').classList.add('active');
+}
+
+function closeAIScopeModal() {
+  document.getElementById('ai-scope-modal').classList.remove('active');
+}
+
+function saveAIScopeSelection() {
+  if (selectedProviders.length === 0) {
+    alert('Please select at least one AI provider');
+    return;
+  }
+  
+  state.currentProvider = selectedProviders[0];
+  document.getElementById('status-ai').textContent = `AI: ${state.currentProvider.charAt(0).toUpperCase() + state.currentProvider.slice(1)} (+${selectedProviders.length - 1})`;
+  
+  closeAIScopeModal();
+  
+  // Show confirmation
+  addAIMessage(`AI scope updated! Primary: <strong>${state.currentProvider}</strong>. Selected providers: ${selectedProviders.join(', ')}.`);
+}
+
+function showSubscriptionModal() {
+  document.getElementById('subscription-modal').classList.add('active');
+}
+
+function closeSubscriptionModal() {
+  document.getElementById('subscription-modal').classList.remove('active');
+}
+
+function openLoginModal() {
+  alert('Login modal would open here.\n\nOptions:\n• GitHub OAuth\n• Google Sign-in\n• Email/password\n\nFor demo purposes, click the User avatar (U) to toggle login state.');
+}
+
+function toggleUserMenu() {
+  state.isLoggedIn = !state.isLoggedIn;
+  const avatar = document.querySelector('.user-avatar');
+  
+  if (state.isLoggedIn) {
+    avatar.textContent = 'JD'; // Would be user initials
+    avatar.style.background = 'linear-gradient(135deg, #10b981, #059669)';
+    addAIMessage('Welcome back! Your session has been restored. All files are synced.', true);
+  } else {
+    avatar.textContent = 'U';
+    avatar.style.background = 'linear-gradient(135deg, var(--accent), #a78bfa)';
+  }
+}
+
+// Keyboard shortcuts
+document.addEventListener('keydown', (e) => {
+  // Ctrl+S to save
+  if ((e.ctrlKey || e.metaKey) && e.key === 's') {
+    e.preventDefault();
+    if (state.activeFile) {
+      // Save to localStorage
+      localStorage.setItem(`scimspt-file-${state.activeFile}`, state.files[state.activeFile]);
+      addAIMessage(`💾 File saved: ${state.activeFile}`, true);
+    }
+  }
+  
+  // Ctrl+P to open AI Scope
+  if ((e.ctrlKey || e.metaKey) && e.key === 'p') {
+    e.preventDefault();
+    openAIScopeModal();
+  }
+  
+  // Escape to close modals
+  if (e.key === 'Escape') {
+    closeAIScopeModal();
+    closeSubscriptionModal();
+  }
+});
+
+// Initialize
+(function init() {
+  // Load theme preference
+  const savedTheme = localStorage.getItem('scimspt-theme');
+  if (savedTheme) {
+    document.documentElement.setAttribute('data-theme', savedTheme);
+    document.getElementById('themeIcon').textContent = savedTheme === 'dark' ? 'dark_mode' : 'light_mode';
+  }
+  
+  // Load saved files from localStorage
+  for (let i = 0; i < localStorage.length; i++) {
+    const key = localStorage.key(i);
+    if (key.startsWith('scimspt-file-')) {
+      const filename = key.replace('scimspt-file-', '');
+      state.files[filename] = localStorage.getItem(key);
+    }
+  }
+  
+  console.log('SciMSPT Studio initialized');
+  console.log('Available commands: help, ls, cat, fetch, analyze, api-status, upgrade');
+})();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1316 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Research Papers — SciMSPT Neural Analysis</title>
+  <meta name="description" content="SciMSPT Research: AI-powered analysis of peer-reviewed scientific papers across frontier technology domains.">
+  
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-deep: #030810;
+      --bg-primary: #0a1628;
+      --bg-secondary: #0d1f35;
+      --bg-tertiary: #122a45;
+      --bg-glass: rgba(10, 22, 40, 0.85);
+      --bg-glass-light: rgba(255, 255, 255, 0.03);
+      
+      --accent-primary: #00E5FF;
+      --accent-secondary: #4da8da;
+      --accent-tertiary: #a78bfa;
+      --accent-pink: #f472b6;
+      --accent-green: #10b981;
+      --accent-gold: #f59e0b;
+      
+      --text-primary: #e8f4fc;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+      
+      --border-subtle: rgba(0, 229, 255, 0.15);
+      
+      --font-heading: 'Playfair Display', Georgia, serif;
+      --font-body: 'Inter', -apple-system, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+      --font-tech: 'Orbitron', sans-serif;
+      
+      --nav-height: 80px;
+      --sidebar-width: 100px;
+    }
+    
+    [data-theme="light"] {
+      --bg-deep: #f0f4f8;
+      --bg-primary: #ffffff;
+      --bg-secondary: #f8fafc;
+      --bg-tertiary: #e2e8f0;
+      --bg-glass: rgba(255, 255, 255, 0.92);
+      --bg-glass-light: rgba(0, 0, 0, 0.02);
+      --text-primary: #0f172a;
+      --text-secondary: #475569;
+      --text-muted: #94a3b8;
+      --border-subtle: rgba(77, 168, 218, 0.25);
+    }
+    
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    
+    body {
+      font-family: var(--font-body);
+      background: var(--bg-deep);
+      color: var(--text-primary);
+      line-height: 1.6;
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+    
+    /* Molecular Sidebars */
+    .molecular-sidebar {
+      position: fixed;
+      top: 0;
+      width: var(--sidebar-width);
+      height: 100vh;
+      z-index: 5;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    
+    .molecular-sidebar.left {
+      left: 0;
+      background: linear-gradient(90deg, rgba(0, 229, 255, 0.08) 0%, transparent 100%);
+      border-right: 1px solid var(--border-subtle);
+    }
+    
+    .molecular-sidebar.right {
+      right: 0;
+      background: linear-gradient(-90deg, rgba(167, 139, 250, 0.08) 0%, transparent 100%);
+      border-left: 1px solid var(--border-subtle);
+    }
+    
+    .dna-helix {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 60px;
+      height: 80vh;
+    }
+    
+    .nucleotide {
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      animation: nucleotidePulse 3s ease-in-out infinite;
+    }
+    
+    .nucleotide.adenine { background: var(--accent-primary); box-shadow: 0 0 10px var(--accent-primary); }
+    .nucleotide.thymine { background: var(--accent-pink); box-shadow: 0 0 10px var(--accent-pink); }
+    .nucleotide.guanine { background: var(--accent-tertiary); box-shadow: 0 0 10px var(--accent-tertiary); }
+    .nucleotide.cytosine { background: var(--accent-green); box-shadow: 0 0 10px var(--accent-green); }
+    
+    @keyframes nucleotidePulse {
+      0%, 100% { opacity: 0.6; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.2); }
+    }
+    
+    .backbone-line {
+      position: absolute;
+      width: 2px;
+      height: 100%;
+      left: 50%;
+      background: linear-gradient(to bottom, transparent, var(--accent-primary) 20%, var(--accent-tertiary) 50%, var(--accent-pink) 80%, transparent);
+      opacity: 0.3;
+    }
+    
+    .protein-chain { position: absolute; width: 40px; height: 200px; top: 20%; }
+    
+    .amino-acid {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      border-radius: 2px;
+      background: var(--accent-gold);
+      opacity: 0.7;
+      animation: aminoFloat 4s ease-in-out infinite;
+    }
+    
+    @keyframes aminoFloat {
+      0%, 100% { transform: translateX(0) rotate(0deg); }
+      50% { transform: translateX(10px) rotate(180deg); }
+    }
+    
+    .molecular-grid {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-image: 
+        radial-gradient(circle at 20% 30%, rgba(0, 229, 255, 0.05) 1px, transparent 1px),
+        radial-gradient(circle at 70% 60%, rgba(167, 139, 250, 0.05) 1px, transparent 1px);
+      background-size: 30px 30px, 50px 50px;
+      animation: gridShift 20s linear infinite;
+    }
+    
+    @keyframes gridShift {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(30px); }
+    }
+    
+    .floating-molecule {
+      position: absolute;
+      border: 1px solid var(--border-subtle);
+      border-radius: 50%;
+      animation: moleculeFloat 8s ease-in-out infinite;
+    }
+    
+    .floating-molecule::before {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 4px; height: 4px;
+      background: var(--accent-primary);
+      border-radius: 50%;
+    }
+    
+    @keyframes moleculeFloat {
+      0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.5; }
+      50% { transform: translateY(-30px) rotate(180deg); opacity: 0.8; }
+    }
+    
+    /* Neural Background */
+    .neural-bg {
+      position: fixed;
+      top: 0;
+      left: calc(var(--sidebar-width));
+      width: calc(100% - 2 * var(--sidebar-width));
+      height: 100%;
+      z-index: 0;
+      overflow: hidden;
+    }
+    
+    .neuron {
+      position: absolute;
+      width: 4px; height: 4px;
+      background: var(--accent-primary);
+      border-radius: 50%;
+      opacity: 0.4;
+      animation: neuronPulse 4s ease-in-out infinite;
+    }
+    
+    @keyframes neuronPulse {
+      0%, 100% { opacity: 0.2; transform: scale(1); }
+      50% { opacity: 0.6; transform: scale(1.5); }
+    }
+    
+    /* Navigation */
+    .nav-container {
+      position: fixed;
+      top: 0;
+      left: var(--sidebar-width);
+      right: var(--sidebar-width);
+      height: var(--nav-height);
+      z-index: 100;
+      background: var(--bg-glass);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 40px;
+    }
+    
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--text-primary);
+    }
+    
+    .nav-logo {
+      width: 42px; height: 42px;
+      background: linear-gradient(135deg, var(--accent-primary), var(--accent-tertiary));
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-tech);
+      font-weight: 900;
+      font-size: 16px;
+      color: var(--bg-deep);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .nav-logo::before {
+      content: '';
+      position: absolute;
+      top: -50%; left: -50%;
+      width: 200%; height: 200%;
+      background: conic-gradient(from 0deg, transparent, rgba(255,255,255,0.3), transparent);
+      animation: logoShine 4s linear infinite;
+    }
+    
+    @keyframes logoShine {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    
+    .nav-title {
+      font-family: var(--font-heading);
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+    }
+    
+    .nav-title span { color: var(--accent-primary); }
+    
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .nav-link {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 10px 18px;
+      text-decoration: none;
+      color: var(--text-secondary);
+      font-size: 14px;
+      font-weight: 500;
+      border-radius: 10px;
+      transition: all 0.3s ease;
+    }
+    
+    .nav-link:hover {
+      color: var(--text-primary);
+      background: var(--bg-glass-light);
+    }
+    
+    .nav-link.active {
+      color: var(--accent-primary);
+      background: rgba(0, 229, 255, 0.08);
+    }
+    
+    .nav-link .material-icons-round { font-size: 18px; }
+    
+    .workspace-btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 24px;
+      background: linear-gradient(135deg, var(--accent-primary), var(--accent-tertiary));
+      color: var(--bg-deep);
+      font-weight: 600;
+      font-size: 14px;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 30px rgba(0, 229, 255, 0.3);
+    }
+    
+    .workspace-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 40px rgba(0, 229, 255, 0.5);
+    }
+    
+    .user-profile {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 16px 8px 8px;
+      background: var(--bg-glass-light);
+      border: 1px solid var(--border-subtle);
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .user-profile:hover {
+      border-color: var(--accent-primary);
+      box-shadow: 0 0 20px rgba(0, 229, 255, 0.2);
+    }
+    
+    .user-avatar {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent-primary), var(--accent-pink));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 14px;
+      color: white;
+      position: relative;
+    }
+    
+    .user-avatar::after {
+      content: '';
+      position: absolute;
+      bottom: 0; right: 0;
+      width: 10px; height: 10px;
+      background: var(--accent-green);
+      border-radius: 50%;
+      border: 2px solid var(--bg-primary);
+    }
+    
+    .user-info { display: flex; flex-direction: column; gap: 2px; }
+    .user-name { font-size: 13px; font-weight: 600; color: var(--text-primary); }
+    .user-role { font-size: 11px; color: var(--accent-primary); font-family: var(--font-mono); }
+    
+    .theme-toggle {
+      width: 44px; height: 44px;
+      border-radius: 12px;
+      background: var(--bg-glass-light);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-secondary);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+    
+    .theme-toggle:hover {
+      color: var(--accent-primary);
+      border-color: var(--accent-primary);
+    }
+    
+    /* Page Navigation */
+    .page-nav-bar {
+      position: fixed;
+      top: calc(var(--nav-height) + 16px);
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 90;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 20px;
+      background: var(--bg-glass);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--border-subtle);
+      border-radius: 50px;
+    }
+    
+    .page-nav-btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      background: transparent;
+      border: 1px solid var(--border-subtle);
+      border-radius: 25px;
+      color: var(--text-secondary);
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+    }
+    
+    .page-nav-btn:hover {
+      background: var(--bg-glass-light);
+      border-color: var(--accent-primary);
+      color: var(--accent-primary);
+    }
+    
+    .page-indicator {
+      font-size: 12px;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+      padding: 0 8px;
+    }
+    
+    /* Main Content */
+    .main-content {
+      position: relative;
+      z-index: 10;
+      margin-left: var(--sidebar-width);
+      margin-right: var(--sidebar-width);
+      padding-top: calc(var(--nav-height) + 24px);
+      min-height: 100vh;
+    }
+    
+    /* Research Hero */
+    .research-hero {
+      padding: 80px 60px;
+      text-align: center;
+    }
+    
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 20px;
+      background: rgba(0, 229, 255, 0.1);
+      border: 1px solid rgba(0, 229, 255, 0.3);
+      border-radius: 50px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--accent-primary);
+      margin-bottom: 32px;
+      font-family: var(--font-mono);
+    }
+    
+    .hero-badge .pulse-dot {
+      width: 8px; height: 8px;
+      background: var(--accent-primary);
+      border-radius: 50%;
+      animation: pulse 2s ease-in-out infinite;
+    }
+    
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(1.5); }
+    }
+    
+    .research-title {
+      font-family: var(--font-heading);
+      font-size: clamp(42px, 6vw, 68px);
+      font-weight: 900;
+      line-height: 1.05;
+      margin-bottom: 24px;
+      letter-spacing: -2px;
+    }
+    
+    .research-title .gradient-text {
+      background: linear-gradient(135deg, var(--accent-primary), var(--accent-tertiary), var(--accent-pink));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .research-subtitle {
+      font-size: clamp(17px, 2vw, 22px);
+      color: var(--text-secondary);
+      max-width: 700px;
+      margin: 0 auto 48px;
+      line-height: 1.6;
+    }
+    
+    /* Search Bar */
+    .search-section {
+      max-width: 700px;
+      margin: 0 auto 64px;
+      padding: 0 20px;
+    }
+    
+    .search-bar {
+      display: flex;
+      gap: 12px;
+      padding: 16px 24px;
+      background: var(--bg-glass);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      transition: all 0.3s ease;
+    }
+    
+    .search-bar:focus-within {
+      border-color: var(--accent-primary);
+      box-shadow: 0 0 30px rgba(0, 229, 255, 0.15);
+    }
+    
+    .search-icon {
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+    }
+    
+    .search-input {
+      flex: 1;
+      background: none;
+      border: none;
+      outline: none;
+      color: var(--text-primary);
+      font-size: 16px;
+      font-family: var(--font-body);
+    }
+    
+    .search-input::placeholder {
+      color: var(--text-muted);
+    }
+    
+    /* Filter Tags */
+    .filter-tags {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 24px;
+      flex-wrap: wrap;
+    }
+    
+    .filter-tag {
+      padding: 8px 18px;
+      background: var(--bg-glass-light);
+      border: 1px solid var(--border-subtle);
+      border-radius: 25px;
+      font-size: 13px;
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    
+    .filter-tag:hover,
+    .filter-tag.active {
+      border-color: var(--accent-primary);
+      color: var(--accent-primary);
+      background: rgba(0, 229, 255, 0.08);
+    }
+    
+    /* Papers Grid */
+    .papers-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+      gap: 28px;
+      padding: 0 60px 80px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    
+    .paper-card {
+      background: var(--bg-glass);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--border-subtle);
+      border-radius: 24px;
+      padding: 32px;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .paper-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent-primary), var(--accent-tertiary));
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    
+    .paper-card:hover {
+      transform: translateY(-8px);
+      border-color: var(--accent-primary);
+      box-shadow: 0 20px 60px rgba(0, 229, 255, 0.15);
+    }
+    
+    .paper-card:hover::before {
+      opacity: 1;
+    }
+    
+    .paper-meta {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+    
+    .paper-domain {
+      padding: 6px 14px;
+      background: rgba(0, 229, 255, 0.1);
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--accent-primary);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    
+    .paper-date {
+      font-size: 13px;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+    }
+    
+    .paper-title {
+      font-family: var(--font-heading);
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      line-height: 1.3;
+    }
+    
+    .paper-authors {
+      font-size: 14px;
+      color: var(--text-secondary);
+      margin-bottom: 16px;
+    }
+    
+    .paper-abstract {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin-bottom: 24px;
+    }
+    
+    .paper-stats {
+      display: flex;
+      gap: 20px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border-subtle);
+    }
+    
+    .stat {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+    
+    .stat .material-icons-round {
+      font-size: 16px;
+      color: var(--accent-primary);
+    }
+    
+    .paper-actions {
+      display: flex;
+      gap: 12px;
+      margin-top: 20px;
+    }
+    
+    .btn-sm {
+      flex: 1;
+      padding: 12px 16px;
+      font-size: 13px;
+      font-weight: 500;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      border: 1px solid var(--border-subtle);
+      background: var(--bg-glass-light);
+      color: var(--text-secondary);
+      text-align: center;
+      text-decoration: none;
+    }
+    
+    .btn-sm:hover {
+      border-color: var(--accent-primary);
+      color: var(--accent-primary);
+    }
+    
+    .btn-sm.primary {
+      background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+      color: var(--bg-deep);
+      border: none;
+    }
+    
+    /* Footer */
+    .footer {
+      padding: 60px;
+      border-top: 1px solid var(--border-subtle);
+      background: var(--bg-glass);
+    }
+    
+    .footer-content {
+      display: grid;
+      grid-template-columns: 2fr repeat(3, 1fr);
+      gap: 48px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .footer-brand { display: flex; flex-direction: column; gap: 20px; }
+    
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    
+    .footer-logo-icon {
+      width: 40px; height: 40px;
+      background: linear-gradient(135deg, var(--accent-primary), var(--accent-tertiary));
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-tech);
+      font-weight: 900;
+      font-size: 14px;
+      color: var(--bg-deep);
+    }
+    
+    .footer-logo-text {
+      font-family: var(--font-heading);
+      font-size: 20px;
+      font-weight: 700;
+    }
+    
+    .footer-desc {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+    
+    .footer-column h4 {
+      font-size: 14px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 20px;
+      color: var(--text-primary);
+    }
+    
+    .footer-links {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    
+    .footer-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 14px;
+      transition: color 0.2s ease;
+    }
+    
+    .footer-links a:hover { color: var(--accent-primary); }
+    
+    .footer-links::-webkit-scrollbar { height: 6px; }
+    .footer-links::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 3px; }
+    
+    .footer-bottom {
+      margin-top: 48px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border-subtle);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+    
+    .footer-social { display: flex; gap: 16px; }
+    .footer-social a { color: var(--text-muted); transition: color 0.2s ease; }
+    .footer-social a:hover { color: var(--accent-primary); }
+    
+    /* Responsive */
+    @media (max-width: 1024px) {
+      :root { --sidebar-width: 60px; }
+      .molecular-sidebar { width: 60px; }
+      .dna-helix { width: 40px; }
+      .nucleotide { width: 8px; height: 8px; }
+      .nav-container { padding: 0 20px; }
+      .nav-links { display: none; }
+      .main-content { padding-left: 20px; padding-right: 20px; }
+      .research-hero { padding-left: 30px; padding-right: 30px; }
+      .papers-grid { padding: 0 30px 60px; grid-template-columns: 1fr; }
+      .footer-content { grid-template-columns: 1fr 1fr; }
+    }
+    
+    @media (max-width: 768px) {
+      :root { --sidebar-width: 0px; --nav-height: 70px; }
+      .molecular-sidebar { display: none; }
+      .neural-bg { width: 100%; left: 0; }
+      .main-content { margin-left: 0; margin-right: 0; }
+      .nav-container { left: 0; right: 0; padding: 0 16px; }
+      .page-nav-bar { display: none; }
+      .research-title { font-size: 32px; }
+      .papers-grid { grid-template-columns: 1fr; }
+      .footer-content { grid-template-columns: 1fr; gap: 32px; }
+      .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Left Molecular Sidebar -->
+  <aside class="molecular-sidebar left">
+    <div class="molecular-grid"></div>
+    <div class="dna-helix">
+      <div class="backbone-line"></div>
+      <div class="dna-strand" id="leftDnaStrand"></div>
+    </div>
+    <div class="protein-chain" id="leftProteinChain"></div>
+    <div class="floating-molecule" style="width: 20px; height: 20px; top: 15%; left: 30%;"></div>
+    <div class="floating-molecule" style="width: 14px; height: 14px; top: 45%; left: 55%;"></div>
+    <div class="floating-molecule" style="width: 18px; height: 18px; top: 75%; left: 25%;"></div>
+  </aside>
+
+  <!-- Right Molecular Sidebar -->
+  <aside class="molecular-sidebar right">
+    <div class="molecular-grid"></div>
+    <div class="dna-helix">
+      <div class="backbone-line"></div>
+      <div class="dna-strand" id="rightDnaStrand"></div>
+    </div>
+    <div class="protein-chain" id="rightProteinChain"></div>
+    <div class="floating-molecule" style="width: 16px; height: 16px; top: 25%; left: 40%;"></div>
+    <div class="floating-molecule" style="width: 22px; height: 22px; top: 55%; left: 60%;"></div>
+    <div class="floating-molecule" style="width: 12px; height: 12px; top: 85%; left: 35%;"></div>
+  </aside>
+
+  <!-- Neural Background -->
+  <div class="neural-bg" id="neuralBg"></div>
+
+  <!-- Navigation -->
+  <nav class="nav-container">
+    <a href="index.html" class="nav-brand">
+      <div class="nav-logo">S</div>
+      <span class="nav-title">Sci<span>MSPT</span></span>
+    </a>
+    
+    <div class="nav-links">
+      <a href="index.html" class="nav-link"><span class="material-icons-round">home</span> Home</a>
+      <a href="research.html" class="nav-link active"><span class="material-icons-round">biotech</span> Research</a>
+      <a href="startups.html" class="nav-link"><span class="material-icons-round">rocket_launch</span> Startups</a>
+      <a href="platform.html" class="nav-link"><span class="material-icons-round">dashboard</span> Platform</a>
+      <a href="documentation.html" class="nav-link"><span class="material-icons-round">code</span> API Docs</a>
+      <a href="about.html" class="nav-link"><span class="material-icons-round">info</span> About</a>
+    </div>
+    
+    <div style="display: flex; align-items: center; gap: 16px;">
+      <button class="theme-toggle" onclick="toggleTheme()">
+        <span class="material-icons-round" id="themeIcon">dark_mode</span>
+      </button>
+      
+      <button class="workspace-btn" onclick="location.href='platform.html#collaboration'">
+        <span class="material-icons-round">workspaces</span>
+        Workspace
+      </button>
+      
+      <div class="user-profile">
+        <div class="user-avatar">EV</div>
+        <div class="user-info">
+          <span class="user-name">Dr. Elena Vasquez</span>
+          <span class="user-role">Neural Architect</span>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page Navigation Bar -->
+  <div class="page-nav-bar">
+    <a href="javascript:history.back()" class="page-nav-btn">
+      <span class="material-icons-round">arrow_back</span>
+      Back
+    </a>
+    <span class="page-indicator">|</span>
+    <a href="index.html" class="page-nav-btn">
+      <span class="material-icons-round">home</span>
+      Home
+    </a>
+    <span class="page-indicator">|</span>
+    <a href="#papers" class="page-nav-btn">
+      <span class="material-icons-round">description</span>
+      Papers
+    </a>
+  </div>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <!-- Research Hero -->
+    <section class="research-hero">
+      <div class="hero-badge">
+        <span class="pulse-dot"></span>
+        Neural Paper Engine — 2.4M+ Analyzed
+      </div>
+      
+      <h1 class="research-title">
+        <span class="gradient-text">Research Papers</span><br>
+        Neural Intelligence Analysis
+      </h1>
+      
+      <p class="research-subtitle">
+        Explore our curated database of frontier research papers analyzed by 
+        our proprietary neural engine for investment-relevant insights.
+      </p>
+      
+      <!-- Search Bar -->
+      <div class="search-section">
+        <div class="search-bar">
+          <span class="search-icon">
+            <span class="material-icons-round">search</span>
+          </span>
+          <input type="text" class="search-input" placeholder="Search papers by topic, author, or keyword...">
+          <button class="btn-sm primary" style="flex: none;">Search</button>
+        </div>
+        
+        <div class="filter-tags">
+          <span class="filter-tag active">All Domains</span>
+          <span class="filter-tag">Quantum Computing</span>
+          <span class="filter-tag">Biotechnology</span>
+          <span class="filter-tag">Energy</span>
+          <span class="filter-tag">Materials Science</span>
+          <span class="filter-tag">AI/ML</span>
+          <span class="filter-tag">Neuroscience</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Papers Grid -->
+    <section class="papers-grid" id="papers">
+      <!-- Paper Card 1 -->
+      <article class="paper-card">
+        <div class="paper-meta">
+          <span class="paper-domain">Quantum Computing</span>
+          <span class="paper-date">2024.01.15</span>
+        </div>
+        
+        <h3 class="paper-title">
+          Variational Quantum Eigensolvers for Drug Discovery: A Comprehensive Benchmark
+        </h3>
+        
+        <p class="paper-authors">
+          Chen et al., MIT | arXiv:2401.08742
+        </p>
+        
+        <p class="paper-abstract">
+          We present a systematic evaluation of VQE algorithms applied to molecular 
+          simulation tasks relevant to pharmaceutical research. Our results demonstrate 
+          40x speedup in ground state energy calculations for drug-like molecules...
+        </p>
+        
+        <div class="paper-stats">
+          <span class="stat">
+            <span class="material-icons-round">visibility</span>
+            2.4K views
+          </span>
+          <span class="stat">
+            <span class="material-icons-round">quote</span>
+            34 citations
+          </span>
+          <span class="stat">
+            <span class="material-icons-round">trending_up</span>
+            94% score
+          </span>
+        </div>
+        
+        <div class="paper-actions">
+          <a href="#" class="btn-sm primary">Analyze Paper</a>
+          <a href="#" class="btn-sm">View PDF</a>
+        </div>
+      </article>
+
+      <!-- Paper Card 2 -->
+      <article class="paper-card">
+        <div class="paper-meta">
+          <span class="paper-domain" style="background: rgba(167, 139, 250, 0.15); color: var(--accent-tertiary);">Biotechnology</span>
+          <span class="paper-date">2024.01.12</span>
+        </div>
+        
+        <h3 class="paper-title">
+          CRISPR-Cas13 Guided RNA Design Using Transformer Architectures
+        </h3>
+        
+        <p class="paper-authors">
+          Patel et al., Stanford | Nature Biotechnology
+        </p>
+        
+        <p class="paper-abstract">
+          A novel deep learning approach for optimizing guide RNA sequences with 
+          improved specificity and reduced off-target effects. Our model achieves 
+          98% accuracy in predicting editing efficiency...
+        </p>
+        
+        <div class="paper-stats">
+          <span class="stat">
+            <span class="material-icons-round">visibility</span>
+            5.1K views
+          </span>
+          <span class="stat">
+            <span class="material-icons-round">quote</span>
+            89 citations
+          </span>
+          <span class="stat">
+            <span class="material-icons-round">trending_up</span>
+            97% score
+          </span>
+        </div>
+        
+        <div class="paper-actions">
+          <a href="#" class="btn-sm primary">Analyze Paper</a>
+          <a href="#" class="btn-sm">View PDF</a>
+        </div>
+      </article>
+
+      <!-- Paper Card 3 -->
+      <article class="paper-card">
+        <div class="paper-meta">
+          <span class="paper-domain" style="background: rgba(16, 185, 129, 0.15); color: var(--accent-green);">Energy</span>
+          <span class="paper-date">2024.01.10</span>
+        </div>
+        
+        <h3 class="paper-title">
+          Perovskite Tandem Solar Cells: Defect Passivation Strategies for 34% Efficiency
+        </h3>
+        
+        <p class="paper-authors">
+          Kim et al., NREL | Science Advances
+        </p>
+        
+        <p class="paper-abstract">
+          Novel interface engineering approaches combining 2D/3D heterojunctions 
+          with molecular passivation layers achieve record-breaking stabilized 
+          power conversion efficiencies in perovskite-silicon tandems...
+        </p>
+        
+        <div class="paper-stats">
+          <span class="stat">
+            <span class="material-icons-round">visibility</span>
+            3.8K views
+          </span>
+          <span class="stat">
+            <span class="material-icons-round">quote</span>
+            56 citations
+          </span>
+          <span class="stat">
+            <span class="material-icons-round">trending_up</span>
+            99% score
+          </span>
+        </div>
+        
+        <div class="paper-actions">
+          <a href="#" class="btn-sm primary">Analyze Paper</a>
+          <a href="#" class="btn-sm">View PDF</a>
+        </div>
+      </article>
+
+      <!-- Paper Card 4 -->
+      <article class="paper-card">
+        <div class="paper-meta">
+          <span class="paper-domain" style="background: rgba(245, 158, 11, 0.15); color: var(--accent-gold);">Neuroscience</span>
+          <span class="paper-date">2024.01.08</span>
+        </div>
+        
+        <h3 class="paper-title">
+          Neuromorphic Computing: Brain-Inspired Architectures for Edge AI Inference
+        </h3>
+        
+        <p class="paper-authors">
+          Rodriguez et al., Intel Labs | IEEE Micro
+        </p>
+        
+        <p class="paper-abstract">
+          Comprehensive analysis of spiking neural network implementations on 
+          neuromorphic hardware demonstrating 100x energy efficiency improvements 
+          for real-time inference applications at the edge...
+        </p>
+        
+        <div class="paper-stats">
+          <span class="stat">
+            <span class="material-icons-round">visibility</span>
+            1.9K views
+          </span>
+          <span class="stat">
+            <span class="material-icons-round">quote</span>
+            23 citations
+          </span>
+          <span class="stat">
+            <span class="material-icons-round">trending_up</span>
+            91% score
+          </span>
+        </div>
+        
+        <div class="paper-actions">
+          <a href="#" class="btn-sm primary">Analyze Paper</a>
+          <a href="#" class="btn-sm">View PDF</a>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <div class="footer-logo-icon">S</div>
+          <span class="footer-logo-text">SciMSPT</span>
+        </div>
+        <p class="footer-desc">
+          Transforming scientific discovery into strategic opportunity through 
+          neural intelligence and molecular computing.
+        </p>
+      </div>
+      
+      <div class="footer-column">
+        <h4>Research</h4>
+        <div class="footer-links">
+          <a href="#">All Papers</a>
+          <a href="#">Quantum Computing</a>
+          <a href="#">Biotechnology</a>
+          <a href="#">Energy & Materials</a>
+          <a href="#">AI & Neuroscience</a>
+        </div>
+      </div>
+      
+      <div class="footer-column">
+        <h4>Resources</h4>
+        <div class="footer-links">
+          <a href="documentation.html">API Documentation</a>
+          <a href="startups.html">Startup Database</a>
+          <a href="platform.html">Platform Features</a>
+          <a href="studio.html">Studio</a>
+        </div>
+      </div>
+      
+      <div class="footer-column">
+        <h4>Company</h4>
+        <div class="footer-links">
+          <a href="about.html">About Us</a>
+          <a href="#">Careers</a>
+          <a href="#">Blog</a>
+          <a href="#">Contact</a>
+          <a href="#">Privacy Policy</a>
+        </div>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <span>&copy; 2025 SciMSPT — Neural Research Intelligence. All rights reserved.</span>
+      <div class="footer-social">
+        <a href="#"><span class="material-icons-round">github</span></a>
+        <a href="#"><span class="material-icons-round">twitter</span></a>
+        <a href="#"><span class="material-icons-round">linkedin</span></a>
+        <a href="#"><span class="material-icons-round">discord</span></a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Initialize DNA Helix
+    function initDnaHelix() {
+      const strands = [
+        { container: 'leftDnaStrand', offset: 0 },
+        { container: 'rightDnaStrand', offset: 50 }
+      ];
+      
+      const nucleotides = ['adenine', 'thymine', 'guanine', 'cytosine'];
+      
+      strands.forEach(({ container, offset }) => {
+        const strand = document.getElementById(container);
+        if (!strand) return;
+        
+        for (let i = 0; i < 20; i++) {
+          const nucleotide = document.createElement('div');
+          nucleotide.className = `nucleotide ${nucleotides[i % 4]}`;
+          
+          const y = (i / 20) * 100;
+          const x = 50 + Math.sin((i + offset) * 0.5) * 35;
+          const delay = (i * 0.15) % 3;
+          
+          nucleotide.style.cssText = `
+            top: ${y}%;
+            left: ${x}%;
+            transform: translate(-50%, -50%);
+            animation-delay: ${delay}s;
+          `;
+          
+          strand.appendChild(nucleotide);
+        }
+      });
+    }
+    
+    // Initialize Protein Chains
+    function initProteinChains() {
+      const chains = ['leftProteinChain', 'rightProteinChain'];
+      
+      chains.forEach(chainId => {
+        const chain = document.getElementById(chainId);
+        if (!chain) return;
+        
+        for (let i = 0; i < 12; i++) {
+          const amino = document.createElement('div');
+          amino.className = 'amino-acid';
+          
+          const y = (i / 12) * 100;
+          const x = Math.sin(i * 0.8) * 15;
+          const delay = (i * 0.3) % 4;
+          const hue = (i * 30) % 360;
+          
+          amino.style.cssText = `
+            top: ${y}%;
+            left: calc(50% + ${x}px);
+            transform: translate(-50%, -50%);
+            animation-delay: ${delay}s;
+            background: hsl(${hue}, 70%, 60%);
+          `;
+          
+          chain.appendChild(amino);
+        }
+      });
+    }
+    
+    // Initialize Neural Background
+    function initNeuralBackground() {
+      const bg = document.getElementById('neuralBg');
+      if (!bg) return;
+      
+      for (let i = 0; i < 50; i++) {
+        const neuron = document.createElement('div');
+        neuron.className = 'neuron';
+        neuron.style.cssText = `
+          left: ${Math.random() * 100}%;
+          top: ${Math.random() * 100}%;
+          animation-delay: ${Math.random() * 4}s;
+        `;
+        bg.appendChild(neuron);
+      }
+    }
+    
+    // Theme Toggle
+    function toggleTheme() {
+      const html = document.documentElement;
+      const icon = document.getElementById('themeIcon');
+      const isDark = html.getAttribute('data-theme') === 'dark';
+      
+      html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+      icon.textContent = isDark ? 'light_mode' : 'dark_mode';
+      localStorage.setItem('theme', isDark ? 'light' : 'dark');
+    }
+    
+    // Load saved theme
+    function loadTheme() {
+      const saved = localStorage.getItem('theme');
+      if (saved) {
+        document.documentElement.setAttribute('data-theme', saved);
+        document.getElementById('themeIcon').textContent = 
+          saved === 'dark' ? 'dark_mode' : 'light_mode';
+      }
+    }
+    
+    // Filter Tags
+    document.querySelectorAll('.filter-tag').forEach(tag => {
+      tag.addEventListener('click', () => {
+        document.querySelectorAll('.filter-tag').forEach(t => t.classList.remove('active'));
+        tag.classList.add('active');
+      });
+    });
+    
+    // Add CSS animations
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes slideIn {
+        from { transform: translateX(100px); opacity: 0; }
+        to { transform: translateX(0); opacity: 1; }
+      }
+      @keyframes slideOut {
+        from { transform: translateX(0); opacity: 1; }
+        to { transform: translateX(100px); opacity: 0; }
+      }
+    `;
+    document.head.appendChild(style);
+    
+    // Initialize
+    document.addEventListener('DOMContentLoaded', () => {
+      loadTheme();
+      initDnaHelix();
+      initProteinChains();
+      initNeuralBackground();
+    });
+  </script>
+</body>
+</html>

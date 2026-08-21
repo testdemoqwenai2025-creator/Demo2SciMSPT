@@ -1,0 +1,1456 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Startup Intelligence — SciMSPT Venture Pipeline</title>
+  <meta name="description" content="SciMSPT Startup Database: AI-validated frontier technology investment opportunities from peer-reviewed research.">
+  
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-deep: #030810;
+      --bg-primary: #0a1628;
+      --bg-secondary: #0d1f35;
+      --bg-tertiary: #122a45;
+      --bg-glass: rgba(10, 22, 40, 0.85);
+      --bg-glass-light: rgba(255, 255, 255, 0.03);
+      
+      --accent-primary: #00E5FF;
+      --accent-secondary: #4da8da;
+      --accent-tertiary: #a78bfa;
+      --accent-pink: #f472b6;
+      --accent-green: #10b981;
+      --accent-gold: #f59e0b;
+      
+      --text-primary: #e8f4fc;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+      
+      --border-subtle: rgba(0, 229, 255, 0.15);
+      
+      --font-heading: 'Playfair Display', Georgia, serif;
+      --font-body: 'Inter', -apple-system, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+      --font-tech: 'Orbitron', sans-serif;
+      
+      --nav-height: 80px;
+      --sidebar-width: 100px;
+    }
+    
+    [data-theme="light"] {
+      --bg-deep: #f0f4f8;
+      --bg-primary: #ffffff;
+      --bg-secondary: #f8fafc;
+      --bg-tertiary: #e2e8f0;
+      --bg-glass: rgba(255, 255, 255, 0.92);
+      --bg-glass-light: rgba(0, 0, 0, 0.02);
+      --text-primary: #0f172a;
+      --text-secondary: #475569;
+      --text-muted: #94a3b8;
+      --border-subtle: rgba(77, 168, 218, 0.25);
+    }
+    
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    
+    body {
+      font-family: var(--font-body);
+      background: var(--bg-deep);
+      color: var(--text-primary);
+      line-height: 1.6;
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+    
+    /* Molecular Sidebars */
+    .molecular-sidebar {
+      position: fixed;
+      top: 0;
+      width: var(--sidebar-width);
+      height: 100vh;
+      z-index: 5;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    
+    .molecular-sidebar.left {
+      left: 0;
+      background: linear-gradient(90deg, rgba(0, 229, 255, 0.08) 0%, transparent 100%);
+      border-right: 1px solid var(--border-subtle);
+    }
+    
+    .molecular-sidebar.right {
+      right: 0;
+      background: linear-gradient(-90deg, rgba(167, 139, 250, 0.08) 0%, transparent 100%);
+      border-left: 1px solid var(--border-subtle);
+    }
+    
+    .dna-helix {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 60px;
+      height: 80vh;
+    }
+    
+    .nucleotide {
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      animation: nucleotidePulse 3s ease-in-out infinite;
+    }
+    
+    .nucleotide.adenine { background: var(--accent-primary); box-shadow: 0 0 10px var(--accent-primary); }
+    .nucleotide.thymine { background: var(--accent-pink); box-shadow: 0 0 10px var(--accent-pink); }
+    .nucleotide.guanine { background: var(--accent-tertiary); box-shadow: 0 0 10px var(--accent-tertiary); }
+    .nucleotide.cytosine { background: var(--accent-green); box-shadow: 0 0 10px var(--accent-green); }
+    
+    @keyframes nucleotidePulse {
+      0%, 100% { opacity: 0.6; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.2); }
+    }
+    
+    .backbone-line {
+      position: absolute;
+      width: 2px;
+      height: 100%;
+      left: 50%;
+      background: linear-gradient(to bottom, transparent, var(--accent-primary) 20%, var(--accent-tertiary) 50%, var(--accent-pink) 80%, transparent);
+      opacity: 0.3;
+    }
+    
+    .protein-chain { position: absolute; width: 40px; height: 200px; top: 20%; }
+    
+    .amino-acid {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      border-radius: 2px;
+      background: var(--accent-gold);
+      opacity: 0.7;
+      animation: aminoFloat 4s ease-in-out infinite;
+    }
+    
+    @keyframes aminoFloat {
+      0%, 100% { transform: translateX(0) rotate(0deg); }
+      50% { transform: translateX(10px) rotate(180deg); }
+    }
+    
+    .molecular-grid {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-image: 
+        radial-gradient(circle at 20% 30%, rgba(0, 229, 255, 0.05) 1px, transparent 1px),
+        radial-gradient(circle at 70% 60%, rgba(167, 139, 250, 0.05) 1px, transparent 1px);
+      background-size: 30px 30px, 50px 50px;
+      animation: gridShift 20s linear infinite;
+    }
+    
+    @keyframes gridShift {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(30px); }
+    }
+    
+    .floating-molecule {
+      position: absolute;
+      border: 1px solid var(--border-subtle);
+      border-radius: 50%;
+      animation: moleculeFloat 8s ease-in-out infinite;
+    }
+    
+    .floating-molecule::before {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 4px; height: 4px;
+      background: var(--accent-primary);
+      border-radius: 50%;
+    }
+    
+    @keyframes moleculeFloat {
+      0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.5; }
+      50% { transform: translateY(-30px) rotate(180deg); opacity: 0.8; }
+    }
+    
+    /* Neural Background */
+    .neural-bg {
+      position: fixed;
+      top: 0;
+      left: calc(var(--sidebar-width));
+      width: calc(100% - 2 * var(--sidebar-width));
+      height: 100%;
+      z-index: 0;
+      overflow: hidden;
+    }
+    
+    .neuron {
+      position: absolute;
+      width: 4px; height: 4px;
+      background: var(--accent-primary);
+      border-radius: 50%;
+      opacity: 0.4;
+      animation: neuronPulse 4s ease-in-out infinite;
+    }
+    
+    @keyframes neuronPulse {
+      0%, 100% { opacity: 0.2; transform: scale(1); }
+      50% { opacity: 0.6; transform: scale(1.5); }
+    }
+    
+    /* Navigation */
+    .nav-container {
+      position: fixed;
+      top: 0;
+      left: var(--sidebar-width);
+      right: var(--sidebar-width);
+      height: var(--nav-height);
+      z-index: 100;
+      background: var(--bg-glass);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 40px;
+    }
+    
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--text-primary);
+    }
+    
+    .nav-logo {
+      width: 42px; height: 42px;
+      background: linear-gradient(135deg, var(--accent-primary), var(--accent-tertiary));
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-tech);
+      font-weight: 900;
+      font-size: 16px;
+      color: var(--bg-deep);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .nav-logo::before {
+      content: '';
+      position: absolute;
+      top: -50%; left: -50%;
+      width: 200%; height: 200%;
+      background: conic-gradient(from 0deg, transparent, rgba(255,255,255,0.3), transparent);
+      animation: logoShine 4s linear infinite;
+    }
+    
+    @keyframes logoShine {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    
+    .nav-title {
+      font-family: var(--font-heading);
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+    }
+    
+    .nav-title span { color: var(--accent-primary); }
+    
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .nav-link {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 10px 18px;
+      text-decoration: none;
+      color: var(--text-secondary);
+      font-size: 14px;
+      font-weight: 500;
+      border-radius: 10px;
+      transition: all 0.3s ease;
+    }
+    
+    .nav-link:hover {
+      color: var(--text-primary);
+      background: var(--bg-glass-light);
+    }
+    
+    .nav-link.active {
+      color: var(--accent-primary);
+      background: rgba(0, 229, 255, 0.08);
+    }
+    
+    .nav-link .material-icons-round { font-size: 18px; }
+    
+    .workspace-btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 24px;
+      background: linear-gradient(135deg, var(--accent-primary), var(--accent-tertiary));
+      color: var(--bg-deep);
+      font-weight: 600;
+      font-size: 14px;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 30px rgba(0, 229, 255, 0.3);
+    }
+    
+    .workspace-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 40px rgba(0, 229, 255, 0.5);
+    }
+    
+    .user-profile {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 16px 8px 8px;
+      background: var(--bg-glass-light);
+      border: 1px solid var(--border-subtle);
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .user-profile:hover {
+      border-color: var(--accent-primary);
+      box-shadow: 0 0 20px rgba(0, 229, 255, 0.2);
+    }
+    
+    .user-avatar {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent-primary), var(--accent-pink));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 14px;
+      color: white;
+      position: relative;
+    }
+    
+    .user-avatar::after {
+      content: '';
+      position: absolute;
+      bottom: 0; right: 0;
+      width: 10px; height: 10px;
+      background: var(--accent-green);
+      border-radius: 50%;
+      border: 2px solid var(--bg-primary);
+    }
+    
+    .user-info { display: flex; flex-direction: column; gap: 2px; }
+    .user-name { font-size: 13px; font-weight: 600; color: var(--text-primary); }
+    .user-role { font-size: 11px; color: var(--accent-primary); font-family: var(--font-mono); }
+    
+    .theme-toggle {
+      width: 44px; height: 44px;
+      border-radius: 12px;
+      background: var(--bg-glass-light);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-secondary);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+    
+    .theme-toggle:hover {
+      color: var(--accent-primary);
+      border-color: var(--accent-primary);
+    }
+    
+    /* Page Navigation */
+    .page-nav-bar {
+      position: fixed;
+      top: calc(var(--nav-height) + 16px);
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 90;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 20px;
+      background: var(--bg-glass);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--border-subtle);
+      border-radius: 50px;
+    }
+    
+    .page-nav-btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      background: transparent;
+      border: 1px solid var(--border-subtle);
+      border-radius: 25px;
+      color: var(--text-secondary);
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+    }
+    
+    .page-nav-btn:hover {
+      background: var(--bg-glass-light);
+      border-color: var(--accent-primary);
+      color: var(--accent-primary);
+    }
+    
+    .page-indicator {
+      font-size: 12px;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+      padding: 0 8px;
+    }
+    
+    /* Main Content */
+    .main-content {
+      position: relative;
+      z-index: 10;
+      margin-left: var(--sidebar-width);
+      margin-right: var(--sidebar-width);
+      padding-top: calc(var(--nav-height) + 24px);
+      min-height: 100vh;
+    }
+    
+    /* Startups Hero */
+    .startups-hero {
+      padding: 80px 60px;
+      text-align: center;
+    }
+    
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 20px;
+      background: rgba(0, 229, 255, 0.1);
+      border: 1px solid rgba(0, 229, 255, 0.3);
+      border-radius: 50px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--accent-primary);
+      margin-bottom: 32px;
+      font-family: var(--font-mono);
+    }
+    
+    .hero-badge .pulse-dot {
+      width: 8px; height: 8px;
+      background: var(--accent-primary);
+      border-radius: 50%;
+      animation: pulse 2s ease-in-out infinite;
+    }
+    
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(1.5); }
+    }
+    
+    .startups-title {
+      font-family: var(--font-heading);
+      font-size: clamp(42px, 6vw, 68px);
+      font-weight: 900;
+      line-height: 1.05;
+      margin-bottom: 24px;
+      letter-spacing: -2px;
+    }
+    
+    .startups-title .gradient-text {
+      background: linear-gradient(135deg, var(--accent-primary), var(--accent-tertiary), var(--accent-pink));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .startups-subtitle {
+      font-size: clamp(17px, 2vw, 22px);
+      color: var(--text-secondary);
+      max-width: 700px;
+      margin: 0 auto 48px;
+      line-height: 1.6;
+    }
+    
+    /* Startup Cards Grid */
+    .startups-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 28px;
+      padding: 0 60px 80px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    
+    .startup-card {
+      background: var(--bg-glass);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--border-subtle);
+      border-radius: 24px;
+      padding: 32px;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .startup-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent-primary), var(--accent-tertiary));
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    
+    .startup-card:hover {
+      transform: translateY(-8px);
+      border-color: var(--accent-primary);
+      box-shadow: 0 20px 60px rgba(0, 229, 255, 0.15);
+    }
+    
+    .startup-card:hover::before {
+      opacity: 1;
+    }
+    
+    .startup-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: 24px;
+    }
+    
+    .startup-logo {
+      width: 64px;
+      height: 64px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, var(--accent-primary), var(--accent-tertiary));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-tech);
+      font-weight: 900;
+      font-size: 24px;
+      color: white;
+    }
+    
+    .startup-stage {
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    
+    .startup-stage.seed { background: rgba(0, 229, 255, 0.15); color: var(--accent-primary); }
+    .startup-stage.series-a { background: rgba(167, 139, 250, 0.15); color: var(--accent-tertiary); }
+    .startup-stage.series-b { background: rgba(244, 114, 182, 0.15); color: var(--accent-pink); }
+    .startup-stage.growth { background: rgba(16, 185, 129, 0.15); color: var(--accent-green); }
+    
+    .startup-name {
+      font-family: var(--font-heading);
+      font-size: 24px;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+    
+    .startup-tagline {
+      font-size: 15px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+    
+    .startup-metrics {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      padding: 20px;
+      background: var(--bg-glass-light);
+      border-radius: 14px;
+      margin-bottom: 20px;
+    }
+    
+    .metric {
+      text-align: center;
+    }
+    
+    .metric-value {
+      font-family: var(--font-tech);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--accent-primary);
+    }
+    
+    .metric-label {
+      font-size: 11px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-top: 4px;
+    }
+    
+    .startup-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 24px;
+    }
+    
+    .startup-tag {
+      padding: 6px 12px;
+      background: var(--bg-glass-light);
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+    
+    .startup-actions {
+      display: flex;
+      gap: 12px;
+    }
+    
+    .btn-primary {
+      flex: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 14px 20px;
+      background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+      color: var(--bg-deep);
+      font-size: 14px;
+      font-weight: 600;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+    }
+    
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(0, 229, 255, 0.3);
+    }
+    
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 14px 20px;
+      background: transparent;
+      color: var(--text-secondary);
+      font-size: 14px;
+      font-weight: 500;
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+    }
+    
+    .btn-secondary:hover {
+      border-color: var(--accent-primary);
+      color: var(--accent-primary);
+    }
+    
+    /* CTA Section */
+    .cta-section {
+      padding: 80px 60px;
+      text-align: center;
+      background: var(--bg-glass-light);
+      border-top: 1px solid var(--border-subtle);
+    }
+    
+    .cta-box {
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    
+    .cta-title {
+      font-family: var(--font-heading);
+      font-size: 36px;
+      font-weight: 800;
+      margin-bottom: 16px;
+    }
+    
+    .cta-desc {
+      font-size: 17px;
+      color: var(--text-secondary);
+      margin-bottom: 32px;
+    }
+    
+    .cta-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    
+    /* Footer */
+    .footer {
+      padding: 60px;
+      border-top: 1px solid var(--border-subtle);
+      background: var(--bg-glass);
+    }
+    
+    .footer-content {
+      display: grid;
+      grid-template-columns: 2fr repeat(3, 1fr);
+      gap: 48px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .footer-brand { display: flex; flex-direction: column; gap: 20px; }
+    
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    
+    .footer-logo-icon {
+      width: 40px; height: 40px;
+      background: linear-gradient(135deg, var(--accent-primary), var(--accent-tertiary));
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-tech);
+      font-weight: 900;
+      font-size: 14px;
+      color: var(--bg-deep);
+    }
+    
+    .footer-logo-text {
+      font-family: var(--font-heading);
+      font-size: 20px;
+      font-weight: 700;
+    }
+    
+    .footer-desc {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+    
+    .footer-column h4 {
+      font-size: 14px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 20px;
+      color: var(--text-primary);
+    }
+    
+    .footer-links {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    
+    .footer-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 14px;
+      transition: color 0.2s ease;
+    }
+    
+    .footer-links a:hover { color: var(--accent-primary); }
+    
+    .footer-links::-webkit-scrollbar { height: 6px; }
+    .footer-links::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 3px; }
+    
+    .footer-bottom {
+      margin-top: 48px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border-subtle);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+    
+    .footer-social { display: flex; gap: 16px; }
+    .footer-social a { color: var(--text-muted); transition: color 0.2s ease; }
+    .footer-social a:hover { color: var(--accent-primary); }
+    
+    /* Responsive */
+    @media (max-width: 1024px) {
+      :root { --sidebar-width: 60px; }
+      .molecular-sidebar { width: 60px; }
+      .dna-helix { width: 40px; }
+      .nucleotide { width: 8px; height: 8px; }
+      .nav-container { padding: 0 20px; }
+      .nav-links { display: none; }
+      .main-content { padding-left: 20px; padding-right: 20px; }
+      .startups-hero { padding-left: 30px; padding-right: 30px; }
+      .startups-grid { padding: 0 30px 60px; }
+      .footer-content { grid-template-columns: 1fr 1fr; }
+    }
+    
+    @media (max-width: 768px) {
+      :root { --sidebar-width: 0px; --nav-height: 70px; }
+      .molecular-sidebar { display: none; }
+      .neural-bg { width: 100%; left: 0; }
+      .main-content { margin-left: 0; margin-right: 0; }
+      .nav-container { left: 0; right: 0; padding: 0 16px; }
+      .page-nav-bar { display: none; }
+      .startups-title { font-size: 32px; }
+      .startups-grid { grid-template-columns: 1fr; }
+      .footer-content { grid-template-columns: 1fr; gap: 32px; }
+      .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Left Molecular Sidebar -->
+  <aside class="molecular-sidebar left">
+    <div class="molecular-grid"></div>
+    <div class="dna-helix">
+      <div class="backbone-line"></div>
+      <div class="dna-strand" id="leftDnaStrand"></div>
+    </div>
+    <div class="protein-chain" id="leftProteinChain"></div>
+    <div class="floating-molecule" style="width: 20px; height: 20px; top: 15%; left: 30%;"></div>
+    <div class="floating-molecule" style="width: 14px; height: 14px; top: 45%; left: 55%;"></div>
+    <div class="floating-molecule" style="width: 18px; height: 18px; top: 75%; left: 25%;"></div>
+  </aside>
+
+  <!-- Right Molecular Sidebar -->
+  <aside class="molecular-sidebar right">
+    <div class="molecular-grid"></div>
+    <div class="dna-helix">
+      <div class="backbone-line"></div>
+      <div class="dna-strand" id="rightDnaStrand"></div>
+    </div>
+    <div class="protein-chain" id="rightProteinChain"></div>
+    <div class="floating-molecule" style="width: 16px; height: 16px; top: 25%; left: 40%;"></div>
+    <div class="floating-molecule" style="width: 22px; height: 22px; top: 55%; left: 60%;"></div>
+    <div class="floating-molecule" style="width: 12px; height: 12px; top: 85%; left: 35%;"></div>
+  </aside>
+
+  <!-- Neural Background -->
+  <div class="neural-bg" id="neuralBg"></div>
+
+  <!-- Navigation -->
+  <nav class="nav-container">
+    <a href="index.html" class="nav-brand">
+      <div class="nav-logo">S</div>
+      <span class="nav-title">Sci<span>MSPT</span></span>
+    </a>
+    
+    <div class="nav-links">
+      <a href="index.html" class="nav-link"><span class="material-icons-round">home</span> Home</a>
+      <a href="research.html" class="nav-link"><span class="material-icons-round">biotech</span> Research</a>
+      <a href="startups.html" class="nav-link active"><span class="material-icons-round">rocket_launch</span> Startups</a>
+      <a href="platform.html" class="nav-link"><span class="material-icons-round">dashboard</span> Platform</a>
+      <a href="documentation.html" class="nav-link"><span class="material-icons-round">code</span> API Docs</a>
+      <a href="about.html" class="nav-link"><span class="material-icons-round">info</span> About</a>
+    </div>
+    
+    <div style="display: flex; align-items: center; gap: 16px;">
+      <button class="theme-toggle" onclick="toggleTheme()">
+        <span class="material-icons-round" id="themeIcon">dark_mode</span>
+      </button>
+      
+      <button class="workspace-btn" onclick="location.href='platform.html#collaboration'">
+        <span class="material-icons-round">workspaces</span>
+        Workspace
+      </button>
+      
+      <div class="user-profile">
+        <div class="user-avatar">EV</div>
+        <div class="user-info">
+          <span class="user-name">Dr. Elena Vasquez</span>
+          <span class="user-role">Neural Architect</span>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page Navigation Bar -->
+  <div class="page-nav-bar">
+    <a href="javascript:history.back()" class="page-nav-btn">
+      <span class="material-icons-round">arrow_back</span>
+      Back
+    </a>
+    <span class="page-indicator">|</span>
+    <a href="index.html" class="page-nav-btn">
+      <span class="material-icons-round">home</span>
+      Home
+    </a>
+    <span class="page-indicator">|</span>
+    <a href="#startups" class="page-nav-btn">
+      <span class="material-icons-round">trending_up</span>
+      Ventures
+    </a>
+  </div>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <!-- Startups Hero -->
+    <section class="startups-hero">
+      <div class="hero-badge">
+        <span class="pulse-dot"></span>
+        Weekly Venture Feed — Updated Live
+      </div>
+      
+      <h1 class="startups-title">
+        <span class="gradient-text">Startup Intelligence</span><br>
+        From Research to Revenue
+      </h1>
+      
+      <p class="startups-subtitle">
+        AI-validated frontier technology opportunities extracted from 
+        cutting-edge research papers. Each startup is vetted for technical 
+        feasibility, market timing, and team composition.
+      </p>
+    </section>
+
+    <!-- Startups Grid -->
+    <section class="startups-grid" id="startups">
+      <!-- Startup Card 1 -->
+      <article class="startup-card">
+        <div class="startup-header">
+          <div class="startup-logo">Q</div>
+          <span class="startup-stage seed">Seed</span>
+        </div>
+        
+        <h3 class="startup-name">Quantum Therapeutics</h3>
+        <p class="startup-tagline">
+          Quantum-accelerated drug discovery platform using variational quantum 
+          eigensolvers for molecular simulation at unprecedented accuracy.
+        </p>
+        
+        <div class="startup-metrics">
+          <div class="metric">
+            <div class="metric-value">94%</div>
+            <div class="metric-label">Validation</div>
+          </div>
+          <div class="metric">
+            <div class="metric-value">$4.2M</div>
+            <div class="metric-label">Raised</div>
+          </div>
+          <div class="metric">
+            <div class="metric-value">12</div>
+            <div class="metric-label">Papers</div>
+          </div>
+        </div>
+        
+        <div class="startup-tags">
+          <span class="startup-tag">Quantum Computing</span>
+          <span class="startup-tag">Drug Discovery</span>
+          <span class="startup-tag">VQE</span>
+          <span class="startup-tag">Biotech</span>
+        </div>
+        
+        <div class="startup-actions">
+          <a href="#" class="btn-primary">
+            <span class="material-icons-round">visibility</span>
+            View Details
+          </a>
+          <a href="#" class="btn-secondary">
+            <span class="material-icons-round">bookmark</span>
+            Save
+          </a>
+        </div>
+      </article>
+
+      <!-- Startup Card 2 -->
+      <article class="startup-card">
+        <div class="startup-header">
+          <div class="startup-logo" style="background: linear-gradient(135deg, #a78bfa, #ec4899);">N</div>
+          <span class="startup-stage series-a">Series A</span>
+        </div>
+        
+        <h3 class="startup-name">NeuroSynth Labs</h3>
+        <p class="startup-tagline">
+          Neuromorphic computing hardware inspired by biological neural networks, 
+          achieving 100x efficiency gains for AI inference workloads.
+        </p>
+        
+        <div class="startup-metrics">
+          <div class="metric">
+            <div class="metric-value">97%</div>
+            <div class="metric-label">Validation</div>
+          </div>
+          <div class="metric">
+            <div class="metric-value">$18M</div>
+            <div class="metric-label">Raised</div>
+          </div>
+          <div class="metric">
+            <div class="metric-value">28</div>
+            <div class="metric-label">Papers</div>
+          </div>
+        </div>
+        
+        <div class="startup-tags">
+          <span class="startup-tag">Neuromorphic</span>
+          <span class="startup-tag">AI Hardware</span>
+          <span class="startup-tag">Edge Computing</span>
+        </div>
+        
+        <div class="startup-actions">
+          <a href="#" class="btn-primary">
+            <span class="material-icons-round">visibility</span>
+            View Details
+          </a>
+          <a href="#" class="btn-secondary">
+            <span class="material-icons-round">bookmark</span>
+            Save
+          </a>
+        </div>
+      </article>
+
+      <!-- Startup Card 3 -->
+      <article class="startup-card">
+        <div class="startup-header">
+          <div class="startup-logo" style="background: linear-gradient(135deg, #10b981, #06b6d4);">S</div>
+          <span class="startup-stage series-b">Series B</span>
+        </div>
+        
+        <h3 class="startup-name">Solaris Materials</h3>
+        <p class="startup-tagline">
+          Next-generation perovskite tandem solar cells achieving 34%+ conversion 
+          efficiency through novel defect passivation techniques.
+        </p>
+        
+        <div class="startup-metrics">
+          <div class="metric">
+            <div class="metric-value">99%</div>
+            <div class="metric-label">Validation</div>
+          </div>
+          <div class="metric">
+            <div class="metric-value">$45M</div>
+            <div class="metric-label">Raised</div>
+          </div>
+          <div class="metric">
+            <div class="metric-value">42</div>
+            <div class="metric-label">Papers</div>
+          </div>
+        </div>
+        
+        <div class="startup-tags">
+          <span class="startup-tag">Solar Energy</span>
+          <span class="startup-tag">Perovskite</span>
+          <span class="startup-tag">CleanTech</span>
+          <span class="startup-tag">Materials</span>
+        </div>
+        
+        <div class="startup-actions">
+          <a href="#" class="btn-primary">
+            <span class="material-icons-round">visibility</span>
+            View Details
+          </a>
+          <a href="#" class="btn-secondary">
+            <span class="material-icons-round">bookmark</span>
+            Save
+          </a>
+        </div>
+      </article>
+
+      <!-- Startup Card 4 -->
+      <article class="startup-card">
+        <div class="startup-header">
+          <div class="startup-logo" style="background: linear-gradient(135deg, #f59e0b, #ef4444);">G</div>
+          <span class="startup-stage seed">Seed</span>
+        </div>
+        
+        <h3 class="startup-name">GenomeForge</h3>
+        <p class="startup-tagline">
+          CRISPR-based gene editing platform with AI-designed guide RNAs for 
+          precision therapeutics targeting previously undruggable diseases.
+        </p>
+        
+        <div class="startup-metrics">
+          <div class="metric">
+            <div class="metric-value">91%</div>
+            <div class="metric-label">Validation</div>
+          </div>
+          <div class="metric">
+            <div class="metric-value">$2.8M</div>
+            <div class="metric-label">Raised</div>
+          </div>
+          <div class="metric">
+            <div class="metric-value">19</div>
+            <div class="metric-label">Papers</div>
+          </div>
+        </div>
+        
+        <div class="startup-tags">
+          <span class="startup-tag">CRISPR</span>
+          <span class="startup-tag">Gene Therapy</span>
+          <span class="startup-tag">AI/ML</span>
+        </div>
+        
+        <div class="startup-actions">
+          <a href="#" class="btn-primary">
+            <span class="material-icons-round">visibility</span>
+            View Details
+          </a>
+          <a href="#" class="btn-secondary">
+            <span class="material-icons-round">bookmark</span>
+            Save
+          </a>
+        </div>
+      </article>
+
+      <!-- Startup Card 5 -->
+      <article class="startup-card">
+        <div class="startup-header">
+          <div class="startup-logo" style="background: linear-gradient(135deg, #06b6d4, #3b82f6);">F</div>
+          <span class="startup-stage growth">Growth</span>
+        </div>
+        
+        <h3 class="startup-name">Fusion Dynamics</h3>
+        <p class="startup-tagline">
+          Compact stellarator fusion reactor design using advanced magnetic 
+          confinement configurations derived from ML-optimized plasma physics.
+        </p>
+        
+        <div class="startup-metrics">
+          <div class="metric">
+            <div class="metric-value">96%</div>
+            <div class="metric-label">Validation</div>
+          </div>
+          <div class="metric">
+            <div class="metric-value">$120M</div>
+            <div class="metric-label">Raised</div>
+          </div>
+          <div class="metric">
+            <div class="metric-value">67</div>
+            <div class="metric-label">Papers</div>
+          </div>
+        </div>
+        
+        <div class="startup-tags">
+          <span class="startup-tag">Fusion Energy</span>
+          <span class="startup-tag">Plasma Physics</span>
+          <span class="startup-tag">Stellarator</span>
+          <span class="startup-tag">Energy</span>
+        </div>
+        
+        <div class="startup-actions">
+          <a href="#" class="btn-primary">
+            <span class="material-icons-round">visibility</span>
+            View Details
+          </a>
+          <a href="#" class="btn-secondary">
+            <span class="material-icons-round">bookmark</span>
+            Save
+          </a>
+        </div>
+      </article>
+
+      <!-- Startup Card 6 -->
+      <article class="startup-card">
+        <div class="startup-header">
+          <div class="startup-logo" style="background: linear-gradient(135deg, #ec4899, #8b5cf6);">B</div>
+          <span class="startup-stage series-a">Series A</span>
+        </div>
+        
+        <h3 class="startup-name">BioNexus AI</h3>
+        <p class="startup-tagline">
+          Multi-modal foundation model trained exclusively on biomedical literature, 
+          enabling hypothesis generation and drug target identification.
+        </p>
+        
+        <div class="startup-metrics">
+          <div class="metric">
+            <div class="metric-value">93%</div>
+            <div class="metric-label">Validation</div>
+          </div>
+          <div class="metric">
+            <div class="metric-value">$22M</div>
+            <div class="metric-label">Raised</div>
+          </div>
+          <div class="metric">
+            <div class="metric-value">35</div>
+            <div class="metric-label">Papers</div>
+          </div>
+        </div>
+        
+        <div class="startup-tags">
+          <span class="startup-tag">Foundation Models</span>
+          <span class="startup-tag">Bioinformatics</span>
+          <span class="startup-tag">LLM</span>
+          <span class="startup-tag">Drug Discovery</span>
+        </div>
+        
+        <div class="startup-actions">
+          <a href="#" class="btn-primary">
+            <span class="material-icons-round">visibility</span>
+            View Details
+          </a>
+          <a href="#" class="btn-secondary">
+            <span class="material-icons-round">bookmark</span>
+            Save
+          </a>
+        </div>
+      </article>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+      <div class="cta-box">
+        <h2 class="cta-title">Get This Week's Full Report</h2>
+        <p class="cta-desc">
+          Access detailed analysis on all 7 validated startups including 
+          market sizing, competitive landscape, and investment thesis.
+        </p>
+        
+        <div class="cta-buttons">
+          <a href="#" class="btn-primary" onclick="showNotification('Report downloading...')">
+            <span class="material-icons-round">download</span>
+            Get Full Report
+          </a>
+          <a href="documentation.html" class="btn-secondary">
+            <span class="material-icons-round">code</span>
+            Get API Access
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <div class="footer-logo-icon">S</div>
+          <span class="footer-logo-text">SciMSPT</span>
+        </div>
+        <p class="footer-desc">
+          Transforming scientific discovery into strategic opportunity through 
+          neural intelligence and molecular computing.
+        </p>
+      </div>
+      
+      <div class="footer-column">
+        <h4>Startups</h4>
+        <div class="footer-links">
+          <a href="#">This Week's Picks</a>
+          <a href="#">All Startups</a>
+          <a href="#">Investment Thesis</a>
+          <a href="#">Validation Methodology</a>
+        </div>
+      </div>
+      
+      <div class="footer-column">
+        <h4>Resources</h4>
+        <div class="footer-links">
+          <a href="documentation.html">API Documentation</a>
+          <a href="research.html">Research Papers</a>
+          <a href="platform.html">Platform Features</a>
+          <a href="studio.html">Studio</a>
+        </div>
+      </div>
+      
+      <div class="footer-column">
+        <h4>Company</h4>
+        <div class="footer-links">
+          <a href="about.html">About Us</a>
+          <a href="#">Careers</a>
+          <a href="#">Blog</a>
+          <a href="#">Contact</a>
+          <a href="#">Privacy Policy</a>
+        </div>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <span>&copy; 2025 SciMSPT — Neural Research Intelligence. All rights reserved.</span>
+      <div class="footer-social">
+        <a href="#"><span class="material-icons-round">github</span></a>
+        <a href="#"><span class="material-icons-round">twitter</span></a>
+        <a href="#"><span class="material-icons-round">linkedin</span></a>
+        <a href="#"><span class="material-icons-round">discord</span></a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Initialize DNA Helix
+    function initDnaHelix() {
+      const strands = [
+        { container: 'leftDnaStrand', offset: 0 },
+        { container: 'rightDnaStrand', offset: 50 }
+      ];
+      
+      const nucleotides = ['adenine', 'thymine', 'guanine', 'cytosine'];
+      
+      strands.forEach(({ container, offset }) => {
+        const strand = document.getElementById(container);
+        if (!strand) return;
+        
+        for (let i = 0; i < 20; i++) {
+          const nucleotide = document.createElement('div');
+          nucleotide.className = `nucleotide ${nucleotides[i % 4]}`;
+          
+          const y = (i / 20) * 100;
+          const x = 50 + Math.sin((i + offset) * 0.5) * 35;
+          const delay = (i * 0.15) % 3;
+          
+          nucleotide.style.cssText = `
+            top: ${y}%;
+            left: ${x}%;
+            transform: translate(-50%, -50%);
+            animation-delay: ${delay}s;
+          `;
+          
+          strand.appendChild(nucleotide);
+        }
+      });
+    }
+    
+    // Initialize Protein Chains
+    function initProteinChains() {
+      const chains = ['leftProteinChain', 'rightProteinChain'];
+      
+      chains.forEach(chainId => {
+        const chain = document.getElementById(chainId);
+        if (!chain) return;
+        
+        for (let i = 0; i < 12; i++) {
+          const amino = document.createElement('div');
+          amino.className = 'amino-acid';
+          
+          const y = (i / 12) * 100;
+          const x = Math.sin(i * 0.8) * 15;
+          const delay = (i * 0.3) % 4;
+          const hue = (i * 30) % 360;
+          
+          amino.style.cssText = `
+            top: ${y}%;
+            left: calc(50% + ${x}px);
+            transform: translate(-50%, -50%);
+            animation-delay: ${delay}s;
+            background: hsl(${hue}, 70%, 60%);
+          `;
+          
+          chain.appendChild(amino);
+        }
+      });
+    }
+    
+    // Initialize Neural Background
+    function initNeuralBackground() {
+      const bg = document.getElementById('neuralBg');
+      if (!bg) return;
+      
+      for (let i = 0; i < 50; i++) {
+        const neuron = document.createElement('div');
+        neuron.className = 'neuron';
+        neuron.style.cssText = `
+          left: ${Math.random() * 100}%;
+          top: ${Math.random() * 100}%;
+          animation-delay: ${Math.random() * 4}s;
+        `;
+        bg.appendChild(neuron);
+      }
+    }
+    
+    // Theme Toggle
+    function toggleTheme() {
+      const html = document.documentElement;
+      const icon = document.getElementById('themeIcon');
+      const isDark = html.getAttribute('data-theme') === 'dark';
+      
+      html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+      icon.textContent = isDark ? 'light_mode' : 'dark_mode';
+      localStorage.setItem('theme', isDark ? 'light' : 'dark');
+    }
+    
+    // Load saved theme
+    function loadTheme() {
+      const saved = localStorage.getItem('theme');
+      if (saved) {
+        document.documentElement.setAttribute('data-theme', saved);
+        document.getElementById('themeIcon').textContent = 
+          saved === 'dark' ? 'dark_mode' : 'light_mode';
+      }
+    }
+    
+    // Notification System
+    function showNotification(message) {
+      const notification = document.createElement('div');
+      notification.style.cssText = `
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        padding: 20px 28px;
+        background: linear-gradient(135deg, var(--accent-primary), var(--accent-tertiary));
+        color: var(--bg-deep);
+        border-radius: 14px;
+        font-weight: 600;
+        z-index: 9999;
+        animation: slideIn 0.4s ease;
+        box-shadow: 0 10px 40px rgba(0, 229, 255, 0.3);
+      `;
+      notification.textContent = message;
+      document.body.appendChild(notification);
+      
+      setTimeout(() => {
+        notification.style.animation = 'slideOut 0.3s ease forwards';
+        setTimeout(() => notification.remove(), 300);
+      }, 4000);
+    }
+    
+    // Add CSS animations
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes slideIn {
+        from { transform: translateX(100px); opacity: 0; }
+        to { transform: translateX(0); opacity: 1; }
+      }
+      @keyframes slideOut {
+        from { transform: translateX(0); opacity: 1; }
+        to { transform: translateX(100px); opacity: 0; }
+      }
+    `;
+    document.head.appendChild(style);
+    
+    // Initialize
+    document.addEventListener('DOMContentLoaded', () => {
+      loadTheme();
+      initDnaHelix();
+      initProteinChains();
+      initNeuralBackground();
+    });
+  </script>
+</body>
+</html>
