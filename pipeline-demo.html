@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pipeline Studio — SciMSPT Data Pipeline Execution</title>
+  <meta name="description" content="SciMSPT Pipeline Studio: Execute multi-stage analysis pipelines with synthetic datasets and quantum enhancement.">
+  
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+  
+  <style>
+    /* ============================================
+       SCIMSPT NEURAL DESIGN SYSTEM v3.0
+       Pipeline Studio - Data Processing Demo
+       ============================================ */
+    
+    :root {
+      --bg-deep: #030810;
+      --bg-primary: #0a1628;
+      --bg-secondary: #0d1f35;
+      --bg-tertiary: #122a45;
+      --bg-glass: rgba(10, 22, 40, 0.85);
+      --bg-glass-light: rgba(255, 255, 255, 0.03);
+      
+      --accent-primary: #00E5FF;
+      --accent-secondary: #4da8da;
+      --accent-tertiary: #a78bfa;
+      --accent-pink: #f472b6;
+      --accent-green: #10b981;
+      --accent-gold: #f59e0b;
+      --accent-red: #ef4444;
+      
+      --text-primary: #e8f4fc;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+      
+      --border-subtle: rgba(0, 229, 255, 0.15);
+      
+      --font-heading: 'Playfair Display', Georgia, serif;
+      --font-body: 'Inter', -apple-system, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+      --font-tech: 'Orbitron', sans-serif;
+      
+      --nav-height: 80px;
+    }
+    
+    [data-theme="light"] {
+      --bg-deep: #f0f4f8;
+      --bg-primary: #ffffff;
+      --bg-secondary: #f8fafc;
+      --bg-tertiary: #e2e8f0;
+      --bg-glass: rgba(255, 255, 255, 0.92);
+      --bg-glass-light: rgba(0, 0, 0, 0.02);
+      --text-primary: #0f172a;
+      --text-secondary: #475569;
+      --text-muted: #94a3b8;
+      --border-subtle: rgba(77, 168, 218, 0.25);
+    }
+    
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    
+    body {
+      font-family: var(--font-body);
+      background: var(--bg-deep);
+      color: var(--text-primary);
+      line-height: 1.6;
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+    
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: var(--nav-height);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 48px;
+      background: var(--bg-glass);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    
+    .nav-left { display: flex; align-items: center; gap: 28px; }
+    
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--text-primary);
+    }
+    
+    .nav-logo-text { font-family: var(--font-heading); font-size: 20px; font-weight: 700; }
+    .nav-logo-text span { color: var(--accent-primary); }
+    
+    .nav-links { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+    
+    .nav-link {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-muted);
+      text-decoration: none;
+      padding: 8px 16px;
+      border-radius: 20px;
+      transition: all 0.25s ease;
+      white-space: nowrap;
+    }
+    
+    .nav-link:hover { color: var(--accent-primary); background: var(--bg-glass-light); }
+    .nav-link.active { color: var(--accent-primary); background: rgba(0, 229, 255, 0.1); }
+    
+    .theme-toggle {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 16px;
+      background: var(--bg-glass-light);
+      border: 1px solid var(--border-subtle);
+      border-radius: 20px;
+      cursor: pointer;
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+    
+    .hero-section {
+      min-height: 50vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 120px 24px 60px;
+      background: 
+        radial-gradient(ellipse at 40% 50%, rgba(16, 185, 129, 0.08) 0%, transparent 50%),
+        radial-gradient(ellipse at 60% 50%, rgba(167, 139, 250, 0.06) 0%, transparent 50%),
+        var(--bg-deep);
+    }
+    
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 20px;
+      background: var(--bg-glass);
+      border: 1px solid var(--border-subtle);
+      border-radius: 30px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--accent-green);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+    
+    .hero-title {
+      font-family: var(--font-heading);
+      font-size: clamp(36px, 6vw, 56px);
+      font-weight: 900;
+      line-height: 1.1;
+      margin-bottom: 20px;
+    }
+    
+    .hero-title .gradient-text {
+      background: linear-gradient(135deg, var(--accent-green), var(--accent-primary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .main-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 80px 24px;
+    }
+    
+    .pipeline-workspace {
+      background: var(--bg-glass);
+      border: 1px solid var(--border-subtle);
+      border-radius: 24px;
+      backdrop-filter: blur(20px);
+      overflow: hidden;
+    }
+    
+    .workspace-header {
+      padding: 24px 28px;
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    
+    .workspace-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-family: var(--font-heading);
+      font-size: 22px;
+      font-weight: 700;
+    }
+    
+    .workspace-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      background: rgba(16, 185, 129, 0.15);
+      color: var(--accent-green);
+    }
+    
+    .workspace-body {
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      min-height: 500px;
+    }
+    
+    @media (max-width: 900px) {
+      .workspace-body { grid-template-columns: 1fr; }
+    }
+    
+    .sidebar {
+      padding: 24px;
+      border-right: 1px solid var(--border-subtle);
+      background: var(--bg-deep);
+    }
+    
+    @media (max-width: 900px) {
+      .sidebar { border-right: none; border-bottom: 1px solid var(--border-subtle); }
+    }
+    
+    .sidebar-section {
+      margin-bottom: 28px;
+    }
+    
+    .sidebar-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+    
+    .config-item {
+      margin-bottom: 16px;
+    }
+    
+    .config-label {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      margin-bottom: 6px;
+      display: block;
+    }
+    
+    .select-wrapper {
+      position: relative;
+    }
+    
+    .select-wrapper select {
+      width: 100%;
+      padding: 10px 14px;
+      padding-right: 30px;
+      background: var(--bg-glass-light);
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      color: var(--text-primary);
+      font-family: var(--font-body);
+      font-size: 13px;
+      appearance: none;
+      cursor: pointer;
+    }
+    
+    .select-wrapper:focus-within select,
+    .select-wrapper select:focus {
+      outline: none;
+      border-color: var(--accent-green);
+    }
+    
+    .select-wrapper::after {
+      content: '▼';
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 9px;
+      color: var(--text-muted);
+      pointer-events: none;
+    }
+    
+    .input-field {
+      width: 100%;
+      padding: 10px 14px;
+      background: var(--bg-glass-light);
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      color: var(--text-primary);
+      font-family: var(--font-mono);
+      font-size: 13px;
+    }
+    
+    .input-field:focus {
+      outline: none;
+      border-color: var(--accent-green);
+    }
+    
+    .checkbox-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    
+    .checkbox-label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--text-secondary);
+      cursor: pointer;
+      padding: 8px 10px;
+      border-radius: 6px;
+      transition: background 0.2s ease;
+    }
+    
+    .checkbox-label:hover {
+      background: var(--bg-glass-light);
+    }
+    
+    .checkbox-label input[type="checkbox"] {
+      accent-color: var(--accent-green);
+    }
+    
+    .btn-run {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      padding: 14px 24px;
+      background: linear-gradient(135deg, var(--accent-green), var(--accent-primary));
+      color: #000;
+      font-size: 14px;
+      font-weight: 700;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    
+    .btn-run:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 40px rgba(16, 185, 129, 0.3);
+    }
+    
+    .btn-run:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+    
+    .main-area {
+      padding: 24px;
+      overflow-y: auto;
+      max-height: 600px;
+    }
+    
+    .pipeline-flow {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    
+    .pipeline-stage {
+      display: flex;
+      align-items: stretch;
+      gap: 16px;
+      padding: 18px;
+      background: var(--bg-glass-light);
+      border: 1px solid var(--border-subtle);
+      border-radius: 14px;
+      transition: all 0.3s ease;
+    }
+    
+    .pipeline-stage.completed {
+      border-color: var(--accent-green);
+      background: rgba(16, 185, 129, 0.03);
+    }
+    
+    .pipeline-stage.running {
+      border-color: var(--accent-gold);
+      background: rgba(245, 158, 11, 0.03);
+    }
+    
+    .stage-number {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 700;
+      font-family: var(--font-tech);
+      flex-shrink: 0;
+      background: var(--bg-tertiary);
+      color: var(--text-muted);
+    }
+    
+    .pipeline-stage.completed .stage-number {
+      background: var(--accent-green);
+      color: #000;
+    }
+    
+    .pipeline-stage.running .stage-number {
+      background: var(--accent-gold);
+      color: #000;
+      animation: pulse 1s infinite;
+    }
+    
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.7; transform: scale(1.05); }
+    }
+    
+    .stage-content { flex: 1; }
+    
+    .stage-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+    
+    .stage-name {
+      font-size: 15px;
+      font-weight: 600;
+    }
+    
+    .stage-time {
+      font-size: 11px;
+      font-family: var(--font-mono);
+      color: var(--text-muted);
+    }
+    
+    .stage-description {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+    
+    .stage-output {
+      margin-top: 12px;
+      padding: 12px;
+      background: var(--bg-deep);
+      border-radius: 8px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--text-secondary);
+      display: none;
+    }
+    
+    .pipeline-stage.completed .stage-output {
+      display: block;
+    }
+    
+    .output-line {
+      display: flex;
+      justify-content: space-between;
+      padding: 4px 0;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    
+    .output-line:last-child { border-bottom: none; }
+    
+    .output-value { color: var(--accent-primary); }
+    
+    .results-summary {
+      margin-top: 32px;
+      padding: 28px;
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(0, 229, 255, 0.1));
+      border: 1px solid var(--accent-green);
+      border-radius: 20px;
+      display: none;
+    }
+    
+    .results-summary.visible { display: block; }
+    
+    .summary-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    
+    .summary-icon {
+      font-size: 28px;
+    }
+    
+    .summary-title {
+      font-family: var(--font-heading);
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--accent-green);
+    }
+    
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    
+    .summary-metric {
+      background: var(--bg-glass);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 16px;
+      text-align: center;
+    }
+    
+    .summary-value {
+      font-size: 28px;
+      font-weight: 700;
+      font-family: var(--font-tech);
+      color: var(--accent-primary);
+      margin-bottom: 4px;
+    }
+    
+    .summary-label {
+      font-size: 12px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    
+    .summary-insights {
+      background: var(--bg-glass);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 20px;
+    }
+    
+    .insights-title {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 12px;
+      color: var(--text-primary);
+    }
+    
+    .insight-list {
+      list-style: none;
+    }
+    
+    .insight-list li {
+      padding: 8px 0;
+      padding-left: 24px;
+      position: relative;
+      font-size: 14px;
+      color: var(--text-secondary);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    
+    .insight-list li:last-child { border-bottom: none; }
+    
+    .insight-list li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: var(--accent-green);
+      font-weight: bold;
+    }
+    
+    .footer {
+      padding: 48px 24px 30px;
+      background: var(--bg-primary);
+      border-top: 1px solid var(--border-subtle);
+      margin-top: 80px;
+      text-align: center;
+    }
+    
+    .footer-text {
+      font-size: 14px;
+      color: var(--text-secondary);
+      margin-bottom: 16px;
+    }
+    
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    
+    .footer-links a {
+      font-size: 13px;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+    
+    .footer-links a:hover { color: var(--accent-green); }
+    
+    @media (max-width: 1024px) {
+      .navbar { padding: 0 20px; }
+      .nav-links { display: none; }
+    }
+    
+    @media (max-width: 768px) {
+      .hero-section { padding: 100px 20px 50px; }
+      .main-content { padding: 50px 16px; }
+      .sidebar { padding: 16px; }
+      .main-area { padding: 16px; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="nav-left">
+      <a href="index.html" class="nav-logo">
+        <span class="nav-logo-text">Sci<span>MSPT</span></span>
+      </a>
+      <div class="nav-links">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="quantum.html" class="nav-link">Quantum</a>
+        <a href="quantum-demo.html" class="nav-link">Quantum Lab</a>
+        <a href="pipeline-demo.html" class="nav-link active">Pipeline</a>
+        <a href="security.html" class="nav-link">Security</a>
+        <a href="scaling.html" class="nav-link">Scaling</a>
+        <a href="monitoring.html" class="nav-link">Monitoring</a>
+      </div>
+    </div>
+    <button class="theme-toggle" onclick="toggleTheme()">
+      <span class="material-icons-round" style="font-size: 16px;">dark_mode</span>
+      Theme
+    </button>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="hero-badge">
+      <span class="material-icons-round">account_tree</span>
+      Pipeline Studio
+    </div>
+    <h1 class="hero-title">
+      <span class="gradient-text">Data Pipeline</span><br>
+      Execution Engine
+    </h1>
+  </section>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <div class="pipeline-workspace">
+      <div class="workspace-header">
+        <div class="workspace-title">
+          <div class="workspace-icon">
+            <span class="material-icons-round">settings_suggest</span>
+          </div>
+          Pipeline Configuration
+        </div>
+        <div id="statusBadge" style="padding: 6px 14px; background: rgba(16, 185, 129, 0.15); border-radius: 20px; font-size: 12px; font-weight: 600; color: var(--accent-green);">
+          ● Ready
+        </div>
+      </div>
+      
+      <div class="workspace-body">
+        <!-- Sidebar Configuration -->
+        <aside class="sidebar">
+          <div class="sidebar-section">
+            <div class="sidebar-label">Data Source</div>
+            <div class="config-item">
+              <label class="config-label">Dataset Type</label>
+              <div class="select-wrapper">
+                <select id="datasetType">
+                  <option value="materials">Materials Discovery</option>
+                  <option value="quantum">Quantum Benchmarks</option>
+                  <option value="molecular">Molecular Simulation</option>
+                  <option value="financial">Portfolio Optimization</option>
+                </select>
+              </div>
+            </div>
+            <div class="config-item">
+              <label class="config-label">Sample Size</label>
+              <input type="number" id="sampleSize" class="input-field" value="100" min="10" max="1000">
+            </div>
+          </div>
+          
+          <div class="sidebar-section">
+            <div class="sidebar-label">Pipeline Stages</div>
+            <div class="checkbox-group" id="stagesCheckboxes">
+              <label class="checkbox-label">
+                <input type="checkbox" checked> Data Ingestion
+              </label>
+              <label class="checkbox-label">
+                <input type="checkbox" checked> Preprocessing
+              </label>
+              <label class="checkbox-label">
+                <input type="checkbox" checked> Feature Extraction
+              </label>
+              <label class="checkbox-label">
+                <input type="checkbox" checked> Quantum Enhancement
+              </label>
+              <label class="checkbox-label">
+                <input type="checkbox" checked> Analysis
+              </label>
+              <label class="checkbox-label">
+                <input type="checkbox" checked> Visualization
+              </label>
+              <label class="checkbox-label">
+                <input type="checkbox" checked> Export
+              </label>
+            </div>
+          </div>
+          
+          <div class="sidebar-section">
+            <button class="btn-run" onclick="runPipeline()" id="runBtn">
+              <span class="material-icons-round">play_arrow</span>
+              Execute Pipeline
+            </button>
+          </div>
+        </aside>
+        
+        <!-- Main Area -->
+        <main class="main-area">
+          <div class="pipeline-flow" id="pipelineFlow">
+            <div style="text-align: center; padding: 60px 20px; color: var(--text-muted);">
+              <span class="material-icons-round" style="font-size: 48px; opacity: 0.3;">account_tree</span>
+              <p style="margin-top: 16px;">Configure your pipeline and click "Execute Pipeline" to begin</p>
+            </div>
+          </div>
+          
+          <div class="results-summary" id="resultsSummary"></div>
+        </main>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p class="footer-text">
+      SciMSPT Neural Research Platform — Pipeline Execution Engine<br>
+      Multi-stage data processing with quantum enhancement
+    </p>
+    <div class="footer-links">
+      <a href="https://github.com/testdemoqwenai2025-creator/SciMSPT2" target="_blank">GitHub</a>
+      <a href="quantum-demo.html">Quantum Lab</a>
+      <a href="index.html">Back to Home</a>
+    </div>
+  </footer>
+
+  <script>
+    function toggleTheme() {
+      const html = document.documentElement;
+      const currentTheme = html.getAttribute('data-theme');
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', newTheme);
+      localStorage.setItem('scimspt-theme', newTheme);
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const saved = localStorage.getItem('scimspt-theme');
+      if (saved) document.documentElement.setAttribute('data-theme', saved);
+    });
+
+    const stages = [
+      { 
+        name: 'Data Ingestion', 
+        icon: 'input',
+        description: 'Loading and validating dataset from source...',
+        outputs: ['Records loaded', 'Columns parsed', 'Data types detected', 'Memory allocated']
+      },
+      { 
+        name: 'Preprocessing', 
+        icon: 'cleaning_services',
+        description: 'Cleaning, normalizing, and preparing data for analysis...',
+        outputs: ['Null values handled', 'Outliers processed', 'Features normalized', 'Quality score calculated']
+      },
+      { 
+        name: 'Feature Extraction', 
+        icon: 'psychology',
+        description: 'Extracting meaningful features using ML techniques...',
+        outputs: ['Features extracted', 'PCA components', 'Correlations computed', 'Feature importance ranked']
+      },
+      { 
+        name: 'Quantum Enhancement', 
+        icon: 'science',
+        description: 'Applying quantum algorithms for enhanced pattern recognition...',
+        outputs: ['Quantum features added', 'Entanglement patterns found', 'Speedup achieved', 'Circuit depth optimized']
+      },
+      { 
+        name: 'Analysis', 
+        icon: 'analytics',
+        description: 'Running statistical analysis and ML models on processed data...',
+        outputs: ['Patterns detected', 'Anomalies flagged', 'Predictions generated', 'Confidence scores assigned']
+      },
+      { 
+        name: 'Visualization', 
+        icon: 'insert_chart',
+        description: 'Generating interactive charts and visual representations...',
+        outputs: ['Charts rendered', 'Dashboard created', 'Export formats ready', 'Interactive elements added']
+      },
+      { 
+        name: 'Export', 
+        icon: 'download',
+        description: 'Preparing final results in multiple export formats...',
+        outputs: ['CSV exported', 'JSON prepared', 'Parquet generated', 'Download links created']
+      }
+    ];
+
+    async function runPipeline() {
+      const btn = document.getElementById('runBtn');
+      const flow = document.getElementById('pipelineFlow');
+      const summary = document.getElementById('resultsSummary');
+      const statusBadge = document.getElementById('statusBadge');
+      const datasetType = document.getElementById('datasetType').value;
+      const sampleSize = parseInt(document.getElementById('sampleSize').value);
+      
+      // Get selected stages
+      const checkboxes = document.querySelectorAll('#stagesCheckboxes input:checked');
+      const selectedStages = Array.from(checkboxes).map((cb, i) => ({
+        ...stages[i],
+        index: i + 1
+      }));
+      
+      if (selectedStages.length === 0) {
+        alert('Please select at least one pipeline stage.');
+        return;
+      }
+      
+      // Update UI
+      btn.disabled = true;
+      btn.innerHTML = '<span class="loading-spinner"></span> Executing...';
+      statusBadge.innerHTML = '<span class="loading-spinner" style="width:12px;height:12px;border-width:2px;"></span> Running';
+      statusBadge.style.background = 'rgba(245, 158, 11, 0.15)';
+      statusBadge.style.color = 'var(--accent-gold)';
+      summary.classList.remove('visible');
+      
+      // Build pipeline flow UI
+      flow.innerHTML = selectedStages.map(stage => `
+        <div class="pipeline-stage" id="stage-${stage.index}">
+          <div class="stage-number">${stage.index}</div>
+          <div class="stage-content">
+            <div class="stage-header">
+              <span class="stage-name">${stage.name}</span>
+              <span class="material-icons-round" style="font-size:16px;color:var(--text-muted);">${stage.icon}</span>
+            </div>
+            <div class="stage-description">${stage.description}</div>
+            <div class="stage-output" id="output-${stage.index}"></div>
+          </div>
+        </div>
+      `).join('');
+      
+      // Execute each stage
+      const metrics = {};
+      let totalDuration = 0;
+      
+      for (const stage of selectedStages) {
+        const stageEl = document.getElementById(`stage-${stage.index}`);
+        const outputEl = document.getElementById(`output-${stage.index}`);
+        
+        // Mark as running
+        stageEl.className = 'pipeline-stage running';
+        
+        // Simulate processing time
+        const duration = Math.floor(Math.random() * 800 + 300);
+        totalDuration += duration;
+        await new Promise(resolve => setTimeout(resolve, duration));
+        
+        // Mark as completed
+        stageEl.className = 'pipeline-stage completed';
+        
+        // Generate output values
+        const outputValues = generateOutputValues(stage.name, sampleSize, datasetType);
+        outputEl.innerHTML = outputValues.map(o => `
+          <div class="output-line">
+            <span>${o.label}</span>
+            <span class="output-value">${o.value}</span>
+          </div>
+        `).join('');
+        
+        // Store metrics
+        metrics[stage.name] = outputValues;
+      }
+      
+      // Show results summary
+      statusBadge.innerHTML = '● Complete';
+      statusBadge.style.background = 'rgba(16, 185, 129, 0.15)';
+      statusBadge.style.color = 'var(--accent-green)';
+      
+      summary.innerHTML = generateSummary(selectedStages.length, sampleSize, totalDuration, datasetType, metrics);
+      summary.classList.add('visible');
+      
+      // Reset button
+      btn.disabled = false;
+      btn.innerHTML = '<span class="material-icons-round">play_arrow</span> Execute Pipeline';
+      
+      // Scroll to results
+      summary.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function generateOutputValues(stageName, size, dataType) {
+      const generators = {
+        'Data Ingestion': () => [
+          { label: 'Records Loaded', value: size.toLocaleString() },
+          { label: 'Columns Parsed', value: Math.floor(Math.random() * 5 + 5).toString() },
+          { label: 'Data Types', value: `${Math.floor(Math.random() * 3 + 3)} types` },
+          { label: 'Memory Usage', value: ${(Math.random() * 10 + 1).toFixed(2)} MB` }
+        ],
+        'Preprocessing': () => [
+          { label: 'Null Values Filled', value: Math.floor(Math.random() * 20).toString() },
+          { label: 'Outliers Handled', value: Math.floor(Math.random() * 10).toString() },
+          { label: 'Normalization', value: 'Min-Max Applied' },
+          { label: 'Quality Score', value: (Math.random() * 0.15 + 0.84).toFixed(3) }
+        ],
+        'Feature Extraction': () => [
+          { label: 'Features Extracted', value: Math.floor(Math.random() * 15 + 8).toString() },
+          { label: 'PCA Components', value: Math.floor(Math.random() * 5 + 3).toString() },
+          { label: 'Variance Retained', value: (Math.random() * 0.13 + 0.86).toFixed(3) },
+          { label: 'Processing Time', value: `${(Math.random() * 100 + 50).toFixed(0)}ms` }
+        ],
+        'Quantum Enhancement': () => [
+          { label: 'Q-Features Added', value: Math.floor(Math.random() * 3 + 2).toString() },
+          { label: 'Entanglement Patterns', value: Math.floor(Math.random() * 4 + 1).toString() },
+          { label: 'Speedup Factor', value: `${(Math.random() * 8 + 1.5).toFixed(1)}x` },
+          { label: 'Circuit Depth', value: Math.floor(Math.random() * 80 + 20).toString() }
+        ],
+        'Analysis': () => [
+          { label: 'Patterns Detected', value: Math.floor(Math.random() * 12 + 3).toString() },
+          { label: 'Anomalies Flagged', value: Math.floor(Math.random() * 8).toString() },
+          { label: 'Confidence Score', value: (Math.random() * 0.23 + 0.76).toFixed(3) },
+          { label: 'Insights Generated', value: Math.floor(Math.random() * 4 + 2).toString() }
+        ],
+        'Visualization': () => [
+          { label: 'Charts Generated', value: Math.floor(Math.random() * 6 + 3).toString() },
+          { label: 'Interactive Elements', value: Math.floor(Math.random() * 4 + 2).toString() },
+          { label: 'Export Formats', value: 'PNG, SVG, PDF' },
+          { label: 'Render Time', value: `${(Math.random() * 200 + 80).toFixed(0)}ms` }
+        ],
+        'Export': () => [
+          { label: 'CSV Size', value: `${(Math.random() * 3 + 0.5).toFixed(2)} MB` },
+          { label: 'JSON Records', value: size.toString() },
+          { label: 'Parquet Compressed', value: `${(Math.random() * 2 + 0.3).toFixed(2)} MB` },
+          { label: 'Download Ready', value: '✓ Yes' }
+        ]
+      };
+      
+      return (generators[stageName] || generators['Data Ingestion'])();
+    }
+
+    function generateSummary(numStages, size, duration, dataType, metrics) {
+      const insights = [
+        `Successfully processed ${size.toLocaleString()} ${dataType} records through ${numStages} pipeline stages`,
+        `Quantum enhancement achieved ${metrics['Quantum Enhancement']?.[2]?.value || 'N/A'} speedup over classical methods`,
+        `Data quality score of ${metrics['Preprocessing']?.[3]?.value || 'N/A'} indicates high-quality input data`,
+        `${metrics['Analysis']?.[2]?.value || 'N/A'} confidence in detected patterns suggests reliable findings`
+      ];
+      
+      return `
+        <div class="summary-header">
+          <span class="summary-icon">✅</span>
+          <span class="summary-title">Pipeline Execution Complete</span>
+        </div>
+        <div class="summary-grid">
+          <div class="summary-metric">
+            <div class="summary-value">${numStages}</div>
+            <div class="summary-label">Stages Completed</div>
+          </div>
+          <div class="summary-metric">
+            <div class="summary-value">${size}</div>
+            <div class="summary-label">Records Processed</div>
+          </div>
+          <div class="summary-metric">
+            <div class="summary-value">${duration}ms</div>
+            <div class="summary-label">Total Duration</div>
+          </div>
+          <div class="summary-metric">
+            <div class="summary-value">${(size / duration * 1000).toFixed(1)}K</div>
+            <div class="summary-label">Throughput/sec</div>
+          </div>
+        </div>
+        <div class="summary-insights">
+          <div class="insights-title">Key Insights & Recommendations</div>
+          <ul class="insight-list">
+            ${insights.map(i => `<li>${i}</li>`).join('')}
+          </ul>
+        </div>
+      `;
+    }
+  </script>
+</body>
+</html>
