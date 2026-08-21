@@ -6,6 +6,30 @@
   <title>Infrastructure & Scaling — SciMSPT Neural Research Platform</title>
   <meta name="description" content="SciMSPT Infrastructure: Cloud-native architecture, global CDN, auto-scaling, quantum backend integration, and enterprise-grade reliability for research platforms.">
   
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%2300E5FF'/%3E%3Cstop offset='100%25' stop-color='%23a78bfa'/%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle cx='16' cy='16' r='14' fill='url(%23g)'/%3E%3Cpath d='M16 8v16M10 12h12M10 20h12' stroke='%23000' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E">
+  <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Crect width='180' height='180' rx='36' fill='%230a1628'/%3E%3Ctext x='90' y='110' font-size='100' text-anchor='middle' fill='%2300E5FF' font-family='system-ui'%3E𝒮%3C/text%3E%3C/svg%3E">
+
+  <!-- Open Graph / Social Sharing -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Infrastructure & Scaling — SciMSPT Neural Research Platform">
+  <meta property="og:description" content="SciMSPT Infrastructure: Cloud-native architecture, global CDN, auto-scaling, quantum backend integration, and enterprise-grade reliability.">
+  <meta property="og:url" content="https://testdemoqwenai2025-creator.github.io/Demo2SciMSPT/infrastructure.html">
+  <meta property="og:image" content="https://testdemoqwenai2025-creator.github.io/Demo2SciMSPT/assets/og-image.png">
+  <meta property="og:site_name" content="SciMSPT">
+  <meta property="og:locale" content="en_US">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Infrastructure & Scaling — SciMSPT">
+  <meta name="twitter:description" content="SciMSPT Infrastructure: Cloud-native architecture, global CDN, auto-scaling, quantum backend integration, and enterprise-grade reliability.">
+  <meta name="twitter:image" content="https://testdemoqwenai2025-creator.github.io/Demo2SciMSPT/assets/og-image.png">
+
+  <!-- Additional SEO -->
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="SciMSPT Team">
+  <link rel="canonical" href="https://testdemoqwenai2025-creator.github.io/Demo2SciMSPT/infrastructure.html">
+  
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
@@ -904,7 +928,19 @@
     
     @media (max-width: 768px) {
       .navbar { padding: 0 20px; }
-      .nav-links { display: none; }
+      .nav-links { 
+        display: none; 
+        position: absolute;
+        top: var(--nav-height);
+        left: 0;
+        right: 0;
+        background: var(--bg-glass);
+        backdrop-filter: blur(20px);
+        flex-direction: column;
+        padding: 20px;
+        border-bottom: 1px solid var(--border-subtle);
+      }
+      .nav-links.active { display: flex; }
       .mobile-menu-btn { display: flex; }
       .main-content { padding: 60px 20px; }
       .hero { padding: calc(var(--nav-height) + 60px) 20px 60px; }
@@ -919,9 +955,217 @@
       .cta-section { padding: 60px 20px; }
       .architecture-container { padding: 24px; }
     }
+    /* ============================================
+       SKELETON LOADING SCREENS
+       ============================================ */
+
+    .skeleton-loader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 9999;
+      background: var(--bg-deep, #030810);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.5s ease, visibility 0.5s ease;
+    }
+
+    .skeleton-loader.hidden {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    .skeleton-logo {
+      width: 60px;
+      height: 60px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, var(--accent-primary, #00E5FF), var(--accent-tertiary, #a78bfa));
+      margin-bottom: 24px;
+      animation: skeletonPulse 1.5s ease-in-out infinite;
+    }
+
+    .skeleton-text {
+      height: 20px;
+      width: 200px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      margin-bottom: 16px;
+      animation: skeletonPulse 1.5s ease-in-out infinite;
+    }
+
+    .skeleton-text.short {
+      width: 140px;
+    }
+
+    .skeleton-nav {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 80px;
+      background: rgba(10, 22, 40, 0.95);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(0, 229, 255, 0.15);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 48px;
+    }
+
+    .skeleton-nav-items {
+      display: flex;
+      gap: 12px;
+    }
+
+    .skeleton-nav-item {
+      height: 32px;
+      width: 80px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 16px;
+      animation: skeletonPulse 1.5s ease-in-out infinite;
+    }
+
+    .skeleton-content {
+      margin-top: 80px;
+      padding: 48px;
+      max-width: 1400px;
+      width: 100%;
+    }
+
+    .skeleton-hero {
+      text-align: center;
+      padding: 80px 0;
+    }
+
+    .skeleton-title {
+      height: 48px;
+      width: 500px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      margin: 0 auto 24px;
+      animation: skeletonPulse 1.5s ease-in-out infinite;
+    }
+
+    .skeleton-subtitle {
+      height: 24px;
+      width: 600px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 8px;
+      margin: 0 auto;
+      animation: skeletonPulse 1.5s ease-in-out infinite 0.2s;
+    }
+
+    .skeleton-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 28px;
+      margin-top: 64px;
+    }
+
+    .skeleton-card {
+      background: var(--bg-glass, rgba(10, 22, 40, 0.85));
+      border: 1px solid var(--border-subtle, rgba(0, 229, 255, 0.15));
+      border-radius: 20px;
+      padding: 36px;
+      animation: skeletonPulse 1.5s ease-in-out infinite;
+    }
+
+    .skeleton-card-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.05);
+      margin-bottom: 24px;
+    }
+
+    .skeleton-card-line {
+      height: 16px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 8px;
+      margin-bottom: 12px;
+    }
+
+    .skeleton-card-line.title {
+      width: 70%;
+      height: 20px;
+      margin-bottom: 16px;
+    }
+
+    @keyframes skeletonPulse {
+      0%, 100% { opacity: 0.6; }
+      50% { opacity: 1; }
+    }
+
+    /* Page-specific skeleton variants */
+    .skeleton-chart {
+      height: 300px;
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 16px;
+      margin-top: 24px;
+      animation: skeletonPulse 1.5s ease-in-out infinite;
+    }
+
+    .skeleton-table {
+      height: 250px;
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 12px;
+      margin-top: 24px;
+      animation: skeletonPulse 1.5s ease-in-out infinite;
+    }
   </style>
 </head>
 <body>
+  <!-- Skeleton Loading Screen -->
+  <div class="skeleton-loader" id="skeletonLoader">
+    <nav class="skeleton-nav">
+      <div style="display: flex; align-items: center; gap: 16px;">
+        <div class="skeleton-logo" style="width: 32px; height: 32px; margin: 0;"></div>
+        <div class="skeleton-text short" style="margin: 0; width: 100px; height: 18px;"></div>
+      </div>
+      <div class="skeleton-nav-items">
+        <div class="skeleton-nav-item"></div>
+        <div class="skeleton-nav-item"></div>
+        <div class="skeleton-nav-item"></div>
+        <div class="skeleton-nav-item"></div>
+        <div class="skeleton-nav-item" style="width: 60px;"></div>
+      </div>
+    </nav>
+    
+    <div class="skeleton-content">
+      <div class="skeleton-hero">
+        <div class="skeleton-title"></div>
+        <div class="skeleton-subtitle"></div>
+      </div>
+      <div class="skeleton-cards">
+        <div class="skeleton-card">
+          <div class="skeleton-card-icon"></div>
+          <div class="skeleton-card-line title"></div>
+          <div class="skeleton-card-line"></div>
+          <div class="skeleton-card-line" style="width: 90%;"></div>
+          <div class="skeleton-card-line" style="width: 75%;"></div>
+        </div>
+        <div class="skeleton-card">
+          <div class="skeleton-card-icon"></div>
+          <div class="skeleton-card-line title"></div>
+          <div class="skeleton-card-line"></div>
+          <div class="skeleton-card-line" style="width: 85%;"></div>
+          <div class="skeleton-card-line" style="width: 65%;"></div>
+        </div>
+        <div class="skeleton-card">
+          <div class="skeleton-card-icon"></div>
+          <div class="skeleton-card-line title"></div>
+          <div class="skeleton-card-line"></div>
+          <div class="skeleton-card-line" style="width: 95%;"></div>
+          <div class="skeleton-card-line" style="width: 70%;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Molecular Sidebars -->
   <div class="molecular-sidebar left">
     <div class="dna-helix">
@@ -1484,11 +1728,11 @@
       Explore our infrastructure documentation or contact our solutions team for custom deployment options.
     </p>
     <div class="cta-buttons">
-      <a href="#" class="btn-primary">
+      <a href="documentation.html" class="btn-primary">
         <span class="material-icons-round">architecture</span>
         View Architecture Docs
       </a>
-      <a href="#" class="btn-secondary">
+      <a href="about.html" class="btn-secondary">
         <span class="material-icons-round">contact_support</span>
         Contact Solutions Team
       </a>
@@ -1524,7 +1768,7 @@
           <li><a href="documentation.html">Documentation</a></li>
           <li><a href="about.html">About</a></li>
           <li><a href="studio.html">Media Studio</a></li>
-          <li><a href="#">API Reference</a></li>
+          <li><a href="documentation.html">API Reference</a></li>
         </ul>
       </div>
       
@@ -1575,6 +1819,47 @@
         }
       });
     });
+    
+    // Mobile Menu Toggle
+    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+    const navLinks = document.querySelector('.nav-links');
+    if (mobileMenuBtn && navLinks) {
+      mobileMenuBtn.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+        const icon = mobileMenuBtn.querySelector('.material-icons-round');
+        if (icon) {
+          icon.textContent = navLinks.classList.contains('active') ? 'close' : 'menu';
+        }
+      });
+      // Close menu when clicking a link
+      navLinks.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+          navLinks.classList.remove('active');
+          const icon = mobileMenuBtn.querySelector('.material-icons-round');
+          if (icon) icon.textContent = 'menu';
+        });
+      });
+    }
   </script>
+  // Hide skeleton loader when page is fully loaded
+  window.addEventListener('load', () => {
+    const loader = document.getElementById('skeletonLoader');
+    if (loader) {
+      setTimeout(() => {
+        loader.classList.add('hidden');
+        // Remove from DOM after animation
+        setTimeout(() => loader.remove(), 500);
+      }, 300); // Small delay for smoother transition
+    }
+  });
+
+  // Fallback: hide loader after 3 seconds even if load event fires early
+  setTimeout(() => {
+    const loader = document.getElementById('skeletonLoader');
+    if (loader) {
+      loader.classList.add('hidden');
+      setTimeout(() => loader.remove(), 500);
+    }
+  }, 3000);
 </body>
 </html>
