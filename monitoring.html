@@ -2144,26 +2144,27 @@
         });
       });
     }
-  </script>
-  // Hide skeleton loader when page is fully loaded
-  window.addEventListener('load', () => {
-    const loader = document.getElementById('skeletonLoader');
-    if (loader) {
-      setTimeout(() => {
-        loader.classList.add('hidden');
-        // Remove from DOM after animation
-        setTimeout(() => loader.remove(), 500);
-      }, 300); // Small delay for smoother transition
-    }
-  });
+    
+    // Hide skeleton loader when page is fully loaded
+    window.addEventListener('load', () => {
+      const loader = document.getElementById('skeletonLoader');
+      if (loader) {
+        setTimeout(() => {
+          loader.classList.add('hidden');
+          // Remove from DOM after animation
+          setTimeout(() => loader.remove(), 500);
+        }, 300); // Small delay for smoother transition
+      }
+    });
 
-  // Fallback: hide loader after 3 seconds even if load event fires early
-  setTimeout(() => {
-    const loader = document.getElementById('skeletonLoader');
-    if (loader) {
-      loader.classList.add('hidden');
-      setTimeout(() => loader.remove(), 500);
-    }
-  }, 3000);
+    // Fallback: hide loader after 3 seconds even if load event fires early
+    setTimeout(() => {
+      const loader = document.getElementById('skeletonLoader');
+      if (loader) {
+        loader.classList.add('hidden');
+        setTimeout(() => loader.remove(), 500);
+      }
+    }, 3000);
+  </script>
 </body>
 </html>
