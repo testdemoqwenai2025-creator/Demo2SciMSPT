@@ -5257,18 +5257,18 @@
           });
         }
         
-        // Handle install prompt
+        // Handle install prompt - DISABLED to prevent popup
         let deferredPrompt;
         window.addEventListener('beforeinstallprompt', (e) => {
           e.preventDefault();
           deferredPrompt = e;
           
-          // Show install button after delay
-          setTimeout(() => {
-            if (this.device.isMobile) {
-              this.showInstallPrompt(deferredPrompt);
-            }
-          }, 3000);
+          // Install prompt disabled - was showing popup after 3 seconds
+          // setTimeout(() => {
+          //   if (this.device.isMobile) {
+          //     this.showInstallPrompt(deferredPrompt);
+          //   }
+          // }, 3000);
         });
       },
       
@@ -5336,12 +5336,12 @@
       }
     };
     
-    // Initialize on DOM ready
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', () => MobileDetection.init());
-    } else {
-      MobileDetection.init();
-    }
+    // Initialize on DOM ready - DISABLED to prevent popup blocking
+    // if (document.readyState === 'loading') {
+    //   document.addEventListener('DOMContentLoaded', () => MobileDetection.init());
+    // } else {
+    //   MobileDetection.init();
+    // }
     
     // Expose globally for inline handlers
     window.MobileDetection = MobileDetection;
