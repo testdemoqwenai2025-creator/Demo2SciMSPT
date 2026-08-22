@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Search Results — SciMSPT Neural Research Platform</title>
+  <meta name="description" content="Search results from ArXiv, PubMed, and SciMSPT knowledge base">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%2300E5FF'/%3E%3Cstop offset='100%25' stop-color='%23a78bfa'/%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle cx='16' cy='16' r='14' fill='url(%23g)'/%3E%3Cpath d='M16 8v16M10 12h12M10 20h12' stroke='%23000' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E">
+  
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/design-system.css">
+  <link rel="stylesheet" href="css/global-components.css">
+  
+  <style>
+    /* Page-specific styles */
+    .search-page-hero {
+      padding: calc(var(--nav-height, 80px) + 40px) 24px 40px;
+      text-align: center;
+      background: linear-gradient(180deg, var(--bg-deep, #030810) 0%, transparent 100%);
+    }
+    
+    .search-page-title {
+      font-family: var(--font-heading, 'Playfair Display', serif);
+      font-size: clamp(28px, 4vw, 42px);
+      font-weight: 900;
+      margin-bottom: 20px;
+      color: var(--text-primary, #e8f4fc);
+    }
+    
+    .search-query-display {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 24px;
+      background: var(--bg-glass, rgba(10, 22, 40, 0.85));
+      border: 1px solid var(--border-subtle, rgba(0, 229, 255, 0.15));
+      border-radius: 50px;
+      font-size: 18px;
+      color: var(--accent-primary, #00E5FF);
+      margin-bottom: 24px;
+    }
+    
+    .search-query-display .material-icons-round {
+      font-size: 22px;
+    }
+    
+    .back-to-home {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--text-secondary, #94a3b8);
+      text-decoration: none;
+      font-size: 14px;
+      transition: color 0.2s ease;
+      margin-bottom: 20px;
+    }
+    
+    .back-to-home:hover {
+      color: var(--accent-primary, #00E5FF);
+    }
+    
+    /* Loading state */
+    .search-loading {
+      text-align: center;
+      padding: 80px 20px;
+      color: var(--text-secondary, #94a3b8);
+    }
+    
+    .search-loading .material-icons-round {
+      font-size: 48px;
+      margin-bottom: 16px;
+      animation: spin 1s linear infinite;
+      color: var(--accent-primary, #00E5FF);
+    }
+    
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+  <!-- Skip Link -->
+  <a href="#main-content" class="skip-link">Skip to search results</a>
+
+  <!-- Molecular Sidebars -->
+  <div class="molecular-sidebar left"></div>
+  <div class="molecular-sidebar right"></div>
+
+  <!-- Navigation -->
+  <nav class="nav-container" role="navigation" aria-label="Main navigation">
+    <a href="index.html" class="nav-brand" aria-label="SciMSPT Home">
+      <div class="nav-logo" aria-hidden="true">S</div>
+      <span class="nav-title">Sci<span>MSPT</span></span>
+    </a>
+    
+    <div class="nav-links">
+      <a href="index.html" class="nav-link">
+        <span class="material-icons-round">home</span> Home
+      </a>
+      <a href="research.html" class="nav-link">
+        <span class="material-icons-round">biotech</span> Research
+      </a>
+      <a href="startups.html" class="nav-link">
+        <span class="material-icons-round">rocket_launch</span> Startups
+      </a>
+      <a href="platform.html" class="nav-link">
+        <span class="material-icons-round">dashboard</span> Platform
+      </a>
+      <a href="quantum.html" class="nav-link">
+        <span class="material-icons-round">psychology</span> Quantum
+      </a>
+      <a href="documentation.html" class="nav-link">
+        <span class="material-icons-round">code</span> API Docs
+      </a>
+      <a href="about.html" class="nav-link">
+        <span class="material-icons-round">info</span> About
+      </a>
+    </div>
+    
+    <div style="display: flex; align-items: center; gap: 16px;">
+      <!-- Global Search Trigger -->
+      <button class="theme-toggle" onclick="window.scimsptSearch.openGlobalSearch()" title="Search (Ctrl+K)" aria-label="Open search">
+        <span class="material-icons-round">search</span>
+      </button>
+      
+      <!-- Theme Toggle -->
+      <button class="theme-toggle" onclick="toggleTheme()" title="Toggle theme" aria-label="Toggle theme">
+        <span class="material-icons-round" id="themeIcon">dark_mode</span>
+      </button>
+      
+      <button class="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="Toggle menu">
+        <span class="material-icons-round">menu</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Navigation Overlay -->
+  <div class="nav-mobile-overlay" id="navOverlay" onclick="toggleMobileMenu()"></div>
+
+  <!-- Main Content -->
+  <main id="main-content" class="main-content" role="main">
+    
+    <!-- Search Hero -->
+    <section class="search-page-hero">
+      <a href="index.html" class="back-to-home">
+        <span class="material-icons-round">arrow_back</span>
+        Back to Home
+      </a>
+      
+      <h1 class="search-page-title">Research Search Results</h1>
+      
+      <div class="search-query-display" id="queryDisplay">
+        <span class="material-icons-round">search</span>
+        <span id="currentQuery">Loading...</span>
+      </div>
+    </section>
+
+    <!-- Search Results Container -->
+    <div id="searchResultsContainer">
+      <div class="search-loading">
+        <span class="material-icons-round">autorenew</span>
+        <p>Searching ArXiv, PubMed & knowledge base...</p>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Scripts -->
+  <script src="js/search-system.js"></script>
+  <script>
+    // Initialize search on page load
+    document.addEventListener('DOMContentLoaded', () => {
+      // Get query from URL parameters
+      const urlParams = new URLSearchParams(window.location.search);
+      const query = urlParams.get('q') || '';
+      
+      if (query) {
+        document.getElementById('currentQuery').textContent = `"${query}"`;
+        document.title = `Search: ${query} — SciMSPT`;
+        
+        // Load search results
+        window.scimsptSearch.loadSearchResults(query);
+      } else {
+        // No query - show empty state
+        document.getElementById('searchResultsContainer').innerHTML = `
+          <div class="no-results">
+            <span class="material-icons-round">search</span>
+            <h3>No search query provided</h3>
+            <p>Please enter a search term to find research papers.</p>
+            <a href="index.html" class="btn-primary" style="margin-top: 24px; display: inline-flex;">
+              <span class="material-icons-round">home</span>
+              Go to Homepage
+            </a>
+          </div>
+        `;
+      }
+      
+      // Add page entering animation
+      document.body.classList.add('page-entering');
+    });
+    
+    // Mobile menu toggle
+    function toggleMobileMenu() {
+      const overlay = document.getElementById('navOverlay');
+      const btn = document.querySelector('.mobile-menu-btn');
+      const isActive = overlay.classList.toggle('active');
+      
+      btn.innerHTML = `<span class="material-icons-round">${isActive ? 'close' : 'menu'}</span>`;
+      document.body.style.overflow = isActive ? 'hidden' : '';
+    }
+    
+    // Scroll animations with Intersection Observer
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+    
+    const scrollObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          scrollObserver.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+    
+    // Observe elements for scroll animation
+    document.querySelectorAll('.animate-on-scroll').forEach(el => {
+      scrollObserver.observe(el);
+    });
+  </script>
+</body>
+</html>

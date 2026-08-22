@@ -3526,7 +3526,11 @@
         <i class="material-icons" id="themeIcon">dark_mode</i>
         <span id="themeText">Dark</span>
       </button>
-      <button class="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="Menu"><i class="material-icons">menu</i></button>
+            <!-- Global Search Trigger -->
+      <button class="theme-toggle" onclick="window.scimsptSearch.openGlobalSearch()" title="Search (Ctrl+K)" aria-label="Open search" style="background: linear-gradient(135deg, #10b981, #059669);">
+        <span class="material-icons-round">search</span>
+      </button>
+<button class="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="Menu"><i class="material-icons">menu</i></button>
     </div>
   </nav>
 
@@ -6669,5 +6673,6 @@
     })();
   </script>
 
+  <script src="js/search-system.js"></script>
 </body>
 </html>

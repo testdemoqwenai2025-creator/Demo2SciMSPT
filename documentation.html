@@ -10,6 +10,8 @@
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+  <link rel="stylesheet" href="css/design-system.css">
+<link rel="stylesheet" href="css/global-components.css">
   
   <style>
     :root {
@@ -3685,12 +3687,12 @@ result = client.analyze_paper(
       
       html.setAttribute('data-theme', isDark ? 'light' : 'dark');
       icon.textContent = isDark ? 'light_mode' : 'dark_mode';
-      localStorage.setItem('theme', isDark ? 'light' : 'dark');
+      localStorage.setItem('scimspt-theme', isDark ? 'light' : 'dark');
     }
     
     // Load saved theme
     function loadTheme() {
-      const saved = localStorage.getItem('theme');
+      const saved = localStorage.getItem('scimspt-theme');
       if (saved) {
         document.documentElement.setAttribute('data-theme', saved);
         document.getElementById('themeIcon').textContent = 
@@ -5101,5 +5103,6 @@ result = client.analyze_paper(
   window.BooleanObserver = BooleanObserver;
 
 
+  <script src="js/search-system.js"></script>
 </body>
 </html>
