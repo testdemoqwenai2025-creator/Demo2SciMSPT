@@ -41,6 +41,7 @@
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+  <link rel="stylesheet" href="css/design-system.css">
   
   <style>
     /* ============================================
@@ -320,23 +321,93 @@
       box-shadow: 0 0 40px rgba(0, 229, 255, 0.5);
     }
     
+    /* Enhanced Theme Toggle - ULTRA VISIBLE - Cannot Miss! */
     .theme-toggle {
-      width: 44px;
-      height: 44px;
-      border-radius: 12px;
-      background: var(--bg-glass-light);
-      border: 1px solid var(--border-subtle);
-      color: var(--text-secondary);
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #00E5FF, #a78bfa);
+      border: 3px solid #ffffff;
+      color: #030810;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: all 0.3s ease;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      position: relative;
+      overflow: hidden;
+      animation: themePulse 2s infinite, themeGlow 3s ease-in-out infinite;
+      z-index: 1001;
+      font-size: 28px;
+      box-shadow: 
+        0 0 20px rgba(0, 229, 255, 0.6),
+        0 0 40px rgba(167, 139, 250, 0.4),
+        inset 0 2px 10px rgba(255, 255, 255, 0.3);
+    }
+    
+    .theme-toggle::before {
+      content: '';
+      position: absolute;
+      inset: -3px;
+      background: conic-gradient(from 0deg, #00E5FF, #a78bfa, #f472b6, #10b981, #00E5FF);
+      border-radius: 50%;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      z-index: -1;
+      animation: themeRotate 3s linear infinite;
+    }
+    
+    .theme-toggle:hover::before {
+      opacity: 1;
     }
     
     .theme-toggle:hover {
-      border-color: var(--accent-primary);
-      color: var(--accent-primary);
+      transform: scale(1.2) rotate(180deg);
+      box-shadow: 
+        0 0 40px rgba(0, 229, 255, 0.8),
+        0 0 80px rgba(167, 139, 250, 0.6),
+        0 0 120px rgba(244, 114, 182, 0.4);
+      border-color: #fff;
+    }
+    
+    .theme-toggle:active {
+      transform: scale(0.95) rotate(360deg);
+    }
+    
+    [data-theme="light"] .theme-toggle {
+      background: linear-gradient(135deg, #0a1628, #1e293b);
+      color: #00E5FF;
+      border-color: #00E5FF;
+      box-shadow: 
+        0 0 20px rgba(0, 229, 255, 0.5),
+        0 0 40px rgba(0, 229, 255, 0.3),
+        inset 0 2px 10px rgba(0, 229, 255, 0.2);
+    }
+    
+    @keyframes themePulse {
+      0%, 100% { 
+        transform: scale(1); 
+        box-shadow: 
+          0 0 20px rgba(0, 229, 255, 0.6),
+          0 0 40px rgba(167, 139, 250, 0.4);
+      }
+      50% { 
+        transform: scale(1.05); 
+        box-shadow: 
+          0 0 30px rgba(0, 229, 255, 0.8),
+          0 0 60px rgba(167, 139, 250, 0.6),
+          0 0 90px rgba(244, 114, 182, 0.3);
+      }
+    }
+    
+    @keyframes themeGlow {
+      0%, 100% { filter: brightness(1); }
+      50% { filter: brightness(1.2); }
+    }
+    
+    @keyframes themeRotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
     }
     
     .user-profile {
@@ -3431,9 +3502,9 @@
     // THEME TOGGLE
     // ============================================
     
-    // Initialize theme on page load
+    // Initialize theme on page load - UNIFIED with all pages
     (function initTheme() {
-      const savedTheme = localStorage.getItem('pipeline-theme') || 'dark';
+      const savedTheme = localStorage.getItem('scimspt-theme') || 'dark';
       const html = document.documentElement;
       const icon = document.getElementById('themeIcon');
       
@@ -3445,17 +3516,42 @@
     
     function toggleTheme() {
       const html = document.documentElement;
-      const icon = document.getElementById('themeIcon');
-      
       const currentTheme = html.getAttribute('data-theme');
       const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
       
       html.setAttribute('data-theme', newTheme);
-      localStorage.setItem('pipeline-theme', newTheme);  // Save preference
+      localStorage.setItem('scimspt-theme', newTheme);  // UNIFIED key - syncs across all pages!
       
-      if (icon) {
-        icon.textContent = newTheme === 'dark' ? 'dark_mode' : 'light_mode';
+      // Update icon with animation
+      const themeIcon = document.getElementById('themeIcon');
+      if (themeIcon) {
+        themeIcon.style.transform = 'rotate(360deg) scale(0)';
+        setTimeout(() => {
+          themeIcon.textContent = newTheme === 'dark' ? 'dark_mode' : 'light_mode';
+          themeIcon.style.transform = 'rotate(0deg) scale(1)';
+        }, 200);
       }
+      
+      // Add ripple effect
+      createThemeRipple();
+    }
+    
+    function createThemeRipple() {
+      const toggle = document.querySelector('.theme-toggle');
+      if (!toggle) return;
+      const ripple = document.createElement('div');
+      ripple.style.cssText = `
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(circle, var(--accent-primary, #00E5FF) 0%, transparent 70%);
+        border-radius: 50%;
+        opacity: 0.5;
+        animation: rippleFade 0.6s ease-out forwards;
+        pointer-events: none;
+      `;
+      toggle.appendChild(ripple);
+      setTimeout(() => ripple.remove(), 600);
     }
     
     // ============================================
