@@ -3431,16 +3431,30 @@
     // THEME TOGGLE
     // ============================================
     
+    // Initialize theme on page load
+    (function initTheme() {
+      const savedTheme = localStorage.getItem('pipeline-theme') || 'dark';
+      const html = document.documentElement;
+      const icon = document.getElementById('themeIcon');
+      
+      html.setAttribute('data-theme', savedTheme);
+      if (icon) {
+        icon.textContent = savedTheme === 'dark' ? 'dark_mode' : 'light_mode';
+      }
+    })();
+    
     function toggleTheme() {
       const html = document.documentElement;
       const icon = document.getElementById('themeIcon');
       
-      if (html.getAttribute('data-theme') === 'dark') {
-        html.setAttribute('data-theme', 'light');
-        icon.textContent = 'light_mode';
-      } else {
-        html.setAttribute('data-theme', 'dark');
-        icon.textContent = 'dark_mode';
+      const currentTheme = html.getAttribute('data-theme');
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      
+      html.setAttribute('data-theme', newTheme);
+      localStorage.setItem('pipeline-theme', newTheme);  // Save preference
+      
+      if (icon) {
+        icon.textContent = newTheme === 'dark' ? 'dark_mode' : 'light_mode';
       }
     }
     
