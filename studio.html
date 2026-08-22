@@ -123,12 +123,14 @@
     
     * { box-sizing: border-box; margin: 0; padding: 0; }
     
-    html, body {
+    html {
       height: 100%;
-      overflow: hidden;
+      scroll-behavior: smooth;
     }
     
     body {
+      min-height: 100vh;
+      overflow-x: hidden;
       font-family: var(--font-body);
       background: var(--bg);
       color: var(--primary);
@@ -144,9 +146,9 @@
     .ide-container {
       display: flex;
       flex-direction: column;
-      height: 100vh;
-      width: 100vw;
-      overflow: hidden;
+      min-height: 100vh;
+      width: 100%;
+      overflow-x: hidden;
     }
     
     /* Top Navigation Bar */
