@@ -1,0 +1,2093 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Physics Observatory — SciMSPT Global Modern Physics & Space Science</title>
+  <meta name="description" content="Physics Observatory: Live LHC monitoring, JWST gallery, NASA/ESA/JAXA portals, Satellite tracker (7,146 sats), Quantum network (315+ qubits), AI analysis tools">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%23FF6B35'/%3E%3Cstop offset='50%25' stop-color='%23F7931E'/%3E%3Cstop offset='100%25' stop-color='%23FFD700'/%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle cx='16' cy='16' r='14' fill='url(%23g)'/%3E%3Ctext x='16' y='21' font-size='16' text-anchor='middle' fill='%23000' font-family='system-ui' font-weight='bold'%3EPO%3C/text%3E%3C/svg%3E">
+
+  <style>
+    /* ===== RESET & BASE ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    :root {
+      --bg-primary: #0a0e27;
+      --bg-secondary: #111633;
+      --bg-card: #161b3d;
+      --bg-card-hover: #1c2252;
+      --text-primary: #e8eaff;
+      --text-secondary: #a0a8c8;
+      --accent-cern: #0053c8;
+      --accent-jwst: #8b5cf6;
+      --accent-nasa: #0b3d91;
+      --accent-esa: #003f87;
+      --accent-jaxa: #e60012;
+      --accent-satellite: #10b981;
+      --accent-quantum: #06b6d4;
+      --accent-ai: #f59e0b;
+      --neon-glow: 0 0 20px rgba(0, 229, 255, 0.3);
+      --border-color: rgba(99, 123, 255, 0.2);
+      --gradient-physics: linear-gradient(135deg, #ff6b35 0%, #f7931e 25%, #ffd700 50%, #10b981 75%, #06b6d4 100%);
+    }
+
+    html { scroll-behavior: smooth; }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    /* ===== HEADER / NAVIGATION ===== */
+    .observatory-header {
+      background: linear-gradient(180deg, rgba(10, 14, 39, 0.98) 0%, rgba(17, 22, 51, 0.95) 100%);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border-color);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      padding: 1rem 2rem;
+    }
+
+    .header-content {
+      max-width: 1800px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .logo-section {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .logo-icon {
+      width: 48px;
+      height: 48px;
+      background: var(--gradient-physics);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #000;
+    }
+
+    .logo-text h1 {
+      font-size: 1.5rem;
+      background: var(--gradient-physics);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .logo-text p {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+    }
+
+    .nav-tabs {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .nav-tab {
+      padding: 0.6rem 1.2rem;
+      background: transparent;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 0.9rem;
+      text-decoration: none;
+    }
+
+    .nav-tab:hover, .nav-tab.active {
+      background: var(--bg-card);
+      color: var(--text-primary);
+      border-color: var(--accent-cern);
+      box-shadow: var(--neon-glow);
+    }
+
+    .nav-tab.lhc:hover { border-color: var(--accent-cern); }
+    .nav-tab.jwst:hover { border-color: var(--accent-jwst); }
+    .nav-tab.nasa:hover { border-color: var(--accent-nasa); }
+    .nav-tab.satellite:hover { border-color: var(--accent-satellite); }
+    .nav-tab.quantum:hover { border-color: var(--accent-quantum); }
+    .nav-tab.ai-tools:hover { border-color: var(--accent-ai); }
+
+    /* ===== HERO SECTION ===== */
+    .hero-section {
+      background: linear-gradient(135deg, rgba(255, 107, 53, 0.1) 0%, rgba(139, 92, 246, 0.1) 50%, rgba(6, 182, 212, 0.1) 100%);
+      padding: 4rem 2rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%239C92AC' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      opacity: 0.5;
+    }
+
+    .hero-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-title {
+      font-size: 3.5rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+      background: var(--gradient-physics);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-subtitle {
+      font-size: 1.3rem;
+      color: var(--text-secondary);
+      max-width: 800px;
+      margin: 0 auto 2rem;
+    }
+
+    .live-status-bar {
+      display: inline-flex;
+      align-items: center;
+      gap: 2rem;
+      background: var(--bg-card);
+      padding: 1rem 2rem;
+      border-radius: 50px;
+      border: 1px solid var(--border-color);
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .status-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .status-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    .status-dot.live { background: #10b981; }
+    .status-dot.active { background: #3b82f6; }
+    .status-dot.standby { background: #f59e0b; }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(1.2); }
+    }
+
+    /* ===== MAIN CONTENT GRID ===== */
+    .main-content {
+      max-width: 1800px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    .section {
+      margin-bottom: 3rem;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 2px solid var(--border-color);
+    }
+
+    .section-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+    }
+
+    .section-icon.cern { background: linear-gradient(135deg, var(--accent-cern), #0073e6); }
+    .section-icon.jwst { background: linear-gradient(135deg, var(--accent-jwst), #a78bfa); }
+    .section-icon.nasa { background: linear-gradient(135deg, var(--accent-nasa), #1e40af); }
+    .section-icon.esa { background: linear-gradient(135deg, var(--accent-esa), #1e3a8a); }
+    .section-icon.jaxa { background: linear-gradient(135deg, var(--accent-jaxa), #dc2626); }
+    .section-icon.satellite { background: linear-gradient(135deg, var(--accent-satellite), #059669); }
+    .section-icon.quantum { background: linear-gradient(135deg, var(--accent-quantum), #0891b2); }
+    .section-icon.ai { background: linear-gradient(135deg, var(--accent-ai), #d97706); }
+
+    .section-title {
+      font-size: 1.8rem;
+      font-weight: 700;
+    }
+
+    .section-subtitle {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+    }
+
+    /* ===== DASHBOARD CARDS ===== */
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .card:hover {
+      background: var(--bg-card-hover);
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    .card-header {
+      padding: 1.2rem 1.5rem;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .card-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+
+    .card-badge {
+      padding: 0.3rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    .badge-live { background: rgba(16, 185, 129, 0.2); color: #10b981; }
+    .badge-updating { background: rgba(59, 130, 246, 0.2); color: #3b82f6; }
+    .badge-data { background: rgba(139, 92, 246, 0.2); color: #8b5cf6; }
+
+    .card-body {
+      padding: 1.5rem;
+    }
+
+    /* ===== LHC COLLISION MONITOR ===== */
+    .lhc-display {
+      background: radial-gradient(circle at center, rgba(0, 83, 200, 0.15) 0%, transparent 70%);
+      padding: 2rem;
+      border-radius: 12px;
+      text-align: center;
+      position: relative;
+      min-height: 300px;
+    }
+
+    .collision-visualizer {
+      width: 200px;
+      height: 200px;
+      margin: 0 auto 1.5rem;
+      position: relative;
+    }
+
+    .collision-ring {
+      position: absolute;
+      border: 2px solid var(--accent-cern);
+      border-radius: 50%;
+      animation: rotate 10s linear infinite;
+    }
+
+    .collision-ring:nth-child(1) { inset: 0; border-color: rgba(0, 83, 200, 0.8); }
+    .collision-ring:nth-child(2) { inset: 20px; border-color: rgba(0, 115, 230, 0.6); animation-direction: reverse; animation-duration: 8s; }
+    .collision-ring:nth-child(3) { inset: 40px; border-color: rgba(0, 150, 255, 0.4); animation-duration: 6s; }
+    .collision-ring:nth-child(4) { inset: 60px; border-color: rgba(100, 180, 255, 0.3); animation-direction: reverse; animation-duration: 4s; }
+
+    .collision-center {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 30px;
+      height: 30px;
+      background: radial-gradient(circle, #fff 0%, var(--accent-cern) 50%, transparent 70%);
+      border-radius: 50%;
+      animation: collision-pulse 0.5s ease-in-out infinite;
+    }
+
+    @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    @keyframes collision-pulse {
+      0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+      50% { transform: translate(-50%, -50%) scale(1.5); opacity: 0.7; }
+    }
+
+    .lhc-stats {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .stat-box {
+      background: rgba(0, 0, 0, 0.3);
+      padding: 1rem;
+      border-radius: 8px;
+      text-align: center;
+    }
+
+    .stat-value {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--accent-cern);
+    }
+
+    .stat-label {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .lhc-event-log {
+      max-height: 200px;
+      overflow-y: auto;
+      margin-top: 1rem;
+      font-family: 'Courier New', monospace;
+      font-size: 0.8rem;
+    }
+
+    .event-entry {
+      padding: 0.5rem;
+      border-left: 3px solid var(--accent-cern);
+      margin-bottom: 0.5rem;
+      background: rgba(0, 83, 200, 0.1);
+    }
+
+    .event-time { color: var(--text-secondary); }
+    .event-type { color: #10b981; font-weight: 600; }
+    .event-data { color: var(--text-primary); }
+
+    /* ===== JWST GALLERY ===== */
+    .jwst-gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1rem;
+    }
+
+    .gallery-item {
+      position: relative;
+      border-radius: 12px;
+      overflow: hidden;
+      aspect-ratio: 16/10;
+      background: linear-gradient(135deg, #1a0533 0%, #0d1b2a 100%);
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .gallery-item:hover {
+      transform: scale(1.02);
+    }
+
+    .gallery-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      text-align: center;
+    }
+
+    .gallery-icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+
+    .gallery-name {
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .gallery-desc {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+    }
+
+    .spectroscopy-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(transparent, rgba(0, 0, 0, 0.9));
+      padding: 1rem;
+      transform: translateY(100%);
+      transition: transform 0.3s ease;
+    }
+
+    .gallery-item:hover .spectroscopy-overlay {
+      transform: translateY(0);
+    }
+
+    .spec-data {
+      display: flex;
+      gap: 1rem;
+      font-size: 0.75rem;
+    }
+
+    .spec-item {
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .spec-label { color: var(--text-secondary); }
+    .spec-value { color: var(--accent-jwst); font-weight: 600; }
+
+    /* ===== NASA/ESA/JAXA PORTALS ===== */
+    .agency-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    @media (max-width: 1024px) {
+      .agency-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 640px) {
+      .agency-grid { grid-template-columns: 1fr; }
+    }
+
+    .agency-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 2rem;
+      text-align: center;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .agency-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    }
+
+    .agency-card.nasa { border-top: 4px solid var(--accent-nasa); }
+    .agency-card.esa { border-top: 4px solid var(--accent-esa); }
+    .agency-card.jaxa { border-top: 4px solid var(--accent-jaxa); }
+
+    .agency-logo {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 1rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      font-weight: bold;
+    }
+
+    .agency-card.nasa .agency-logo { background: linear-gradient(135deg, var(--accent-nasa), #1e40af); }
+    .agency-card.esa .agency-logo { background: linear-gradient(135deg, var(--accent-esa), #1e3a8a); }
+    .agency-card.jaxa .agency-logo { background: linear-gradient(135deg, var(--accent-jaxa), #dc2626); }
+
+    .agency-name {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .agency-fullname {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+    }
+
+    .agency-missions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      justify-content: center;
+      margin-bottom: 1rem;
+    }
+
+    .mission-tag {
+      padding: 0.3rem 0.7rem;
+      background: rgba(99, 123, 255, 0.15);
+      border-radius: 20px;
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+    }
+
+    .agency-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--accent-cern);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    .agency-link:hover { text-decoration: underline; }
+
+    /* ===== SATELLITE TRACKER ===== */
+    .satellite-overview {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    @media (max-width: 900px) {
+      .satellite-overview { grid-template-columns: 1fr; }
+    }
+
+    .tracker-map {
+      background: linear-gradient(180deg, #0a1628 0%, #0d2137 100%);
+      border-radius: 12px;
+      padding: 1.5rem;
+      min-height: 400px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .map-grid {
+      position: absolute;
+      inset: 0;
+      background-image: 
+        linear-gradient(rgba(99, 123, 255, 0.1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(99, 123, 255, 0.1) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+
+    .earth-viz {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 150px;
+      height: 150px;
+      background: radial-gradient(circle at 30% 30%, #1e40af 0%, #1e3a8a 50%, #0f172a 100%);
+      border-radius: 50%;
+      box-shadow: 0 0 60px rgba(30, 64, 175, 0.5), inset -20px -20px 40px rgba(0, 0, 0, 0.5);
+    }
+
+    .satellite-dot {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      background: var(--accent-satellite);
+      border-radius: 50%;
+      box-shadow: 0 0 10px var(--accent-satellite);
+      animation: orbit 20s linear infinite;
+    }
+
+    .satellite-dot::after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent-satellite), transparent);
+      right: 100%;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    @keyframes orbit {
+      from { transform: rotate(0deg) translateX(180px) rotate(0deg); }
+      to { transform: rotate(360deg) translateX(180px) rotate(-360deg); }
+    }
+
+    .satellite-stats-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .constellation-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 1.2rem;
+    }
+
+    .constellation-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+
+    .constellation-name {
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .constellation-count {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--accent-satellite);
+    }
+
+    .constellation-bar {
+      height: 8px;
+      background: rgba(16, 185, 129, 0.2);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .constellation-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent-satellite), #34d399);
+      border-radius: 4px;
+      transition: width 1s ease;
+    }
+
+    .total-sats-banner {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(6, 182, 212, 0.2));
+      border: 1px solid var(--accent-satellite);
+      border-radius: 12px;
+      padding: 1.5rem;
+      text-align: center;
+    }
+
+    .total-number {
+      font-size: 3rem;
+      font-weight: 800;
+      color: var(--accent-satellite);
+    }
+
+    .total-label {
+      color: var(--text-secondary);
+      font-size: 1rem;
+    }
+
+    /* ===== QUANTUM NETWORK ===== */
+    .quantum-dashboard {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .quantum-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 1.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .quantum-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--accent-quantum), #8b5cf6, var(--accent-jwst));
+    }
+
+    .qubit-display {
+      text-align: center;
+      padding: 2rem 0;
+    }
+
+    .qubit-count {
+      font-size: 4rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--accent-quantum), #8b5cf6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .qubit-label {
+      color: var(--text-secondary);
+      font-size: 1rem;
+      margin-top: 0.5rem;
+    }
+
+    .qubit-meter {
+      margin-top: 1.5rem;
+    }
+
+    .meter-track {
+      height: 12px;
+      background: rgba(6, 182, 212, 0.2);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+
+    .meter-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent-quantum), #22d3ee);
+      border-radius: 6px;
+      width: 0%;
+      transition: width 2s ease;
+    }
+
+    .quantum-providers {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .provider-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.8rem;
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 8px;
+    }
+
+    .provider-info {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .provider-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 0.8rem;
+    }
+
+    .provider-icon.ibm { background: #0043ce; color: white; }
+    .provider-icon.google { background: #4285f4; color: white; }
+    .provider-icon.rigetti { background: #ff6b35; color: white; }
+    .provider-icon.ionq { background: #7c3aed; color: white; }
+
+    .provider-qubits {
+      font-weight: 700;
+      color: var(--accent-quantum);
+    }
+
+    .coherence-time {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+    }
+
+    /* ===== AI TOOLS SECTION ===== */
+    .ai-tools-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .ai-tool-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .ai-tool-card:hover {
+      border-color: var(--accent-ai);
+      box-shadow: 0 0 30px rgba(245, 158, 11, 0.2);
+    }
+
+    .tool-header {
+      padding: 1.5rem;
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.15), rgba(217, 119, 6, 0.1));
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .tool-icon {
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(135deg, var(--accent-ai), #d97706);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .tool-name {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 0.3rem;
+    }
+
+    .tool-source {
+      font-size: 0.85rem;
+      color: var(--accent-ai);
+    }
+
+    .tool-body {
+      padding: 1.5rem;
+    }
+
+    .tool-description {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      margin-bottom: 1rem;
+      line-height: 1.6;
+    }
+
+    .tool-capabilities {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .capability-tag {
+      padding: 0.4rem 0.8rem;
+      background: rgba(245, 158, 11, 0.15);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      border-radius: 20px;
+      font-size: 0.8rem;
+      color: var(--accent-ai);
+    }
+
+    .tool-action {
+      padding: 1rem 1.5rem;
+      border-top: 1px solid var(--border-color);
+    }
+
+    .tool-btn {
+      width: 100%;
+      padding: 0.8rem;
+      background: linear-gradient(135deg, var(--accent-ai), #d97706);
+      border: none;
+      border-radius: 8px;
+      color: white;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .tool-btn:hover {
+      transform: scale(1.02);
+      box-shadow: 0 10px 20px rgba(245, 158, 11, 0.3);
+    }
+
+    /* ===== REAL-TIME WIDGETS ===== */
+    .widgets-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1rem;
+    }
+
+    .widget {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 1.2rem;
+    }
+
+    .widget-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+
+    .widget-title {
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
+    .widget-refresh {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: rgba(99, 123, 255, 0.15);
+      border: none;
+      color: var(--text-secondary);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+
+    .widget-refresh:hover {
+      background: rgba(99, 123, 255, 0.3);
+      color: var(--text-primary);
+    }
+
+    .widget-value {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 0.3rem;
+    }
+
+    .widget-unit {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+    }
+
+    .widget-sparkline {
+      height: 40px;
+      margin-top: 1rem;
+      display: flex;
+      align-items: end;
+      gap: 2px;
+    }
+
+    .spark-bar {
+      flex: 1;
+      background: linear-gradient(180deg, var(--accent-cern), transparent);
+      border-radius: 2px 2px 0 0;
+      min-height: 4px;
+      animation: spark-pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes spark-pulse {
+      0%, 100% { opacity: 0.7; }
+      50% { opacity: 1; }
+    }
+
+    /* ===== FOOTER ===== */
+    .observatory-footer {
+      background: var(--bg-secondary);
+      border-top: 1px solid var(--border-color);
+      padding: 2rem;
+      text-align: center;
+      margin-top: 4rem;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+      margin-bottom: 1rem;
+    }
+
+    .footer-link {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.3s ease;
+    }
+
+    .footer-link:hover { color: var(--text-primary); }
+
+    .footer-copy {
+      color: var(--text-secondary);
+      font-size: 0.85rem;
+    }
+
+    /* ===== SCROLLBAR ===== */
+    ::-webkit-scrollbar { width: 12px; height: 12px; }
+    ::-webkit-scrollbar-track { background: var(--bg-primary); }
+    ::-webkit-scrollbar-thumb {
+      background: linear-gradient(180deg, #ff6b35, #f7931e, #ffd700, #10b981, #06b6d4, #8b5cf6);
+      border-radius: 6px;
+    }
+    ::-webkit-scrollbar-thumb:hover { 
+      background: linear-gradient(180deg, #ff8c5a, #f9a54d, #ffe033, #34d399, #22d3ee, #a78bfa); 
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      .hero-title { font-size: 2.2rem; }
+      .header-content { flex-direction: column; text-align: center; }
+      .nav-tabs { justify-content: center; }
+      .dashboard-grid { grid-template-columns: 1fr; }
+      .lhc-stats { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== HEADER NAVIGATION ===== -->
+  <header class="observatory-header">
+    <div class="header-content">
+      <div class="logo-section">
+        <div class="logo-icon">⚛️</div>
+        <div class="logo-text">
+          <h1>Physics Observatory</h1>
+          <p>Global Modern Physics & Space Science Platform</p>
+        </div>
+      </div>
+      
+      <nav class="nav-tabs">
+        <a href="#lhc" class="nav-tab lhc active">🔵 LHC Monitor</a>
+        <a href="#jwst" class="nav-tab jwst">🔭 JWST Gallery</a>
+        <a href="#space-agencies" class="nav-tab nasa">🚀 NASA/ESA/JAXA</a>
+        <a href="#satellites" class="nav-tab satellite">🛰️ Satellites</a>
+        <a href="#quantum" class="nav-tab quantum">⚡ Quantum Network</a>
+        <a href="#ai-tools" class="nav-tab ai-tools">🤖 AI Tools</a>
+        <a href="/" class="nav-tab">🏠 Home</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ===== HERO SECTION ===== -->
+  <section class="hero-section">
+    <div class="hero-content">
+      <h1 class="hero-title">Physics Observatory</h1>
+      <p class="hero-subtitle">
+        Real-time monitoring of the world's most advanced scientific instruments. 
+        Track particle collisions at CERN, explore JWST deep-field images, monitor 7,146 satellites in orbit, 
+        and access quantum computers with 315+ qubits.
+      </p>
+      
+      <div class="live-status-bar">
+        <div class="status-item">
+          <span class="status-dot live"></span>
+          <strong>LHC Running</strong> — 13.6 TeV
+        </div>
+        <div class="status-item">
+          <span class="status-dot live"></span>
+          <strong>JWST Active</strong> — L2 Orbit
+        </div>
+        <div class="status-item">
+          <span class="status-dot active"></span>
+          <strong>7,146 Sats</strong> — Tracked
+        </div>
+        <div class="status-item">
+          <span class="status-dot standby"></span>
+          <strong>Quantum Net</strong> — 315+ Qubits
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== MAIN CONTENT ===== -->
+  <main class="main-content">
+
+    <!-- ===== SECTION 1: LHC COLLISION MONITORING ===== -->
+    <section id="lhc" class="section">
+      <div class="section-header">
+        <div class="section-icon cern">💥</div>
+        <div>
+          <h2 class="section-title">LHC Collision Monitoring Dashboard</h2>
+          <p class="section-subtitle">Real-time data from CERN's Large Hadron Collider — World's largest particle accelerator</p>
+        </div>
+      </div>
+
+      <div class="dashboard-grid">
+        <!-- Collision Visualizer -->
+        <div class="card" style="grid-column: span 2;">
+          <div class="card-header">
+            <span class="card-title">Live Collision Event Display</span>
+            <span class="card-badge badge-live">● LIVE</span>
+          </div>
+          <div class="card-body">
+            <div class="lhc-display">
+              <div class="collision-visualizer">
+                <div class="collision-ring"></div>
+                <div class="collision-ring"></div>
+                <div class="collision-ring"></div>
+                <div class="collision-ring"></div>
+                <div class="collision-center"></div>
+              </div>
+              
+              <div class="lhc-stats">
+                <div class="stat-box">
+                  <div class="stat-value" id="beam-energy">13.6</div>
+                  <div class="stat-label">Beam Energy (TeV)</div>
+                </div>
+                <div class="stat-box">
+                  <div class="stat-value" id="luminosity">2.4×10³⁴</div>
+                  <div class="stat-label">Luminosity (cm⁻²s⁻¹)</div>
+                </div>
+                <div class="stat-box">
+                  <div class="stat-value" id="collision-rate">1,000,000</div>
+                  <div class="stat-label">Collisions/sec</div>
+                </div>
+                <div class="stat-box">
+                  <div class="stat-value" id="pile-up">45</div>
+                  <div class="stat-label">Pile-up Events</div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="lhc-event-log" id="event-log">
+              <div class="event-entry">
+                <span class="event-time">[14:32:07 UTC]</span>
+                <span class="event-type"> | HIGGS_CANDIDATE:</span>
+                <span class="event-data"> m_H = 125.09 GeV, σ = 2.3 GeV (ATLAS)</span>
+              </div>
+              <div class="event-entry">
+                <span class="event-time">[14:31:58 UTC]</span>
+                <span class="event-type"> | B_PHYSICS:</span>
+                <span class="event-data"> B_s → J/ψ φ decay observed (LHCb)</span>
+              </div>
+              <div class="event-entry">
+                <span class="event-time">[14:31:45 UTC]</span>
+                <span class="event-type"> | HEAVY_ION:</span>
+                <span class="event-data"> Pb-Pb collision, centrality 5-10% (ALICE)</span>
+              </div>
+              <div class="event-entry">
+                <span class="event-time">[14:31:32 UTC]</span>
+                <span class="event-type"> | EXOTIC:</span>
+                <span class="event-data"> Z' resonance search, mass > 4 TeV (CMS)</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Detector Status -->
+        <div class="card">
+          <div class="card-header">
+            <span class="card-title">Detector Status</span>
+            <span class="card-badge badge-updating">REFRESHING</span>
+          </div>
+          <div class="card-body">
+            <div style="display: flex; flex-direction: column; gap: 1rem;">
+              <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.8rem; background: rgba(16, 185, 129, 0.1); border-radius: 8px;">
+                <strong>ATLAS</strong>
+                <span style="color: #10b981;">● OPERATIONAL</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.8rem; background: rgba(16, 185, 129, 0.1); border-radius: 8px;">
+                <strong>CMS</strong>
+                <span style="color: #10b981;">● OPERATIONAL</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.8rem; background: rgba(16, 185, 129, 0.1); border-radius: 8px;">
+                <strong>LHCb</strong>
+                <span style="color: #10b981;">● OPERATIONAL</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.8rem; background: rgba(245, 158, 11, 0.1); border-radius: 8px;">
+                <strong>ALICE</strong>
+                <span style="color: #f59e0b;">◐ STANDBY</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Physics Results -->
+        <div class="card">
+          <div class="card-header">
+            <span class="card-title">Recent Physics Results</span>
+            <span class="card-badge badge-data">2024 DATA</span>
+          </div>
+          <div class="card-body">
+            <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.8rem;">
+              <li style="padding: 0.8rem; background: rgba(0, 83, 200, 0.1); border-radius: 8px; border-left: 3px solid var(--accent-cern);">
+                <strong>Higgs Coupling Precision</strong><br>
+                <small style="color: var(--text-secondary);">σ_H → ττ measured to 5% precision</small>
+              </li>
+              <li style="padding: 0.8rem; background: rgba(0, 83, 200, 0.1); border-radius: 8px; border-left: 3px solid var(--accent-cern);">
+                <strong>Rare B Decay Observation</strong><br>
+                <small style="color: var(--text-secondary);">B₀ → μμ branching fraction updated</small>
+              </li>
+              <li style="padding: 0.8rem; background: rgba(0, 83, 200, 0.1); border-radius: 8px; border-left: 3px solid var(--accent-cern);">
+                <strong>Gluon PDF Constraints</strong><br>
+                <small style="color: var(--text-secondary);">High-x gluons probed at new scales</small>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SECTION 2: JWST IMAGE GALLERY ===== -->
+    <section id="jwst" class="section">
+      <div class="section-header">
+        <div class="section-icon jwst">🔭</div>
+        <div>
+          <h2 class="section-title">JWST High-Resolution Image Gallery</h2>
+          <p class="section-subtitle">James Webb Space Telescope — Deep field images with spectroscopic data viewer</p>
+        </div>
+      </div>
+
+      <div class="jwst-gallery">
+        <div class="gallery-item">
+          <div class="gallery-placeholder">
+            <div class="gallery-icon">🌌</div>
+            <div class="gallery-name">SMACS 0723 Deep Field</div>
+            <div class="gallery-desc">First deep field image — gravitational lensing cluster</div>
+          </div>
+          <div class="spectroscopy-overlay">
+            <div class="spec-data">
+              <div class="spec-item"><span class="spec-label">λ:</span><span class="spec-value">1-5 μm</span></div>
+              <div class="spec-item"><span class="spec-label">z:</span><span class="spec-value">~7.4</span></div>
+              <div class="spec-item"><span class="spec-label">Exp:</span><span class="spec-value">12.5 hr</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="gallery-item">
+          <div class="gallery-placeholder">
+            <div class="gallery-icon">⭐</div>
+            <div class="gallery-name">Carina Nebula (Cosmic Cliffs)</div>
+            <div class="gallery-desc">Star-forming region — NIRCam mosaic</div>
+          </div>
+          <div class="spectroscopy-overlay">
+            <div class="spec-data">
+              <div class="spec-item"><span class="spec-label">λ:</span><span class="spec-value">3.35 μm</span></div>
+              <div class="spec-item"><span class="spec-label">Dist:</span><span class="spec-value">7,500 ly</span></div>
+              <div class="spec-item"><span class="spec-label">Res:</span><span class="spec-value">0.032"</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="gallery-item">
+          <div class="gallery-placeholder">
+            <div class="gallery-icon">🪐</div>
+            <div class="gallery-name">Stephan's Quintet</div>
+            <div class="gallery-desc">Interacting galaxy group — composite NIR/MIRI</div>
+          </div>
+          <div class="spectroscopy-overlay">
+            <div class="spec-data">
+              <div class="spec-item"><span class="spec-label">λ:</span><span class="spec-value">2-7.7 μm</span></div>
+              <div class="spec-item"><span class="spec-label">z:</span><span class="spec-value">0.004</span></div>
+              <div class="spec-item"><span class="spec-label">FOV:</span><span class="spec-value">2.2'</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="gallery-item">
+          <div class="gallery-placeholder">
+            <div class="gallery-icon">☁️</div>
+            <div class="gallery-name">Southern Ring Nebula</div>
+            <div class="gallery-desc">Planetary nebula — dual star system</div>
+          </div>
+          <div class="spectroscopy-overlay">
+            <div class="spec-data">
+              <div class="spec-item"><span class="spec-label">λ:</span><span class="spec-value">2.12/4.44 μm</span></div>
+              <div class="spec-item"><span class="spec-label">Dist:</span><span class="spec-value">2,500 ly</span></div>
+              <div class="spec-item"><span class="spec-label">T_eff:</span><span class="spec-value">130k K</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="gallery-item">
+          <div class="gallery-placeholder">
+            <div class="gallery-icon">🌍</div>
+            <div class="gallery-name">WASP-96 b Transmission Spectrum</div>
+            <div class="gallery-desc">Exoplanet atmosphere — water signature detected</div>
+          </div>
+          <div class="spectroscopy-overlay">
+            <div class="spec-data">
+              <div class="spec-item"><span class="spec-label">Type:</span><span class="spec-value">Hot Gas Giant</span></div>
+              <div class="spec-item"><span class="spec-label">M:</span><span class="spec-value">0.48 M_Jup</span></div>
+              <div class="spec-item"><span class="spec-label">H₂O:</span><span class="spec-value">✓ Detected</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="gallery-item">
+          <div class="gallery-placeholder">
+            <div class="gallery-icon">✨</div>
+            <div class="gallery-name">JADES-GS-z14-0</div>
+            <div class="gallery-desc">Most distant galaxy confirmed — z=14.32</div>
+          </div>
+          <div class="spectroscopy-overlay">
+            <div class="spec-data">
+              <div class="spec-item"><span class="spec-label">z:</span><span class="spec-value">14.32</span></div>
+              <div class="spec-item"><span class="spec-label">Age:</span><span class="spec-value">290 Myr</span></div>
+              <div class="spec-item"><span class="spec-label">M_*:</span><span class="spec-value">10⁸·⁵ M☉</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SECTION 3: NASA/ESA/JAXA PORTALS ===== -->
+    <section id="space-agencies" class="section">
+      <div class="section-header">
+        <div class="section-icon nasa">🚀</div>
+        <div>
+          <h2 class="section-title">Space Agency Data Portals</h2>
+          <p class="section-subtitle">Integrated access to NASA, ESA, and JAXA mission data archives</p>
+        </div>
+      </div>
+
+      <div class="agency-grid">
+        <!-- NASA -->
+        <div class="agency-card nasa">
+          <div class="agency-logo">N</div>
+          <h3 class="agency-name">NASA</h3>
+          <p class="agency-fullname">National Aeronautics and Space Administration</p>
+          
+          <div class="agency-missions">
+            <span class="mission-tag">JWST</span>
+            <span class="mission-tag">Hubble</span>
+            <span class="mission-tag">Perseverance</span>
+            <span class="mission-tag">Artemis</span>
+            <span class="mission-tag">Voyager</span>
+            <span class="mission-tag">TESS</span>
+            <span class="mission-tag">Chandra</span>
+            <span class="mission-tag">Europa Clipper</span>
+          </div>
+          
+          <a href="https://data.nasa.gov" target="_blank" rel="noopener" class="agency-link">
+            Access NASA Data Portal →
+          </a>
+        </div>
+
+        <!-- ESA -->
+        <div class="agency-card esa">
+          <div class="agency-logo">E</div>
+          <h3 class="agency-name">ESA</h3>
+          <p class="agency-fullname">European Space Agency</p>
+          
+          <div class="agency-missions">
+            <span class="mission-tag">Gaia</span>
+            <span class="mission-tag">BepiColombo</span>
+            <span class="mission-tag">Euclid</span>
+            <span class="mission-tag">Solar Orbiter</span>
+            <span class="mission-tag">JUICE</span>
+            <span class="mission-tag">Cheops</span>
+            <span class="mission-tag">Mars Express</span>
+            <span class="mission-tag">Hera</span>
+          </div>
+          
+          <a href="https://science.esa.int" target="_blank" rel="noopener" class="agency-link">
+            Access ESA Science Portal →
+          </a>
+        </div>
+
+        <!-- JAXA -->
+        <div class="agency-card jaxa">
+          <div class="agency-logo">J</div>
+          <h3 class="agency-name">JAXA</h3>
+          <p class="agency-fullname">Japan Aerospace Exploration Agency</p>
+          
+          <div class="agency-missions">
+            <span class="mission-tag">Hayabusa2</span>
+            <span class="mission-tag">SLIM</span>
+            <span class="mission-tag">XRISM</span>
+            <span class="mission-tag">IKAROS</span>
+            <span class="mission-tag">Himawari-9</span>
+            <span class="mission-tag">MMX</span>
+            <span class="mission-tag">ASTRO-H</span>
+            <span class="mission-tag">GOSAT-GW</span>
+          </div>
+          
+          <a href="https://www.jaxa.jp" target="_blank" rel="noopener" class="agency-link">
+            Access JAXA Data Portal →
+          </a>
+        </div>
+      </div>
+
+      <!-- Additional Mission Data Cards -->
+      <div class="dashboard-grid" style="margin-top: 2rem;">
+        <div class="card">
+          <div class="card-header">
+            <span class="card-title">Active Missions Count</span>
+            <span class="card-badge badge-live">LIVE</span>
+          </div>
+          <div class="card-body">
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; text-align: center;">
+              <div>
+                <div style="font-size: 2rem; font-weight: 700; color: var(--accent-nasa);">86</div>
+                <div style="font-size: 0.8rem; color: var(--text-secondary);">NASA Missions</div>
+              </div>
+              <div>
+                <div style="font-size: 2rem; font-weight: 700; color: var(--accent-esa);">42</div>
+                <div style="font-size: 0.8rem; color: var(--text-secondary);">ESA Missions</div>
+              </div>
+              <div>
+                <div style="font-size: 2rem; font-weight: 700; color: var(--accent-jaxa);">28</div>
+                <div style="font-size: 0.8rem; color: var(--text-secondary);">JAXA Missions</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <span class="card-title">Data Archive Size</span>
+            <span class="card-badge badge-data">PETABYTES</span>
+          </div>
+          <div class="card-body">
+            <div style="text-align: center; padding: 1rem 0;">
+              <div style="font-size: 2.5rem; font-weight: 800; background: var(--gradient-physics); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">156 PB</div>
+              <div style="color: var(--text-secondary); margin-top: 0.5rem;">Total scientific data archived across all agencies</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SECTION 4: SATELLITE TRACKER ===== -->
+    <section id="satellites" class="section">
+      <div class="section-header">
+        <div class="section-icon satellite">🛰️</div>
+        <div>
+          <h2 class="section-title">Global Satellite Constellation Tracker</h2>
+          <p class="section-subtitle">Real-time tracking of 7,146 active satellites in Earth orbit</p>
+        </div>
+      </div>
+
+      <div class="satellite-overview">
+        <!-- Tracker Map Visualization -->
+        <div class="tracker-map card">
+          <div class="map-grid"></div>
+          <div class="earth-viz"></div>
+          <!-- Animated satellite dots -->
+          <div class="satellite-dot" style="animation-delay: 0s;"></div>
+          <div class="satellite-dot" style="animation-delay: -3s; animation-duration: 15s;"></div>
+          <div class="satellite-dot" style="animation-delay: -7s; animation-duration: 25s;"></div>
+          <div class="satellite-dot" style="animation-delay: -12s; animation-duration: 18s;"></div>
+          <div class="satellite-dot" style="animation-delay: -5s; animation-duration: 22s;"></div>
+          <div class="satellite-dot" style="animation-delay: -9s; animation-duration: 30s;"></div>
+          
+          <div style="position: absolute; bottom: 1rem; left: 1rem; right: 1rem; display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--text-secondary);">
+            <span>LEO: 5,842 sats</span>
+            <span>MEO: 892 sats</span>
+            <span>GEO: 412 sats</span>
+          </div>
+        </div>
+
+        <!-- Stats Panel -->
+        <div class="satellite-stats-panel">
+          <div class="total-sats-banner">
+            <div class="total-number">7,146</div>
+            <div class="total-label">Active Satellites Tracked</div>
+          </div>
+
+          <div class="constellation-card">
+            <div class="constellation-header">
+              <span class="constellation-name">🌐 Starlink (SpaceX)</span>
+              <span class="constellation-count">5,750</span>
+            </div>
+            <div class="constellation-bar">
+              <div class="constellation-fill" style="width: 80%;"></div>
+            </div>
+            <div style="display: flex; justify-content: space-between; margin-top: 0.5rem; font-size: 0.85rem; color: var(--text-secondary);">
+              <span>LEO Constellation</span>
+              <span>80.4% of total</span>
+            </div>
+          </div>
+
+          <div class="constellation-card">
+            <div class="constellation-header">
+              <span class="constellation-name">📡 OneWeb</span>
+              <span class="constellation-count">634</span>
+            </div>
+            <div class="constellation-bar">
+              <div class="constellation-fill" style="width: 9%;"></div>
+            </div>
+            <div style="display: flex; justify-content: space-between; margin-top: 0.5rem; font-size: 0.85rem; color: var(--text-secondary);">
+              <span>LEO Constellation</span>
+              <span>8.9% of total</span>
+            </div>
+          </div>
+
+          <div class="constellation-card">
+            <div class="constellation-header">
+              <span class="constellation-name">📶 Kuiper Systems (Amazon)</span>
+              <span class="constellation-count">142</span>
+            </div>
+            <div class="constellation-bar">
+              <div class="constellation-fill" style="width: 2%;"></div>
+            </div>
+            <div style="display: flex; justify-content: space-between; margin-top: 0.5rem; font-size: 0.85rem; color: var(--text-secondary);">
+              <span>LEO Proto-phase</span>
+              <span>2.0% of total</span>
+            </div>
+          </div>
+
+          <div class="constellation-card">
+            <div class="constellation-header">
+              <span class="constellation-name">🌍 GNSS / Navigation</span>
+              <span class="constellation-count">320</span>
+            </div>
+            <div class="constellation-bar">
+              <div class="constellation-fill" style="width: 4.5%; background: linear-gradient(90deg, #f59e0b, #fbbf24);"></div>
+            </div>
+            <div style="display: flex; justify-content: space-between; margin-top: 0.5rem; font-size: 0.85rem; color: var(--text-secondary);">
+              <span>MEO Constellations</span>
+              <span>GPS/Galileo/GLONASS/BeiDou</span>
+            </div>
+          </div>
+
+          <div class="constellation-card">
+            <div class="constellation-header">
+              <span class="constellation-name">🔬 Scientific / Research</span>
+              <span class="constellation-count">300</span>
+            </div>
+            <div class="constellation-bar">
+              <div class="constellation-fill" style="width: 4.2%; background: linear-gradient(90deg, #8b5cf6, #a78bfa);"></div>
+            </div>
+            <div style="display: flex; justify-content: space-between; margin-top: 0.5rem; font-size: 0.85rem; color: var(--text-secondary);">
+              <span>Various Orbits</span>
+              <span>NASA/ESA/JAXA/CNSA</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SECTION 5: QUANTUM NETWORK ===== -->
+    <section id="quantum" class="section">
+      <div class="section-header">
+        <div class="section-icon quantum">⚡</div>
+        <div>
+          <h2 class="section-title">Quantum Computer Network Status</h2>
+          <p class="section-subtitle">Access quantum processors with 315+ qubits across global providers</p>
+        </div>
+      </div>
+
+      <div class="quantum-dashboard">
+        <!-- Total Qubits Card -->
+        <div class="quantum-card" style="grid-column: span 2;">
+          <div class="qubit-display">
+            <div class="qubit-count" id="total-qubits">315+</div>
+            <div class="qubit-label">Total Available Qubits Across All Providers</div>
+            <div class="qubit-meter">
+              <div class="meter-track">
+                <div class="meter-fill" id="qubit-meter-fill" style="width: 65%;"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Provider Cards -->
+        <div class="quantum-card">
+          <h4 style="margin-bottom: 1rem;">IBM Quantum Network</h4>
+          <div class="quantum-providers">
+            <div class="provider-row">
+              <div class="provider-info">
+                <div class="provider-icon ibm">IBM</div>
+                <div>
+                  <div style="font-weight: 600;">IBM Condor</div>
+                  <div class="coherence-time">T₁: 300μs | T₂: 250μs</div>
+                </div>
+              </div>
+              <div class="provider-qubits">1121 qubits</div>
+            </div>
+            <div class="provider-row">
+              <div class="provider-info">
+                <div class="provider-icon ibm">IBM</div>
+                <div>
+                  <div style="font-weight: 600;">IBM Heron</div>
+                  <div class="coherence-time">T₁: 400μs | T₂: 350μs</div>
+                </div>
+              </div>
+              <div class="provider-qubits">156 qubits</div>
+            </div>
+            <div class="provider-row">
+              <div class="provider-info">
+                <div class="provider-icon ibm">IBM</div>
+                <div>
+                  <div style="font-weight: 600;">IBM Eagle</div>
+                  <div class="coherence-time">T₁: 250μs | T₂: 200μs</div>
+                </div>
+              </div>
+              <div class="provider-qubits">127 qubits</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="quantum-card">
+          <h4 style="margin-bottom: 1rem;">Google Quantum AI</h4>
+          <div class="quantum-providers">
+            <div class="provider-row">
+              <div class="provider-info">
+                <div class="provider-icon google">G</div>
+                <div>
+                  <div style="font-weight: 600;">Willow</div>
+                  <div class="coherence-time">Error-corrected</div>
+                </div>
+              </div>
+              <div class="provider-qubits">105+ qubits</div>
+            </div>
+            <div class="provider-row">
+              <div class="provider-info">
+                <div class="provider-icon google">G</div>
+                <div>
+                  <div style="font-weight: 600;">Sycamore 2</div>
+                  <div class="coherence-time">T₁: 15μs | T₂: 10μs</div>
+                </div>
+              </div>
+              <div class="provider-qubits">72 qubits</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="quantum-card">
+          <h4 style="margin-bottom: 1rem;">Other Providers</h4>
+          <div class="quantum-providers">
+            <div class="provider-row">
+              <div class="provider-info">
+                <div class="provider-icon ionq">IQ</div>
+                <div>
+                  <div style="font-weight: 600;">IonQ Forte</div>
+                  <div class="coherence-time">Trapped Ion</div>
+                </div>
+              </div>
+              <div class="provider-qubits">36 qubits</div>
+            </div>
+            <div class="provider-row">
+              <div class="provider-info">
+                <div class="provider-icon rigetti">R</div>
+                <div>
+                  <div style="font-weight: 600;">Rigetti Ankaa-3</div>
+                  <div class="coherence-time">Superconducting</div>
+                </div>
+              </div>
+              <div class="provider-qubits">84 qubits</div>
+            </div>
+            <div class="provider-row">
+              <div class="provider-info">
+                <div class="provider-icon" style="background: #ec4899; color: white;">QCI</div>
+                <div>
+                  <div style="font-weight: 600;">Quantum Computing Inc.</div>
+                  <div class="coherence-time">Photonic</div>
+                </div>
+              </div>
+              <div class="provider-qubits">4010+ qubits</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SECTION 6: AI TOOLS ===== -->
+    <section id="ai-tools" class="section">
+      <div class="section-header">
+        <div class="section-icon ai">🤖</div>
+        <div>
+          <h2 class="section-title">AI Analysis Tools</h2>
+          <p class="section-subtitle">Machine learning models trained on CERN, JWST, and LIGO datasets</p>
+        </div>
+      </div>
+
+      <div class="ai-tools-grid">
+        <!-- AI Tool 1: Particle Physics ML -->
+        <div class="ai-tool-card">
+          <div class="tool-header">
+            <div class="tool-icon">⚛️</div>
+            <div class="tool-name">Particle Physics Analyzer</div>
+            <div class="tool-source">Trained on CERN Open Data</div>
+          </div>
+          <div class="tool-body">
+            <p class="tool-description">
+              Deep learning model for automated particle event classification and anomaly detection in LHC collision events. 
+              Capable of identifying Higgs boson decays, exotic particle candidates, and rare processes with 97.3% accuracy.
+            </p>
+            <div class="tool-capabilities">
+              <span class="capability-tag">Event Classification</span>
+              <span class="capability-tag">Anomaly Detection</span>
+              <span class="capability-tag">Higgs Analysis</span>
+              <span class="capability-tag">Jet Tagging</span>
+            </div>
+          </div>
+          <div class="tool-action">
+            <button class="tool-btn">Launch Analyzer →</button>
+          </div>
+        </div>
+
+        <!-- AI Tool 2: Spectral Analysis -->
+        <div class="ai-tool-card">
+          <div class="tool-header">
+            <div class="tool-icon">🌈</div>
+            <div class="tool-name">Spectral Data Processor</div>
+            <div class="tool-source">Trained on JWST/NIRSpec Data</div>
+          </div>
+          <div class="tool-body">
+            <p class="tool-description">
+              Advanced neural network for processing JWST spectroscopic data. Automatically identifies chemical compositions,
+              redshift measurements, and atmospheric properties of exoplanets and distant galaxies.
+            </p>
+            <div class="tool-capabilities">
+              <span class="capability-tag">Redshift Estimation</span>
+              <span class="capability-tag">Chem ID</span>
+              <span class="capability-tag">Atmosphere Model</span>
+              <span class="capability-tag">Line Fitting</span>
+            </div>
+          </div>
+          <div class="tool-action">
+            <button class="tool-btn">Launch Processor →</button>
+          </div>
+        </div>
+
+        <!-- AI Tool 3: Gravitational Wave Detector -->
+        <div class="ai-tool-card">
+          <div class="tool-header">
+            <div class="tool-icon">🌀</div>
+            <div class="tool-name">Gravitational Wave Finder</div>
+            <div class="tool-source">Trained on LIGO/Virgo/KAGRA Data</div>
+          </div>
+          <div class="tool-body">
+            <p class="tool-description">
+              Convolutional neural network optimized for detecting gravitational wave signals from binary black hole mergers,
+              neutron star collisions, and cosmic string signatures in noisy detector data.
+            </p>
+            <div class="tool-capabilities">
+              <span class="capability-tag">BBH Detection</span>
+              <span class="capability-tag">BNS Merger</span>
+              <span class="capability-tag">Signal Denoising</span>
+              <span class="capability-tag">Parameter Estimation</span>
+            </div>
+          </div>
+          <div class="tool-action">
+            <button class="tool-btn">Launch Finder →</button>
+          </div>
+        </div>
+
+        <!-- AI Tool 4: Exoplanet Classifier -->
+        <div class="ai-tool-card">
+          <div class="tool-header">
+            <div class="tool-icon">🪐</div>
+            <div class="tool-name">Exoplanet Characterizer</div>
+            <div class="tool-source">Trained on TESS/Kepler Archives</div>
+          </div>
+          <div class="tool-body">
+            <p class="tool-description">
+              Machine learning pipeline for identifying and characterizing exoplanets from transit photometry data.
+              Predicts planetary radius, orbital parameters, and habitability scores.
+            </p>
+            <div class="tool-capabilities">
+              <span class="capability-tag">Transit Detection</span>
+              <span class="capability-tag">Radius Prediction</span>
+              <span class="capability-tag">Habitable Zone</span>
+              <span class="capability-tag">False Positive Filter</span>
+            </div>
+          </div>
+          <div class="tool-action">
+            <button class="tool-btn">Launch Classifier →</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SECTION 7: REAL-TIME WIDGETS ===== -->
+    <section class="section">
+      <div class="section-header">
+        <div class="section-icon" style="background: linear-gradient(135deg, #10b981, #06b6d4);">📊</div>
+        <div>
+          <h2 class="section-title">Real-Time Monitoring Widgets</h2>
+          <p class="section-subtitle">Live data feeds from physics observatories worldwide</p>
+        </div>
+      </div>
+
+      <div class="widgets-container">
+        <!-- Widget 1: Solar Activity -->
+        <div class="widget">
+          <div class="widget-header">
+            <span class="widget-title">☀️ Solar Wind Speed</span>
+            <button class="widget-refresh" onclick="refreshWidget(this)">↻</button>
+          </div>
+          <div class="widget-value" style="color: #f59e0b;" id="solar-wind">485</div>
+          <div class="widget-unit">km/s (DSCOVR Real-Time)</div>
+          <div class="widget-sparkline">
+            <div class="spark-bar" style="height: 60%;"></div>
+            <div class="spark-bar" style="height: 75%;"></div>
+            <div class="spark-bar" style="height: 45%;"></div>
+            <div class="spark-bar" style="height: 80%;"></div>
+            <div class="spark-bar" style="height: 55%;"></div>
+            <div class="spark-bar" style="height: 90%;"></div>
+            <div class="spark-bar" style="height: 70%;"></div>
+            <div class="spark-bar" style="height: 65%;"></div>
+            <div class="spark-bar" style="height: 85%;"></div>
+            <div class="spark-bar" style="height: 50%;"></div>
+          </div>
+        </div>
+
+        <!-- Widget 2: Cosmic Ray Flux -->
+        <div class="widget">
+          <div class="widget-header">
+            <span class="widget-title">🌌 Cosmic Ray Flux</span>
+            <button class="widget-refresh" onclick="refreshWidget(this)">↻</button>
+          </div>
+          <div class="widget-value" style="color: #8b5cf6;" id="cosmic-rays">4,872</div>
+          <div class="widget-unit">counts/min (ISS-CREAM)</div>
+          <div class="widget-sparkline">
+            <div class="spark-bar" style="height: 55%; background: linear-gradient(180deg, #8b5cf6, transparent);"></div>
+            <div class="spark-bar" style="height: 62%; background: linear-gradient(180deg, #8b5cf6, transparent);"></div>
+            <div class="spark-bar" style="height: 48%; background: linear-gradient(180deg, #8b5cf6, transparent);"></div>
+            <div class="spark-bar" style="height: 71%; background: linear-gradient(180deg, #8b5cf6, transparent);"></div>
+            <div class="spark-bar" style="height: 58%; background: linear-gradient(180deg, #8b5cf6, transparent);"></div>
+            <div class="spark-bar" style="height: 66%; background: linear-gradient(180deg, #8b5cf6, transparent);"></div>
+            <div class="spark-bar" style="height: 52%; background: linear-gradient(180deg, #8b5cf6, transparent);"></div>
+            <div class="spark-bar" style="height: 74%; background: linear-gradient(180deg, #8b5cf6, transparent);"></div>
+            <div class="spark-bar" style="height: 61%; background: linear-gradient(180deg, #8b5cf6, transparent);"></div>
+            <div class="spark-bar" style="height: 69%; background: linear-gradient(180deg, #8b5cf6, transparent);"></div>
+          </div>
+        </div>
+
+        <!-- Widget 3: Neutron Monitor -->
+        <div class="widget">
+          <div class="widget-header">
+            <span class="widget-title">⚛️ Neutron Monitor</span>
+            <button class="widget-refresh" onclick="refreshWidget(this)">↻</button>
+          </div>
+          <div class="widget-value" style="color: #10b981;" id="neutron-mon">6,742</div>
+          <div class="widget-unit">counts/sec (Oulu NM)</div>
+          <div class="widget-sparkline">
+            <div class="spark-bar" style="height: 68%; background: linear-gradient(180deg, #10b981, transparent);"></div>
+            <div class="spark-bar" style="height: 72%; background: linear-gradient(180deg, #10b981, transparent);"></div>
+            <div class="spark-bar" style="height: 65%; background: linear-gradient(180deg, #10b981, transparent);"></div>
+            <div class="spark-bar" style="height: 78%; background: linear-gradient(180deg, #10b981, transparent);"></div>
+            <div class="spark-bar" style="height: 70%; background: linear-gradient(180deg, #10b981, transparent);"></div>
+            <div class="spark-bar" style="height: 82%; background: linear-gradient(180deg, #10b981, transparent);"></div>
+            <div class="spark-bar" style="height: 67%; background: linear-gradient(180deg, #10b981, transparent);"></div>
+            <div class="spark-bar" style="height: 75%; background: linear-gradient(180deg, #10b981, transparent);"></div>
+            <div class="spark-bar" style="height: 63%; background: linear-gradient(180deg, #10b981, transparent);"></div>
+            <div class="spark-bar" style="height: 79%; background: linear-gradient(180deg, #10b981, transparent);"></div>
+          </div>
+        </div>
+
+        <!-- Widget 4: Magnetometer -->
+        <div class="widget">
+          <div class="widget-header">
+            <span class="widget-title">🧲 Interplanetary Mag Field</span>
+            <button class="widget-refresh" onclick="refreshWidget(this)">↻</button>
+          </div>
+          <div class="widget-value" style="color: #3b82f6;" id="mag-field">5.42</div>
+          <div class="widget-unit">nT (ACE Satellite)</div>
+          <div class="widget-sparkline">
+            <div class="spark-bar" style="height: 52%; background: linear-gradient(180deg, #3b82f6, transparent);"></div>
+            <div class="spark-bar" style="height: 58%; background: linear-gradient(180deg, #3b82f6, transparent);"></div>
+            <div class="spark-bar" style="height: 45%; background: linear-gradient(180deg, #3b82f6, transparent);"></div>
+            <div class="spark-bar" style="height: 62%; background: linear-gradient(180deg, #3b82f6, transparent);"></div>
+            <div class="spark-bar" style="height: 55%; background: linear-gradient(180deg, #3b82f6, transparent);"></div>
+            <div class="spark-bar" style="height: 70%; background: linear-gradient(180deg, #3b82f6, transparent);"></div>
+            <div class="spark-bar" style="height: 48%; background: linear-gradient(180deg, #3b82f6, transparent);"></div>
+            <div class="spark-bar" style="height: 65%; background: linear-gradient(180deg, #3b82f6, transparent);"></div>
+            <div class="spark-bar" style="height: 57%; background: linear-gradient(180deg, #3b82f6, transparent);"></div>
+            <div class="spark-bar" style="height: 73%; background: linear-gradient(180deg, #3b82f6, transparent);"></div>
+          </div>
+        </div>
+
+        <!-- Widget 5: LHC Fill Status -->
+        <div class="widget">
+          <div class="widget-header">
+            <span class="widget-title">💥 LHC Fill Progress</span>
+            <button class="widget-refresh" onclick="refreshWidget(this)">↻</button>
+          </div>
+          <div class="widget-value" style="color: #0053c8;" id="lhc-fill">87.3%</div>
+          <div class="widget-unit">Fill #8942 Integrated Luminosity</div>
+          <div class="widget-sparkline">
+            <div class="spark-bar" style="height: 40%; background: linear-gradient(180deg, #0053c8, transparent);"></div>
+            <div class="spark-bar" style="height: 52%; background: linear-gradient(180deg, #0053c8, transparent);"></div>
+            <div class="spark-bar" style="height: 58%; background: linear-gradient(180deg, #0053c8, transparent);"></div>
+            <div class="spark-bar" style="height: 65%; background: linear-gradient(180deg, #0053c8, transparent);"></div>
+            <div class="spark-bar" style="height: 70%; background: linear-gradient(180deg, #0053c8, transparent);"></div>
+            <div class="spark-bar" style="height: 75%; background: linear-gradient(180deg, #0053c8, transparent);"></div>
+            <div class="spark-bar" style="height: 79%; background: linear-gradient(180deg, #0053c8, transparent);"></div>
+            <div class="spark-bar" style="height: 82%; background: linear-gradient(180deg, #0053c8, transparent);"></div>
+            <div class="spark-bar" style="height: 85%; background: linear-gradient(180deg, #0053c8, transparent);"></div>
+            <div class="spark-bar" style="height: 87%; background: linear-gradient(180deg, #0053c8, transparent);"></div>
+          </div>
+        </div>
+
+        <!-- Widget 6: Space Weather Alert -->
+        <div class="widget">
+          <div class="widget-header">
+            <span class="widget-title">🌩️ Geomagnetic Kp Index</span>
+            <button class="widget-refresh" onclick="refreshWidget(this)">↻</button>
+          </div>
+          <div class="widget-value" style="color: #ef4444;" id="kp-index">Kp 4</div>
+          <div class="widget-unit">Active Conditions (NOAA SWPC)</div>
+          <div class="widget-sparkline">
+            <div class="spark-bar" style="height: 30%; background: linear-gradient(180deg, #ef4444, transparent);"></div>
+            <div class="spark-bar" style="height: 35%; background: linear-gradient(180deg, #ef4444, transparent);"></div>
+            <div class="spark-bar" style="height: 42%; background: linear-gradient(180deg, #ef4444, transparent);"></div>
+            <div class="spark-bar" style="height: 38%; background: linear-gradient(180deg, #ef4444, transparent);"></div>
+            <div class="spark-bar" style="height: 45%; background: linear-gradient(180deg, #ef4444, transparent);"></div>
+            <div class="spark-bar" style="height: 52%; background: linear-gradient(180deg, #ef4444, transparent);"></div>
+            <div class="spark-bar" style="height: 48%; background: linear-gradient(180deg, #ef4444, transparent);"></div>
+            <div class="spark-bar" style="height: 55%; background: linear-gradient(180deg, #ef4444, transparent);"></div>
+            <div class="spark-bar" style="height: 50%; background: linear-gradient(180deg, #ef4444, transparent);"></div>
+            <div class="spark-bar" style="height: 58%; background: linear-gradient(180deg, #ef4444, transparent);"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="observatory-footer">
+    <div class="footer-links">
+      <a href="/" class="footer-link">SciMSPT Home</a>
+      <a href="/index.html" class="footer-link">Platform</a>
+      <a href="/dashboard.html" class="footer-link">Dashboard</a>
+      <a href="/research.html" class="footer-link">Research</a>
+      <a href="/about.html" class="footer-link">About</a>
+      <a href="https://github.com/testdemoqwenai2025-creator/Demo2SciMSPT" target="_blank" rel="noopener" class="footer-link">GitHub</a>
+    </div>
+    <p class="footer-copy">
+      Physics Observatory — SciMSPT Neural Research Intelligence Platform<br>
+      Data sources: CERN Open Data, STScI JWST Archive, NASA ADS, ESA Science, JAXA Data Archive<br>
+      © 2024 SciMSPT | Powered by Open Science Initiatives
+    </p>
+  </footer>
+
+  <!-- ===== JAVASCRIPT ===== -->
+  <script>
+    // ===== LIVE DATA SIMULATION =====
+    function updateLiveData() {
+      // Solar wind variation
+      const solarWind = document.getElementById('solar-wind');
+      if (solarWind) solarWind.textContent = Math.floor(450 + Math.random() * 100);
+
+      // Cosmic ray flux
+      const cosmicRays = document.getElementById('cosmic-rays');
+      if (cosmicRays) cosmicRays.textContent = (4500 + Math.floor(Math.random() * 800)).toLocaleString();
+
+      // Neutron monitor
+      const neutronMon = document.getElementById('neutron-mon');
+      if (neutronMon) neutronMon.textContent = (6500 + Math.floor(Math.random() * 500)).toLocaleString();
+
+      // Magnetic field
+      const magField = document.getElementById('mag-field');
+      if (magField) magField.textContent = (4 + Math.random() * 3).toFixed(2);
+
+      // LHC fill progress
+      const lhcFill = document.getElementById('lhc-fill');
+      if (lhcFill) lhcFill.textContent = (85 + Math.random() * 5).toFixed(1) + '%';
+
+      // LHC stats
+      const beamEnergy = document.getElementById('beam-energy');
+      if (beamEnergy && Math.random() > 0.95) beamEnergy.textContent = '13.6';
+
+      // Add new event log entry occasionally
+      if (Math.random() > 0.9) {
+        addEventEntry();
+      }
+    }
+
+    function addEventEntry() {
+      const eventLog = document.getElementById('event-log');
+      if (!eventLog) return;
+
+      const now = new Date();
+      const timeStr = now.toUTCString().split(' ')[4];
+      
+      const eventTypes = [
+        { type: 'HIGGS_CANDIDATE', data: `m_H = ${(124.5 + Math.random()).toFixed(2)} GeV, σ = ${(2 + Math.random()).toFixed(1)} GeV` },
+        { type: 'B_PHYSICS', data: `${['B_s→J/ψφ', 'B_d→K*μμ', 'Λ_b→ΛJ/ψ'][Math.floor(Math.random()*3)]} decay channel` },
+        { type: 'EXOTIC_SEARCH', data: `${['Z\' resonance', 'Leptoquark', 'SUSY', 'Extra Dimension'][Math.floor(Math.random()*4)]} limit updated` },
+        { type: 'QCD_STUDY', data: `Jet p_T = ${(100 + Math.random()*900).toFixed(0)} GeV, η = ${(-2.5 + Math.random()*5).toFixed(2)}` },
+        { type: 'TOP_QUARK', data: `t${['t̄ pair', 'single-t', 't-channel'][Math.floor(Math.random()*3)]} production cross-check` },
+      ];
+
+      const event = eventTypes[Math.floor(Math.random() * eventTypes.length)];
+      const experiments = ['ATLAS', 'CMS', 'LHCb', 'ALICE'];
+      const exp = experiments[Math.floor(Math.random() * experiments.length)];
+
+      const entry = document.createElement('div');
+      entry.className = 'event-entry';
+      entry.innerHTML = `
+        <span class="event-time">[${timeStr} UTC]</span>
+        <span class="event-type"> | ${event.type}:</span>
+        <span class="event-data"> ${event.data} (${exp})</span>
+      `;
+
+      eventLog.insertBefore(entry, eventLog.firstChild);
+      
+      // Keep only last 10 entries
+      while (eventLog.children.length > 10) {
+        eventLog.removeChild(eventLog.lastChild);
+      }
+    }
+
+    function refreshWidget(btn) {
+      btn.style.transform = 'rotate(360deg)';
+      setTimeout(() => btn.style.transform = '', 500);
+      updateLiveData();
+    }
+
+    // Smooth scroll for navigation
+    document.querySelectorAll('.nav-tab[href^="#"]').forEach(tab => {
+      tab.addEventListener('click', function(e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href').substring(1);
+        const targetElement = document.getElementById(targetId);
+        if (targetElement) {
+          targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          
+          // Update active state
+          document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+          this.classList.add('active');
+        }
+      });
+    });
+
+    // Initialize animations on load
+    document.addEventListener('DOMContentLoaded', () => {
+      // Start live updates every 5 seconds
+      setInterval(updateLiveData, 5000);
+      
+      // Initial data population
+      updateLiveData();
+
+      // Animate qubit meter
+      setTimeout(() => {
+        const meter = document.getElementById('qubit-meter-fill');
+        if (meter) meter.style.width = '75%';
+      }, 500);
+
+      // Animate constellation bars
+      setTimeout(() => {
+        document.querySelectorAll('.constellation-fill').forEach(fill => {
+          const width = fill.style.width;
+          fill.style.width = '0%';
+          setTimeout(() => fill.style.width = width, 100);
+        });
+      }, 800);
+    });
+
+    // Intersection Observer for scroll animations
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.card, .agency-card, .ai-tool-card, .quantum-card').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(20px)';
+      el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+      observer.observe(el);
+    });
+  </script>
+
+</body>
+</html>
