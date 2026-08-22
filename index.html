@@ -1749,6 +1749,22 @@
       observer.observe(card);
     });
   </script>
-  <script src="js/search-system.js"></script>
+  <!-- Global Components System v3.0 -->
+  <script src="js/global-components.js"></script>
+  
+  <!-- Google Analytics 4 (Replace G-XXXXXXXXXX with actual ID) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX', {
+      send_page_view: true,
+      custom_map: {
+        'custom_parameter_1': 'search_query',
+        'custom_parameter_2': 'result_count'
+      }
+    });
+  </script>
 </body>
 </html>
