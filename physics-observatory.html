@@ -33,6 +33,18 @@
       --gradient-physics: linear-gradient(135deg, #ff6b35 0%, #f7931e 25%, #ffd700 50%, #10b981 75%, #06b6d4 100%);
     }
 
+    /* ===== LIGHT THEME ===== */
+    [data-theme="light"] {
+      --bg-primary: #f8fafc;
+      --bg-secondary: #f1f5f9;
+      --bg-card: #ffffff;
+      --bg-card-hover: #f8fafc;
+      --text-primary: #1e293b;
+      --text-secondary: #64748b;
+      --border-color: rgba(99, 123, 255, 0.15);
+      --neon-glow: 0 0 20px rgba(0, 83, 200, 0.1);
+    }
+
     html { scroll-behavior: smooth; }
     
     body {
@@ -953,6 +965,42 @@
       color: var(--text-primary);
     }
 
+    /* ===== THEME TOGGLE BUTTON ===== */
+    .theme-toggle-btn {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      border: 2px solid var(--border-color);
+      background: var(--bg-card);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .theme-toggle-btn:hover {
+      border-color: var(--accent-quantum);
+      box-shadow: var(--neon-glow);
+      transform: scale(1.05);
+    }
+
+    .theme-icon-light {
+      display: none;
+      position: absolute;
+    }
+
+    [data-theme="light"] .theme-icon-dark {
+      display: none;
+    }
+
+    [data-theme="light"] .theme-icon-light {
+      display: block;
+    }
+
     .widget-value {
       font-size: 2rem;
       font-weight: 700;
@@ -1059,6 +1107,12 @@
         <a href="#ai-tools" class="nav-tab ai-tools">🤖 AI Tools</a>
         <a href="https://testdemoqwenai2025-creator.github.io/Demo2SciMSPT/index.html" class="nav-tab">🏠 Home</a>
       </nav>
+      
+      <!-- Theme Toggle Button -->
+      <button class="theme-toggle-btn" onclick="toggleTheme()" title="Toggle Dark/Light Theme" aria-label="Toggle theme">
+        <span class="theme-icon-dark">🌙</span>
+        <span class="theme-icon-light">☀️</span>
+      </button>
     </div>
   </header>
 
@@ -1953,6 +2007,21 @@
 
   <!-- ===== JAVASCRIPT ===== -->
   <script>
+    // ===== THEME TOGGLE =====
+    function toggleTheme() {
+      const html = document.documentElement;
+      const currentTheme = html.getAttribute('data-theme');
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', newTheme);
+      localStorage.setItem('physics-obs-theme', newTheme);
+    }
+
+    // Load saved theme preference
+    (function() {
+      const savedTheme = localStorage.getItem('physics-obs-theme') || 'dark';
+      document.documentElement.setAttribute('data-theme', savedTheme);
+    })();
+
     // ===== LIVE DATA SIMULATION =====
     function updateLiveData() {
       // Solar wind variation
