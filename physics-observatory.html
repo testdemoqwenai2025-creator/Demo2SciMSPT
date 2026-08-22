@@ -8,6 +8,9 @@
   
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%23FF6B35'/%3E%3Cstop offset='50%25' stop-color='%23F7931E'/%3E%3Cstop offset='100%25' stop-color='%23FFD700'/%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle cx='16' cy='16' r='14' fill='url(%23g)'/%3E%3Ctext x='16' y='21' font-size='16' text-anchor='middle' fill='%23000' font-family='system-ui' font-weight='bold'%3EPO%3C/text%3E%3C/svg%3E">
+  
+  <!-- Material Icons (for theme toggle) -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
 
   <style>
     /* ===== RESET & BASE ===== */
@@ -965,10 +968,10 @@
       color: var(--text-primary);
     }
 
-    /* ===== THEME TOGGLE BUTTON ===== */
-    .theme-toggle-btn {
-      width: 48px;
-      height: 48px;
+    /* ===== THEME TOGGLE BUTTON - Consistent with all pages ===== */
+    .theme-toggle {
+      width: 44px;
+      height: 44px;
       border-radius: 12px;
       border: 2px solid var(--border-color);
       background: var(--bg-card);
@@ -976,29 +979,25 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.4rem;
+      color: var(--text-primary);
       transition: all 0.3s ease;
       position: relative;
       overflow: hidden;
     }
 
-    .theme-toggle-btn:hover {
+    .theme-toggle:hover {
       border-color: var(--accent-quantum);
       box-shadow: var(--neon-glow);
       transform: scale(1.05);
     }
 
-    .theme-icon-light {
-      display: none;
-      position: absolute;
+    .theme-toggle .material-icons-round {
+      font-size: 22px;
+      transition: transform 0.3s ease;
     }
 
-    [data-theme="light"] .theme-icon-dark {
-      display: none;
-    }
-
-    [data-theme="light"] .theme-icon-light {
-      display: block;
+    .theme-toggle:hover .material-icons-round {
+      transform: rotate(15deg);
     }
 
     .widget-value {
@@ -1108,10 +1107,9 @@
         <a href="https://testdemoqwenai2025-creator.github.io/Demo2SciMSPT/index.html" class="nav-tab">🏠 Home</a>
       </nav>
       
-      <!-- Theme Toggle Button -->
-      <button class="theme-toggle-btn" onclick="toggleTheme()" title="Toggle Dark/Light Theme" aria-label="Toggle theme">
-        <span class="theme-icon-dark">🌙</span>
-        <span class="theme-icon-light">☀️</span>
+      <!-- Theme Toggle Button - Consistent with other pages -->
+      <button class="theme-toggle" onclick="toggleTheme()" title="Toggle Dark/Light Theme" aria-label="Toggle theme">
+        <span class="material-icons-round" id="themeIcon">dark_mode</span>
       </button>
     </div>
   </header>
@@ -2007,19 +2005,41 @@
 
   <!-- ===== JAVASCRIPT ===== -->
   <script>
-    // ===== THEME TOGGLE =====
-    function toggleTheme() {
-      const html = document.documentElement;
-      const currentTheme = html.getAttribute('data-theme');
-      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-      html.setAttribute('data-theme', newTheme);
-      localStorage.setItem('physics-obs-theme', newTheme);
-    }
-
-    // Load saved theme preference
+    // ===== THEME TOGGLE - Bulletproof Implementation (consistent with all pages) =====
     (function() {
+      // Initialize immediately AND on DOMContentLoaded for safety
+      function applyTheme(theme) {
+        try {
+          const html = document.documentElement;
+          const icon = document.getElementById('themeIcon');
+          
+          html.setAttribute('data-theme', theme);
+          if (icon) {
+            icon.textContent = theme === 'dark' ? 'dark_mode' : 'light_mode';
+          }
+        } catch(e) { console.warn('Theme apply error:', e); }
+      }
+      
+      // Load saved theme or default to dark
       const savedTheme = localStorage.getItem('physics-obs-theme') || 'dark';
-      document.documentElement.setAttribute('data-theme', savedTheme);
+      applyTheme(savedTheme);
+      
+      // Also run when DOM is ready (backup)
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', () => applyTheme(savedTheme));
+      }
+      
+      // Expose toggle function globally
+      window.toggleTheme = function() {
+        try {
+          const html = document.documentElement;
+          const currentTheme = html.getAttribute('data-theme') || 'dark';
+          const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+          
+          localStorage.setItem('physics-obs-theme', newTheme);
+          applyTheme(newTheme);
+        } catch(e) { console.warn('Theme toggle error:', e); }
+      };
     })();
 
     // ===== LIVE DATA SIMULATION =====

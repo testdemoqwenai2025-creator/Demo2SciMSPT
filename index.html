@@ -6924,26 +6924,42 @@
       }
     }
     
-    // Theme Toggle
-    function toggleTheme() {
-      const html = document.documentElement;
-      const icon = document.getElementById('themeIcon');
-      const isDark = html.getAttribute('data-theme') === 'dark';
-      
-      html.setAttribute('data-theme', isDark ? 'light' : 'dark');
-      icon.textContent = isDark ? 'light_mode' : 'dark_mode';
-      localStorage.setItem('theme', isDark ? 'light' : 'dark');
-    }
-    
-    // Load saved theme
-    function loadTheme() {
-      const saved = localStorage.getItem('theme');
-      if (saved) {
-        document.documentElement.setAttribute('data-theme', saved);
-        document.getElementById('themeIcon').textContent = 
-          saved === 'dark' ? 'dark_mode' : 'light_mode';
+    // Theme Toggle - Bulletproof Implementation
+    (function() {
+      // Initialize immediately AND on DOMContentLoaded for safety
+      function applyTheme(theme) {
+        try {
+          const html = document.documentElement;
+          const icon = document.getElementById('themeIcon');
+          
+          html.setAttribute('data-theme', theme);
+          if (icon) {
+            icon.textContent = theme === 'dark' ? 'dark_mode' : 'light_mode';
+          }
+        } catch(e) { console.warn('Theme apply error:', e); }
       }
-    }
+      
+      // Load saved theme or default to dark
+      const savedTheme = localStorage.getItem('theme') || 'dark';
+      applyTheme(savedTheme);
+      
+      // Also run when DOM is ready (backup)
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', () => applyTheme(savedTheme));
+      }
+      
+      // Expose toggle function globally
+      window.toggleTheme = function() {
+        try {
+          const html = document.documentElement;
+          const currentTheme = html.getAttribute('data-theme') || 'dark';
+          const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+          
+          localStorage.setItem('theme', newTheme);
+          applyTheme(newTheme);
+        } catch(e) { console.warn('Theme toggle error:', e); }
+      };
+    })();
     
     // User Dropdown
     function toggleUserDropdown() {
@@ -7108,7 +7124,6 @@
     
     // Initialize everything
     document.addEventListener('DOMContentLoaded', () => {
-      loadTheme();
       initDnaHelix();
       initProteinChains();
       initNeuralBackground();
