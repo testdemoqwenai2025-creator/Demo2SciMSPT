@@ -688,14 +688,17 @@
    SCROLL ANIMATIONS
    ============================================ */
 
+/* SAFE VERSION: Don't hide content by default!
+   Only animate transform, keep content visible */
 .animate-on-scroll {
-  opacity: 0;
-  transform: translateY(40px);
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: translateY(0);
   transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .animate-on-scroll.animate-in {
-  opacity: 1;
+  opacity: 1 !important;
   transform: translateY(0);
 }
 
@@ -723,10 +726,11 @@
   transform: scale(1);
 }
 
-/* Staggered animations */
+/* SAFE VERSION: Don't hide children by default! */
 .stagger-children > * {
-  opacity: 0;
-  transform: translateY(20px);
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: translateY(0);
   transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -738,7 +742,7 @@
 .stagger-children.animate-in > *:nth-child(6) { transition-delay: 0.6s; }
 
 .stagger-children.animate-in > * {
-  opacity: 1;
+  opacity: 1 !important;
   transform: translateY(0);
 }
 
@@ -859,16 +863,16 @@
   gap: 20px;
 }
 
+/* SAFE VERSION: Cards must be visible by default! */
 .result-card {
   padding: 24px;
   background: var(--bg-glass, rgba(10, 22, 40, 0.85));
   border: 1px solid var(--border-subtle, rgba(0, 229, 255, 0.1));
   border-radius: 16px;
   transition: all 0.3s ease;
-  opacity: 0;
-  transform: translateY(20px);
-  animation: result-card-in 0.5s ease forwards;
-  animation-delay: var(--animation-delay, 0s);
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: translateY(0);
 }
 
 @keyframes result-card-in {
