@@ -1234,20 +1234,25 @@ class SciMSPTGlobal {
   // ============================================
 
   setupPageTransitions() {
-    // Add transition class to body for entry animations only
+    // SAFETY: Force body to be visible immediately
+    document.body.style.opacity = '1';
+    document.body.style.visibility = 'visible';
+    
+    // Add transition class for entry animations only (safe version)
     // NOTE: Click interception DISABLED for static sites (GitHub Pages compatibility)
-    // Page transitions via AJAX break static hosting - using normal navigation instead
     document.body.classList.add('page-transitions-enabled');
     
     // Handle popstate (back/forward) - just track, don't intercept
     window.addEventListener('popstate', () => {
       this.trackPageView(window.location.pathname);
+      // Ensure visibility on back navigation
+      document.body.style.opacity = '1';
     });
     
     // Initial page view
     this.trackPageView(window.location.pathname);
     
-    console.log('📄 Page transitions: Entry animations enabled (click interception disabled for static hosting)');
+    console.log('📄 Page transitions: Safe mode enabled (visibility forced)');
   }
 
   async transitionToPage(url) {

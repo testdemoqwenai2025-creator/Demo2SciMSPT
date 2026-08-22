@@ -642,16 +642,24 @@
    PAGE TRANSITIONS
    ============================================ */
 
+/* DISABLED: Animation was causing content to stay hidden (opacity: 0)
 .page-transitions-enabled {
   animation: page-enter 0.4s cubic-bezier(0.4, 0, 0.2, 1) both;
 }
+*/
+
+/* Safe version - just ensures visibility */
+.page-transitions-enabled {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
 
 .page-exiting {
-  animation: page-exit 0.3s cubic-bezier(0.4, 0, 0.2, 1) both;
+  animation: page-exit 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
 .page-entering {
-  animation: page-enter 0.4s cubic-bezier(0.4, 0, 0.2, 1) both;
+  animation: page-enter 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
 @keyframes page-enter {
