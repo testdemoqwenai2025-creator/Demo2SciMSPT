@@ -51,6 +51,22 @@
 <link rel="stylesheet" href="css/global-components.css">
   
   <style>
+    /* CRITICAL FIX: Hide skeleton loader immediately to prevent blocking */
+    .skeleton-loader, #skeletonLoader {
+      display: none !important;
+      opacity: 0 !important;
+      visibility: hidden !important;
+      pointer-events: none !important;
+      position: fixed !important;
+      z-index: -9999 !important;
+    }
+    
+    /* Ensure body and content are visible */
+    body {
+      opacity: 1 !important;
+      visibility: visible !important;
+    }
+
     /* ============================================
        SCIMSPT NEURAL DESIGN SYSTEM v3.0
        Platform Command Center

@@ -52,6 +52,22 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.45.0/min/vs/editor/editor.main.css">
   
   <style>
+    /* CRITICAL FIX: Hide skeleton loader immediately to prevent blocking */
+    .skeleton-loader, #skeletonLoader {
+      display: none !important;
+      opacity: 0 !important;
+      visibility: hidden !important;
+      pointer-events: none !important;
+      position: fixed !important;
+      z-index: -9999 !important;
+    }
+    
+    /* Ensure body and content are visible */
+    body {
+      opacity: 1 !important;
+      visibility: visible !important;
+    }
+    
     :root {
       --bg-dark: #0a1628;
       --bg-light: #f5f8fc;
