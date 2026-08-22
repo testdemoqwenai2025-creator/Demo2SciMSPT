@@ -4766,9 +4766,7 @@ print(f"Optimal Parameters: {result.optimal_parameters}")</textarea>
         <h3 class="usecase-title">Catalyst Development</h3>
         <p class="usecase-description">
           Understand reaction mechanisms at the electronic level, design novel catalysts 
-<script>
           for carbon capture, ammonia synthesis, and sustainable chemical processes.
-</script>
         </p>
         <div class="usecase-tags">
           <span class="tag">Chemistry</span>
@@ -5399,9 +5397,7 @@ result = vqe.compute_minimum_eigenvalue(qubit_op)
               <h4 class="workflow-title">Quantum Machine Learning</h4>
               <p class="workflow-description">
                 VQE-based quantum classifier skeleton. Train quantum circuits 
-<script>
                 for classification tasks using hybrid quantum-classical approach.
-</script>
               </p>
             </div>
             <div class="workflow-code">
@@ -7077,17 +7073,22 @@ print(f"Accuracy: {np.mean(predictions == y_test):.2%}")`
     });
   </script>
 
-  <!-- FAILSAFE: Force hide skeleton loader after 800ms -->
-  <script>
+  <!-- FAILSAFE: Auto-hide skeleton loader after 800ms -->
+  <script id="loader-failsafe">
     (function() {
-      var loader = document.getElementById('skeletonLoader');
-      if (loader) {
-        setTimeout(function() {
+      function hideLoader() {
+        var loader = document.getElementById('skeletonLoader');
+        if (loader) {
           loader.style.opacity = '0';
           loader.style.visibility = 'hidden';
-          setTimeout(function() { if (loader.parentNode) loader.remove(); }, 500);
-        }, 800);
+          loader.style.pointerEvents = 'none';
+          setTimeout(function() { try { loader.remove(); } catch(e) {} }, 500);
+        }
       }
+      hideLoader();
+      setTimeout(hideLoader, 800);
+      setTimeout(hideLoader, 2000);
+      setTimeout(hideLoader, 5000);
     })();
   </script>
 

@@ -1507,9 +1507,7 @@
         <h2 class="section-title">Unified Quantum Access</h2>
         <p class="section-desc">
           Single interface to all major quantum computing providers. Free tier access 
-<script>
           for prototyping, seamless upgrade to production hardware.
-</script>
         </p>
       </div>
       
@@ -2008,17 +2006,22 @@
     }
   </script>
 
-  <!-- FAILSAFE: Force hide skeleton loader after 800ms -->
-  <script>
+  <!-- FAILSAFE: Auto-hide skeleton loader after 800ms -->
+  <script id="loader-failsafe">
     (function() {
-      var loader = document.getElementById('skeletonLoader');
-      if (loader) {
-        setTimeout(function() {
+      function hideLoader() {
+        var loader = document.getElementById('skeletonLoader');
+        if (loader) {
           loader.style.opacity = '0';
           loader.style.visibility = 'hidden';
-          setTimeout(function() { if (loader.parentNode) loader.remove(); }, 500);
-        }, 800);
+          loader.style.pointerEvents = 'none';
+          setTimeout(function() { try { loader.remove(); } catch(e) {} }, 500);
+        }
       }
+      hideLoader();
+      setTimeout(hideLoader, 800);
+      setTimeout(hideLoader, 2000);
+      setTimeout(hideLoader, 5000);
     })();
   </script>
 

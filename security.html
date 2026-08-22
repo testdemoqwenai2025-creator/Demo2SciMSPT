@@ -2865,9 +2865,7 @@
           <h3 class="card-title">Bug Bounty Program</h3>
           <p class="card-desc">
             Responsible disclosure program with rewards up to $10,000 
-<script>
             for critical security vulnerabilities.
-</script>
           </p>
           <ul class="card-list">
             <li><span class="material-icons-round">check_circle</span>HackerOne integration</li>
@@ -2884,9 +2882,7 @@
           <h3 class="card-title">Security Updates</h3>
           <p class="card-desc">
             Continuous dependency monitoring and automated patching 
-<script>
             for zero-day vulnerabilities.
-</script>
           </p>
           <ul class="card-list">
             <li><span class="material-icons-round">check_circle</span>Dependabot integration</li>
@@ -4913,17 +4909,22 @@ SCHEMA_TEMPLATE = {
     });
   </script>
 
-  <!-- FAILSAFE: Force hide skeleton loader after 800ms -->
-  <script>
+  <!-- FAILSAFE: Auto-hide skeleton loader after 800ms -->
+  <script id="loader-failsafe">
     (function() {
-      var loader = document.getElementById('skeletonLoader');
-      if (loader) {
-        setTimeout(function() {
+      function hideLoader() {
+        var loader = document.getElementById('skeletonLoader');
+        if (loader) {
           loader.style.opacity = '0';
           loader.style.visibility = 'hidden';
-          setTimeout(function() { if (loader.parentNode) loader.remove(); }, 500);
-        }, 800);
+          loader.style.pointerEvents = 'none';
+          setTimeout(function() { try { loader.remove(); } catch(e) {} }, 500);
+        }
       }
+      hideLoader();
+      setTimeout(hideLoader, 800);
+      setTimeout(hideLoader, 2000);
+      setTimeout(hideLoader, 5000);
     })();
   </script>
 

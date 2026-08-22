@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+<!DO
+</script>CTYPE html>
 <html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8">
@@ -3235,20 +3236,6 @@
     </div>
   </div>
 
-  <!-- Fail-safe: Hide skeleton loader immediately -->
-  <script>
-    (function() {
-      var loader = document.getElementById('skeletonLoader');
-      if (loader) {
-        setTimeout(function() {
-          loader.style.opacity = '0';
-          loader.style.visibility = 'hidden';
-          setTimeout(function() { loader.remove(); }, 500);
-        }, 800);
-      }
-    })();
-  </script>
-
 <div class="ide-container">
   <!-- Navigation Bar -->
   <nav class="ide-navbar" role="navigation" aria-label="Studio IDE navigation">
@@ -5085,8 +5072,12 @@ document.addEventListener('keydown', (e) => {
 
   </script>
   
-  
+  /* ============================================
 <script>
+     INTELLIGENT MOBILE DETECTION SYSTEM v4.0
+     Device-Aware | Contextual | Helpful
+     ============================================ */
+  
   (function() {
     'use strict';
     
@@ -5477,7 +5468,6 @@ document.addEventListener('keydown', (e) => {
     window.MobileDetection = MobileDetection;
     
   })();
-  })();
 </script>
 
 
@@ -5735,13 +5725,13 @@ document.addEventListener('keydown', (e) => {
 
 
 
-
-  <script>
+  
   /* ============================================
+<script>
      BOOLEAN OBSERVER SYSTEM v5.0
      Human Confirmation | Real-time Monitoring
      ============================================ */
-
+  
   const BooleanObserver = {
     status: {
       videoGeneration: 'PENDING',
@@ -5981,35 +5971,24 @@ document.addEventListener('keydown', (e) => {
     }
   </script>
 
-  <!-- FAILSAFE: Force hide skeleton loader after 800ms -->
-  <script>
+  <!-- FAILSAFE: Auto-hide skeleton loader after 800ms -->
+  <script id="loader-failsafe">
     (function() {
-      var loader = document.getElementById('skeletonLoader');
-      if (loader) {
-        setTimeout(function() {
+      function hideLoader() {
+        var loader = document.getElementById('skeletonLoader');
+        if (loader) {
           loader.style.opacity = '0';
           loader.style.visibility = 'hidden';
-          setTimeout(function() { if (loader.parentNode) loader.remove(); }, 500);
-        }, 800);
+          loader.style.pointerEvents = 'none';
+          setTimeout(function() { try { loader.remove(); } catch(e) {} }, 500);
+        }
       }
+      hideLoader();
+      setTimeout(hideLoader, 800);
+      setTimeout(hideLoader, 2000);
+      setTimeout(hideLoader, 5000);
     })();
   </script>
 
-
-  <!-- FAILSAFE: Force hide skeleton loader after 800ms -->
-  <script>
-    (function() {
-      var loader = document.getElementById('skeletonLoader');
-      if (loader) {
-        setTimeout(function() {
-          loader.style.opacity = '0';
-          loader.style.visibility = 'hidden';
-          setTimeout(function() { if (loader.parentNode) loader.remove(); }, 500);
-        }, 800);
-      }
-    })();
-  </script>
-
-</script>
 </body>
 </html>
