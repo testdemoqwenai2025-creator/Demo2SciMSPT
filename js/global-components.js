@@ -1234,35 +1234,20 @@ class SciMSPTGlobal {
   // ============================================
 
   setupPageTransitions() {
-    // Add transition class to body
+    // Add transition class to body for entry animations only
+    // NOTE: Click interception DISABLED for static sites (GitHub Pages compatibility)
+    // Page transitions via AJAX break static hosting - using normal navigation instead
     document.body.classList.add('page-transitions-enabled');
     
-    // Intercept navigation clicks
-    document.addEventListener('click', (e) => {
-      const link = e.target.closest('a[href]');
-      if (!link) return;
-      
-      const href = link.getAttribute('href');
-      
-      // Only intercept same-page origin links (not external, anchors, or javascript)
-      if (href && 
-          !href.startsWith('#') && 
-          !href.startsWith('javascript:') &&
-          !href.startsWith('http') &&
-          !link.hasAttribute('target') &&
-          !link.hasAttribute('download')) {
-        e.preventDefault();
-        this.transitionToPage(href);
-      }
-    });
-    
-    // Handle popstate (back/forward)
+    // Handle popstate (back/forward) - just track, don't intercept
     window.addEventListener('popstate', () => {
       this.trackPageView(window.location.pathname);
     });
     
     // Initial page view
     this.trackPageView(window.location.pathname);
+    
+    console.log('📄 Page transitions: Entry animations enabled (click interception disabled for static hosting)');
   }
 
   async transitionToPage(url) {
