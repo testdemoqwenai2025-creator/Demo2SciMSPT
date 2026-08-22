@@ -2,12 +2,17 @@
 <html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8">
+<!-- Resource Hints -->
+<link rel="dns-prefetch" href="//fonts.googleapis.com">
+<link rel="dns-prefetch" href="//fonts.gstatic.com">
+<link rel="dns-prefetch" href="//www.googletagmanager.com">
+<meta name="theme-color" content="#00E5FF">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SciMSPT — Beyond the Scaling Wall | Investor Deck Presentation</title>
   <meta name="description" content="15-Slide Investor Foresight Deck — From Research Paper to Investment Intelligence.">
   
   <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   
   <style>
@@ -404,7 +409,7 @@
   <nav class="navbar">
     <div class="nav-left">
       <a href="index.html" class="nav-logo">
-        <img src="assets/icons/icon-science.png" alt="SciMSPT">
+        <img loading="eager" decoding="async" src="assets/icons/icon-science.png" alt="SciMSPT">
         <span class="nav-logo-text">Sci<span>MSPT</span></span>
       </a>
       <span class="deck-title">Beyond the Scaling Wall — Investor Foresight Deck</span>
@@ -628,7 +633,7 @@
     });
   </script>
   <!-- Global Components System v3.0 -->
-  <script src="js/global-components.js"></script>
+  <script src="js/global-components.js" defer></script>
   <!-- Google Analytics 4 -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
   <script>
@@ -637,5 +642,17 @@
     gtag('js', new Date());
     gtag('config', 'G-XXXXXXXXXX', { send_page_view: true });
   </script>
+<!-- Service Worker Registration -->
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js')
+      .then(reg => console.log('✅ SW registered:', reg.scope))
+      .catch(err => console.warn('⚠️ SW registration failed:', err));
+  });
+}
+</script>
+<!-- Performance Optimizer -->
+<script src="js/performance.js" defer></script>
 </body>
 </html>

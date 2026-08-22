@@ -2,6 +2,11 @@
 <html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8">
+<!-- Resource Hints -->
+<link rel="dns-prefetch" href="//fonts.googleapis.com">
+<link rel="dns-prefetch" href="//fonts.gstatic.com">
+<link rel="dns-prefetch" href="//www.googletagmanager.com">
+<meta name="theme-color" content="#00E5FF">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Physics Observatory — SciMSPT Global Modern Physics & Space Science</title>
   <meta name="description" content="Physics Observatory: Live LHC monitoring, JWST gallery, NASA/ESA/JAXA portals, Satellite tracker (7,146 sats), Quantum network (315+ qubits), AI analysis tools">
@@ -2181,7 +2186,7 @@
   </script>
 
     <!-- Global Components System v3.0 -->
-  <script src="js/global-components.js"></script>
+  <script src="js/global-components.js" defer></script>
   <!-- Google Analytics 4 -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
   <script>
@@ -2190,5 +2195,17 @@
     gtag('js', new Date());
     gtag('config', 'G-XXXXXXXXXX', { send_page_view: true });
   </script>
+<!-- Service Worker Registration -->
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js')
+      .then(reg => console.log('✅ SW registered:', reg.scope))
+      .catch(err => console.warn('⚠️ SW registration failed:', err));
+  });
+}
+</script>
+<!-- Performance Optimizer -->
+<script src="js/performance.js" defer></script>
 </body>
 </html>

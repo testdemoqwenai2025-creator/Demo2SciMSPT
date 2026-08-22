@@ -2,12 +2,17 @@
 <html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8">
+<!-- Resource Hints -->
+<link rel="dns-prefetch" href="//fonts.googleapis.com">
+<link rel="dns-prefetch" href="//fonts.gstatic.com">
+<link rel="dns-prefetch" href="//www.googletagmanager.com">
+<meta name="theme-color" content="#00E5FF">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Quantum Lab — SciMSPT Interactive Quantum Computing</title>
   <meta name="description" content="SciMSPT Quantum Lab: Run real quantum circuits, generate synthetic datasets, and execute AI pipelines interactively.">
   
   <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Orbitron:wght@400;700;900&display=swap&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
   
   <style>
@@ -1451,5 +1456,17 @@
       statusEl.innerHTML = '<span class="status-dot green"></span> Ready';
     }
   </script>
+<!-- Service Worker Registration -->
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js')
+      .then(reg => console.log('✅ SW registered:', reg.scope))
+      .catch(err => console.warn('⚠️ SW registration failed:', err));
+  });
+}
+</script>
+<!-- Performance Optimizer -->
+<script src="js/performance.js" defer></script>
 </body>
 </html>

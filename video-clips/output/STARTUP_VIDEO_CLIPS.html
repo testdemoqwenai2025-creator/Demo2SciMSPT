@@ -2,9 +2,14 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+<!-- Resource Hints -->
+<link rel="dns-prefetch" href="//fonts.googleapis.com">
+<link rel="dns-prefetch" href="//fonts.gstatic.com">
+<link rel="dns-prefetch" href="//www.googletagmanager.com">
+<meta name="theme-color" content="#00E5FF">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SciMSPT Startup Portfolio — Video Clips</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;600&display=swap&display=swap" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: 'Inter', sans-serif; background: #030810; color: #e8f4fc; min-height: 100vh; }
@@ -449,5 +454,17 @@
 
     </div>
   </div>
+<!-- Service Worker Registration -->
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js')
+      .then(reg => console.log('✅ SW registered:', reg.scope))
+      .catch(err => console.warn('⚠️ SW registration failed:', err));
+  });
+}
+</script>
+<!-- Performance Optimizer -->
+<script src="js/performance.js" defer></script>
 </body>
 </html>

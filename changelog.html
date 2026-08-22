@@ -2,6 +2,11 @@
 <html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8">
+<!-- Resource Hints -->
+<link rel="dns-prefetch" href="//fonts.googleapis.com">
+<link rel="dns-prefetch" href="//fonts.gstatic.com">
+<link rel="dns-prefetch" href="//www.googletagmanager.com">
+<meta name="theme-color" content="#00E5FF">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Changelog & Roadmap — SciMSPT Neural Research Platform</title>
   <meta name="description" content="SciMSPT Changelog & Roadmap — Track our development progress, upcoming features, and platform evolution. Building the future of neural molecular simulation.">
@@ -39,7 +44,7 @@
   <meta name="apple-mobile-web-app-title" content="SciMSPT">
   
   <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Orbitron:wght@400;700;900&display=swap&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
   <link rel="stylesheet" href="css/design-system.css">
 <link rel="stylesheet" href="css/global-components.css">
@@ -2764,7 +2769,7 @@
     );
   </script>
     <!-- Global Components System v3.0 -->
-  <script src="js/global-components.js"></script>
+  <script src="js/global-components.js" defer></script>
   <!-- Google Analytics 4 -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
   <script>
@@ -2773,5 +2778,7 @@
     gtag('js', new Date());
     gtag('config', 'G-XXXXXXXXXX', { send_page_view: true });
   </script>
+<!-- Performance Optimizer -->
+<script src="js/performance.js" defer></script>
 </body>
 </html>
